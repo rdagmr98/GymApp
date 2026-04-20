@@ -616,7 +616,7 @@ class AppL {
   static String get editExercise =>
       _lang == 'en' ? 'Edit exercise' : 'Modifica esercizio';
   static String get streakWeeks =>
-      _lang == 'en' ? 'Week streak' : 'Settimane di fila';
+      _lang == 'en' ? 'Week streak' : 'Microcicli di fila';
   static String get streakMsg => _lang == 'en'
       ? '🔥 Keep your streak alive!'
       : '🔥 Mantieni la tua streak!';
@@ -6622,7 +6622,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             Text(
               AppL.lang == 'en'
                   ? (_streak == 1 ? 'week streak' : 'weeks streak')
-                  : (_streak == 1 ? 'settimana' : 'settimane'),
+                  : (_streak == 1 ? 'microciclo' : 'microcicli'),
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.orange,
@@ -6637,8 +6637,8 @@ class _ClientMainPageState extends State<ClientMainPage>
           children: [
             Text(
               AppL.lang == 'en'
-                  ? 'Complete ALL sessions in your plan every week to increase your streak counter.\n\nMiss even one session in a week and your streak resets to 0.\n\nStay consistent — every week counts! 💪'
-                  : 'Completa TUTTE le sessioni della tua scheda ogni settimana per incrementare il contatore.\n\nSe salti anche solo una sessione in una settimana, la streak si azzera.\n\nSii costante — ogni settimana conta! 💪',
+                  ? 'Complete ALL sessions in your plan every microcycle to increase your streak counter.\n\nMiss even one session in a microcycle and your streak resets to 0.\n\nStay consistent — every microcycle counts! 💪'
+                  : 'Completa TUTTE le sessioni della tua scheda ogni microciclo per incrementare il contatore.\n\nSe salti anche solo una sessione in un microciclo, la streak si azzera.\n\nSii costante — ogni microciclo conta! 💪',
               style: const TextStyle(color: Colors.white70, fontSize: 13),
               textAlign: TextAlign.center,
             ),
@@ -6646,7 +6646,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             // Mini progress strip
             if (myRoutine.isNotEmpty) ...[
               Text(
-                '${_streakDone.where((n) => myRoutine.any((d) => d.dayName == n)).length}/${myRoutine.length} ${AppL.lang == 'en' ? 'sessions this week' : 'sessioni questa settimana'}',
+                '${_streakDone.where((n) => myRoutine.any((d) => d.dayName == n)).length}/${myRoutine.length} ${AppL.lang == 'en' ? 'sessions this microcycle' : 'sessioni questo microciclo'}',
                 style: const TextStyle(color: Colors.white54, fontSize: 11),
               ),
               const SizedBox(height: 6),
@@ -6914,8 +6914,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                                         AppL.lang == 'en'
                                             ? (_streak == 1 ? 'week' : 'weeks')
                                             : (_streak == 1
-                                                  ? 'settimana'
-                                                  : 'settimane'),
+                                                  ? 'mc'
+                                                  : 'mc'),
                                         style: const TextStyle(
                                           color: Colors.white38,
                                           fontSize: 10,
@@ -6958,7 +6958,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                     ),
                                     const SizedBox(width: 4),
                                     Text(
-                                      '$_streak ${AppL.lang == 'en' ? (_streak == 1 ? 'week' : 'weeks') : (_streak == 1 ? 'settimana' : 'settimane')}',
+                                      '$_streak ${AppL.lang == 'en' ? (_streak == 1 ? 'week' : 'weeks') : (_streak == 1 ? 'mc' : 'mc')}',
                                       style: const TextStyle(
                                         color: Colors.orange,
                                         fontSize: 13,
@@ -10534,8 +10534,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           Flexible(
                             child: Text(
                               AppL.lang == 'en'
-                                  ? 'Session unlocked! $_streakDoneCount/$_streakTotalCount this week'
-                                  : 'Sessione sbloccata! $_streakDoneCount/$_streakTotalCount questa settimana',
+                                  ? 'Session unlocked! $_streakDoneCount/$_streakTotalCount this microcycle'
+                                  : 'Sessione sbloccata! $_streakDoneCount/$_streakTotalCount questo microciclo',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -10614,8 +10614,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           _streakTotalCount > 0)
                         Text(
                           AppL.lang == 'en'
-                              ? '🔥 Week complete! Streak continues!'
-                              : '🔥 Settimana completata! La streak continua!',
+                              ? '🔥 Microcycle complete! Streak continues!'
+                              : '🔥 Microciclo completato! La streak continua!',
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.orange,
@@ -10639,8 +10639,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         const SizedBox(height: 6),
                         Text(
                           AppL.lang == 'en'
-                              ? '🔥 $_currentStreak week${_currentStreak == 1 ? '' : 's'} streak!'
-                              : '🔥 $_currentStreak ${_currentStreak == 1 ? 'settimana' : 'settimane'} di fila!',
+                              ? '🔥 $_currentStreak microcycle${_currentStreak == 1 ? '' : 's'} streak!'
+                              : '🔥 $_currentStreak ${_currentStreak == 1 ? 'mc' : 'mc'} di fila!',
                           style: const TextStyle(
                             color: Colors.orange,
                             fontSize: 14,
@@ -13358,7 +13358,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '$doneCount/$total questa settimana',
+                      '$doneCount/$total questo microciclo',
                       style: const TextStyle(color: Colors.white54, fontSize: 9),
                     ),
                   ],
@@ -13466,7 +13466,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                 Colors.orange,
               ),
               _toggleChip(
-                AppL.lang == 'en' ? 'Weekly badges' : 'Badge settimana',
+                AppL.lang == 'en' ? 'Microcycle badges' : 'Badge microciclo',
                 _showWeeklyBadges,
                 () => setState(() => _showWeeklyBadges = !_showWeeklyBadges),
                 Colors.amber,
@@ -13634,8 +13634,8 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                 const SizedBox(height: 8),
                 Text(
                   AppL.lang == 'en'
-                      ? '${widget.streak == 1 ? 'week' : 'weeks'} on fire! 🔥'
-                      : '${widget.streak == 1 ? 'settimana' : 'settimane'} di fila! 🔥',
+                      ? '${widget.streak == 1 ? 'microcycle' : 'microcycles'} on fire! 🔥'
+                      : '${widget.streak == 1 ? 'mc' : 'mc'} di fila! 🔥',
                   style: const TextStyle(
                     color: Colors.orange,
                     fontSize: 20,
@@ -13647,7 +13647,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                 // Weekly badges: session circles
                 if (_showBadges && widget.allSessionNames.isNotEmpty) ...[
                   Text(
-                    AppL.lang == 'en' ? 'This week' : 'Questa settimana',
+                    AppL.lang == 'en' ? 'This microcycle' : 'Questo microciclo',
                     style: const TextStyle(color: Colors.white38, fontSize: 12),
                   ),
                   const SizedBox(height: 12),
@@ -13751,8 +13751,8 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
       await Share.shareXFiles(
         [XFile(file.path, mimeType: 'image/png')],
         text: AppL.lang == 'en'
-            ? '🔥 ${widget.streak} week${widget.streak == 1 ? '' : 's'} streak! #GymApp #Fitness'
-            : '🔥 ${widget.streak} ${widget.streak == 1 ? 'settimana' : 'settimane'} di fila! #GymApp #Fitness',
+            ? '🔥 ${widget.streak} microcycle${widget.streak == 1 ? '' : 's'} streak!'
+            : '🔥 ${widget.streak} ${widget.streak == 1 ? 'mc' : 'mc'} di fila!',
       );
     } finally {
       if (mounted) setState(() => _sharing = false);
@@ -13885,7 +13885,10 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       const double cardSize = 220.0 * s;
       final double badgesH = (_includeStreak || _includeSessionCount || _includeTrend) ? (cardSize + 40.0 * s) : 0.0;
       const double headerH = 300.0 * s;
-      final double chartH = 320.0 * s; // Fixed height for better proportion with stat cards
+      
+      // Calculate chart height based on actual chart image dimensions
+      final chartAspect = chartImage.width / chartImage.height;
+      final double chartH = (w / chartAspect).clamp(200 * s, 380 * s);
       final double totalH = headerH + chartH + badgesH + 40 * s;
 
       final recorder = ui.PictureRecorder();
@@ -16359,22 +16362,7 @@ class _OverallProgressPainter extends CustomPainter {
       canvas.drawCircle(Offset(x, y), 4, dotPaint);
 
       if (n <= 8 || i % ((n / 6).ceil()) == 0 || i == n - 1) {
-        final d = points[i].date;
-        final label = '${d.day}/${d.month}';
-        final tp = TextPainter(
-          text: TextSpan(
-            text: label,
-            style: const TextStyle(color: Colors.white38, fontSize: 9),
-          ),
-          textDirection: TextDirection.ltr,
-        )..layout();
-        tp.paint(
-          canvas,
-          Offset(
-            (x - tp.width / 2).clamp(0, size.width - tp.width),
-            chartH + 4,
-          ),
-        );
+        // Date labels removed from share card
       }
     }
   }
