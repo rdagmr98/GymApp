@@ -24,6 +24,7 @@ import 'package:path_provider/path_provider.dart';
 import 'js_stub.dart' if (dart.library.js) 'dart:js' as js;
 import 'gif_exercise_catalog.dart';
 import 'exercise_catalog.dart';
+import 'workout_tutorial.dart';
 
 // Colore accento globale (tema)
 final ValueNotifier<Color> appAccentNotifier = ValueNotifier<Color>(
@@ -1395,6 +1396,9 @@ Future<int> updateStreak(String dayName, List<String> totalSessionNames) async {
   );
   // Aggiorna data ultimo allenamento per notifiche
   await prefs.setString('last_workout_date', now.toIso8601String());
+  
+  // Gestisci il reset dei badge
+  await manageBadgeReset();
 
   return streak;
 }
@@ -1412,6 +1416,44 @@ Future<({int count, Set<String> done})> getStreakData() async {
   final json = prefs.getString('streak_completed_sessions') ?? '[]';
   final done = Set<String>.from(jsonDecode(json));
   return (count: count, done: done);
+}
+
+/// Gestisce il reset dei badge se 1 settimana dal primo conquistato OR nuovo microciclo
+Future<void> manageBadgeReset() async {
+  final prefs = await SharedPreferences.getInstance();
+  final now = DateTime.now();
+  final thisWeek = _isoWeek(now);
+  
+  // Data di quando è stato conquistato il primo badge
+  final badgesStartStr = prefs.getString('badges_start_date');
+  if (badgesStartStr == null) {
+    // Primo accesso, salva la data
+    await prefs.setString('badges_start_date', now.toIso8601String());
+    return;
+  }
+  
+  final badgesStart = DateTime.tryParse(badgesStartStr);
+  if (badgesStart == null) return;
+  
+  // Controlla se è passata 1 settimana
+  final daysPassed = now.difference(badgesStart).inDays;
+  final shouldResetByTime = daysPassed >= 7;
+  
+  // Controlla se è iniziato un nuovo microciclo
+  final lastBadgeMicrocycleWeek = prefs.getString('last_badge_microcycle_week') ?? '';
+  final currentMicrocycleWeek = prefs.getString('current_microcycle_week') ?? thisWeek;
+  final shouldResetByMicrocycle = lastBadgeMicrocycleWeek.isNotEmpty && lastBadgeMicrocycleWeek != currentMicrocycleWeek;
+  
+  if (shouldResetByTime || shouldResetByMicrocycle) {
+    // Reset badge
+    await prefs.remove('badges_start_date');
+    if (shouldResetByTime) {
+      await prefs.setString('last_badge_reset_week', thisWeek);
+    }
+  } else {
+    // Aggiorna il microciclo corrente
+    await prefs.setString('current_microcycle_week', thisWeek);
+  }
 }
 
 /// Controlla se l'utente non si allena da più di 2 giorni e mostra notifica giornaliera.
@@ -4464,6 +4506,73 @@ class _ClientMainPageState extends State<ClientMainPage>
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: Text(
+                  'TUTORIAL',
+                  style: TextStyle(
+                    color: Colors.white38,
+                    fontSize: 11,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setBool('workout_tutorial_shown', false);
+                  if (mounted) {
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (c, anim, _) => WorkoutTutorial(
+                          accentColor: accent,
+                          onComplete: () {
+                            Navigator.pop(context);
+                            prefs.setBool('workout_tutorial_shown', true);
+                          },
+                        ),
+                        transitionsBuilder: (c, anim, _, child) => FadeTransition(
+                          opacity: anim,
+                          child: child,
+                        ),
+                      ),
+                    );
+                  }
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withAlpha(10),
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: accent.withAlpha(100),
+                      width: 1,
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.school_outlined,
+                        color: accent,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          AppL.lang == 'en' ? 'Watch Tutorial' : 'Rivedere Tutorial',
+                          style: TextStyle(
+                            color: accent,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Divider(color: Colors.white12),
+
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Text(
                   'COLORE TEMA',
                   style: TextStyle(
                     color: Colors.white38,
@@ -6392,9 +6501,35 @@ class _ClientMainPageState extends State<ClientMainPage>
 
   void _startWorkout(WorkoutDay d) async {
     if (!await _handleWebDonationStartGate()) return;
+    
+    // Check if tutorial should be shown
+    final prefs = await SharedPreferences.getInstance();
+    final tutorialShown = prefs.getBool('workout_tutorial_shown') ?? false;
+    
+    if (!tutorialShown && !kIsWeb) {
+      // Show tutorial first
+      if (!mounted) return;
+      await Navigator.push(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (c, anim, _) => WorkoutTutorial(
+            accentColor: appAccentNotifier.value,
+            onComplete: () {
+              Navigator.pop(context);
+            },
+          ),
+          transitionsBuilder: (c, anim, _, child) => FadeTransition(
+            opacity: anim,
+            child: child,
+          ),
+        ),
+      );
+      await prefs.setBool('workout_tutorial_shown', true);
+      if (!mounted) return;
+    }
+    
     // Cancella SEMPRE lo snapshot precedente: ogni tap su "Allena ora" è una nuova sessione.
     // Il ripristino automatico avviene solo se l'app viene chiusa MID-workout.
-    final prefs = await SharedPreferences.getInstance();
     await prefs.remove('workout_in_progress_${d.dayName}');
     // Resetta i risultati in memoria dell'allenamento precedente
     for (final ex in d.exercises) {
@@ -13151,7 +13286,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                   _badgeChip(
                     icon: '🔥',
                     label: 'Streak',
-                    value: '${widget.streak} ${AppL.lang == 'en' ? 'wk' : 'sett.'}',
+                    value: '${widget.streak} ${AppL.lang == 'en' ? 'mc' : 'mc.'}',
                     accent: Colors.orange,
                   ),
                 if (_showSessionProgress && widget.progressPercent != null)
@@ -13177,6 +13312,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                       spacing: 8,
                       runSpacing: 6,
                       alignment: WrapAlignment.center,
+                      runAlignment: WrapAlignment.center,
                       children: names.map((name) {
                         final done = widget.streakDoneNames.contains(name);
                         return Container(
@@ -13749,7 +13885,7 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       const double cardSize = 220.0 * s;
       final double badgesH = (_includeStreak || _includeSessionCount || _includeTrend) ? (cardSize + 40.0 * s) : 0.0;
       const double headerH = 300.0 * s;
-      final double chartH = (chartImage.height.toDouble() / chartImage.width.toDouble()) * w;
+      final double chartH = 320.0 * s; // Fixed height for better proportion with stat cards
       final double totalH = headerH + chartH + badgesH + 40 * s;
 
       final recorder = ui.PictureRecorder();
@@ -13761,6 +13897,16 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       // Background
       final bgPaint = Paint()..color = const Color(0xFF0E0E10);
       canvas.drawRect(Rect.fromLTWH(0, 0, w, totalH), bgPaint);
+      
+      // Colored border for 3D effect
+      final borderPaint = Paint()
+        ..color = widget.accent.withAlpha(120)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 3 * s;
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, w, totalH), Radius.circular(32 * s)),
+        borderPaint,
+      );
 
       // Header: icon + "GymApp"
       final codec = await ui.instantiateImageCodec(
@@ -13776,6 +13922,16 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
         Rect.fromLTWH(0, 0, frame.image.width.toDouble(), frame.image.height.toDouble()),
         Rect.fromLTWH(iconX, 20 * s, iconSz, iconSz),
         Paint(),
+      );
+      
+      // Border around icon with rounded corners
+      final iconBorderPaint = Paint()
+        ..color = widget.accent.withAlpha(150)
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2.5 * s;
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(Rect.fromLTWH(iconX, 20 * s, iconSz, iconSz), Radius.circular(16 * s)),
+        iconBorderPaint,
       );
       final tp = TextPainter(
         text: TextSpan(
@@ -13828,6 +13984,8 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
             );
             canvas.drawRRect(rect, Paint()..color = cardColor.withAlpha(25));
             canvas.drawRRect(rect, Paint()..color = cardColor.withAlpha(130)..style = PaintingStyle.stroke..strokeWidth = 2 * s);
+            // Glow effect
+            canvas.drawRRect(rect, Paint()..color = Colors.white.withAlpha(15)..style = PaintingStyle.stroke..strokeWidth = 1 * s);
             final emojiTp = TextPainter(
               text: TextSpan(text: emoji, style: TextStyle(fontSize: 44 * s)),
               textDirection: TextDirection.ltr,
