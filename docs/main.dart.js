@@ -97449,11 +97449,11 @@ $2(a,b){var s=null,r=this.a,q=r.d.length,p=b.b,o=p-68-10-6-18,n=q===0||q*38+(q-1
 if(n){p=t.p
 j=A.aY(A.c([B.ath,B.amq,A.o(j,s,s,s,s,B.apx,s,s)],p),B.n,B.bP,B.o,0)
 if($.V==="en")k=r.w===1?"week":"weeks"
-else k="mc"
+else k="micro"
 k=A.o(k,s,s,s,s,B.Es,s,s)
 r=r.d.length
 return A.aY(A.c([A.bF(A.aT(A.c([j,k,B.o1,A.o(""+l+"/"+r,s,s,s,s,A.aE(s,s,l>=r?B.aD:B.ab,s,s,s,s,s,s,s,s,10,s,s,B.b8,s,s,!0,s,s,s,s,s,s,s,s),s,s)],p),B.n,B.k,B.a6),s,68),B.c4,A.bp(m.$1(o),1),B.dC,B.t3],p),B.n,B.k,B.o,0)}else{if($.V==="en")k=k===1?"week":"weeks"
-else k="mc"
+else k="micro"
 k=A.o(j+" "+k,s,s,s,s,B.aqR,s,s)
 r=r.d.length
 j=t.p
@@ -99450,7 +99450,7 @@ h="Complete "+f+" more session"+h+" to keep your streak!"}else{h=h===1?"e":"i"
 h="Completa ancora "+f+" session"+h+" per non perdere i tuoi progressi!"}B.c.N(g,A.c([A.o(h,d,d,d,d,B.aqz,B.Q,d)],m))}h=n.db
 if(h>0){f="\ud83d\udd25 "+h
 if($.V==="en"){h=h===1?"":"s"
-h=f+" microcycle"+h+" streak!"}else h=f+" mc di fila!"
+h=f+" microcycle"+h+" streak!"}else h=f+" micro di fila!"
 B.c.N(g,A.c([B.c5,A.o(h,d,d,d,d,B.anI,d,d)],m))}l=A.c([B.qF,B.ay,l,k,B.ay,B.qF,B.ay,A.aA(d,A.aT(g,B.n,B.k,B.o),B.m,d,d,new A.ap(B.pF,d,i,j,d,d,B.v),d,d,d,B.hx,d,d,d),n.a9L()],m)
 k=A.a1(14)
 j=A.cC(A.Q(a).ax.b.aN(70),1)

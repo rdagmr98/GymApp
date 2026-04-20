@@ -6914,8 +6914,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                                         AppL.lang == 'en'
                                             ? (_streak == 1 ? 'week' : 'weeks')
                                             : (_streak == 1
-                                                  ? 'mc'
-                                                  : 'mc'),
+                                                  ? 'micro'
+                                                  : 'micro'),
                                         style: const TextStyle(
                                           color: Colors.white38,
                                           fontSize: 10,
@@ -6958,7 +6958,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                     ),
                                     const SizedBox(width: 4),
                                     Text(
-                                      '$_streak ${AppL.lang == 'en' ? (_streak == 1 ? 'week' : 'weeks') : (_streak == 1 ? 'mc' : 'mc')}',
+                                      '$_streak ${AppL.lang == 'en' ? (_streak == 1 ? 'week' : 'weeks') : (_streak == 1 ? 'micro' : 'micro')}',
                                       style: const TextStyle(
                                         color: Colors.orange,
                                         fontSize: 13,
@@ -10640,7 +10640,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         Text(
                           AppL.lang == 'en'
                               ? '🔥 $_currentStreak microcycle${_currentStreak == 1 ? '' : 's'} streak!'
-                              : '🔥 $_currentStreak ${_currentStreak == 1 ? 'mc' : 'mc'} di fila!',
+                              : '🔥 $_currentStreak ${_currentStreak == 1 ? 'micro' : 'micro'} di fila!',
                           style: const TextStyle(
                             color: Colors.orange,
                             fontSize: 14,
@@ -13286,7 +13286,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                   _badgeChip(
                     icon: '🔥',
                     label: 'Streak',
-                    value: '${widget.streak} ${AppL.lang == 'en' ? 'mc' : 'mc.'}',
+                    value: '${widget.streak} ${AppL.lang == 'en' ? 'micro' : 'micro.'}',
                     accent: Colors.orange,
                   ),
                 if (_showSessionProgress && widget.progressPercent != null)
@@ -13635,7 +13635,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                 Text(
                   AppL.lang == 'en'
                       ? '${widget.streak == 1 ? 'microcycle' : 'microcycles'} on fire! 🔥'
-                      : '${widget.streak == 1 ? 'mc' : 'mc'} di fila! 🔥',
+                      : '${widget.streak == 1 ? 'micro' : 'micro'} di fila! 🔥',
                   style: const TextStyle(
                     color: Colors.orange,
                     fontSize: 20,
@@ -13752,7 +13752,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
         [XFile(file.path, mimeType: 'image/png')],
         text: AppL.lang == 'en'
             ? '🔥 ${widget.streak} microcycle${widget.streak == 1 ? '' : 's'} streak!'
-            : '🔥 ${widget.streak} ${widget.streak == 1 ? 'mc' : 'mc'} di fila!',
+            : '🔥 ${widget.streak} ${widget.streak == 1 ? 'micro' : 'micro'} di fila!',
       );
     } finally {
       if (mounted) setState(() => _sharing = false);
