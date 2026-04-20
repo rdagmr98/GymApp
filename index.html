@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=docs/">
-  <script>window.location.replace('docs/');</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GymApp</title>
+  <script>
+    // Redirect to docs subdirectory
+    if (window.location.pathname === '/' || window.location.pathname === '/GymApp/') {
+      window.location.href = '/GymApp/';
+    }
+  </script>
 </head>
 <body>
-  <p><a href="docs/">Apri GymApp</a></p>
+  <p>Redirecting to GymApp...</p>
 </body>
 </html>
+
