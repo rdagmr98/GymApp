@@ -1335,8 +1335,8 @@ const RESOURCES = {"assets/AssetManifest.bin": "2086f352b8be9d26c0cbfff810b3861d
 "assets/assets/videos/trazioni_presa_neutra.mp4": "389466259d5c024032915a46300cf499",
 "assets/assets/videos/tricipiti_ai_cavi.mp4": "5de902dc5bd16424c0137c65281d6d32",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
-"assets/fonts/MaterialIcons-Regular.otf": "70cb7347f5c987159b2782d444dd1ca3",
-"assets/NOTICES": "04bd433a597f888559480a5371e822ad",
+"assets/fonts/MaterialIcons-Regular.otf": "a542a48325a408ff55f60eac52553b2d",
+"assets/NOTICES": "00a3b186d266fea6ec840f9b8d528dd0",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "33b7d9392238c04c131b6ce224e13711",
 "assets/packages/wakelock_plus/assets/no_sleep.js": "74499cf34f37daae14b51e3a23cd9f7a",
 "assets/shaders/ink_sparkle.frag": "ecc85a2e95f5e9f53123dcaf8cb9b6ce",
@@ -1355,7 +1355,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "2086f352b8be9d26c0cbfff810b3861d
 "canvaskit/skwasm_heavy.wasm": "b0be7910760d205ea4e011458df6ee01",
 "favicon.png": "bab703d825dafa066624127b80b9b949",
 "flutter.js": "24bc71911b75b5f8135c949e27a2984e",
-"flutter_bootstrap.js": "61562b44ba8662285778132eb4fc3f3b",
+"flutter_bootstrap.js": "c5b477a37ad3020de926532ae8474ac5",
 "gymapp-favicon.png": "bab703d825dafa066624127b80b9b949",
 "icons/gymapp-home-180.png": "ffc859c4461c480f31bd4af23ccc2555",
 "icons/gymapp-icon-192.png": "c102f13ce1671fe76013435cb654409a",
@@ -1368,9 +1368,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "2086f352b8be9d26c0cbfff810b3861d
 "icons/Icon-maskable-512.png": "fc7ca009d17fa7a63c30194c5da5903c",
 "index.html": "ddc1657dea2b96cdc85a8f2d856466d7",
 "/": "ddc1657dea2b96cdc85a8f2d856466d7",
-"main.dart.js": "c59d43bbfd31394356cb89f7436be707",
+"main.dart.js": "90f8c53c246b2387e8ebd4670b637abf",
 "manifest.json": "c58b590ae81d6fe7fea194a1eba19ee7",
-"version.json": "3ed484e8a55c87fe3310d6bbf1629e84"};
+"version.json": "6f892ee668dea71719a8a1b3546354ba"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
