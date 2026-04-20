@@ -13875,7 +13875,7 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       if (boundary == null) return;
 
       // Capture the chart at high resolution
-      final chartImage = await boundary.toImage(pixelRatio: 4.0);
+      final chartImage = await boundary.toImage(pixelRatio: 6.0);
       final chartBytes = await chartImage.toByteData(format: ui.ImageByteFormat.png);
       if (chartBytes == null) return;
 

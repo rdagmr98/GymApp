@@ -1314,7 +1314,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "391763e626895d0cf08b09a921235c70
 "canvaskit/skwasm_heavy.wasm": "b0be7910760d205ea4e011458df6ee01",
 "favicon.png": "bab703d825dafa066624127b80b9b949",
 "flutter.js": "24bc71911b75b5f8135c949e27a2984e",
-"flutter_bootstrap.js": "918ea770323ebe070c273cc9453286ef",
+"flutter_bootstrap.js": "bfd781850d9129dad946cd64feab564c",
 "gymapp-favicon.png": "bab703d825dafa066624127b80b9b949",
 "icons/gymapp-home-180.png": "ffc859c4461c480f31bd4af23ccc2555",
 "icons/gymapp-icon-192.png": "c102f13ce1671fe76013435cb654409a",
