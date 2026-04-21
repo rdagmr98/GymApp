@@ -101094,7 +101094,7 @@ n=A.a1(16)
 m=A.aA(j,j,B.m,j,j,new A.ap(i,j,j,A.a1(2),j,j,B.v),j,20,j,j,j,j,4)
 if(k.d==null&&k.a.d.length>1)l=$.V==="en"?"Progress per microcycle":"Progressi per microciclo"
 else l=$.V==="en"?"Progress per session":"Progressi per sessione"
-f=A.ip(A.aT(A.c([r,B.bb,new A.hi(A.aA(j,A.aT(A.c([A.aY(A.c([m,B.cW,A.o(l,j,j,j,j,B.aon,j,j)],f),B.n,B.k,B.o,0),B.al,A.bF(A.fO(j,j,j,new A.YB(h,i,j),B.o_),220,j),B.ay],f),B.a1,B.k,B.o),B.m,j,j,new A.ap(B.a4,j,j,n,j,j,B.v),j,j,j,B.cO,j,j,j),k.e),B.aH,k.a.aqP()],f),B.a1,B.k,B.o),B.r0,B.aa)}s.push(A.bp(f,1))
+f=A.ip(A.aT(A.c([r,B.bb,A.aA(j,A.aT(A.c([A.aY(A.c([m,B.cW,A.o(l,j,j,j,j,B.aon,j,j)],f),B.n,B.k,B.o,0),B.al,new A.hi(A.bF(A.fO(j,j,j,new A.YB(h,i,j),B.o_),220,j),k.e),B.ay],f),B.a1,B.k,B.o),B.m,j,j,new A.ap(B.a4,j,j,n,j,j,B.v),j,j,j,B.cO,j,j,j),B.aH,k.a.aqP()],f),B.a1,B.k,B.o),B.r0,B.aa)}s.push(A.bp(f,1))
 return A.k6(g,B.cq,A.aT(s,B.n,B.k,B.o),j,j,j)},
 QG(a,b,c,d){var s,r=null,q=d?a.aN(40):B.a4,p=A.a1(20),o=d?a:B.bo
 o=A.cC(o,d?1.5:1)
