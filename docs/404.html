@@ -4,12 +4,13 @@
   <meta charset="utf-8">
   <title>GymApp</title>
   <script>
-    var segment = '';
-    if (window.location.pathname !== '/') {
-      segment = window.location.pathname.split('/').pop();
+    var pathname = window.location.pathname;
+    var baseUrl = '/GymApp/docs/';
+    if (!pathname.startsWith(baseUrl)) {
+      var segment = pathname.replace(/^\/GymApp\/docs\//, '');
+      sessionStorage.redirect = segment || '/';
+      window.location.href = baseUrl;
     }
-    sessionStorage.redirect = segment || '/';
-    window.location.href = '/';
   </script>
 </head>
 <body></body>
