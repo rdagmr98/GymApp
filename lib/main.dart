@@ -13370,7 +13370,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
           const SizedBox(height: 6),
           Center(
             child: Text(
-              '#GymApp #Fitness #Workout',
+              '',
               style: TextStyle(color: accent.withAlpha(120), fontSize: 10),
             ),
           ),
@@ -13416,7 +13416,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
       await file.writeAsBytes(byteData.buffer.asUint8List());
       await Share.shareXFiles(
         [XFile(file.path, mimeType: 'image/png')],
-        text: '#GymApp #Fitness #Workout',
+        text: '',
       );
     } finally {
       if (mounted) setState(() => _sharing = false);
@@ -13724,7 +13724,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                 const Spacer(),
                 // Bottom hashtags
                 Text(
-                  '#GymApp #Streak #Fitness #Workout',
+                  '',
                   style: TextStyle(color: widget.accent.withAlpha(100), fontSize: 10),
                   textAlign: TextAlign.center,
                 ),
@@ -13888,7 +13888,11 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       
       // Calculate chart height based on actual chart image dimensions
       final chartAspect = chartImage.width / chartImage.height;
-      final double chartH = (w / chartAspect).clamp(200 * s, 380 * s);
+      // Chart width should match the width of the 3 stat cards below
+      const double gap = 16.0 * s;
+      final double badgesWidthTotal = 3 * cardSize + 4 * gap; // 3 cards + 4 gaps
+      final double chartW = badgesWidthTotal; // Chart width matches badges width
+      final double chartH = chartW / chartAspect; // Height proportional to width
       final double totalH = headerH + chartH + badgesH + 40 * s;
 
       final recorder = ui.PictureRecorder();
@@ -13950,10 +13954,11 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       )..layout();
       tp.paint(canvas, Offset((w - tp.width) / 2, (20 + 200 + 16) * s));
 
-      // Draw chart below header
+      // Draw chart below header, centered horizontally
       final chartUi = await ui.instantiateImageCodec(chartBytes.buffer.asUint8List());
       final chartFrame = await chartUi.getNextFrame();
-      final dst = Rect.fromLTWH(0, headerH, w, chartH);
+      final chartX = (w - chartW) / 2; // Center chart horizontally
+      final dst = Rect.fromLTWH(chartX, headerH, chartW, chartH);
       canvas.drawImageRect(
         chartFrame.image,
         Rect.fromLTWH(0, 0, chartImage.width.toDouble(), chartImage.height.toDouble()),
@@ -13976,7 +13981,6 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
         if (_includeTrend) activeCards.add((trendUp ? Colors.greenAccent : Colors.redAccent, trendUp ? '📈' : '📉', '${trendUp ? '+' : ''}${trendPct.toStringAsFixed(0)}%', 'Trend'));
 
         if (activeCards.isNotEmpty) {
-          const double gap = 16.0 * s;
           final double totalCardsW = activeCards.length * cardSize + (activeCards.length + 1) * gap;
           final double firstCardX = (w - totalCardsW) / 2 + gap;
 
@@ -14024,8 +14028,8 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       await Share.shareXFiles(
         [XFile(file.path, mimeType: 'image/png')],
         text: AppL.lang == 'en'
-            ? '💪 My GymApp progress! #GymApp #Fitness'
-            : '💪 I miei progressi su GymApp! #GymApp #Fitness',
+            ? '💪 My GymApp progress!'
+            : '💪 I miei progressi su GymApp!',
       );
     } finally {
       if (mounted) setState(() => _sharing = false);
