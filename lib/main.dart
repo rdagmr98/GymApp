@@ -1358,45 +1358,49 @@ String _isoWeek(DateTime d) {
 Future<int> updateStreak(String dayName, List<String> totalSessionNames) async {
   final prefs = await SharedPreferences.getInstance();
   final now = DateTime.now();
-  final thisWeek = _isoWeek(now);
-  final lastWeek = prefs.getString('streak_last_week') ?? '';
   int streak = prefs.getInt('streak_count') ?? 0;
 
-  // Sessioni completate questa settimana
-  final completedJson = prefs.getString('streak_completed_sessions') ?? '[]';
-  Set<String> completed = Set<String>.from(jsonDecode(completedJson));
-
-  // Se è una nuova settimana, valuta la precedente e resetta
-  if (lastWeek.isNotEmpty && lastWeek != thisWeek) {
-    final prevCompletedJson = prefs.getString('streak_prev_completed') ?? '[]';
-    Set<String> prevCompleted = Set<String>.from(jsonDecode(prevCompletedJson));
-    // Usa il conteggio richiesto salvato (robusto a cambi di scheda)
-    final prevRequired =
-        prefs.getInt('streak_required_count') ?? totalSessionNames.length;
-    if (prevCompleted.length >= prevRequired && prevRequired > 0) {
-      streak++;
-    } else {
-      streak = 0;
-    }
-    await prefs.setInt('streak_count', streak);
-    await prefs.setString(
-      'streak_prev_completed',
-      jsonEncode(completed.toList()),
-    );
-    completed = {};
+  // Sessioni già completate nel microciclo corrente
+  final microJson = prefs.getString('microcycle_done') ?? '[]';
+  Set<String> microDone = Set<String>.from(jsonDecode(microJson));
+  // Rimuovi sessioni non più presenti nella scheda
+  if (totalSessionNames.isNotEmpty) {
+    microDone = microDone.intersection(Set<String>.from(totalSessionNames));
   }
 
-  // Salva il conteggio richiesto per questa settimana
-  await prefs.setInt('streak_required_count', totalSessionNames.length);
-  completed.add(dayName);
-  await prefs.setString('streak_last_week', thisWeek);
-  await prefs.setString(
-    'streak_completed_sessions',
-    jsonEncode(completed.toList()),
-  );
-  // Aggiorna data ultimo allenamento per notifiche
+  // REGOLA 7 GIORNI: se una sessione del piano non è stata fatta da >7 giorni → reset streak
+  for (final name in totalSessionNames) {
+    if (name == dayName) continue;
+    final lastStr = prefs.getString('last_session_date_$name');
+    if (lastStr != null) {
+      final last = DateTime.tryParse(lastStr);
+      if (last != null && now.difference(last).inDays > 7) {
+        streak = 0;
+        break;
+      }
+    }
+  }
+
+  // LOGICA MICROCICLO
+  if (microDone.contains(dayName)) {
+    // Questa sessione era già nel microciclo corrente → microciclo incompleto, si ricomincia
+    streak = 0;
+    microDone = {dayName};
+  } else {
+    microDone.add(dayName);
+    // Microciclo completo quando tutte le sessioni sono state fatte
+    if (totalSessionNames.isNotEmpty &&
+        totalSessionNames.every((n) => microDone.contains(n))) {
+      streak++;
+      microDone = {}; // Azzera per il prossimo microciclo
+    }
+  }
+
+  await prefs.setInt('streak_count', streak);
+  await prefs.setString('microcycle_done', jsonEncode(microDone.toList()));
+  await prefs.setString('last_session_date_$dayName', now.toIso8601String());
   await prefs.setString('last_workout_date', now.toIso8601String());
-  
+
   // Gestisci il reset dei badge
   await manageBadgeReset();
 
@@ -1409,11 +1413,11 @@ Future<int> getStreak() async {
   return prefs.getInt('streak_count') ?? 0;
 }
 
-/// Legge streak count + sessioni completate questa settimana.
+/// Legge streak count + sessioni completate nel microciclo corrente.
 Future<({int count, Set<String> done})> getStreakData() async {
   final prefs = await SharedPreferences.getInstance();
   final count = prefs.getInt('streak_count') ?? 0;
-  final json = prefs.getString('streak_completed_sessions') ?? '[]';
+  final json = prefs.getString('microcycle_done') ?? '[]';
   final done = Set<String>.from(jsonDecode(json));
   return (count: count, done: done);
 }
@@ -7705,10 +7709,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
       'client_routine',
       jsonEncode(_days.map((d) => d.toJson()).toList()),
     );
-    // Reset this week's completed sessions when the routine changes
-    // (but keep the week streak count intact)
-    await prefs.setString('streak_completed_sessions', '[]');
-    await prefs.setInt('streak_required_count', _days.length);
+    // Reset microcycle in progress when the routine changes (keep streak count)
+    await prefs.setString('microcycle_done', '[]');
   }
 
   void _aggiungiGiorno() {
