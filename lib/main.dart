@@ -13306,7 +13306,10 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                     : widget.streakDoneNames.toList();
                 final doneCount = widget.streakDoneNames.length;
                 final total = names.length;
-                return Column(
+                return SizedBox(
+                  width: double.infinity,
+                  child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Wrap(
                       spacing: 8,
@@ -13360,8 +13363,10 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                     Text(
                       '$doneCount/$total questo microciclo',
                       style: const TextStyle(color: Colors.white54, fontSize: 9),
+                      textAlign: TextAlign.center,
                     ),
                   ],
+                  ),
                 );
               }),
             ],
@@ -13882,16 +13887,15 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       // Build composed image using PictureRecorder (2x scale for higher quality)
       const double s = 2.0;
       const double w = 1080 * s;
+      const double hPad = 20.0 * s; // horizontal padding
+      final double chartW = w - 2 * hPad; // chart fills content width
       const double cardSize = 220.0 * s;
       final double badgesH = (_includeStreak || _includeSessionCount || _includeTrend) ? (cardSize + 40.0 * s) : 0.0;
-      const double headerH = 300.0 * s;
-      
+      const double headerH = 260.0 * s; // reduced from 300
+
       // Calculate chart height based on actual chart image dimensions
       final chartAspect = chartImage.width / chartImage.height;
-      // Chart width should match the width of the 3 stat cards below
       const double gap = 16.0 * s;
-      final double badgesWidthTotal = 3 * cardSize + 4 * gap; // 3 cards + 4 gaps
-      final double chartW = badgesWidthTotal; // Chart width matches badges width
       final double chartH = chartW / chartAspect; // Height proportional to width
       final double totalH = headerH + chartH + badgesH + 40 * s;
 
@@ -13904,7 +13908,7 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       // Background
       final bgPaint = Paint()..color = const Color(0xFF0E0E10);
       canvas.drawRect(Rect.fromLTWH(0, 0, w, totalH), bgPaint);
-      
+
       // Colored border for 3D effect
       final borderPaint = Paint()
         ..color = widget.accent.withAlpha(120)
@@ -13918,26 +13922,26 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       // Header: icon + "GymApp"
       final codec = await ui.instantiateImageCodec(
         (await rootBundle.load('assets/icon_client.png')).buffer.asUint8List(),
-        targetWidth: (200 * s).round(),
-        targetHeight: (200 * s).round(),
+        targetWidth: (180 * s).round(),
+        targetHeight: (180 * s).round(),
       );
       final frame = await codec.getNextFrame();
-      const double iconSz = 200.0 * s;
+      const double iconSz = 180.0 * s;
       final iconX = (w - iconSz) / 2;
       canvas.drawImageRect(
         frame.image,
         Rect.fromLTWH(0, 0, frame.image.width.toDouble(), frame.image.height.toDouble()),
-        Rect.fromLTWH(iconX, 20 * s, iconSz, iconSz),
+        Rect.fromLTWH(iconX, 16 * s, iconSz, iconSz),
         Paint(),
       );
-      
+
       // Border around icon with rounded corners
       final iconBorderPaint = Paint()
         ..color = widget.accent.withAlpha(150)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2.5 * s;
       canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(iconX, 20 * s, iconSz, iconSz), Radius.circular(16 * s)),
+        RRect.fromRectAndRadius(Rect.fromLTWH(iconX, 16 * s, iconSz, iconSz), Radius.circular(16 * s)),
         iconBorderPaint,
       );
       final tp = TextPainter(
@@ -13945,20 +13949,26 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
           text: 'GymApp',
           style: TextStyle(
             color: widget.accent,
-            fontSize: 52 * s,
+            fontSize: 48 * s,
             fontWeight: FontWeight.w900,
             letterSpacing: 2.0,
           ),
         ),
         textDirection: TextDirection.ltr,
       )..layout();
-      tp.paint(canvas, Offset((w - tp.width) / 2, (20 + 200 + 16) * s));
+      tp.paint(canvas, Offset((w - tp.width) / 2, (16 + 180 + 12) * s));
 
-      // Draw chart below header, centered horizontally
+      // Chart background (dark box behind the transparent chart)
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(Rect.fromLTWH(hPad, headerH, chartW, chartH), const Radius.circular(16 * s)),
+        Paint()..color = const Color(0xFF1C1C1E),
+      );
+
+      // Draw chart below header, filling content width
       final chartUi = await ui.instantiateImageCodec(chartBytes.buffer.asUint8List());
       final chartFrame = await chartUi.getNextFrame();
-      final chartX = (w - chartW) / 2; // Center chart horizontally
-      final dst = Rect.fromLTWH(chartX, headerH, chartW, chartH);
+      final double innerPad = 12.0 * s;
+      final dst = Rect.fromLTWH(hPad + innerPad, headerH + innerPad, chartW - 2 * innerPad, chartH - 2 * innerPad);
       canvas.drawImageRect(
         chartFrame.image,
         Rect.fromLTWH(0, 0, chartImage.width.toDouble(), chartImage.height.toDouble()),
@@ -16099,42 +16109,42 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                       children: [
                         _buildStatsRow(points, accent),
                         const SizedBox(height: 20),
-                        RepaintBoundary(
-                          key: _chartKey,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF1C1C1E),
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            padding: const EdgeInsets.all(16),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      width: 4,
-                                      height: 20,
-                                      decoration: BoxDecoration(
-                                        color: accent,
-                                        borderRadius: BorderRadius.circular(2),
-                                      ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF1C1C1E),
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 4,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      color: accent,
+                                      borderRadius: BorderRadius.circular(2),
                                     ),
-                                    const SizedBox(width: 8),
-                                    Text(
-                                      _filterDay == null && widget.routine.length > 1
-                                          ? (AppL.lang == 'en' ? 'Progress per microcycle' : 'Progressi per microciclo')
-                                          : (AppL.lang == 'en' ? 'Progress per session' : 'Progressi per sessione'),
-                                      style: const TextStyle(
-                                        color: Colors.white70,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    _filterDay == null && widget.routine.length > 1
+                                        ? (AppL.lang == 'en' ? 'Progress per microcycle' : 'Progressi per microciclo')
+                                        : (AppL.lang == 'en' ? 'Progress per session' : 'Progressi per sessione'),
+                                    style: const TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
                                     ),
-                                  ],
-                                ),
-                                const SizedBox(height: 16),
-                                SizedBox(
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 16),
+                              RepaintBoundary(
+                                key: _chartKey,
+                                child: SizedBox(
                                   height: 220,
                                   child: CustomPaint(
                                     size: Size.infinite,
@@ -16144,9 +16154,9 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 8),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(height: 8),
+                            ],
                           ),
                         ),
                         const SizedBox(height: 12),
