@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="it">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=docs/">
-  <script>window.location.replace('docs/');</script>
+  <meta charset="utf-8">
   <title>GymApp</title>
+  <script>
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + 
+      '/index.html?p=' + l.pathname.slice(1).replace(/&/g, '~and~') +
+      l.search.replace(/&/g, '~and~') + l.hash
+    );
+  </script>
 </head>
-<body>
-  <p><a href="docs/">Apri GymApp</a></p>
-</body>
+<body></body>
 </html>
