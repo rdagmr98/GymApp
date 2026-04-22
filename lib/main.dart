@@ -1374,7 +1374,7 @@ Future<int> updateStreak(String dayName, List<String> totalSessionNames) async {
     final lastStr = prefs.getString('last_session_date_$name');
     if (lastStr != null) {
       final last = DateTime.tryParse(lastStr);
-      if (last != null && now.difference(last).inDays > 7) {
+      if (last != null && now.difference(last).inDays > 13) {
         streak = 0;
         break;
       }
@@ -5344,6 +5344,43 @@ class _ClientMainPageState extends State<ClientMainPage>
                     ),
                   ),
                   _buildWorkoutProgressNativeAd(),
+                  if (!kIsWeb) ...[
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: () => _shareLastSession(context, day),
+                            icon: const Icon(Icons.share_rounded, size: 16),
+                            label: const Text('Condividi 🏋️'),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: accent,
+                              side: BorderSide(color: accent.withAlpha(80)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: () {
+                              Navigator.pop(c);
+                              _showOverallProgressPage();
+                            },
+                            icon: const Icon(Icons.bar_chart_rounded, size: 16),
+                            label: Text(AppL.lang == 'en' ? 'Progress' : 'Progressi'),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: accent,
+                              side: BorderSide(color: accent.withAlpha(80)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              padding: const EdgeInsets.symmetric(vertical: 10),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -6585,6 +6622,48 @@ class _ClientMainPageState extends State<ClientMainPage>
           accent: appAccentNotifier.value,
           buildAd: _buildOverallProgressNativeAd,
         ),
+      ),
+    );
+  }
+
+  List<Map<String, dynamic>> _buildLastSessionExercises(String dayName) {
+    final Map<String, List<Map<String, dynamic>>> bySid = {};
+    final Map<String, DateTime> sidDate = {};
+    for (final h in history) {
+      if ((h['dayName'] as String?) != dayName) continue;
+      final sid = (h['session_id'] as String?)?.isNotEmpty == true
+          ? h['session_id'] as String
+          : ((h['date'] as String?) ?? '').substring(0, 10);
+      bySid.putIfAbsent(sid, () => []).add(Map<String, dynamic>.from(h));
+      sidDate.putIfAbsent(sid, () => DateTime.tryParse((h['date'] as String?) ?? '') ?? DateTime(2000));
+    }
+    if (bySid.isEmpty) return [];
+    final lastSid = sidDate.entries.reduce((a, b) => a.value.isAfter(b.value) ? a : b).key;
+    return bySid[lastSid]!.map((h) => {
+      'exercise': h['exercise'] as String? ?? '',
+      'series': (h['series'] as List?) ?? [],
+    }).toList();
+  }
+
+  void _shareLastSession(BuildContext ctx, WorkoutDay day) {
+    final exercises = _buildLastSessionExercises(day.dayName);
+    if (exercises.isEmpty) return;
+    final allNames = myRoutine.map((r) => r.dayName).toList();
+    final now = DateTime.now();
+    const months = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+    final todayLabel = '${now.day} ${months[now.month - 1]}';
+    showModalBottomSheet(
+      context: ctx,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => _WorkoutShareSheet(
+        dayName: day.dayName,
+        todayLabel: todayLabel,
+        exercises: exercises,
+        streak: _streak,
+        accent: appAccentNotifier.value,
+        streakDoneNames: Set<String>.from(_streakDone),
+        allSessionNames: allNames,
       ),
     );
   }
@@ -14974,23 +15053,6 @@ class _WorkoutProgressPainter extends CustomPainter {
       final y = size.height * 0.9 - (size.height * 0.8 * norm.clamp(0.0, 1.0));
       canvas.drawCircle(Offset(x, y), 5, dotBg);
       canvas.drawCircle(Offset(x, y), 4, dotPaint);
-
-      if (n <= 8 || i % ((n / 6).ceil()) == 0) {
-        final tp = TextPainter(
-          text: TextSpan(
-            text: labels[i],
-            style: const TextStyle(color: Colors.white38, fontSize: 9),
-          ),
-          textDirection: TextDirection.ltr,
-        )..layout();
-        tp.paint(
-          canvas,
-          Offset(
-            (x - tp.width / 2).clamp(0, size.width - tp.width),
-            size.height - 14,
-          ),
-        );
-      }
     }
   }
 
