@@ -1382,16 +1382,24 @@ Future<int> updateStreak(String dayName, List<String> totalSessionNames) async {
   }
 
   // LOGICA MICROCICLO
+  final bool newCycleStarting = microDone.isEmpty;
   if (microDone.contains(dayName)) {
     // Questa sessione era già nel microciclo corrente → microciclo incompleto, si ricomincia
     streak = 0;
     microDone = {dayName};
+    await prefs.remove('microcycle_completed_at');
   } else {
+    if (newCycleStarting) {
+      // Prima sessione del nuovo microciclo — cancella lo stato "appena completato"
+      await prefs.remove('microcycle_completed_at');
+    }
     microDone.add(dayName);
     // Microciclo completo quando tutte le sessioni sono state fatte
     if (totalSessionNames.isNotEmpty &&
         totalSessionNames.every((n) => microDone.contains(n))) {
       streak++;
+      await prefs.setString('microcycle_completed_at', now.toIso8601String());
+      await prefs.setString('microcycle_last_sessions', jsonEncode(microDone.toList()));
       microDone = {}; // Azzera per il prossimo microciclo
     }
   }
@@ -1418,7 +1426,19 @@ Future<({int count, Set<String> done})> getStreakData() async {
   final prefs = await SharedPreferences.getInstance();
   final count = prefs.getInt('streak_count') ?? 0;
   final json = prefs.getString('microcycle_done') ?? '[]';
-  final done = Set<String>.from(jsonDecode(json));
+  Set<String> done = Set<String>.from(jsonDecode(json));
+  // Se il microciclo è stato appena completato (< 2 giorni fa) e non è ancora
+  // iniziato il successivo, mostra tutti i badge come conquistati
+  if (done.isEmpty) {
+    final completedAtStr = prefs.getString('microcycle_completed_at');
+    if (completedAtStr != null) {
+      final completedAt = DateTime.tryParse(completedAtStr);
+      if (completedAt != null && DateTime.now().difference(completedAt).inDays < 2) {
+        final lastJson = prefs.getString('microcycle_last_sessions') ?? '[]';
+        done = Set<String>.from(jsonDecode(lastJson));
+      }
+    }
+  }
   return (count: count, done: done);
 }
 
