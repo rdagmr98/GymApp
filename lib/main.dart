@@ -6597,15 +6597,56 @@ class _ClientMainPageState extends State<ClientMainPage>
     final tutorialShown = prefs.getBool('workout_tutorial_shown') ?? false;
     
     if (!tutorialShown && !kIsWeb) {
-      // Show tutorial first
+      // Show tutorial first with real WorkoutEngine in demo mode
       if (!mounted) return;
+      final demoDay = WorkoutDay(
+        dayName: 'Demo',
+        bodyParts: ['petto', 'braccia'],
+        exercises: [
+          ExerciseConfig(
+            name: 'Panca Piana',
+            targetSets: 2,
+            repsList: [10, 10],
+            recoveryTime: 15,
+            notePT: 'Mantieni i piedi a terra e la schiena leggermente arcuata.',
+          ),
+          ExerciseConfig(
+            name: 'Trazioni',
+            targetSets: 2,
+            repsList: [8, 8],
+            recoveryTime: 15,
+          ),
+        ],
+      );
       await Navigator.push(
         context,
         PageRouteBuilder(
           pageBuilder: (c, anim, _) => WorkoutTutorial(
             accentColor: appAccentNotifier.value,
-            onComplete: () {
-              Navigator.pop(context);
+            onComplete: () => Navigator.pop(context),
+            onStartDemo: () async {
+              await Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (bc, a, __) => WorkoutEngine(
+                    demoMode: true,
+                    day: demoDay,
+                    history: const [],
+                    carryoverWeights: const {},
+                    allSessionNames: const [],
+                    onDone: (_) {},
+                  ),
+                  transitionsBuilder: (bc, a, _, child) => SlideTransition(
+                    position: Tween<Offset>(
+                      begin: const Offset(0, 1),
+                      end: Offset.zero,
+                    ).animate(
+                      CurvedAnimation(parent: a, curve: Curves.easeOutCubic),
+                    ),
+                    child: child,
+                  ),
+                ),
+              );
             },
           ),
           transitionsBuilder: (c, anim, _, child) => FadeTransition(
@@ -9774,6 +9815,7 @@ class WorkoutEngine extends StatefulWidget {
   final Map<String, Map<String, dynamic>> carryoverWeights;
   final Function(Map<String, dynamic>) onDone;
   final List<String> allSessionNames; // per calcolo streak
+  final bool demoMode; // se true, nessun dato viene salvato (tutorial)
   const WorkoutEngine({
     super.key,
     required this.day,
@@ -9781,6 +9823,7 @@ class WorkoutEngine extends StatefulWidget {
     required this.onDone,
     this.carryoverWeights = const {},
     this.allSessionNames = const [],
+    this.demoMode = false,
   });
   @override
   State<WorkoutEngine> createState() => _WorkoutEngineState();
@@ -9875,8 +9918,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       ex.results = [];
     }
     _loadSettings();
-    _loadWorkoutNativeAds();
-    _restoreInProgressWorkout();
+    if (!widget.demoMode) _loadWorkoutNativeAds();
+    if (!widget.demoMode) _restoreInProgressWorkout();
   }
 
   Future<void> _loadSettings() async {
@@ -10002,6 +10045,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
   /// Salva lo stato corrente dell'allenamento in SharedPreferences
   Future<void> _persistInProgress() async {
+    if (widget.demoMode) return;
     final prefs = await SharedPreferences.getInstance();
     final snapshot = {
       'exI': exI,
@@ -10085,6 +10129,16 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   }
 
   Future<void> _saveAndExit() async {
+    if (widget.demoMode) {
+      _timerRunId = _newTimerRunId();
+      _bgTimer?.cancel();
+      timerActive = false;
+      _bgCounter = 0;
+      _endTime = null;
+      await _clearTimerNotifications();
+      if (mounted) Navigator.pop(context);
+      return;
+    }
     final prefs = await SharedPreferences.getInstance();
 
     // Sincronizza l'esercizio corrente prima di chiudere
@@ -10270,7 +10324,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     _appLifecycleState = state;
     if (state == AppLifecycleState.resumed) {
-      _clearTimerNotifications();
+      // Only clear notifications when the timer is NOT active.
+      // If timerActive == true the user may have just closed the notification
+      // shade and returned to the app — cancelling here would remove the
+      // running countdown notification.
+      if (!timerActive) {
+        _clearTimerNotifications();
+      }
     }
   }
 
@@ -10560,6 +10620,57 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             child: Text(
               AppL.close,
               style: TextStyle(color: Theme.of(c).colorScheme.primary),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showDemoRecapDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (c) => AlertDialog(
+        backgroundColor: const Color(0xFF1C1C1E),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: const Column(
+          children: [
+            Icon(Icons.emoji_events, color: Colors.amber, size: 52),
+            SizedBox(height: 8),
+            Text(
+              'Demo completata! 💪',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+          ],
+        ),
+        content: const Text(
+          'Hai appena simulato un vero allenamento! Ora sai come funziona l\'app: registra pesi, reps, e il timer parte automaticamente.\n\nNessun dato è stato salvato.',
+          style: TextStyle(color: Colors.white70, fontSize: 14),
+          textAlign: TextAlign.center,
+        ),
+        actionsAlignment: MainAxisAlignment.center,
+        actions: [
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.amber,
+              foregroundColor: Colors.black,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+            onPressed: () {
+              Navigator.pop(c);
+              Navigator.pop(context);
+            },
+            child: const Text(
+              'Inizia il vero allenamento! 🚀',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -11445,6 +11556,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   }
 
   Future<void> _aggiornaJsonSuDisco() async {
+    if (widget.demoMode) return;
     final prefs = await SharedPreferences.getInstance();
     String? routineString = prefs.getString('client_routine');
 
@@ -11805,6 +11917,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         if (tuttoFinito) {
           _bgTimer?.cancel();
           await _clearTimerNotifications();
+          if (widget.demoMode) {
+            if (mounted) _showDemoRecapDialog();
+            return;
+          }
           final prefs = await SharedPreferences.getInstance();
           await prefs.remove(
             _inProgressKey,
@@ -11894,6 +12010,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       if (tuttoFinito) {
         if (_bgTimer != null) _bgTimer!.cancel();
         await _clearTimerNotifications();
+        if (widget.demoMode) {
+          if (mounted) _showDemoRecapDialog();
+          return;
+        }
         final prefs = await SharedPreferences.getInstance();
         await prefs.remove(
           _inProgressKey,
