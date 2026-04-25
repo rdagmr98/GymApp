@@ -1,23 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Monochrome bodybuilder double-bicep icon for Android 5+ notification bar -->
+<!-- Monochrome barbell icon for Android 5+ notification bar -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"
     android:height="24dp"
     android:viewportWidth="24"
     android:viewportHeight="24">
-    <!-- Head -->
+    <!-- Left weight plate: circle centered at (6, 12), radius 5 — 1dp from left edge -->
     <path android:fillColor="#FFFFFF"
-        android:pathData="M12,2 C13.1,2 14,2.9 14,4 C14,5.1 13.1,6 12,6 C10.9,6 10,5.1 10,4 C10,2.9 10.9,2 12,2 Z"/>
-    <!-- Left arm: raised double-bicep pose (upper arm with bicep curve, forearm pointing up) -->
+        android:pathData="M1,12 C1,9.24 3.24,7 6,7 C8.76,7 11,9.24 11,12 C11,14.76 8.76,17 6,17 C3.24,17 1,14.76 1,12 Z"/>
+    <!-- Right weight plate: circle centered at (18, 12), radius 5 — 1dp from right edge -->
     <path android:fillColor="#FFFFFF"
-        android:pathData="M10,8 C8,7 5,8 4,11 L5,6 L7,6 L7,11 L10,10 Z"/>
-    <!-- Right arm: mirror of left -->
+        android:pathData="M13,12 C13,9.24 15.24,7 18,7 C20.76,7 23,9.24 23,12 C23,14.76 20.76,17 18,17 C15.24,17 13,14.76 13,12 Z"/>
+    <!-- Barbell shaft between inner plate edges -->
     <path android:fillColor="#FFFFFF"
-        android:pathData="M14,8 C16,7 19,8 20,11 L19,6 L17,6 L17,11 L14,10 Z"/>
-    <!-- Torso -->
-    <path android:fillColor="#FFFFFF"
-        android:pathData="M10,8 L14,8 L14,17 L10,17 Z"/>
-    <!-- Legs -->
-    <path android:fillColor="#FFFFFF"
-        android:pathData="M10,17 L9,22 L11.5,22 L12,20 L12.5,22 L15,22 L14,17 Z"/>
+        android:pathData="M11,10.5 L13,10.5 L13,13.5 L11,13.5 Z"/>
 </vector>
