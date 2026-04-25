@@ -187,7 +187,7 @@ class MainActivity : FlutterActivity() {
                                 .setSilent(true)
                                 .setAutoCancel(false)
                                 .setOnlyAlertOnce(true)
-                                .setTimeoutAfter(durationMs + 1000L)
+                                .setCategory(NotificationCompat.CATEGORY_STOPWATCH)
                                 .setCustomContentView(views)
                                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                                 .build()

@@ -3596,8 +3596,8 @@ const List<Map<String, dynamic>> kWorkoutTemplates = [
     'days': [
       {
         'dayName': '1/4',
-        'bodyParts': [],
-        'muscleImage': null,
+        'bodyParts': ['dorso'],
+        'muscleImage': 'pull.png',
         'exercises': [
           {
             'name': 'Seated Row Machine',
@@ -3680,8 +3680,8 @@ const List<Map<String, dynamic>> kWorkoutTemplates = [
       },
       {
         'dayName': '2/4',
-        'bodyParts': [],
-        'muscleImage': null,
+        'bodyParts': ['glutei'],
+        'muscleImage': 'glutei.png',
         'exercises': [
           {
             'name': 'Squat con Bilanciere',
@@ -3753,8 +3753,8 @@ const List<Map<String, dynamic>> kWorkoutTemplates = [
       },
       {
         'dayName': '3/4',
-        'bodyParts': [],
-        'muscleImage': null,
+        'bodyParts': ['petto'],
+        'muscleImage': 'push.png',
         'exercises': [
           {
             'name': 'Distensioni con Manubri',
@@ -3826,8 +3826,8 @@ const List<Map<String, dynamic>> kWorkoutTemplates = [
       },
       {
         'dayName': '4/4',
-        'bodyParts': [],
-        'muscleImage': null,
+        'bodyParts': ['gambe'],
+        'muscleImage': 'gambe.png',
         'exercises': [
           {
             'name': 'Dumbbell Goblet Squat',
@@ -13451,7 +13451,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                               ),
                               const SizedBox(height: 3),
                               Text(
-                                name.length > 6 ? name.substring(0, 6) : name,
+                                name,
                                 style: TextStyle(fontSize: 7, color: done ? Colors.white : Colors.white38, fontWeight: FontWeight.w700),
                                 textAlign: TextAlign.center, overflow: TextOverflow.ellipsis,
                               ),
@@ -13805,7 +13805,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              name.length > 5 ? name.substring(0, 5) : name,
+                              name,
                               style: TextStyle(
                                 fontSize: 9,
                                 color: done ? Colors.white : Colors.white24,
