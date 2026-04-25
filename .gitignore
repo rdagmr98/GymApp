@@ -1,0 +1,7 @@
+# Ignore everything by default
+/*
+
+# Only track the GymApp project and this gitignore
+!app/
+!README.md
+!.gitignore
