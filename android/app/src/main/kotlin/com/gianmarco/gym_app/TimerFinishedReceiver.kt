@@ -2,6 +2,7 @@ package com.gianmarco.gym_app
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -22,6 +23,14 @@ class TimerFinishedReceiver : BroadcastReceiver() {
         val title = intent.getStringExtra("title") ?: "TORNA AD ALLENARTI!"
         val body = intent.getStringExtra("body") ?: "Il timer di recupero è terminato."
 
+        val launchIntent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        }
+        val launchPendingIntent = PendingIntent.getActivity(
+            context, 100, launchIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
         val notification = NotificationCompat.Builder(context, "timer_gym_alert")
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(title)
@@ -32,6 +41,7 @@ class TimerFinishedReceiver : BroadcastReceiver() {
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
+            .setContentIntent(launchPendingIntent)
             .build()
 
         nm.notify(0, notification)

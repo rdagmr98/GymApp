@@ -180,6 +180,14 @@ class MainActivity : FlutterActivity() {
                                 views.setTextViewText(R.id.notif_time, timeStr)
                             }
 
+                            val launchIntent = Intent(this, MainActivity::class.java).apply {
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                            }
+                            val launchPendingIntent = PendingIntent.getActivity(
+                                this, 100, launchIntent,
+                                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                            )
+
                             val notification = NotificationCompat.Builder(this, channelId)
                                 .setSmallIcon(R.drawable.ic_notification)
                                 .setColor(0xFFFF6B00.toInt())
@@ -190,6 +198,7 @@ class MainActivity : FlutterActivity() {
                                 .setCategory(NotificationCompat.CATEGORY_STOPWATCH)
                                 .setCustomContentView(views)
                                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+                                .setContentIntent(launchPendingIntent)
                                 .build()
 
                             val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

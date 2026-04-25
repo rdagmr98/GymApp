@@ -25,6 +25,14 @@ class StreakReminderReceiver : BroadcastReceiver() {
         val body = intent.getStringExtra("body")
             ?: "Non ti alleni da 2 giorni. Allenati oggi per non perdere i tuoi progressi!"
 
+        val launchIntent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+        }
+        val launchPendingIntent = PendingIntent.getActivity(
+            context, 101, launchIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
         val notification = NotificationCompat.Builder(context, "streak_reminder")
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(title)
@@ -35,6 +43,7 @@ class StreakReminderReceiver : BroadcastReceiver() {
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setAutoCancel(true)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
+            .setContentIntent(launchPendingIntent)
             .build()
 
         nm.notify(9901, notification)

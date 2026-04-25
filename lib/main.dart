@@ -3972,6 +3972,46 @@ List<dynamic> _templateDays(Map<String, dynamic> template) {
   return decoded is List ? decoded : const [];
 }
 
+/// Infers a muscle image filename from the day name and exercise list.
+/// Used to provide a background image for curated template days that lack muscleImage.
+String? _inferMuscleImage(String dayName, List<dynamic> exercises) {
+  final dn = dayName.toLowerCase();
+  // Direct name matches
+  if (dn.contains('push') || dn.contains('petto') || dn.contains('chest')) return 'push.png';
+  if (dn.contains('pull') || dn.contains('dorso') || dn.contains('back') || dn.contains('schiena')) return 'pull.png';
+  if (dn.contains('leg') || dn.contains('gamb') || dn.contains('squat')) return 'gambe.png';
+  if (dn.contains('spall') || dn.contains('shoulder')) return 'spalle.png';
+  if (dn.contains('bracc') || dn.contains('bicep') || dn.contains('tricep')) return 'braccia.png';
+  if (dn.contains('glut') || dn.contains('boot')) return 'glutei.png';
+  if (dn.contains('core') || dn.contains('abs') || dn.contains('addome')) return null;
+  if (dn.contains('full') || dn.contains('corpo')) return null;
+
+  // Infer from exercise names and gif filenames
+  final exText = exercises.map((e) {
+    final ex = e as Map<String, dynamic>;
+    return '${(ex['name'] as String? ?? '')} ${(ex['gifFilename'] as String? ?? '')}'.toLowerCase();
+  }).join(' ');
+
+  int push = 0, pull = 0, legs = 0, shoulders = 0, arms = 0;
+  for (final kw in ['bench', 'panca', 'peck', 'fly', 'dip', 'crossover']) if (exText.contains(kw)) push++;
+  for (final kw in ['lat', 'pulldown', 'row', 'stacco', 'deadlift', 'seated-cable', 'pulley']) if (exText.contains(kw)) pull++;
+  for (final kw in ['leg-press', 'leg press', 'leg-extension', 'leg-curl', 'squat', 'lunge', 'affondi', 'calf', 'hip']) if (exText.contains(kw)) legs++;
+  for (final kw in ['shoulder', 'lateral', 'alzate', 'rear', 'upright']) if (exText.contains(kw)) shoulders++;
+  for (final kw in ['curl', 'bicep', 'tricep', 'pressdown', 'skull']) if (exText.contains(kw)) arms++;
+
+  final counts = {'push': push, 'pull': pull, 'legs': legs, 'shoulders': shoulders, 'arms': arms};
+  if (counts.values.every((v) => v == 0)) return null;
+  final top = counts.entries.reduce((a, b) => a.value >= b.value ? a : b).key;
+  switch (top) {
+    case 'push': return 'push.png';
+    case 'pull': return 'pull.png';
+    case 'legs': return 'gambe.png';
+    case 'shoulders': return 'spalle.png';
+    case 'arms': return 'braccia.png';
+    default: return null;
+  }
+}
+
 final List<Map<String, dynamic>> kCuratedWorkoutTemplates = [
   {
     'name': '5-Day Split',
@@ -4572,6 +4612,25 @@ class _ClientMainPageState extends State<ClientMainPage>
                   final prefs = await SharedPreferences.getInstance();
                   await prefs.setBool('workout_tutorial_shown', false);
                   if (mounted) {
+                    final demoDay = WorkoutDay(
+                      dayName: 'Demo',
+                      bodyParts: ['petto', 'braccia'],
+                      exercises: [
+                        ExerciseConfig(
+                          name: 'Panca Piana',
+                          targetSets: 2,
+                          repsList: [10, 10],
+                          recoveryTime: 15,
+                          notePT: 'Mantieni i piedi a terra e la schiena leggermente arcuata.',
+                        ),
+                        ExerciseConfig(
+                          name: 'Trazioni',
+                          targetSets: 2,
+                          repsList: [8, 8],
+                          recoveryTime: 15,
+                        ),
+                      ],
+                    );
                     Navigator.push(
                       context,
                       PageRouteBuilder(
@@ -4580,6 +4639,28 @@ class _ClientMainPageState extends State<ClientMainPage>
                           onComplete: () {
                             Navigator.pop(context);
                             prefs.setBool('workout_tutorial_shown', true);
+                          },
+                          onStartDemo: () async {
+                            await Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (bc, a, __) => WorkoutEngine(
+                                  demoMode: true,
+                                  day: demoDay,
+                                  history: const [],
+                                  carryoverWeights: const {},
+                                  allSessionNames: const [],
+                                  onDone: (_) {},
+                                ),
+                                transitionsBuilder: (bc, a, _, child) => SlideTransition(
+                                  position: Tween<Offset>(
+                                    begin: const Offset(0, 1),
+                                    end: Offset.zero,
+                                  ).animate(CurvedAnimation(parent: a, curve: Curves.easeOutCubic)),
+                                  child: child,
+                                ),
+                              ),
+                            );
                           },
                         ),
                         transitionsBuilder: (c, anim, _, child) => FadeTransition(
@@ -8376,6 +8457,13 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         return rawEx;
                       }).toList();
                   rawDay['exercises'] = exercises;
+                  // Infer muscleImage for curated templates that don't have it
+                  if (rawDay['muscleImage'] == null) {
+                    rawDay['muscleImage'] = _inferMuscleImage(
+                      rawDay['dayName'] as String? ?? '',
+                      exercises,
+                    );
+                  }
                   final day = WorkoutDay.fromJson(rawDay);
                   _days.add(day);
                 }
@@ -12294,6 +12382,25 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               _showWorkoutReadyScreen
                   ? _buildWorkoutStartNativeAd()
                   : _buildWorkoutNativeAd(),
+              // Demo mode banner
+              if (widget.demoMode)
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  color: Colors.amber.withAlpha(30),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.info_outline, color: Colors.amber, size: 16),
+                      const SizedBox(width: 8),
+                      const Expanded(
+                        child: Text(
+                          '💪 Prima fai la serie → poi registra peso e reps → premi Conferma',
+                          style: TextStyle(color: Colors.amber, fontSize: 12, fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               // Compact badges row (only superset, record badge removed - shown as overlay at save time)
               if (ex.supersetGroup > 0)
                 Padding(

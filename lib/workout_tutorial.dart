@@ -157,13 +157,37 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 28),
-                    _buildFeatureCard(
-                      accent,
-                      icon: '⚡',
-                      title: 'Timer automatico',
-                      body: 'Il recupero parte da solo a fine serie — tu ti concentri solo sul ferro.',
+                    // Step-by-step workflow guide
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withAlpha(8),
+                        borderRadius: BorderRadius.circular(14),
+                        border: Border.all(color: Colors.white.withAlpha(20)),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Come funziona ogni serie',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                          const SizedBox(height: 14),
+                          _buildStep(accent, '1', '💪', 'Esegui la serie', 'Fai le ripetizioni con il tuo peso — prima il ferro!'),
+                          const SizedBox(height: 10),
+                          _buildStep(accent, '2', '📝', 'Registra peso e reps', 'Solo dopo aver finito la serie, inserisci i valori e premi Conferma.'),
+                          const SizedBox(height: 10),
+                          _buildStep(accent, '3', '⏱️', 'Il timer parte da solo', 'Il recupero inizia automaticamente. Puoi tenerlo d\'occhio nella barra delle notifiche.'),
+                          const SizedBox(height: 10),
+                          _buildStep(accent, '4', '🔁', 'Prossima serie', 'A fine recupero l\'app ti avvisa. Ripeti per tutte le serie!'),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 20),
                     _buildFeatureCard(
                       accent,
                       icon: '🧠',
@@ -184,7 +208,7 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
                       title: 'Streak e badge',
                       body: 'Mantieni la continuità e sblocca badge per ogni allenamento completato.',
                     ),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 24),
                     // Info prova
                     Container(
                       padding: const EdgeInsets.all(16),
@@ -196,14 +220,14 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('💡', style: TextStyle(fontSize: 22)),
+                          const Text('🎮', style: TextStyle(fontSize: 22)),
                           const SizedBox(width: 12),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Prova con un allenamento reale',
+                                  'Fai una prova vera — nessun dato salvato',
                                   style: TextStyle(
                                     color: accent,
                                     fontWeight: FontWeight.bold,
@@ -212,7 +236,7 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
                                 ),
                                 const SizedBox(height: 4),
                                 const Text(
-                                  'Fai una prova completa con Panca Piana e Trazioni (2 serie ciascuno). Puoi inserire il peso con i tasti veloci o dalla tastiera.\nNessun dato verrà salvato.',
+                                  'Ti guidiamo in un allenamento completo con Panca Piana e Trazioni (2 serie). Inserisci il peso con i tasti veloci o dalla tastiera, conferma ogni serie e segui le istruzioni sullo schermo.',
                                   style: TextStyle(
                                     color: Colors.white70,
                                     fontSize: 13,
@@ -255,6 +279,44 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildStep(Color accent, String number, String icon, String title, String body) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          width: 24,
+          height: 24,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: accent.withAlpha(40),
+            border: Border.all(color: accent.withAlpha(120), width: 1),
+          ),
+          child: Center(
+            child: Text(
+              number,
+              style: TextStyle(color: accent, fontSize: 12, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(children: [
+                Text(icon, style: const TextStyle(fontSize: 16)),
+                const SizedBox(width: 6),
+                Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+              ]),
+              const SizedBox(height: 2),
+              Text(body, style: const TextStyle(color: Colors.white54, fontSize: 12)),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
