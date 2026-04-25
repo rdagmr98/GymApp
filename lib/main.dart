@@ -1384,10 +1384,9 @@ Future<int> updateStreak(String dayName, List<String> totalSessionNames) async {
   // LOGICA MICROCICLO
   final bool newCycleStarting = microDone.isEmpty;
   if (microDone.contains(dayName)) {
-    // Questa sessione era già nel microciclo corrente → microciclo incompleto, si ricomincia
-    streak = 0;
-    microDone = {dayName};
-    await prefs.remove('microcycle_completed_at');
+    // Sessione già completata nel microciclo corrente → nessun reset,
+    // aggiorna solo la data così l'utente può rifare la stessa sessione
+    // senza perdere i badge delle altre sessioni già completate.
   } else {
     if (newCycleStarting) {
       // Prima sessione del nuovo microciclo — cancella lo stato "appena completato"
@@ -15219,23 +15218,11 @@ class _WorkoutProgressChart extends StatelessWidget {
         .map((s) => bySession[s]!.values.fold(0.0, (a, b) => a + b))
         .toList();
 
-    final Map<String, int> dateTotal = {};
-    for (final s in sessions) {
-      final d = sessionDate[s] ?? '';
-      dateTotal[d] = (dateTotal[d] ?? 0) + 1;
-    }
-    final Map<String, int> dateCounter = {};
-    final labels = sessions.map((s) {
-      final d = sessionDate[s] ?? s;
-      final dd = d.length >= 10
-          ? '${d.substring(8, 10)}/${d.substring(5, 7)}'
-          : d;
-      if ((dateTotal[d] ?? 1) > 1) {
-        dateCounter[d] = (dateCounter[d] ?? 0) + 1;
-        return '$dd(${dateCounter[d]})';
-      }
-      return dd;
-    }).toList();
+    final labels = sessions
+        .asMap()
+        .entries
+        .map((e) => (e.key + 1).toString())
+        .toList();
 
     final minS = scores.reduce((a, b) => a < b ? a : b);
     final maxS = scores.reduce((a, b) => a > b ? a : b);
