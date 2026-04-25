@@ -1919,6 +1919,35 @@ String exerciseAnimationAssetPath(String slug) =>
 String muscleAssetPath(String? fileName) =>
     'assets/muscle/${fileName!.replaceAll(RegExp(r"\.png$", caseSensitive: false), ".webp")}';
 
+/// Returns all category labels an exercise belongs to, derived from its
+/// primary [category] and its [muscleImages] list. Used by the browse screen
+/// so that e.g. a "petto" exercise with tricipiti.webp also appears under
+/// "braccia".
+Set<String> exerciseAllCategories(ExerciseInfo e) {
+  final cats = <String>{e.category};
+  for (final img in e.muscleImages) {
+    final base = img.replaceAll(RegExp(r'\.(png|webp)$', caseSensitive: false), '');
+    switch (base) {
+      case 'petto': cats.add('petto');
+      case 'dorso': cats.add('dorso');
+      case 'spalle': cats.add('spalle');
+      case 'braccia':
+      case 'bicipiti':
+      case 'tricipiti': cats.add('braccia');
+      case 'gambe':
+      case 'quadricipiti':
+      case 'femorali': cats.add('gambe');
+      case 'glutei': cats.add('glutei');
+      case 'addome':
+      case 'core': cats.add('core');
+      case 'cardio': cats.add('cardio');
+      case 'pull': cats.add('dorso');
+      case 'push': cats.add('petto');
+    }
+  }
+  return cats;
+}
+
 bool usesQuarterStepIncrement(double valueKg) {
   final centiKg = (valueKg.abs() * 100).round();
   if (centiKg % 125 != 0) return false;
@@ -8842,14 +8871,21 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
 
           List<ExerciseInfo> filtered = selectedCategory != null
               ? kGifCatalog
-                    .where((e) => e.category == selectedCategory)
+                    .where(
+                      (e) => exerciseAllCategories(e).contains(selectedCategory),
+                    )
                     .toList()
               : kGifCatalog.where((e) => e.category != 'altro').toList();
 
           if (searchQuery.isNotEmpty) {
             final q = searchQuery.toLowerCase();
             filtered = filtered
-                .where((e) => e.name.toLowerCase().contains(q))
+                .where(
+                  (e) =>
+                      e.name.toLowerCase().contains(q) ||
+                      e.nameEn.toLowerCase().contains(q) ||
+                      e.aliases.any((a) => a.toLowerCase().contains(q)),
+                )
                 .toList();
           }
 
