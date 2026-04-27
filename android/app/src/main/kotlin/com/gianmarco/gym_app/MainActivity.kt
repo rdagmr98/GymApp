@@ -7,10 +7,12 @@ import android.content.Intent
 import android.content.Context
 import android.media.AudioManager
 import android.media.ToneGenerator
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
 import android.widget.RemoteViews
+import androidx.core.view.WindowCompat
 import androidx.core.app.NotificationCompat
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -20,6 +22,11 @@ import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
 class MainActivity : FlutterActivity() {
     private var workoutNativeAdFactory: WorkoutNativeAdFactory? = null
     private var timerNotificationToken: Long = 0
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+    }
 
     private fun timerFinishedPendingIntent(title: String = "", body: String = ""): PendingIntent {
         val intent = Intent(this, TimerFinishedReceiver::class.java).apply {

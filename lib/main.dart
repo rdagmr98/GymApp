@@ -1384,9 +1384,11 @@ Future<int> updateStreak(String dayName, List<String> totalSessionNames) async {
   // LOGICA MICROCICLO
   final bool newCycleStarting = microDone.isEmpty;
   if (microDone.contains(dayName)) {
-    // Sessione già completata nel microciclo corrente → nessun reset,
-    // aggiorna solo la data così l'utente può rifare la stessa sessione
-    // senza perdere i badge delle altre sessioni già completate.
+    // Sessione ripetuta nel microciclo corrente → il vecchio ciclo non è stato completato,
+    // si ricomincia da capo con questa sessione.
+    streak = 0;
+    microDone = {dayName};
+    await prefs.remove('microcycle_completed_at');
   } else {
     if (newCycleStarting) {
       // Prima sessione del nuovo microciclo — cancella lo stato "appena completato"
@@ -1515,18 +1517,27 @@ Future<void> checkAndScheduleStreakNotification(String lang) async {
 
 /// Pianifica notifica streak giornaliera 48h dopo l'ultimo allenamento, poi ripete ogni giorno.
 /// Chiamare dopo ogni allenamento completato per resettare il timer.
-Future<void> scheduleStreakReminder(String lang) async {
+Future<void> scheduleStreakReminder(String lang, {bool force = false}) async {
   if (kIsWeb) return;
   try {
+    final prefs = await SharedPreferences.getInstance();
+    // Se non è forzato (es. apertura app), non riprogrammare se c'è già un allarme in futuro.
+    // Questo evita che ogni apertura dell'app resetti l'allarme e lo mandi a delay=0.
+    if (!force) {
+      final nextFireStr = prefs.getString('streak_reminder_next_fire');
+      final nextFireMs = int.tryParse(nextFireStr ?? '0') ?? 0;
+      if (nextFireMs > DateTime.now().millisecondsSinceEpoch) return;
+    }
     await flutterLocalNotificationsPlugin.cancel(9901);
     try {
       await _gymFileChannel.invokeMethod('cancelStreakReminderNotification');
     } catch (_) {}
-    final prefs = await SharedPreferences.getInstance();
     final lastStr = prefs.getString('last_workout_date');
     final lastWorkout =
         DateTime.tryParse(lastStr ?? '')?.toLocal() ?? DateTime.now();
     final scheduledDate = lastWorkout.add(const Duration(hours: 48));
+    // Salva l'orario pianificato in modo che il receiver e l'apertura successiva sappiano che c'è un allarme attivo
+    await prefs.setString('streak_reminder_next_fire', scheduledDate.millisecondsSinceEpoch.toString());
     final title = lang == 'en'
         ? '🔥 Keep your streak alive!'
         : '🔥 Non perdere i tuoi progressi!';
@@ -10007,6 +10018,34 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     _loadSettings();
     if (!widget.demoMode) _loadWorkoutNativeAds();
     if (!widget.demoMode) _restoreInProgressWorkout();
+    if (widget.demoMode) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _showDemoHint());
+    }
+  }
+
+  void _showDemoHint() {
+    if (!mounted) return;
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => AlertDialog(
+        backgroundColor: const Color(0xFF121620),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: const Text('💪 Come funziona',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+        content: const Text(
+          'Prima esegui la serie fisicamente.\n\nPoi inserisci il peso e le ripetizioni e premi CONFERMA SERIE per registrare il risultato.',
+          style: TextStyle(color: Colors.white70, height: 1.5),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Ho capito!',
+                style: TextStyle(color: Color(0xFF00E5FF), fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<void> _loadSettings() async {
@@ -12027,10 +12066,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             widget.allSessionNames,
           );
           final sData = await getStreakData();
-          scheduleStreakReminder(AppL.lang); // reset reminder: prossimo in 48h
+          scheduleStreakReminder(AppL.lang, force: true); // reset reminder: prossimo in 48h
           if (mounted)
             setState(() {
-              _currentStreak = streak;
+              _currentStreak= streak;
               _streakDoneCount = sData.done.length;
               _streakTotalCount = widget.allSessionNames.length;
               _streakDoneNames = sData.done;
@@ -12121,7 +12160,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           widget.allSessionNames,
         );
         final sData = await getStreakData();
-        scheduleStreakReminder(AppL.lang); // reset reminder: prossimo in 48h
+        scheduleStreakReminder(AppL.lang, force: true); // reset reminder: prossimo in 48h
         if (mounted)
           setState(() {
             _currentStreak = streak;
@@ -12381,25 +12420,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               _showWorkoutReadyScreen
                   ? _buildWorkoutStartNativeAd()
                   : _buildWorkoutNativeAd(),
-              // Demo mode banner
-              if (widget.demoMode)
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  color: Colors.amber.withAlpha(30),
-                  child: Row(
-                    children: [
-                      const Icon(Icons.info_outline, color: Colors.amber, size: 16),
-                      const SizedBox(width: 8),
-                      const Expanded(
-                        child: Text(
-                          '💪 Prima fai la serie → poi registra peso e reps → premi Conferma',
-                          style: TextStyle(color: Colors.amber, fontSize: 12, fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+              // Demo mode banner handled via popup in initState
               // Compact badges row (only superset, record badge removed - shown as overlay at save time)
               if (ex.supersetGroup > 0)
                 Padding(

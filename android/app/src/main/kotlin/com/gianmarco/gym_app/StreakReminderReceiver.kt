@@ -69,5 +69,10 @@ class StreakReminderReceiver : BroadcastReceiver() {
         } else {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, nextTriggerAt, pendingIntent)
         }
+        // Aggiorna Flutter SharedPreferences così l'app al prossimo avvio sa che l'allarme è già pianificato
+        context.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
+            .edit()
+            .putString("flutter.streak_reminder_next_fire", nextTriggerAt.toString())
+            .apply()
     }
 }
