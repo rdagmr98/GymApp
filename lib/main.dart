@@ -1242,23 +1242,33 @@ class _OnboardingPage {
 const Map<String, List<String>> kItalianKeywords = {
   'panca': ['bench'],
   'petto': ['chest', 'pec', 'bench', 'fly', 'push'],
+  'pettorali': ['chest', 'pec', 'bench', 'fly', 'push', 'crossover'],
   'dorsale': ['lat', 'pulldown', 'pull', 'row'],
   'rematore': ['row'],
   'tirate': ['pulldown', 'pull'],
+  'tirata': ['pulldown', 'pull', 'row'],
+  'trazioni': ['pull-up', 'pull up', 'pullup', 'chin-up', 'chinup', 'pull'],
+  'trazione': ['pull-up', 'pull up', 'pullup', 'chin-up', 'chinup'],
   'bicipite': ['curl', 'bicep'],
   'tricipite': ['tricep', 'extension', 'pushdown', 'dip'],
   'spalla': ['shoulder', 'press', 'raise', 'delt', 'arnold'],
+  'deltoidi': ['delt', 'shoulder', 'raise', 'lateral', 'front'],
+  'deltoide': ['delt', 'shoulder', 'raise', 'lateral'],
   'squat': ['squat'],
   'affondi': ['lunge'],
+  'affondo': ['lunge'],
   'stacco': ['deadlift'],
   'curl': ['curl'],
   'croci': ['fly', 'flye', 'crossover'],
   'pressa': ['press', 'leg press'],
   'gambe': ['leg', 'squat', 'lunge'],
   'glutei': ['glute', 'hip', 'bridge'],
+  'gluteo': ['glute', 'hip', 'bridge'],
   'addome': ['ab', 'crunch', 'plank', 'core'],
+  'addominali': ['ab', 'crunch', 'plank', 'core', 'sit-up', 'situp'],
   'plank': ['plank'],
   'polpaccio': ['calf', 'raise'],
+  'polpacci': ['calf', 'raise'],
   'pull': ['pull', 'pulldown', 'pullup'],
   'push': ['push', 'press'],
   'dip': ['dip'],
@@ -1268,10 +1278,19 @@ const Map<String, List<String>> kItalianKeywords = {
   'corda': ['rope'],
   'kettlebell': ['kettlebell'],
   'alzate': ['raise', 'lateral', 'front'],
+  'alzata': ['raise', 'lateral', 'front'],
   'lat': ['lat', 'pulldown'],
   'lombari': ['back extension', 'hyperextension', 'deadlift'],
+  'lombare': ['back extension', 'hyperextension'],
   'adduttori': ['adductor'],
   'abduttori': ['abductor'],
+  'quadricipiti': ['quad', 'leg extension', 'squat', 'leg press'],
+  'quadricipite': ['quad', 'leg extension', 'squat'],
+  'femorali': ['hamstring', 'leg curl', 'romanian'],
+  'femorale': ['hamstring', 'leg curl', 'romanian'],
+  'inclinata': ['incline'],
+  'declinata': ['decline'],
+  'cardio': ['jump', 'burpee', 'running', 'rope', 'jumping', 'sprint'],
 };
 
 /// Cerca esercizi nel catalogo con supporto parole chiave italiane.
@@ -7977,6 +7996,14 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     final nameCtrl = TextEditingController();
     final List<String> selectedParts = [];
     String? selectedMuscleImage;
+    String selectedEmoji = '💪';
+    int wizardStep = 0; // 0=nome, 1=emoji+immagine, 2=gruppi muscolari
+
+    const workoutEmojis = [
+      '💪', '🏋️', '🦵', '🔥', '🏃', '⚡', '🎯', '🥊',
+      '🤸', '🧘', '🏊', '🚴', '🤼', '🏆', '❤️', '💥',
+      '🦾', '🧠', '🦅', '⚔️', '🌟', '🎖️', '🚀', '🏅',
+    ];
 
     Future<void> pickMuscleImage(StateSetter setS) async {
       await showDialog<void>(
@@ -8120,158 +8147,293 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     showDialog(
       context: context,
       builder: (c) => StatefulBuilder(
-        builder: (ctx, setS) => AlertDialog(
-          backgroundColor: const Color(0xFF1C1C1E),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          title: Text(AppL.day, style: const TextStyle(color: Colors.white)),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(
-                  controller: nameCtrl,
-                  style: const TextStyle(color: Colors.white),
-                  decoration: InputDecoration(
-                    labelText: AppL.day,
-                    labelStyle: const TextStyle(color: Colors.white54),
-                    enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white24),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: appAccentNotifier.value),
-                    ),
+        builder: (ctx, setS) {
+          // ── Step titles ─────────────────────────────────────────
+          final stepTitles = ['Nome allenamento', 'Emoji e immagine', 'Gruppi muscolari'];
+
+          // ── Step indicator ──────────────────────────────────────
+          Widget stepIndicator() => Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(3, (i) {
+              final active = i == wizardStep;
+              final done = i < wizardStep;
+              return Container(
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                width: active ? 24 : 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  color: done || active
+                      ? appAccentNotifier.value
+                      : Colors.white12,
+                ),
+              );
+            }),
+          );
+
+          // ── Step 0: Nome ────────────────────────────────────────
+          Widget step0() => Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Come si chiama questo allenamento?',
+                style: TextStyle(color: Colors.white70, fontSize: 13),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: nameCtrl,
+                autofocus: true,
+                style: const TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  labelText: 'Es. Push, Petto & Tricipiti…',
+                  labelStyle: const TextStyle(color: Colors.white38, fontSize: 13),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white24),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: appAccentNotifier.value),
                   ),
                 ),
-                const SizedBox(height: 12),
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: kBodyPartNames.entries
-                      .where((e) => e.key != 'nessuno')
-                      .map((e) {
-                        final sel = selectedParts.contains(e.key);
-                        return FilterChip(
-                          label: Text(
-                            '${kBodyPartIcons[e.key] ?? ''} ${bodyPartName(e.key)}',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: sel ? Colors.black : Colors.white70,
-                            ),
+                onSubmitted: (_) {
+                  if (nameCtrl.text.trim().isNotEmpty) {
+                    setS(() => wizardStep = 1);
+                  }
+                },
+              ),
+            ],
+          );
+
+          // ── Step 1: Emoji + immagine muscolo ───────────────────
+          Widget step1() => Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Scegli un\'emoji per questo allenamento:',
+                style: TextStyle(color: Colors.white70, fontSize: 13),
+              ),
+              const SizedBox(height: 10),
+              SizedBox(
+                height: 180,
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: workoutEmojis.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 6,
+                    crossAxisSpacing: 6,
+                    mainAxisSpacing: 6,
+                    childAspectRatio: 1,
+                  ),
+                  itemBuilder: (_, i) {
+                    final e = workoutEmojis[i];
+                    final sel = e == selectedEmoji;
+                    return GestureDetector(
+                      onTap: () => setS(() => selectedEmoji = e),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: sel
+                              ? appAccentNotifier.value.withAlpha(40)
+                              : Colors.white10,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(
+                            color: sel
+                                ? appAccentNotifier.value
+                                : Colors.transparent,
+                            width: 2,
                           ),
-                          selected: sel,
-                          onSelected: (v) => setS(() {
-                            if (v)
-                              selectedParts.add(e.key);
-                            else
-                              selectedParts.remove(e.key);
-                          }),
-                          backgroundColor: Colors.white10,
-                          selectedColor: appAccentNotifier.value,
-                          checkmarkColor: Colors.black,
-                        );
-                      })
-                      .toList(),
-                ),
-                const SizedBox(height: 12),
-                // Selezione immagine muscolo
-                GestureDetector(
-                  onTap: () => pickMuscleImage(setS),
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.white10,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: appAccentNotifier.value.withAlpha(80),
+                        ),
+                        child: Center(
+                          child: Text(e, style: const TextStyle(fontSize: 22)),
+                        ),
                       ),
-                    ),
-                    child: Row(
-                      children: [
-                        if (selectedMuscleImage != null)
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              muscleAssetPath(selectedMuscleImage),
-                              width: 48,
-                              height: 48,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        else
-                          const Icon(
-                            Icons.image_outlined,
-                            color: Colors.white38,
-                            size: 48,
-                          ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            selectedMuscleImage != null
-                                ? (muscleImageLabel(
-                                    kMuscleImages.firstWhere(
-                                      (m) => m['file'] == selectedMuscleImage,
-                                      orElse: () => {
-                                        'label': selectedMuscleImage!,
-                                      },
-                                    ),
-                                  ))
-                                : AppL.tapToChooseMuscle,
-                            style: TextStyle(
-                              color: selectedMuscleImage != null
-                                  ? Colors.white
-                                  : Colors.white38,
-                              fontSize: 13,
-                            ),
-                          ),
-                        ),
-                        Icon(
-                          Icons.chevron_right,
-                          color: appAccentNotifier.value,
-                        ),
-                      ],
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 14),
+              const Text(
+                'Immagine muscolo (opzionale):',
+                style: TextStyle(color: Colors.white70, fontSize: 13),
+              ),
+              const SizedBox(height: 8),
+              GestureDetector(
+                onTap: () => pickMuscleImage(setS),
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.white10,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: appAccentNotifier.value.withAlpha(80),
                     ),
                   ),
+                  child: Row(
+                    children: [
+                      if (selectedMuscleImage != null)
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(8),
+                          child: Image.asset(
+                            muscleAssetPath(selectedMuscleImage),
+                            width: 48,
+                            height: 48,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                      else
+                        const Icon(
+                          Icons.image_outlined,
+                          color: Colors.white38,
+                          size: 48,
+                        ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          selectedMuscleImage != null
+                              ? muscleImageLabel(
+                                  kMuscleImages.firstWhere(
+                                    (m) => m['file'] == selectedMuscleImage,
+                                    orElse: () => {'label': selectedMuscleImage!},
+                                  ),
+                                )
+                              : AppL.tapToChooseMuscle,
+                          style: TextStyle(
+                            color: selectedMuscleImage != null
+                                ? Colors.white
+                                : Colors.white38,
+                            fontSize: 13,
+                          ),
+                        ),
+                      ),
+                      Icon(Icons.chevron_right, color: appAccentNotifier.value),
+                    ],
+                  ),
                 ),
+              ),
+            ],
+          );
+
+          // ── Step 2: Gruppi muscolari ───────────────────────────
+          Widget step2() => Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Seleziona i gruppi muscolari coinvolti (opzionale):',
+                style: TextStyle(color: Colors.white70, fontSize: 13),
+              ),
+              const SizedBox(height: 10),
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                children: kBodyPartNames.entries
+                    .where((e) => e.key != 'nessuno')
+                    .map((e) {
+                      final sel = selectedParts.contains(e.key);
+                      return FilterChip(
+                        label: Text(
+                          '${kBodyPartIcons[e.key] ?? ''} ${bodyPartName(e.key)}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: sel ? Colors.black : Colors.white70,
+                          ),
+                        ),
+                        selected: sel,
+                        onSelected: (v) => setS(() {
+                          if (v)
+                            selectedParts.add(e.key);
+                          else
+                            selectedParts.remove(e.key);
+                        }),
+                        backgroundColor: Colors.white10,
+                        selectedColor: appAccentNotifier.value,
+                        checkmarkColor: Colors.black,
+                      );
+                    })
+                    .toList(),
+              ),
+            ],
+          );
+
+          // ── Actions ─────────────────────────────────────────────
+          Widget cancelBtn() => TextButton(
+            onPressed: () => Navigator.pop(c),
+            child: const Text('Annulla', style: TextStyle(color: Colors.white54)),
+          );
+
+          Widget backBtn() => TextButton(
+            onPressed: () => setS(() => wizardStep--),
+            child: const Text('‹ Indietro', style: TextStyle(color: Colors.white54)),
+          );
+
+          Widget nextBtn() => TextButton(
+            onPressed: () {
+              if (wizardStep == 0 && nameCtrl.text.trim().isEmpty) return;
+              setS(() => wizardStep++);
+            },
+            child: Text(
+              'Avanti ›',
+              style: TextStyle(
+                color: appAccentNotifier.value,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
+
+          Widget createBtn() => TextButton(
+            onPressed: () {
+              final name = nameCtrl.text.trim();
+              if (name.isEmpty) return;
+              Navigator.pop(c);
+              setState(() {
+                _days.add(
+                  WorkoutDay(
+                    dayName: '$selectedEmoji $name',
+                    bodyParts: List.from(selectedParts),
+                    muscleImage: selectedMuscleImage,
+                    exercises: [],
+                  ),
+                );
+              });
+              _save();
+            },
+            child: Text(
+              AppL.add,
+              style: TextStyle(
+                color: appAccentNotifier.value,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          );
+
+          return AlertDialog(
+            backgroundColor: const Color(0xFF1C1C1E),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  stepTitles[wizardStep],
+                  style: const TextStyle(color: Colors.white),
+                ),
+                const SizedBox(height: 8),
+                stepIndicator(),
               ],
             ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(c),
-              child: Text(
-                AppL.cancel,
-                style: const TextStyle(color: Colors.white54),
-              ),
+            content: SingleChildScrollView(
+              child: wizardStep == 0
+                  ? step0()
+                  : wizardStep == 1
+                      ? step1()
+                      : step2(),
             ),
-            TextButton(
-              onPressed: () {
-                final name = nameCtrl.text.trim();
-                if (name.isEmpty) return;
-                Navigator.pop(c);
-                setState(() {
-                  _days.add(
-                    WorkoutDay(
-                      dayName: _limitToOneEmoji(name),
-                      bodyParts: List.from(selectedParts),
-                      muscleImage: selectedMuscleImage,
-                      exercises: [],
-                    ),
-                  );
-                });
-                _save();
-              },
-              child: Text(
-                AppL.add,
-                style: TextStyle(
-                  color: appAccentNotifier.value,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ],
-        ),
+            actions: [
+              if (wizardStep == 0) ...[cancelBtn(), nextBtn()],
+              if (wizardStep == 1) ...[backBtn(), nextBtn()],
+              if (wizardStep == 2) ...[backBtn(), createBtn()],
+            ],
+          );
+        },
       ),
     );
   }
