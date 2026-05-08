@@ -126,14 +126,13 @@ class GymWidgetProvider : AppWidgetProvider() {
                             views.setImageViewResource(badgeId, R.mipmap.ic_launcher)
                         }
 
-                        val bgDrawable = when {
-                            doneSessions.contains(name) -> R.drawable.widget_badge_done
-                            name == nextWorkout -> R.drawable.widget_badge_active
-                            else -> R.drawable.widget_badge_pending
-                        }
+                        val bgDrawable = if (doneSessions.contains(name))
+                            R.drawable.widget_badge_done
+                        else
+                            R.drawable.widget_badge_pending
                         views.setInt(badgeId, "setBackgroundResource", bgDrawable)
 
-                        val alpha = if (doneSessions.contains(name) || name == nextWorkout) 255 else 35
+                        val alpha = if (doneSessions.contains(name)) 255 else 35
                         views.setInt(badgeId, "setImageAlpha", alpha)
 
                         views.setViewVisibility(badgeId, View.VISIBLE)

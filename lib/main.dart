@@ -5301,11 +5301,31 @@ class _ClientMainPageState extends State<ClientMainPage>
         'gambe': 'gambe', 'spalle': 'spalle', 'braccia': 'braccia',
         'core': '', 'full_body': 'push', 'cardio': '', 'glutei': 'glutei', 'altro': '',
       };
-      final nextMuscle = kBodyPartToMuscle[nextDay?.bodyParts.firstOrNull ?? ''] ?? '';
+      String muscleForDay(WorkoutDay d) {
+        // 1. Use muscleImage field if available
+        if (d.muscleImage != null && d.muscleImage!.isNotEmpty) {
+          final key = d.muscleImage!.replaceAll(RegExp(r'\.\w+$'), '').toLowerCase();
+          return kBodyPartToMuscle[key] ?? key;
+        }
+        // 2. Use bodyParts list
+        if (d.bodyParts.isNotEmpty) {
+          return kBodyPartToMuscle[d.bodyParts.first] ?? '';
+        }
+        // 3. Infer from exercises via catalog
+        final catCounts = <String, int>{};
+        for (final ex in d.exercises) {
+          final info = resolveExerciseInfo(ex.name);
+          if (info != null && info.category.isNotEmpty && info.category != 'altro') {
+            catCounts[info.category] = (catCounts[info.category] ?? 0) + 1;
+          }
+        }
+        if (catCounts.isEmpty) return '';
+        final top = catCounts.entries.reduce((a, b) => a.value >= b.value ? a : b).key;
+        return kBodyPartToMuscle[top] ?? top;
+      }
+      final nextMuscle = nextDay != null ? muscleForDay(nextDay) : '';
       await prefs.setString('widget_next_muscle', nextMuscle);
-      final sessionMuscles = myRoutine.take(7).map((d) {
-        return kBodyPartToMuscle[d.bodyParts.firstOrNull ?? ''] ?? '';
-      }).toList();
+      final sessionMuscles = myRoutine.take(7).map(muscleForDay).toList();
       await prefs.setString('widget_session_muscles', jsonEncode(sessionMuscles));
       try { await _gymFileChannel.invokeMethod('updateWidget'); } catch (_) {}
     } catch (_) {}
