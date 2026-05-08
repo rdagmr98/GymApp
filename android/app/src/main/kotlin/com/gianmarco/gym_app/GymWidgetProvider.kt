@@ -133,7 +133,7 @@ class GymWidgetProvider : AppWidgetProvider() {
                         }
                         views.setInt(badgeId, "setBackgroundResource", bgDrawable)
 
-                        val alpha = if (doneSessions.contains(name) || name == nextWorkout) 255 else 90
+                        val alpha = if (doneSessions.contains(name) || name == nextWorkout) 255 else 35
                         views.setInt(badgeId, "setImageAlpha", alpha)
 
                         views.setViewVisibility(badgeId, View.VISIBLE)
@@ -152,7 +152,16 @@ class GymWidgetProvider : AppWidgetProvider() {
                     PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
                 )
                 views.setOnClickPendingIntent(R.id.widget_root, pi)
-                views.setOnClickPendingIntent(R.id.widget_start_btn, pi)
+
+                val startWorkoutIntent = Intent(context, MainActivity::class.java).apply {
+                    action = "com.gianmarco.gym_app.START_WORKOUT"
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
+                val startWorkoutPi = PendingIntent.getActivity(
+                    context, 2, startWorkoutIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+                views.setOnClickPendingIntent(R.id.widget_start_btn, startWorkoutPi)
 
                 appWidgetManager.updateAppWidget(widgetId, views)
             } catch (e: Exception) {

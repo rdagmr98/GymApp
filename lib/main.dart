@@ -1502,6 +1502,7 @@ Future<int> updateStreak(String dayName, List<String> totalSessionNames) async {
   // Write muscle image name for the next workout
   const kBodyPartToMuscle = {
     'petto': 'petto',
+    'schiena': 'dorso',
     'dorso': 'dorso',
     'gambe': 'gambe',
     'spalle': 'spalle',
@@ -5262,6 +5263,67 @@ class _ClientMainPageState extends State<ClientMainPage>
         history = [];
       }
     });
+    if (!kIsWeb) _updateWidgetData();
+    if (!kIsWeb) _maybeStartWorkoutFromWidget();
+  }
+
+  Future<void> _updateWidgetData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final streakData = await getStreakData();
+      final doneNames = streakData.done;
+      String nextWorkout = '—';
+      WorkoutDay? nextDay;
+      for (final day in myRoutine) {
+        if (!doneNames.contains(day.dayName)) {
+          nextWorkout = day.dayName;
+          nextDay = day;
+          break;
+        }
+      }
+      if (nextWorkout == '—' && myRoutine.isNotEmpty) {
+        nextWorkout = myRoutine.first.dayName;
+        nextDay = myRoutine.first;
+      }
+      await prefs.setInt('widget_streak', streakData.count);
+      await prefs.setString('widget_next_workout', nextWorkout);
+      final sessionNames = myRoutine.take(7).map((d) => d.dayName).toList();
+      await prefs.setString('widget_session_names', jsonEncode(sessionNames));
+      const kBodyPartToMuscle = {
+        'petto': 'petto', 'schiena': 'dorso', 'dorso': 'dorso',
+        'gambe': 'gambe', 'spalle': 'spalle', 'braccia': 'braccia',
+        'core': '', 'full_body': 'push', 'cardio': '', 'glutei': 'glutei', 'altro': '',
+      };
+      final nextMuscle = kBodyPartToMuscle[nextDay?.bodyParts.firstOrNull ?? ''] ?? '';
+      await prefs.setString('widget_next_muscle', nextMuscle);
+      final sessionMuscles = myRoutine.take(7).map((d) {
+        return kBodyPartToMuscle[d.bodyParts.firstOrNull ?? ''] ?? '';
+      }).toList();
+      await prefs.setString('widget_session_muscles', jsonEncode(sessionMuscles));
+      try { await _gymFileChannel.invokeMethod('updateWidget'); } catch (_) {}
+    } catch (_) {}
+  }
+
+  Future<void> _maybeStartWorkoutFromWidget() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final tsStr = prefs.getString('widget_start_workout_ts');
+      if (tsStr == null) return;
+      final ts = int.tryParse(tsStr) ?? 0;
+      if (DateTime.now().millisecondsSinceEpoch - ts > 10000) return;
+      await prefs.remove('widget_start_workout_ts');
+      if (myRoutine.isEmpty || !mounted) return;
+      final streakData = await getStreakData();
+      WorkoutDay? nextDay;
+      for (final day in myRoutine) {
+        if (!streakData.done.contains(day.dayName)) { nextDay = day; break; }
+      }
+      nextDay ??= myRoutine.first;
+      if (!mounted) return;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _startWorkout(nextDay!);
+      });
+    } catch (_) {}
   }
 
   @override

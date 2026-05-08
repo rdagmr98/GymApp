@@ -26,9 +26,23 @@ class MainActivity : FlutterActivity() {
     private var workoutNativeAdFactory: WorkoutNativeAdFactory? = null
     private var timerNotificationToken: Long = 0
 
+    private fun handleWorkoutStartIntent(intent: Intent?) {
+        if (intent?.action == "com.gianmarco.gym_app.START_WORKOUT") {
+            val prefs = getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
+            prefs.edit().putString("flutter.widget_start_workout_ts",
+                System.currentTimeMillis().toString()).apply()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        handleWorkoutStartIntent(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleWorkoutStartIntent(intent)
     }
 
     private fun timerFinishedPendingIntent(title: String = "", body: String = ""): PendingIntent {
