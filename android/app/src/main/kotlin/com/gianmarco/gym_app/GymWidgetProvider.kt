@@ -19,7 +19,8 @@ class GymWidgetProvider : AppWidgetProvider() {
         for (widgetId in appWidgetIds) {
             val options = appWidgetManager.getAppWidgetOptions(widgetId)
             val minWidth = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 250)
-            updateWidget(context, appWidgetManager, widgetId, minWidth)
+            val minHeight = options.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 130)
+            updateWidget(context, appWidgetManager, widgetId, minWidth, minHeight)
         }
     }
 
@@ -31,7 +32,8 @@ class GymWidgetProvider : AppWidgetProvider() {
     ) {
         super.onAppWidgetOptionsChanged(context, appWidgetManager, appWidgetId, newOptions)
         val minWidth = newOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH, 250)
-        updateWidget(context, appWidgetManager, appWidgetId, minWidth)
+        val minHeight = newOptions.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT, 130)
+        updateWidget(context, appWidgetManager, appWidgetId, minWidth, minHeight)
     }
 
     companion object {
@@ -56,11 +58,18 @@ class GymWidgetProvider : AppWidgetProvider() {
             }
         }
 
+        private val badgeIds = intArrayOf(
+            R.id.widget_badge_1, R.id.widget_badge_2, R.id.widget_badge_3,
+            R.id.widget_badge_4, R.id.widget_badge_5, R.id.widget_badge_6,
+            R.id.widget_badge_7
+        )
+
         fun updateWidget(
             context: Context,
             appWidgetManager: AppWidgetManager,
             widgetId: Int,
-            widgetWidth: Int = 250
+            widgetWidth: Int = 250,
+            widgetHeight: Int = 130
         ) {
             try {
                 val prefs = context.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
@@ -77,50 +86,59 @@ class GymWidgetProvider : AppWidgetProvider() {
                 val sessionNamesJson = prefs.getString("flutter.widget_session_names", "[]") ?: "[]"
                 val sessionNames = parseJsonArray(sessionNamesJson)
 
+                val sessionMusclesJson = prefs.getString("flutter.widget_session_muscles", "[]") ?: "[]"
+                val sessionMuscles = parseJsonArray(sessionMusclesJson)
+
                 val doneJson = prefs.getString("flutter.microcycle_done", "[]") ?: "[]"
                 val doneSessions = parseJsonArray(doneJson).toSet()
 
-                val views = RemoteViews(context.packageName, R.layout.gym_widget)
+                // Use large layout when widget is big
+                val isLarge = widgetWidth >= 340 || widgetHeight >= 200
+                val layoutId = if (isLarge) R.layout.gym_widget_large else R.layout.gym_widget
+                val views = RemoteViews(context.packageName, layoutId)
 
                 views.setTextViewText(R.id.widget_streak, "\uD83D\uDD25 $streak")
                 views.setTextViewText(R.id.widget_workout, nextWorkout)
 
-                // Muscle image: show/hide based on width and available image
+                // Main muscle image
                 val drawableId = muscleDrawable(nextMuscle)
-                if (widgetWidth >= 180 && drawableId != 0) {
+                if (drawableId != 0) {
                     views.setImageViewResource(R.id.widget_muscle, drawableId)
-                    views.setViewVisibility(R.id.widget_muscle_container, View.VISIBLE)
+                    views.setViewVisibility(R.id.widget_muscle, View.VISIBLE)
                 } else {
-                    views.setViewVisibility(R.id.widget_muscle_container, View.GONE)
+                    views.setViewVisibility(R.id.widget_muscle, View.INVISIBLE)
                 }
 
-                // Session dots
-                val badgeIds = intArrayOf(
-                    R.id.widget_badge_1, R.id.widget_badge_2, R.id.widget_badge_3,
-                    R.id.widget_badge_4, R.id.widget_badge_5
-                )
+                // Session badge ImageViews: show muscle icon + colored background per status
                 val doneCount = doneSessions.size
                 val totalCount = sessionNames.size
 
-                for (i in 0 until 5) {
+                for (i in 0 until 7) {
                     val badgeId = badgeIds[i]
                     if (i < sessionNames.size) {
                         val name = sessionNames[i]
-                        when {
-                            doneSessions.contains(name) -> {
-                                views.setInt(badgeId, "setBackgroundResource", R.drawable.widget_circle_done)
-                            }
-                            name == nextWorkout -> {
-                                views.setInt(badgeId, "setBackgroundResource", R.drawable.widget_circle_active)
-                            }
-                            else -> {
-                                views.setInt(badgeId, "setBackgroundResource", R.drawable.widget_circle_pending)
-                            }
+                        val muscle = if (i < sessionMuscles.size) sessionMuscles[i] else ""
+                        val muscleDrId = muscleDrawable(muscle)
+
+                        if (muscleDrId != 0) {
+                            views.setImageViewResource(badgeId, muscleDrId)
+                        } else {
+                            views.setImageViewResource(badgeId, R.mipmap.ic_launcher)
                         }
-                        views.setTextViewText(badgeId, "")
+
+                        val bgDrawable = when {
+                            doneSessions.contains(name) -> R.drawable.widget_badge_done
+                            name == nextWorkout -> R.drawable.widget_badge_active
+                            else -> R.drawable.widget_badge_pending
+                        }
+                        views.setInt(badgeId, "setBackgroundResource", bgDrawable)
+
+                        val alpha = if (doneSessions.contains(name) || name == nextWorkout) 255 else 90
+                        views.setInt(badgeId, "setImageAlpha", alpha)
+
                         views.setViewVisibility(badgeId, View.VISIBLE)
                     } else {
-                        views.setViewVisibility(badgeId, View.INVISIBLE)
+                        views.setViewVisibility(badgeId, View.GONE)
                     }
                 }
 

@@ -1498,7 +1498,7 @@ Future<int> updateStreak(String dayName, List<String> totalSessionNames) async {
   await prefs.setInt('widget_streak', streak);
   await prefs.setString('widget_next_workout', nextSession);
   // Write session list for badge display
-  await prefs.setString('widget_session_names', jsonEncode(totalSessionNames.take(5).toList()));
+  await prefs.setString('widget_session_names', jsonEncode(totalSessionNames.take(7).toList()));
   // Write muscle image name for the next workout
   const kBodyPartToMuscle = {
     'petto': 'petto',
@@ -1524,6 +1524,20 @@ Future<int> updateStreak(String dayName, List<String> totalSessionNames) async {
       final firstPart = bodyParts.isNotEmpty ? bodyParts.first as String : '';
       final nextMuscle = kBodyPartToMuscle[firstPart] ?? '';
       await prefs.setString('widget_next_muscle', nextMuscle);
+
+      // Write per-session muscle names for badge icons (up to 7)
+      final sessionMuscles = totalSessionNames.take(7).map((name) {
+        try {
+          final day = routineList.cast<Map<String, dynamic>>().firstWhere(
+            (d) => d['dayName'] == name,
+            orElse: () => <String, dynamic>{},
+          );
+          final parts = day['bodyParts'] as List<dynamic>? ?? [];
+          final part = parts.isNotEmpty ? parts.first as String : '';
+          return kBodyPartToMuscle[part] ?? '';
+        } catch (_) { return ''; }
+      }).toList();
+      await prefs.setString('widget_session_muscles', jsonEncode(sessionMuscles));
     }
   } catch (_) {}
 

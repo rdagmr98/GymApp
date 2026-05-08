@@ -1,17 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/widget_background"
-    android:padding="12dp">
+    android:padding="16dp">
 
     <!-- HEADER: app name + streak -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp">
+        android:layout_marginBottom="8dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
             android:layout_centerVertical="true"
             android:text="GymApp"
             android:textColor="#80EAEEF4"
-            android:textSize="11sp"
+            android:textSize="13sp"
             android:textStyle="bold"
             android:letterSpacing="0.05"/>
 
@@ -32,13 +32,13 @@
             android:layout_centerVertical="true"
             android:text="0"
             android:textColor="#FF1A1A1E"
-            android:textSize="13sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:background="@drawable/widget_badge_done"
-            android:paddingStart="10dp"
-            android:paddingEnd="10dp"
-            android:paddingTop="4dp"
-            android:paddingBottom="4dp"/>
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"/>
     </RelativeLayout>
 
     <!-- MAIN CONTENT: muscle image + workout info -->
@@ -48,16 +48,16 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginBottom="8dp">
+        android:layout_marginBottom="10dp">
 
-        <!-- Muscle image: fitCenter keeps image inside rounded square -->
+        <!-- Muscle image: large version, fitCenter keeps within bounds -->
         <ImageView
             android:id="@+id/widget_muscle"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="10dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="14dp"
             android:background="@drawable/widget_muscle_bg"
-            android:padding="6dp"
+            android:padding="7dp"
             android:scaleType="fitCenter"/>
 
         <!-- Workout text info -->
@@ -70,11 +70,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="PROSSIMO"
-                android:textColor="#44EAEEF4"
-                android:textSize="9sp"
-                android:letterSpacing="0.1"
-                android:layout_marginBottom="2dp"/>
+                android:text="PROSSIMO ALLENAMENTO"
+                android:textColor="#55EAEEF4"
+                android:textSize="10sp"
+                android:letterSpacing="0.08"
+                android:layout_marginBottom="3dp"/>
 
             <TextView
                 android:id="@+id/widget_workout"
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:text="Caricamento..."
                 android:textColor="#FFEAEEF4"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
                 android:maxLines="2"
                 android:ellipsize="end"
@@ -92,13 +92,13 @@
         <!-- Play button (circle) -->
         <TextView
             android:id="@+id/widget_start_btn"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="10dp"
             android:gravity="center"
             android:text="&#9654;"
             android:textColor="#FF1A1A1E"
-            android:textSize="16sp"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:background="@drawable/widget_play_btn"/>
     </LinearLayout>
@@ -106,69 +106,69 @@
     <!-- FOOTER: session muscle-icon badges (up to 7) -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="48dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/widget_badge_1"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginEnd="4dp"
-            android:padding="4dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="6dp"
+            android:padding="5dp"
             android:scaleType="fitCenter"
             android:background="@drawable/widget_badge_pending"/>
 
         <ImageView
             android:id="@+id/widget_badge_2"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginEnd="4dp"
-            android:padding="4dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="6dp"
+            android:padding="5dp"
             android:scaleType="fitCenter"
             android:background="@drawable/widget_badge_pending"/>
 
         <ImageView
             android:id="@+id/widget_badge_3"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginEnd="4dp"
-            android:padding="4dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="6dp"
+            android:padding="5dp"
             android:scaleType="fitCenter"
             android:background="@drawable/widget_badge_pending"/>
 
         <ImageView
             android:id="@+id/widget_badge_4"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginEnd="4dp"
-            android:padding="4dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="6dp"
+            android:padding="5dp"
             android:scaleType="fitCenter"
             android:background="@drawable/widget_badge_pending"/>
 
         <ImageView
             android:id="@+id/widget_badge_5"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginEnd="4dp"
-            android:padding="4dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="6dp"
+            android:padding="5dp"
             android:scaleType="fitCenter"
             android:background="@drawable/widget_badge_pending"/>
 
         <ImageView
             android:id="@+id/widget_badge_6"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:layout_marginEnd="4dp"
-            android:padding="4dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="6dp"
+            android:padding="5dp"
             android:scaleType="fitCenter"
             android:background="@drawable/widget_badge_pending"/>
 
         <ImageView
             android:id="@+id/widget_badge_7"
-            android:layout_width="34dp"
-            android:layout_height="34dp"
-            android:padding="4dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:padding="5dp"
             android:scaleType="fitCenter"
             android:background="@drawable/widget_badge_pending"/>
 
@@ -183,8 +183,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0/0"
-            android:textColor="#60EAEEF4"
-            android:textSize="11sp"/>
+            android:textColor="#70EAEEF4"
+            android:textSize="13sp"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 </LinearLayout>
