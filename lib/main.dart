@@ -27,9 +27,14 @@ import 'exercise_catalog.dart';
 import 'workout_tutorial.dart';
 
 // Colore accento globale (tema)
+/// Returns true if dark mode is active
+bool _isDarkCtx(BuildContext context) =>
+    Theme.of(context).brightness == Brightness.dark;
+
 final ValueNotifier<Color> appAccentNotifier = ValueNotifier<Color>(
   const Color(0xFF00F2FF),
 );
+final ValueNotifier<ThemeMode> appThemeModeNotifier = ValueNotifier<ThemeMode>(ThemeMode.dark);
 
 // Istanza globale del plugin
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -266,6 +271,56 @@ class _ClientGymAppState extends State<ClientGymApp> {
     final prefs = await SharedPreferences.getInstance();
     final hex = prefs.getInt('accent_color') ?? 0xFF00F2FF;
     appAccentNotifier.value = Color(hex);
+    final dark = prefs.getBool('dark_mode') ?? true;
+    appThemeModeNotifier.value = dark ? ThemeMode.dark : ThemeMode.light;
+  }
+
+  ThemeData _buildLightTheme(Color accent) {
+    return ThemeData.light().copyWith(
+      scaffoldBackgroundColor: const Color(0xFFF2F2F7),
+      primaryColor: accent,
+      colorScheme: ColorScheme.light(
+        primary: accent,
+        surface: Colors.white,
+        onSurface: Colors.black87,
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: accent,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+        ),
+      ),
+      appBarTheme: AppBarTheme(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        centerTitle: true,
+        iconTheme: const IconThemeData(color: Colors.black87),
+        titleTextStyle: const TextStyle(
+          color: Colors.black87,
+          fontSize: 17,
+          fontWeight: FontWeight.w600,
+          letterSpacing: -0.5,
+        ),
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+      ),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: Colors.white,
+        selectedItemColor: accent,
+        unselectedItemColor: Colors.black38,
+      ),
+      drawerTheme: const DrawerThemeData(
+        backgroundColor: Colors.white,
+      ),
+      dividerTheme: const DividerThemeData(color: Color(0xFFE0E0E0)),
+      cardTheme: const CardThemeData(color: Colors.white),
+      listTileTheme: const ListTileThemeData(
+        textColor: Colors.black87,
+        iconColor: Colors.black54,
+      ),
+    );
   }
 
   ThemeData _buildTheme(Color accent) {
@@ -287,12 +342,12 @@ class _ClientGymAppState extends State<ClientGymApp> {
           textStyle: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
         ),
       ),
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.white),
-        titleTextStyle: TextStyle(
+        iconTheme: const IconThemeData(color: Colors.white),
+        titleTextStyle: const TextStyle(
           color: Colors.white,
           fontSize: 17,
           fontWeight: FontWeight.w600,
@@ -304,12 +359,17 @@ class _ClientGymAppState extends State<ClientGymApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<Color>(
-      valueListenable: appAccentNotifier,
-      builder: (_, accent, __) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: _buildTheme(accent),
-        home: const GymAppHome(),
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: appThemeModeNotifier,
+      builder: (_, themeMode, __) => ValueListenableBuilder<Color>(
+        valueListenable: appAccentNotifier,
+        builder: (_, accent, __) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: _buildLightTheme(accent),
+          darkTheme: _buildTheme(accent),
+          themeMode: themeMode,
+          home: const GymAppHome(),
+        ),
       ),
     );
   }
@@ -659,6 +719,7 @@ const String kWorkoutProgressNativeAdUnitId =
 const String kOverallProgressNativeAdUnitId =
     'ca-app-pub-2556899149200560/8735561710';
 const String kTutorialNativeAdUnitId = 'ca-app-pub-2556899149200560/4047708794';
+const String kChooseExerciseNativeAdUnitId = 'ca-app-pub-2556899149200560/4310484557';
 const String _webDonationPromptedAtKey = 'web_donation_prompted_at';
 const String _webDonationProceededAtKey = 'web_donation_proceeded_at';
 const String _webDonationReceiptKey = 'web_donation_receipt_id';
@@ -917,8 +978,8 @@ class _GymAppHomeState extends State<GymAppHome> {
   @override
   Widget build(BuildContext context) {
     if (_loading) {
-      return const Scaffold(
-        backgroundColor: Color(0xFF0A0A0A),
+      return Scaffold(
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF0A0A0A) : Colors.white,
         body: Center(child: CircularProgressIndicator()),
       );
     }
@@ -949,7 +1010,7 @@ class LanguagePickerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0A),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0A0A0A) : Colors.white,
       body: SafeArea(
         child: Center(
           child: Padding(
@@ -959,11 +1020,11 @@ class LanguagePickerScreen extends StatelessWidget {
               children: [
                 const Text('🌍', style: TextStyle(fontSize: 72)),
                 const SizedBox(height: 32),
-                const Text(
+                Text(
                   'Scegli la lingua\nChoose your language',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
                     height: 1.4,
@@ -1003,7 +1064,7 @@ class LanguagePickerScreen extends StatelessWidget {
                       elevation: 0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
-                        side: const BorderSide(color: Colors.white24),
+                        side: BorderSide(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
                       ),
                     ),
                     child: const Text(
@@ -1076,14 +1137,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     const accent = Color(0xFF00F2FF);
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0A),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0A0A0A) : Colors.white,
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
               child: PageView.builder(
                 controller: _pageCtrl,
-                onPageChanged: (i) => setState(() => _currentPage = i),
+                onPageChanged: (i) { if (mounted) setState(() => _currentPage = i); },
                 itemCount: _pages.length,
                 itemBuilder: (_, i) => _buildPage(_pages[i], accent),
               ),
@@ -1101,7 +1162,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   width: _currentPage == i ? 24 : 8,
                   height: 8,
                   decoration: BoxDecoration(
-                    color: _currentPage == i ? accent : Colors.white24,
+                    color: _currentPage == i ? accent : (_isDarkCtx(context) ? Colors.white24 : Colors.black26),
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -1174,8 +1235,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Text(
             page.title,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.white,
+            style: TextStyle(
+              color: _isDarkCtx(context) ? Colors.white : Colors.black87,
               fontSize: 26,
               fontWeight: FontWeight.w900,
               letterSpacing: -0.5,
@@ -1185,8 +1246,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Text(
             page.text,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              color: Colors.white60,
+            style: TextStyle(
+              color: _isDarkCtx(context) ? Colors.white60 : Colors.black54,
               fontSize: 16,
               height: 1.6,
             ),
@@ -1428,6 +1489,43 @@ Future<int> updateStreak(String dayName, List<String> totalSessionNames) async {
   await prefs.setString('microcycle_done', jsonEncode(microDone.toList()));
   await prefs.setString('last_session_date_$dayName', now.toIso8601String());
   await prefs.setString('last_workout_date', now.toIso8601String());
+
+  // Write widget data for the Android home screen widget
+  final nextSession = totalSessionNames.firstWhere(
+    (n) => !microDone.contains(n),
+    orElse: () => totalSessionNames.isNotEmpty ? totalSessionNames.first : '—',
+  );
+  await prefs.setInt('widget_streak', streak);
+  await prefs.setString('widget_next_workout', nextSession);
+  // Write session list for badge display
+  await prefs.setString('widget_session_names', jsonEncode(totalSessionNames.take(5).toList()));
+  // Write muscle image name for the next workout
+  const kBodyPartToMuscle = {
+    'petto': 'petto',
+    'dorso': 'dorso',
+    'gambe': 'gambe',
+    'spalle': 'spalle',
+    'braccia': 'braccia',
+    'core': '',
+    'full_body': 'push',
+    'cardio': '',
+    'glutei': 'glutei',
+    'altro': '',
+  };
+  try {
+    final routineStr = prefs.getString('client_routine');
+    if (routineStr != null) {
+      final routineList = jsonDecode(routineStr) as List<dynamic>;
+      final nextDay = routineList.cast<Map<String, dynamic>>().firstWhere(
+        (d) => d['dayName'] == nextSession,
+        orElse: () => <String, dynamic>{},
+      );
+      final bodyParts = nextDay['bodyParts'] as List<dynamic>? ?? [];
+      final firstPart = bodyParts.isNotEmpty ? bodyParts.first as String : '';
+      final nextMuscle = kBodyPartToMuscle[firstPart] ?? '';
+      await prefs.setString('widget_next_muscle', nextMuscle);
+    }
+  } catch (_) {}
 
   // Gestisci il reset dei badge
   await manageBadgeReset();
@@ -4123,6 +4221,7 @@ class _ClientMainPageState extends State<ClientMainPage>
   bool _stWeightHint = true;
   bool _stUsePounds = false;
   bool _stDisableWeightKeyboard = false;
+  bool _stDarkMode = true;
 
   String _appLang = 'it';
   BannerAd? _bannerAd;
@@ -4160,6 +4259,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     scheduleStreakReminder(_appLang);
     _refreshWebDonationGate();
     _maybeShowIosInstallHint();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkMiuiWidget());
     try {
       AdManager.instance.loadInterstitial();
     } catch (_) {}
@@ -4372,7 +4472,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     final accent = Theme.of(context).colorScheme.primary;
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -4386,8 +4486,8 @@ class _ClientMainPageState extends State<ClientMainPage>
             const SizedBox(height: 16),
             Text(
               AppL.proTrainer,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                 fontSize: 22,
                 fontWeight: FontWeight.w900,
               ),
@@ -4396,8 +4496,8 @@ class _ClientMainPageState extends State<ClientMainPage>
             const SizedBox(height: 12),
             Text(
               AppL.promoText,
-              style: const TextStyle(
-                color: Colors.white60,
+              style: TextStyle(
+                color: _isDarkCtx(context) ? Colors.white60 : Colors.black54,
                 fontSize: 15,
                 height: 1.5,
               ),
@@ -4417,8 +4517,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                     Expanded(
                       child: Text(
                         v,
-                        style: const TextStyle(
-                          color: Colors.white70,
+                        style: TextStyle(
+                          color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
                           fontSize: 14,
                         ),
                       ),
@@ -4471,8 +4571,12 @@ class _ClientMainPageState extends State<ClientMainPage>
       const Color(0xFFFF6E40), // corallo
       const Color(0xFFE040FB), // viola neon
     ];
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color textColor = isDark ? Colors.white : Colors.black87;
+    final Color subColor  = isDark ? Colors.white38 : Colors.black45;
+    final Color divColor  = isDark ? Colors.white12 : Colors.black12;
     return Drawer(
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       child: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20),
@@ -4498,8 +4602,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                       const SizedBox(height: 2),
                       Text(
                         AppL.settings,
-                        style: const TextStyle(
-                          color: Colors.white38,
+                        style: TextStyle(
+                          color: subColor,
                           fontSize: 12,
                         ),
                       ),
@@ -4508,14 +4612,14 @@ class _ClientMainPageState extends State<ClientMainPage>
                 },
               ),
               const SizedBox(height: 20),
-              const Divider(color: Colors.white12),
+              Divider(color: divColor),
 
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   'FEEDBACK',
                   style: TextStyle(
-                    color: Colors.white38,
+                    color: subColor,
                     fontSize: 11,
                     letterSpacing: 1.5,
                   ),
@@ -4539,14 +4643,14 @@ class _ClientMainPageState extends State<ClientMainPage>
                   _saveMainSettings();
                 },
               ),
-              const Divider(color: Colors.white12),
+              Divider(color: divColor),
 
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   'TIMER',
                   style: TextStyle(
-                    color: Colors.white38,
+                    color: subColor,
                     fontSize: 11,
                     letterSpacing: 1.5,
                   ),
@@ -4570,14 +4674,14 @@ class _ClientMainPageState extends State<ClientMainPage>
                   _saveMainSettings();
                 },
               ),
-              const Divider(color: Colors.white12),
+              Divider(color: divColor),
 
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   'SERIE',
                   style: TextStyle(
-                    color: Colors.white38,
+                    color: subColor,
                     fontSize: 11,
                     letterSpacing: 1.5,
                   ),
@@ -4623,14 +4727,33 @@ class _ClientMainPageState extends State<ClientMainPage>
                   _saveMainSettings();
                 },
               ),
-              const Divider(color: Colors.white12),
+              Divider(color: divColor),
 
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  'ASPETTO',
+                  style: TextStyle(color: subColor, fontSize: 11, letterSpacing: 1.5),
+                ),
+              ),
+              _mainSettingRow(
+                Icons.brightness_medium,
+                'Tema scuro',
+                _stDarkMode,
+                (v) async {
+                  setState(() => _stDarkMode = v);
+                  appThemeModeNotifier.value = v ? ThemeMode.dark : ThemeMode.light;
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setBool('dark_mode', v);
+                },
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   'TUTORIAL',
                   style: TextStyle(
-                    color: Colors.white38,
+                    color: subColor,
                     fontSize: 11,
                     letterSpacing: 1.5,
                   ),
@@ -4703,7 +4826,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                   decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(10),
+                    color: _isDarkCtx(context) ? const Color(0xFF2C2C2E) : Colors.white,
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(
                       color: accent.withAlpha(100),
@@ -4731,14 +4854,14 @@ class _ClientMainPageState extends State<ClientMainPage>
                   ),
                 ),
               ),
-              const Divider(color: Colors.white12),
+              Divider(color: divColor),
 
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   'COLORE TEMA',
                   style: TextStyle(
-                    color: Colors.white38,
+                    color: subColor,
                     fontSize: 11,
                     letterSpacing: 1.5,
                   ),
@@ -4763,7 +4886,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                         color: c,
                         shape: BoxShape.circle,
                         border: selected
-                            ? Border.all(color: Colors.white, width: 3)
+                            ? Border.all(color: _isDarkCtx(context) ? Colors.white : Colors.black87, width: 3)
                             : null,
                         boxShadow: selected
                             ? [
@@ -4786,15 +4909,15 @@ class _ClientMainPageState extends State<ClientMainPage>
                   );
                 }).toList(),
               ),
-              const Divider(color: Colors.white12),
+              Divider(color: divColor),
 
-              const Divider(color: Colors.white12),
+              Divider(color: divColor),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   AppL.language.toUpperCase(),
-                  style: const TextStyle(
-                    color: Colors.white38,
+                  style: TextStyle(
+                    color: subColor,
                     fontSize: 11,
                     letterSpacing: 1.5,
                   ),
@@ -4807,11 +4930,11 @@ class _ClientMainPageState extends State<ClientMainPage>
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.only(top: 2),
                           child: Icon(
                             Icons.language,
-                            color: Colors.white54,
+                            color: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
                             size: 20,
                           ),
                         ),
@@ -4820,8 +4943,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                           child: Text(
                             AppL.language,
                             softWrap: true,
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                               fontSize: 14,
                             ),
                           ),
@@ -4833,7 +4956,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                   DropdownButton<String>(
                     value: _appLang,
                     dropdownColor: const Color(0xFF2C2C2E),
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                     underline: const SizedBox(),
                     items: const [
                       DropdownMenuItem(
@@ -4855,13 +4978,13 @@ class _ClientMainPageState extends State<ClientMainPage>
                   ),
                 ],
               ),
-              const Divider(color: Colors.white12),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+              Divider(color: divColor),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   'GYMAPP PRO',
                   style: TextStyle(
-                    color: Colors.white38,
+                    color: subColor,
                     fontSize: 11,
                     letterSpacing: 1.5,
                   ),
@@ -4873,10 +4996,10 @@ class _ClientMainPageState extends State<ClientMainPage>
                   icon: const Text('👨‍💼', style: TextStyle(fontSize: 16)),
                   label: Text(
                     AppL.gymAppPro,
-                    style: const TextStyle(color: Colors.white70),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87),
                   ),
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.white24),
+                    side: BorderSide(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -4887,13 +5010,13 @@ class _ClientMainPageState extends State<ClientMainPage>
                   },
                 ),
               ),
-              const Divider(color: Colors.white12),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
+              Divider(color: divColor),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
                   'DATI',
                   style: TextStyle(
-                    color: Colors.white38,
+                    color: subColor,
                     fontSize: 11,
                     letterSpacing: 1.5,
                   ),
@@ -4961,36 +5084,39 @@ class _ClientMainPageState extends State<ClientMainPage>
     bool value,
     ValueChanged<bool> onChanged,
   ) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 2),
-                child: Icon(icon, color: appAccentNotifier.value, size: 20),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  label,
-                  softWrap: true,
-                  style: const TextStyle(color: Colors.white, fontSize: 14),
+    return Builder(builder: (ctx) {
+      final textClr = Theme.of(ctx).colorScheme.onSurface;
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: Icon(icon, color: appAccentNotifier.value, size: 20),
                 ),
-              ),
-            ],
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    label,
+                    softWrap: true,
+                    style: TextStyle(color: textClr, fontSize: 14),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(width: 12),
-        Switch(
-          value: value,
-          onChanged: onChanged,
-          activeTrackColor: appAccentNotifier.value,
-        ),
-      ],
-    );
+          const SizedBox(width: 12),
+          Switch(
+            value: value,
+            onChanged: onChanged,
+            activeTrackColor: appAccentNotifier.value,
+          ),
+        ],
+      );
+    });
   }
 
   Widget _mainSegmentSettingRow(
@@ -5016,7 +5142,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                 child: Text(
                   label,
                   softWrap: true,
-                  style: const TextStyle(color: Colors.white, fontSize: 14),
+                  style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontSize: 14),
                 ),
               ),
             ],
@@ -5031,16 +5157,16 @@ class _ClientMainPageState extends State<ClientMainPage>
               label: Text(
                 entry.value,
                 style: TextStyle(
-                  color: selected ? Colors.black : Colors.white70,
+                  color: selected ? Colors.black : (_isDarkCtx(context) ? Colors.white70 : Colors.black87),
                   fontWeight: FontWeight.w700,
                 ),
               ),
               selected: selected,
               onSelected: (_) => onChanged(entry.key),
               selectedColor: appAccentNotifier.value,
-              backgroundColor: Colors.white10,
+              backgroundColor: _isDarkCtx(context) ? Colors.white10 : Colors.grey.shade200,
               side: BorderSide(
-                color: selected ? appAccentNotifier.value : Colors.white12,
+                color: selected ? appAccentNotifier.value : (_isDarkCtx(context) ? Colors.white12 : Colors.grey.shade400),
               ),
             );
           }).toList(),
@@ -5062,6 +5188,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       _stUsePounds = prefs.getBool('use_pounds') ?? false;
       _stDisableWeightKeyboard =
           prefs.getBool('disable_weight_keyboard') ?? false;
+      _stDarkMode = prefs.getBool('dark_mode') ?? true;
     });
   }
 
@@ -5075,6 +5202,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     await prefs.setBool('show_weight_suggestion', _stWeightHint);
     await prefs.setBool('use_pounds', _stUsePounds);
     await prefs.setBool('disable_weight_keyboard', _stDisableWeightKeyboard);
+    await prefs.setBool('dark_mode', _stDarkMode);
   }
 
   Future<void> _loadData() async {
@@ -5127,17 +5255,17 @@ class _ClientMainPageState extends State<ClientMainPage>
     return Scaffold(
       endDrawer: _buildMainSettingsDrawer(),
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "GYM LOGBOOK",
           style: TextStyle(
-            color: Colors.white,
+            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
             fontWeight: FontWeight.bold,
             fontSize: 18,
           ),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         leading: IconButton(
-          icon: const Icon(Icons.bar_chart_rounded, color: Colors.white),
+          icon: Icon(Icons.bar_chart_rounded, color: _isDarkCtx(context) ? Colors.white : Colors.black87),
           tooltip: AppL.lang == 'en' ? 'Overall Progress' : 'Progressi',
           onPressed: _showOverallProgressPage,
         ),
@@ -5173,9 +5301,9 @@ class _ClientMainPageState extends State<ClientMainPage>
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         selectedItemColor: Theme.of(context).colorScheme.primary,
-        unselectedItemColor: Colors.white24,
+        unselectedItemColor: Theme.of(context).colorScheme.onSurface.withAlpha(80),
         type: BottomNavigationBarType.fixed,
         onTap: (i) => setState(() => _currentIndex = i),
         items: [
@@ -5207,7 +5335,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             const SizedBox(height: 16),
             Text(
               AppL.noScheduleLoaded,
-              style: const TextStyle(color: Colors.white38, fontSize: 16),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 16),
             ),
             const SizedBox(height: 20),
             OutlinedButton.icon(
@@ -5247,6 +5375,8 @@ class _ClientMainPageState extends State<ClientMainPage>
   }
 
   Widget _buildRoutineCard(WorkoutDay day, Color accent, int index) {
+    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final Color cardBg = isDark ? const Color(0xFF1C1C1E) : Colors.white;
     return Material(
       color: Colors.transparent,
       borderRadius: BorderRadius.circular(20),
@@ -5261,7 +5391,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             gradient: LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,
-              colors: [accent.withAlpha(28), const Color(0xFF1C1C1E)],
+              colors: [accent.withAlpha(28), cardBg],
             ),
             border: Border.all(color: accent.withAlpha(55), width: 1.2),
             boxShadow: [
@@ -5337,8 +5467,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                         child: Text(
                           localizeMixedLabel(day.dayName),
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                             fontSize: 17,
                             fontWeight: FontWeight.w600,
                             letterSpacing: 0.2,
@@ -5348,11 +5478,11 @@ class _ClientMainPageState extends State<ClientMainPage>
                       // Icona lista esercizi: tap → lista diretta
                       GestureDetector(
                         onTap: () => _showDayDetail(day),
-                        child: const Padding(
+                        child: Padding(
                           padding: EdgeInsets.all(4),
                           child: Icon(
                             Icons.format_list_bulleted_rounded,
-                            color: Colors.white38,
+                            color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                             size: 22,
                           ),
                         ),
@@ -5372,7 +5502,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     final accent = Theme.of(context).colorScheme.primary;
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF0E0E10),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -5390,7 +5520,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                   width: 36,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.white12,
+                    color: _isDarkCtx(context) ? Colors.white12 : Colors.black12,
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -5435,8 +5565,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                 ],
               ),
             ),
-            Divider(color: Colors.white.withAlpha(10), height: 1),
-            // Immagine muscolo (tap → fullscreen)
+            Divider(color: _isDarkCtx(context) ? Colors.white12 : Colors.black87.withAlpha(10), height: 1),
+            // Immagine muscolo(tap → fullscreen)
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 16, 24, 0),
               child: day.muscleImage != null
@@ -5477,16 +5607,16 @@ class _ClientMainPageState extends State<ClientMainPage>
                 children: [
                   Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.trending_up_rounded,
-                        color: Colors.white38,
+                        color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                         size: 16,
                       ),
                       const SizedBox(width: 6),
                       Text(
                         AppL.workoutProgress,
-                        style: const TextStyle(
-                          color: Colors.white38,
+                        style: TextStyle(
+                          color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                           fontSize: 11,
                           letterSpacing: 1.2,
                         ),
@@ -5579,18 +5709,18 @@ class _ClientMainPageState extends State<ClientMainPage>
                     left: 16,
                     child: Text(
                       label,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                         shadows: [Shadow(blurRadius: 8, color: Colors.black)],
                       ),
                     ),
                   ),
-                  const Positioned(
+                  Positioned(
                     top: 12,
                     right: 16,
-                    child: Icon(Icons.close, color: Colors.white70, size: 28),
+                    child: Icon(Icons.close, color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, size: 28),
                   ),
                 ],
               ),
@@ -5605,7 +5735,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     final accent = Theme.of(context).colorScheme.primary;
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF0E0E10),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -5622,7 +5752,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                   width: 36,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.white12,
+                    color: _isDarkCtx(context) ? Colors.white12 : Colors.black12,
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -5654,22 +5784,22 @@ class _ClientMainPageState extends State<ClientMainPage>
                     ),
                     Text(
                       '${day.exercises.length} ${AppL.exercises.toLowerCase()}',
-                      style: const TextStyle(
-                        color: Colors.white24,
+                      style: TextStyle(
+                        color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                         fontSize: 12,
                       ),
                     ),
                   ],
                 ),
               ),
-              Divider(color: Colors.white.withAlpha(10), height: 1),
+              Divider(color: _isDarkCtx(context) ? Colors.white12 : Colors.black87.withAlpha(10), height: 1),
               // Exercise list
               Expanded(
                 child: ListView.separated(
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   itemCount: day.exercises.length + 1,
                   separatorBuilder: (_, __) => Divider(
-                    color: Colors.white.withAlpha(8),
+                    color: _isDarkCtx(context) ? Colors.white12 : Colors.black87.withAlpha(8),
                     height: 1,
                     indent: 24,
                     endIndent: 24,
@@ -5765,10 +5895,10 @@ class _ClientMainPageState extends State<ClientMainPage>
                                         borderRadius: BorderRadius.circular(6),
                                         child: Text(
                                           localizedExerciseName(ex.name),
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 14,
-                                            color: Colors.white,
+                                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                                           ),
                                           overflow: TextOverflow.ellipsis,
                                         ),
@@ -5780,7 +5910,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                 Text(
                                   scheme,
                                   style: TextStyle(
-                                    color: Colors.white.withAlpha(100),
+                                    color: _isDarkCtx(context) ? Colors.white : Colors.black87.withAlpha(100),
                                     fontSize: 12,
                                   ),
                                 ),
@@ -5800,12 +5930,12 @@ class _ClientMainPageState extends State<ClientMainPage>
                               width: 36,
                               height: 36,
                               decoration: BoxDecoration(
-                                color: Colors.white10,
+                                color: _isDarkCtx(context) ? Colors.white10 : Colors.black12,
                                 shape: BoxShape.circle,
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.edit_rounded,
-                                color: Colors.white38,
+                                color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                 size: 16,
                               ),
                             ),
@@ -5859,7 +5989,7 @@ class _ClientMainPageState extends State<ClientMainPage>
 
     showModalBottomSheet(
       context: ctx,
-      backgroundColor: const Color(0xFF0E0E10),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -5880,7 +6010,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                   width: 36,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.white12,
+                    color: _isDarkCtx(context) ? Colors.white12 : Colors.black12,
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -5914,8 +6044,8 @@ class _ClientMainPageState extends State<ClientMainPage>
               const SizedBox(height: 4),
               Text(
                 AppL.lang == 'en' ? info.nameEn : info.name,
-                style: const TextStyle(
-                  color: Colors.white38,
+                style: TextStyle(
+                  color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                   fontSize: 12,
                   fontStyle: FontStyle.italic,
                 ),
@@ -5968,13 +6098,13 @@ class _ClientMainPageState extends State<ClientMainPage>
                   Icons.grain_rounded,
                   AppL.secondaryMuscles,
                   translateMuscle(info.secondaryMuscles),
-                  Colors.white54,
+                  _isDarkCtx(context) ? Colors.white54 : Colors.black54,
                 ),
               const SizedBox(height: 12),
               _sectionCard(
                 AppL.execution,
                 translateExerciseText(info.execution),
-                const Color(0xFF1C1C1E),
+                _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.grey.shade100,
               ),
               const SizedBox(height: 8),
               _sectionCard(
@@ -5986,17 +6116,17 @@ class _ClientMainPageState extends State<ClientMainPage>
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white.withAlpha(5),
+                  color: _isDarkCtx(context) ? Colors.white.withAlpha(5) : Colors.black87.withAlpha(5),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   AppL.notInCatalog,
-                  style: const TextStyle(color: Colors.white38, fontSize: 13),
+                  style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 13),
                   textAlign: TextAlign.center,
                 ),
               ),
             const SizedBox(height: 16),
-            Divider(color: Colors.white12),
+            Divider(color: _isDarkCtx(context) ? Colors.white12 : Colors.black12),
             const SizedBox(height: 8),
             Row(
               children: [
@@ -6115,8 +6245,8 @@ class _ClientMainPageState extends State<ClientMainPage>
       children: [
         Text(
           title,
-          style: const TextStyle(
-            color: Colors.white54,
+          style: TextStyle(
+            color: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
             fontSize: 11,
             fontWeight: FontWeight.bold,
             letterSpacing: 1,
@@ -6125,8 +6255,8 @@ class _ClientMainPageState extends State<ClientMainPage>
         const SizedBox(height: 6),
         Text(
           body,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
             fontSize: 13,
             height: 1.5,
           ),
@@ -6157,7 +6287,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: const Color(0xFF0E0E10),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -6171,7 +6301,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                 width: 36,
                 height: 4,
                 decoration: BoxDecoration(
-                  color: Colors.white12,
+                  color: _isDarkCtx(context) ? Colors.white12 : Colors.black12,
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
@@ -6184,8 +6314,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                 Expanded(
                   child: Text(
                     name,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
                     ),
@@ -6197,7 +6327,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             const SizedBox(height: 6),
             Text(
               AppL.progressOverTime,
-              style: const TextStyle(color: Colors.white24, fontSize: 11),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26, fontSize: 11),
             ),
             const SizedBox(height: 16),
             SizedBox(
@@ -6244,7 +6374,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             child: Text(
               '$name  •  $scheme',
               style: TextStyle(
-                color: isSuperset ? Colors.white70 : Colors.white60,
+                color: isSuperset ? (_isDarkCtx(context) ? Colors.white70 : Colors.black87) : (_isDarkCtx(context) ? Colors.white60 : Colors.black54),
                 fontSize: 13,
               ),
               maxLines: 2,
@@ -6343,7 +6473,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       await showDialog<void>(
         context: context,
         builder: (c) => AlertDialog(
-          backgroundColor: const Color(0xFF1C1C1E),
+          backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -6358,7 +6488,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                 ? 'On iPhone or iPad, open GymApp in Safari, tap Share, choose \"Add to Home Screen\", then tap Add. You will get the app icon directly on the home screen.'
                 : 'Su iPhone o iPad apri GymApp in Safari, tocca Condividi, scegli \"Aggiungi a Home\", poi tocca Aggiungi. Avrai l\'icona dell\'app direttamente nella schermata Home.',
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white70, height: 1.4),
+            style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, height: 1.4),
           ),
           actions: [
             SizedBox(
@@ -6375,12 +6505,72 @@ class _ClientMainPageState extends State<ClientMainPage>
     });
   }
 
+  Future<void> _checkMiuiWidget() async {
+    if (kIsWeb) return;
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool('widget_hint_shown') ?? false) return;
+
+    bool isMiui = false;
+    bool isSamsung = false;
+    try {
+      isMiui = await _gymFileChannel.invokeMethod<bool>('isMiui') ?? false;
+      isSamsung = await _gymFileChannel.invokeMethod<bool>('isSamsung') ?? false;
+    } catch (_) {}
+
+    if ((!isMiui && !isSamsung) || !mounted) return;
+
+    final isDark = _isDarkCtx(context);
+    final bgColor = isDark ? const Color(0xFF1C1C1E) : Colors.white;
+    final textColor = isDark ? Colors.white70 : Colors.black87;
+
+    final String title;
+    final String message;
+    final String buttonLabel;
+    final String channelMethod;
+
+    if (isMiui) {
+      title = '📱 Widget GymApp';
+      message = 'Su Xiaomi/MIUI il widget richiede il permesso di avvio automatico.\n\nVai in:\nImpostazioni → App → GymApp → Avvio automatico → Attiva';
+      buttonLabel = 'Apri impostazioni';
+      channelMethod = 'openAutoStartSettings';
+    } else {
+      title = '📱 Widget GymApp';
+      message = 'Su Samsung il widget potrebbe non funzionare se l\'app è in risparmio energetico.\n\nVai in:\nImpostazioni App → Batteria → Nessuna restrizione';
+      buttonLabel = 'Apri impostazioni batteria';
+      channelMethod = 'openBatterySettings';
+    }
+
+    await showDialog<void>(
+      context: context,
+      builder: (c) => AlertDialog(
+        backgroundColor: bgColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Text(title, textAlign: TextAlign.center),
+        content: Text(message,
+          textAlign: TextAlign.center,
+          style: TextStyle(color: textColor, height: 1.45),
+        ),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(c), child: const Text('Dopo')),
+          ElevatedButton(
+            onPressed: () async {
+              Navigator.pop(c);
+              try { await _gymFileChannel.invokeMethod(channelMethod); } catch (_) {}
+            },
+            child: Text(buttonLabel),
+          ),
+        ],
+      ),
+    );
+    await prefs.setBool('widget_hint_shown', true);
+  }
+
   Future<bool> _acknowledgeWebDonation() async {
     final textCtrl = TextEditingController();
     final receiptId = await showDialog<String>(
       context: context,
       builder: (c) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
           AppL.lang == 'en'
@@ -6396,21 +6586,21 @@ class _ClientMainPageState extends State<ClientMainPage>
                   ? 'GymApp Web unlocks only after you enter the transaction code from your PayPal receipt for this month.'
                   : 'GymApp Web si sblocca solo dopo aver inserito il codice transazione presente nella ricevuta PayPal di questo mese.',
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white70, fontSize: 13),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 13),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: textCtrl,
               autofocus: true,
               textCapitalization: TextCapitalization.characters,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
               decoration: InputDecoration(
                 hintText: AppL.lang == 'en'
                     ? 'Example: 8AB12345CD6789012'
                     : 'Esempio: 8AB12345CD6789012',
-                hintStyle: const TextStyle(color: Colors.white38),
+                hintStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white24),
+                  borderSide: BorderSide(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 focusedBorder: OutlineInputBorder(
@@ -6463,7 +6653,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       context: context,
       barrierDismissible: false,
       builder: (c) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
           AppL.lang == 'en'
@@ -6486,7 +6676,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                   ? 'After donating, enter the PayPal transaction ID from your receipt to unlock the workout.'
                   : 'Dopo la donazione inserisci l\'ID transazione PayPal presente nella ricevuta per sbloccare l\'allenamento.',
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white60, fontSize: 12),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white60 : Colors.black54, fontSize: 12),
             ),
           ],
         ),
@@ -6533,7 +6723,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: const Color(0xFF1C1C1E),
+        color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.grey.shade100,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: _webDonationLocked ? Colors.redAccent : accent.withAlpha(90),
@@ -6558,7 +6748,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               ),
               if (!_webDonationLocked)
                 IconButton(
-                  icon: const Icon(Icons.close_rounded, color: Colors.white38, size: 20),
+                  icon: Icon(Icons.close_rounded, color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, size: 20),
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
                   onPressed: _dismissWebDonationBanner,
@@ -6570,8 +6760,8 @@ class _ClientMainPageState extends State<ClientMainPage>
             AppL.lang == 'en'
                 ? 'If you do not donate at least €1 every month, GymApp Web will stop working. Donations fund the Apple App Store publication.'
                 : 'Se non doni almeno 1€ ogni mese, GymApp Web non potra piu essere usata. Le donazioni finanziano la pubblicazione su Apple App Store.',
-            style: const TextStyle(
-              color: Colors.white70,
+            style: TextStyle(
+              color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
               fontSize: 12,
               height: 1.35,
             ),
@@ -6629,7 +6819,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             child: Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: const Color(0xFF1C1C1E),
+                color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(color: Colors.redAccent.withAlpha(180)),
               ),
@@ -6647,8 +6837,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                         ? 'GymApp Web is locked until you confirm this month\'s donation'
                         : 'GymApp Web e bloccata finche non confermi la donazione di questo mese',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                       fontSize: 18,
                       fontWeight: FontWeight.w800,
                     ),
@@ -6659,7 +6849,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                         ? 'Donate at least €1 to support development and fund the Apple App Store release, then enter the PayPal transaction ID from your receipt.'
                         : 'Dona almeno 1€ per supportare lo sviluppo e finanziare l\'uscita su Apple App Store, poi inserisci l\'ID transazione PayPal presente nella ricevuta.',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(color: Colors.white70, height: 1.35),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, height: 1.35),
                   ),
                   const SizedBox(height: 16),
                   SizedBox(
@@ -6887,7 +7077,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     showDialog(
       context: context,
       builder: (c) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Column(
           children: [
@@ -6922,7 +7112,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               AppL.lang == 'en'
                   ? 'Complete ALL sessions in your plan every microcycle to increase your streak counter.\n\nMiss even one session in a microcycle and your streak resets to 0.\n\nStay consistent — every microcycle counts! 💪'
                   : 'Completa TUTTE le sessioni della tua scheda ogni microciclo per incrementare il contatore.\n\nSe salti anche solo una sessione in un microciclo, la streak si azzera.\n\nSii costante — ogni microciclo conta! 💪',
-              style: const TextStyle(color: Colors.white70, fontSize: 13),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 13),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 14),
@@ -6930,7 +7120,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             if (myRoutine.isNotEmpty) ...[
               Text(
                 '${_streakDone.where((n) => myRoutine.any((d) => d.dayName == n)).length}/${myRoutine.length} ${AppL.lang == 'en' ? 'sessions this microcycle' : 'sessioni questo microciclo'}',
-                style: const TextStyle(color: Colors.white54, fontSize: 11),
+                style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 11),
               ),
               const SizedBox(height: 6),
               LayoutBuilder(
@@ -7022,12 +7212,12 @@ class _ClientMainPageState extends State<ClientMainPage>
             const SizedBox(height: 16),
             Text(
               AppL.noScheduleLoaded,
-              style: const TextStyle(color: Colors.white38, fontSize: 16),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 16),
             ),
             const SizedBox(height: 8),
             Text(
               AppL.createFirstSchedule,
-              style: const TextStyle(color: Colors.white24, fontSize: 13),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26, fontSize: 13),
             ),
           ],
         ),
@@ -7066,7 +7256,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                 const SizedBox(height: 4),
                 Text(
                   AppL.chooseAndStart,
-                  style: const TextStyle(color: Colors.white38, fontSize: 13),
+                  style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 13),
                 ),
                 if (myRoutine.isNotEmpty) ...[
                   const SizedBox(height: 12),
@@ -7079,7 +7269,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                         vertical: 12,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1C1C1E),
+                        color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
                         borderRadius: BorderRadius.circular(16),
                         border: Border.all(
                           color: _streak > 0
@@ -7199,8 +7389,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                                             : (_streak == 1
                                                   ? 'micro'
                                                   : 'micro'),
-                                        style: const TextStyle(
-                                          color: Colors.white38,
+                                        style: TextStyle(
+                                          color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                           fontSize: 10,
                                         ),
                                       ),
@@ -7221,9 +7411,9 @@ class _ClientMainPageState extends State<ClientMainPage>
                                 const SizedBox(width: 10),
                                 Expanded(child: buildIconRow(sideIconsWidth)),
                                 const SizedBox(width: 6),
-                                const Icon(
+                                Icon(
                                   Icons.info_outline,
-                                  color: Colors.white24,
+                                  color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                                   size: 15,
                                 ),
                               ],
@@ -7260,9 +7450,9 @@ class _ClientMainPageState extends State<ClientMainPage>
                                       ),
                                     ),
                                     const Spacer(),
-                                    const Icon(
+                                    Icon(
                                       Icons.info_outline,
-                                      color: Colors.white24,
+                                      color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                                       size: 15,
                                     ),
                                   ],
@@ -7295,12 +7485,12 @@ class _ClientMainPageState extends State<ClientMainPage>
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 16),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF111113),
+                    color: _isDarkCtx(context) ? const Color(0xFF111113) : Colors.white,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
                       color: isToday
                           ? accent.withAlpha(120)
-                          : Colors.white.withAlpha(15),
+                          : (_isDarkCtx(context) ? Colors.white.withAlpha(15) : Colors.black12),
                       width: isToday ? 1.5 : 1,
                     ),
                     boxShadow: isToday
@@ -7322,7 +7512,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                         decoration: BoxDecoration(
                           border: Border(
                             bottom: BorderSide(
-                              color: Colors.white.withAlpha(10),
+                              color: _isDarkCtx(context) ? Colors.white12 : Colors.black87.withAlpha(10),
                             ),
                           ),
                         ),
@@ -7339,7 +7529,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                     style: TextStyle(
-                                      color: isToday ? accent : Colors.white,
+                                      color: isToday ? accent : (_isDarkCtx(context) ? Colors.white : Colors.black87),
                                       fontSize: 18,
                                       fontWeight: FontWeight.w900,
                                       letterSpacing: 1,
@@ -7351,7 +7541,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                       Icon(
                                         Icons.fitness_center,
                                         size: 12,
-                                        color: Colors.white38,
+                                        color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                       ),
                                       const SizedBox(width: 4),
                                       Flexible(
@@ -7359,8 +7549,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                                           '${d.exercises.length} ${AppL.exercises.toLowerCase()}',
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
-                                          style: const TextStyle(
-                                            color: Colors.white38,
+                                          style: TextStyle(
+                                            color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                             fontSize: 12,
                                           ),
                                         ),
@@ -7369,7 +7559,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                       Icon(
                                         Icons.repeat,
                                         size: 12,
-                                        color: Colors.white38,
+                                        color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                       ),
                                       const SizedBox(width: 4),
                                       Flexible(
@@ -7377,8 +7567,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                                           '${d.exercises.fold(0, (s, ex) => s + ex.targetSets)} ${AppL.sets.toLowerCase()}',
                                           overflow: TextOverflow.ellipsis,
                                           maxLines: 1,
-                                          style: const TextStyle(
-                                            color: Colors.white38,
+                                          style: TextStyle(
+                                            color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                             fontSize: 12,
                                           ),
                                         ),
@@ -7396,12 +7586,12 @@ class _ClientMainPageState extends State<ClientMainPage>
                               decoration: BoxDecoration(
                                 color: isToday
                                     ? accent.withAlpha(30)
-                                    : Colors.white.withAlpha(10),
+                                    : (_isDarkCtx(context) ? Colors.white.withAlpha(10) : Colors.black.withAlpha(8)),
                                 borderRadius: BorderRadius.circular(20),
                                 border: Border.all(
                                   color: isToday
                                       ? accent.withAlpha(120)
-                                      : Colors.white12,
+                                      : (_isDarkCtx(context) ? Colors.white12 : Colors.black12),
                                 ),
                               ),
                               child: Row(
@@ -7412,13 +7602,13 @@ class _ClientMainPageState extends State<ClientMainPage>
                                         ? Icons.check_circle
                                         : Icons.history,
                                     size: 12,
-                                    color: isToday ? accent : Colors.white38,
+                                    color: isToday ? accent : (_isDarkCtx(context) ? Colors.white38 : Colors.black38),
                                   ),
                                   const SizedBox(width: 4),
                                   Text(
                                     label,
                                     style: TextStyle(
-                                      color: isToday ? accent : Colors.white38,
+                                      color: isToday ? accent : (_isDarkCtx(context) ? Colors.white38 : Colors.black38),
                                       fontSize: 11,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -7506,15 +7696,15 @@ class _ClientMainPageState extends State<ClientMainPage>
     final result = await showDialog<String>(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         title: Text(
           AppL.lang == 'en' ? 'Rename Session' : 'Rinomina Sessione',
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         content: TextField(
           controller: ctrl,
           autofocus: true,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: accent.withAlpha(100)),
@@ -7570,7 +7760,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -7612,7 +7802,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                       height: 4,
                       margin: const EdgeInsets.only(bottom: 16),
                       decoration: BoxDecoration(
-                        color: Colors.white24,
+                        color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -7628,10 +7818,10 @@ class _ClientMainPageState extends State<ClientMainPage>
                   const SizedBox(height: 16),
                   TextField(
                     controller: nameCtrl,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                     decoration: InputDecoration(
                       labelText: AppL.exerciseName,
-                      labelStyle: const TextStyle(color: Colors.white54),
+                      labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                       filled: true,
                       fillColor: Colors.black26,
                       border: OutlineInputBorder(
@@ -7657,7 +7847,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                         physics: const ClampingScrollPhysics(),
                         itemCount: suggestions.length,
                         separatorBuilder: (_, __) =>
-                            const Divider(color: Colors.white10, height: 1),
+                            Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 1),
                         itemBuilder: (_, i) {
                           final ex = suggestions[i];
                           return ListTile(
@@ -7687,8 +7877,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                                   ),
                             title: Text(
                               ex.name,
-                              style: const TextStyle(
-                                color: Colors.white,
+                              style: TextStyle(
+                                color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                                 fontSize: 13,
                               ),
                             ),
@@ -7726,10 +7916,10 @@ class _ClientMainPageState extends State<ClientMainPage>
                         child: TextField(
                           controller: setsCtrl,
                           keyboardType: TextInputType.number,
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                           decoration: InputDecoration(
                             labelText: AppL.sets,
-                            labelStyle: const TextStyle(color: Colors.white54),
+                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                             filled: true,
                             fillColor: Colors.black26,
                             border: OutlineInputBorder(
@@ -7745,10 +7935,10 @@ class _ClientMainPageState extends State<ClientMainPage>
                         child: TextField(
                           controller: recoveryCtrl,
                           keyboardType: TextInputType.number,
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                           decoration: InputDecoration(
                             labelText: AppL.recovery,
-                            labelStyle: const TextStyle(color: Colors.white54),
+                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                             filled: true,
                             fillColor: Colors.black26,
                             border: OutlineInputBorder(
@@ -7763,10 +7953,10 @@ class _ClientMainPageState extends State<ClientMainPage>
                         child: TextField(
                           controller: pausaCtrl,
                           keyboardType: TextInputType.number,
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                           decoration: InputDecoration(
                             labelText: AppL.pauseSec,
-                            labelStyle: const TextStyle(color: Colors.white54),
+                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                             filled: true,
                             fillColor: Colors.black26,
                             border: OutlineInputBorder(
@@ -7781,7 +7971,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                   const SizedBox(height: 12),
                   Text(
                     AppL.repsPerSet,
-                    style: const TextStyle(color: Colors.white54, fontSize: 12),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
                   ),
                   const SizedBox(height: 6),
                   Wrap(
@@ -7795,14 +7985,14 @@ class _ClientMainPageState extends State<ClientMainPage>
                           controller: repsCtrls[i],
                           keyboardType: TextInputType.number,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                             fontSize: 13,
                           ),
                           decoration: InputDecoration(
                             labelText: 'S${i + 1}',
-                            labelStyle: const TextStyle(
-                              color: Colors.white38,
+                            labelStyle: TextStyle(
+                              color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                               fontSize: 11,
                             ),
                             filled: true,
@@ -7823,10 +8013,10 @@ class _ClientMainPageState extends State<ClientMainPage>
                   TextField(
                     controller: noteCtrl,
                     maxLines: 3,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                     decoration: InputDecoration(
                       labelText: AppL.notes,
-                      labelStyle: const TextStyle(color: Colors.white54),
+                      labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                       filled: true,
                       fillColor: Colors.black26,
                       border: OutlineInputBorder(
@@ -7838,8 +8028,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                   const SizedBox(height: 16),
                   Text(
                     '🔗  ${AppL.circuit}',
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                     ),
@@ -7847,7 +8037,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                   const SizedBox(height: 4),
                   Text(
                     AppL.circuitHint,
-                    style: const TextStyle(color: Colors.white38, fontSize: 11),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 11),
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -7996,27 +8186,20 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     final nameCtrl = TextEditingController();
     final List<String> selectedParts = [];
     String? selectedMuscleImage;
-    String selectedEmoji = '💪';
-    int wizardStep = 0; // 0=nome, 1=emoji+immagine, 2=gruppi muscolari
-
-    const workoutEmojis = [
-      '💪', '🏋️', '🦵', '🔥', '🏃', '⚡', '🎯', '🥊',
-      '🤸', '🧘', '🏊', '🚴', '🤼', '🏆', '❤️', '💥',
-      '🦾', '🧠', '🦅', '⚔️', '🌟', '🎖️', '🚀', '🏅',
-    ];
+    int wizardStep = 0; // 0=nome, 1=immagine+gruppi muscolari
 
     Future<void> pickMuscleImage(StateSetter setS) async {
       await showDialog<void>(
         context: context,
         builder: (c) => StatefulBuilder(
           builder: (c, setSInner) => AlertDialog(
-            backgroundColor: const Color(0xFF1C1C1E),
+            backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
             title: Text(
               AppL.chooseMuscleImage,
-              style: const TextStyle(color: Colors.white, fontSize: 16),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontSize: 16),
             ),
             content: SizedBox(
               width: double.maxFinite,
@@ -8149,7 +8332,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
       builder: (c) => StatefulBuilder(
         builder: (ctx, setS) {
           // ── Step titles ─────────────────────────────────────────
-          final stepTitles = ['Nome allenamento', 'Emoji e immagine', 'Gruppi muscolari'];
+          final stepTitles = ['Nome allenamento', 'Immagine muscolo', 'Gruppi muscolari'];
 
           // ── Step indicator ──────────────────────────────────────
           Widget stepIndicator() => Row(
@@ -8176,20 +8359,20 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Come si chiama questo allenamento?',
-                style: TextStyle(color: Colors.white70, fontSize: 13),
+                style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 13),
               ),
               const SizedBox(height: 12),
               TextField(
                 controller: nameCtrl,
                 autofocus: true,
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                 decoration: InputDecoration(
                   labelText: 'Es. Push, Petto & Tricipiti…',
-                  labelStyle: const TextStyle(color: Colors.white38, fontSize: 13),
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white24),
+                  labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 13),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: appAccentNotifier.value),
@@ -8204,57 +8387,14 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
             ],
           );
 
-          // ── Step 1: Emoji + immagine muscolo ───────────────────
+          // ── Step 1: Immagine muscolo ───────────────────────────
           Widget step1() => Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Scegli un\'emoji per questo allenamento:',
-                style: TextStyle(color: Colors.white70, fontSize: 13),
-              ),
-              const SizedBox(height: 10),
-              SizedBox(
-                height: 180,
-                child: GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: workoutEmojis.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 6,
-                    crossAxisSpacing: 6,
-                    mainAxisSpacing: 6,
-                    childAspectRatio: 1,
-                  ),
-                  itemBuilder: (_, i) {
-                    final e = workoutEmojis[i];
-                    final sel = e == selectedEmoji;
-                    return GestureDetector(
-                      onTap: () => setS(() => selectedEmoji = e),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: sel
-                              ? appAccentNotifier.value.withAlpha(40)
-                              : Colors.white10,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: sel
-                                ? appAccentNotifier.value
-                                : Colors.transparent,
-                            width: 2,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(e, style: const TextStyle(fontSize: 22)),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(height: 14),
-              const Text(
+              Text(
                 'Immagine muscolo (opzionale):',
-                style: TextStyle(color: Colors.white70, fontSize: 13),
+                style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 13),
               ),
               const SizedBox(height: 8),
               GestureDetector(
@@ -8262,7 +8402,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.white10,
+                    color: _isDarkCtx(context) ? Colors.white10 : Colors.black12,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: appAccentNotifier.value.withAlpha(80),
@@ -8281,9 +8421,9 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           ),
                         )
                       else
-                        const Icon(
+                        Icon(
                           Icons.image_outlined,
-                          color: Colors.white38,
+                          color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                           size: 48,
                         ),
                       const SizedBox(width: 12),
@@ -8318,9 +8458,9 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Seleziona i gruppi muscolari coinvolti (opzionale):',
-                style: TextStyle(color: Colors.white70, fontSize: 13),
+                style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 13),
               ),
               const SizedBox(height: 10),
               Wrap(
@@ -8358,12 +8498,12 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
           // ── Actions ─────────────────────────────────────────────
           Widget cancelBtn() => TextButton(
             onPressed: () => Navigator.pop(c),
-            child: const Text('Annulla', style: TextStyle(color: Colors.white54)),
+            child: Text('Annulla', style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54)),
           );
 
           Widget backBtn() => TextButton(
             onPressed: () => setS(() => wizardStep--),
-            child: const Text('‹ Indietro', style: TextStyle(color: Colors.white54)),
+            child: Text('‹ Indietro', style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54)),
           );
 
           Widget nextBtn() => TextButton(
@@ -8388,7 +8528,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
               setState(() {
                 _days.add(
                   WorkoutDay(
-                    dayName: '$selectedEmoji $name',
+                    dayName: name,
                     bodyParts: List.from(selectedParts),
                     muscleImage: selectedMuscleImage,
                     exercises: [],
@@ -8407,14 +8547,14 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
           );
 
           return AlertDialog(
-            backgroundColor: const Color(0xFF1C1C1E),
+            backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   stepTitles[wizardStep],
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                 ),
                 const SizedBox(height: 8),
                 stepIndicator(),
@@ -8442,10 +8582,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     final ok = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         title: Text(
           AppL.deleteDay,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         actions: [
           TextButton(
@@ -8496,7 +8636,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     final accent = appAccentNotifier.value;
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -8521,7 +8661,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                 ),
                 const Spacer(),
                 IconButton(
-                  icon: const Icon(Icons.close, color: Colors.white38),
+                  icon: Icon(Icons.close, color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
                   onPressed: () => Navigator.pop(c),
                 ),
               ],
@@ -8530,7 +8670,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
               AppL.lang == 'en'
                   ? 'Load a pre-built plan as a starting point. You can edit it afterwards.'
                   : 'Carica una scheda pre-impostata come punto di partenza. Puoi modificarla dopo il caricamento.',
-              style: const TextStyle(color: Colors.white38, fontSize: 12),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
             ),
             const SizedBox(height: 16),
             ...kAllWorkoutTemplates.map(
@@ -8557,19 +8697,19 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   localizeMixedLabel(t['name'] as String),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
                 subtitle: Text(
                   t['desc'] as String,
-                  style: const TextStyle(color: Colors.white38, fontSize: 12),
+                  style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
                 ),
-                trailing: const Icon(
+                trailing: Icon(
                   Icons.arrow_forward_ios,
                   size: 14,
-                  color: Colors.white24,
+                  color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                 ),
                 onTap: () {
                   Navigator.pop(c);
@@ -8589,24 +8729,24 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     showDialog(
       context: context,
       builder: (c) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Text(
           '"${localizeMixedLabel(template['name'] as String)}"?',
-          style: const TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontSize: 16),
         ),
         content: Text(
           AppL.lang == 'en'
               ? 'This will add ${_templateDays(template).length} sessions to your schedule. Existing sessions will be kept.'
               : 'Verranno aggiunte ${_templateDays(template).length} sessioni alla scheda. Le sessioni esistenti verranno mantenute.',
-          style: const TextStyle(color: Colors.white54, fontSize: 14),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 14),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(c),
             child: Text(
               AppL.cancel,
-              style: const TextStyle(color: Colors.white38),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
             ),
           ),
           ElevatedButton(
@@ -8689,7 +8829,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -8732,7 +8872,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                       height: 4,
                       margin: const EdgeInsets.only(bottom: 16),
                       decoration: BoxDecoration(
-                        color: Colors.white24,
+                        color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -8750,15 +8890,15 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   // — Nome esercizio
                   TextField(
                     controller: nameCtrl,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                     decoration: InputDecoration(
                       labelText: AppL.exerciseName,
-                      labelStyle: const TextStyle(color: Colors.white54),
+                      labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                       suffixIcon: nameCtrl.text.isNotEmpty
                           ? IconButton(
-                              icon: const Icon(
+                              icon: Icon(
                                 Icons.clear,
-                                color: Colors.white38,
+                                color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                               ),
                               onPressed: () {
                                 nameCtrl.clear();
@@ -8796,7 +8936,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         physics: const ClampingScrollPhysics(),
                         itemCount: suggestions.length,
                         separatorBuilder: (_, __) =>
-                            const Divider(color: Colors.white10, height: 1),
+                            Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 1),
                         itemBuilder: (_, i) {
                           final ex = suggestions[i];
                           return ListTile(
@@ -8835,8 +8975,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                                   ),
                             title: Text(
                               ex.name,
-                              style: const TextStyle(
-                                color: Colors.white,
+                              style: TextStyle(
+                                color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                                 fontSize: 13,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -8847,8 +8987,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                                         'Muscolatura principale coinvolta'
                                 ? Text(
                                     translateMuscle(ex.primaryMuscle),
-                                    style: const TextStyle(
-                                      color: Colors.white38,
+                                    style: TextStyle(
+                                      color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                       fontSize: 11,
                                     ),
                                     maxLines: 1,
@@ -8913,8 +9053,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         padding: const EdgeInsets.only(top: 6),
                         child: Text(
                           '💪 ${translateMuscle(selectedExInfo!.primaryMuscle)}',
-                          style: const TextStyle(
-                            color: Colors.white54,
+                          style: TextStyle(
+                            color: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
                             fontSize: 12,
                           ),
                         ),
@@ -8929,10 +9069,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         child: TextField(
                           controller: setsCtrl,
                           keyboardType: TextInputType.number,
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                           decoration: InputDecoration(
                             labelText: AppL.sets,
-                            labelStyle: const TextStyle(color: Colors.white54),
+                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                             filled: true,
                             fillColor: Colors.black26,
                             border: OutlineInputBorder(
@@ -8948,10 +9088,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         child: TextField(
                           controller: recoveryCtrl,
                           keyboardType: TextInputType.number,
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                           decoration: InputDecoration(
                             labelText: AppL.recovery,
-                            labelStyle: const TextStyle(color: Colors.white54),
+                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                             filled: true,
                             fillColor: Colors.black26,
                             border: OutlineInputBorder(
@@ -8966,10 +9106,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         child: TextField(
                           controller: pausaCtrl,
                           keyboardType: TextInputType.number,
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                           decoration: InputDecoration(
                             labelText: AppL.pauseSec,
-                            labelStyle: const TextStyle(color: Colors.white54),
+                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                             filled: true,
                             fillColor: Colors.black26,
                             border: OutlineInputBorder(
@@ -8987,7 +9127,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   // — Reps per serie
                   Text(
                     AppL.repsPerSet,
-                    style: const TextStyle(color: Colors.white54, fontSize: 12),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
                   ),
                   const SizedBox(height: 6),
                   Wrap(
@@ -9001,14 +9141,14 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           controller: repsCtrls[i],
                           keyboardType: TextInputType.number,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                             fontSize: 13,
                           ),
                           decoration: InputDecoration(
                             labelText: 'S${i + 1}',
-                            labelStyle: const TextStyle(
-                              color: Colors.white38,
+                            labelStyle: TextStyle(
+                              color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                               fontSize: 11,
                             ),
                             filled: true,
@@ -9032,10 +9172,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   TextField(
                     controller: noteCtrl,
                     maxLines: 3,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                     decoration: InputDecoration(
                       labelText: AppL.notes,
-                      labelStyle: const TextStyle(color: Colors.white54),
+                      labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                       filled: true,
                       fillColor: Colors.black26,
                       border: OutlineInputBorder(
@@ -9050,8 +9190,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   // — Superserie / Circuito
                   Text(
                     '🔗  ${AppL.circuit}',
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                     ),
@@ -9059,7 +9199,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   const SizedBox(height: 4),
                   Text(
                     AppL.circuitHint,
-                    style: const TextStyle(color: Colors.white38, fontSize: 11),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 11),
                   ),
                   const SizedBox(height: 8),
                   Row(
@@ -9155,7 +9295,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
@@ -9202,19 +9342,19 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     height: 4,
                     margin: const EdgeInsets.only(bottom: 12),
                     decoration: BoxDecoration(
-                      color: Colors.white24,
+                      color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
                 ),
                 TextField(
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                   decoration: InputDecoration(
                     hintText: AppL.lang == 'en'
                         ? 'Search exercise...'
                         : 'Cerca esercizio...',
-                    hintStyle: const TextStyle(color: Colors.white38),
-                    prefixIcon: const Icon(Icons.search, color: Colors.white38),
+                    hintStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
+                    prefixIcon: Icon(Icons.search, color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
                     filled: true,
                     fillColor: Colors.white10,
                     border: OutlineInputBorder(
@@ -9271,7 +9411,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white10,
+                            color: _isDarkCtx(context) ? Colors.white10 : Colors.grey.shade100,
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Column(
@@ -9310,8 +9450,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                                 padding: const EdgeInsets.all(6),
                                 child: Text(
                                   ex.name,
-                                  style: const TextStyle(
-                                    color: Colors.white,
+                                  style: TextStyle(
+                                    color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                                     fontSize: 11,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -9394,18 +9534,18 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         title: Text(
           AppL.renameSession,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         content: TextField(
           controller: ctrl,
           autofocus: true,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
           decoration: InputDecoration(
             labelText: AppL.sessionName,
-            labelStyle: const TextStyle(color: Colors.white54),
+            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
             filled: true,
             fillColor: Colors.black26,
             border: OutlineInputBorder(
@@ -9460,7 +9600,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -9503,7 +9643,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                       height: 4,
                       margin: const EdgeInsets.only(bottom: 16),
                       decoration: BoxDecoration(
-                        color: Colors.white24,
+                        color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
@@ -9519,10 +9659,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   const SizedBox(height: 16),
                   TextField(
                     controller: nameCtrl,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                     decoration: InputDecoration(
                       labelText: AppL.exerciseName,
-                      labelStyle: const TextStyle(color: Colors.white54),
+                      labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                       filled: true,
                       fillColor: Colors.black26,
                       border: OutlineInputBorder(
@@ -9554,10 +9694,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         child: TextField(
                           controller: setsCtrl,
                           keyboardType: TextInputType.number,
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                           decoration: InputDecoration(
                             labelText: AppL.sets,
-                            labelStyle: const TextStyle(color: Colors.white54),
+                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                             filled: true,
                             fillColor: Colors.black26,
                             border: OutlineInputBorder(
@@ -9573,10 +9713,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         child: TextField(
                           controller: recoveryCtrl,
                           keyboardType: TextInputType.number,
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                           decoration: InputDecoration(
                             labelText: AppL.recovery,
-                            labelStyle: const TextStyle(color: Colors.white54),
+                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                             filled: true,
                             fillColor: Colors.black26,
                             border: OutlineInputBorder(
@@ -9591,10 +9731,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         child: TextField(
                           controller: pausaCtrl,
                           keyboardType: TextInputType.number,
-                          style: const TextStyle(color: Colors.white),
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                           decoration: InputDecoration(
                             labelText: AppL.pauseSec,
-                            labelStyle: const TextStyle(color: Colors.white54),
+                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                             filled: true,
                             fillColor: Colors.black26,
                             border: OutlineInputBorder(
@@ -9609,7 +9749,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   const SizedBox(height: 12),
                   Text(
                     AppL.repsPerSet,
-                    style: const TextStyle(color: Colors.white54, fontSize: 12),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
                   ),
                   const SizedBox(height: 6),
                   Wrap(
@@ -9623,14 +9763,14 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           controller: repsCtrls[i],
                           keyboardType: TextInputType.number,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                             fontSize: 13,
                           ),
                           decoration: InputDecoration(
                             labelText: 'S${i + 1}',
-                            labelStyle: const TextStyle(
-                              color: Colors.white38,
+                            labelStyle: TextStyle(
+                              color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                               fontSize: 11,
                             ),
                             filled: true,
@@ -9651,10 +9791,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   TextField(
                     controller: noteCtrl,
                     maxLines: 3,
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                     decoration: InputDecoration(
                       labelText: AppL.notes,
-                      labelStyle: const TextStyle(color: Colors.white54),
+                      labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                       filled: true,
                       fillColor: Colors.black26,
                       border: OutlineInputBorder(
@@ -9718,11 +9858,11 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
   Widget build(BuildContext context) {
     final accent = appAccentNotifier.value;
     return Scaffold(
-      backgroundColor: const Color(0xFF0A0A0A),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0A0A0A) : Colors.white,
       appBar: AppBar(
         title: Text(AppL.mySchedule),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white),
+          icon: Icon(Icons.arrow_back_ios_new, color: _isDarkCtx(context) ? Colors.white : Colors.black87),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
@@ -9744,7 +9884,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
           FloatingActionButton.extended(
             heroTag: 'templates_fab',
             onPressed: _mostraTemplateDialog,
-            backgroundColor: const Color(0xFF2C2C2E),
+            backgroundColor: _isDarkCtx(context) ? const Color(0xFF2C2C2E) : const Color(0xFFF2F2F7),
             foregroundColor: Colors.amber,
             icon: const Icon(Icons.auto_awesome_rounded),
             label: Text(AppL.lang == 'en' ? 'Templates' : 'Template'),
@@ -9775,7 +9915,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   const SizedBox(height: 16),
                   Text(
                     AppL.noScheduleYet,
-                    style: const TextStyle(color: Colors.white38, fontSize: 16),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 16),
                   ),
                   const SizedBox(height: 24),
                   // Speech bubble hint
@@ -9833,7 +9973,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                 final day = _days[dayIdx];
                 final dayCard = Card(
                   key: ObjectKey(day),
-                  color: const Color(0xFF1C1C1E),
+                  color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
                   margin: const EdgeInsets.only(bottom: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
@@ -9863,21 +10003,21 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                                 .join(' '),
                             style: const TextStyle(fontSize: 22),
                           )
-                        : const Icon(
+                        : Icon(
                             Icons.fitness_center,
-                            color: Colors.white38,
+                            color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                           ),
                     title: Text(
                       localizeMixedLabel(day.dayName),
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     subtitle: Text(
                       '${day.exercises.length} ${AppL.exercises.toLowerCase()}',
-                      style: const TextStyle(
-                        color: Colors.white38,
+                      style: TextStyle(
+                        color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                         fontSize: 12,
                       ),
                     ),
@@ -9885,9 +10025,9 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.edit_rounded,
-                            color: Colors.white38,
+                            color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                             size: 20,
                           ),
                           onPressed: () => _rinominaGiorno(dayIdx),
@@ -9908,7 +10048,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                             size: 20,
                           ),
                         ),
-                        const Icon(Icons.expand_more, color: Colors.white38),
+                        Icon(Icons.expand_more, color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
                       ],
                     ),
                     children: [
@@ -9953,8 +10093,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                                   ),
                             title: Text(
                               localizedExerciseName(ex.name),
-                              style: const TextStyle(
-                                color: Colors.white,
+                              style: TextStyle(
+                                color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                                 fontSize: 14,
                               ),
                             ),
@@ -9965,8 +10105,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                                   children: [
                                     Text(
                                       '${ex.targetSets}x${ex.repsList.isNotEmpty ? ex.repsList.first : "?"} | ${ex.recoveryTime}s',
-                                      style: const TextStyle(
-                                        color: Colors.white38,
+                                      style: TextStyle(
+                                        color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                         fontSize: 12,
                                       ),
                                     ),
@@ -9992,9 +10132,9 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 IconButton(
-                                  icon: const Icon(
+                                  icon: Icon(
                                     Icons.edit_rounded,
-                                    color: Colors.white38,
+                                    color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                     size: 18,
                                   ),
                                   onPressed: () =>
@@ -10068,6 +10208,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
   }
 }
 
+
+
 // --- MOTORE ALLENAMENTO ---
 class WorkoutEngine extends StatefulWidget {
   final WorkoutDay day;
@@ -10140,11 +10282,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   NativeAd? _confirmPopupNativeAd;
   NativeAd? _timerRestNativeAd;
   NativeAd? _recapWorkoutNativeAd;
+  NativeAd? _chooseExerciseNativeAd;
   bool _isInlineWorkoutNativeAdLoaded = false;
   bool _isStartWorkoutNativeAdLoaded = false;
   bool _isConfirmPopupNativeAdLoaded = false;
   bool _isTimerRestNativeAdLoaded = false;
   bool _isRecapWorkoutNativeAdLoaded = false;
+  bool _isChooseExerciseNativeAdLoaded = false;
 
   @override
   void initState() {
@@ -10191,13 +10335,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       context: context,
       barrierDismissible: false,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF121620),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF121620) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('💪 Come funziona',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-        content: const Text(
+        title: Text('💪 Come funziona',
+            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontWeight: FontWeight.bold)),
+        content: Text(
           'Prima esegui la serie fisicamente.\n\nPoi inserisci il peso e le ripetizioni e premi CONFERMA SERIE per registrare il risultato.',
-          style: TextStyle(color: Colors.white70, height: 1.5),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, height: 1.5),
         ),
         actions: [
           TextButton(
@@ -10235,6 +10379,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         'confirm' => _confirmPopupNativeAd,
         'timer' => _timerRestNativeAd,
         'recap' => _recapWorkoutNativeAd,
+        'choose' => _chooseExerciseNativeAd,
         _ => null,
       };
       current?.dispose();
@@ -10270,6 +10415,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   _recapWorkoutNativeAd = loadedAd as NativeAd;
                   _isRecapWorkoutNativeAdLoaded = true;
                   break;
+                case 'choose':
+                  _chooseExerciseNativeAd = loadedAd as NativeAd;
+                  _isChooseExerciseNativeAdLoaded = true;
+                  break;
               }
             });
           },
@@ -10298,6 +10447,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   _recapWorkoutNativeAd = null;
                   _isRecapWorkoutNativeAdLoaded = false;
                   break;
+                case 'choose':
+                  _chooseExerciseNativeAd = null;
+                  _isChooseExerciseNativeAdLoaded = false;
+                  break;
               }
             });
             debugPrint('$placement workout native ad failed to load: $error');
@@ -10320,6 +10473,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         case 'recap':
           _recapWorkoutNativeAd = ad;
           break;
+        case 'choose':
+          _chooseExerciseNativeAd = ad;
+          break;
       }
       ad.load();
     }
@@ -10329,6 +10485,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     loadAd(adUnitId: kConfirmPopupNativeAdUnitId, placement: 'confirm');
     loadAd(adUnitId: kTimerRestNativeAdUnitId, placement: 'timer');
     loadAd(adUnitId: kWorkoutRecapNativeAdUnitId, placement: 'recap');
+    loadAd(adUnitId: kChooseExerciseNativeAdUnitId, placement: 'choose');
   }
 
   /// Salva lo stato corrente dell'allenamento in SharedPreferences
@@ -10462,21 +10619,21 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     return await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            backgroundColor: const Color(0xFF1C1C1E),
+            backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
             title: Text(
               AppL.quitWorkout,
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
             ),
             content: Text(
               AppL.quitWorkoutMsg,
-              style: const TextStyle(color: Colors.white70),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
                 child: Text(
                   AppL.cancel.toUpperCase(),
-                  style: const TextStyle(color: Colors.white38),
+                  style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
                 ),
               ),
               // Nel metodo _mostraDialogConfermaUscita
@@ -10599,6 +10756,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     _confirmPopupNativeAd?.dispose();
     _timerRestNativeAd?.dispose();
     _recapWorkoutNativeAd?.dispose();
+    _chooseExerciseNativeAd?.dispose();
     wC.dispose();
     rC.dispose();
     for (final ctrl in _noteControllers.values) {
@@ -10799,7 +10957,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     showDialog(
       context: ctx,
       builder: (c) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
           AppL.workoutSummary,
@@ -10828,8 +10986,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   children: [
                     Text(
                       name.toUpperCase(),
-                      style: const TextStyle(
-                        color: Colors.white54,
+                      style: TextStyle(
+                        color: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
                         fontSize: 11,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.2,
@@ -10877,8 +11035,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                               width: 28,
                               child: Text(
                                 'S${si + 1}',
-                                style: const TextStyle(
-                                  color: Colors.white38,
+                                style: TextStyle(
+                                  color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                   fontSize: 12,
                                 ),
                               ),
@@ -10895,7 +11053,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         ),
                       );
                     }),
-                    const Divider(color: Colors.white12, height: 20),
+                    Divider(color: _isDarkCtx(context) ? Colors.white12 : Colors.black12, height: 20),
                   ],
                 ),
               );
@@ -10920,9 +11078,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       context: context,
       barrierDismissible: false,
       builder: (c) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: const Column(
+        title: Column(
           children: [
             Icon(Icons.emoji_events, color: Colors.amber, size: 52),
             SizedBox(height: 8),
@@ -10930,16 +11088,16 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               'Demo completata! 💪',
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: Colors.white,
+                color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
             ),
           ],
         ),
-        content: const Text(
+        content: Text(
           'Hai appena simulato un vero allenamento! Ora sai come funziona l\'app: registra pesi, reps, e il timer parte automaticamente.\n\nNessun dato è stato salvato.',
-          style: TextStyle(color: Colors.white70, fontSize: 14),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 14),
           textAlign: TextAlign.center,
         ),
         actionsAlignment: MainAxisAlignment.center,
@@ -11005,7 +11163,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           perfLabel = AppL.plateau;
         }
         return AlertDialog(
-          backgroundColor: const Color(0xFF1C1C1E),
+          backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -11037,7 +11195,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Divider(color: Colors.white24),
+                Divider(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
                 const SizedBox(height: 8),
                 _recapRow(
                   Icons.fitness_center,
@@ -11046,18 +11204,18 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                 ),
                 _recapRow(Icons.repeat, AppL.totalSeries, '$totalSeries'),
                 const SizedBox(height: 8),
-                const Divider(color: Colors.white24),
+                Divider(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
                 const SizedBox(height: 8),
                 // Streak progress section
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF252527),
+                    color: _isDarkCtx(context) ? const Color(0xFF252527) : Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: _currentStreak > 0
                           ? Colors.orange.withAlpha(80)
-                          : Colors.white12,
+                          : (_isDarkCtx(context) ? Colors.white12 : Colors.black12),
                     ),
                   ),
                   child: Column(
@@ -11072,8 +11230,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                               AppL.lang == 'en'
                                   ? 'Session unlocked! $_streakDoneCount/$_streakTotalCount this microcycle'
                                   : 'Sessione sbloccata! $_streakDoneCount/$_streakTotalCount questo microciclo',
-                              style: const TextStyle(
-                                color: Colors.white,
+                              style: TextStyle(
+                                color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 12,
                               ),
@@ -11116,7 +11274,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                             : null,
                                         color: done
                                             ? null
-                                            : const Color(0xFF1C1C1E),
+                                            : (_isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.grey.shade200),
                                         boxShadow: done
                                             ? [
                                                 BoxShadow(
@@ -11165,8 +11323,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                               ? 'Complete ${_streakTotalCount - _streakDoneCount} more session${_streakTotalCount - _streakDoneCount == 1 ? '' : 's'} to keep your streak!'
                               : 'Completa ancora ${_streakTotalCount - _streakDoneCount} session${_streakTotalCount - _streakDoneCount == 1 ? 'e' : 'i'} per non perdere i tuoi progressi!',
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.white60,
+                          style: TextStyle(
+                            color: _isDarkCtx(context) ? Colors.white60 : Colors.black54,
                             fontSize: 11,
                           ),
                         ),
@@ -11214,7 +11372,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     width: double.infinity,
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: const Color(0xFF252527),
+                      color: _isDarkCtx(c) ? const Color(0xFF252527) : Colors.grey.shade100,
                       borderRadius: BorderRadius.circular(14),
                       border: Border.all(
                         color: Theme.of(c).colorScheme.primary.withAlpha(70),
@@ -11238,8 +11396,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           AppL.lang == 'en'
                               ? 'Donate at least €1 every month or the web app will stop working. These funds are used to publish GymApp on the Apple App Store.'
                               : 'Dona almeno 1€ ogni mese oppure la web app smettera di funzionare. Questi fondi vengono usati per pubblicare GymApp su Apple App Store.',
-                          style: const TextStyle(
-                            color: Colors.white70,
+                          style: TextStyle(
+                            color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
                             fontSize: 12,
                             height: 1.35,
                           ),
@@ -11287,8 +11445,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           AppL.lang == 'en'
                               ? 'Automatic verification is not possible here without a server: confirmation is stored locally on this device.'
                               : 'Senza server la verifica automatica non e possibile: la conferma viene salvata localmente su questo dispositivo.',
-                          style: const TextStyle(
-                            color: Colors.white38,
+                          style: TextStyle(
+                            color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                             fontSize: 11,
                             height: 1.3,
                           ),
@@ -11359,17 +11517,24 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         : info != null
         ? exerciseAnimationAssetPath(info.gifSlug)
         : null;
-    return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Container(
+    return Column(
+      children: [
+        Expanded(
+          child: LayoutBuilder(
+            builder: (ctx, constraints) {
+              return SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight - 16,
+                  ),
+                  child: Center(
+                    child: Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
-              color: const Color(0xFF1C1C1E),
+              color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.white10),
+              border: Border.all(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12),
             ),
             child: Column(
               children: [
@@ -11392,8 +11557,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                 Text(
                   localizedExerciseName(ex.name),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -11405,9 +11570,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       onPressed: exI > 0
                           ? () => _cambiaEsercizioMethod(exI - 1)
                           : null,
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.chevron_left,
-                        color: Colors.white70,
+                        color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
                       ),
                     ),
                     Expanded(
@@ -11418,20 +11583,20 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                 gifPath,
                                 height: 220,
                                 fit: BoxFit.contain,
-                                errorBuilder: (_, __, ___) => const Icon(
+                                errorBuilder: (_, __, ___) => Icon(
                                   Icons.fitness_center,
                                   size: 72,
-                                  color: Colors.white24,
+                                  color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                                 ),
                               ),
                             )
-                          : const SizedBox(
+                          : SizedBox(
                               height: 220,
                               child: Center(
                                 child: Icon(
                                   Icons.fitness_center,
                                   size: 72,
-                                  color: Colors.white24,
+                                  color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                                 ),
                               ),
                             ),
@@ -11440,9 +11605,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       onPressed: exI < widget.day.exercises.length - 1
                           ? () => _cambiaEsercizioMethod(exI + 1)
                           : null,
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.chevron_right,
-                        color: Colors.white70,
+                        color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
                       ),
                     ),
                   ],
@@ -11453,9 +11618,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     width: double.infinity,
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: Colors.white.withAlpha(6),
+                      color: _isDarkCtx(context) ? Colors.white.withAlpha(6) : Colors.black87.withAlpha(6),
                       borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: Colors.white10),
+                      border: Border.all(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -11472,8 +11637,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         const SizedBox(height: 6),
                         Text(
                           '${_formatWeightLabel(lastW)} x $lastR reps',
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                             fontSize: 18,
                             fontWeight: FontWeight.w700,
                           ),
@@ -11538,8 +11703,14 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               ],
             ),
           ),
-        ],
-      ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+        _buildChooseExerciseNativeAd(),
+      ],
     );
   }
 
@@ -11576,6 +11747,25 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _startWorkoutNativeAd!),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildChooseExerciseNativeAd() {
+    if (kIsWeb ||
+        !_isChooseExerciseNativeAdLoaded ||
+        _chooseExerciseNativeAd == null) {
+      return const SizedBox.shrink();
+    }
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
+      child: SizedBox(
+        width: double.infinity,
+        height: 86,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: AdWidget(ad: _chooseExerciseNativeAd!),
         ),
       ),
     );
@@ -11643,13 +11833,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         Icon(icon, color: Colors.amber, size: 20),
         const SizedBox(width: 12),
         Flexible(
-          child: Text(label, style: const TextStyle(color: Colors.white60)),
+          child: Text(label, style: TextStyle(color: _isDarkCtx(context) ? Colors.white60 : Colors.black54)),
         ),
         const Spacer(),
         Text(
           value,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
@@ -11914,7 +12104,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF1C1C1E),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -11927,15 +12117,15 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.white24,
+                color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
             const SizedBox(height: 16),
             Text(
               currentEx.name.toUpperCase(),
-              style: const TextStyle(
-                color: Colors.white54,
+              style: TextStyle(
+                color: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
                 fontSize: 12,
                 letterSpacing: 1,
               ),
@@ -11943,7 +12133,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             const SizedBox(height: 8),
             Text(
               "${AppL.sets} $setN",
-              style: const TextStyle(color: Colors.white38, fontSize: 13),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 13),
             ),
             const SizedBox(height: 16),
             Row(
@@ -11968,8 +12158,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       Navigator.pop(ctx);
                     },
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: Colors.white54,
-                      side: const BorderSide(color: Colors.white24),
+                      foregroundColor: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
+                      side: BorderSide(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
@@ -12008,6 +12198,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       ),
     );
   }
+
 
   void _showNewRecordOverlay() {
     HapticFeedback.heavyImpact();
@@ -12229,6 +12420,12 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           );
           final sData = await getStreakData();
           scheduleStreakReminder(AppL.lang, force: true); // reset reminder: prossimo in 48h
+          // Aggiorna widget home screen
+          if (!kIsWeb) {
+            try {
+              await _gymFileChannel.invokeMethod('updateWidget');
+            } catch (_) {}
+          }
           if (mounted)
             setState(() {
               _currentStreak= streak;
@@ -12257,9 +12454,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             _isNewRecord = false;
           });
           _setDrumValues(nextIndex, 1);
-          _triggerTimer(
+          _avviaTimerSeNonAttivo(
             pause,
-            force: true,
           ); // fine gruppo superset: pausa inter-esercizio
         } else {}
       }
@@ -12351,10 +12547,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           _isNewRecord = false;
         });
         _setDrumValues(nextIndex, 1);
-        _triggerTimer(
+        _avviaTimerSeNonAttivo(
           pauseTime,
-          force: true,
-        ); // fine esercizio: sempre pausa inter-esercizio
+        ); // fine esercizio: pausa inter-esercizio (non resetta se già avviato al tap)
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -12416,7 +12611,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             Text(
               AppL.exerciseCompleteMsg,
               textAlign: TextAlign.center,
-              style: const TextStyle(color: Colors.white38, fontSize: 12),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
             ),
           ],
         ),
@@ -12508,7 +12703,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             children: [
               // FRECCIA SINISTRA
               IconButton(
-                icon: const Icon(Icons.chevron_left, color: Colors.white),
+                icon: Icon(Icons.chevron_left, color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                 onPressed: exI <= 0 ? null : () => _cambiaEsercizio(exI - 1),
               ),
 
@@ -12521,8 +12716,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         height: 1.1,
@@ -12549,7 +12744,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                 ),
               ),
               IconButton(
-                icon: const Icon(Icons.chevron_right, color: Colors.white),
+                icon: Icon(Icons.chevron_right, color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                 onPressed: exI >= widget.day.exercises.length - 1
                     ? null
                     : () => _cambiaEsercizio(exI + 1),
@@ -12557,7 +12752,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             ],
           ),
           leading: IconButton(
-            icon: const Icon(Icons.close, color: Colors.white),
+            icon: Icon(Icons.close, color: _isDarkCtx(context) ? Colors.white : Colors.black87),
             onPressed: () async {
               bool conferma = await _mostraDialogConfermaUscita();
               if (conferma) {
@@ -12602,16 +12797,16 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            const Icon(
+                            Icon(
                               Icons.link,
-                              color: Colors.white,
+                              color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                               size: 14,
                             ),
                             const SizedBox(width: 4),
                             Text(
                               'SUPERSERIE ${ex.supersetGroup}',
-                              style: const TextStyle(
-                                color: Colors.white,
+                              style: TextStyle(
+                                color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 11,
                               ),
@@ -12688,10 +12883,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           ) +
                           16,
                     ),
-                    decoration: const BoxDecoration(
-                      color: Color(0xFF1C1C1E),
+                    decoration: BoxDecoration(
+                      color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
                       border: Border(
-                        top: BorderSide(color: Colors.white12, width: 1),
+                        top: BorderSide(color: _isDarkCtx(context) ? Colors.white12 : Colors.black12, width: 1),
                       ),
                     ),
                     child: SizedBox(
@@ -12751,9 +12946,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
       decoration: BoxDecoration(
-        color: const Color(0xFF1C1C1E),
+        color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.grey.shade50,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.white10),
+        border: Border.all(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -12762,9 +12957,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           if (lastW > 0)
             Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.history_rounded,
-                  color: Colors.white38,
+                  color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                   size: 14,
                 ),
                 const SizedBox(width: 6),
@@ -12773,7 +12968,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     '${AppL.lastTime}: ${_formatWeightLabel(lastW)} × $lastR reps',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: const TextStyle(color: Colors.white60, fontSize: 13),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white60 : Colors.black54, fontSize: 13),
                   ),
                 ),
                 if (suggerisciAumento && _showWeightSuggestion) ...[
@@ -12812,7 +13007,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               ],
             ),
           if (ex.notePT.isNotEmpty) ...[
-            if (lastW > 0) const Divider(color: Colors.white10, height: 10),
+            if (lastW > 0) Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 10),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -12841,16 +13036,15 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               ],
             ),
           ],
-          const Divider(color: Colors.white10, height: 10),
+          Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 10),
           TextField(
-            style: const TextStyle(fontSize: 12, color: Colors.white54),
             decoration: InputDecoration(
               hintText: AppL.myNotes,
-              hintStyle: const TextStyle(color: Colors.white24, fontSize: 12),
-              prefixIcon: const Icon(
+              hintStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26, fontSize: 12),
+              prefixIcon: Icon(
                 Icons.edit_note,
                 size: 16,
-                color: Colors.white24,
+                color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
               ),
               border: InputBorder.none,
               isDense: true,
@@ -12887,7 +13081,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF0E0E10),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
       isScrollControlled: true,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
@@ -12908,7 +13102,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   width: 36,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.white12,
+                    color: _isDarkCtx(context) ? Colors.white12 : Colors.black12,
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
@@ -12945,8 +13139,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               const SizedBox(height: 4),
               Text(
                 AppL.lang == 'en' ? info.nameEn : info.name,
-                style: const TextStyle(
-                  color: Colors.white38,
+                style: TextStyle(
+                  color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                   fontSize: 12,
                   fontStyle: FontStyle.italic,
                 ),
@@ -12989,9 +13183,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               Container(
                 padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: Colors.white.withAlpha(7),
+                  color: _isDarkCtx(context) ? Colors.white.withAlpha(7) : Colors.black87.withAlpha(7),
                   borderRadius: BorderRadius.circular(14),
-                  border: Border.all(color: Colors.white10),
+                  border: Border.all(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -13013,8 +13207,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           const SizedBox(height: 3),
                           Text(
                             translateMuscle(info.primaryMuscle),
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                               fontSize: 13,
                             ),
                           ),
@@ -13028,7 +13222,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               Container(
                 padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF1C1C1E),
+                  color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
                   borderRadius: BorderRadius.circular(14),
                 ),
                 child: Column(
@@ -13046,8 +13240,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     const SizedBox(height: 8),
                     Text(
                       translateExerciseText(info.execution),
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                         fontSize: 13,
                         height: 1.5,
                       ),
@@ -13077,8 +13271,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     const SizedBox(height: 8),
                     Text(
                       translateExerciseText(info.tips),
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                         fontSize: 13,
                         height: 1.5,
                       ),
@@ -13090,12 +13284,12 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white.withAlpha(5),
+                  color: _isDarkCtx(context) ? Colors.white.withAlpha(5) : Colors.black87.withAlpha(5),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   AppL.notInCatalogShort,
-                  style: const TextStyle(color: Colors.white38, fontSize: 13),
+                  style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 13),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -13145,7 +13339,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         : 0.0;
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: _isDarkCtx(context) ? Colors.black : Colors.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -13153,7 +13347,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             Text(
               'REST',
               style: TextStyle(
-                color: Colors.white.withAlpha(80),
+                color: _isDarkCtx(context) ? Colors.white.withAlpha(80) : Colors.black54,
                 fontSize: 12,
                 letterSpacing: 10,
                 fontWeight: FontWeight.w600,
@@ -13189,7 +13383,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           style: TextStyle(
                             fontSize: ringSize * 0.38,
                             fontWeight: FontWeight.w100,
-                            color: Colors.white,
+                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                           ),
                         ),
                       ],
@@ -13206,6 +13400,55 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    // Navigazione esercizio durante riposo inter-esercizio
+                    if (widget.day.exercises.length > 1)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            icon: Icon(
+                              Icons.chevron_left_rounded,
+                              color: _isDarkCtx(context) ? Colors.white.withAlpha(80) : Colors.black54,
+                              size: 34,
+                            ),
+                            onPressed: () {
+                              final total = widget.day.exercises.length;
+                              int c = (exI - 1 + total) % total;
+                              for (int i = 0; i < total - 1; i++) {
+                                if (!eserciziCompletati.contains(widget.day.exercises[c].name)) break;
+                                c = (c - 1 + total) % total;
+                              }
+                              if (c != exI) _cambiaEsercizioMethod(c);
+                            },
+                          ),
+                          Text(
+                            AppL.changeExercise,
+                            style: TextStyle(
+                              color: _isDarkCtx(context) ? Colors.white.withAlpha(60) : Colors.black45,
+                              fontSize: 10,
+                              letterSpacing: 2,
+                            ),
+                          ),
+                          IconButton(
+                            padding: EdgeInsets.zero,
+                            icon: Icon(
+                              Icons.chevron_right_rounded,
+                              color: _isDarkCtx(context) ? Colors.white.withAlpha(80) : Colors.black54,
+                              size: 34,
+                            ),
+                            onPressed: () {
+                              final total = widget.day.exercises.length;
+                              int c = (exI + 1) % total;
+                              for (int i = 0; i < total - 1; i++) {
+                                if (!eserciziCompletati.contains(widget.day.exercises[c].name)) break;
+                                c = (c + 1) % total;
+                              }
+                              if (c != exI) _cambiaEsercizioMethod(c);
+                            },
+                          ),
+                        ],
+                      ),
                     // Card prossimo esercizio
                     GestureDetector(
                       onTap: _prossimoNome.isNotEmpty
@@ -13218,12 +13461,12 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         width: double.infinity,
                         padding: const EdgeInsets.fromLTRB(18, 14, 18, 14),
                         decoration: BoxDecoration(
-                          color: Colors.white.withAlpha(8),
+                          color: _isDarkCtx(context) ? Colors.white.withAlpha(8) : Colors.grey.shade100,
                           borderRadius: BorderRadius.circular(16),
                           border: Border.all(
                             color: _prossimoNome.isNotEmpty
                                 ? accent.withAlpha(60)
-                                : Colors.white10,
+                                : (_isDarkCtx(context) ? Colors.white10 : Colors.black12),
                           ),
                         ),
                         child: Column(
@@ -13235,7 +13478,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                 Text(
                                   AppL.nextInfo,
                                   style: TextStyle(
-                                    color: Colors.white.withAlpha(70),
+                                    color: _isDarkCtx(context) ? Colors.white.withAlpha(70) : Colors.black54,
                                     fontSize: 15,
                                     letterSpacing: 4,
                                   ),
@@ -13290,7 +13533,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                           children: [
                                             Icon(
                                               Icons.history_rounded,
-                                              color: Colors.white.withAlpha(70),
+                                              color: _isDarkCtx(context) ? Colors.white.withAlpha(70) : Colors.black45,
                                               size: 15,
                                             ),
                                             const SizedBox(width: 4),
@@ -13300,9 +13543,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                                 overflow: TextOverflow.ellipsis,
                                                 maxLines: 2,
                                                 style: TextStyle(
-                                                  color: Colors.white.withAlpha(
-                                                    160,
-                                                  ),
+                                                  color: _isDarkCtx(context) ? Colors.white.withAlpha(160) : Colors.black87,
                                                   fontSize: 14,
                                                   height: 1.4,
                                                 ),
@@ -13331,15 +13572,15 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           vertical: 16,
                         ),
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.white.withAlpha(40)),
+                          border: Border.all(color: _isDarkCtx(context) ? Colors.white.withAlpha(40) : Colors.black26),
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        child: const Text(
+                        child: Text(
                           'SKIP',
                           style: TextStyle(
                             letterSpacing: 3,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                             fontSize: 16,
                           ),
                         ),
@@ -13468,8 +13709,8 @@ class _AumentaPesoWidgetState extends State<_AumentaPesoWidget>
               const SizedBox(width: 10),
               Text(
                 AppL.increaseWeight,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                   fontWeight: FontWeight.w900,
                   fontSize: 15,
                   letterSpacing: 1.5,
@@ -13781,7 +14022,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                   ),
                   Text(
                     '${widget.dayName} · ${widget.todayLabel}',
-                    style: const TextStyle(color: Colors.white54, fontSize: 12),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
                   ),
                 ],
               ),
@@ -13789,7 +14030,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
           ),
           const SizedBox(height: 14),
           if (_showExercises) ...[
-            const Divider(color: Colors.white12),
+            Divider(color: _isDarkCtx(context) ? Colors.white12 : Colors.black12),
             const SizedBox(height: 8),
             ...widget.exercises.map((ex) {
               final name = ex['exercise'] as String;
@@ -13808,7 +14049,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                     Expanded(
                       child: Text(
                         name,
-                        style: const TextStyle(color: Colors.white70, fontSize: 12),
+                        style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 12),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -13823,7 +14064,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
             const SizedBox(height: 8),
           ],
           if (_showStreak || _showWeeklyBadges || _showSessionProgress) ...[
-            const Divider(color: Colors.white12),
+            Divider(color: _isDarkCtx(context) ? Colors.white12 : Colors.black12),
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -13908,7 +14149,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                     const SizedBox(height: 4),
                     Text(
                       '$doneCount/$total questo microciclo',
-                      style: const TextStyle(color: Colors.white54, fontSize: 9),
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 9),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -13947,7 +14188,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
         children: [
           Text(icon, style: const TextStyle(fontSize: 18)),
           Text(value, style: TextStyle(color: accent, fontWeight: FontWeight.w800, fontSize: 14)),
-          Text(label, style: const TextStyle(color: Colors.white54, fontSize: 10)),
+          Text(label, style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 10)),
         ],
       ),
     );
@@ -13978,8 +14219,8 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
   Widget build(BuildContext context) {
     final accent = widget.accent;
     return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xFF1C1C1E),
+      decoration: BoxDecoration(
+        color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       padding: EdgeInsets.fromLTRB(16, 16, 16, MediaQuery.of(context).viewInsets.bottom + 24),
@@ -13988,12 +14229,12 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
         children: [
           Container(
             width: 40, height: 4,
-            decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)),
+            decoration: BoxDecoration(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26, borderRadius: BorderRadius.circular(2)),
           ),
           const SizedBox(height: 16),
           Text(
             AppL.lang == 'en' ? 'Share workout' : 'Condividi allenamento',
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16),
+            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontWeight: FontWeight.w700, fontSize: 16),
           ),
           const SizedBox(height: 14),
           RepaintBoundary(key: _cardKey, child: _buildCard(accent)),
@@ -14199,7 +14440,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                 if (_showBadges && widget.allSessionNames.isNotEmpty) ...[
                   Text(
                     AppL.lang == 'en' ? 'This microcycle' : 'Questo microciclo',
-                    style: const TextStyle(color: Colors.white38, fontSize: 12),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
                   ),
                   const SizedBox(height: 12),
                   Wrap(
@@ -14236,7 +14477,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                               borderRadius: BorderRadius.circular(8),
                               child: done
                                   ? Image.asset('assets/icon_client.png', width: 36, height: 36,
-                                      errorBuilder: (_, __, ___) => const Icon(Icons.fitness_center, color: Colors.white, size: 32))
+                                      errorBuilder: (_, __, ___) => Icon(Icons.fitness_center, color: _isDarkCtx(context) ? Colors.white : Colors.black87, size: 32))
                                   : ColorFiltered(
                                       colorFilter: const ColorFilter.matrix([
                                         0.2126, 0.7152, 0.0722, 0, 0,
@@ -14245,7 +14486,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                                         0,      0,      0,      0.3, 0,
                                       ]),
                                       child: Image.asset('assets/icon_client.png', width: 36, height: 36,
-                                          errorBuilder: (_, __, ___) => const Icon(Icons.fitness_center, color: Colors.white24, size: 32)),
+                                          errorBuilder: (_, __, ___) => Icon(Icons.fitness_center, color: _isDarkCtx(context) ? Colors.white24 : Colors.black26, size: 32)),
                                     ),
                             ),
                             const SizedBox(height: 2),
@@ -14268,7 +14509,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                     const SizedBox(height: 12),
                     Text(
                       '$doneCount / $total ${AppL.lang == 'en' ? 'sessions done' : 'sessioni completate'}',
-                      style: const TextStyle(color: Colors.white54, fontSize: 12),
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
                     ),
                   ],
                 ],
@@ -14313,8 +14554,8 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xFF1C1C1E),
+      decoration: BoxDecoration(
+        color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       padding: EdgeInsets.fromLTRB(16, 16, 16, MediaQuery.of(context).viewInsets.bottom + 24),
@@ -14323,12 +14564,12 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
         children: [
           Container(
             width: 40, height: 4,
-            decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)),
+            decoration: BoxDecoration(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26, borderRadius: BorderRadius.circular(2)),
           ),
           const SizedBox(height: 16),
           Text(
             AppL.lang == 'en' ? 'Share Streak 🔥' : 'Condividi Streak 🔥',
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16),
+            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontWeight: FontWeight.w700, fontSize: 16),
           ),
           const SizedBox(height: 8),
           // Composer toggles
@@ -14379,15 +14620,15 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: active ? Colors.orange.withAlpha(40) : Colors.white10,
+          color: active ? Colors.orange.withAlpha(40) : (_isDarkCtx(context) ? Colors.white10 : Colors.grey.shade200),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: active ? Colors.orange : Colors.white24),
+          border: Border.all(color: active ? Colors.orange : (_isDarkCtx(context) ? Colors.white24 : Colors.grey.shade400)),
         ),
         child: Text(
           label,
           style: TextStyle(
             fontSize: 12,
-            color: active ? Colors.orange : Colors.white54,
+            color: active ? Colors.orange : (_isDarkCtx(context) ? Colors.white54 : Colors.black54),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -14560,7 +14801,7 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
             )..layout(maxWidth: cardSize - 8 * s);
             valTp.paint(canvas, Offset(cx + (cardSize - valTp.width) / 2, bY + cardSize * 0.42));
             final lblTp = TextPainter(
-              text: TextSpan(text: lbl, style: TextStyle(color: Colors.white54, fontSize: 20 * s)),
+              text: TextSpan(text: lbl, style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 20 * s)),
               textDirection: TextDirection.ltr,
             )..layout(maxWidth: cardSize - 8 * s);
             lblTp.paint(canvas, Offset(cx + (cardSize - lblTp.width) / 2, bY + cardSize * 0.74));
@@ -14632,8 +14873,8 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xFF1C1C1E),
+      decoration: BoxDecoration(
+        color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       padding: EdgeInsets.fromLTRB(16, 16, 16, MediaQuery.of(context).viewInsets.bottom + 24),
@@ -14642,17 +14883,17 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
         children: [
           Container(
             width: 40, height: 4,
-            decoration: BoxDecoration(color: Colors.white24, borderRadius: BorderRadius.circular(2)),
+            decoration: BoxDecoration(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26, borderRadius: BorderRadius.circular(2)),
           ),
           const SizedBox(height: 16),
           Text(
             AppL.lang == 'en' ? 'Share Progress 📊' : 'Condividi Progressi 📊',
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 16),
+            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontWeight: FontWeight.w700, fontSize: 16),
           ),
           const SizedBox(height: 12),
           Text(
             AppL.lang == 'en' ? 'Choose what to include:' : 'Scegli cosa includere:',
-            style: const TextStyle(color: Colors.white54, fontSize: 12),
+            style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
           ),
           const SizedBox(height: 10),
           Wrap(
@@ -14928,17 +15169,17 @@ class _DrumPickersState extends State<_DrumPickers>
         backgroundColor: const Color(0xFF1A1A1E),
         title: Text(
           isKg ? AppL.insertKg : AppL.insertReps,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         content: TextField(
           controller: textCtrl,
           autofocus: true,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          style: const TextStyle(color: Colors.white, fontSize: 28),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontSize: 28),
           textAlign: TextAlign.center,
           decoration: InputDecoration(
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white24),
+              borderSide: BorderSide(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: widget.accent),
@@ -14954,7 +15195,7 @@ class _DrumPickersState extends State<_DrumPickers>
             onPressed: () => Navigator.pop(ctx),
             child: Text(
               AppL.cancel,
-              style: const TextStyle(color: Colors.white38),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
             ),
           ),
           TextButton(
@@ -15106,8 +15347,8 @@ class _DrumPickersState extends State<_DrumPickers>
         children: [
           Text(
             label,
-            style: const TextStyle(
-              color: Colors.white54,
+            style: TextStyle(
+              color: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
               fontSize: 22,
               letterSpacing: 4,
               fontWeight: FontWeight.w700,
@@ -15219,7 +15460,7 @@ class _DrumPickersState extends State<_DrumPickers>
           displayedWeight > referenceDisplayed;
       final color = isSel
           ? (isKg ? (isAmber ? Colors.amber : accent) : accent)
-          : Colors.white.withAlpha(itemAlpha(dist));
+          : (_isDarkCtx(context) ? Colors.white : Colors.black87).withAlpha(itemAlpha(dist));
       final fontSize = isKg && displayText.length >= 4
           ? (itemSize(dist) - (dist == 0 ? 16 : 8)).clamp(18.0, 82.0)
           : itemSize(dist);
@@ -15324,7 +15565,7 @@ class _DrumPickersState extends State<_DrumPickers>
           ),
           Container(
             width: 1,
-            color: Colors.white10,
+            color: _isDarkCtx(context) ? Colors.white10 : Colors.black12,
             margin: const EdgeInsets.symmetric(vertical: 40),
           ),
           Expanded(
@@ -15390,7 +15631,7 @@ class _WorkoutProgressChart extends StatelessWidget {
       return Center(
         child: Text(
           AppL.noDataRegistered,
-          style: const TextStyle(color: Colors.white38),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
         ),
       );
     }
@@ -15608,7 +15849,7 @@ class PTGraphWidget extends StatelessWidget {
                 const SizedBox(width: 5),
                 Text(
                   "S${i + 1}",
-                  style: const TextStyle(fontSize: 11, color: Colors.white70),
+                  style: TextStyle(fontSize: 11, color: _isDarkCtx(context) ? Colors.white70 : Colors.black87),
                 ),
               ],
             ),
@@ -15799,14 +16040,14 @@ class _CancellazioneScreenState extends State<CancellazioneScreen> {
     final ok1 = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         title: Text(
           AppL.fullResetTitle,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         content: Text(
           AppL.fullResetMsg,
-          style: const TextStyle(color: Colors.white70),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87),
         ),
         actions: [
           TextButton(
@@ -15827,10 +16068,10 @@ class _CancellazioneScreenState extends State<CancellazioneScreen> {
     final ok2 = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         title: Text(
           AppL.areYouSure,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         content: Text(
           AppL.irreversible,
@@ -15893,12 +16134,12 @@ class _CancellazioneScreenState extends State<CancellazioneScreen> {
     final grouped = _grouped;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF111111),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF111111) : Colors.grey.shade100,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF111111),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF111111) : Colors.grey.shade100,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white70),
+          icon: Icon(Icons.arrow_back_ios_new, color: _isDarkCtx(context) ? Colors.white70 : Colors.black87),
           onPressed: () => Navigator.pop(context),
         ),
         title: Row(
@@ -15911,8 +16152,8 @@ class _CancellazioneScreenState extends State<CancellazioneScreen> {
             const SizedBox(width: 8),
             Text(
               AppL.dataManagement,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
@@ -15929,7 +16170,7 @@ class _CancellazioneScreenState extends State<CancellazioneScreen> {
                     child: Text(
                       AppL.noHistory,
                       style: TextStyle(
-                        color: Colors.white.withAlpha(80),
+                        color: _isDarkCtx(context) ? Colors.white : Colors.black87.withAlpha(80),
                         fontSize: 15,
                       ),
                     ),
@@ -15965,7 +16206,7 @@ class _CancellazioneScreenState extends State<CancellazioneScreen> {
                                 Text(
                                   dayName.toUpperCase(),
                                   style: TextStyle(
-                                    color: Colors.white.withAlpha(180),
+                                    color: _isDarkCtx(context) ? Colors.white : Colors.black87.withAlpha(180),
                                     fontSize: 12,
                                     fontWeight: FontWeight.w700,
                                     letterSpacing: 2,
@@ -16014,21 +16255,21 @@ class _CancellazioneScreenState extends State<CancellazioneScreen> {
                                   ),
                                   title: Text(
                                     exName,
-                                    style: const TextStyle(
-                                      color: Colors.white,
+                                    style: TextStyle(
+                                      color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                                       fontSize: 14,
                                     ),
                                   ),
                                   subtitle: Text(
                                     '${sessions.length} ${sessions.length == 1 ? AppL.sessionCount : AppL.sessionCountPlural}',
                                     style: TextStyle(
-                                      color: Colors.white.withAlpha(100),
+                                      color: _isDarkCtx(context) ? Colors.white : Colors.black87.withAlpha(100),
                                       fontSize: 12,
                                     ),
                                   ),
-                                  trailing: const Icon(
+                                  trailing: Icon(
                                     Icons.chevron_right_rounded,
-                                    color: Colors.white24,
+                                    color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
                                   ),
                                 ),
                               ),
@@ -16045,13 +16286,13 @@ class _CancellazioneScreenState extends State<CancellazioneScreen> {
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.delete_sweep_outlined,
-                    color: Colors.white,
+                    color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                   ),
                   label: Text(
                     '${AppL.deleteSelected} (${_selected.length})',
-                    style: const TextStyle(color: Colors.white),
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                   ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
@@ -16064,13 +16305,13 @@ class _CancellazioneScreenState extends State<CancellazioneScreen> {
                 ),
               ),
             ),
-          const Divider(color: Colors.white12, height: 1),
+          Divider(color: _isDarkCtx(context) ? Colors.white12 : Colors.black12, height: 1),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 12, 16, 4),
             child: Text(
               AppL.totalReset,
               style: TextStyle(
-                color: Colors.white.withAlpha(100),
+                color: _isDarkCtx(context) ? Colors.white : Colors.black87.withAlpha(100),
                 fontSize: 11,
                 letterSpacing: 2,
               ),
@@ -16140,14 +16381,14 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         title: Text(
           AppL.deleteSession,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         content: Text(
           AppL.deleteSessionMsg,
-          style: const TextStyle(color: Colors.white70),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87),
         ),
         actions: [
           TextButton(
@@ -16181,10 +16422,10 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
     final ok = await showDialog<bool>(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         title: Text(
           AppL.deleteSeries,
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         actions: [
           TextButton(
@@ -16222,10 +16463,10 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        backgroundColor: const Color(0xFF1C1C1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         title: Text(
           'Serie ${serieIdx + 1}',
-          style: const TextStyle(color: Colors.white),
+          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
@@ -16235,12 +16476,12 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
               keyboardType: const TextInputType.numberWithOptions(
                 decimal: true,
               ),
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
               decoration: InputDecoration(
                 labelText: AppL.weight,
-                labelStyle: const TextStyle(color: Colors.white54),
-                enabledBorder: const UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white24),
+                labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
                 ),
               ),
             ),
@@ -16248,12 +16489,12 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
             TextField(
               controller: rCtrl,
               keyboardType: TextInputType.number,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+              decoration: InputDecoration(
                 labelText: 'Reps',
-                labelStyle: TextStyle(color: Colors.white54),
+                labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
                 enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white24),
+                  borderSide: BorderSide(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
                 ),
               ),
             ),
@@ -16293,18 +16534,18 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF111111),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF111111) : Colors.grey.shade100,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF111111),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF111111) : Colors.grey.shade100,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.white70),
+          icon: Icon(Icons.arrow_back_ios_new, color: _isDarkCtx(context) ? Colors.white70 : Colors.black87),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           widget.exerciseName,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -16315,7 +16556,7 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
               child: Text(
                 AppL.noSession,
                 style: TextStyle(
-                  color: Colors.white.withAlpha(80),
+                  color: _isDarkCtx(context) ? Colors.white : Colors.black87.withAlpha(80),
                   fontSize: 15,
                 ),
               ),
@@ -16330,9 +16571,9 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
                 return Container(
                   margin: const EdgeInsets.only(bottom: 12),
                   decoration: BoxDecoration(
-                    color: Colors.white.withAlpha(8),
+                    color: _isDarkCtx(context) ? Colors.white.withAlpha(8) : Colors.black87.withAlpha(8),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.white10),
+                    border: Border.all(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -16345,8 +16586,8 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
                             Expanded(
                               child: Text(
                                 date,
-                                style: const TextStyle(
-                                  color: Colors.white54,
+                                style: TextStyle(
+                                  color: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
                                   fontSize: 13,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -16366,7 +16607,7 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
                           ],
                         ),
                       ),
-                      const Divider(color: Colors.white10, height: 1),
+                      Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 1),
                       // Serie
                       ...series.asMap().entries.map((e) {
                         final idx = e.key;
@@ -16377,8 +16618,8 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
                           dense: true,
                           title: Text(
                             'Serie ${idx + 1}:  ${w}kg × ${r} reps',
-                            style: const TextStyle(
-                              color: Colors.white70,
+                            style: TextStyle(
+                              color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
                               fontSize: 13,
                             ),
                           ),
@@ -16386,9 +16627,9 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               IconButton(
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.edit_rounded,
-                                  color: Colors.white38,
+                                  color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                                   size: 18,
                                 ),
                                 onPressed: () => _modificaSerie(sIdx, idx),
@@ -16496,6 +16737,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
     List<_SessionPoint> currentCycle = [];
     Set<String> seenDays = {};
     int cycleIndex = 1;
+    Map<String, _SessionPoint> lastCompleteCycleSessions = {};
 
     for (final s in sessions) {
       final day = s.dayName;
@@ -16504,6 +16746,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
       if (seenDays.contains(day)) {
         // This day was already done in current cycle → close it
         if (currentCycle.isNotEmpty) {
+          lastCompleteCycleSessions = {for (final p in currentCycle) p.dayName: p};
           result.add(_aggregateCycle(currentCycle, cycleIndex++));
         }
         currentCycle = [s];
@@ -16513,6 +16756,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
         seenDays.add(day);
         if (seenDays.length == dayNames.length) {
           // All days completed: microcycle done
+          lastCompleteCycleSessions = {for (final p in currentCycle) p.dayName: p};
           result.add(_aggregateCycle(currentCycle, cycleIndex++));
           currentCycle = [];
           seenDays = {};
@@ -16520,9 +16764,19 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
       }
     }
 
-    // Partial last cycle
+    // Partial last cycle: supplement missing sessions with prev cycle values
     if (currentCycle.isNotEmpty) {
-      result.add(_aggregateCycle(currentCycle, cycleIndex));
+      if (lastCompleteCycleSessions.isNotEmpty) {
+        final supplemented = List<_SessionPoint>.from(currentCycle);
+        for (final day in dayNames) {
+          if (!seenDays.contains(day) && lastCompleteCycleSessions.containsKey(day)) {
+            supplemented.add(lastCompleteCycleSessions[day]!);
+          }
+        }
+        result.add(_aggregateCycle(supplemented, cycleIndex));
+      } else {
+        result.add(_aggregateCycle(currentCycle, cycleIndex));
+      }
     }
 
     return result;
@@ -16560,18 +16814,18 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
     final dayNames = widget.routine.map((d) => d.dayName).toList();
 
     return Scaffold(
-      backgroundColor: const Color(0xFF0E0E10),
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF0E0E10),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
         title: Text(
           AppL.lang == 'en' ? 'Overall Progress' : 'Progressi Generali',
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         actions: [
           if (!kIsWeb)
             IconButton(
@@ -16616,7 +16870,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                 ? Center(
                     child: Text(
                       AppL.noData,
-                      style: const TextStyle(color: Colors.white38, fontSize: 16),
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 16),
                     ),
                   )
                 : SingleChildScrollView(
@@ -16628,7 +16882,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                         const SizedBox(height: 20),
                         Container(
                           decoration: BoxDecoration(
-                            color: const Color(0xFF1C1C1E),
+                            color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
                             borderRadius: BorderRadius.circular(16),
                           ),
                           padding: const EdgeInsets.all(16),
@@ -16650,8 +16904,8 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                                     _filterDay == null && widget.routine.length > 1
                                         ? (AppL.lang == 'en' ? 'Progress per microcycle' : 'Progressi per microciclo')
                                         : (AppL.lang == 'en' ? 'Progress per session' : 'Progressi per sessione'),
-                                    style: const TextStyle(
-                                      color: Colors.white70,
+                                    style: TextStyle(
+                                      color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
                                       fontSize: 12,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -16720,17 +16974,17 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
         decoration: BoxDecoration(
-          color: selected ? accent.withAlpha(40) : const Color(0xFF1C1C1E),
+          color: selected ? accent.withAlpha(40) : (_isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.grey.shade200),
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: selected ? accent : Colors.white12,
+            color: selected ? accent : (_isDarkCtx(context) ? Colors.white12 : Colors.grey.shade400),
             width: selected ? 1.5 : 1,
           ),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: selected ? accent : Colors.white60,
+            color: selected ? accent : (_isDarkCtx(context) ? Colors.white60 : Colors.black54),
             fontSize: 12,
             fontWeight: selected ? FontWeight.w700 : FontWeight.normal,
           ),
@@ -16782,7 +17036,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
         decoration: BoxDecoration(
-          color: const Color(0xFF1C1C1E),
+          color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(color: color.withAlpha(100), width: 1.5),
         ),
@@ -16800,7 +17054,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
             ),
             Text(
               label,
-              style: const TextStyle(color: Colors.white38, fontSize: 10),
+              style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 10),
               textAlign: TextAlign.center,
             ),
           ],

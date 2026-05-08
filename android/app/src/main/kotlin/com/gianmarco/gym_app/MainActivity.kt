@@ -3,10 +3,13 @@ package com.gianmarco.gym_app
 import android.app.AlarmManager
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.content.Context
 import android.media.AudioManager
 import android.media.ToneGenerator
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -175,9 +178,12 @@ class MainActivity : FlutterActivity() {
 
                             val views = RemoteViews(packageName, R.layout.notification_timer)
                             views.setTextViewText(R.id.notif_label, subtitle)
-                            // Force visible colors for dark notification panels (Xiaomi MIUI, etc.)
-                            views.setInt(R.id.notif_time, "setTextColor", 0xFFFFFFFF.toInt())
-                            views.setInt(R.id.notif_label, "setTextColor", 0xFFFFFFFF.toInt())
+                            // Adaptive text color based on system dark/light mode
+                            val nightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
+                            val isDarkMode = nightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES
+                            val textColor = if (isDarkMode) 0xFFFFFFFF.toInt() else 0xFF212121.toInt()
+                            views.setInt(R.id.notif_time, "setTextColor", textColor)
+                            views.setInt(R.id.notif_label, "setTextColor", textColor)
                             val durationMs = remainingSeconds.coerceAtLeast(0L) * 1000L
                             val chronometerBase = SystemClock.elapsedRealtime() + durationMs
                             views.setChronometer(R.id.notif_time, chronometerBase, null, true)
@@ -273,6 +279,42 @@ class MainActivity : FlutterActivity() {
                             result.error("CANCEL_STREAK_REMINDER_ERROR", e.message, null)
                         }
                     }
+                    "updateWidget" -> {
+                        try {
+                            val manager = AppWidgetManager.getInstance(this)
+                            val component = ComponentName(this, GymWidgetProvider::class.java)
+                            val ids = manager.getAppWidgetIds(component)
+                            for (id in ids) {
+                                GymWidgetProvider.updateWidget(this, manager, id)
+                            }
+                            result.success(null)
+                        } catch (e: Exception) {
+                            result.error("WIDGET_UPDATE_ERROR", e.message, null)
+                        }
+                    }
+                    "isMiui" -> {
+                        val isMiui = isMiuiDevice()
+                        result.success(isMiui)
+                    }
+                    "isSamsung" -> {
+                        result.success(isSamsungDevice())
+                    }
+                    "openAutoStartSettings" -> {
+                        try {
+                            openAutoStartSettings()
+                            result.success(null)
+                        } catch (e: Exception) {
+                            result.error("AUTOSTART_ERROR", e.message, null)
+                        }
+                    }
+                    "openBatterySettings" -> {
+                        try {
+                            openBatterySettings()
+                            result.success(null)
+                        } catch (e: Exception) {
+                            result.error("BATTERY_ERROR", e.message, null)
+                        }
+                    }
                     else -> result.notImplemented()
                 }
             }
@@ -282,5 +324,87 @@ class MainActivity : FlutterActivity() {
         GoogleMobileAdsPlugin.unregisterNativeAdFactory(flutterEngine, "workout_native")
         workoutNativeAdFactory = null
         super.cleanUpFlutterEngine(flutterEngine)
+    }
+
+    private fun isMiuiDevice(): Boolean {
+        return Build.MANUFACTURER.lowercase() == "xiaomi" ||
+            !getSystemProperty("ro.miui.ui.version.name").isNullOrEmpty() ||
+            !getSystemProperty("ro.miui.ui.version.code").isNullOrEmpty()
+    }
+
+    private fun isSamsungDevice(): Boolean {
+        return Build.MANUFACTURER.lowercase() == "samsung"
+    }
+
+    private fun getSystemProperty(key: String): String? {
+        return try {
+            val cls = Class.forName("android.os.SystemProperties")
+            val method = cls.getMethod("get", String::class.java)
+            method.invoke(null, key) as? String
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    private fun openAutoStartSettings() {
+        val miuiIntents = listOf(
+            // MIUI 12+
+            Intent().setComponent(ComponentName(
+                "com.miui.securitycenter",
+                "com.miui.permcenter.autostart.AutoStartManagementActivity"
+            )),
+            // HyperOS / MIUI 14
+            Intent().setComponent(ComponentName(
+                "com.miui.securitycenter",
+                "com.miui.powercenter.PowerAndPerformanceActivity"
+            )),
+            // Alternative MIUI
+            Intent().setComponent(ComponentName(
+                "com.miui.powerkeeper",
+                "com.miui.powerkeeper.ui.HiddenAppsConfigActivity"
+            )),
+        )
+        for (intent in miuiIntents) {
+            try {
+                startActivity(intent)
+                return
+            } catch (e: Exception) {
+                // Try next
+            }
+        }
+        // Fallback: general app settings
+        try {
+            val intent = android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS.let {
+                Intent(it).apply { data = android.net.Uri.parse("package:$packageName") }
+            }
+            startActivity(intent)
+        } catch (e: Exception) {}
+    }
+
+    private fun openBatterySettings() {
+        // Try Samsung-specific battery usage settings
+        val samsungIntents = listOf(
+            Intent().setComponent(ComponentName(
+                "com.samsung.android.lool",
+                "com.samsung.android.sm.ui.battery.BatteryActivity"
+            )),
+            Intent().setComponent(ComponentName(
+                "com.samsung.android.sm",
+                "com.samsung.android.sm.ui.battery.BatteryActivity"
+            )),
+        )
+        for (intent in samsungIntents) {
+            try {
+                startActivity(intent)
+                return
+            } catch (e: Exception) {}
+        }
+        // Fallback: app details settings
+        try {
+            val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                data = android.net.Uri.parse("package:$packageName")
+            }
+            startActivity(intent)
+        } catch (e: Exception) {}
     }
 }
