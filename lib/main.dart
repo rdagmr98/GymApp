@@ -4275,6 +4275,13 @@ class _ClientMainPageState extends State<ClientMainPage>
     _refreshWebDonationGate();
     _maybeShowIosInstallHint();
     WidgetsBinding.instance.addPostFrameCallback((_) => _checkMiuiWidget());
+    if (!kIsWeb) {
+      // Handle widget play button warm-start (app already running)
+      _gymFileChannel.setMethodCallHandler((call) async {
+        if (call.method == 'startWorkout') await _maybeStartWorkoutFromWidget();
+        return null;
+      });
+    }
     try {
       AdManager.instance.loadInterstitial();
     } catch (_) {}

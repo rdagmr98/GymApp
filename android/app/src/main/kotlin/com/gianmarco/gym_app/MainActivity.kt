@@ -26,11 +26,17 @@ class MainActivity : FlutterActivity() {
     private var workoutNativeAdFactory: WorkoutNativeAdFactory? = null
     private var timerNotificationToken: Long = 0
 
-    private fun handleWorkoutStartIntent(intent: Intent?) {
+    private fun handleWorkoutStartIntent(intent: Intent?, warmStart: Boolean = false) {
         if (intent?.action == "com.gianmarco.gym_app.START_WORKOUT") {
             val prefs = getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
             prefs.edit().putString("flutter.widget_start_workout_ts",
                 System.currentTimeMillis().toString()).apply()
+            // On warm start (onNewIntent), app is already running → signal Flutter directly
+            if (warmStart) {
+                flutterEngine?.dartExecutor?.binaryMessenger?.let { messenger ->
+                    MethodChannel(messenger, "gym_file_reader").invokeMethod("startWorkout", null)
+                }
+            }
         }
     }
 
@@ -42,7 +48,7 @@ class MainActivity : FlutterActivity() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        handleWorkoutStartIntent(intent)
+        handleWorkoutStartIntent(intent, warmStart = true)
     }
 
     private fun timerFinishedPendingIntent(title: String = "", body: String = ""): PendingIntent {

@@ -100,14 +100,14 @@ class GymWidgetProvider : AppWidgetProvider() {
                 views.setTextViewText(R.id.widget_streak, "\uD83D\uDD25 $streak")
                 views.setTextViewText(R.id.widget_workout, nextWorkout)
 
-                // Main muscle image
+                // Main muscle image - fallback to app icon when no muscle match
                 val drawableId = muscleDrawable(nextMuscle)
                 if (drawableId != 0) {
                     views.setImageViewResource(R.id.widget_muscle, drawableId)
-                    views.setViewVisibility(R.id.widget_muscle, View.VISIBLE)
                 } else {
-                    views.setViewVisibility(R.id.widget_muscle, View.INVISIBLE)
+                    views.setImageViewResource(R.id.widget_muscle, R.mipmap.ic_launcher)
                 }
+                views.setViewVisibility(R.id.widget_muscle, View.VISIBLE)
 
                 // Session badge ImageViews: show muscle icon + colored background per status
                 val doneCount = doneSessions.size
