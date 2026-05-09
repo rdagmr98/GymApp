@@ -12025,6 +12025,17 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     _avviaTimerSeNonAttivo(sec);
   }
 
+  // Pre-avvia il timer di pausa inter-esercizio se siamo sull'ultima serie
+  void _avviaPausaSeUltimaSerie() {
+    if (!mounted || isRestingFullScreen) return;
+    final ex = widget.day.exercises[exI];
+    if (setN < ex.targetSets) return;
+    if (eserciziCompletati.contains(ex.name)) return;
+    if (ex.supersetGroup > 0) return; // le superserie gestiscono il timer in modo diverso
+    final pause = ex.interExercisePause > 0 ? ex.interExercisePause : 120;
+    _avviaTimerConTempo(pause);
+  }
+
   void _cambiaEsercizioMethod(int nuovoIndice) {
     setState(() {
       widget.day.exercises[exI].results = List.from(currentExSeries);
@@ -12099,6 +12110,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         try {
           WakelockPlus.disable();
         } catch (_) {}
+        // Se ora siamo sull'ultima serie dell'esercizio, pre-avvia il timer di pausa
+        if (mounted) _avviaPausaSeUltimaSerie();
       } else {
         if (mounted) {
           setState(() {
@@ -12684,6 +12697,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     try {
       WakelockPlus.disable();
     } catch (_) {}
+    _avviaPausaSeUltimaSerie();
   }
 
   @override
@@ -15727,7 +15741,7 @@ class _DrumPickersState extends State<_DrumPickers>
   }
 }
 
-class _WorkoutProgressChart extends StatelessWidget {
+class _WorkoutProgressChart extends StatefulWidget {
   final WorkoutDay day;
   final List<dynamic> history;
   final Color accent;
@@ -15738,13 +15752,34 @@ class _WorkoutProgressChart extends StatelessWidget {
   });
 
   @override
+  State<_WorkoutProgressChart> createState() => _WorkoutProgressChartState();
+}
+
+class _WorkoutProgressChartState extends State<_WorkoutProgressChart> {
+  final _scrollCtrl = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollCtrl.dispose();
+    super.dispose();
+  }
+
+  void _scrollToEnd() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollCtrl.hasClients) {
+        _scrollCtrl.jumpTo(_scrollCtrl.position.maxScrollExtent);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final exerciseNames = day.exercises.map((e) => e.name).toSet();
+    final exerciseNames = widget.day.exercises.map((e) => e.name).toSet();
 
     // Raggruppa per session_id (separa più sessioni stesso giorno)
     final Map<String, Map<String, double>> bySession = {};
     final Map<String, String> sessionDate = {};
-    for (final h in history) {
+    for (final h in widget.history) {
       final exName = h['exercise'] as String? ?? '';
       if (!exerciseNames.contains(exName)) continue;
       final dateRaw = h['date'] as String? ?? '';
@@ -15776,12 +15811,11 @@ class _WorkoutProgressChart extends StatelessWidget {
 
     final allSessions = bySession.keys.toList()
       ..sort((a, b) => (sessionDate[a] ?? a).compareTo(sessionDate[b] ?? b));
-    final sessions = allSessions.length > 10 ? allSessions.sublist(allSessions.length - 10) : allSessions;
-    final scores = sessions
+    final scores = allSessions
         .map((s) => bySession[s]!.values.fold(0.0, (a, b) => a + b))
         .toList();
 
-    final labels = sessions
+    final labels = allSessions
         .asMap()
         .entries
         .map((e) => (e.key + 1).toString())
@@ -15790,14 +15824,29 @@ class _WorkoutProgressChart extends StatelessWidget {
     final minS = scores.reduce((a, b) => a < b ? a : b);
     final maxS = scores.reduce((a, b) => a > b ? a : b);
 
-    return CustomPaint(
-      painter: _WorkoutProgressPainter(
-        labels: labels,
-        scores: scores,
-        minS: minS,
-        maxS: maxS,
-        accent: accent,
-      ),
+    _scrollToEnd();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final chartWidth = (allSessions.length * 50.0).clamp(constraints.maxWidth, double.infinity);
+        return SingleChildScrollView(
+          controller: _scrollCtrl,
+          scrollDirection: Axis.horizontal,
+          child: SizedBox(
+            width: chartWidth,
+            height: constraints.maxHeight,
+            child: CustomPaint(
+              size: Size.infinite,
+              painter: _WorkoutProgressPainter(
+                labels: labels,
+                scores: scores,
+                minS: minS,
+                maxS: maxS,
+                accent: widget.accent,
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -15895,7 +15944,7 @@ class _WorkoutProgressPainter extends CustomPainter {
 
 // --- GRAFICI ---
 
-class PTGraphWidget extends StatelessWidget {
+class PTGraphWidget extends StatefulWidget {
   final String exerciseName;
   final List<dynamic> history;
 
@@ -15906,6 +15955,19 @@ class PTGraphWidget extends StatelessWidget {
   });
 
   @override
+  State<PTGraphWidget> createState() => _PTGraphWidgetState();
+}
+
+class _PTGraphWidgetState extends State<PTGraphWidget> {
+  final _scrollCtrl = ScrollController();
+
+  @override
+  void dispose() {
+    _scrollCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final List<Color> seriesColors = [
       Theme.of(context).colorScheme.primary,
@@ -15914,11 +15976,10 @@ class PTGraphWidget extends StatelessWidget {
       Colors.orangeAccent,
       Colors.redAccent,
     ];
-    var logs = history
-        .where((h) => h['exercise'] == exerciseName)
+    var logs = widget.history
+        .where((h) => h['exercise'] == widget.exerciseName)
         .map((e) => Map<String, dynamic>.from(e))
         .toList();
-    if (logs.length > 10) logs = logs.sublist(logs.length - 10);
 
     if (logs.isEmpty) return Center(child: Text(AppL.noData));
 
@@ -15959,11 +16020,15 @@ class PTGraphWidget extends StatelessWidget {
       }
     }
 
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollCtrl.hasClients) _scrollCtrl.jumpTo(_scrollCtrl.position.maxScrollExtent);
+    });
+
     return Column(
       children: [
         const SizedBox(height: 10),
         Text(
-          exerciseName.toUpperCase(),
+          widget.exerciseName.toUpperCase(),
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
           style: TextStyle(
@@ -15998,12 +16063,23 @@ class PTGraphWidget extends StatelessWidget {
         const SizedBox(height: 8),
         SizedBox(
           height: 160,
-          child: logs.isEmpty
-              ? Center(child: Text(AppL.noData))
-              : CustomPaint(
-                  size: Size.infinite,
-                  painter: PTChartPainter(logs: logs, colors: seriesColors),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final chartWidth = (logs.length * 50.0).clamp(constraints.maxWidth, double.infinity);
+              return SingleChildScrollView(
+                controller: _scrollCtrl,
+                scrollDirection: Axis.horizontal,
+                child: SizedBox(
+                  width: chartWidth,
+                  height: 160,
+                  child: CustomPaint(
+                    size: Size.infinite,
+                    painter: PTChartPainter(logs: logs, colors: seriesColors),
+                  ),
                 ),
+              );
+            },
+          ),
         ),
       ],
     );
@@ -16817,6 +16893,25 @@ class _OverallProgressPage extends StatefulWidget {
 class _OverallProgressPageState extends State<_OverallProgressPage> {
   String? _filterDay;
   final GlobalKey _chartKey = GlobalKey();
+  final ScrollController _chartScrollCtrl = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollChartToEnd());
+  }
+
+  @override
+  void dispose() {
+    _chartScrollCtrl.dispose();
+    super.dispose();
+  }
+
+  void _scrollChartToEnd() {
+    if (_chartScrollCtrl.hasClients) {
+      _chartScrollCtrl.jumpTo(_chartScrollCtrl.position.maxScrollExtent);
+    }
+  }
 
   List<_SessionPoint> _computePoints() {
     // Group history by session, then by exercise
@@ -16951,7 +17046,6 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
   Widget build(BuildContext context) {
     final accent = widget.accent;
     final allPoints = _computePoints();
-    final points = allPoints.length > 10 ? allPoints.sublist(allPoints.length - 10) : allPoints;
     final dayNames = widget.routine.map((d) => d.dayName).toList();
 
     return Scaffold(
@@ -16988,7 +17082,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                     label: AppL.lang == 'en' ? 'All' : 'Tutti',
                     selected: _filterDay == null,
                     accent: accent,
-                    onTap: () => setState(() => _filterDay = null),
+                    onTap: () { setState(() => _filterDay = null); WidgetsBinding.instance.addPostFrameCallback((_) => _scrollChartToEnd()); },
                   ),
                   const SizedBox(width: 8),
                   ...dayNames.map(
@@ -16998,8 +17092,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                         label: d,
                         selected: _filterDay == d,
                         accent: accent,
-                        onTap: () =>
-                            setState(() => _filterDay = _filterDay == d ? null : d),
+                        onTap: () { setState(() => _filterDay = _filterDay == d ? null : d); WidgetsBinding.instance.addPostFrameCallback((_) => _scrollChartToEnd()); },
                       ),
                     ),
                   ),
@@ -17007,7 +17100,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
               ),
             ),
           Expanded(
-            child: points.isEmpty
+            child: allPoints.isEmpty
                 ? Center(
                     child: Text(
                       AppL.noData,
@@ -17019,7 +17112,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _buildStatsRow(points, accent),
+                        _buildStatsRow(allPoints, accent),
                         const SizedBox(height: 20),
                         Container(
                           decoration: BoxDecoration(
@@ -17054,18 +17147,28 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                                 ],
                               ),
                               const SizedBox(height: 16),
-                              RepaintBoundary(
-                                key: _chartKey,
-                                child: SizedBox(
-                                  height: 220,
-                                  child: CustomPaint(
-                                    size: Size.infinite,
-                                    painter: _OverallProgressPainter(
-                                      points: points,
-                                      accent: accent,
+                              LayoutBuilder(
+                                builder: (context, constraints) {
+                                  final chartWidth = (allPoints.length * 50.0).clamp(constraints.maxWidth, double.infinity);
+                                  return SingleChildScrollView(
+                                    controller: _chartScrollCtrl,
+                                    scrollDirection: Axis.horizontal,
+                                    child: RepaintBoundary(
+                                      key: _chartKey,
+                                      child: SizedBox(
+                                        width: chartWidth,
+                                        height: 220,
+                                        child: CustomPaint(
+                                          size: Size.infinite,
+                                          painter: _OverallProgressPainter(
+                                            points: allPoints,
+                                            accent: accent,
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
+                                  );
+                                },
                               ),
                               const SizedBox(height: 8),
                             ],
