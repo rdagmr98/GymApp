@@ -11901,7 +11901,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.only(top: 4),
       child: SizedBox(
         width: double.infinity,
-        height: 86,
+        height: 120,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _timerRestNativeAd!),
@@ -12557,9 +12557,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             _isNewRecord = false;
           });
           _setDrumValues(nextIndex, 1);
-          _avviaTimerSeNonAttivo(
+          _triggerTimer(
             pause,
-          ); // fine gruppo superset: pausa inter-esercizio
+            force: true,
+          ); // fine gruppo superset: pausa inter-esercizio (forza restart)
         } else {}
       }
       _persistInProgress();
@@ -12650,9 +12651,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           _isNewRecord = false;
         });
         _setDrumValues(nextIndex, 1);
-        _avviaTimerSeNonAttivo(
+        _triggerTimer(
           pauseTime,
-        ); // fine esercizio: pausa inter-esercizio (non resetta se già avviato al tap)
+          force: true,
+        ); // fine esercizio: pausa inter-esercizio (forza restart)
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -13503,8 +13505,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // Navigazione esercizio durante riposo inter-esercizio
-                    if (widget.day.exercises.length > 1)
+                    // Navigazione esercizio durante riposo inter-esercizio - solo prima della prima serie
+                    if (widget.day.exercises.length > 1 && setN == 1)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -13631,27 +13633,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                         ),
                                       ),
                                       if (lastW > 0) ...[
-                                        const SizedBox(height: 4),
+                                        const SizedBox(height: 8),
                                         Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
-                                            Icon(
-                                              Icons.history_rounded,
-                                              color: _isDarkCtx(context) ? Colors.white.withAlpha(70) : Colors.black45,
-                                              size: 15,
-                                            ),
-                                            const SizedBox(width: 4),
-                                            Expanded(
-                                              child: Text(
-                                                '${AppL.lastTime} ${lastW}kg × ${lastR} reps',
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 2,
-                                                style: TextStyle(
-                                                  color: _isDarkCtx(context) ? Colors.white.withAlpha(160) : Colors.black87,
-                                                  fontSize: 14,
-                                                  height: 1.4,
-                                                ),
-                                              ),
-                                            ),
+                                            _chipConferma('${lastW}kg', const Color(0xFFFFD700)),
+                                            const SizedBox(width: 10),
+                                            _chipConferma('$lastR reps', Theme.of(context).colorScheme.primary),
                                           ],
                                         ),
                                       ],
