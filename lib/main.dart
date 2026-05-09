@@ -12557,10 +12557,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             _isNewRecord = false;
           });
           _setDrumValues(nextIndex, 1);
-          _triggerTimer(
-            pause,
-            force: true,
-          ); // fine gruppo superset: pausa inter-esercizio (forza restart)
+          setState(() { _maxTime = pause; }); // aggiorna denominatore ring
+          _avviaTimerSeNonAttivo(pause); // continua se attivo, avvia se scaduto
         } else {}
       }
       _persistInProgress();
@@ -12651,10 +12649,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           _isNewRecord = false;
         });
         _setDrumValues(nextIndex, 1);
-        _triggerTimer(
-          pauseTime,
-          force: true,
-        ); // fine esercizio: pausa inter-esercizio (forza restart)
+        setState(() { _maxTime = pauseTime; }); // aggiorna denominatore ring
+        _avviaTimerSeNonAttivo(pauseTime); // continua se attivo, avvia se scaduto
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -13633,13 +13629,47 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                         ),
                                       ),
                                       if (lastW > 0) ...[
-                                        const SizedBox(height: 8),
+                                        const SizedBox(height: 6),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
-                                            _chipConferma('${lastW}kg', const Color(0xFFFFD700)),
-                                            const SizedBox(width: 10),
-                                            _chipConferma('$lastR reps', Theme.of(context).colorScheme.primary),
+                                            Icon(Icons.history_rounded, size: 11,
+                                              color: _isDarkCtx(context) ? Colors.white.withAlpha(70) : Colors.black45),
+                                            const SizedBox(width: 4),
+                                            Text(AppL.lastTime,
+                                              style: TextStyle(
+                                                color: _isDarkCtx(context) ? Colors.white.withAlpha(70) : Colors.black45,
+                                                fontSize: 11,
+                                                letterSpacing: 2,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Wrap(
+                                          alignment: WrapAlignment.center,
+                                          spacing: 8,
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFFFFD700).withAlpha(30),
+                                                border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Text('${lastW}kg',
+                                                style: const TextStyle(color: Color(0xFFFFD700), fontSize: 13, fontWeight: FontWeight.bold)),
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                              decoration: BoxDecoration(
+                                                color: accent.withAlpha(30),
+                                                border: Border.all(color: accent.withAlpha(180), width: 1.5),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Text('$lastR reps',
+                                                style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
+                                            ),
                                           ],
                                         ),
                                       ],
