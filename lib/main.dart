@@ -161,7 +161,7 @@ class _YouTubeSearchViewState extends State<YouTubeSearchView> {
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                 child: SizedBox(
                   width: double.infinity,
-                  height: 86,
+                  height: 120,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: AdWidget(ad: _tutorialNativeAd!),
@@ -4439,7 +4439,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
       child: SizedBox(
         width: double.infinity,
-        height: 86,
+        height: 120,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _exerciseListNativeAd!),
@@ -4456,7 +4456,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       padding: const EdgeInsets.only(top: 16),
       child: SizedBox(
         width: double.infinity,
-        height: 86,
+        height: 120,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _graphNativeAd!),
@@ -4470,7 +4470,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 12),
-      child: SizedBox(height: 80, child: AdWidget(ad: _workoutProgressNativeAd!)),
+      child: SizedBox(height: 120, child: AdWidget(ad: _workoutProgressNativeAd!)),
     );
   }
 
@@ -4479,7 +4479,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 12),
-      child: SizedBox(height: 80, child: AdWidget(ad: _overallProgressNativeAd!)),
+      child: SizedBox(height: 120, child: AdWidget(ad: _overallProgressNativeAd!)),
     );
   }
 
@@ -6171,7 +6171,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             const SizedBox(height: 16),
             if (info != null && info.muscleImages.isNotEmpty)
               SizedBox(
-                height: 80,
+                height: 120,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: info.muscleImages.length,
@@ -6181,7 +6181,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                     child: Image.asset(
                       muscleAssetPath(info.muscleImages[i]),
                       width: 100,
-                      height: 80,
+                      height: 120,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -11827,7 +11827,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 2),
       child: SizedBox(
         width: double.infinity,
-        height: 86,
+        height: 120,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _inlineWorkoutNativeAd!),
@@ -11846,7 +11846,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 2),
       child: SizedBox(
         width: double.infinity,
-        height: 86,
+        height: 120,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _startWorkoutNativeAd!),
@@ -11865,7 +11865,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
       child: SizedBox(
         width: double.infinity,
-        height: 86,
+        height: 120,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _chooseExerciseNativeAd!),
@@ -11884,7 +11884,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
       child: SizedBox(
         width: double.infinity,
-        height: 86,
+        height: 120,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _confirmPopupNativeAd!),
@@ -11920,7 +11920,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.only(top: 10),
       child: SizedBox(
         width: double.infinity,
-        height: 86,
+        height: 120,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _recapWorkoutNativeAd!),
@@ -13052,33 +13052,53 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         border: Border.all(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (lastW > 0)
+          if (lastW > 0) ...[
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
-                  Icons.history_rounded,
-                  color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
-                  size: 14,
-                ),
-                const SizedBox(width: 6),
-                Flexible(
-                  child: Text(
-                    '${AppL.lastTime}: ${_formatWeightLabel(lastW)} × $lastR reps',
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white60 : Colors.black54, fontSize: 13),
+                Icon(Icons.history_rounded, size: 11,
+                  color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
+                const SizedBox(width: 4),
+                Text(AppL.lastTime,
+                  style: TextStyle(
+                    color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
+                    fontSize: 11,
+                    letterSpacing: 2,
                   ),
                 ),
-                if (suggerisciAumento && _showWeightSuggestion) ...[
-                  const SizedBox(width: 8),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 8,
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFFFD700).withAlpha(30),
+                    border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text('${lastW}kg',
+                    style: const TextStyle(color: Color(0xFFFFD700), fontSize: 13, fontWeight: FontWeight.bold)),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: accent.withAlpha(30),
+                    border: Border.all(color: accent.withAlpha(180), width: 1.5),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text('$lastR reps',
+                    style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
+                ),
+                if (suggerisciAumento && _showWeightSuggestion)
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 7,
-                      vertical: 3,
-                    ),
+                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
                     decoration: BoxDecoration(
                       color: Colors.amber.withAlpha(30),
                       border: Border.all(color: Colors.amber),
@@ -13087,26 +13107,16 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(
-                          Icons.trending_up_rounded,
-                          color: Colors.amber,
-                          size: 13,
-                        ),
+                        const Icon(Icons.trending_up_rounded, color: Colors.amber, size: 13),
                         const SizedBox(width: 3),
-                        Text(
-                          AppL.increase,
-                          style: const TextStyle(
-                            color: Colors.amber,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                        Text(AppL.increase,
+                          style: const TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
                       ],
                     ),
                   ),
-                ],
               ],
             ),
+          ],
           if (ex.notePT.isNotEmpty) ...[
             if (lastW > 0) Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 10),
             Row(
@@ -13263,7 +13273,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               const SizedBox(height: 16),
               if (info.muscleImages.isNotEmpty) ...[
                 SizedBox(
-                  height: 80,
+                  height: 120,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: info.muscleImages.length,
@@ -13273,7 +13283,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       child: Image.asset(
                         muscleAssetPath(info.muscleImages[i]),
                         width: 100,
-                        height: 80,
+                        height: 120,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -13615,13 +13625,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                 ],
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
                                       Text(
                                         _infoProssimo,
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 2,
+                                        textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: accent.withAlpha(210),
                                           fontSize: 18,
