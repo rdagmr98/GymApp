@@ -12016,6 +12016,15 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     _triggerTimer(sec, force: true);
   }
 
+  // Avvia timer con il tempo specificato; se il timer è attivo con tempo diverso, lo sostituisce
+  void _avviaTimerConTempo(int sec) {
+    if (timerActive && _maxTime == sec) return;
+    _bgTimer?.cancel();
+    timerActive = false;
+    setState(() { _maxTime = sec; });
+    _avviaTimerSeNonAttivo(sec);
+  }
+
   void _cambiaEsercizioMethod(int nuovoIndice) {
     setState(() {
       widget.day.exercises[exI].results = List.from(currentExSeries);
@@ -12557,8 +12566,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             _isNewRecord = false;
           });
           _setDrumValues(nextIndex, 1);
-          setState(() { _maxTime = pause; }); // aggiorna denominatore ring
-          _avviaTimerSeNonAttivo(pause); // continua se attivo, avvia se scaduto
+          _avviaTimerConTempo(pause);
         } else {}
       }
       _persistInProgress();
@@ -12649,8 +12657,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           _isNewRecord = false;
         });
         _setDrumValues(nextIndex, 1);
-        setState(() { _maxTime = pauseTime; }); // aggiorna denominatore ring
-        _avviaTimerSeNonAttivo(pauseTime); // continua se attivo, avvia se scaduto
+        _avviaTimerConTempo(pauseTime);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -12969,7 +12976,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                               useSingleStep: useSingleStep,
                             );
                           },
-                      onInteraction: () => _avviaTimerSeNonAttivo(timeToUse),
+                      onInteraction: () => _avviaTimerConTempo(timeToUse),
                     ),
                   ),
                 if (!giaFatto)
@@ -13168,7 +13175,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             onChanged: (v) {
               ex.noteCliente = v;
               _aggiornaJsonSuDisco();
-              _avviaTimerSeNonAttivo(timeToUse > 0 ? timeToUse : 90);
+              _avviaTimerConTempo(timeToUse > 0 ? timeToUse : 90);
             },
           ),
         ],
@@ -15767,8 +15774,9 @@ class _WorkoutProgressChart extends StatelessWidget {
       );
     }
 
-    final sessions = bySession.keys.toList()
+    final allSessions = bySession.keys.toList()
       ..sort((a, b) => (sessionDate[a] ?? a).compareTo(sessionDate[b] ?? b));
+    final sessions = allSessions.length > 10 ? allSessions.sublist(allSessions.length - 10) : allSessions;
     final scores = sessions
         .map((s) => bySession[s]!.values.fold(0.0, (a, b) => a + b))
         .toList();
@@ -15910,6 +15918,7 @@ class PTGraphWidget extends StatelessWidget {
         .where((h) => h['exercise'] == exerciseName)
         .map((e) => Map<String, dynamic>.from(e))
         .toList();
+    if (logs.length > 10) logs = logs.sublist(logs.length - 10);
 
     if (logs.isEmpty) return Center(child: Text(AppL.noData));
 
@@ -16941,7 +16950,8 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
   @override
   Widget build(BuildContext context) {
     final accent = widget.accent;
-    final points = _computePoints();
+    final allPoints = _computePoints();
+    final points = allPoints.length > 10 ? allPoints.sublist(allPoints.length - 10) : allPoints;
     final dayNames = widget.routine.map((d) => d.dayName).toList();
 
     return Scaffold(
