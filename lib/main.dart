@@ -12792,8 +12792,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               : ex.repsList.last)
         : 10;
     // Il suggerimento si attiva SOLO se le reps dell'ultima volta sono MAGGIORI del target
-    bool suggerisciAumento = lastR > targetR && lastR > 0;
-    bool suggerisciReps = lastR > targetR && lastR > 0;
+    final _sugg = _computeSuggestions(ex, setN, lastR, targetR);
+    bool suggerisciAumento = _sugg['aumento']!;
+    bool suggerisciReps = _sugg['reps']!;
     if (ex.repsList.isNotEmpty) {
       if (setN <= ex.repsList.length) {
         targetR = ex.repsList[setN - 1];
@@ -13453,6 +13454,44 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     );
   }
 
+  /// Calcola i suggerimenti per la serie corrente.
+  Map<String, bool> _computeSuggestions(ExerciseConfig ex, int setN, int lastR, int targetR) {
+    bool suggerisciAumento = lastR > targetR && lastR > 0;
+
+    int? repsTriggerSet;
+    for (int sn = ex.targetSets; sn >= 1; sn--) {
+      final tgt = ex.repsList.isNotEmpty
+          ? (sn <= ex.repsList.length ? ex.repsList[sn - 1] : ex.repsList.last)
+          : 10;
+      final prevSug = _getSuggest(ex.name, sn);
+      final pr = (prevSug['r'] as num?)?.toInt() ?? 0;
+      if (pr > tgt && pr > 0) {
+        repsTriggerSet = sn;
+        break;
+      }
+    }
+
+    bool suggerisciReps = false;
+    if (!suggerisciAumento && repsTriggerSet != null && setN < repsTriggerSet) {
+      final currentHasHigherReps = currentExSeries.any((s) {
+        final sn2 = (s['s'] as num?)?.toInt() ?? 0;
+        final r2 = (s['r'] as num?)?.toInt() ?? 0;
+        if (sn2 <= 0) return false;
+        final tgt2 = ex.repsList.isNotEmpty
+            ? (sn2 <= ex.repsList.length ? ex.repsList[sn2 - 1] : ex.repsList.last)
+            : 10;
+        return r2 > tgt2;
+      });
+      if (currentHasHigherReps) {
+        suggerisciAumento = true;
+      } else {
+        suggerisciReps = true;
+      }
+    }
+
+    return {'aumento': suggerisciAumento, 'reps': suggerisciReps};
+  }
+
   Widget _buildRestUI() {
     var ex = widget.day.exercises[exI];
     var suggest = _getSuggest(ex.name, setN);
@@ -13465,7 +13504,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               : ex.repsList.last)
         : 10;
     bool suggerisciAumento = lastR > targetR && lastR > 0;
-    bool suggerisciReps = lastR > targetR && lastR > 0;
+    final _sugg2 = _computeSuggestions(ex, setN, lastR, targetR);
+    suggerisciAumento = _sugg2['aumento']!;
+    bool suggerisciReps = _sugg2['reps']!;
 
     // GIF del prossimo esercizio
     ExerciseConfig? prossimoConfig;
