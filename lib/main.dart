@@ -229,6 +229,7 @@ void main() async {
     );
   }
 
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
@@ -11610,6 +11611,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     double lastW,
     int lastR,
     bool suggerisciAumento,
+    bool suggerisciReps,
+    int targetR,
     Color accent,
   ) {
     final info =
@@ -11716,51 +11719,80 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   ],
                 ),
                 if (lastW > 0) ...[
-                  const SizedBox(height: 18),
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(14),
-                    decoration: BoxDecoration(
-                      color: _isDarkCtx(context) ? Colors.white.withAlpha(6) : Colors.black87.withAlpha(6),
-                      borderRadius: BorderRadius.circular(14),
-                      border: Border.all(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          AppL.lastTime.toUpperCase(),
-                          style: TextStyle(
-                            color: accent.withAlpha(210),
-                            fontSize: 11,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 1.1,
-                          ),
+                  const SizedBox(height: 14),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.history_rounded, size: 11,
+                        color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
+                      const SizedBox(width: 4),
+                      Text(AppL.lastTime.toUpperCase(),
+                        style: TextStyle(
+                          color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
+                          fontSize: 11,
+                          letterSpacing: 2,
                         ),
-                        const SizedBox(height: 6),
-                        Text(
-                          '${_formatWeightLabel(lastW)} x $lastR reps',
-                          style: TextStyle(
-                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        if (suggerisciAumento && _showWeightSuggestion) ...[
-                          const SizedBox(height: 8),
-                          Text(
-                            AppL.lang == 'en'
-                                ? 'You closed the target last time: consider increasing the load.'
-                                : 'Hai chiuso il target l\'ultima volta: valuta un aumento del carico.',
-                            style: const TextStyle(
-                              color: Colors.amber,
-                              fontSize: 12,
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                  const SizedBox(height: 6),
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 6,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFD700).withAlpha(30),
+                          border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg',
+                          style: const TextStyle(color: Color(0xFFFFD700), fontSize: 13, fontWeight: FontWeight.bold)),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        decoration: BoxDecoration(
+                          color: accent.withAlpha(30),
+                          border: Border.all(color: accent.withAlpha(180), width: 1.5),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text('$lastR reps',
+                          style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
+                      ),
+                      if (suggerisciReps && _showWeightSuggestion)
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.green.withAlpha(30),
+                            border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text('PROVA ${targetR + 2} REPS',
+                            style: const TextStyle(color: Colors.green, fontSize: 13, fontWeight: FontWeight.bold)),
+                        ),
+                      if (suggerisciAumento && _showWeightSuggestion)
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.withAlpha(30),
+                            border: Border.all(color: Colors.amber.withAlpha(180), width: 1.5),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text('↑ AUMENTA PESO',
+                            style: TextStyle(color: Colors.amber, fontSize: 13, fontWeight: FontWeight.bold)),
+                        ),
+                    ],
+                  ),
+                  if (suggerisciAumento && _showWeightSuggestion) ...[
+                    const SizedBox(height: 6),
+                    const _AumentaPesoWidget(),
+                  ],
+                  if (suggerisciReps && _showWeightSuggestion) ...[
+                    const SizedBox(height: 6),
+                    _AumentaRepsWidget(targetReps: targetR + 2),
+                  ],
                 ],
                 if (ex.notePT.isNotEmpty) ...[
                   const SizedBox(height: 14),
@@ -12955,6 +12987,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     lastW,
                     lastR,
                     suggerisciAumento,
+                    suggerisciReps,
+                    targetR,
                     accent,
                   ),
                 )
@@ -13108,19 +13142,20 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             Wrap(
               alignment: WrapAlignment.center,
               spacing: 8,
+              runSpacing: 6,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                     color: const Color(0xFFFFD700).withAlpha(30),
                     border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: Text('${lastW}kg',
+                  child: Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg',
                     style: const TextStyle(color: Color(0xFFFFD700), fontSize: 13, fontWeight: FontWeight.bold)),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                     color: accent.withAlpha(30),
                     border: Border.all(color: accent.withAlpha(180), width: 1.5),
@@ -13131,32 +13166,25 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                 ),
                 if (suggerisciAumento && _showWeightSuggestion)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       color: Colors.amber.withAlpha(30),
-                      border: Border.all(color: Colors.amber),
+                      border: Border.all(color: Colors.amber.withAlpha(180), width: 1.5),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Icon(Icons.trending_up_rounded, color: Colors.amber, size: 13),
-                        const SizedBox(width: 3),
-                        Text(AppL.increase,
-                          style: const TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
-                      ],
-                    ),
+                    child: Text(AppL.increase,
+                      style: const TextStyle(color: Colors.amber, fontSize: 13, fontWeight: FontWeight.bold)),
                   ),
-                if (suggerisciReps)
+                if (suggerisciReps && _showWeightSuggestion)
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                       color: Colors.green.withAlpha(30),
                       border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Text('PROVA ${targetR + 2} REPS',
-                      style: const TextStyle(color: Colors.green, fontSize: 10, fontWeight: FontWeight.bold)),
+                      style: const TextStyle(color: Colors.green, fontSize: 13, fontWeight: FontWeight.bold)),
                   ),
               ],
             ),
@@ -13741,44 +13769,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                           ],
                                         ),
                                         const SizedBox(height: 4),
-                                        Wrap(
-                                          alignment: WrapAlignment.center,
-                                          spacing: 8,
-                                          children: [
-                                            Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                              decoration: BoxDecoration(
-                                                color: const Color(0xFFFFD700).withAlpha(30),
-                                                border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
-                                                borderRadius: BorderRadius.circular(8),
-                                              ),
-                                              child: Text('${lastW}kg',
-                                                style: const TextStyle(color: Color(0xFFFFD700), fontSize: 13, fontWeight: FontWeight.bold)),
-                                            ),
-                                            Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                              decoration: BoxDecoration(
-                                                color: accent.withAlpha(30),
-                                                border: Border.all(color: accent.withAlpha(180), width: 1.5),
-                                                borderRadius: BorderRadius.circular(8),
-                                              ),
-                                              child: Text('$lastR reps',
-                                                style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
-                                            ),
-                                            if (suggerisciReps) ...[
-                                              const SizedBox(width: 4),
-                                              Container(
-                                                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
-                                                decoration: BoxDecoration(
-                                                  color: Colors.green.withAlpha(30),
-                                                  border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
-                                                  borderRadius: BorderRadius.circular(8),
-                                                ),
-                                                child: Text('PROVA ${targetR + 2} REPS',
-                                                  style: const TextStyle(color: Colors.green, fontSize: 11, fontWeight: FontWeight.bold)),
-                                              ),
-                                            ],
-                                          ],
+                                        Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg  ×  $lastR reps',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: _isDarkCtx(context) ? Colors.white70 : Colors.black54,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
                                       ],
                                     ],
