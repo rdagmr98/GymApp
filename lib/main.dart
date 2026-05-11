@@ -12207,25 +12207,31 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     }
 
     // ── Avvia subito il timer al tap su "Conferma Serie" ──────────────────
-    // Usiamo il recoveryTime dell'esercizio corrente (o maxRecovery del gruppo)
-    int previewRecovery = currentEx.recoveryTime;
-    if (currentEx.supersetGroup > 0) {
-      int groupStart = exI, groupEnd = exI;
-      while (groupStart > 0 &&
-          widget.day.exercises[groupStart - 1].supersetGroup ==
-              currentEx.supersetGroup)
-        groupStart--;
-      while (groupEnd < widget.day.exercises.length - 1 &&
-          widget.day.exercises[groupEnd + 1].supersetGroup ==
-              currentEx.supersetGroup)
-        groupEnd++;
-      previewRecovery = widget.day.exercises
-          .sublist(groupStart, groupEnd + 1)
-          .map((e) => e.recoveryTime)
-          .reduce((a, b) => a > b ? a : b);
+    // Sull'ultima serie usa la pausa inter-esercizio; sulle altre usa il recovery
+    final bool isLastSetHere = setN >= currentEx.targetSets && currentEx.supersetGroup == 0;
+    int previewRecovery;
+    if (isLastSetHere) {
+      previewRecovery = currentEx.interExercisePause > 0 ? currentEx.interExercisePause : 120;
+    } else {
+      previewRecovery = currentEx.recoveryTime;
+      if (currentEx.supersetGroup > 0) {
+        int groupStart = exI, groupEnd = exI;
+        while (groupStart > 0 &&
+            widget.day.exercises[groupStart - 1].supersetGroup ==
+                currentEx.supersetGroup)
+          groupStart--;
+        while (groupEnd < widget.day.exercises.length - 1 &&
+            widget.day.exercises[groupEnd + 1].supersetGroup ==
+                currentEx.supersetGroup)
+          groupEnd++;
+        previewRecovery = widget.day.exercises
+            .sublist(groupStart, groupEnd + 1)
+            .map((e) => e.recoveryTime)
+            .reduce((a, b) => a > b ? a : b);
+      }
     }
-    // Avvia il timer al tap su Conferma (solo se non è già partito)
-    _avviaTimerSeNonAttivo(previewRecovery);
+    // Avvia il timer al tap su Conferma (usa il tempo corretto; non riavvia se già in corso)
+    _avviaTimerConTempo(previewRecovery);
 
     showModalBottomSheet(
       context: context,
