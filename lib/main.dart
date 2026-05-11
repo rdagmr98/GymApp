@@ -12787,6 +12787,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         : 10;
     // Il suggerimento si attiva SOLO se le reps dell'ultima volta sono MAGGIORI del target
     bool suggerisciAumento = lastR > targetR && lastR > 0;
+    bool suggerisciReps = lastR > targetR && lastR > 0;
     if (ex.repsList.isNotEmpty) {
       if (setN <= ex.repsList.length) {
         targetR = ex.repsList[setN - 1];
@@ -12958,6 +12959,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   suggerisciAumento,
                   accent,
                   timeToUse,
+                  targetR,
+                  suggerisciReps,
                 ),
                 if (giaFatto)
                   Expanded(child: Center(child: _buildBoxEsercizioCompletato()))
@@ -13063,6 +13066,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     bool suggerisciAumento,
     Color accent,
     int timeToUse,
+    int targetR,
+    bool suggerisciReps,
   ) {
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
@@ -13134,6 +13139,17 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           style: const TextStyle(color: Colors.amber, fontSize: 10, fontWeight: FontWeight.bold)),
                       ],
                     ),
+                  ),
+                if (suggerisciReps)
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: Colors.green.withAlpha(30),
+                      border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Text('PROVA ${targetR + 2} REPS',
+                      style: const TextStyle(color: Colors.green, fontSize: 10, fontWeight: FontWeight.bold)),
                   ),
               ],
             ),
@@ -13443,6 +13459,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               : ex.repsList.last)
         : 10;
     bool suggerisciAumento = lastR > targetR && lastR > 0;
+    bool suggerisciReps = lastR > targetR && lastR > 0;
 
     // GIF del prossimo esercizio
     ExerciseConfig? prossimoConfig;
@@ -13701,6 +13718,19 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                               child: Text('$lastR reps',
                                                 style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
                                             ),
+                                            if (suggerisciReps) ...[
+                                              const SizedBox(width: 4),
+                                              Container(
+                                                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.green.withAlpha(30),
+                                                  border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
+                                                  borderRadius: BorderRadius.circular(8),
+                                                ),
+                                                child: Text('PROVA ${targetR + 2} REPS',
+                                                  style: const TextStyle(color: Colors.green, fontSize: 11, fontWeight: FontWeight.bold)),
+                                              ),
+                                            ],
                                           ],
                                         ),
                                       ],
@@ -13714,6 +13744,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       ),
                     ),
                     if (suggerisciAumento) const _AumentaPesoWidget(),
+                    if (suggerisciReps) _AumentaRepsWidget(targetReps: targetR + 2),
                     _buildTimerRestNativeAd(),
                     // SKIP
                     GestureDetector(
@@ -14028,6 +14059,103 @@ class _RecordOverlayState extends State<_RecordOverlay>
           ),
         ),
       ],
+    );
+  }
+}
+
+// --- BADGE ANIMATO AUMENTA LE REPS ---
+class _AumentaRepsWidget extends StatefulWidget {
+  final int targetReps;
+  const _AumentaRepsWidget({required this.targetReps});
+
+  @override
+  State<_AumentaRepsWidget> createState() => _AumentaRepsWidgetState();
+}
+
+class _AumentaRepsWidgetState extends State<_AumentaRepsWidget>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _ctrl;
+  late Animation<double> _scale;
+  late Animation<double> _glow;
+  int _flashes = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 380),
+    );
+    _scale = Tween(begin: 1.0, end: 1.07)
+        .animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
+    _glow = Tween(begin: 0.0, end: 18.0)
+        .animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
+    _ctrl.addStatusListener((status) {
+      if (!mounted) return;
+      if (status == AnimationStatus.completed) {
+        _ctrl.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        _flashes++;
+        if (_flashes < 3) _ctrl.forward();
+      }
+    });
+    _ctrl.forward();
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _ctrl,
+      builder: (_, __) => Transform.scale(
+        scale: _scale.value,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.green.shade600,
+                Colors.teal.shade500,
+                Colors.green.shade700,
+              ],
+            ),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: _glow.value > 0
+                ? [
+                    BoxShadow(
+                      color: Colors.green.withAlpha(160),
+                      blurRadius: _glow.value,
+                      spreadRadius: _glow.value / 5,
+                    ),
+                  ]
+                : [],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('💪', style: TextStyle(fontSize: 20)),
+              const SizedBox(width: 10),
+              Text(
+                'PROVA ${widget.targetReps} REPS',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 15,
+                  letterSpacing: 1.5,
+                ),
+              ),
+              const SizedBox(width: 10),
+              const Text('💪', style: TextStyle(fontSize: 20)),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
