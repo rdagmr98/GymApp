@@ -381,310 +381,374 @@ class AppL {
   static void setLang(String lang) => _lang = lang;
   static String get lang => _lang;
 
-  static String get mySchedule =>
-      _lang == 'en' ? 'My Schedule' : 'La mia scheda';
-  static String get noSchedule =>
-      _lang == 'en' ? 'No schedule yet' : 'Nessuna scheda';
-  static String get createSchedule =>
-      _lang == 'en' ? 'Create your schedule' : 'Crea la tua scheda';
-  static String get train => _lang == 'en' ? 'Train' : 'Allenati';
-  static String get progress => _lang == 'en' ? 'Progress' : 'Progressi';
-  static String get settings => _lang == 'en' ? 'Settings' : 'Impostazioni';
-  static String get deleteData =>
-      _lang == 'en' ? 'Delete data' : 'Cancella dati';
-  static String get day => _lang == 'en' ? 'Day' : 'Giorno';
-  static String get exercises => _lang == 'en' ? 'Exercises' : 'Esercizi';
-  static String get sets => _lang == 'en' ? 'Sets' : 'Serie';
-  static String get reps => _lang == 'en' ? 'Reps' : 'Ripetizioni';
-  static String get recovery => _lang == 'en' ? 'Recovery (s)' : 'Recupero (s)';
-  static String get notes => _lang == 'en' ? 'Notes' : 'Note';
-  static String get save => _lang == 'en' ? 'Save' : 'Salva';
-  static String get cancel => _lang == 'en' ? 'Cancel' : 'Annulla';
-  static String get add => _lang == 'en' ? 'Add' : 'Aggiungi';
-  static String get weight => _lang == 'en' ? 'Weight (kg)' : 'Peso (kg)';
-  static String get weightUnit => _lang == 'en' ? 'Weight unit' : 'Unita peso';
-  static String get usePounds =>
-      _lang == 'en' ? 'Use pounds (lb)' : 'Usa libbre (lb)';
-  static String get startWorkout =>
-      _lang == 'en' ? 'Start Workout' : 'Inizia Allenamento';
-  static String get proTrainer => _lang == 'en'
-      ? 'Are you a Personal Trainer?'
-      : 'Sei un Personal Trainer?';
-  static String get pause =>
-      _lang == 'en' ? 'Pause between exercises (s)' : 'Pausa tra esercizi (s)';
-  static String get browseArchive =>
-      _lang == 'en' ? 'Browse archive' : 'Sfoglia archivio';
-  static String get repsPerSet =>
-      _lang == 'en' ? 'Reps per set' : 'Reps per serie';
-  static String get muscleGroup =>
-      _lang == 'en' ? 'Muscle group' : 'Gruppo muscolare';
-  static String get chooseExercise =>
-      _lang == 'en' ? 'Choose exercise' : 'Scegli esercizio';
-  static String get noScheduleYet =>
-      _lang == 'en' ? 'No days yet' : 'Nessun giorno ancora';
-  static String get addFirstDay => _lang == 'en'
-      ? 'Press + to add the first day'
-      : 'Premi + per aggiungere il primo giorno';
-  static String get deleteDay =>
-      _lang == 'en' ? 'Delete day?' : 'Elimina giorno?';
-  static String get delete => _lang == 'en' ? 'DELETE' : 'ELIMINA';
-  static String get circuit =>
-      _lang == 'en' ? 'Superset & circuit' : 'Superserie e circuito';
-  static String get circuitHint => _lang == 'en'
-      ? 'Assign the same number to exercises done back-to-back without rest. 0 = normal, 1/2/3 = superset/circuit group.'
-      : 'Assegna lo stesso numero agli esercizi da fare in sequenza senza recupero. 0 = normale, 1/2/3 = gruppo superserie/circuito.';
-  static String get exerciseName =>
-      _lang == 'en' ? 'Exercise name' : 'Nome esercizio';
-  static String get pauseSec => _lang == 'en' ? 'Pause (s)' : 'Pausa (s)';
-  static String get tapToChooseMuscle => _lang == 'en'
-      ? 'Tap to choose muscle image'
-      : 'Tocca per scegliere immagine muscolo';
-  static String get noScheduleMsg => _lang == 'en'
-      ? 'No schedule yet.\nCreate your first workout!'
-      : 'Nessuna scheda.\nCrea il tuo primo allenamento!';
-  static String get history => _lang == 'en' ? 'History' : 'Storico';
-  static String get workoutOf =>
-      _lang == 'en' ? 'Workout of' : 'Allenamento del';
-  static String get restTimer =>
-      _lang == 'en' ? 'Rest timer' : 'Timer recupero';
-  static String get nextSet => _lang == 'en' ? 'Next set' : 'Prossima serie';
-  static String get done => _lang == 'en' ? 'Done' : 'Fatto';
-  static String get skip => _lang == 'en' ? 'Skip' : 'Salta';
-  static String get confirm => _lang == 'en' ? 'Confirm' : 'Conferma';
-  static String get workout => _lang == 'en' ? 'Workout' : 'Allenamento';
-  static String get totalVolume =>
-      _lang == 'en' ? 'Total volume' : 'Volume totale';
-  static String get personalBest =>
-      _lang == 'en' ? 'Personal best' : 'Record personale';
-  static String get language => _lang == 'en' ? 'Language' : 'Lingua';
-  static String get italian => _lang == 'en' ? 'Italian' : 'Italiano';
-  static String get english => _lang == 'en' ? 'English' : 'Inglese';
-  static String get accentColor =>
-      _lang == 'en' ? 'Accent color' : 'Colore accento';
-  static String get chooseLanguage =>
-      _lang == 'en' ? 'Choose your language' : 'Scegli la tua lingua';
-  static String get continueBtn => _lang == 'en' ? 'Continue' : 'Continua';
-  static String get welcomeTitle =>
-      _lang == 'en' ? 'Welcome to GymApp' : 'Benvenuto in GymApp';
-  static String get setGroup => _lang == 'en' ? 'Group' : 'Gruppo';
+  static String _t(String key) {
+    final m = _s[key];
+    if (m == null) return key;
+    return m[_lang] ?? m['en'] ?? m['it'] ?? key;
+  }
 
-  // Onboarding pages
-  static String get onboardingWelcomeText => _lang == 'en'
-      ? 'Your smart workout app, wherever you are.'
-      : 'La tua app per allenarsi in modo intelligente, ovunque tu sia.';
-  static String get onboardingScheduleTitle =>
-      _lang == 'en' ? 'Build your schedule' : 'Crea la tua scheda';
-  static String get onboardingScheduleText => _lang == 'en'
-      ? 'Build your personalized routine with exercises from our database of 1200+ movements with animated GIFs.'
-      : 'Costruisci la tua routine personalizzata con esercizi dal nostro database di 1200+ movimenti con GIF animate.';
-  static String get onboardingTrainTitle =>
-      _lang == 'en' ? 'Train & track' : 'Allena e registra';
-  static String get onboardingTrainText => _lang == 'en'
-      ? 'Follow each set with automatic timer, record weights and reps, view your progress over time.'
-      : 'Segui ogni serie con timer automatico, registra pesi e ripetizioni, visualizza i tuoi progressi nel tempo.';
-  static String get onboardingProgressTitle =>
-      _lang == 'en' ? 'Monitor progress' : 'Monitora i progressi';
-  static String get onboardingProgressText => _lang == 'en'
-      ? 'Charts for each exercise, session history and automatic suggestions to increase loads.'
-      : 'Grafici per ogni esercizio, storico delle sessioni e suggerimenti automatici per aumentare i carichi.';
-  static String get onboardingProText => _lang == 'en'
-      ? 'Take your clients to the next level with the complete ecosystem: PT app to create schedules and monitor all your athletes from a single dashboard.'
-      : 'Porta i tuoi clienti al livello successivo con l\'ecosistema completo: app PT per creare schede e monitorare tutti i tuoi atleti da un\'unica dashboard.';
-  static String get contactGianmarco =>
-      _lang == 'en' ? 'Contact Gianmarco' : 'Contatta Gianmarco';
-  static String get proInfoText => _lang == 'en'
-      ? 'Write for info on the GymApp Pro ecosystem'
-      : 'Scrivi per info sull\'ecosistema GymApp Pro';
-  static String get startBtn => _lang == 'en' ? 'START' : 'INIZIA';
-  static String get nextBtn => _lang == 'en' ? 'NEXT' : 'AVANTI';
-  static String get chooseMuscleImage =>
-      _lang == 'en' ? 'Workout image' : 'Immagine allenamento';
-  static String get noImage => _lang == 'en' ? 'None' : 'Nessuna';
-  static String get promoText => _lang == 'en'
-      ? 'Take your clients to the next level with the GymApp Pro ecosystem.'
-      : 'Porta i tuoi clienti al livello successivo con l\'ecosistema GymApp Pro.';
-  static String get noScheduleLoaded =>
-      _lang == 'en' ? 'No schedule loaded' : 'Nessuna scheda caricata';
-  static String get editOrCreate => _lang == 'en'
-      ? 'Edit or create schedule'
-      : 'Modifica o crea una nuova scheda';
-  static String get trainNow => _lang == 'en' ? 'TRAIN NOW' : 'ALLENATI ORA';
-  static String get train2 => _lang == 'en' ? 'TRAIN' : 'ALLENATI';
-  static String get chooseAndStart => _lang == 'en'
-      ? 'Choose and start your workout'
-      : 'Scegli e inizia il tuo allenamento';
-  static String get createFirstSchedule => _lang == 'en'
-      ? 'Create your schedule before training'
-      : 'Crea la tua scheda prima di allenarti';
-  static String get workoutProgress =>
-      _lang == 'en' ? 'WORKOUT PROGRESS' : 'ANDAMENTO ALLENAMENTO';
-  static String get neverTrained =>
-      _lang == 'en' ? 'Never trained' : 'Mai allenato';
-  static String get today => _lang == 'en' ? 'Today' : 'Oggi';
-  static String get yesterday => _lang == 'en' ? 'Yesterday' : 'Ieri';
-  static String get daysAgo => _lang == 'en' ? 'days ago' : 'giorni fa';
-  static String get others => _lang == 'en' ? 'others' : 'altri';
-  static String get timerSound =>
-      _lang == 'en' ? 'Timer sound' : 'Suono fine timer';
-  static String get timerVibration =>
-      _lang == 'en' ? 'Timer vibration' : 'Vibrazione fine timer';
-  static String get autoStartTimer =>
-      _lang == 'en' ? 'Auto-start timer' : 'Avvia timer automaticamente';
-  static String get screenAlwaysOn =>
-      _lang == 'en' ? 'Screen always on' : 'Schermo sempre acceso';
-  static String get confirmSeriesWindow =>
-      _lang == 'en' ? 'Set confirmation window' : 'Finestra di conferma serie';
-  static String get weightSuggestion => _lang == 'en'
-      ? 'Weight increase suggestion'
-      : 'Suggerimento aumento peso';
-  static String get dataManagement =>
-      _lang == 'en' ? 'Data Management' : 'Gestione Dati';
-  static String get insertKg => _lang == 'en' ? 'Enter KG' : 'Inserisci KG';
-  static String get insertReps =>
-      _lang == 'en' ? 'Enter REPS' : 'Inserisci REPS';
-  static String get enterKgReps => _lang == 'en'
-      ? 'Enter kg and reps before confirming'
-      : 'Inserisci kg e reps prima di confermare';
-  static String get saveSeries => _lang == 'en' ? 'SAVE SET' : 'SALVA SERIE';
-  static String get confirmSeries =>
-      _lang == 'en' ? 'CONFIRM SET' : 'CONFERMA SERIE';
-  static String get quitWorkout => _lang == 'en' ? 'Quit?' : 'Interrompere?';
-  static String get quitWorkoutMsg => _lang == 'en'
-      ? 'Do you really want to exit? Progress made so far is saved.'
-      : 'Vuoi davvero uscire dall\'allenamento? I progressi fin qui fatti sono comunque salvati.';
-  static String get exitAndSave =>
-      _lang == 'en' ? 'EXIT & SAVE' : 'ESCI E SALVA';
-  static String get exerciseComplete =>
-      _lang == 'en' ? 'EXERCISE COMPLETED' : 'ESERCIZIO COMPLETATO';
-  static String get exerciseCompleteMsg => _lang == 'en'
-      ? 'Data has been saved and cannot be modified.'
-      : 'I dati sono stati salvati e non sono più modificabili.';
-  static String get nextInfo => _lang == 'en' ? 'NEXT' : 'PROSSIMA';
-  static String get lastTime => _lang == 'en' ? 'LAST TIME' : 'ULTIMA VOLTA';
-  static String get increaseWeight =>
-      _lang == 'en' ? 'INCREASE WEIGHT' : 'AUMENTA IL PESO';
-  static String get increase => _lang == 'en' ? 'INCREASE' : 'AUMENTA';
-  static String get workoutComplete =>
-      _lang == 'en' ? 'WORKOUT COMPLETE!' : 'ALLENAMENTO COMPLETATO!';
-  static String get firstSession =>
-      _lang == 'en' ? 'First session!' : 'Prima sessione!';
-  static String get improving =>
-      _lang == 'en' ? 'Improving!' : 'In miglioramento!';
-  static String get declining => _lang == 'en' ? 'Declining' : 'In calo';
-  static String get plateau => _lang == 'en' ? 'Plateau' : 'Stallo';
-  static String get details => _lang == 'en' ? 'DETAILS' : 'DETTAGLI';
-  static String get greatWork =>
-      _lang == 'en' ? 'GREAT JOB!' : 'OTTIMO LAVORO!';
-  static String get workoutSummary =>
-      _lang == 'en' ? 'Workout summary' : 'Riepilogo allenamento';
-  static String get close => _lang == 'en' ? 'CLOSE' : 'CHIUDI';
-  static String get totalSeries =>
-      _lang == 'en' ? 'Total sets' : 'Serie totali';
-  static String get exercisesLabel => _lang == 'en' ? 'Exercises' : 'Esercizi';
-  static String get primaryMuscle =>
-      _lang == 'en' ? 'PRIMARY MUSCLE' : 'MUSCOLO PRINCIPALE';
-  static String get secondaryMuscles =>
-      _lang == 'en' ? 'SECONDARY MUSCLES' : 'MUSCOLI SECONDARI';
-  static String get execution =>
-      _lang == 'en' ? '📋 EXECUTION' : '📋 ESECUZIONE';
-  static String get tips => _lang == 'en' ? '💡 TIPS' : '💡 CONSIGLI';
-  static String get notInCatalog => _lang == 'en'
-      ? 'Exercise not in catalog.\nUse YouTube to watch the technique.'
-      : 'Esercizio non in catalogo.\nUsa YouTube per vedere la tecnica.';
-  static String get notInCatalogShort =>
-      _lang == 'en' ? 'Exercise not in catalog.' : 'Esercizio non in catalogo.';
-  static String get watchOnYoutube =>
-      _lang == 'en' ? 'Watch on YouTube' : 'Guarda su YouTube';
-  static String get progressOverTime => _lang == 'en'
-      ? 'Progress over time — one line per set'
-      : 'Progressi nel tempo — una linea per serie';
-  static String get noData => _lang == 'en' ? 'No data' : 'Nessun dato';
-  static String get noDataRegistered =>
-      _lang == 'en' ? 'No recorded data' : 'Nessun dato registrato';
-  static String get myNotes => _lang == 'en' ? 'My notes...' : 'Le mie note...';
-  static String get coachNotes => _lang == 'en' ? 'COACH' : 'COACH';
-  static String get setsDone => _lang == 'en' ? 'SETS DONE' : 'SERIE FATTE';
-  static String get of => _lang == 'en' ? 'OF' : 'DI';
-  static String get changeExercise =>
-      _lang == 'en' ? 'CHANGE EXERCISE' : 'CAMBIO ESERCIZIO';
-  static String get noHistory =>
-      _lang == 'en' ? 'No history' : 'Nessuno storico presente';
-  static String get deleteSelected =>
-      _lang == 'en' ? 'Delete selected' : 'Elimina selezionati';
-  static String get totalReset =>
-      _lang == 'en' ? 'TOTAL RESET' : 'RESET TOTALE';
-  static String get fullReset =>
-      _lang == 'en' ? 'Full data reset' : 'Reset completo dati';
-  static String get fullResetTitle =>
-      _lang == 'en' ? 'Full reset' : 'Reset completo';
-  static String get fullResetMsg => _lang == 'en'
-      ? 'Will delete ALL data: schedule, history and settings.'
-      : 'Eliminerà TUTTI i dati: scheda, storico e impostazioni.';
-  static String get continueLabel => _lang == 'en' ? 'CONTINUE' : 'CONTINUA';
-  static String get areYouSure =>
-      _lang == 'en' ? 'Are you sure?' : 'Sei sicuro?';
-  static String get irreversible => _lang == 'en'
-      ? 'This operation is irreversible.'
-      : 'Operazione irreversibile.';
-  static String get deleteAll =>
-      _lang == 'en' ? 'DELETE ALL' : 'CANCELLA TUTTO';
-  static String get noSession =>
-      _lang == 'en' ? 'No sessions' : 'Nessuna sessione';
-  static String get deleteSession =>
-      _lang == 'en' ? 'Delete session?' : 'Elimina sessione?';
-  static String get deleteSessionMsg => _lang == 'en'
-      ? 'All data from this session will be deleted.'
-      : 'Tutti i dati di questa sessione verranno eliminati.';
-  static String get sessionDeleted =>
-      _lang == 'en' ? 'Session deleted' : 'Sessione eliminata';
-  static String get deleteSeries =>
-      _lang == 'en' ? 'Delete set?' : 'Elimina serie?';
-  static String get dataDeleted =>
-      _lang == 'en' ? 'Data deleted' : 'Dati eliminati';
-  static String get skipUseButton => _lang == 'en'
-      ? 'Use the SKIP button to return to the exercise'
-      : 'Usa il tasto \'SKIP\' per tornare all\'esercizio';
-  static String get restoreWorkout => _lang == 'en'
-      ? '♻️ Previous workout restored'
-      : '♻️ Allenamento precedente ripristinato';
-  static String get workoutNotDone => _lang == 'en'
-      ? 'You completed this exercise, but there are more! Use the arrows.'
-      : 'Hai completato questo esercizio, ma ne mancano altri! Usa le frecce.';
-  static String get proFeature1 => _lang == 'en'
-      ? '✅ Personalized schedules for each athlete'
-      : '✅ Schede personalizzate per ogni atleta';
-  static String get proFeature2 => _lang == 'en'
-      ? '✅ Real-time progress monitoring'
-      : '✅ Monitoraggio progressi in tempo reale';
-  static String get proFeature3 => _lang == 'en'
-      ? '✅ Shared exercise database'
-      : '✅ Database esercizi condiviso';
-  static String get proFeature4 => _lang == 'en'
-      ? '✅ No monthly subscriptions'
-      : '✅ Senza abbonamenti mensili';
-  static String get gymAppPro =>
-      _lang == 'en' ? 'GymApp Pro - For PT' : 'GymApp Pro - Per PT';
-  static String get recoverySuffix => _lang == 'en' ? 's rest' : 's riposo';
-  static String get sessionCount => _lang == 'en' ? 'session' : 'session';
-  static String get sessionCountPlural =>
-      _lang == 'en' ? 'sessions' : 'sessioni';
-  static String get loadExample =>
-      _lang == 'en' ? 'Load example' : 'Carica esempio';
-  static String get renameSession =>
-      _lang == 'en' ? 'Rename session' : 'Rinomina sessione';
-  static String get sessionName =>
-      _lang == 'en' ? 'Session name' : 'Nome sessione';
-  static String get editExercise =>
-      _lang == 'en' ? 'Edit exercise' : 'Modifica esercizio';
-  static String get streakWeeks =>
-      _lang == 'en' ? 'Week streak' : 'Microcicli di fila';
-  static String get streakMsg => _lang == 'en'
-      ? '🔥 Keep your streak alive!'
-      : '🔥 Mantieni la tua streak!';
-  static String get newRecord =>
-      _lang == 'en' ? 'NEW RECORD!' : 'NUOVO RECORD!';
+  static String tryReps(int n) {
+    switch (_lang) {
+      case 'en': return 'TRY $n REPS';
+      case 'es': return 'INTENTA $n REPS';
+      case 'pt': return 'TENTE $n REPS';
+      case 'fr': return 'ESSAYEZ $n REPS';
+      case 'de': return '$n WDHL. VERSUCHEN';
+      case 'el': return 'ΔΟΚΙΜΑΣΕ $n ΕΠΑΝ.';
+      case 'ar': return 'جرب $n تكرارات';
+      case 'pl': return 'SPRÓBUJ $n POWT.';
+      case 'ro': return 'ÎNCEARCĂ $n REP.';
+      case 'hu': return 'PRÓBÁLJ $n ISM.';
+      default: return 'PROVA $n REPS';
+    }
+  }
+
+  static const Map<String, Map<String, String>> _s = {
+    'mySchedule': {'it': 'La mia scheda', 'en': 'My Schedule', 'es': 'Mi programa', 'pt': 'Meu programa', 'fr': 'Mon programme', 'de': 'Mein Programm', 'el': 'Το πρόγραμμά μου', 'ar': 'برنامجي', 'pl': 'Mój plan', 'ro': 'Programul meu', 'hu': 'Saját programom'},
+    'noSchedule': {'it': 'Nessuna scheda', 'en': 'No schedule yet', 'es': 'Sin programa', 'pt': 'Sem programa', 'fr': 'Pas de programme', 'de': 'Kein Programm', 'el': 'Δεν υπάρχει πρόγραμμα', 'ar': 'لا يوجد برنامج', 'pl': 'Brak planu', 'ro': 'Niciun program', 'hu': 'Nincs program'},
+    'createSchedule': {'it': 'Crea la tua scheda', 'en': 'Create your schedule', 'es': 'Crea tu programa', 'pt': 'Crie seu programa', 'fr': 'Créez votre programme', 'de': 'Erstelle dein Programm', 'el': 'Δημιούργησε το πρόγραμμά σου', 'ar': 'أنشئ برنامجك', 'pl': 'Utwórz swój plan', 'ro': 'Creează-ți programul', 'hu': 'Hozd létre a programodat'},
+    'train': {'it': 'Allenati', 'en': 'Train', 'es': 'Entrenar', 'pt': 'Treinar', 'fr': 'S\'entraîner', 'de': 'Trainieren', 'el': 'Γυμνάσου', 'ar': 'تدرب', 'pl': 'Trenuj', 'ro': 'Antrenează-te', 'hu': 'Edzen'},
+    'progress': {'it': 'Progressi', 'en': 'Progress', 'es': 'Progreso', 'pt': 'Progresso', 'fr': 'Progrès', 'de': 'Fortschritt', 'el': 'Πρόοδος', 'ar': 'التقدم', 'pl': 'Postęp', 'ro': 'Progres', 'hu': 'Haladás'},
+    'settings': {'it': 'Impostazioni', 'en': 'Settings', 'es': 'Ajustes', 'pt': 'Configurações', 'fr': 'Paramètres', 'de': 'Einstellungen', 'el': 'Ρυθμίσεις', 'ar': 'الإعدادات', 'pl': 'Ustawienia', 'ro': 'Setări', 'hu': 'Beállítások'},
+    'deleteData': {'it': 'Cancella dati', 'en': 'Delete data', 'es': 'Borrar datos', 'pt': 'Excluir dados', 'fr': 'Supprimer données', 'de': 'Daten löschen', 'el': 'Διαγραφή δεδομένων', 'ar': 'حذف البيانات', 'pl': 'Usuń dane', 'ro': 'Șterge date', 'hu': 'Adatok törlése'},
+    'day': {'it': 'Giorno', 'en': 'Day', 'es': 'Día', 'pt': 'Dia', 'fr': 'Jour', 'de': 'Tag', 'el': 'Ημέρα', 'ar': 'يوم', 'pl': 'Dzień', 'ro': 'Zi', 'hu': 'Nap'},
+    'exercises': {'it': 'Esercizi', 'en': 'Exercises', 'es': 'Ejercicios', 'pt': 'Exercícios', 'fr': 'Exercices', 'de': 'Übungen', 'el': 'Ασκήσεις', 'ar': 'تمارين', 'pl': 'Ćwiczenia', 'ro': 'Exerciții', 'hu': 'Gyakorlatok'},
+    'sets': {'it': 'Serie', 'en': 'Sets', 'es': 'Series', 'pt': 'Séries', 'fr': 'Séries', 'de': 'Sätze', 'el': 'Σετ', 'ar': 'مجموعات', 'pl': 'Serie', 'ro': 'Seturi', 'hu': 'Sorozatok'},
+    'reps': {'it': 'Ripetizioni', 'en': 'Reps', 'es': 'Repeticiones', 'pt': 'Repetições', 'fr': 'Répétitions', 'de': 'Wdhl.', 'el': 'Επαναλήψεις', 'ar': 'تكرارات', 'pl': 'Powtórzenia', 'ro': 'Repetări', 'hu': 'Ismétlések'},
+    'recovery': {'it': 'Recupero (s)', 'en': 'Recovery (s)', 'es': 'Recuperación (s)', 'pt': 'Recuperação (s)', 'fr': 'Récupération (s)', 'de': 'Erholung (s)', 'el': 'Ανάκαμψη (s)', 'ar': 'التعافي (s)', 'pl': 'Odpoczynek (s)', 'ro': 'Recuperare (s)', 'hu': 'Pihenő (s)'},
+    'notes': {'it': 'Note', 'en': 'Notes', 'es': 'Notas', 'pt': 'Notas', 'fr': 'Notes', 'de': 'Notizen', 'el': 'Σημειώσεις', 'ar': 'ملاحظات', 'pl': 'Notatki', 'ro': 'Note', 'hu': 'Megjegyzések'},
+    'save': {'it': 'Salva', 'en': 'Save', 'es': 'Guardar', 'pt': 'Salvar', 'fr': 'Enregistrer', 'de': 'Speichern', 'el': 'Αποθήκευση', 'ar': 'حفظ', 'pl': 'Zapisz', 'ro': 'Salvează', 'hu': 'Mentés'},
+    'cancel': {'it': 'Annulla', 'en': 'Cancel', 'es': 'Cancelar', 'pt': 'Cancelar', 'fr': 'Annuler', 'de': 'Abbrechen', 'el': 'Ακύρωση', 'ar': 'إلغاء', 'pl': 'Anuluj', 'ro': 'Anulează', 'hu': 'Mégse'},
+    'add': {'it': 'Aggiungi', 'en': 'Add', 'es': 'Añadir', 'pt': 'Adicionar', 'fr': 'Ajouter', 'de': 'Hinzufügen', 'el': 'Προσθήκη', 'ar': 'إضافة', 'pl': 'Dodaj', 'ro': 'Adaugă', 'hu': 'Hozzáadás'},
+    'weight': {'it': 'Peso (kg)', 'en': 'Weight (kg)', 'es': 'Peso (kg)', 'pt': 'Peso (kg)', 'fr': 'Poids (kg)', 'de': 'Gewicht (kg)', 'el': 'Βάρος (kg)', 'ar': 'الوزن (kg)', 'pl': 'Ciężar (kg)', 'ro': 'Greutate (kg)', 'hu': 'Súly (kg)'},
+    'weightUnit': {'it': 'Unita peso', 'en': 'Weight unit', 'es': 'Unidad de peso', 'pt': 'Unidade de peso', 'fr': 'Unité de poids', 'de': 'Gewichtseinheit', 'el': 'Μονάδα βάρους', 'ar': 'وحدة الوزن', 'pl': 'Jednostka wagi', 'ro': 'Unitate greutate', 'hu': 'Súlyegység'},
+    'usePounds': {'it': 'Usa libbre (lb)', 'en': 'Use pounds (lb)', 'es': 'Usar libras (lb)', 'pt': 'Usar libras (lb)', 'fr': 'Utiliser livres (lb)', 'de': 'Pfund verwenden (lb)', 'el': 'Χρήση λιβρών (lb)', 'ar': 'استخدام الرطل (lb)', 'pl': 'Używaj funtów (lb)', 'ro': 'Folosiți livre (lb)', 'hu': 'Font használata (lb)'},
+    'startWorkout': {'it': 'Inizia Allenamento', 'en': 'Start Workout', 'es': 'Iniciar entrenamiento', 'pt': 'Iniciar treino', 'fr': 'Démarrer l\'entraînement', 'de': 'Training starten', 'el': 'Ξεκίνα προπόνηση', 'ar': 'ابدأ التمرين', 'pl': 'Rozpocznij trening', 'ro': 'Începe antrenamentul', 'hu': 'Edzés indítása'},
+    'proTrainer': {'it': 'Sei un Personal Trainer?', 'en': 'Are you a Personal Trainer?', 'es': '¿Eres un entrenador personal?', 'pt': 'Você é personal trainer?', 'fr': 'Êtes-vous coach personnel?', 'de': 'Bist du ein Personal Trainer?', 'el': 'Είσαι Προσωπικός Γυμναστής;', 'ar': 'هل أنت مدرب شخصي؟', 'pl': 'Czy jesteś trenerem personalnym?', 'ro': 'Ești antrenor personal?', 'hu': 'Personal edző vagy?'},
+    'pause': {'it': 'Pausa tra esercizi (s)', 'en': 'Pause between exercises (s)', 'es': 'Pausa entre ejercicios (s)', 'pt': 'Pausa entre exercícios (s)', 'fr': 'Pause entre exercices (s)', 'de': 'Pause zwischen Übungen (s)', 'el': 'Παύση μεταξύ ασκήσεων (s)', 'ar': 'استراحة بين التمارين (s)', 'pl': 'Przerwa między ćwiczeniami (s)', 'ro': 'Pauză între exerciții (s)', 'hu': 'Szünet gyakorlatok között (s)'},
+    'browseArchive': {'it': 'Sfoglia archivio', 'en': 'Browse archive', 'es': 'Ver archivo', 'pt': 'Ver arquivo', 'fr': 'Parcourir l\'archive', 'de': 'Archiv durchsuchen', 'el': 'Περιήγηση αρχείου', 'ar': 'تصفح الأرشيف', 'pl': 'Przeglądaj archiwum', 'ro': 'Răsfoiește arhiva', 'hu': 'Archívum böngészése'},
+    'repsPerSet': {'it': 'Reps per serie', 'en': 'Reps per set', 'es': 'Reps por serie', 'pt': 'Reps por série', 'fr': 'Reps par série', 'de': 'Wdhl. pro Satz', 'el': 'Επαναλήψεις ανά σετ', 'ar': 'تكرارات لكل مجموعة', 'pl': 'Powtórzenia na serię', 'ro': 'Rep. per set', 'hu': 'Ismétlés/sorozat'},
+    'muscleGroup': {'it': 'Gruppo muscolare', 'en': 'Muscle group', 'es': 'Grupo muscular', 'pt': 'Grupo muscular', 'fr': 'Groupe musculaire', 'de': 'Muskelgruppe', 'el': 'Μυϊκή ομάδα', 'ar': 'مجموعة عضلية', 'pl': 'Grupa mięśniowa', 'ro': 'Grup muscular', 'hu': 'Izomcsoport'},
+    'chooseExercise': {'it': 'Scegli esercizio', 'en': 'Choose exercise', 'es': 'Elegir ejercicio', 'pt': 'Escolher exercício', 'fr': 'Choisir exercice', 'de': 'Übung wählen', 'el': 'Επιλέξτε άσκηση', 'ar': 'اختر تمريناً', 'pl': 'Wybierz ćwiczenie', 'ro': 'Alege exercițiu', 'hu': 'Válassz gyakorlatot'},
+    'noScheduleYet': {'it': 'Nessun giorno ancora', 'en': 'No days yet', 'es': 'Sin días aún', 'pt': 'Sem dias ainda', 'fr': 'Pas encore de jours', 'de': 'Noch keine Tage', 'el': 'Δεν υπάρχουν ημέρες', 'ar': 'لا أيام بعد', 'pl': 'Brak dni', 'ro': 'Nicio zi încă', 'hu': 'Még nincs nap'},
+    'addFirstDay': {'it': 'Premi + per aggiungere il primo giorno', 'en': 'Press + to add the first day', 'es': 'Pulsa + para añadir el primer día', 'pt': 'Pressione + para adicionar o primeiro dia', 'fr': 'Appuyez sur + pour ajouter le premier jour', 'de': 'Drücke + um den ersten Tag hinzuzufügen', 'el': 'Πάτα + για προσθήκη πρώτης ημέρας', 'ar': 'اضغط + لإضافة اليوم الأول', 'pl': 'Naciśnij + aby dodać pierwszy dzień', 'ro': 'Apasă + pentru a adăuga prima zi', 'hu': 'Nyomj + az első nap hozzáadásához'},
+    'deleteDay': {'it': 'Elimina giorno?', 'en': 'Delete day?', 'es': '¿Eliminar día?', 'pt': 'Excluir dia?', 'fr': 'Supprimer le jour?', 'de': 'Tag löschen?', 'el': 'Διαγραφή ημέρας;', 'ar': 'حذف اليوم؟', 'pl': 'Usunąć dzień?', 'ro': 'Ștergi ziua?', 'hu': 'Nap törlése?'},
+    'delete': {'it': 'ELIMINA', 'en': 'DELETE', 'es': 'ELIMINAR', 'pt': 'EXCLUIR', 'fr': 'SUPPRIMER', 'de': 'LÖSCHEN', 'el': 'ΔΙΑΓΡΑΦΗ', 'ar': 'حذف', 'pl': 'USUŃ', 'ro': 'ȘTERGE', 'hu': 'TÖRLÉS'},
+    'circuit': {'it': 'Superserie e circuito', 'en': 'Superset & circuit', 'es': 'Superserie y circuito', 'pt': 'Supersérie e circuito', 'fr': 'Superset et circuit', 'de': 'Supersatz & Zirkel', 'el': 'Superset & κύκλος', 'ar': 'سوبر سيت ودورة', 'pl': 'Superseria i obwód', 'ro': 'Superset și circuit', 'hu': 'Szupersorozat és kör'},
+    'circuitHint': {'it': 'Assegna lo stesso numero agli esercizi da fare in sequenza senza recupero. 0 = normale, 1/2/3 = gruppo superserie/circuito.', 'en': 'Assign the same number to exercises done back-to-back without rest. 0 = normal, 1/2/3 = superset/circuit group.', 'es': 'Asigna el mismo número a ejercicios sin descanso. 0 = normal, 1/2/3 = grupo superserie/circuito.', 'pt': 'Atribua o mesmo número a exercícios sem descanso. 0 = normal, 1/2/3 = grupo supersérie/circuito.', 'fr': 'Assignez le même numéro aux exercices enchaînés sans repos. 0 = normal, 1/2/3 = groupe superset/circuit.', 'de': 'Gleiche Nummer für Übungen ohne Pause. 0 = normal, 1/2/3 = Supersatz/Zirkelgruppe.', 'el': 'Δώσε τον ίδιο αριθμό σε ασκήσεις χωρίς ανάπαυση. 0 = κανονικό, 1/2/3 = ομάδα superset/κύκλου.', 'ar': 'أعطِ نفس الرقم للتمارين المتتالية بدون راحة. 0 = عادي، 1/2/3 = مجموعة سوبر سيت/دورة.', 'pl': 'Przypisz ten sam numer ćwiczeniom bez przerwy. 0 = normalne, 1/2/3 = superseria/obwód.', 'ro': 'Atribuie același număr exercițiilor fără odihnă. 0 = normal, 1/2/3 = grup superset/circuit.', 'hu': 'Azonos számot adj a pihenő nélküli gyakorlatoknak. 0 = normál, 1/2/3 = szuper/körsorozat.'},
+    'exerciseName': {'it': 'Nome esercizio', 'en': 'Exercise name', 'es': 'Nombre del ejercicio', 'pt': 'Nome do exercício', 'fr': 'Nom de l\'exercice', 'de': 'Übungsname', 'el': 'Όνομα άσκησης', 'ar': 'اسم التمرين', 'pl': 'Nazwa ćwiczenia', 'ro': 'Numele exercițiului', 'hu': 'Gyakorlat neve'},
+    'pauseSec': {'it': 'Pausa (s)', 'en': 'Pause (s)', 'es': 'Pausa (s)', 'pt': 'Pausa (s)', 'fr': 'Pause (s)', 'de': 'Pause (s)', 'el': 'Παύση (s)', 'ar': 'توقف (s)', 'pl': 'Przerwa (s)', 'ro': 'Pauză (s)', 'hu': 'Szünet (s)'},
+    'tapToChooseMuscle': {'it': 'Tocca per scegliere immagine muscolo', 'en': 'Tap to choose muscle image', 'es': 'Toca para elegir imagen de músculo', 'pt': 'Toque para escolher imagem do músculo', 'fr': 'Appuyez pour choisir image du muscle', 'de': 'Tippe um Muskelbild zu wählen', 'el': 'Πάτα για επιλογή εικόνας μυός', 'ar': 'اضغط لاختيار صورة العضلة', 'pl': 'Dotknij aby wybrać obraz mięśnia', 'ro': 'Atinge pentru a alege imaginea mușchiului', 'hu': 'Érintsd az izomkép kiválasztásához'},
+    'noScheduleMsg': {'it': 'Nessuna scheda.\nCrea il tuo primo allenamento!', 'en': 'No schedule yet.\nCreate your first workout!', 'es': 'Sin programa.\n¡Crea tu primer entrenamiento!', 'pt': 'Sem programa.\nCrie seu primeiro treino!', 'fr': 'Pas de programme.\nCréez votre premier entraînement!', 'de': 'Kein Programm.\nErstelle dein erstes Training!', 'el': 'Δεν υπάρχει πρόγραμμα.\nΔημιούργησε την πρώτη σου προπόνηση!', 'ar': 'لا يوجد برنامج.\nأنشئ أول تمرين لك!', 'pl': 'Brak planu.\nUtwórz pierwszy trening!', 'ro': 'Niciun program.\nCreează primul tău antrenament!', 'hu': 'Nincs program.\nHozd létre az első edzésed!'},
+    'history': {'it': 'Storico', 'en': 'History', 'es': 'Historial', 'pt': 'Histórico', 'fr': 'Historique', 'de': 'Verlauf', 'el': 'Ιστορικό', 'ar': 'السجل', 'pl': 'Historia', 'ro': 'Istoric', 'hu': 'Előzmény'},
+    'workoutOf': {'it': 'Allenamento del', 'en': 'Workout of', 'es': 'Entrenamiento del', 'pt': 'Treino de', 'fr': 'Entraînement du', 'de': 'Training vom', 'el': 'Προπόνηση', 'ar': 'تمرين', 'pl': 'Trening z', 'ro': 'Antrenament din', 'hu': 'Edzés'},
+    'restTimer': {'it': 'Timer recupero', 'en': 'Rest timer', 'es': 'Temporizador descanso', 'pt': 'Cronômetro descanso', 'fr': 'Minuterie repos', 'de': 'Erholungs-Timer', 'el': 'Χρονόμετρο ανάπαυσης', 'ar': 'مؤقت الراحة', 'pl': 'Timer odpoczynku', 'ro': 'Timer odihnă', 'hu': 'Pihenő időzítő'},
+    'nextSet': {'it': 'Prossima serie', 'en': 'Next set', 'es': 'Siguiente serie', 'pt': 'Próxima série', 'fr': 'Prochain set', 'de': 'Nächster Satz', 'el': 'Επόμενο σετ', 'ar': 'المجموعة التالية', 'pl': 'Następna seria', 'ro': 'Setul următor', 'hu': 'Következő sorozat'},
+    'done': {'it': 'Fatto', 'en': 'Done', 'es': 'Hecho', 'pt': 'Feito', 'fr': 'Terminé', 'de': 'Fertig', 'el': 'Έγινε', 'ar': 'تم', 'pl': 'Gotowe', 'ro': 'Gata', 'hu': 'Kész'},
+    'skip': {'it': 'Salta', 'en': 'Skip', 'es': 'Saltar', 'pt': 'Pular', 'fr': 'Passer', 'de': 'Überspringen', 'el': 'Παράλειψη', 'ar': 'تخطي', 'pl': 'Pomiń', 'ro': 'Sari peste', 'hu': 'Kihagyás'},
+    'confirm': {'it': 'Conferma', 'en': 'Confirm', 'es': 'Confirmar', 'pt': 'Confirmar', 'fr': 'Confirmer', 'de': 'Bestätigen', 'el': 'Επιβεβαίωση', 'ar': 'تأكيد', 'pl': 'Potwierdź', 'ro': 'Confirmă', 'hu': 'Megerősítés'},
+    'workout': {'it': 'Allenamento', 'en': 'Workout', 'es': 'Entrenamiento', 'pt': 'Treino', 'fr': 'Entraînement', 'de': 'Training', 'el': 'Προπόνηση', 'ar': 'تمرين', 'pl': 'Trening', 'ro': 'Antrenament', 'hu': 'Edzés'},
+    'totalVolume': {'it': 'Volume totale', 'en': 'Total volume', 'es': 'Volumen total', 'pt': 'Volume total', 'fr': 'Volume total', 'de': 'Gesamtvolumen', 'el': 'Συνολικός όγκος', 'ar': 'الحجم الكلي', 'pl': 'Całkowita objętość', 'ro': 'Volum total', 'hu': 'Összes térfogat'},
+    'personalBest': {'it': 'Record personale', 'en': 'Personal best', 'es': 'Mejor personal', 'pt': 'Recorde pessoal', 'fr': 'Record personnel', 'de': 'Persönlicher Rekord', 'el': 'Προσωπικό ρεκόρ', 'ar': 'رقم شخصي', 'pl': 'Osobisty rekord', 'ro': 'Record personal', 'hu': 'Személyes rekord'},
+    'language': {'it': 'Lingua', 'en': 'Language', 'es': 'Idioma', 'pt': 'Idioma', 'fr': 'Langue', 'de': 'Sprache', 'el': 'Γλώσσα', 'ar': 'اللغة', 'pl': 'Język', 'ro': 'Limbă', 'hu': 'Nyelv'},
+    'italian': {'it': 'Italiano', 'en': 'Italian', 'es': 'Italiano', 'pt': 'Italiano', 'fr': 'Italien', 'de': 'Italienisch', 'el': 'Ιταλικά', 'ar': 'إيطالي', 'pl': 'Włoski', 'ro': 'Italiană', 'hu': 'Olasz'},
+    'english': {'it': 'Inglese', 'en': 'English', 'es': 'Inglés', 'pt': 'Inglês', 'fr': 'Anglais', 'de': 'Englisch', 'el': 'Αγγλικά', 'ar': 'إنجليزي', 'pl': 'Angielski', 'ro': 'Engleză', 'hu': 'Angol'},
+    'spanish': {'it': 'Spagnolo', 'en': 'Spanish', 'es': 'Español', 'pt': 'Espanhol', 'fr': 'Espagnol', 'de': 'Spanisch', 'el': 'Ισπανικά', 'ar': 'إسباني', 'pl': 'Hiszpański', 'ro': 'Spaniolă', 'hu': 'Spanyol'},
+    'portuguese': {'it': 'Portoghese', 'en': 'Portuguese', 'es': 'Portugués', 'pt': 'Português', 'fr': 'Portugais', 'de': 'Portugiesisch', 'el': 'Πορτογαλικά', 'ar': 'برتغالي', 'pl': 'Portugalski', 'ro': 'Portugheză', 'hu': 'Portugál'},
+    'french': {'it': 'Francese', 'en': 'French', 'es': 'Francés', 'pt': 'Francês', 'fr': 'Français', 'de': 'Französisch', 'el': 'Γαλλικά', 'ar': 'فرنسي', 'pl': 'Francuski', 'ro': 'Franceză', 'hu': 'Francia'},
+    'german': {'it': 'Tedesco', 'en': 'German', 'es': 'Alemán', 'pt': 'Alemão', 'fr': 'Allemand', 'de': 'Deutsch', 'el': 'Γερμανικά', 'ar': 'ألماني', 'pl': 'Niemiecki', 'ro': 'Germană', 'hu': 'Német'},
+    'greek': {'it': 'Greco', 'en': 'Greek', 'es': 'Griego', 'pt': 'Grego', 'fr': 'Grec', 'de': 'Griechisch', 'el': 'Ελληνικά', 'ar': 'يوناني', 'pl': 'Grecki', 'ro': 'Greacă', 'hu': 'Görög'},
+    'arabic': {'it': 'Arabo', 'en': 'Arabic', 'es': 'Árabe', 'pt': 'Árabe', 'fr': 'Arabe', 'de': 'Arabisch', 'el': 'Αραβικά', 'ar': 'عربي', 'pl': 'Arabski', 'ro': 'Arabă', 'hu': 'Arab'},
+    'polish': {'it': 'Polacco', 'en': 'Polish', 'es': 'Polaco', 'pt': 'Polonês', 'fr': 'Polonais', 'de': 'Polnisch', 'el': 'Πολωνικά', 'ar': 'بولندي', 'pl': 'Polski', 'ro': 'Polonă', 'hu': 'Lengyel'},
+    'romanian': {'it': 'Rumeno', 'en': 'Romanian', 'es': 'Rumano', 'pt': 'Romeno', 'fr': 'Roumain', 'de': 'Rumänisch', 'el': 'Ρουμανικά', 'ar': 'روماني', 'pl': 'Rumuński', 'ro': 'Română', 'hu': 'Román'},
+    'hungarian': {'it': 'Ungherese', 'en': 'Hungarian', 'es': 'Húngaro', 'pt': 'Húngaro', 'fr': 'Hongrois', 'de': 'Ungarisch', 'el': 'Ουγγρικά', 'ar': 'مجري', 'pl': 'Węgierski', 'ro': 'Maghiară', 'hu': 'Magyar'},
+    'accentColor': {'it': 'Colore accento', 'en': 'Accent color', 'es': 'Color de acento', 'pt': 'Cor de destaque', 'fr': 'Couleur d\'accentuation', 'de': 'Akzentfarbe', 'el': 'Χρώμα τόνου', 'ar': 'لون التمييز', 'pl': 'Kolor akcentu', 'ro': 'Culoare accent', 'hu': 'Kiemelőszín'},
+    'chooseLanguage': {'it': 'Scegli la tua lingua', 'en': 'Choose your language', 'es': 'Elige tu idioma', 'pt': 'Escolha seu idioma', 'fr': 'Choisissez votre langue', 'de': 'Wähle deine Sprache', 'el': 'Επίλεξε τη γλώσσα σου', 'ar': 'اختر لغتك', 'pl': 'Wybierz swój język', 'ro': 'Alege-ți limba', 'hu': 'Válaszd ki a nyelvet'},
+    'continueBtn': {'it': 'Continua', 'en': 'Continue', 'es': 'Continuar', 'pt': 'Continuar', 'fr': 'Continuer', 'de': 'Weiter', 'el': 'Συνέχεια', 'ar': 'متابعة', 'pl': 'Kontynuuj', 'ro': 'Continuă', 'hu': 'Folytatás'},
+    'welcomeTitle': {'it': 'Benvenuto in GymApp', 'en': 'Welcome to GymApp', 'es': 'Bienvenido a GymApp', 'pt': 'Bem-vindo ao GymApp', 'fr': 'Bienvenue dans GymApp', 'de': 'Willkommen bei GymApp', 'el': 'Καλωσήρθες στο GymApp', 'ar': 'مرحباً في GymApp', 'pl': 'Witaj w GymApp', 'ro': 'Bun venit în GymApp', 'hu': 'Üdvözöl a GymApp'},
+    'setGroup': {'it': 'Gruppo', 'en': 'Group', 'es': 'Grupo', 'pt': 'Grupo', 'fr': 'Groupe', 'de': 'Gruppe', 'el': 'Ομάδα', 'ar': 'مجموعة', 'pl': 'Grupa', 'ro': 'Grup', 'hu': 'Csoport'},
+    'onboardingWelcomeText': {'it': 'La tua app per allenarsi in modo intelligente, ovunque tu sia.', 'en': 'Your smart workout app, wherever you are.', 'es': 'Tu app de entrenamiento inteligente, donde quieras.', 'pt': 'Seu app de treino inteligente, onde você estiver.', 'fr': 'Votre app d\'entraînement intelligente, où que vous soyez.', 'de': 'Deine smarte Workout-App, überall dabei.', 'el': 'Η έξυπνη εφαρμογή προπόνησής σου, όπου κι αν βρίσκεσαι.', 'ar': 'تطبيقك الذكي للتمرين، أينما كنت.', 'pl': 'Twoja inteligentna aplikacja treningowa, gdziekolwiek jesteś.', 'ro': 'Aplicația ta inteligentă de antrenament, oriunde ești.', 'hu': 'Az okos edzésalkalmazásod, bárhol is vagy.'},
+    'onboardingScheduleTitle': {'it': 'Crea la tua scheda', 'en': 'Build your schedule', 'es': 'Crea tu programa', 'pt': 'Crie seu programa', 'fr': 'Créez votre programme', 'de': 'Erstelle deinen Plan', 'el': 'Φτιάξε το πρόγραμμά σου', 'ar': 'أنشئ برنامجك', 'pl': 'Zbuduj swój plan', 'ro': 'Construiește-ți programul', 'hu': 'Hozd létre a programodat'},
+    'onboardingScheduleText': {'it': 'Costruisci la tua routine personalizzata con esercizi dal nostro database di 1200+ movimenti con GIF animate.', 'en': 'Build your personalized routine with exercises from our database of 1200+ movements with animated GIFs.', 'es': 'Crea tu rutina personalizada con ejercicios de nuestra base de datos de 1200+ movimientos con GIF animados.', 'pt': 'Crie sua rotina personalizada com exercícios do nosso banco de dados de 1200+ movimentos com GIFs animados.', 'fr': 'Construisez votre routine personnalisée avec des exercices de notre base de données de 1200+ mouvements avec GIFs animés.', 'de': 'Erstelle deine personalisierte Routine mit Übungen aus unserer Datenbank von 1200+ Bewegungen mit animierten GIFs.', 'el': 'Φτιάξε την εξατομικευμένη ρουτίνα σου με ασκήσεις από τη βάση δεδομένων μας με 1200+ κινήσεις με animated GIFs.', 'ar': 'أنشئ روتينك الشخصي مع تمارين من قاعدة بياناتنا التي تضم أكثر من 1200 حركة مع صور GIF متحركة.', 'pl': 'Stwórz spersonalizowaną rutynę z ćwiczeniami z naszej bazy danych ponad 1200 ruchów z animowanymi GIF-ami.', 'ro': 'Construiește-ți rutina personalizată cu exerciții din baza noastră de date de 1200+ mișcări cu GIF-uri animate.', 'hu': 'Hozd létre személyre szabott rutinod 1200+ mozgásból álló adatbázisunkból animált GIF-ekkel.'},
+    'onboardingTrainTitle': {'it': 'Allena e registra', 'en': 'Train & track', 'es': 'Entrena y registra', 'pt': 'Treina e registra', 'fr': 'Entraînez-vous et suivez', 'de': 'Trainiere & verfolge', 'el': 'Γυμνάσου & παρακολούθα', 'ar': 'تدرب وتتبع', 'pl': 'Trenuj i śledź', 'ro': 'Antrenează-te și monitorizează', 'hu': 'Edzz és kövesd'},
+    'onboardingTrainText': {'it': 'Segui ogni serie con timer automatico, registra pesi e ripetizioni, visualizza i tuoi progressi nel tempo.', 'en': 'Follow each set with automatic timer, record weights and reps, view your progress over time.', 'es': 'Sigue cada serie con temporizador automático, registra pesos y repeticiones, ve tu progreso en el tiempo.', 'pt': 'Siga cada série com cronômetro automático, registre pesos e repetições, veja seu progresso ao longo do tempo.', 'fr': 'Suivez chaque série avec minuterie automatique, enregistrez poids et répétitions, visualisez vos progrès.', 'de': 'Folge jedem Satz mit automatischem Timer, erfasse Gewichte und Wiederholungen, verfolge deinen Fortschritt.', 'el': 'Ακολούθα κάθε σετ με αυτόματο χρονόμετρο, καταγράφε βάρη και επαναλήψεις, δες την πρόοδό σου.', 'ar': 'اتبع كل مجموعة بمؤقت تلقائي، سجل الأوزان والتكرارات، شاهد تقدمك مع الوقت.', 'pl': 'Śledź każdą serię z automatycznym timerem, zapisuj ciężary i powtórzenia, obserwuj swoje postępy.', 'ro': 'Urmărește fiecare set cu timer automat, înregistrează greutăți și repetări, vizualizează progresul.', 'hu': 'Kövesd az egyes sorozatokat automatikus időzítővel, rögzítsd a súlyokat és ismétléseket, kövesd fejlődésedet.'},
+    'onboardingProgressTitle': {'it': 'Monitora i progressi', 'en': 'Monitor progress', 'es': 'Monitorea el progreso', 'pt': 'Monitore o progresso', 'fr': 'Surveillez les progrès', 'de': 'Fortschritt überwachen', 'el': 'Παρακολούθα την πρόοδο', 'ar': 'راقب التقدم', 'pl': 'Monitoruj postępy', 'ro': 'Monitorizează progresul', 'hu': 'Figyeld a haladást'},
+    'onboardingProgressText': {'it': 'Grafici per ogni esercizio, storico delle sessioni e suggerimenti automatici per aumentare i carichi.', 'en': 'Charts for each exercise, session history and automatic suggestions to increase loads.', 'es': 'Gráficos para cada ejercicio, historial de sesiones y sugerencias automáticas para aumentar cargas.', 'pt': 'Gráficos para cada exercício, histórico de sessões e sugestões automáticas para aumentar cargas.', 'fr': 'Graphiques pour chaque exercice, historique des sessions et suggestions automatiques pour augmenter les charges.', 'de': 'Diagramme für jede Übung, Sitzungsverlauf und automatische Vorschläge zur Laststeigerung.', 'el': 'Γραφήματα για κάθε άσκηση, ιστορικό συνεδριών και αυτόματες προτάσεις για αύξηση φορτίων.', 'ar': 'مخططات لكل تمرين وسجل الجلسات واقتراحات تلقائية لزيادة الأحمال.', 'pl': 'Wykresy dla każdego ćwiczenia, historia sesji i automatyczne sugestie zwiększenia obciążeń.', 'ro': 'Grafice pentru fiecare exercițiu, istoric sesiuni și sugestii automate pentru creșterea încărcăturilor.', 'hu': 'Diagramok minden gyakorlathoz, foglalkozástörténet és automatikus javaslatok a terhelés növeléséhez.'},
+    'onboardingProText': {'it': 'Porta i tuoi clienti al livello successivo con l\'ecosistema completo: app PT per creare schede e monitorare tutti i tuoi atleti da un\'unica dashboard.', 'en': 'Take your clients to the next level with the complete ecosystem: PT app to create schedules and monitor all your athletes from a single dashboard.', 'es': 'Lleva a tus clientes al siguiente nivel con el ecosistema completo: app PT para crear programas y monitorear todos tus atletas desde un panel.', 'pt': 'Leve seus clientes ao próximo nível com o ecossistema completo: app PT para criar programas e monitorar todos os seus atletas.', 'fr': 'Amenez vos clients au niveau supérieur avec l\'écosystème complet: app PT pour créer des programmes et surveiller tous vos athlètes.', 'de': 'Bringe deine Kunden auf das nächste Level mit dem vollständigen Ökosystem: PT-App zum Erstellen von Plänen und Überwachen aller Athleten.', 'el': 'Πάρε τους πελάτες σου στο επόμενο επίπεδο με το πλήρες οικοσύστημα: εφαρμογή PT για δημιουργία προγραμμάτων και παρακολούθηση αθλητών.', 'ar': 'ارتقِ بعملائك إلى المستوى التالي مع النظام البيئي الكامل: تطبيق PT لإنشاء البرامج ومراقبة جميع الرياضيين.', 'pl': 'Przenieś klientów na wyższy poziom dzięki pełnemu ekosystemowi: aplikacja PT do tworzenia planów i monitorowania wszystkich sportowców.', 'ro': 'Du-ți clienții la nivelul următor cu ecosistemul complet: aplicație PT pentru crearea programelor și monitorizarea tuturor sportivilor.', 'hu': 'Vidd ügyfeleidet a következő szintre a teljes ökoszisztémával: PT-alkalmazás programok létrehozásához és összes sportoló követéséhez.'},
+    'contactGianmarco': {'it': 'Contatta Gianmarco', 'en': 'Contact Gianmarco', 'es': 'Contactar Gianmarco', 'pt': 'Contatar Gianmarco', 'fr': 'Contacter Gianmarco', 'de': 'Gianmarco kontaktieren', 'el': 'Επικοινωνία με τον Gianmarco', 'ar': 'تواصل مع Gianmarco', 'pl': 'Skontaktuj się z Gianmarco', 'ro': 'Contactează-l pe Gianmarco', 'hu': 'Kapcsolatfelvétel Gianmarcóval'},
+    'proInfoText': {'it': 'Scrivi per info sull\'ecosistema GymApp Pro', 'en': 'Write for info on the GymApp Pro ecosystem', 'es': 'Escribe para info del ecosistema GymApp Pro', 'pt': 'Escreva para info do ecossistema GymApp Pro', 'fr': 'Écrivez pour info sur l\'écosystème GymApp Pro', 'de': 'Schreibe für Infos zum GymApp Pro Ökosystem', 'el': 'Γράψε για πληροφορίες σχετικά με το οικοσύστημα GymApp Pro', 'ar': 'اكتب للحصول على معلومات حول نظام GymApp Pro البيئي', 'pl': 'Napisz po informacje o ekosystemie GymApp Pro', 'ro': 'Scrie pentru informații despre ecosistemul GymApp Pro', 'hu': 'Írj a GymApp Pro ökoszisztémáról szóló infókért'},
+    'startBtn': {'it': 'INIZIA', 'en': 'START', 'es': 'EMPEZAR', 'pt': 'COMEÇAR', 'fr': 'COMMENCER', 'de': 'STARTEN', 'el': 'ΕΝΑΡΞΗ', 'ar': 'ابدأ', 'pl': 'ZACZNIJ', 'ro': 'PORNEȘTE', 'hu': 'INDÍTÁS'},
+    'nextBtn': {'it': 'AVANTI', 'en': 'NEXT', 'es': 'SIGUIENTE', 'pt': 'PRÓXIMO', 'fr': 'SUIVANT', 'de': 'WEITER', 'el': 'ΕΠΟΜΕΝΟ', 'ar': 'التالي', 'pl': 'DALEJ', 'ro': 'URMĂTOR', 'hu': 'TOVÁBB'},
+    'chooseMuscleImage': {'it': 'Immagine allenamento', 'en': 'Workout image', 'es': 'Imagen entrenamiento', 'pt': 'Imagem treino', 'fr': 'Image entraînement', 'de': 'Trainingsbild', 'el': 'Εικόνα προπόνησης', 'ar': 'صورة التمرين', 'pl': 'Obraz treningu', 'ro': 'Imaginea antrenamentului', 'hu': 'Edzéskép'},
+    'noImage': {'it': 'Nessuna', 'en': 'None', 'es': 'Ninguna', 'pt': 'Nenhuma', 'fr': 'Aucune', 'de': 'Keine', 'el': 'Καμία', 'ar': 'لا شيء', 'pl': 'Brak', 'ro': 'Niciuna', 'hu': 'Nincs'},
+    'promoText': {'it': 'Porta i tuoi clienti al livello successivo con l\'ecosistema GymApp Pro.', 'en': 'Take your clients to the next level with the GymApp Pro ecosystem.', 'es': 'Lleva a tus clientes al siguiente nivel con el ecosistema GymApp Pro.', 'pt': 'Leve seus clientes ao próximo nível com o ecossistema GymApp Pro.', 'fr': 'Amenez vos clients au niveau supérieur avec l\'écosystème GymApp Pro.', 'de': 'Bringe deine Kunden auf das nächste Level mit dem GymApp Pro Ökosystem.', 'el': 'Πάρε τους πελάτες σου στο επόμενο επίπεδο με το οικοσύστημα GymApp Pro.', 'ar': 'ارتقِ بعملائك إلى المستوى التالي مع نظام GymApp Pro البيئي.', 'pl': 'Przenieś klientów na wyższy poziom dzięki ekosystemowi GymApp Pro.', 'ro': 'Du-ți clienții la nivelul următor cu ecosistemul GymApp Pro.', 'hu': 'Vidd ügyfeleidet a következő szintre a GymApp Pro ökoszisztémával.'},
+    'noScheduleLoaded': {'it': 'Nessuna scheda caricata', 'en': 'No schedule loaded', 'es': 'Sin programa cargado', 'pt': 'Nenhum programa carregado', 'fr': 'Aucun programme chargé', 'de': 'Kein Programm geladen', 'el': 'Δεν έχει φορτωθεί πρόγραμμα', 'ar': 'لم يتم تحميل برنامج', 'pl': 'Brak załadowanego planu', 'ro': 'Niciun program încărcat', 'hu': 'Nincs betöltött program'},
+    'editOrCreate': {'it': 'Modifica o crea una nuova scheda', 'en': 'Edit or create schedule', 'es': 'Editar o crear programa', 'pt': 'Editar ou criar programa', 'fr': 'Modifier ou créer un programme', 'de': 'Programm bearbeiten oder erstellen', 'el': 'Επεξεργασία ή δημιουργία προγράμματος', 'ar': 'تعديل أو إنشاء برنامج', 'pl': 'Edytuj lub utwórz plan', 'ro': 'Editează sau creează un program', 'hu': 'Program szerkesztése vagy létrehozása'},
+    'trainNow': {'it': 'ALLENATI ORA', 'en': 'TRAIN NOW', 'es': 'ENTRENAR AHORA', 'pt': 'TREINAR AGORA', 'fr': 'S\'ENTRAÎNER', 'de': 'JETZT TRAINIEREN', 'el': 'ΓΥΜΝΑΣΟΥ ΤΩΡΑ', 'ar': 'تدرب الآن', 'pl': 'TRENUJ TERAZ', 'ro': 'ANTRENEAZĂ-TE', 'hu': 'EDZÉS MOST'},
+    'train2': {'it': 'ALLENATI', 'en': 'TRAIN', 'es': 'ENTRENAR', 'pt': 'TREINAR', 'fr': 'S\'ENTRAÎNER', 'de': 'TRAINIEREN', 'el': 'ΓΥΜΝΑΣΟΥ', 'ar': 'تدرب', 'pl': 'TRENUJ', 'ro': 'ANTRENEAZĂ-TE', 'hu': 'EDZEN'},
+    'chooseAndStart': {'it': 'Scegli e inizia il tuo allenamento', 'en': 'Choose and start your workout', 'es': 'Elige e inicia tu entrenamiento', 'pt': 'Escolha e inicie seu treino', 'fr': 'Choisissez et démarrez votre entraînement', 'de': 'Wähle und starte dein Training', 'el': 'Επέλεξε και ξεκίνα την προπόνησή σου', 'ar': 'اختر وابدأ تمرينك', 'pl': 'Wybierz i rozpocznij trening', 'ro': 'Alege și începe antrenamentul', 'hu': 'Válaszd ki és indítsd az edzésedet'},
+    'createFirstSchedule': {'it': 'Crea la tua scheda prima di allenarti', 'en': 'Create your schedule before training', 'es': 'Crea tu programa antes de entrenar', 'pt': 'Crie seu programa antes de treinar', 'fr': 'Créez votre programme avant de vous entraîner', 'de': 'Erstelle deinen Plan vor dem Training', 'el': 'Δημιούργησε το πρόγραμμά σου πριν γυμναστείς', 'ar': 'أنشئ برنامجك قبل التدريب', 'pl': 'Utwórz plan przed treningiem', 'ro': 'Creează-ți programul înainte de antrenament', 'hu': 'Hozd létre a programodat edzés előtt'},
+    'workoutProgress': {'it': 'ANDAMENTO ALLENAMENTO', 'en': 'WORKOUT PROGRESS', 'es': 'PROGRESO ENTRENAMIENTO', 'pt': 'PROGRESSO TREINO', 'fr': 'PROGRESSION ENTRAÎNEMENT', 'de': 'TRAININGSFORTSCHRITT', 'el': 'ΕΞΕΛΙΞΗ ΠΡΟΠΟΝΗΣΗΣ', 'ar': 'تقدم التمرين', 'pl': 'POSTĘP TRENINGU', 'ro': 'PROGRES ANTRENAMENT', 'hu': 'EDZÉS HALADÁSA'},
+    'neverTrained': {'it': 'Mai allenato', 'en': 'Never trained', 'es': 'Nunca entrenado', 'pt': 'Nunca treinou', 'fr': 'Jamais entraîné', 'de': 'Nie trainiert', 'el': 'Ποτέ δεν γυμνάστηκε', 'ar': 'لم يتدرب قط', 'pl': 'Nigdy nie trenował', 'ro': 'Niciodată antrenat', 'hu': 'Soha nem edzett'},
+    'today': {'it': 'Oggi', 'en': 'Today', 'es': 'Hoy', 'pt': 'Hoje', 'fr': 'Aujourd\'hui', 'de': 'Heute', 'el': 'Σήμερα', 'ar': 'اليوم', 'pl': 'Dziś', 'ro': 'Azi', 'hu': 'Ma'},
+    'yesterday': {'it': 'Ieri', 'en': 'Yesterday', 'es': 'Ayer', 'pt': 'Ontem', 'fr': 'Hier', 'de': 'Gestern', 'el': 'Χθες', 'ar': 'أمس', 'pl': 'Wczoraj', 'ro': 'Ieri', 'hu': 'Tegnap'},
+    'daysAgo': {'it': 'giorni fa', 'en': 'days ago', 'es': 'días atrás', 'pt': 'dias atrás', 'fr': 'jours passés', 'de': 'Tage her', 'el': 'ημέρες πριν', 'ar': 'منذ أيام', 'pl': 'dni temu', 'ro': 'zile în urmă', 'hu': 'nappal ezelőtt'},
+    'others': {'it': 'altri', 'en': 'others', 'es': 'otros', 'pt': 'outros', 'fr': 'autres', 'de': 'andere', 'el': 'άλλοι', 'ar': 'آخرون', 'pl': 'inni', 'ro': 'alții', 'hu': 'mások'},
+    'timerSound': {'it': 'Suono fine timer', 'en': 'Timer sound', 'es': 'Sonido timer', 'pt': 'Som do timer', 'fr': 'Son de minuterie', 'de': 'Timer-Ton', 'el': 'Ήχος χρονομέτρου', 'ar': 'صوت المؤقت', 'pl': 'Dźwięk timera', 'ro': 'Sunetul timerului', 'hu': 'Időzítő hang'},
+    'timerVibration': {'it': 'Vibrazione fine timer', 'en': 'Timer vibration', 'es': 'Vibración timer', 'pt': 'Vibração timer', 'fr': 'Vibration minuterie', 'de': 'Timer-Vibration', 'el': 'Δόνηση χρονομέτρου', 'ar': 'اهتزاز المؤقت', 'pl': 'Wibracja timera', 'ro': 'Vibrația timerului', 'hu': 'Időzítő rezgés'},
+    'autoStartTimer': {'it': 'Avvia timer automaticamente', 'en': 'Auto-start timer', 'es': 'Temporizador automático', 'pt': 'Timer automático', 'fr': 'Minuterie automatique', 'de': 'Timer automatisch starten', 'el': 'Αυτόματη εκκίνηση χρονομέτρου', 'ar': 'تشغيل المؤقت تلقائياً', 'pl': 'Automatyczny start timera', 'ro': 'Timer pornit automat', 'hu': 'Automatikus időzítő indítás'},
+    'screenAlwaysOn': {'it': 'Schermo sempre acceso', 'en': 'Screen always on', 'es': 'Pantalla siempre encendida', 'pt': 'Tela sempre ligada', 'fr': 'Écran toujours allumé', 'de': 'Bildschirm immer an', 'el': 'Οθόνη πάντα ανοιχτή', 'ar': 'الشاشة دائماً مضاءة', 'pl': 'Ekran zawsze włączony', 'ro': 'Ecran mereu activ', 'hu': 'Képernyő mindig bekapcsolva'},
+    'confirmSeriesWindow': {'it': 'Finestra di conferma serie', 'en': 'Set confirmation window', 'es': 'Ventana de confirmación de serie', 'pt': 'Janela de confirmação da série', 'fr': 'Fenêtre de confirmation du set', 'de': 'Satz-Bestätigungsfenster', 'el': 'Παράθυρο επιβεβαίωσης σετ', 'ar': 'نافذة تأكيد المجموعة', 'pl': 'Okno potwierdzenia serii', 'ro': 'Fereastra de confirmare a setului', 'hu': 'Sorozat-megerősítési ablak'},
+    'weightSuggestion': {'it': 'Suggerimento aumento peso', 'en': 'Weight increase suggestion', 'es': 'Sugerencia aumento de peso', 'pt': 'Sugestão de aumento de peso', 'fr': 'Suggestion d\'augmentation du poids', 'de': 'Gewichtserhöhungsvorschlag', 'el': 'Πρόταση αύξησης βάρους', 'ar': 'اقتراح زيادة الوزن', 'pl': 'Sugestia zwiększenia ciężaru', 'ro': 'Sugestie creștere greutate', 'hu': 'Súlynövelési javaslat'},
+    'dataManagement': {'it': 'Gestione Dati', 'en': 'Data Management', 'es': 'Gestión de Datos', 'pt': 'Gestão de Dados', 'fr': 'Gestion des Données', 'de': 'Datenverwaltung', 'el': 'Διαχείριση Δεδομένων', 'ar': 'إدارة البيانات', 'pl': 'Zarządzanie Danymi', 'ro': 'Gestionarea Datelor', 'hu': 'Adatkezelés'},
+    'insertKg': {'it': 'Inserisci KG', 'en': 'Enter KG', 'es': 'Ingresa KG', 'pt': 'Insira KG', 'fr': 'Entrez KG', 'de': 'KG eingeben', 'el': 'Εισάγετε KG', 'ar': 'أدخل KG', 'pl': 'Wpisz KG', 'ro': 'Introdu KG', 'hu': 'Adj meg KG-t'},
+    'insertReps': {'it': 'Inserisci REPS', 'en': 'Enter REPS', 'es': 'Ingresa REPS', 'pt': 'Insira REPS', 'fr': 'Entrez REPS', 'de': 'WDHL eingeben', 'el': 'Εισάγετε ΕΠΑΝ.', 'ar': 'أدخل التكرارات', 'pl': 'Wpisz POWTÓRZENIA', 'ro': 'Introdu REP.', 'hu': 'Adj meg ISM.-t'},
+    'enterKgReps': {'it': 'Inserisci kg e reps prima di confermare', 'en': 'Enter kg and reps before confirming', 'es': 'Ingresa kg y reps antes de confirmar', 'pt': 'Insira kg e reps antes de confirmar', 'fr': 'Entrez kg et reps avant de confirmer', 'de': 'KG und Wdhl. eingeben vor Bestätigung', 'el': 'Εισάγετε kg και επαναλήψεις πριν επιβεβαιώσετε', 'ar': 'أدخل kg والتكرارات قبل التأكيد', 'pl': 'Wpisz kg i powtórzenia przed potwierdzeniem', 'ro': 'Introdu kg și rep. înainte de confirmare', 'hu': 'Adj meg kg-t és ismétlést megerősítés előtt'},
+    'saveSeries': {'it': 'SALVA SERIE', 'en': 'SAVE SET', 'es': 'GUARDAR SERIE', 'pt': 'SALVAR SÉRIE', 'fr': 'ENREGISTRER SÉRIE', 'de': 'SATZ SPEICHERN', 'el': 'ΑΠΟΘΗΚΕΥΣΗ ΣΕΤ', 'ar': 'حفظ المجموعة', 'pl': 'ZAPISZ SERIĘ', 'ro': 'SALVEAZĂ SETUL', 'hu': 'SOROZAT MENTÉSE'},
+    'confirmSeries': {'it': 'CONFERMA SERIE', 'en': 'CONFIRM SET', 'es': 'CONFIRMAR SERIE', 'pt': 'CONFIRMAR SÉRIE', 'fr': 'CONFIRMER SÉRIE', 'de': 'SATZ BESTÄTIGEN', 'el': 'ΕΠΙΒΕΒΑΙΩΣΗ ΣΕΤ', 'ar': 'تأكيد المجموعة', 'pl': 'POTWIERDŹ SERIĘ', 'ro': 'CONFIRMĂ SETUL', 'hu': 'SOROZAT MEGERŐSÍTÉSE'},
+    'quitWorkout': {'it': 'Interrompere?', 'en': 'Quit?', 'es': '¿Salir?', 'pt': 'Sair?', 'fr': 'Quitter?', 'de': 'Beenden?', 'el': 'Διακοπή;', 'ar': 'الخروج؟', 'pl': 'Wyjść?', 'ro': 'Ieși?', 'hu': 'Kilépés?'},
+    'quitWorkoutMsg': {'it': 'Vuoi davvero uscire dall\'allenamento? I progressi fin qui fatti sono comunque salvati.', 'en': 'Do you really want to exit? Progress made so far is saved.', 'es': '¿Realmente quieres salir? El progreso realizado hasta ahora se guarda.', 'pt': 'Realmente quer sair? O progresso feito até agora é salvo.', 'fr': 'Voulez-vous vraiment quitter? Le progrès effectué est sauvegardé.', 'de': 'Wirklich beenden? Bisheriger Fortschritt wird gespeichert.', 'el': 'Θέλεις πραγματικά να βγεις; Η πρόοδος μέχρι τώρα αποθηκεύεται.', 'ar': 'هل تريد الخروج فعلاً؟ التقدم المحقق حتى الآن يتم حفظه.', 'pl': 'Naprawdę chcesz wyjść? Dotychczasowe postępy zostają zapisane.', 'ro': 'Chiar vrei să ieși? Progresul de până acum este salvat.', 'hu': 'Valóban ki akarsz lépni? Az eddigi haladás mentésre kerül.'},
+    'exitAndSave': {'it': 'ESCI E SALVA', 'en': 'EXIT & SAVE', 'es': 'SALIR Y GUARDAR', 'pt': 'SAIR E SALVAR', 'fr': 'QUITTER ET ENREGISTRER', 'de': 'BEENDEN & SPEICHERN', 'el': 'ΕΞΟΔΟΣ & ΑΠΟΘΗΚΕΥΣΗ', 'ar': 'خروج وحفظ', 'pl': 'WYJDŹ I ZAPISZ', 'ro': 'IEȘI ȘI SALVEAZĂ', 'hu': 'KILÉPÉS ÉS MENTÉS'},
+    'exerciseComplete': {'it': 'ESERCIZIO COMPLETATO', 'en': 'EXERCISE COMPLETED', 'es': 'EJERCICIO COMPLETADO', 'pt': 'EXERCÍCIO CONCLUÍDO', 'fr': 'EXERCICE TERMINÉ', 'de': 'ÜBUNG ABGESCHLOSSEN', 'el': 'ΑΣΚΗΣΗ ΟΛΟΚΛΗΡΩΘΗΚΕ', 'ar': 'اكتمل التمرين', 'pl': 'ĆWICZENIE UKOŃCZONE', 'ro': 'EXERCIȚIU FINALIZAT', 'hu': 'GYAKORLAT BEFEJEZVE'},
+    'exerciseCompleteMsg': {'it': 'I dati sono stati salvati e non sono più modificabili.', 'en': 'Data has been saved and cannot be modified.', 'es': 'Los datos han sido guardados y no pueden modificarse.', 'pt': 'Os dados foram salvos e não podem ser modificados.', 'fr': 'Les données ont été sauvegardées et ne peuvent pas être modifiées.', 'de': 'Daten wurden gespeichert und können nicht geändert werden.', 'el': 'Τα δεδομένα αποθηκεύτηκαν και δεν μπορούν να τροποποιηθούν.', 'ar': 'تم حفظ البيانات ولا يمكن تعديلها.', 'pl': 'Dane zostały zapisane i nie mogą być zmieniane.', 'ro': 'Datele au fost salvate și nu pot fi modificate.', 'hu': 'Az adatok mentve lettek és nem módosíthatók.'},
+    'nextInfo': {'it': 'PROSSIMA', 'en': 'NEXT', 'es': 'SIGUIENTE', 'pt': 'PRÓXIMA', 'fr': 'SUIVANT', 'de': 'NÄCHSTE', 'el': 'ΕΠΟΜΕΝΗ', 'ar': 'التالي', 'pl': 'NASTĘPNY', 'ro': 'URMĂTOR', 'hu': 'KÖVETKEZŐ'},
+    'lastTime': {'it': 'ULTIMA VOLTA', 'en': 'LAST TIME', 'es': 'ÚLTIMA VEZ', 'pt': 'ÚLTIMA VEZ', 'fr': 'DERNIÈRE FOIS', 'de': 'LETZTES MAL', 'el': 'ΤΕΛΕΥΤΑΙΑ ΦΟΡΑ', 'ar': 'آخر مرة', 'pl': 'OSTATNIO', 'ro': 'ULTIMA DATĂ', 'hu': 'LEGUTÓBB'},
+    'increaseWeight': {'it': 'AUMENTA PESO', 'en': 'INCREASE WEIGHT', 'es': 'AUMENTA PESO', 'pt': 'AUMENTAR PESO', 'fr': 'AUGMENTER POIDS', 'de': 'GEWICHT ERHÖHEN', 'el': 'ΑΥΞΗΣΗ ΒΑΡΟΥΣ', 'ar': 'زيادة الوزن', 'pl': 'ZWIĘKSZ CIĘŻAR', 'ro': 'MĂREȘTE GREUTATEA', 'hu': 'SÚLY NÖVELÉSE'},
+    'increase': {'it': 'AUMENTA', 'en': 'INCREASE', 'es': 'AUMENTA', 'pt': 'AUMENTAR', 'fr': 'AUGMENTER', 'de': 'ERHÖHEN', 'el': 'ΑΥΞΗΣΗ', 'ar': 'زيادة', 'pl': 'ZWIĘKSZ', 'ro': 'MĂREȘTE', 'hu': 'NÖVELÉS'},
+    'workoutComplete': {'it': 'ALLENAMENTO COMPLETATO!', 'en': 'WORKOUT COMPLETE!', 'es': '¡ENTRENAMIENTO COMPLETO!', 'pt': 'TREINO CONCLUÍDO!', 'fr': 'ENTRAÎNEMENT TERMINÉ!', 'de': 'TRAINING ABGESCHLOSSEN!', 'el': 'ΠΡΟΠΌΝΗΣΗ ΟΛΟΚΛΗΡΩΘΗΚΕ!', 'ar': 'اكتمل التمرين!', 'pl': 'TRENING UKOŃCZONY!', 'ro': 'ANTRENAMENT FINALIZAT!', 'hu': 'EDZÉS BEFEJEZVE!'},
+    'firstSession': {'it': 'Prima sessione!', 'en': 'First session!', 'es': '¡Primera sesión!', 'pt': 'Primeira sessão!', 'fr': 'Première session!', 'de': 'Erste Einheit!', 'el': 'Πρώτη συνεδρία!', 'ar': 'الجلسة الأولى!', 'pl': 'Pierwsza sesja!', 'ro': 'Prima sesiune!', 'hu': 'Első foglalkozás!'},
+    'improving': {'it': 'In miglioramento!', 'en': 'Improving!', 'es': '¡Mejorando!', 'pt': 'Melhorando!', 'fr': 'En progrès!', 'de': 'Verbesserung!', 'el': 'Βελτίωση!', 'ar': 'في تحسن!', 'pl': 'Poprawa!', 'ro': 'În progres!', 'hu': 'Fejlődés!'},
+    'declining': {'it': 'In calo', 'en': 'Declining', 'es': 'En declive', 'pt': 'Em declínio', 'fr': 'En baisse', 'de': 'Rückgang', 'el': 'Πτώση', 'ar': 'انخفاض', 'pl': 'Spadek', 'ro': 'În scădere', 'hu': 'Csökkenés'},
+    'plateau': {'it': 'Stallo', 'en': 'Plateau', 'es': 'Meseta', 'pt': 'Platô', 'fr': 'Plateau', 'de': 'Plateau', 'el': 'Στάσιμο', 'ar': 'توقف التقدم', 'pl': 'Plateau', 'ro': 'Platou', 'hu': 'Plateau'},
+    'details': {'it': 'DETTAGLI', 'en': 'DETAILS', 'es': 'DETALLES', 'pt': 'DETALHES', 'fr': 'DÉTAILS', 'de': 'DETAILS', 'el': 'ΛΕΠΤΟΜΕΡΕΙΕΣ', 'ar': 'التفاصيل', 'pl': 'SZCZEGÓŁY', 'ro': 'DETALII', 'hu': 'RÉSZLETEK'},
+    'greatWork': {'it': 'OTTIMO LAVORO!', 'en': 'GREAT JOB!', 'es': '¡BUEN TRABAJO!', 'pt': 'ÓTIMO TRABALHO!', 'fr': 'BON TRAVAIL!', 'de': 'SUPER JOB!', 'el': 'ΜΠΡΑΒΟ!', 'ar': 'عمل رائع!', 'pl': 'ŚWIETNA ROBOTA!', 'ro': 'TREABĂ BUNĂ!', 'hu': 'NAGYSZERŰ MUNKA!'},
+    'workoutSummary': {'it': 'Riepilogo allenamento', 'en': 'Workout summary', 'es': 'Resumen entrenamiento', 'pt': 'Resumo do treino', 'fr': 'Résumé de l\'entraînement', 'de': 'Trainingsübersicht', 'el': 'Σύνοψη προπόνησης', 'ar': 'ملخص التمرين', 'pl': 'Podsumowanie treningu', 'ro': 'Rezumatul antrenamentului', 'hu': 'Edzés összefoglaló'},
+    'close': {'it': 'CHIUDI', 'en': 'CLOSE', 'es': 'CERRAR', 'pt': 'FECHAR', 'fr': 'FERMER', 'de': 'SCHLIESSEN', 'el': 'ΚΛΕΙΣΙΜΟ', 'ar': 'إغلاق', 'pl': 'ZAMKNIJ', 'ro': 'ÎNCHIDE', 'hu': 'BEZÁRÁS'},
+    'totalSeries': {'it': 'Serie totali', 'en': 'Total sets', 'es': 'Series totales', 'pt': 'Séries totais', 'fr': 'Séries totales', 'de': 'Gesamtsätze', 'el': 'Σύνολο σετ', 'ar': 'إجمالي المجموعات', 'pl': 'Łączna liczba serii', 'ro': 'Total seturi', 'hu': 'Összes sorozat'},
+    'exercisesLabel': {'it': 'Esercizi', 'en': 'Exercises', 'es': 'Ejercicios', 'pt': 'Exercícios', 'fr': 'Exercices', 'de': 'Übungen', 'el': 'Ασκήσεις', 'ar': 'تمارين', 'pl': 'Ćwiczenia', 'ro': 'Exerciții', 'hu': 'Gyakorlatok'},
+    'primaryMuscle': {'it': 'MUSCOLO PRINCIPALE', 'en': 'PRIMARY MUSCLE', 'es': 'MÚSCULO PRINCIPAL', 'pt': 'MÚSCULO PRINCIPAL', 'fr': 'MUSCLE PRINCIPAL', 'de': 'HAUPTMUSKEL', 'el': 'ΚΥΡΙΟΣ ΜΥΣ', 'ar': 'العضلة الرئيسية', 'pl': 'GŁÓWNY MIĘSIEŃ', 'ro': 'MUȘCHIUL PRINCIPAL', 'hu': 'ELSŐDLEGES IZOM'},
+    'secondaryMuscles': {'it': 'MUSCOLI SECONDARI', 'en': 'SECONDARY MUSCLES', 'es': 'MÚSCULOS SECUNDARIOS', 'pt': 'MÚSCULOS SECUNDÁRIOS', 'fr': 'MUSCLES SECONDAIRES', 'de': 'NEBENMUSKELN', 'el': 'ΔΕΥΤΕΡΕΥΟΝΤΕΣ ΜΥΕΣ', 'ar': 'العضلات الثانوية', 'pl': 'MIĘŚNIE POMOCNICZE', 'ro': 'MUȘCHI SECUNDARI', 'hu': 'MÁSODLAGOS IZMOK'},
+    'execution': {'it': '📋 ESECUZIONE', 'en': '📋 EXECUTION', 'es': '📋 EJECUCIÓN', 'pt': '📋 EXECUÇÃO', 'fr': '📋 EXÉCUTION', 'de': '📋 AUSFÜHRUNG', 'el': '📋 ΕΚΤΕΛΕΣΗ', 'ar': '📋 التنفيذ', 'pl': '📋 WYKONANIE', 'ro': '📋 EXECUȚIE', 'hu': '📋 VÉGREHAJTÁS'},
+    'tips': {'it': '💡 CONSIGLI', 'en': '💡 TIPS', 'es': '💡 CONSEJOS', 'pt': '💡 DICAS', 'fr': '💡 CONSEILS', 'de': '💡 TIPPS', 'el': '💡 ΣΥΜΒΟΥΛΕΣ', 'ar': '💡 نصائح', 'pl': '💡 WSKAZÓWKI', 'ro': '💡 SFATURI', 'hu': '💡 TIPPEK'},
+    'notInCatalog': {'it': 'Esercizio non in catalogo.\nUsa YouTube per vedere la tecnica.', 'en': 'Exercise not in catalog.\nUse YouTube to watch the technique.', 'es': 'Ejercicio no en catálogo.\nUsa YouTube para ver la técnica.', 'pt': 'Exercício não no catálogo.\nUse YouTube para ver a técnica.', 'fr': 'Exercice non dans le catalogue.\nUtilisez YouTube pour voir la technique.', 'de': 'Übung nicht im Katalog.\nBenutze YouTube für die Technik.', 'el': 'Η άσκηση δεν βρίσκεται στον κατάλογο.\nΧρησιμοποίησε YouTube για να δεις την τεχνική.', 'ar': 'التمرين غير موجود في الكتالوج.\nاستخدم YouTube لمشاهدة التقنية.', 'pl': 'Ćwiczenie nie w katalogu.\nUżyj YouTube, aby zobaczyć technikę.', 'ro': 'Exercițiu nu în catalog.\nFolosește YouTube pentru tehnica exercițiului.', 'hu': 'Gyakorlat nem a katalógusban.\nHasználd a YouTube-ot a technikáért.'},
+    'notInCatalogShort': {'it': 'Esercizio non in catalogo.', 'en': 'Exercise not in catalog.', 'es': 'Ejercicio no en catálogo.', 'pt': 'Exercício não no catálogo.', 'fr': 'Exercice non dans le catalogue.', 'de': 'Übung nicht im Katalog.', 'el': 'Άσκηση δεν βρίσκεται στον κατάλογο.', 'ar': 'التمرين غير موجود في الكتالوج.', 'pl': 'Ćwiczenie nie w katalogu.', 'ro': 'Exercițiu nu în catalog.', 'hu': 'Gyakorlat nem a katalógusban.'},
+    'watchOnYoutube': {'it': 'Guarda su YouTube', 'en': 'Watch on YouTube', 'es': 'Ver en YouTube', 'pt': 'Ver no YouTube', 'fr': 'Regarder sur YouTube', 'de': 'Auf YouTube ansehen', 'el': 'Δες στο YouTube', 'ar': 'شاهد على YouTube', 'pl': 'Obejrzyj na YouTube', 'ro': 'Vizionează pe YouTube', 'hu': 'Nézd meg YouTube-on'},
+    'progressOverTime': {'it': 'Progressi nel tempo — una linea per serie', 'en': 'Progress over time — one line per set', 'es': 'Progreso en el tiempo — una línea por serie', 'pt': 'Progresso ao longo do tempo — uma linha por série', 'fr': 'Progression dans le temps — une ligne par série', 'de': 'Fortschritt über Zeit — eine Linie pro Satz', 'el': 'Πρόοδος με τον καιρό — μια γραμμή ανά σετ', 'ar': 'التقدم مع الوقت — سطر لكل مجموعة', 'pl': 'Postęp w czasie — jedna linia na serię', 'ro': 'Progres în timp — o linie per set', 'hu': 'Haladás az idő múlásával — egy vonal sorozatonként'},
+    'noData': {'it': 'Nessun dato', 'en': 'No data', 'es': 'Sin datos', 'pt': 'Sem dados', 'fr': 'Pas de données', 'de': 'Keine Daten', 'el': 'Δεν υπάρχουν δεδομένα', 'ar': 'لا توجد بيانات', 'pl': 'Brak danych', 'ro': 'Nu există date', 'hu': 'Nincs adat'},
+    'noDataRegistered': {'it': 'Nessun dato registrato', 'en': 'No recorded data', 'es': 'Sin datos registrados', 'pt': 'Sem dados registrados', 'fr': 'Aucune donnée enregistrée', 'de': 'Keine erfassten Daten', 'el': 'Δεν υπάρχουν καταγεγραμμένα δεδομένα', 'ar': 'لا توجد بيانات مسجلة', 'pl': 'Brak zarejestrowanych danych', 'ro': 'Nu există date înregistrate', 'hu': 'Nincs rögzített adat'},
+    'myNotes': {'it': 'Le mie note...', 'en': 'My notes...', 'es': 'Mis notas...', 'pt': 'Minhas notas...', 'fr': 'Mes notes...', 'de': 'Meine Notizen...', 'el': 'Οι σημειώσεις μου...', 'ar': 'ملاحظاتي...', 'pl': 'Moje notatki...', 'ro': 'Notele mele...', 'hu': 'Saját megjegyzéseim...'},
+    'coachNotes': {'it': 'COACH', 'en': 'COACH', 'es': 'COACH', 'pt': 'COACH', 'fr': 'COACH', 'de': 'COACH', 'el': 'COACH', 'ar': 'COACH', 'pl': 'COACH', 'ro': 'COACH', 'hu': 'COACH'},
+    'setsDone': {'it': 'SERIE FATTE', 'en': 'SETS DONE', 'es': 'SERIES HECHAS', 'pt': 'SÉRIES FEITAS', 'fr': 'SÉRIES FAITES', 'de': 'SÄTZE GEMACHT', 'el': 'ΣΕΤ ΤΕΛΕΙΩΣΑΝ', 'ar': 'مجموعات منجزة', 'pl': 'SERIE WYKONANE', 'ro': 'SETURI FĂCUTE', 'hu': 'SOROZATOK TELJESÍTVE'},
+    'of': {'it': 'DI', 'en': 'OF', 'es': 'DE', 'pt': 'DE', 'fr': 'DE', 'de': 'VON', 'el': 'ΑΠΟ', 'ar': 'من', 'pl': 'Z', 'ro': 'DIN', 'hu': 'BŐL'},
+    'changeExercise': {'it': 'CAMBIO ESERCIZIO', 'en': 'CHANGE EXERCISE', 'es': 'CAMBIAR EJERCICIO', 'pt': 'MUDAR EXERCÍCIO', 'fr': 'CHANGER EXERCICE', 'de': 'ÜBUNG WECHSELN', 'el': 'ΑΛΛΑΓΗ ΑΣΚΗΣΗΣ', 'ar': 'تغيير التمرين', 'pl': 'ZMIEŃ ĆWICZENIE', 'ro': 'SCHIMBĂ EXERCIȚIU', 'hu': 'GYAKORLAT VÁLTÁSA'},
+    'noHistory': {'it': 'Nessuno storico presente', 'en': 'No history', 'es': 'Sin historial', 'pt': 'Sem histórico', 'fr': 'Pas d\'historique', 'de': 'Kein Verlauf', 'el': 'Δεν υπάρχει ιστορικό', 'ar': 'لا يوجد سجل', 'pl': 'Brak historii', 'ro': 'Niciun istoric', 'hu': 'Nincs előzmény'},
+    'deleteSelected': {'it': 'Elimina selezionati', 'en': 'Delete selected', 'es': 'Eliminar seleccionados', 'pt': 'Excluir selecionados', 'fr': 'Supprimer la sélection', 'de': 'Auswahl löschen', 'el': 'Διαγραφή επιλεγμένων', 'ar': 'حذف المحدد', 'pl': 'Usuń zaznaczone', 'ro': 'Șterge selecția', 'hu': 'Kijelöltek törlése'},
+    'totalReset': {'it': 'RESET TOTALE', 'en': 'TOTAL RESET', 'es': 'RESET TOTAL', 'pt': 'RESET TOTAL', 'fr': 'RÉINITIALISATION TOTALE', 'de': 'TOTAL ZURÜCKSETZEN', 'el': 'ΠΛΗΡΗΣ ΕΠΑΝΑΦΟΡΑ', 'ar': 'إعادة تعيين كاملة', 'pl': 'CAŁKOWITY RESET', 'ro': 'RESETARE TOTALĂ', 'hu': 'TELJES VISSZAÁLLÍTÁS'},
+    'fullReset': {'it': 'Reset completo dati', 'en': 'Full data reset', 'es': 'Reset completo de datos', 'pt': 'Reset completo de dados', 'fr': 'Réinitialisation complète', 'de': 'Vollständiges Zurücksetzen', 'el': 'Πλήρης επαναφορά δεδομένων', 'ar': 'إعادة تعيين كاملة للبيانات', 'pl': 'Pełny reset danych', 'ro': 'Resetare completă date', 'hu': 'Teljes adatvisszaállítás'},
+    'fullResetTitle': {'it': 'Reset completo', 'en': 'Full reset', 'es': 'Reset completo', 'pt': 'Reset completo', 'fr': 'Réinitialisation complète', 'de': 'Vollständiges Zurücksetzen', 'el': 'Πλήρης επαναφορά', 'ar': 'إعادة تعيين كاملة', 'pl': 'Pełny reset', 'ro': 'Resetare completă', 'hu': 'Teljes visszaállítás'},
+    'fullResetMsg': {'it': 'Eliminerà TUTTI i dati: scheda, storico e impostazioni.', 'en': 'Will delete ALL data: schedule, history and settings.', 'es': 'Eliminará TODOS los datos: programa, historial y ajustes.', 'pt': 'Excluirá TODOS os dados: programa, histórico e configurações.', 'fr': 'Supprimera TOUTES les données: programme, historique et paramètres.', 'de': 'Löscht ALLE Daten: Programm, Verlauf und Einstellungen.', 'el': 'Θα διαγράψει ΟΛΑ τα δεδομένα: πρόγραμμα, ιστορικό και ρυθμίσεις.', 'ar': 'سيحذف جميع البيانات: البرنامج والسجل والإعدادات.', 'pl': 'Usunie WSZYSTKIE dane: plan, historię i ustawienia.', 'ro': 'Va șterge TOATE datele: programul, istoricul și setările.', 'hu': 'MINDEN adatot töröl: program, előzmény és beállítások.'},
+    'continueLabel': {'it': 'CONTINUA', 'en': 'CONTINUE', 'es': 'CONTINUAR', 'pt': 'CONTINUAR', 'fr': 'CONTINUER', 'de': 'WEITER', 'el': 'ΣΥΝΕΧΕΙΑ', 'ar': 'متابعة', 'pl': 'KONTYNUUJ', 'ro': 'CONTINUĂ', 'hu': 'FOLYTATÁS'},
+    'areYouSure': {'it': 'Sei sicuro?', 'en': 'Are you sure?', 'es': '¿Estás seguro?', 'pt': 'Tem certeza?', 'fr': 'Êtes-vous sûr?', 'de': 'Bist du sicher?', 'el': 'Είσαι σίγουρος;', 'ar': 'هل أنت متأكد؟', 'pl': 'Jesteś pewny?', 'ro': 'Ești sigur?', 'hu': 'Biztos vagy benne?'},
+    'irreversible': {'it': 'Operazione irreversibile.', 'en': 'This operation is irreversible.', 'es': 'Esta operación es irreversible.', 'pt': 'Esta operação é irreversível.', 'fr': 'Cette opération est irréversible.', 'de': 'Diese Operation ist nicht rückgängig zu machen.', 'el': 'Αυτή η λειτουργία είναι μη αναστρέψιμη.', 'ar': 'هذه العملية لا يمكن التراجع عنها.', 'pl': 'Ta operacja jest nieodwracalna.', 'ro': 'Această operațiune este ireversibilă.', 'hu': 'Ez a művelet visszavonhatatlan.'},
+    'deleteAll': {'it': 'CANCELLA TUTTO', 'en': 'DELETE ALL', 'es': 'ELIMINAR TODO', 'pt': 'EXCLUIR TUDO', 'fr': 'TOUT SUPPRIMER', 'de': 'ALLES LÖSCHEN', 'el': 'ΔΙΑΓΡΑΦΗ ΟΛΩΝ', 'ar': 'حذف الكل', 'pl': 'USUŃ WSZYSTKO', 'ro': 'ȘTERGE TOT', 'hu': 'ÖSSZES TÖRLÉSE'},
+    'noSession': {'it': 'Nessuna sessione', 'en': 'No sessions', 'es': 'Sin sesiones', 'pt': 'Sem sessões', 'fr': 'Pas de sessions', 'de': 'Keine Einheiten', 'el': 'Δεν υπάρχουν συνεδρίες', 'ar': 'لا توجد جلسات', 'pl': 'Brak sesji', 'ro': 'Nicio sesiune', 'hu': 'Nincs foglalkozás'},
+    'deleteSession': {'it': 'Elimina sessione?', 'en': 'Delete session?', 'es': '¿Eliminar sesión?', 'pt': 'Excluir sessão?', 'fr': 'Supprimer la session?', 'de': 'Einheit löschen?', 'el': 'Διαγραφή συνεδρίας;', 'ar': 'حذف الجلسة؟', 'pl': 'Usunąć sesję?', 'ro': 'Ștergi sesiunea?', 'hu': 'Foglalkozás törlése?'},
+    'deleteSessionMsg': {'it': 'Tutti i dati di questa sessione verranno eliminati.', 'en': 'All data from this session will be deleted.', 'es': 'Todos los datos de esta sesión serán eliminados.', 'pt': 'Todos os dados desta sessão serão excluídos.', 'fr': 'Toutes les données de cette session seront supprimées.', 'de': 'Alle Daten dieser Einheit werden gelöscht.', 'el': 'Όλα τα δεδομένα αυτής της συνεδρίας θα διαγραφούν.', 'ar': 'ستُحذف جميع بيانات هذه الجلسة.', 'pl': 'Wszystkie dane z tej sesji zostaną usunięte.', 'ro': 'Toate datele din această sesiune vor fi șterse.', 'hu': 'Az ülés összes adata törlésre kerül.'},
+    'sessionDeleted': {'it': 'Sessione eliminata', 'en': 'Session deleted', 'es': 'Sesión eliminada', 'pt': 'Sessão excluída', 'fr': 'Session supprimée', 'de': 'Einheit gelöscht', 'el': 'Συνεδρία διαγράφηκε', 'ar': 'تم حذف الجلسة', 'pl': 'Sesja usunięta', 'ro': 'Sesiune ștearsă', 'hu': 'Foglalkozás törölve'},
+    'deleteSeries': {'it': 'Elimina serie?', 'en': 'Delete set?', 'es': '¿Eliminar serie?', 'pt': 'Excluir série?', 'fr': 'Supprimer le set?', 'de': 'Satz löschen?', 'el': 'Διαγραφή σετ;', 'ar': 'حذف المجموعة؟', 'pl': 'Usunąć serię?', 'ro': 'Ștergi setul?', 'hu': 'Sorozat törlése?'},
+    'dataDeleted': {'it': 'Dati eliminati', 'en': 'Data deleted', 'es': 'Datos eliminados', 'pt': 'Dados excluídos', 'fr': 'Données supprimées', 'de': 'Daten gelöscht', 'el': 'Τα δεδομένα διαγράφηκαν', 'ar': 'تم حذف البيانات', 'pl': 'Dane usunięte', 'ro': 'Date șterse', 'hu': 'Adatok törölve'},
+    'skipUseButton': {'it': 'Usa il tasto \'SKIP\' per tornare all\'esercizio', 'en': 'Use the SKIP button to return to the exercise', 'es': 'Usa el botón SKIP para volver al ejercicio', 'pt': 'Use o botão SKIP para voltar ao exercício', 'fr': 'Utilisez le bouton SKIP pour revenir à l\'exercice', 'de': 'Benutze den SKIP-Button um zur Übung zurückzukehren', 'el': 'Χρησιμοποίησε το κουμπί SKIP για να επιστρέψεις στην άσκηση', 'ar': 'استخدم زر التخطي للعودة إلى التمرين', 'pl': 'Użyj przycisku POMIŃ aby wrócić do ćwiczenia', 'ro': 'Folosiți butonul SKIP pentru a reveni la exercițiu', 'hu': 'Használd a KIHAGYÁS gombot a gyakorlathoz való visszatéréshez'},
+    'restoreWorkout': {'it': '♻️ Allenamento precedente ripristinato', 'en': '♻️ Previous workout restored', 'es': '♻️ Entrenamiento anterior restaurado', 'pt': '♻️ Treino anterior restaurado', 'fr': '♻️ Entraînement précédent restauré', 'de': '♻️ Vorheriges Training wiederhergestellt', 'el': '♻️ Προηγούμενη προπόνηση αποκαταστάθηκε', 'ar': '♻️ تم استعادة التمرين السابق', 'pl': '♻️ Poprzedni trening przywrócony', 'ro': '♻️ Antrenamentul anterior restaurat', 'hu': '♻️ Korábbi edzés visszaállítva'},
+    'workoutNotDone': {'it': 'Hai completato questo esercizio, ma ne mancano altri! Usa le frecce.', 'en': 'You completed this exercise, but there are more! Use the arrows.', 'es': 'Completaste este ejercicio, ¡pero hay más! Usa las flechas.', 'pt': 'Você completou este exercício, mas há mais! Use as setas.', 'fr': 'Vous avez terminé cet exercice, mais il y en a d\'autres! Utilisez les flèches.', 'de': 'Du hast diese Übung abgeschlossen, aber es gibt noch mehr! Benutze die Pfeile.', 'el': 'Ολοκλήρωσες αυτή την άσκηση, αλλά υπάρχουν κι άλλες! Χρησιμοποίησε τα βέλη.', 'ar': 'أكملت هذا التمرين، لكن هناك المزيد! استخدم الأسهم.', 'pl': 'Ukończyłeś to ćwiczenie, ale jest ich więcej! Użyj strzałek.', 'ro': 'Ai completat acest exercițiu, dar mai sunt altele! Folosește săgețile.', 'hu': 'Befejezted ezt a gyakorlatot, de van még! Használd a nyilakat.'},
+    'proFeature1': {'it': '✅ Schede personalizzate per ogni atleta', 'en': '✅ Personalized schedules for each athlete', 'es': '✅ Programas personalizados para cada atleta', 'pt': '✅ Programas personalizados para cada atleta', 'fr': '✅ Programmes personnalisés pour chaque athlète', 'de': '✅ Personalisierte Pläne für jeden Athleten', 'el': '✅ Εξατομικευμένα προγράμματα για κάθε αθλητή', 'ar': '✅ برامج مخصصة لكل رياضي', 'pl': '✅ Spersonalizowane plany dla każdego sportowca', 'ro': '✅ Programe personalizate pentru fiecare sportiv', 'hu': '✅ Személyre szabott programok minden sportolónak'},
+    'proFeature2': {'it': '✅ Monitoraggio progressi in tempo reale', 'en': '✅ Real-time progress monitoring', 'es': '✅ Monitoreo de progreso en tiempo real', 'pt': '✅ Monitoramento de progresso em tempo real', 'fr': '✅ Suivi des progrès en temps réel', 'de': '✅ Echtzeit-Fortschrittsüberwachung', 'el': '✅ Παρακολούθηση προόδου σε πραγματικό χρόνο', 'ar': '✅ مراقبة التقدم في الوقت الفعلي', 'pl': '✅ Monitorowanie postępów w czasie rzeczywistym', 'ro': '✅ Monitorizare progres în timp real', 'hu': '✅ Valós idejű haladás követés'},
+    'proFeature3': {'it': '✅ Database esercizi condiviso', 'en': '✅ Shared exercise database', 'es': '✅ Base de datos de ejercicios compartida', 'pt': '✅ Banco de dados de exercícios compartilhado', 'fr': '✅ Base de données d\'exercices partagée', 'de': '✅ Gemeinsame Übungsdatenbank', 'el': '✅ Κοινή βάση δεδομένων ασκήσεων', 'ar': '✅ قاعدة بيانات تمارين مشتركة', 'pl': '✅ Wspólna baza danych ćwiczeń', 'ro': '✅ Bază de date exerciții partajată', 'hu': '✅ Megosztott gyakorlat adatbázis'},
+    'proFeature4': {'it': '✅ Senza abbonamenti mensili', 'en': '✅ No monthly subscriptions', 'es': '✅ Sin suscripciones mensuales', 'pt': '✅ Sem assinaturas mensais', 'fr': '✅ Sans abonnements mensuels', 'de': '✅ Keine monatlichen Abonnements', 'el': '✅ Χωρίς μηνιαίες συνδρομές', 'ar': '✅ بدون اشتراكات شهرية', 'pl': '✅ Bez miesięcznych subskrypcji', 'ro': '✅ Fără abonamente lunare', 'hu': '✅ Nincsenek havi előfizetések'},
+    'gymAppPro': {'it': 'GymApp Pro - Per PT', 'en': 'GymApp Pro - For PT', 'es': 'GymApp Pro - Para PT', 'pt': 'GymApp Pro - Para PT', 'fr': 'GymApp Pro - Pour PT', 'de': 'GymApp Pro - Für PT', 'el': 'GymApp Pro - Για PT', 'ar': 'GymApp Pro - للمدربين', 'pl': 'GymApp Pro - Dla PT', 'ro': 'GymApp Pro - Pentru PT', 'hu': 'GymApp Pro - PT-knek'},
+    'recoverySuffix': {'it': 's riposo', 'en': 's rest', 'es': 's descanso', 'pt': 's descanso', 'fr': 's repos', 'de': 's Erholung', 'el': 's ανάπαυση', 'ar': 'ث راحة', 'pl': 's odpoczynku', 'ro': 's odihnă', 'hu': 's pihenő'},
+    'sessionCount': {'it': 'session', 'en': 'session', 'es': 'sesión', 'pt': 'sessão', 'fr': 'session', 'de': 'Einheit', 'el': 'συνεδρία', 'ar': 'جلسة', 'pl': 'sesja', 'ro': 'sesiune', 'hu': 'foglalkozás'},
+    'sessionCountPlural': {'it': 'sessioni', 'en': 'sessions', 'es': 'sesiones', 'pt': 'sessões', 'fr': 'sessions', 'de': 'Einheiten', 'el': 'συνεδρίες', 'ar': 'جلسات', 'pl': 'sesje', 'ro': 'sesiuni', 'hu': 'foglalkozások'},
+    'loadExample': {'it': 'Carica esempio', 'en': 'Load example', 'es': 'Cargar ejemplo', 'pt': 'Carregar exemplo', 'fr': 'Charger exemple', 'de': 'Beispiel laden', 'el': 'Φόρτωση παραδείγματος', 'ar': 'تحميل مثال', 'pl': 'Załaduj przykład', 'ro': 'Încarcă exemplu', 'hu': 'Példa betöltése'},
+    'renameSession': {'it': 'Rinomina sessione', 'en': 'Rename session', 'es': 'Renombrar sesión', 'pt': 'Renomear sessão', 'fr': 'Renommer session', 'de': 'Einheit umbenennen', 'el': 'Μετονομασία συνεδρίας', 'ar': 'إعادة تسمية الجلسة', 'pl': 'Zmień nazwę sesji', 'ro': 'Redenumește sesiunea', 'hu': 'Foglalkozás átnevezése'},
+    'sessionName': {'it': 'Nome sessione', 'en': 'Session name', 'es': 'Nombre de sesión', 'pt': 'Nome da sessão', 'fr': 'Nom de la session', 'de': 'Name der Einheit', 'el': 'Όνομα συνεδρίας', 'ar': 'اسم الجلسة', 'pl': 'Nazwa sesji', 'ro': 'Numele sesiunii', 'hu': 'Foglalkozás neve'},
+    'editExercise': {'it': 'Modifica esercizio', 'en': 'Edit exercise', 'es': 'Editar ejercicio', 'pt': 'Editar exercício', 'fr': 'Modifier exercice', 'de': 'Übung bearbeiten', 'el': 'Επεξεργασία άσκησης', 'ar': 'تعديل التمرين', 'pl': 'Edytuj ćwiczenie', 'ro': 'Editează exercițiu', 'hu': 'Gyakorlat szerkesztése'},
+    'streakWeeks': {'it': 'Microcicli di fila', 'en': 'Week streak', 'es': 'Racha de semanas', 'pt': 'Sequência de semanas', 'fr': 'Série de semaines', 'de': 'Wochensträhne', 'el': 'Σερί εβδομάδων', 'ar': 'تتابع الأسابيع', 'pl': 'Seria tygodni', 'ro': 'Serie de săptămâni', 'hu': 'Hetek sorozata'},
+    'streakMsg': {'it': '🔥 Mantieni la tua streak!', 'en': '🔥 Keep your streak alive!', 'es': '🔥 ¡Mantén tu racha!', 'pt': '🔥 Mantenha sua sequência!', 'fr': '🔥 Gardez votre série!', 'de': '🔥 Halte deine Serie am Laufen!', 'el': '🔥 Κράτα το σερί σου!', 'ar': '🔥 حافظ على تتابعك!', 'pl': '🔥 Utrzymaj swoją serię!', 'ro': '🔥 Menține-ți seria!', 'hu': '🔥 Tartsd fenn a sorozatodat!'},
+    'newRecord': {'it': 'NUOVO RECORD!', 'en': 'NEW RECORD!', 'es': '¡NUEVO RÉCORD!', 'pt': 'NOVO RECORDE!', 'fr': 'NOUVEAU RECORD!', 'de': 'NEUER REKORD!', 'el': 'ΝΕΟ ΡΕΚΟΡ!', 'ar': 'رقم قياسي جديد!', 'pl': 'NOWY REKORD!', 'ro': 'NOU RECORD!', 'hu': 'ÚJ REKORD!'},
+  };
+
+  static String get mySchedule => _t('mySchedule');
+  static String get noSchedule => _t('noSchedule');
+  static String get createSchedule => _t('createSchedule');
+  static String get train => _t('train');
+  static String get progress => _t('progress');
+  static String get settings => _t('settings');
+  static String get deleteData => _t('deleteData');
+  static String get day => _t('day');
+  static String get exercises => _t('exercises');
+  static String get sets => _t('sets');
+  static String get reps => _t('reps');
+  static String get recovery => _t('recovery');
+  static String get notes => _t('notes');
+  static String get save => _t('save');
+  static String get cancel => _t('cancel');
+  static String get add => _t('add');
+  static String get weight => _t('weight');
+  static String get weightUnit => _t('weightUnit');
+  static String get usePounds => _t('usePounds');
+  static String get startWorkout => _t('startWorkout');
+  static String get proTrainer => _t('proTrainer');
+  static String get pause => _t('pause');
+  static String get browseArchive => _t('browseArchive');
+  static String get repsPerSet => _t('repsPerSet');
+  static String get muscleGroup => _t('muscleGroup');
+  static String get chooseExercise => _t('chooseExercise');
+  static String get noScheduleYet => _t('noScheduleYet');
+  static String get addFirstDay => _t('addFirstDay');
+  static String get deleteDay => _t('deleteDay');
+  static String get delete => _t('delete');
+  static String get circuit => _t('circuit');
+  static String get circuitHint => _t('circuitHint');
+  static String get exerciseName => _t('exerciseName');
+  static String get pauseSec => _t('pauseSec');
+  static String get tapToChooseMuscle => _t('tapToChooseMuscle');
+  static String get noScheduleMsg => _t('noScheduleMsg');
+  static String get history => _t('history');
+  static String get workoutOf => _t('workoutOf');
+  static String get restTimer => _t('restTimer');
+  static String get nextSet => _t('nextSet');
+  static String get done => _t('done');
+  static String get skip => _t('skip');
+  static String get confirm => _t('confirm');
+  static String get workout => _t('workout');
+  static String get totalVolume => _t('totalVolume');
+  static String get personalBest => _t('personalBest');
+  static String get language => _t('language');
+  static String get italian => _t('italian');
+  static String get english => _t('english');
+  static String get spanish => _t('spanish');
+  static String get portuguese => _t('portuguese');
+  static String get french => _t('french');
+  static String get german => _t('german');
+  static String get greek => _t('greek');
+  static String get arabic => _t('arabic');
+  static String get polish => _t('polish');
+  static String get romanian => _t('romanian');
+  static String get hungarian => _t('hungarian');
+  static String get accentColor => _t('accentColor');
+  static String get chooseLanguage => _t('chooseLanguage');
+  static String get continueBtn => _t('continueBtn');
+  static String get welcomeTitle => _t('welcomeTitle');
+  static String get setGroup => _t('setGroup');
+  static String get onboardingWelcomeText => _t('onboardingWelcomeText');
+  static String get onboardingScheduleTitle => _t('onboardingScheduleTitle');
+  static String get onboardingScheduleText => _t('onboardingScheduleText');
+  static String get onboardingTrainTitle => _t('onboardingTrainTitle');
+  static String get onboardingTrainText => _t('onboardingTrainText');
+  static String get onboardingProgressTitle => _t('onboardingProgressTitle');
+  static String get onboardingProgressText => _t('onboardingProgressText');
+  static String get onboardingProText => _t('onboardingProText');
+  static String get contactGianmarco => _t('contactGianmarco');
+  static String get proInfoText => _t('proInfoText');
+  static String get startBtn => _t('startBtn');
+  static String get nextBtn => _t('nextBtn');
+  static String get chooseMuscleImage => _t('chooseMuscleImage');
+  static String get noImage => _t('noImage');
+  static String get promoText => _t('promoText');
+  static String get noScheduleLoaded => _t('noScheduleLoaded');
+  static String get editOrCreate => _t('editOrCreate');
+  static String get trainNow => _t('trainNow');
+  static String get train2 => _t('train2');
+  static String get chooseAndStart => _t('chooseAndStart');
+  static String get createFirstSchedule => _t('createFirstSchedule');
+  static String get workoutProgress => _t('workoutProgress');
+  static String get neverTrained => _t('neverTrained');
+  static String get today => _t('today');
+  static String get yesterday => _t('yesterday');
+  static String get daysAgo => _t('daysAgo');
+  static String get others => _t('others');
+  static String get timerSound => _t('timerSound');
+  static String get timerVibration => _t('timerVibration');
+  static String get autoStartTimer => _t('autoStartTimer');
+  static String get screenAlwaysOn => _t('screenAlwaysOn');
+  static String get confirmSeriesWindow => _t('confirmSeriesWindow');
+  static String get weightSuggestion => _t('weightSuggestion');
+  static String get dataManagement => _t('dataManagement');
+  static String get insertKg => _t('insertKg');
+  static String get insertReps => _t('insertReps');
+  static String get enterKgReps => _t('enterKgReps');
+  static String get saveSeries => _t('saveSeries');
+  static String get confirmSeries => _t('confirmSeries');
+  static String get quitWorkout => _t('quitWorkout');
+  static String get quitWorkoutMsg => _t('quitWorkoutMsg');
+  static String get exitAndSave => _t('exitAndSave');
+  static String get exerciseComplete => _t('exerciseComplete');
+  static String get exerciseCompleteMsg => _t('exerciseCompleteMsg');
+  static String get nextInfo => _t('nextInfo');
+  static String get lastTime => _t('lastTime');
+  static String get increaseWeight => _t('increaseWeight');
+  static String get increase => _t('increase');
+  static String get workoutComplete => _t('workoutComplete');
+  static String get firstSession => _t('firstSession');
+  static String get improving => _t('improving');
+  static String get declining => _t('declining');
+  static String get plateau => _t('plateau');
+  static String get details => _t('details');
+  static String get greatWork => _t('greatWork');
+  static String get workoutSummary => _t('workoutSummary');
+  static String get close => _t('close');
+  static String get totalSeries => _t('totalSeries');
+  static String get exercisesLabel => _t('exercisesLabel');
+  static String get primaryMuscle => _t('primaryMuscle');
+  static String get secondaryMuscles => _t('secondaryMuscles');
+  static String get execution => _t('execution');
+  static String get tips => _t('tips');
+  static String get notInCatalog => _t('notInCatalog');
+  static String get notInCatalogShort => _t('notInCatalogShort');
+  static String get watchOnYoutube => _t('watchOnYoutube');
+  static String get progressOverTime => _t('progressOverTime');
+  static String get noData => _t('noData');
+  static String get noDataRegistered => _t('noDataRegistered');
+  static String get myNotes => _t('myNotes');
+  static String get coachNotes => _t('coachNotes');
+  static String get setsDone => _t('setsDone');
+  static String get of => _t('of');
+  static String get changeExercise => _t('changeExercise');
+  static String get noHistory => _t('noHistory');
+  static String get deleteSelected => _t('deleteSelected');
+  static String get totalReset => _t('totalReset');
+  static String get fullReset => _t('fullReset');
+  static String get fullResetTitle => _t('fullResetTitle');
+  static String get fullResetMsg => _t('fullResetMsg');
+  static String get continueLabel => _t('continueLabel');
+  static String get areYouSure => _t('areYouSure');
+  static String get irreversible => _t('irreversible');
+  static String get deleteAll => _t('deleteAll');
+  static String get noSession => _t('noSession');
+  static String get deleteSession => _t('deleteSession');
+  static String get deleteSessionMsg => _t('deleteSessionMsg');
+  static String get sessionDeleted => _t('sessionDeleted');
+  static String get deleteSeries => _t('deleteSeries');
+  static String get dataDeleted => _t('dataDeleted');
+  static String get skipUseButton => _t('skipUseButton');
+  static String get restoreWorkout => _t('restoreWorkout');
+  static String get workoutNotDone => _t('workoutNotDone');
+  static String get proFeature1 => _t('proFeature1');
+  static String get proFeature2 => _t('proFeature2');
+  static String get proFeature3 => _t('proFeature3');
+  static String get proFeature4 => _t('proFeature4');
+  static String get gymAppPro => _t('gymAppPro');
+  static String get recoverySuffix => _t('recoverySuffix');
+  static String get sessionCount => _t('sessionCount');
+  static String get sessionCountPlural => _t('sessionCountPlural');
+  static String get loadExample => _t('loadExample');
+  static String get renameSession => _t('renameSession');
+  static String get sessionName => _t('sessionName');
+  static String get editExercise => _t('editExercise');
+  static String get streakWeeks => _t('streakWeeks');
+  static String get streakMsg => _t('streakMsg');
+  static String get newRecord => _t('newRecord');
 }
-
 double kgToLb(double kg) => kg * 2.2046226218;
 
 double lbToKg(double lb) => lb / 2.2046226218;
@@ -1010,75 +1074,75 @@ class LanguagePickerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final dark = _isDarkCtx(context);
+    const langs = [
+      ('it', '🇮🇹', 'Italiano'),
+      ('en', '🇬🇧', 'English'),
+      ('es', '🇪🇸', 'Español'),
+      ('pt', '🇧🇷', 'Português'),
+      ('fr', '🇫🇷', 'Français'),
+      ('de', '🇩🇪', 'Deutsch'),
+      ('el', '🇬🇷', 'Ελληνικά'),
+      ('ar', '🇸🇦', 'العربية'),
+      ('pl', '🇵🇱', 'Polski'),
+      ('ro', '🇷🇴', 'Română'),
+      ('hu', '🇭🇺', 'Magyar'),
+    ];
     return Scaffold(
-      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0A0A0A) : Colors.white,
+      backgroundColor: dark ? const Color(0xFF0A0A0A) : Colors.white,
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('🌍', style: TextStyle(fontSize: 72)),
-                const SizedBox(height: 32),
-                Text(
-                  'Scegli la lingua\nChoose your language',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    height: 1.4,
-                  ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(height: 32),
+              const Text('🌍', style: TextStyle(fontSize: 72)),
+              const SizedBox(height: 20),
+              Text(
+                'Scegli la lingua / Choose your language',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: dark ? Colors.white : Colors.black87,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(height: 48),
-                SizedBox(
-                  width: double.infinity,
-                  height: 56,
-                  child: ElevatedButton(
-                    onPressed: () => _choose(context, 'it'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF00F2FF),
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
+              ),
+              const SizedBox(height: 28),
+              Expanded(
+                child: ListView.separated(
+                  itemCount: langs.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 10),
+                  itemBuilder: (ctx, i) {
+                    final (code, flag, name) = langs[i];
+                    final isPrimary = i == 0;
+                    return SizedBox(
+                      width: double.infinity,
+                      height: 52,
+                      child: ElevatedButton(
+                        onPressed: () => _choose(ctx, code),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: isPrimary ? const Color(0xFF00F2FF) : Colors.transparent,
+                          foregroundColor: isPrimary ? Colors.black : (dark ? Colors.white : Colors.black87),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(14),
+                            side: isPrimary
+                                ? BorderSide.none
+                                : BorderSide(color: dark ? Colors.white24 : Colors.black26),
+                          ),
+                        ),
+                        child: Text(
+                          '$flag  $name',
+                          style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 17),
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      '🇮🇹  Italiano',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
-                const SizedBox(height: 16),
-                SizedBox(
-                  width: double.infinity,
-                  height: 56,
-                  child: ElevatedButton(
-                    onPressed: () => _choose(context, 'en'),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white12,
-                      foregroundColor: Colors.white,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        side: BorderSide(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
-                      ),
-                    ),
-                    child: const Text(
-                      '🇬🇧  English',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 24),
+            ],
           ),
         ),
       ),
@@ -4982,14 +5046,17 @@ class _ClientMainPageState extends State<ClientMainPage>
                     style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                     underline: const SizedBox(),
                     items: const [
-                      DropdownMenuItem(
-                        value: 'it',
-                        child: Text('🇮🇹 Italiano'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'en',
-                        child: Text('🇬🇧 English'),
-                      ),
+                      DropdownMenuItem(value: 'it', child: Text('🇮🇹 Italiano')),
+                      DropdownMenuItem(value: 'en', child: Text('🇬🇧 English')),
+                      DropdownMenuItem(value: 'es', child: Text('🇪🇸 Español')),
+                      DropdownMenuItem(value: 'pt', child: Text('🇧🇷 Português')),
+                      DropdownMenuItem(value: 'fr', child: Text('🇫🇷 Français')),
+                      DropdownMenuItem(value: 'de', child: Text('🇩🇪 Deutsch')),
+                      DropdownMenuItem(value: 'el', child: Text('🇬🇷 Ελληνικά')),
+                      DropdownMenuItem(value: 'ar', child: Text('🇸🇦 العربية')),
+                      DropdownMenuItem(value: 'pl', child: Text('🇵🇱 Polski')),
+                      DropdownMenuItem(value: 'ro', child: Text('🇷🇴 Română')),
+                      DropdownMenuItem(value: 'hu', child: Text('🇭🇺 Magyar')),
                     ],
                     onChanged: (v) async {
                       if (v == null) return;
@@ -11769,7 +11836,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                             border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Text('PROVA ${targetR + 2} REPS',
+                          child: Text(AppL.tryReps(targetR + 2),
                             style: const TextStyle(color: Colors.green, fontSize: 13, fontWeight: FontWeight.bold)),
                         ),
                       if (suggerisciAumento && _showWeightSuggestion)
@@ -13183,7 +13250,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Text('PROVA ${targetR + 2} REPS',
+                    child: Text(AppL.tryReps(targetR + 2),
                       style: const TextStyle(color: Colors.green, fontSize: 13, fontWeight: FontWeight.bold)),
                   ),
               ],
@@ -13769,13 +13836,32 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                           ],
                                         ),
                                         const SizedBox(height: 4),
-                                        Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg  ×  $lastR reps',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            color: _isDarkCtx(context) ? Colors.white70 : Colors.black54,
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                                        Wrap(
+                                          alignment: WrapAlignment.center,
+                                          spacing: 8,
+                                          runSpacing: 4,
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFFFFD700).withAlpha(30),
+                                                border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg',
+                                                style: const TextStyle(color: Color(0xFFFFD700), fontSize: 13, fontWeight: FontWeight.bold)),
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                              decoration: BoxDecoration(
+                                                color: accent.withAlpha(30),
+                                                border: Border.all(color: accent.withAlpha(180), width: 1.5),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Text('$lastR reps',
+                                                style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ],
@@ -14186,7 +14272,7 @@ class _AumentaRepsWidgetState extends State<_AumentaRepsWidget>
               const Text('💪', style: TextStyle(fontSize: 20)),
               const SizedBox(width: 10),
               Text(
-                'PROVA ${widget.targetReps} REPS',
+                AppL.tryReps(widget.targetReps),
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w900,
