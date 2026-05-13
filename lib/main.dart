@@ -386,6 +386,11 @@ class AppL {
     if (m == null) return key;
     return m[_lang] ?? m['en'] ?? m['it'] ?? key;
   }
+  static String t(String lang, String key) {
+    final m = _s[key];
+    if (m == null) return key;
+    return m[lang] ?? m['en'] ?? m['it'] ?? key;
+  }
 
   static String tryReps(int n) {
     switch (_lang) {
@@ -582,6 +587,58 @@ class AppL {
     'muscleImageOpt': {'it': 'Immagine muscolo (opzionale):', 'en': 'Muscle image (optional):', 'es': 'Imagen de múscolo (opcional):', 'pt': 'Imagem do múscolo (opcional):', 'fr': 'Image du muscle (optionnel):', 'de': 'Muskelbild (optional):', 'el': 'Εικόνα μυός (προαιρετικό):', 'ar': 'صورة العπلة (اختياري):', 'pl': 'Obraz mięśnia (opcjonalne):', 'ro': 'Imagine mușchi (opțional):', 'hu': 'Izomkép (opcionális):'},
     'selectMusclesOpt': {'it': 'Seleziona i gruppi muscolari coinvolti (opzionale):', 'en': 'Select the muscle groups involved (optional):', 'es': 'Selecciona los grupos musculares involucrados (opcional):', 'pt': 'Selecione os grupos musculares envolvidos (opcional):', 'fr': 'Sélectionnez les groupes musculaires impliqués (optionnel):', 'de': 'Wähle die beteiligten Muskelgruppen (optional):', 'el': 'Επίλεξε τις μυικές ομάδες που εμπλέκονται (προαιρετικό):', 'ar': 'حدد مجموعات العضلات المشاركة (اختياري):', 'pl': 'Wybierz zaangażowane grupy mięśniowe (opcjonalne):', 'ro': 'Selectați grupele musculare implicate (opțional):', 'hu': 'Válaszd ki az érintett izomcsoportokat (opcionális):'},
     'startRealWorkout': {'it': 'Inizia il vero allenamento! 🚀', 'en': 'Start your real workout! 🚀', 'es': '¡Empieza tu entrenamiento real! 🚀', 'pt': 'Comece seu treino real! 🚀', 'fr': 'Commencez votre vrai entraînement ! 🚀', 'de': 'Starte dein echtes Training! 🚀', 'el': 'Ξεκίνα την πραγματική σου προπόνηση! 🚀', 'ar': 'ابدأ تمرينك الحقيقي! 🚀', 'pl': 'Zacznij swój prawdziwy trening! 🚀', 'ro': 'Începe antrenamentul tău real! 🚀', 'hu': 'Kezdd el az igazi edzést! 🚀'},
+    'pounds': {'it': 'LIBBRE', 'en': 'POUNDS', 'es': 'LIBRAS', 'pt': 'LIBRAS', 'fr': 'LIVRES', 'de': 'PFUND', 'el': 'ΛΙΒΡΕΣ', 'ar': 'أرطال', 'pl': 'FUNTY', 'ro': 'LIVRE', 'hu': 'FONT'},
+    'noKeyboard': {'it': 'Nessuna tastiera', 'en': 'No keyboard', 'es': 'Sin teclado', 'pt': 'Sem teclado', 'fr': 'Sans clavier', 'de': 'Keine Tastatur', 'el': 'Χωρίς πληκτρολόγιο', 'ar': 'بدون لوحة مفاتيح', 'pl': 'Bez klawiatury', 'ro': 'Fără tastatură', 'hu': 'Billentyűzet nélkül'},
+    'watchTutorial': {'it': 'Guarda il Tutorial', 'en': 'Watch Tutorial', 'es': 'Ver Tutorial', 'pt': 'Assistir Tutorial', 'fr': 'Voir le Tutoriel', 'de': 'Tutorial ansehen', 'el': 'Παρακολούθηση Tutorial', 'ar': 'مشاهدة الدرس', 'pl': 'Obejrzyj Tutorial', 'ro': 'Vizionează Tutorialul', 'hu': 'Bemutató megtekintése'},
+    'overallProgress': {'it': 'Progressi Generali', 'en': 'Overall Progress', 'es': 'Progreso General', 'pt': 'Progresso Geral', 'fr': 'Progrès Général', 'de': 'Gesamtfortschritt', 'el': 'Γενική Πρόοδος', 'ar': 'التقدم الإجمالي', 'pl': 'Ogólny Postęp', 'ro': 'Progres General', 'hu': 'Általános Haladás'},
+    'closeApp': {'it': 'Chiudi', 'en': 'Close app', 'es': 'Cerrar', 'pt': 'Fechar', 'fr': 'Fermer', 'de': 'Schließen', 'el': 'Κλείσιμο', 'ar': 'إغلاق', 'pl': 'Zamknij', 'ro': 'Închide', 'hu': 'Bezárás'},
+    'openPayPal': {'it': 'Apri PayPal', 'en': 'Open PayPal', 'es': 'Abrir PayPal', 'pt': 'Abrir PayPal', 'fr': 'Ouvrir PayPal', 'de': 'PayPal öffnen', 'el': 'Άνοιγμα PayPal', 'ar': 'فتح PayPal', 'pl': 'Otwórz PayPal', 'ro': 'Deschide PayPal', 'hu': 'PayPal megnyitása'},
+    'sessionsThisMicrocycle': {'it': 'sessioni questo microciclo', 'en': 'sessions this microcycle', 'es': 'sesiones este microciclo', 'pt': 'sessões neste microciclo', 'fr': 'séances ce microcycle', 'de': 'Einheiten in diesem Mikrozyklus', 'el': 'συνεδρίες αυτόν τον μικρόκυκλο', 'ar': 'جلسات في هذه الدورة الصغيرة', 'pl': 'sesje w tym mikrocyklu', 'ro': 'sesiuni în acest microciclu', 'hu': 'foglalkozás ebben a mikrociklusban'},
+    'shareStreak': {'it': 'Condividi Streak', 'en': 'Share Streak', 'es': 'Compartir Racha', 'pt': 'Compartilhar Sequência', 'fr': 'Partager la Série', 'de': 'Serie teilen', 'el': 'Κοινοποίηση Σερί', 'ar': 'مشاركة التتابع', 'pl': 'Udostępnij Serię', 'ro': 'Distribuie Seria', 'hu': 'Sorozat megosztása'},
+    'streakUnitSingle': {'it': 'micro', 'en': 'week', 'es': 'sem.', 'pt': 'sem.', 'fr': 'sem.', 'de': 'Wo.', 'el': 'εβδ.', 'ar': 'أسبوع', 'pl': 'tydz.', 'ro': 'săpt.', 'hu': 'hét'},
+    'streakUnitPlural': {'it': 'micro', 'en': 'weeks', 'es': 'sem.', 'pt': 'sem.', 'fr': 'sem.', 'de': 'Wo.', 'el': 'εβδ.', 'ar': 'أسابيع', 'pl': 'tyg.', 'ro': 'săpt.', 'hu': 'hét'},
+    'load': {'it': 'CARICA', 'en': 'LOAD', 'es': 'CARGAR', 'pt': 'CARREGAR', 'fr': 'CHARGER', 'de': 'LADEN', 'el': 'ΦΟΡΤΩΣΗ', 'ar': 'تحميل', 'pl': 'ŁADUJ', 'ro': 'ÎNCARCĂ', 'hu': 'BETÖLTÉS'},
+    'all': {'it': 'Tutti', 'en': 'All', 'es': 'Todos', 'pt': 'Todos', 'fr': 'Tous', 'de': 'Alle', 'el': 'Όλα', 'ar': 'الكل', 'pl': 'Wszystkie', 'ro': 'Toate', 'hu': 'Összes'},
+    'templates': {'it': 'Template', 'en': 'Templates', 'es': 'Plantillas', 'pt': 'Modelos', 'fr': 'Modèles', 'de': 'Vorlagen', 'el': 'Πρότυπα', 'ar': 'قوالب', 'pl': 'Szablony', 'ro': 'Șabloane', 'hu': 'Sablonok'},
+    'timerFinished': {'it': 'Timer recupero finito', 'en': 'Workout timer finished', 'es': 'Temporizador finalizado', 'pt': 'Temporizador concluído', 'fr': 'Minuterie terminée', 'de': 'Timer beendet', 'el': 'Χρονόμετρο ολοκληρώθηκε', 'ar': 'انتهى المؤقت', 'pl': 'Timer zakończony', 'ro': 'Cronometrul s-a terminat', 'hu': 'Időzítő lejárt'},
+    'getBackToTraining': {'it': 'Torna ad allenarti.', 'en': 'Get back to training.', 'es': 'Vuelve a entrenar.', 'pt': 'Volte a treinar.', 'fr': 'Reprenez l\'entraînement.', 'de': 'Zurück zum Training.', 'el': 'Επέστρεψε στην προπόνηση.', 'ar': 'عد للتدريب.', 'pl': 'Wróć do treningu.', 'ro': 'Întoarce-te la antrenament.', 'hu': 'Térj vissza az edzéshez.'},
+    'shareWorkout': {'it': 'Condividi allenamento', 'en': 'Share workout', 'es': 'Compartir entrenamiento', 'pt': 'Compartilhar treino', 'fr': 'Partager l\'entraînement', 'de': 'Training teilen', 'el': 'Κοινοποίηση προπόνησης', 'ar': 'مشاركة التمرين', 'pl': 'Udostępnij trening', 'ro': 'Distribuie antrenamentul', 'hu': 'Edzés megosztása'},
+    'microAbbr': {'it': 'micro.', 'en': 'micro', 'es': 'micro', 'pt': 'micro', 'fr': 'micro', 'de': 'Mikro', 'el': 'μικρο.', 'ar': 'دورة', 'pl': 'mikro', 'ro': 'micro', 'hu': 'mikro'},
+    'vsPrev': {'it': 'vs prec.', 'en': 'vs prev.', 'es': 'vs ant.', 'pt': 'vs ant.', 'fr': 'vs préc.', 'de': 'vs. vor.', 'el': 'vs προηγ.', 'ar': 'مقابل سابق', 'pl': 'vs poprz.', 'ro': 'vs prec.', 'hu': 'vs előző'},
+    'microcycleBadges': {'it': 'Badge microciclo', 'en': 'Microcycle badges', 'es': 'Insignias del microciclo', 'pt': 'Badges do microciclo', 'fr': 'Badges du microcycle', 'de': 'Mikrozyklus-Abzeichen', 'el': 'Σήματα μικρόκυκλου', 'ar': 'شارات الدورة الصغيرة', 'pl': 'Odznaki mikrocyklu', 'ro': 'Insigne microciclu', 'hu': 'Mikrociklus jelvények'},
+    'vsPrevious': {'it': 'vs prec.', 'en': 'vs previous', 'es': 'vs anterior', 'pt': 'vs anterior', 'fr': 'vs précédent', 'de': 'vs. vorherig', 'el': 'vs προηγούμενο', 'ar': 'مقابل السابق', 'pl': 'vs poprzedni', 'ro': 'vs precedent', 'hu': 'vs előző'},
+    'shareImage': {'it': 'Condividi immagine', 'en': 'Share image', 'es': 'Compartir imagen', 'pt': 'Compartilhar imagem', 'fr': 'Partager l\'image', 'de': 'Bild teilen', 'el': 'Κοινοποίηση εικόνας', 'ar': 'مشاركة الصورة', 'pl': 'Udostępnij obraz', 'ro': 'Distribuie imaginea', 'hu': 'Kép megosztása'},
+    'thisMicrocycle': {'it': 'Questo microciclo', 'en': 'This microcycle', 'es': 'Este microciclo', 'pt': 'Este microciclo', 'fr': 'Ce microcycle', 'de': 'Dieser Mikrozyklus', 'el': 'Αυτός ο μικρόκυκλος', 'ar': 'هذه الدورة الصغيرة', 'pl': 'Ten mikrocykl', 'ro': 'Acest microciclu', 'hu': 'Ez a mikrociklus'},
+    'sessionsDone': {'it': 'sessioni completate', 'en': 'sessions done', 'es': 'sesiones completadas', 'pt': 'sessões concluídas', 'fr': 'séances effectuées', 'de': 'Einheiten abgeschlossen', 'el': 'συνεδρίες ολοκληρωμένες', 'ar': 'جلسات مكتملة', 'pl': 'sesje ukończone', 'ro': 'sesiuni finalizate', 'hu': 'befejezett foglalkozás'},
+    'shareStreakFire': {'it': 'Condividi Streak 🔥', 'en': 'Share Streak 🔥', 'es': 'Compartir Racha 🔥', 'pt': 'Compartilhar Sequência 🔥', 'fr': 'Partager la Série 🔥', 'de': 'Serie teilen 🔥', 'el': 'Κοινοποίηση Σερί 🔥', 'ar': 'مشاركة التتابع 🔥', 'pl': 'Udostępnij Serię 🔥', 'ro': 'Distribuie Seria 🔥', 'hu': 'Sorozat megosztása 🔥'},
+    'badgesIcon': {'it': '🏅 Badge', 'en': '🏅 Badges', 'es': '🏅 Insignias', 'pt': '🏅 Distintivos', 'fr': '🏅 Badges', 'de': '🏅 Abzeichen', 'el': '🏅 Σήματα', 'ar': '🏅 شارات', 'pl': '🏅 Odznaki', 'ro': '🏅 Insigne', 'hu': '🏅 Jelvények'},
+    'sessionsIcon': {'it': '📊 Sessioni', 'en': '📊 Sessions', 'es': '📊 Sesiones', 'pt': '📊 Sessões', 'fr': '📊 Séances', 'de': '📊 Einheiten', 'el': '📊 Συνεδρίες', 'ar': '📊 الجلسات', 'pl': '📊 Sesje', 'ro': '📊 Sesiuni', 'hu': '📊 Foglalkozások'},
+    'shareToStories': {'it': 'Condividi nelle Storie', 'en': 'Share to Stories', 'es': 'Compartir en Historias', 'pt': 'Compartilhar nos Stories', 'fr': 'Partager en Story', 'de': 'In Stories teilen', 'el': 'Κοινοποίηση στις Ιστορίες', 'ar': 'مشاركة في القصص', 'pl': 'Udostępnij do Stories', 'ro': 'Distribuie în Povești', 'hu': 'Megosztás Sztorikba'},
+    'microcycles': {'it': 'Microcicli', 'en': 'Microcycles', 'es': 'Microciclos', 'pt': 'Microciclos', 'fr': 'Microcycles', 'de': 'Mikrozyklen', 'el': 'Μικρόκυκλοι', 'ar': 'دورات صغيرة', 'pl': 'Mikrocykle', 'ro': 'Microciclu', 'hu': 'Mikrociklusok'},
+    'sessions': {'it': 'Sessioni', 'en': 'Sessions', 'es': 'Sesiones', 'pt': 'Sessões', 'fr': 'Séances', 'de': 'Einheiten', 'el': 'Συνεδρίες', 'ar': 'الجلسات', 'pl': 'Sesje', 'ro': 'Sesiuni', 'hu': 'Foglalkozások'},
+    'shareProgressIcon': {'it': 'Condividi Progressi 📊', 'en': 'Share Progress 📊', 'es': 'Compartir Progreso 📊', 'pt': 'Compartilhar Progresso 📊', 'fr': 'Partager Progrès 📊', 'de': 'Fortschritt teilen 📊', 'el': 'Κοινοποίηση Προόδου 📊', 'ar': 'مشاركة التقدم 📊', 'pl': 'Udostępnij Postęp 📊', 'ro': 'Distribuie Progresul 📊', 'hu': 'Haladás megosztása 📊'},
+    'chooseWhatToInclude': {'it': 'Scegli cosa includere:', 'en': 'Choose what to include:', 'es': 'Elige qué incluir:', 'pt': 'Escolha o que incluir:', 'fr': 'Choisissez ce qui est inclus :', 'de': 'Wähle aus, was enthalten sein soll:', 'el': 'Επίλεξε τι να συμπεριλάβεις:', 'ar': 'اختر ما تريد تضمينه:', 'pl': 'Wybierz co uwzględnić:', 'ro': 'Alege ce să incluzi:', 'hu': 'Válaszd ki, mit tartalmaz:'},
+    'shareProgress': {'it': 'Condividi Progressi', 'en': 'Share Progress', 'es': 'Compartir Progreso', 'pt': 'Compartilhar Progresso', 'fr': 'Partager Progrès', 'de': 'Fortschritt teilen', 'el': 'Κοινοποίηση Προόδου', 'ar': 'مشاركة التقدم', 'pl': 'Udostępnij Postęp', 'ro': 'Distribuie Progresul', 'hu': 'Haladás megosztása'},
+    'shareSimple': {'it': 'Condividi', 'en': 'Share', 'es': 'Compartir', 'pt': 'Compartilhar', 'fr': 'Partager', 'de': 'Teilen', 'el': 'Κοινοποίηση', 'ar': 'مشاركة', 'pl': 'Udostępnij', 'ro': 'Distribuie', 'hu': 'Megosztás'},
+    'progressPerMicrocycle': {'it': 'Progressi per microciclo', 'en': 'Progress per microcycle', 'es': 'Progreso por microciclo', 'pt': 'Progresso por microciclo', 'fr': 'Progrès par microcycle', 'de': 'Fortschritt pro Mikrozyklus', 'el': 'Πρόοδος ανά μικρόκυκλο', 'ar': 'التقدم لكل دورة صغيرة', 'pl': 'Postęp na mikrocykl', 'ro': 'Progres per microciclu', 'hu': 'Haladás mikrociklusonként'},
+    'progressPerSession': {'it': 'Progressi per sessione', 'en': 'Progress per session', 'es': 'Progreso por sesión', 'pt': 'Progresso por sessão', 'fr': 'Progrès par séance', 'de': 'Fortschritt pro Einheit', 'el': 'Πρόοδος ανά συνεδρία', 'ar': 'التقدم لكل جلسة', 'pl': 'Postęp na sesję', 'ro': 'Progres per sesiune', 'hu': 'Haladás foglalkozásonként'},
+    'keepStreakAlive': {'it': '🔥 Non perdere i tuoi progressi!', 'en': '🔥 Keep your streak alive!', 'es': '🔥 ¡No pierdas tu racha!', 'pt': '🔥 Não perca sua sequência!', 'fr': '🔥 Ne perdez pas votre série !', 'de': '🔥 Verliere deine Serie nicht!', 'el': '🔥 Μη χάσεις το σερί σου!', 'ar': '🔥 لا تفقد تتابعك!', 'pl': '🔥 Nie strać swojej serii!', 'ro': '🔥 Nu-ți pierde seria!', 'hu': '🔥 Ne veszítsd el a sorozatodat!'},
+    'streakReminderBody': {'it': 'Non ti alleni da {days} giorni. Allenati oggi per non perdere i tuoi progressi!', 'en': 'You haven\'t trained in {days} days. Train today to keep your progress!', 'es': 'Llevas {days} días sin entrenar. ¡Entrena hoy para no perder tu racha!', 'pt': 'Você não treina há {days} dias. Treine hoje para não perder seu progresso!', 'fr': 'Vous n\'avez pas entraîné depuis {days} jours. Entraînez-vous aujourd\'hui pour garder vos progrès !', 'de': 'Du hast {days} Tage nicht trainiert. Trainiere heute, um deinen Fortschritt zu behalten!', 'el': 'Δεν έχεις γυμναστεί εδώ και {days} μέρες. Γυμνάσου σήμερα για να κρατήσεις την πρόοδό σου!', 'ar': 'لم تتدرب منذ {days} أيام. تدرب اليوم للحفاظ على تقدمك!', 'pl': 'Nie trenowałeś od {days} dni. Trenuj dziś, aby utrzymać swój postęp!', 'ro': 'Nu ai antrenat de {days} zile. Antrenează-te azi pentru a-ți păstra progresul!', 'hu': 'Már {days} napja nem edzel. Edzz ma, hogy megőrizd a haladásodat!'},
+    'getBackToWorkout': {'it': '💪 TORNA AD ALLENARTI!', 'en': '💪 GET BACK TO TRAINING!', 'es': '💪 ¡VUELVE A ENTRENAR!', 'pt': '💪 VOLTE A TREINAR!', 'fr': '💪 REPRENEZ L\'ENTRAÎNEMENT !', 'de': '💪 ZURÜCK ZUM TRAINING!', 'el': '💪 ΕΠΙΣΤΡΕΨΕ ΣΤΗΝ ΠΡΟΠΟΝΗΣΗ!', 'ar': '💪 عد للتدريب!', 'pl': '💪 WRÓĆ DO TRENINGU!', 'ro': '💪 ÎNTOARCE-TE LA ANTRENAMENT!', 'hu': '💪 TÉRJ VISSZA AZ EDZÉSHEZ!'},
+    'restTimerCompleted': {'it': 'Il timer di recupero è terminato.', 'en': 'Rest timer completed.', 'es': 'Temporizador de descanso completado.', 'pt': 'Temporizador de descanso concluído.', 'fr': 'Minuterie de repos terminée.', 'de': 'Erholungstimer abgelaufen.', 'el': 'Ο χρονόμετρο ανάπαυσης ολοκληρώθηκε.', 'ar': 'انتهى مؤقت الراحة.', 'pl': 'Timer odpoczynku zakończony.', 'ro': 'Cronometrul de odihnă s-a terminat.', 'hu': 'Pihenő időzítő lejárt.'},
+    'restInProgress': {'it': '⏱ Recupero in corso', 'en': '⏱ Rest in progress', 'es': '⏱ Descanso en curso', 'pt': '⏱ Descanso em andamento', 'fr': '⏱ Repos en cours', 'de': '⏱ Erholung läuft', 'el': '⏱ Ανάπαυση σε εξέλιξη', 'ar': '⏱ الراحة جارية', 'pl': '⏱ Odpoczynek w toku', 'ro': '⏱ Recuperare în curs', 'hu': '⏱ Pihenő folyamatban'},
+    'microcycleCompleteStreak': {'it': '🔥 Microciclo completato! La streak continua!', 'en': '🔥 Microcycle complete! Streak continues!', 'es': '🔥 ¡Microciclo completado! ¡La racha continúa!', 'pt': '🔥 Microciclo concluído! A sequência continua!', 'fr': '🔥 Microcycle terminé ! La série continue !', 'de': '🔥 Mikrozyklus abgeschlossen! Serie geht weiter!', 'el': '🔥 Μικρόκυκλος ολοκληρώθηκε! Το σερί συνεχίζεται!', 'ar': '🔥 اكتملت الدورة الصغيرة! التتابع يستمر!', 'pl': '🔥 Mikrocykl ukończony! Seria trwa!', 'ro': '🔥 Microciclu finalizat! Seria continuă!', 'hu': '🔥 Mikrociklus kész! A sorozat folytatódik!'},
+    'newPersonalRecord': {'it': 'NUOVO RECORD PERSONALE!', 'en': 'NEW PERSONAL RECORD!', 'es': '¡NUEVO RÉCORD PERSONAL!', 'pt': 'NOVO RECORDE PESSOAL!', 'fr': 'NOUVEAU RECORD PERSONNEL !', 'de': 'NEUER PERSÖNLICHER REKORD!', 'el': 'ΝΕΟ ΠΡΟΣΩΠΙΚΟ ΡΕΚΟΡ!', 'ar': 'رقم قياسي شخصي جديد!', 'pl': 'NOWY REKORD OSOBISTY!', 'ro': 'NOU RECORD PERSONAL!', 'hu': 'ÚJ SZEMÉLYES REKORD!'},
+    'myGymProgress': {'it': '💪 I miei progressi su GymApp!', 'en': '💪 My GymApp progress!', 'es': '💪 ¡Mi progreso en GymApp!', 'pt': '💪 Meu progresso no GymApp!', 'fr': '💪 Ma progression GymApp !', 'de': '💪 Mein GymApp-Fortschritt!', 'el': '💪 Η πρόοδός μου στο GymApp!', 'ar': '💪 تقدمي في GymApp!', 'pl': '💪 Mój postęp w GymApp!', 'ro': '💪 Progresul meu în GymApp!', 'hu': '💪 A GymApp-haladásom!'},
+    'getReadyFirstEx': {'it': 'Preparati al primo esercizio', 'en': 'Get ready for the first exercise', 'es': 'Prepárate para el primer ejercicio', 'pt': 'Prepare-se para o primeiro exercício', 'fr': 'Préparez-vous pour le premier exercice', 'de': 'Mach dich bereit für die erste Übung', 'el': 'Ετοιμάσου για την πρώτη άσκηση', 'ar': 'استعد للتمرين الأول', 'pl': 'Przygotuj się do pierwszego ćwiczenia', 'ro': 'Pregătește-te pentru primul exercițiu', 'hu': 'Készülj az első gyakorlatra'},
+    'getReadyThisEx': {'it': 'Preparati a questo esercizio', 'en': 'Get ready for this exercise', 'es': 'Prepárate para este ejercicio', 'pt': 'Prepare-se para este exercício', 'fr': 'Préparez-vous pour cet exercice', 'de': 'Mach dich bereit für diese Übung', 'el': 'Ετοιμάσου για αυτή την άσκηση', 'ar': 'استعد لهذا التمرين', 'pl': 'Przygotuj się do tego ćwiczenia', 'ro': 'Pregătește-te pentru acest exercițiu', 'hu': 'Készülj erre a gyakorlatra'},
+    'startFirstEx': {'it': 'Inizia il primo esercizio', 'en': 'Start first exercise', 'es': 'Inicia el primer ejercicio', 'pt': 'Inicie o primeiro exercício', 'fr': 'Commencer le premier exercice', 'de': 'Erste Übung starten', 'el': 'Ξεκίνα την πρώτη άσκηση', 'ar': 'ابدأ التمرين الأول', 'pl': 'Zacznij pierwsze ćwiczenie', 'ro': 'Începe primul exercițiu', 'hu': 'Első gyakorlat indítása'},
+    'startFromThisEx': {'it': 'Inizia da questo esercizio', 'en': 'Start from this exercise', 'es': 'Inicia desde este ejercicio', 'pt': 'Inicie a partir deste exercício', 'fr': 'Commencer depuis cet exercice', 'de': 'Ab dieser Übung starten', 'el': 'Ξεκίνα από αυτή την άσκηση', 'ar': 'ابدأ من هذا التمرين', 'pl': 'Zacznij od tego ćwiczenia', 'ro': 'Începe de la acest exercițiu', 'hu': 'Ettől a gyakorlattól indul'},
+    'workoutNameStep': {'it': 'Nome allenamento', 'en': 'Workout name', 'es': 'Nombre del entrenamiento', 'pt': 'Nome do treino', 'fr': 'Nom de l\'entraînement', 'de': 'Trainingsname', 'el': 'Όνομα προπόνησης', 'ar': 'اسم التمرين', 'pl': 'Nazwa treningu', 'ro': 'Numele antrenamentului', 'hu': 'Edzés neve'},
+    'muscleImageStep': {'it': 'Immagine muscolo', 'en': 'Muscle image', 'es': 'Imagen de músculo', 'pt': 'Imagem do músculo', 'fr': 'Image du muscle', 'de': 'Muskelbild', 'el': 'Εικόνα μυός', 'ar': 'صورة العضلة', 'pl': 'Obraz mięśnia', 'ro': 'Imagine mușchi', 'hu': 'Izomkép'},
+    'muscleGroupsStep': {'it': 'Gruppi muscolari', 'en': 'Muscle groups', 'es': 'Grupos musculares', 'pt': 'Grupos musculares', 'fr': 'Groupes musculaires', 'de': 'Muskelgruppen', 'el': 'Μυικές ομάδες', 'ar': 'مجموعات العضلات', 'pl': 'Grupy mięśniowe', 'ro': 'Grupe musculare', 'hu': 'Izomcsoportok'},
+    'microcycleCompleteSnackbar': {'it': 'Microciclo completato! La streak continua!', 'en': 'Microcycle complete! Streak continues!', 'es': '¡Microciclo completado! ¡La racha continúa!', 'pt': 'Microciclo concluído! A sequência continua!', 'fr': 'Microcycle terminé ! La série continue !', 'de': 'Mikrozyklus abgeschlossen! Serie geht weiter!', 'el': 'Μικρόκυκλος ολοκληρώθηκε! Το σερί συνεχίζεται!', 'ar': 'اكتملت الدورة الصغيرة! التتابع يستمر!', 'pl': 'Mikrocykl ukończony! Seria trwa!', 'ro': 'Microciclu finalizat! Seria continuă!', 'hu': 'Mikrociklus kész! A sorozat folytatódik!'},
+    'backToWorkoutTicker': {'it': 'Torna ad allenarti', 'en': 'Back to training', 'es': 'Vuelve a entrenar', 'pt': 'Volte a treinar', 'fr': 'Reprenez l\'entraînement', 'de': 'Zurück zum Training', 'el': 'Επέστρεψε στην προπόνηση', 'ar': 'عد للتدريب', 'pl': 'Wróć do treningu', 'ro': 'Întoarce-te la antrenament', 'hu': 'Vissza az edzéshez'},
   };
 
   static String get mySchedule => _t('mySchedule');
@@ -762,6 +819,58 @@ class AppL {
   static String get muscleImageOpt => _t('muscleImageOpt');
   static String get selectMusclesOpt => _t('selectMusclesOpt');
   static String get startRealWorkout => _t('startRealWorkout');
+  static String get pounds => _t('pounds');
+  static String get noKeyboard => _t('noKeyboard');
+  static String get watchTutorial => _t('watchTutorial');
+  static String get overallProgress => _t('overallProgress');
+  static String get closeApp => _t('closeApp');
+  static String get openPayPal => _t('openPayPal');
+  static String get sessionsThisMicrocycle => _t('sessionsThisMicrocycle');
+  static String get shareStreak => _t('shareStreak');
+  static String get streakUnitSingle => _t('streakUnitSingle');
+  static String get streakUnitPlural => _t('streakUnitPlural');
+  static String get load => _t('load');
+  static String get all => _t('all');
+  static String get templates => _t('templates');
+  static String get timerFinished => _t('timerFinished');
+  static String get getBackToTraining => _t('getBackToTraining');
+  static String get shareWorkout => _t('shareWorkout');
+  static String get microAbbr => _t('microAbbr');
+  static String get vsPrev => _t('vsPrev');
+  static String get microcycleBadges => _t('microcycleBadges');
+  static String get vsPrevious => _t('vsPrevious');
+  static String get shareImage => _t('shareImage');
+  static String get thisMicrocycle => _t('thisMicrocycle');
+  static String get sessionsDone => _t('sessionsDone');
+  static String get shareStreakFire => _t('shareStreakFire');
+  static String get badgesIcon => _t('badgesIcon');
+  static String get sessionsIcon => _t('sessionsIcon');
+  static String get shareToStories => _t('shareToStories');
+  static String get microcycles => _t('microcycles');
+  static String get sessions => _t('sessions');
+  static String get shareProgressIcon => _t('shareProgressIcon');
+  static String get chooseWhatToInclude => _t('chooseWhatToInclude');
+  static String get shareProgress => _t('shareProgress');
+  static String get shareSimple => _t('shareSimple');
+  static String get progressPerMicrocycle => _t('progressPerMicrocycle');
+  static String get progressPerSession => _t('progressPerSession');
+  static String get keepStreakAlive => _t('keepStreakAlive');
+  static String get streakReminderBody => _t('streakReminderBody');
+  static String get getBackToWorkout => _t('getBackToWorkout');
+  static String get restTimerCompleted => _t('restTimerCompleted');
+  static String get restInProgress => _t('restInProgress');
+  static String get microcycleCompleteStreak => _t('microcycleCompleteStreak');
+  static String get newPersonalRecord => _t('newPersonalRecord');
+  static String get myGymProgress => _t('myGymProgress');
+  static String get getReadyFirstEx => _t('getReadyFirstEx');
+  static String get getReadyThisEx => _t('getReadyThisEx');
+  static String get startFirstEx => _t('startFirstEx');
+  static String get startFromThisEx => _t('startFromThisEx');
+  static String get workoutNameStep => _t('workoutNameStep');
+  static String get muscleImageStep => _t('muscleImageStep');
+  static String get muscleGroupsStep => _t('muscleGroupsStep');
+  static String get microcycleCompleteSnackbar => _t('microcycleCompleteSnackbar');
+  static String get backToWorkoutTicker => _t('backToWorkoutTicker');
 }
 double kgToLb(double kg) => kg * 2.2046226218;
 
@@ -1711,12 +1820,8 @@ Future<void> checkAndScheduleStreakNotification(String lang) async {
       priority: Priority.high,
       icon: 'ic_notification',
     );
-    final title = lang == 'en'
-        ? '🔥 Keep your streak alive!'
-        : '🔥 Non perdere i tuoi progressi!';
-    final body = lang == 'en'
-        ? "You haven't trained in $daysSince days. Train today to keep your progress!"
-        : "Non ti alleni da $daysSince giorni. Allenati oggi per non perdere i tuoi progressi!";
+    final title = AppL.t(lang, 'keepStreakAlive');
+    final body = AppL.t(lang, 'streakReminderBody').replaceAll('{days}', '$daysSince');
     await flutterLocalNotificationsPlugin.show(
       9902,
       title,
@@ -1749,12 +1854,8 @@ Future<void> scheduleStreakReminder(String lang, {bool force = false}) async {
     final scheduledDate = lastWorkout.add(const Duration(hours: 48));
     // Salva l'orario pianificato in modo che il receiver e l'apertura successiva sappiano che c'è un allarme attivo
     await prefs.setString('streak_reminder_next_fire', scheduledDate.millisecondsSinceEpoch.toString());
-    final title = lang == 'en'
-        ? '🔥 Keep your streak alive!'
-        : '🔥 Non perdere i tuoi progressi!';
-    final body = lang == 'en'
-        ? "You haven't trained in 2 days. Train today to keep your progress!"
-        : "Non ti alleni da 2 giorni. Allenati oggi per non perdere i tuoi progressi!";
+    final title = AppL.t(lang, 'keepStreakAlive');
+    final body = AppL.t(lang, 'streakReminderBody').replaceAll('{days}', '2');
     if (Platform.isAndroid) {
       final delayMs = scheduledDate
           .difference(DateTime.now())
@@ -4808,11 +4909,11 @@ class _ClientMainPageState extends State<ClientMainPage>
               ),
               _mainSegmentSettingRow(
                 Icons.straighten,
-                AppL.lang == 'en' ? 'Weight unit' : 'Unita peso',
+                AppL.weightUnit,
                 selectedKey: _stUsePounds ? 'lb' : 'kg',
                 options: {
-                  'kg': AppL.lang == 'en' ? 'KG' : 'KG',
-                  'lb': AppL.lang == 'en' ? 'POUNDS' : 'LIBBRE',
+                  'kg': 'KG',
+                  'lb': AppL.pounds,
                 },
                 onChanged: (value) {
                   setState(() => _stUsePounds = value == 'lb');
@@ -4821,7 +4922,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               ),
               _mainSettingRow(
                 Icons.keyboard_hide_outlined,
-                AppL.lang == 'en' ? 'No keyboard' : 'No tastiera',
+                AppL.noKeyboard,
                 _stDisableWeightKeyboard,
                 (v) {
                   setState(() => _stDisableWeightKeyboard = v);
@@ -4944,7 +5045,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(
-                          AppL.lang == 'en' ? 'Watch Tutorial' : 'Rivedere Tutorial',
+                          AppL.watchTutorial,
                           style: TextStyle(
                             color: accent,
                             fontSize: 14,
@@ -5451,7 +5552,7 @@ class _ClientMainPageState extends State<ClientMainPage>
         iconTheme: IconThemeData(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         leading: IconButton(
           icon: Icon(Icons.bar_chart_rounded, color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-          tooltip: AppL.lang == 'en' ? 'Overall Progress' : 'Progressi',
+          tooltip: AppL.overallProgress,
           onPressed: _showOverallProgressPage,
         ),
         actions: [
@@ -5843,7 +5944,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                               _showOverallProgressPage();
                             },
                             icon: const Icon(Icons.bar_chart_rounded, size: 16),
-                            label: Text(AppL.lang == 'en' ? 'Progress' : 'Progressi'),
+                            label: Text(AppL.progress),
                             style: OutlinedButton.styleFrom(
                               foregroundColor: accent,
                               side: BorderSide(color: accent.withAlpha(80)),
@@ -6680,7 +6781,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(c),
-                child: Text(AppL.lang == 'en' ? 'Got it' : 'Ho capito'),
+                child: Text(AppL.gotIt),
               ),
             ),
           ],
@@ -6805,7 +6906,7 @@ class _ClientMainPageState extends State<ClientMainPage>
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(c, textCtrl.text.trim()),
-            child: Text(AppL.lang == 'en' ? 'Confirm' : 'Conferma'),
+            child: Text(AppL.confirm),
           ),
         ],
       ),
@@ -6868,13 +6969,13 @@ class _ClientMainPageState extends State<ClientMainPage>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(c, false),
-            child: Text(AppL.lang == 'en' ? 'Close app' : 'Chiudi'),
+            child: Text(AppL.closeApp),
           ),
           OutlinedButton(
             onPressed: () async {
               await openPaypalDonationPage();
             },
-            child: Text(AppL.lang == 'en' ? 'Open PayPal' : 'Apri PayPal'),
+            child: Text(AppL.openPayPal),
           ),
           ElevatedButton(
             onPressed: () => Navigator.pop(c, true),
@@ -6966,7 +7067,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               OutlinedButton.icon(
                 onPressed: openPaypalDonationPage,
                 icon: const Icon(Icons.open_in_new_rounded, size: 16),
-                label: Text(AppL.lang == 'en' ? 'Open PayPal' : 'Apri PayPal'),
+                label: Text(AppL.openPayPal),
                 style: OutlinedButton.styleFrom(
                   foregroundColor: accent,
                   side: BorderSide(color: accent),
@@ -7304,7 +7405,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             // Mini progress strip
             if (myRoutine.isNotEmpty) ...[
               Text(
-                '${_streakDone.where((n) => myRoutine.any((d) => d.dayName == n)).length}/${myRoutine.length} ${AppL.lang == 'en' ? 'sessions this microcycle' : 'sessioni questo microciclo'}',
+                '${_streakDone.where((n) => myRoutine.any((d) => d.dayName == n)).length}/${myRoutine.length} ${AppL.sessionsThisMicrocycle}',
                 style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 11),
               ),
               const SizedBox(height: 6),
@@ -7369,7 +7470,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             TextButton.icon(
               icon: const Text('🔥', style: TextStyle(fontSize: 14)),
               label: Text(
-                AppL.lang == 'en' ? 'Share Streak' : 'Condividi',
+                AppL.shareStreak,
                 style: const TextStyle(color: Colors.orange),
               ),
               onPressed: () {
@@ -7616,7 +7717,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                     ),
                                     const SizedBox(width: 4),
                                     Text(
-                                      '$_streak ${AppL.lang == 'en' ? (_streak == 1 ? 'week' : 'weeks') : (_streak == 1 ? 'micro' : 'micro')}',
+                                      '$_streak ${_streak == 1 ? AppL.streakUnitSingle : AppL.streakUnitPlural}',
                                       style: const TextStyle(
                                         color: Colors.orange,
                                         fontSize: 13,
@@ -7883,7 +7984,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       builder: (_) => AlertDialog(
         backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         title: Text(
-          AppL.lang == 'en' ? 'Rename Session' : 'Rinomina Sessione',
+          AppL.renameSession,
           style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         content: TextField(
@@ -7993,7 +8094,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                     ),
                   ),
                   Text(
-                    AppL.lang == 'en' ? 'Edit Exercise' : 'Modifica Esercizio',
+                    AppL.editExercise,
                     style: TextStyle(
                       color: accent,
                       fontWeight: FontWeight.bold,
@@ -8517,7 +8618,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
       builder: (c) => StatefulBuilder(
         builder: (ctx, setS) {
           // ── Step titles ─────────────────────────────────────────
-          final stepTitles = ['Nome allenamento', 'Immagine muscolo', 'Gruppi muscolari'];
+          final stepTitles = [AppL.workoutNameStep, AppL.muscleImageStep, AppL.muscleGroupsStep];
 
           // ── Step indicator ──────────────────────────────────────
           Widget stepIndicator() => Row(
@@ -8987,7 +9088,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
-            child: Text(AppL.lang == 'en' ? 'LOAD' : 'CARICA'),
+            child: Text(AppL.load),
           ),
         ],
       ),
@@ -9559,7 +9660,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   child: Row(
                     children: [
                       _archiveChip(
-                        label: AppL.lang == 'en' ? 'All' : 'Tutti',
+                        label: AppL.all,
                         selected: selectedCategory == null,
                         onTap: () => setA(() => selectedCategory = null),
                         accent: appAccentNotifier.value,
@@ -10072,7 +10173,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
             backgroundColor: _isDarkCtx(context) ? const Color(0xFF2C2C2E) : const Color(0xFFF2F2F7),
             foregroundColor: Colors.amber,
             icon: const Icon(Icons.auto_awesome_rounded),
-            label: Text(AppL.lang == 'en' ? 'Templates' : 'Template'),
+            label: Text(AppL.templates),
           ),
           const SizedBox(width: 12),
           FloatingActionButton.extended(
@@ -10868,10 +10969,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     try {
       await _gymFileChannel.invokeMethod('scheduleTimerFinishedNotification', {
         'delayMs': secondi * 1000,
-        'title': AppL.lang == 'en'
-            ? '💪 GET BACK TO TRAINING!'
-            : '💪 TORNA AD ALLENARTI!',
-        'body': AppL.lang == 'en' ? '' : '',
+        'title': AppL.getBackToWorkout,
+        'body': '',
       });
     } catch (e) {
       debugPrint("Errore notifica: $e");
@@ -10885,13 +10984,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       await _gymFileChannel.invokeMethod('cancelTimerFinishedNotification');
       await flutterLocalNotificationsPlugin.show(
         0,
-        AppL.lang == 'en'
-            ? '💪 GET BACK TO TRAINING!'
-            : '💪 TORNA AD ALLENARTI!',
-        AppL.lang == 'en'
-            ? 'Rest timer completed.'
-            : 'Il timer di recupero è terminato.',
-        const NotificationDetails(
+        AppL.getBackToWorkout,
+        AppL.restTimerCompleted,
+        NotificationDetails(
           android: AndroidNotificationDetails(
             'timer_gym_alert',
             'Timer Fine Recupero',
@@ -10902,7 +10997,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             enableVibration: true,
             category: AndroidNotificationCategory.message,
             visibility: NotificationVisibility.public,
-            ticker: 'Torna ad allenarti',
+            ticker: AppL.backToWorkoutTicker,
           ),
         ),
       );
@@ -10917,9 +11012,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     final secs = remaining % 60;
     final timeStr =
         '${mins.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
-    final subtitle = AppL.lang == 'en'
-        ? '⏱ Rest in progress'
-        : '⏱ Recupero in corso';
+    final subtitle = AppL.restInProgress;
     try {
       _gymFileChannel.invokeMethod('showTimerNotification', {
         'time': timeStr,
@@ -11025,10 +11118,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   void _showWebTimerNotification() {
     if (!kIsWeb) return;
     final title = jsonEncode(
-      AppL.lang == 'en' ? 'Workout timer finished' : 'Timer recupero finito',
+      AppL.timerFinished,
     );
     final body = jsonEncode(
-      AppL.lang == 'en' ? 'Get back to training.' : 'Torna ad allenarti.',
+      AppL.getBackToTraining,
     );
     try {
       js.context.callMethod('eval', [
@@ -11492,9 +11585,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       if (_streakDoneCount >= _streakTotalCount &&
                           _streakTotalCount > 0)
                         Text(
-                          AppL.lang == 'en'
-                              ? '🔥 Microcycle complete! Streak continues!'
-                              : '🔥 Microciclo completato! La streak continua!',
+                          AppL.microcycleCompleteStreak,
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.orange,
@@ -11538,7 +11629,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     child: OutlinedButton.icon(
                       icon: const Icon(Icons.share_rounded),
                       label: Text(
-                        AppL.lang == 'en' ? 'Share workout' : 'Condividi allenamento',
+                        AppL.shareWorkout,
                       ),
                       style: OutlinedButton.styleFrom(
                         foregroundColor: Theme.of(c).colorScheme.primary,
@@ -11726,13 +11817,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             child: Column(
               children: [
                 Text(
-                  AppL.lang == 'en'
-                      ? (exI == 0
-                            ? 'Get ready for the first exercise'
-                            : 'Get ready for this exercise')
-                      : (exI == 0
-                            ? 'Preparati al primo esercizio'
-                            : 'Preparati a questo esercizio'),
+                  exI == 0
+                      ? AppL.getReadyFirstEx
+                      : AppL.getReadyThisEx,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: accent,
@@ -11853,17 +11940,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           child: Text(AppL.tryReps(targetR + 2),
                             style: const TextStyle(color: Colors.green, fontSize: 13, fontWeight: FontWeight.bold)),
                         ),
-                      if (suggerisciAumento && _showWeightSuggestion)
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.amber.withAlpha(30),
-                            border: Border.all(color: Colors.amber.withAlpha(180), width: 1.5),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: const Text('↑ AUMENTA PESO',
-                            style: TextStyle(color: Colors.amber, fontSize: 13, fontWeight: FontWeight.bold)),
-                        ),
                     ],
                   ),
                   if (suggerisciAumento && _showWeightSuggestion) ...[
@@ -11906,13 +11982,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     },
                     icon: const Icon(Icons.play_arrow_rounded),
                     label: Text(
-                      AppL.lang == 'en'
-                          ? (exI == 0
-                                ? 'Start first exercise'
-                                : 'Start from this exercise')
-                          : (exI == 0
-                                ? 'Inizia il primo esercizio'
-                                : 'Inizia da questo esercizio'),
+                      exI == 0
+                          ? AppL.startFirstEx
+                          : AppL.startFromThisEx,
                     ),
                   ),
                 ),
@@ -12223,8 +12295,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         try {
           WakelockPlus.disable();
         } catch (_) {}
-        // Se ora siamo sull'ultima serie dell'esercizio, pre-avvia il timer di pausa
-        if (mounted) _avviaPausaSeUltimaSerie();
+
       } else {
         if (mounted) {
           setState(() {
@@ -12789,7 +12860,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     try {
       WakelockPlus.disable();
     } catch (_) {}
-    _avviaPausaSeUltimaSerie();
   }
 
   @override
@@ -14147,9 +14217,7 @@ class _RecordOverlayState extends State<_RecordOverlay>
                     const Text('🏆', style: TextStyle(fontSize: 52)),
                     const SizedBox(height: 8),
                     Text(
-                      widget.lang == 'en'
-                          ? 'NEW PERSONAL RECORD!'
-                          : 'NUOVO RECORD PERSONALE!',
+                      AppL.newPersonalRecord,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -14470,13 +14538,13 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                   _badgeChip(
                     icon: '🔥',
                     label: 'Streak',
-                    value: '${widget.streak} ${AppL.lang == 'en' ? 'micro' : 'micro.'}',
+                    value: '${widget.streak} ${AppL.microAbbr}',
                     accent: Colors.orange,
                   ),
                 if (_showSessionProgress && widget.progressPercent != null)
                   _badgeChip(
                     icon: widget.progressPercent! >= 0 ? '📈' : '📉',
-                    label: AppL.lang == 'en' ? 'vs prev.' : 'vs prec.',
+                    label: AppL.vsPrev,
                     value: '${widget.progressPercent! >= 0 ? '+' : ''}${widget.progressPercent!.toStringAsFixed(0)}%',
                     accent: widget.progressPercent! >= 0 ? Colors.greenAccent : Colors.redAccent,
                   ),
@@ -14630,7 +14698,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
           ),
           const SizedBox(height: 16),
           Text(
-            AppL.lang == 'en' ? 'Share workout' : 'Condividi allenamento',
+            AppL.shareWorkout,
             style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontWeight: FontWeight.w700, fontSize: 16),
           ),
           const SizedBox(height: 14),
@@ -14643,7 +14711,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
             alignment: WrapAlignment.center,
             children: [
               _toggleChip(
-                AppL.lang == 'en' ? 'Exercises' : 'Esercizi',
+                AppL.exercises,
                 _showExercises,
                 () => setState(() => _showExercises = !_showExercises),
                 accent,
@@ -14655,14 +14723,14 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                 Colors.orange,
               ),
               _toggleChip(
-                AppL.lang == 'en' ? 'Microcycle badges' : 'Badge microciclo',
+                AppL.microcycleBadges,
                 _showWeeklyBadges,
                 () => setState(() => _showWeeklyBadges = !_showWeeklyBadges),
                 Colors.amber,
               ),
               if (widget.progressPercent != null)
                 _toggleChip(
-                  AppL.lang == 'en' ? 'vs previous' : 'vs prec.',
+                  AppL.vsPrevious,
                   _showSessionProgress,
                   () => setState(() => _showSessionProgress = !_showSessionProgress),
                   Colors.greenAccent,
@@ -14677,7 +14745,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
               icon: _sharing
                   ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
                   : const Icon(Icons.share_rounded),
-              label: Text(AppL.lang == 'en' ? 'Share image' : 'Condividi immagine'),
+              label: Text(AppL.shareImage),
               style: FilledButton.styleFrom(
                 backgroundColor: accent,
                 foregroundColor: Colors.black,
@@ -14836,7 +14904,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                 // Weekly badges: session circles
                 if (_showBadges && widget.allSessionNames.isNotEmpty) ...[
                   Text(
-                    AppL.lang == 'en' ? 'This microcycle' : 'Questo microciclo',
+                    AppL.thisMicrocycle,
                     style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
                   ),
                   const SizedBox(height: 12),
@@ -14905,7 +14973,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                   if (_showSessionCount) ...[
                     const SizedBox(height: 12),
                     Text(
-                      '$doneCount / $total ${AppL.lang == 'en' ? 'sessions done' : 'sessioni completate'}',
+                      '$doneCount / $total ${AppL.sessionsDone}',
                       style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
                     ),
                   ],
@@ -14965,7 +15033,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
           ),
           const SizedBox(height: 16),
           Text(
-            AppL.lang == 'en' ? 'Share Streak 🔥' : 'Condividi Streak 🔥',
+            AppL.shareStreakFire,
             style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontWeight: FontWeight.w700, fontSize: 16),
           ),
           const SizedBox(height: 8),
@@ -14974,13 +15042,13 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               _toggleChip(
-                label: AppL.lang == 'en' ? '🏅 Badges' : '🏅 Badge',
+                label: AppL.badgesIcon,
                 active: _showBadges,
                 onTap: () => setState(() => _showBadges = !_showBadges),
               ),
               const SizedBox(width: 8),
               _toggleChip(
-                label: AppL.lang == 'en' ? '📊 Sessions' : '📊 Sessioni',
+                label: AppL.sessionsIcon,
                 active: _showSessionCount,
                 onTap: () => setState(() => _showSessionCount = !_showSessionCount),
               ),
@@ -14996,7 +15064,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
               icon: _sharing
                   ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
                   : const Text('🔥', style: TextStyle(fontSize: 16)),
-              label: Text(AppL.lang == 'en' ? 'Share to Stories' : 'Condividi nelle Storie'),
+              label: Text(AppL.shareToStories),
               style: FilledButton.styleFrom(
                 backgroundColor: Colors.orange,
                 foregroundColor: Colors.black,
@@ -15170,7 +15238,7 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
         final isMicrocycle = widget.points.isNotEmpty && widget.points.first.dayName.startsWith('Microciclo');
 
         final activeCards = <(Color, String, String, String)>[];
-        if (_includeSessionCount) activeCards.add((const Color(0xFF00BCD4), '📅', '${widget.points.length}', isMicrocycle ? (AppL.lang == 'en' ? 'Microcycles' : 'Microcicli') : (AppL.lang == 'en' ? 'Sessions' : 'Sessioni')));
+        if (_includeSessionCount) activeCards.add((const Color(0xFF00BCD4), '📅', '${widget.points.length}', isMicrocycle ? AppL.microcycles : AppL.sessions));
         if (_includeStreak) activeCards.add((const Color(0xFFFF6B00), '🔥', '${widget.streak}', 'Streak'));
         if (_includeTrend) activeCards.add((trendUp ? Colors.greenAccent : Colors.redAccent, trendUp ? '📈' : '📉', '${trendUp ? '+' : ''}${trendPct.toStringAsFixed(0)}%', 'Trend'));
 
@@ -15221,9 +15289,7 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
       await file.writeAsBytes(finalBytes.buffer.asUint8List());
       await Share.shareXFiles(
         [XFile(file.path, mimeType: 'image/png')],
-        text: AppL.lang == 'en'
-            ? '💪 My GymApp progress!'
-            : '💪 I miei progressi su GymApp!',
+        text: AppL.myGymProgress,
       );
     } finally {
       if (mounted) setState(() => _sharing = false);
@@ -15284,12 +15350,12 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
           ),
           const SizedBox(height: 16),
           Text(
-            AppL.lang == 'en' ? 'Share Progress 📊' : 'Condividi Progressi 📊',
+            AppL.shareProgressIcon,
             style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontWeight: FontWeight.w700, fontSize: 16),
           ),
           const SizedBox(height: 12),
           Text(
-            AppL.lang == 'en' ? 'Choose what to include:' : 'Scegli cosa includere:',
+            AppL.chooseWhatToInclude,
             style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
           ),
           const SizedBox(height: 10),
@@ -15304,7 +15370,7 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
                 onTap: () => setState(() => _includeStreak = !_includeStreak),
               ),
               _toggleChip(
-                label: '🏋 ${AppL.lang == 'en' ? 'Sessions' : 'Sessioni'}',
+                label: '🏋 ${AppL.sessions}',
                 active: _includeSessionCount,
                 onTap: () => setState(() => _includeSessionCount = !_includeSessionCount),
               ),
@@ -15323,7 +15389,7 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
               icon: _sharing
                   ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
                   : const Icon(Icons.share_rounded),
-              label: Text(AppL.lang == 'en' ? 'Share Progress' : 'Condividi Progressi'),
+              label: Text(AppL.shareProgress),
               style: FilledButton.styleFrom(
                 backgroundColor: widget.accent,
                 foregroundColor: Colors.black,
@@ -17298,7 +17364,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
       appBar: AppBar(
         backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
         title: Text(
-          AppL.lang == 'en' ? 'Overall Progress' : 'Progressi Generali',
+          AppL.overallProgress,
           style: TextStyle(
             color: _isDarkCtx(context) ? Colors.white : Colors.black87,
             fontWeight: FontWeight.bold,
@@ -17311,7 +17377,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
             IconButton(
               icon: const Icon(Icons.share_rounded),
               onPressed: () => _shareProgress(context),
-              tooltip: AppL.lang == 'en' ? 'Share' : 'Condividi',
+              tooltip: AppL.shareSimple,
             ),
         ],
       ),
@@ -17324,7 +17390,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
               child: Row(
                 children: [
                   _filterChip(
-                    label: AppL.lang == 'en' ? 'All' : 'Tutti',
+                    label: AppL.all,
                     selected: _filterDay == null,
                     accent: accent,
                     onTap: () { setState(() => _filterDay = null); WidgetsBinding.instance.addPostFrameCallback((_) => _scrollChartToEnd()); },
@@ -17381,8 +17447,8 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                                   const SizedBox(width: 8),
                                   Text(
                                     _filterDay == null && widget.routine.length > 1
-                                        ? (AppL.lang == 'en' ? 'Progress per microcycle' : 'Progressi per microciclo')
-                                        : (AppL.lang == 'en' ? 'Progress per session' : 'Progressi per sessione'),
+                                        ? (AppL.progressPerMicrocycle)
+                                        : (AppL.progressPerSession),
                                     style: TextStyle(
                                       color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
                                       fontSize: 12,
@@ -17494,8 +17560,8 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
       children: [
         _statCard(
           _filterDay == null && widget.routine.length > 1
-              ? (AppL.lang == 'en' ? 'Microcycles' : 'Microcicli')
-              : (AppL.lang == 'en' ? 'Sessions' : 'Sessioni'),
+              ? (AppL.microcycles)
+              : (AppL.sessions),
           '$totalSessions',
           Icons.calendar_today_rounded,
           accent,
@@ -17509,7 +17575,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
         ),
         const SizedBox(width: 8),
         _statCard(
-          AppL.lang == 'en' ? 'Trend' : 'Trend',
+          'Trend',
           points.length >= 2
               ? '${trendUp ? '+' : ''}${trendPct.toStringAsFixed(0)}%'
               : '—',
