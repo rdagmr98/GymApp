@@ -575,6 +575,13 @@ class AppL {
     'streakWeeks': {'it': 'Microcicli di fila', 'en': 'Week streak', 'es': 'Racha de semanas', 'pt': 'Sequência de semanas', 'fr': 'Série de semaines', 'de': 'Wochensträhne', 'el': 'Σερί εβδομάδων', 'ar': 'تتابع الأسابيع', 'pl': 'Seria tygodni', 'ro': 'Serie de săptămâni', 'hu': 'Hetek sorozata'},
     'streakMsg': {'it': '🔥 Mantieni la tua streak!', 'en': '🔥 Keep your streak alive!', 'es': '🔥 ¡Mantén tu racha!', 'pt': '🔥 Mantenha sua sequência!', 'fr': '🔥 Gardez votre série!', 'de': '🔥 Halte deine Serie am Laufen!', 'el': '🔥 Κράτα το σερί σου!', 'ar': '🔥 حافظ على تتابعك!', 'pl': '🔥 Utrzymaj swoją serię!', 'ro': '🔥 Menține-ți seria!', 'hu': '🔥 Tartsd fenn a sorozatodat!'},
     'newRecord': {'it': 'NUOVO RECORD!', 'en': 'NEW RECORD!', 'es': '¡NUEVO RÉCORD!', 'pt': 'NOVO RECORDE!', 'fr': 'NOUVEAU RECORD!', 'de': 'NEUER REKORD!', 'el': 'ΝΕΟ ΡΕΚΟΡ!', 'ar': 'رقم قياسي جديد!', 'pl': 'NOWY REKORD!', 'ro': 'NOU RECORD!', 'hu': 'ÚJ REKORD!'},
+    'share': {'it': 'Condividi 🏋️', 'en': 'Share 🏋️', 'es': 'Compartir 🏋️', 'pt': 'Compartilhar 🏋️', 'fr': 'Partager 🏋️', 'de': 'Teilen 🏋️', 'el': 'Κοινοποίηση 🏋️', 'ar': 'مشاركة 🏋️', 'pl': 'Udostępnij 🏋️', 'ro': 'Partajare 🏋️', 'hu': 'Megosztás 🏋️'},
+    'back': {'it': '‹ Indietro', 'en': '‹ Back', 'es': '‹ Atrás', 'pt': '‹ Voltar', 'fr': '‹ Retour', 'de': '‹ Zurück', 'el': '‹ Πίσω', 'ar': '‹ رجوع', 'pl': '‹ Wstecz', 'ro': '‹ Înapoi', 'hu': '‹ Vissza'},
+    'gotIt': {'it': 'Ho capito!', 'en': 'Got it!', 'es': '¡Entendido!', 'pt': 'Entendido!', 'fr': 'J\'ai compris !', 'de': 'Verstanden!', 'el': 'Κατάλαβα!', 'ar': 'فهمت!', 'pl': 'Rozumiem!', 'ro': 'Am înțeles!', 'hu': 'Értem!'},
+    'workoutNameQuestion': {'it': 'Come si chiama questo allenamento?', 'en': 'What is the name of this workout?', 'es': '¿Cómo se llama este entrenamiento?', 'pt': 'Qual é o nome deste treino?', 'fr': 'Comment s\'appelle cet entraînement ?', 'de': 'Wie heißt dieses Training?', 'el': 'Πώς λέγεται αυτή η προπόνηση;', 'ar': 'ما اسم هذا التمرين؟', 'pl': 'Jak nazywa się ten trening?', 'ro': 'Cum se numește acest antrenament?', 'hu': 'Mi a neve ennek az edzésnek?'},
+    'muscleImageOpt': {'it': 'Immagine muscolo (opzionale):', 'en': 'Muscle image (optional):', 'es': 'Imagen de múscolo (opcional):', 'pt': 'Imagem do múscolo (opcional):', 'fr': 'Image du muscle (optionnel):', 'de': 'Muskelbild (optional):', 'el': 'Εικόνα μυός (προαιρετικό):', 'ar': 'صورة العπلة (اختياري):', 'pl': 'Obraz mięśnia (opcjonalne):', 'ro': 'Imagine mușchi (opțional):', 'hu': 'Izomkép (opcionális):'},
+    'selectMusclesOpt': {'it': 'Seleziona i gruppi muscolari coinvolti (opzionale):', 'en': 'Select the muscle groups involved (optional):', 'es': 'Selecciona los grupos musculares involucrados (opcional):', 'pt': 'Selecione os grupos musculares envolvidos (opcional):', 'fr': 'Sélectionnez les groupes musculaires impliqués (optionnel):', 'de': 'Wähle die beteiligten Muskelgruppen (optional):', 'el': 'Επίλεξε τις μυικές ομάδες που εμπλέκονται (προαιρετικό):', 'ar': 'حدد مجموعات العضلات المشاركة (اختياري):', 'pl': 'Wybierz zaangażowane grupy mięśniowe (opcjonalne):', 'ro': 'Selectați grupele musculare implicate (opțional):', 'hu': 'Válaszd ki az érintett izomcsoportokat (opcionális):'},
+    'startRealWorkout': {'it': 'Inizia il vero allenamento! 🚀', 'en': 'Start your real workout! 🚀', 'es': '¡Empieza tu entrenamiento real! 🚀', 'pt': 'Comece seu treino real! 🚀', 'fr': 'Commencez votre vrai entraînement ! 🚀', 'de': 'Starte dein echtes Training! 🚀', 'el': 'Ξεκίνα την πραγματική σου προπόνηση! 🚀', 'ar': 'ابدأ تمرينك الحقيقي! 🚀', 'pl': 'Zacznij swój prawdziwy trening! 🚀', 'ro': 'Începe antrenamentul tău real! 🚀', 'hu': 'Kezdd el az igazi edzést! 🚀'},
   };
 
   static String get mySchedule => _t('mySchedule');
@@ -748,6 +755,13 @@ class AppL {
   static String get streakWeeks => _t('streakWeeks');
   static String get streakMsg => _t('streakMsg');
   static String get newRecord => _t('newRecord');
+  static String get share => _t('share');
+  static String get back => _t('back');
+  static String get gotIt => _t('gotIt');
+  static String get workoutNameQuestion => _t('workoutNameQuestion');
+  static String get muscleImageOpt => _t('muscleImageOpt');
+  static String get selectMusclesOpt => _t('selectMusclesOpt');
+  static String get startRealWorkout => _t('startRealWorkout');
 }
 double kgToLb(double kg) => kg * 2.2046226218;
 
@@ -4766,7 +4780,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  'SERIE',
+                  AppL.sets.toUpperCase(),
                   style: TextStyle(
                     color: subColor,
                     fontSize: 11,
@@ -5812,7 +5826,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                           child: OutlinedButton.icon(
                             onPressed: () => _shareLastSession(context, day),
                             icon: const Icon(Icons.share_rounded, size: 16),
-                            label: const Text('Condividi 🏋️'),
+                            label: Text(AppL.share),
                             style: OutlinedButton.styleFrom(
                               foregroundColor: accent,
                               side: BorderSide(color: accent.withAlpha(80)),
@@ -8531,7 +8545,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Come si chiama questo allenamento?',
+                AppL.workoutNameQuestion,
                 style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 13),
               ),
               const SizedBox(height: 12),
@@ -8564,7 +8578,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Immagine muscolo (opzionale):',
+                AppL.muscleImageOpt,
                 style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 13),
               ),
               const SizedBox(height: 8),
@@ -8630,7 +8644,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Seleziona i gruppi muscolari coinvolti (opzionale):',
+                AppL.selectMusclesOpt,
                 style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 13),
               ),
               const SizedBox(height: 10),
@@ -8669,12 +8683,12 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
           // ── Actions ─────────────────────────────────────────────
           Widget cancelBtn() => TextButton(
             onPressed: () => Navigator.pop(c),
-            child: Text('Annulla', style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54)),
+            child: Text(AppL.cancel, style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54)),
           );
 
           Widget backBtn() => TextButton(
             onPressed: () => setS(() => wizardStep--),
-            child: Text('‹ Indietro', style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54)),
+            child: Text(AppL.back, style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54)),
           );
 
           Widget nextBtn() => TextButton(
@@ -10517,7 +10531,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Ho capito!',
+            child: Text(AppL.gotIt,
                 style: TextStyle(color: Color(0xFF00E5FF), fontWeight: FontWeight.bold)),
           ),
         ],
@@ -11285,8 +11299,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               Navigator.pop(c);
               Navigator.pop(context);
             },
-            child: const Text(
-              'Inizia il vero allenamento! 🚀',
+            child: Text(
+              AppL.startRealWorkout,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
@@ -12304,33 +12318,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       _saveSet();
       return;
     }
-
-    // ── Avvia subito il timer al tap su "Conferma Serie" ──────────────────
-    // Sull'ultima serie usa la pausa inter-esercizio; sulle altre usa il recovery
-    final bool isLastSetHere = setN >= currentEx.targetSets && currentEx.supersetGroup == 0;
-    int previewRecovery;
-    if (isLastSetHere) {
-      previewRecovery = currentEx.interExercisePause > 0 ? currentEx.interExercisePause : 120;
-    } else {
-      previewRecovery = currentEx.recoveryTime;
-      if (currentEx.supersetGroup > 0) {
-        int groupStart = exI, groupEnd = exI;
-        while (groupStart > 0 &&
-            widget.day.exercises[groupStart - 1].supersetGroup ==
-                currentEx.supersetGroup)
-          groupStart--;
-        while (groupEnd < widget.day.exercises.length - 1 &&
-            widget.day.exercises[groupEnd + 1].supersetGroup ==
-                currentEx.supersetGroup)
-          groupEnd++;
-        previewRecovery = widget.day.exercises
-            .sublist(groupStart, groupEnd + 1)
-            .map((e) => e.recoveryTime)
-            .reduce((a, b) => a > b ? a : b);
-      }
-    }
-    // Avvia il timer al tap su Conferma (usa il tempo corretto; non riavvia se già in corso)
-    _avviaTimerConTempo(previewRecovery);
 
     showModalBottomSheet(
       context: context,
