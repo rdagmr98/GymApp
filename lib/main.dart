@@ -4725,7 +4725,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  'DATI',
+                  AppL.dataSection,
                   style: TextStyle(
                     color: subColor,
                     fontSize: 11,
@@ -10042,6 +10042,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   final Map<int, List<Map<String, dynamic>>> _supersetAccumulated = {};
   // Risultati sessione precedente: nome esercizio → lista serie {w, r}
   final Map<String, List<Map<String, dynamic>>> _previousResults = {};
+  bool _plateauDetected = false; // true if 2+ microcycles with no workout-wide improvement
   // Chiave persistenza allenamento in corso
   String get _inProgressKey => 'workout_in_progress_${widget.day.dayName}';
   // Suono fine timer
@@ -10105,6 +10106,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       }
       ex.results = [];
     }
+    _checkPlateauForWorkout();
     _loadSettings();
     if (!widget.demoMode) _loadWorkoutNativeAds();
     if (!widget.demoMode) _restoreInProgressWorkout();
@@ -11421,17 +11423,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         child: Text('$lastR reps',
                           style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
                       ),
-                      if (suggerisciReps && _showWeightSuggestion)
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.green.withAlpha(30),
-                            border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(AppL.tryReps(targetR + 2),
-                            style: const TextStyle(color: Colors.green, fontSize: 13, fontWeight: FontWeight.bold)),
-                        ),
                     ],
                   ),
                   if (suggerisciAumento && _showWeightSuggestion) ...[
@@ -13099,8 +13090,63 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   }
 
   /// Calcola i suggerimenti per la serie corrente.
+  /// Checks history for 2 consecutive sessions without ANY improvement across
+  /// the entire workout (neither weight nor reps increased on any exercise).
+  void _checkPlateauForWorkout() {
+    // Group all history entries by date string (= one session)
+    final Map<String, Map<String, List<Map<String, dynamic>>>> byDate = {};
+    for (final h in widget.history) {
+      final entry = h as Map<String, dynamic>;
+      final date = (entry['date'] as String?) ?? '';
+      final exName = (entry['exercise'] as String?) ?? '';
+      if (date.isEmpty || exName.isEmpty) continue;
+      byDate.putIfAbsent(date, () => {});
+      final rawSeries = entry['series'];
+      if (rawSeries is List) {
+        byDate[date]![exName] =
+            rawSeries.map((s) => Map<String, dynamic>.from(s as Map)).toList();
+      }
+    }
+    // Sort sessions newest-first
+    final sortedDates = byDate.keys.toList()
+      ..sort((a, b) => b.compareTo(a));
+    if (sortedDates.length < 2) {
+      _plateauDetected = false;
+      return;
+    }
+    // Check last 2 sessions for ANY improvement
+    bool anyImprovement = false;
+    final sess1 = byDate[sortedDates[0]]!; // most recent
+    final sess2 = byDate[sortedDates[1]]!; // second most recent
+    for (final exName in sess1.keys) {
+      final s1 = sess1[exName] ?? [];
+      final s2 = sess2[exName] ?? [];
+      if (s2.isEmpty) continue;
+      double maxW1 = 0, maxW2 = 0;
+      int maxR1 = 0, maxR2 = 0;
+      for (final s in s1) {
+        final w = ((s['w'] ?? s['weight'] ?? 0) as num).toDouble();
+        final r = ((s['r'] ?? s['reps'] ?? 0) as num).toInt();
+        if (w > maxW1) maxW1 = w;
+        if (r > maxR1) maxR1 = r;
+      }
+      for (final s in s2) {
+        final w = ((s['w'] ?? s['weight'] ?? 0) as num).toDouble();
+        final r = ((s['r'] ?? s['reps'] ?? 0) as num).toInt();
+        if (w > maxW2) maxW2 = w;
+        if (r > maxR2) maxR2 = r;
+      }
+      if (maxW1 > maxW2 || maxR1 > maxR2) {
+        anyImprovement = true;
+        break;
+      }
+    }
+    _plateauDetected = !anyImprovement;
+  }
+
+
   Map<String, bool> _computeSuggestions(ExerciseConfig ex, int setN, int lastR, int targetR) {
-    bool suggerisciAumento = lastR > targetR && lastR > 0;
+    bool suggerisciAumento = _plateauDetected && lastR > targetR && lastR > 0;
 
     int? repsTriggerSet;
     for (int sn = ex.targetSets; sn >= 1; sn--) {
