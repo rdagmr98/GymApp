@@ -162,7 +162,7 @@ class _YouTubeSearchViewState extends State<YouTubeSearchView> {
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                 child: SizedBox(
                   width: double.infinity,
-                  height: 120,
+                  height: 160,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: AdWidget(ad: _tutorialNativeAd!),
@@ -4125,7 +4125,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
       child: SizedBox(
         width: double.infinity,
-        height: 120,
+        height: 160,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _exerciseListNativeAd!),
@@ -4142,7 +4142,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       padding: const EdgeInsets.only(top: 16),
       child: SizedBox(
         width: double.infinity,
-        height: 120,
+        height: 160,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _graphNativeAd!),
@@ -4156,7 +4156,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 12),
-      child: SizedBox(height: 120, child: AdWidget(ad: _workoutProgressNativeAd!)),
+      child: SizedBox(height: 160, child: AdWidget(ad: _workoutProgressNativeAd!)),
     );
   }
 
@@ -4165,7 +4165,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 12),
-      child: SizedBox(height: 120, child: AdWidget(ad: _overallProgressNativeAd!)),
+      child: SizedBox(height: 160, child: AdWidget(ad: _overallProgressNativeAd!)),
     );
   }
 
@@ -5424,7 +5424,6 @@ class _ClientMainPageState extends State<ClientMainPage>
                       accent: accent,
                     ),
                   ),
-                  _buildWorkoutProgressNativeAd(),
                   if (!kIsWeb) ...[
                     const SizedBox(height: 12),
                     Row(
@@ -5462,6 +5461,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                       ],
                     ),
                   ],
+                  _buildWorkoutProgressNativeAd(),
                 ],
               ),
             ),
@@ -5860,7 +5860,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             const SizedBox(height: 16),
             if (info != null && info.muscleImages.isNotEmpty)
               SizedBox(
-                height: 120,
+                height: 160,
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: info.muscleImages.length,
@@ -5870,7 +5870,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                     child: Image.asset(
                       muscleAssetPath(info.muscleImages[i]),
                       width: 100,
-                      height: 120,
+                      height: 160,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -10034,7 +10034,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   final Map<int, List<Map<String, dynamic>>> _supersetAccumulated = {};
   // Risultati sessione precedente: nome esercizio → lista serie {w, r}
   final Map<String, List<Map<String, dynamic>>> _previousResults = {};
-  bool _plateauDetected = false; // true if 2+ microcycles with no workout-wide improvement
+  bool _plateauDetected = false;
+  final Set<String> _shownSuggestions = {}; // true if 2+ microcycles with no workout-wide improvement
   // Chiave persistenza allenamento in corso
   String get _inProgressKey => 'workout_in_progress_${widget.day.dayName}';
   // Suono fine timer
@@ -10959,6 +10960,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   fontWeight: FontWeight.w500,
                 ),
               ),
+              const SizedBox(height: 8),
+              _buildRecapNativeAd(),
             ],
           ),
           content: SingleChildScrollView(
@@ -11107,7 +11110,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     ],
                   ),
                 ),
-                _buildRecapNativeAd(),
                 if (!kIsWeb) ...[
                   const SizedBox(height: 12),
                   SizedBox(
@@ -11273,6 +11275,12 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     int targetR,
     Color accent,
   ) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        if (suggerisciAumento) _showSuggestionOverlay(isWeight: true, targetReps: targetR);
+        else if (suggerisciReps) _showSuggestionOverlay(isWeight: false, targetReps: targetR);
+      }
+    });
     final info =
         (ex.gifFilename != null ? findByGifSlug(ex.gifFilename!) : null) ??
         findAnyExercise(ex.name);
@@ -11417,14 +11425,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       ),
                     ],
                   ),
-                  if (suggerisciAumento && _showWeightSuggestion) ...[
-                    const SizedBox(height: 6),
-                    const _AumentaPesoWidget(),
-                  ],
-                  if (suggerisciReps && _showWeightSuggestion) ...[
-                    const SizedBox(height: 6),
-                    _AumentaRepsWidget(targetReps: targetR + 2),
-                  ],
+
                 ],
                 if (ex.notePT.isNotEmpty) ...[
                   const SizedBox(height: 14),
@@ -11487,7 +11488,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 2),
       child: SizedBox(
         width: double.infinity,
-        height: 120,
+        height: 160,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _inlineWorkoutNativeAd!),
@@ -11506,7 +11507,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 2),
       child: SizedBox(
         width: double.infinity,
-        height: 120,
+        height: 160,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _startWorkoutNativeAd!),
@@ -11525,7 +11526,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
       child: SizedBox(
         width: double.infinity,
-        height: 120,
+        height: 160,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _chooseExerciseNativeAd!),
@@ -11544,7 +11545,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
       child: SizedBox(
         width: double.infinity,
-        height: 120,
+        height: 160,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _confirmPopupNativeAd!),
@@ -11561,7 +11562,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.only(top: 4),
       child: SizedBox(
         width: double.infinity,
-        height: 120,
+        height: 160,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _timerRestNativeAd!),
@@ -11580,7 +11581,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.only(top: 10),
       child: SizedBox(
         width: double.infinity,
-        height: 120,
+        height: 160,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _recapWorkoutNativeAd!),
@@ -11697,6 +11698,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   }
 
   void _cambiaEsercizioMethod(int nuovoIndice) {
+    _shownSuggestions.clear();
     setState(() {
       widget.day.exercises[exI].results = List.from(currentExSeries);
       exI = nuovoIndice;
@@ -11962,6 +11964,22 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     );
   }
 
+
+
+  void _showSuggestionOverlay({required bool isWeight, required int targetReps}) {
+    final key = isWeight ? 'peso_$exI' : 'reps_$exI';
+    if (_shownSuggestions.contains(key)) return;
+    _shownSuggestions.add(key);
+    OverlayEntry? entry;
+    entry = OverlayEntry(
+      builder: (ctx) => _SuggestionOverlay(
+        isWeight: isWeight,
+        targetReps: targetReps,
+        onDismiss: () { entry?.remove(); },
+      ),
+    );
+    Overlay.of(context).insert(entry);
+  }
 
   void _showNewRecordOverlay() {
     HapticFeedback.heavyImpact();
@@ -12537,7 +12555,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             children: [
               _showWorkoutReadyScreen
                   ? _buildWorkoutStartNativeAd()
-                  : _buildWorkoutNativeAd(),
+                  : const SizedBox.shrink(),
               // Demo mode banner handled via popup in initState
               // Compact badges row (only superset, record badge removed - shown as overlay at save time)
               if (ex.supersetGroup > 0)
@@ -12592,15 +12610,34 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   ),
                 )
               else ...[
-                _buildInfoPanel(
-                  ex,
-                  lastW,
-                  lastR,
-                  suggerisciAumento,
-                  accent,
-                  timeToUse,
-                  targetR,
-                  suggerisciReps,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: _buildInfoPanel(
+                        ex,
+                        lastW,
+                        lastR,
+                        suggerisciAumento,
+                        accent,
+                        timeToUse,
+                        targetR,
+                        suggerisciReps,
+                      ),
+                    ),
+                    if (!kIsWeb && _isInlineWorkoutNativeAdLoaded && _inlineWorkoutNativeAd != null)
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 8, 16, 4),
+                        child: SizedBox(
+                          width: 140,
+                          height: 160,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: AdWidget(ad: _inlineWorkoutNativeAd!),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
                 if (giaFatto)
                   Expanded(child: Center(child: _buildBoxEsercizioCompletato()))
@@ -12709,6 +12746,12 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     int targetR,
     bool suggerisciReps,
   ) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        if (suggerisciAumento) _showSuggestionOverlay(isWeight: true, targetReps: targetR);
+        else if (suggerisciReps) _showSuggestionOverlay(isWeight: false, targetReps: targetR);
+      }
+    });
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
@@ -12763,28 +12806,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   child: Text('$lastR reps',
                     style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
                 ),
-                if (suggerisciAumento && _showWeightSuggestion)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: Colors.amber.withAlpha(30),
-                      border: Border.all(color: Colors.amber.withAlpha(180), width: 1.5),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(AppL.increase,
-                      style: const TextStyle(color: Colors.amber, fontSize: 13, fontWeight: FontWeight.bold)),
-                  ),
-                if (suggerisciReps && _showWeightSuggestion)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    decoration: BoxDecoration(
-                      color: Colors.green.withAlpha(30),
-                      border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(AppL.tryReps(targetR + 2),
-                      style: const TextStyle(color: Colors.green, fontSize: 13, fontWeight: FontWeight.bold)),
-                  ),
+
               ],
             ),
           ],
@@ -12944,7 +12966,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               const SizedBox(height: 16),
               if (info.muscleImages.isNotEmpty) ...[
                 SizedBox(
-                  height: 120,
+                  height: 160,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: info.muscleImages.length,
@@ -12954,7 +12976,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       child: Image.asset(
                         muscleAssetPath(info.muscleImages[i]),
                         width: 100,
-                        height: 120,
+                        height: 160,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -13460,8 +13482,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         ),
                       ),
                     ),
-                    if (suggerisciAumento) const _AumentaPesoWidget(),
-                    if (suggerisciReps) _AumentaRepsWidget(targetReps: targetR + 2),
+
                     // SKIP
                     GestureDetector(
                       onTap: _skipRest,
@@ -13516,6 +13537,86 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       debugPrint("Errore suggerimenti: $e");
       return {'w': 0.0, 'r': 0};
     }
+  }
+}
+
+
+// --- SUGGESTION OVERLAY MODAL ---
+class _SuggestionOverlay extends StatefulWidget {
+  final bool isWeight; // true = peso, false = reps
+  final int targetReps;
+  final VoidCallback onDismiss;
+  const _SuggestionOverlay({required this.isWeight, required this.targetReps, required this.onDismiss});
+  @override
+  State<_SuggestionOverlay> createState() => _SuggestionOverlayState();
+}
+
+class _SuggestionOverlayState extends State<_SuggestionOverlay> with SingleTickerProviderStateMixin {
+  late AnimationController _ctrl;
+  late Animation<double> _scale;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 350));
+    _scale = CurvedAnimation(parent: _ctrl, curve: Curves.elasticOut);
+    _ctrl.forward();
+  }
+
+  @override
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isWeight = widget.isWeight;
+    final grad = isWeight
+        ? const LinearGradient(colors: [Color(0xFFFF6B35), Color(0xFFE53935)], begin: Alignment.topLeft, end: Alignment.bottomRight)
+        : const LinearGradient(colors: [Color(0xFF43A047), Color(0xFF00897B)], begin: Alignment.topLeft, end: Alignment.bottomRight);
+    final emoji = isWeight ? '⬆️' : '🔁';
+    final title = isWeight ? AppL.increaseWeight : AppL.tryReps(widget.targetReps + 2);
+    final btnText = isWeight ? AppL.tryWeightBtn : AppL.okBtn;
+    return Material(
+      color: Colors.black.withAlpha(160),
+      child: Center(
+        child: ScaleTransition(
+          scale: _scale,
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 32),
+            padding: const EdgeInsets.all(28),
+            decoration: BoxDecoration(
+              gradient: grad,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: const [BoxShadow(color: Colors.black38, blurRadius: 24, offset: Offset(0, 8))],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(emoji, style: const TextStyle(fontSize: 52)),
+                const SizedBox(height: 16),
+                Text(title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: widget.onDismiss,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white,
+                    foregroundColor: isWeight ? const Color(0xFFE53935) : const Color(0xFF43A047),
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                    textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  child: Text(btnText),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -13693,7 +13794,9 @@ class _RecordOverlayState extends State<_RecordOverlay>
     final size = MediaQuery.of(context).size;
     final cx = size.width / 2;
     final cy = size.height * 0.4;
-    return Stack(
+    return Material(
+      color: Colors.black.withAlpha(160),
+      child: Stack(
       children: [
         ...List.generate(_sparks.length, (i) {
           final dir = _dirs[i % _dirs.length];
@@ -13772,6 +13875,7 @@ class _RecordOverlayState extends State<_RecordOverlay>
           ),
         ),
       ],
+      ),
     );
   }
 }
