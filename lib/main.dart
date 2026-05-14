@@ -11378,7 +11378,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     ),
                   ],
                 ),
-                if (lastW > 0 && !suggerisciAumento && !suggerisciReps) ...[
+                if (lastW > 0) ...[
                   const SizedBox(height: 14),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
