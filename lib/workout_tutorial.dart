@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'app_l.dart';
 
-/// Tutorial interattivo: mostra una schermata introduttiva,
-/// poi lancia il vero WorkoutEngine in modalità demo (nessun dato salvato).
+/// Interactive tutorial widget for GymApp.
 class WorkoutTutorial extends StatefulWidget {
   final Color accentColor;
-  /// Chiamato quando il tutorial è completato (avvia il vero allenamento).
   final VoidCallback onComplete;
-  /// Callback che lancia il WorkoutEngine in demoMode e restituisce un Future
-  /// che si completa quando l'utente finisce o esce dalla demo.
-  /// Se null, il tutorial passa direttamente a onComplete (es. web).
   final Future<void> Function()? onStartDemo;
 
   const WorkoutTutorial({
@@ -78,9 +74,7 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
   Widget _buildLoadingScreen() {
     return Scaffold(
       backgroundColor: const Color(0xFF0E0E10),
-      body: Center(
-        child: CircularProgressIndicator(color: widget.accentColor),
-      ),
+      body: Center(child: CircularProgressIndicator(color: widget.accentColor)),
     );
   }
 
@@ -91,26 +85,17 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
       body: SafeArea(
         child: Column(
           children: [
-            // Top bar con Salta
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Tutorial',
-                    style: TextStyle(
-                      color: accent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
+                  Text(AppL.tutorialTitle,
+                      style: TextStyle(color: accent, fontWeight: FontWeight.bold, fontSize: 16)),
                   TextButton(
                     onPressed: widget.onComplete,
-                    child: Text(
-                      'Salta',
-                      style: TextStyle(color: Colors.white54, fontSize: 14),
-                    ),
+                    child: Text(AppL.skip,
+                        style: const TextStyle(color: Colors.white54, fontSize: 14)),
                   ),
                 ],
               ),
@@ -121,43 +106,27 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
                 child: Column(
                   children: [
                     const SizedBox(height: 8),
-                    // Icona animata
                     ScaleTransition(
                       scale: _pulseAnim,
                       child: Container(
-                        width: 100,
-                        height: 100,
+                        width: 100, height: 100,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: accent.withAlpha(30),
                           border: Border.all(color: accent.withAlpha(120), width: 2),
                         ),
-                        child: Center(
-                          child: Text(
-                            '🏋️',
-                            style: TextStyle(fontSize: 52),
-                          ),
-                        ),
+                        child: const Center(child: Text('🏋️', style: TextStyle(fontSize: 52))),
                       ),
                     ),
                     const SizedBox(height: 24),
-                    Text(
-                      'Benvenuto in GymApp!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
+                    Text(AppL.welcomeTitle,
+                        style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center),
                     const SizedBox(height: 8),
-                    Text(
-                      'Il tuo diario di allenamento intelligente',
-                      style: TextStyle(color: Colors.white54, fontSize: 14),
-                      textAlign: TextAlign.center,
-                    ),
+                    Text(AppL.tutorialSubtitle,
+                        style: const TextStyle(color: Colors.white54, fontSize: 14),
+                        textAlign: TextAlign.center),
                     const SizedBox(height: 28),
-                    // Step-by-step workflow guide
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
@@ -168,48 +137,26 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Come funziona ogni serie',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
-                          ),
+                          Text(AppL.tutorialHowItWorks,
+                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
                           const SizedBox(height: 14),
-                          _buildStep(accent, '1', '💪', 'Esegui la serie', 'Fai le ripetizioni con il tuo peso — prima il ferro!'),
+                          _step(accent, '1', '💪', AppL.tutorialStep1Title, AppL.tutorialStep1Body),
                           const SizedBox(height: 10),
-                          _buildStep(accent, '2', '📝', 'Registra peso e reps', 'Solo dopo aver finito la serie, inserisci i valori e premi Conferma.'),
+                          _step(accent, '2', '📝', AppL.tutorialStep2Title, AppL.tutorialStep2Body),
                           const SizedBox(height: 10),
-                          _buildStep(accent, '3', '⏱️', 'Il timer parte da solo', 'Il recupero inizia automaticamente. Puoi tenerlo d\'occhio nella barra delle notifiche.'),
+                          _step(accent, '3', '⏱️', AppL.tutorialStep3Title, AppL.tutorialStep3Body),
                           const SizedBox(height: 10),
-                          _buildStep(accent, '4', '🔁', 'Prossima serie', 'A fine recupero l\'app ti avvisa. Ripeti per tutte le serie!'),
+                          _step(accent, '4', '🔁', AppL.nextSet, AppL.tutorialStep4Body),
                         ],
                       ),
                     ),
                     const SizedBox(height: 20),
-                    _buildFeatureCard(
-                      accent,
-                      icon: '🧠',
-                      title: 'L\'app ricorda i tuoi pesi',
-                      body: 'GymApp suggerisce automaticamente il peso usato l\'ultima volta.',
-                    ),
+                    _featureCard(accent, '🧠', AppL.tutorialMemoryTitle, AppL.tutorialMemoryBody),
                     const SizedBox(height: 12),
-                    _buildFeatureCard(
-                      accent,
-                      icon: '📊',
-                      title: 'Grafici e progressi',
-                      body: 'Tieni traccia dei tuoi progressi sessione dopo sessione.',
-                    ),
+                    _featureCard(accent, '📊', AppL.tutorialChartsTitle, AppL.tutorialChartsBody),
                     const SizedBox(height: 12),
-                    _buildFeatureCard(
-                      accent,
-                      icon: '🎯',
-                      title: 'Streak e badge',
-                      body: 'Mantieni la continuità e sblocca badge per ogni allenamento completato.',
-                    ),
+                    _featureCard(accent, '🎯', AppL.tutorialStreakTitle, AppL.tutorialStreakBody),
                     const SizedBox(height: 24),
-                    // Info prova
                     Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
@@ -226,22 +173,11 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Fai una prova vera — nessun dato salvato',
-                                  style: TextStyle(
-                                    color: accent,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                  ),
-                                ),
+                                Text(AppL.tutorialDemoTitle,
+                                    style: TextStyle(color: accent, fontWeight: FontWeight.bold, fontSize: 14)),
                                 const SizedBox(height: 4),
-                                const Text(
-                                  'Ti guidiamo in un allenamento completo con Panca Piana e Trazioni (2 serie). Inserisci il peso con i tasti veloci o dalla tastiera, conferma ogni serie e segui le istruzioni sullo schermo.',
-                                  style: TextStyle(
-                                    color: Colors.white70,
-                                    fontSize: 13,
-                                  ),
-                                ),
+                                Text(AppL.tutorialDemoBody,
+                                    style: const TextStyle(color: Colors.white70, fontSize: 13)),
                               ],
                             ),
                           ),
@@ -249,26 +185,16 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
                       ),
                     ),
                     const SizedBox(height: 32),
-                    // Bottone principale
                     SizedBox(
-                      width: double.infinity,
-                      height: 56,
+                      width: double.infinity, height: 56,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: accent,
-                          foregroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
+                          backgroundColor: accent, foregroundColor: Colors.black,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                         ),
                         onPressed: _startDemo,
-                        child: const Text(
-                          'Inizia la prova 💪',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                          ),
-                        ),
+                        child: Text(AppL.tutorialStartDemo,
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
                       ),
                     ),
                     const SizedBox(height: 32),
@@ -282,24 +208,19 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
     );
   }
 
-  Widget _buildStep(Color accent, String number, String icon, String title, String body) {
+  Widget _step(Color accent, String num, String icon, String title, String body) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          width: 24,
-          height: 24,
+          width: 24, height: 24,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: accent.withAlpha(40),
             border: Border.all(color: accent.withAlpha(120), width: 1),
           ),
           child: Center(
-            child: Text(
-              number,
-              style: TextStyle(color: accent, fontSize: 12, fontWeight: FontWeight.bold),
-            ),
-          ),
+              child: Text(num, style: TextStyle(color: accent, fontSize: 12, fontWeight: FontWeight.bold))),
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -309,7 +230,8 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
               Row(children: [
                 Text(icon, style: const TextStyle(fontSize: 16)),
                 const SizedBox(width: 6),
-                Text(title, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13)),
+                Flexible(child: Text(title,
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13))),
               ]),
               const SizedBox(height: 2),
               Text(body, style: const TextStyle(color: Colors.white54, fontSize: 12)),
@@ -320,18 +242,11 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
     );
   }
 
-  Widget _buildFeatureCard(
-    Color accent, {
-    required String icon,
-    required String title,
-    required String body,
-  }) {
+  Widget _featureCard(Color accent, String icon, String title, String body) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       decoration: BoxDecoration(
-        color: Colors.white.withAlpha(8),
-        borderRadius: BorderRadius.circular(14),
-      ),
+          color: Colors.white.withAlpha(8), borderRadius: BorderRadius.circular(14)),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -341,19 +256,10 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                  ),
-                ),
+                Text(title,
+                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
                 const SizedBox(height: 4),
-                Text(
-                  body,
-                  style: const TextStyle(color: Colors.white60, fontSize: 13),
-                ),
+                Text(body, style: const TextStyle(color: Colors.white60, fontSize: 13)),
               ],
             ),
           ),
@@ -374,55 +280,32 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  width: 100,
-                  height: 100,
+                  width: 100, height: 100,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.greenAccent.withAlpha(30),
-                    border: Border.all(
-                      color: Colors.greenAccent.withAlpha(120),
-                      width: 2,
-                    ),
+                    border: Border.all(color: Colors.greenAccent.withAlpha(120), width: 2),
                   ),
-                  child: const Center(
-                    child: Text('🎉', style: TextStyle(fontSize: 52)),
-                  ),
+                  child: const Center(child: Text('🎉', style: TextStyle(fontSize: 52))),
                 ),
                 const SizedBox(height: 28),
-                const Text(
-                  'Sei pronto!',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Text(AppL.tutorialCompleteTitle,
+                    style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
-                const Text(
-                  'Hai completato la prova e conosci già tutte le funzioni essenziali di GymApp. Adesso inizia il tuo vero allenamento!',
-                  style: TextStyle(color: Colors.white70, fontSize: 15),
-                  textAlign: TextAlign.center,
-                ),
+                Text(AppL.tutorialCompleteBody,
+                    style: const TextStyle(color: Colors.white70, fontSize: 15),
+                    textAlign: TextAlign.center),
                 const SizedBox(height: 40),
                 SizedBox(
-                  width: double.infinity,
-                  height: 56,
+                  width: double.infinity, height: 56,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: accent,
-                      foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
+                      backgroundColor: accent, foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     ),
                     onPressed: widget.onComplete,
-                    child: const Text(
-                      'Inizia il vero allenamento! 🚀',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
+                    child: Text(AppL.startRealWorkout,
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   ),
                 ),
               ],
