@@ -11886,7 +11886,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     ),
                   ],
                 ),
-                if (lastW > 0) ...[
+                if (lastW > 0 && !suggerisciAumento && !suggerisciReps) ...[
                   const SizedBox(height: 14),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -13875,6 +13875,52 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
+                                      if (lastW > 0) ...[
+                                        const SizedBox(height: 8),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Icon(Icons.history_rounded, size: 11,
+                                              color: _isDarkCtx(context) ? Colors.white.withAlpha(70) : Colors.black45),
+                                            const SizedBox(width: 4),
+                                            Text(AppL.lastTime,
+                                              style: TextStyle(
+                                                color: _isDarkCtx(context) ? Colors.white.withAlpha(70) : Colors.black45,
+                                                fontSize: 11,
+                                                letterSpacing: 2,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Wrap(
+                                          alignment: WrapAlignment.center,
+                                          spacing: 8,
+                                          runSpacing: 4,
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFFFFD700).withAlpha(30),
+                                                border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg',
+                                                style: const TextStyle(color: Color(0xFFFFD700), fontSize: 13, fontWeight: FontWeight.bold)),
+                                            ),
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                              decoration: BoxDecoration(
+                                                color: accent.withAlpha(30),
+                                                border: Border.all(color: accent.withAlpha(180), width: 1.5),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Text('$lastR reps',
+                                                style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ],
                                   ),
                                 ),
@@ -13884,55 +13930,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         ),
                       ),
                     ),
-                    // Chips ultima volta (kg e reps correnti)
-                    if (lastW > 0) ...[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.history_rounded, size: 12,
-                            color: _isDarkCtx(context) ? Colors.white.withAlpha(70) : Colors.black45),
-                          const SizedBox(width: 4),
-                          Text(AppL.lastTime,
-                            style: TextStyle(
-                              color: _isDarkCtx(context) ? Colors.white.withAlpha(70) : Colors.black45,
-                              fontSize: 11,
-                              letterSpacing: 2,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 6),
-                      Wrap(
-                        alignment: WrapAlignment.center,
-                        spacing: 8,
-                        runSpacing: 4,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFFFD700).withAlpha(30),
-                              border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg',
-                              style: const TextStyle(color: Color(0xFFFFD700), fontSize: 14, fontWeight: FontWeight.bold)),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                            decoration: BoxDecoration(
-                              color: accent.withAlpha(30),
-                              border: Border.all(color: accent.withAlpha(180), width: 1.5),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text('$lastR reps',
-                              style: TextStyle(color: accent, fontSize: 14, fontWeight: FontWeight.bold)),
-                          ),
-                        ],
-                      ),
-                    ],
                     if (suggerisciAumento) const _AumentaPesoWidget(),
                     if (suggerisciReps) _AumentaRepsWidget(targetReps: targetR + 2),
-                    _buildTimerRestNativeAd(),
                     // SKIP
                     GestureDetector(
                       onTap: _skipRest,
@@ -13956,6 +13955,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         ),
                       ),
                     ),
+                    _buildTimerRestNativeAd(),
                   ],
                 ),
               ),
