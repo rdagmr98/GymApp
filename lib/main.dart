@@ -4299,7 +4299,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        name.isNotEmpty ? name.toUpperCase() : 'ATLETA',
+                        name.isNotEmpty ? name.toUpperCase() : AppL.athleteFallback,
                         style: TextStyle(
                           color: accent,
                           fontSize: 18,
@@ -4325,7 +4325,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  'FEEDBACK',
+                  AppL.sectionFeedback,
                   style: TextStyle(
                     color: subColor,
                     fontSize: 11,
@@ -4356,7 +4356,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  'TIMER',
+                  AppL.sectionTimer,
                   style: TextStyle(
                     color: subColor,
                     fontSize: 11,
@@ -4567,7 +4567,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  'COLORE TEMA',
+                  AppL.sectionAccentColor,
                   style: TextStyle(
                     color: subColor,
                     fontSize: 11,
@@ -4693,7 +4693,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Text(
-                  'GYMAPP PRO',
+                  AppL.sectionPro,
                   style: TextStyle(
                     color: subColor,
                     fontSize: 11,
@@ -6317,14 +6317,14 @@ class _ClientMainPageState extends State<ClientMainPage>
     final String channelMethod;
 
     if (isMiui) {
-      title = '📱 Widget GymApp';
-      message = 'Su Xiaomi/MIUI il widget richiede il permesso di avvio automatico.\n\nVai in:\nImpostazioni → App → GymApp → Avvio automatico → Attiva';
-      buttonLabel = 'Apri impostazioni';
+      title = AppL.widgetGymAppTitle;
+      message = AppL.widgetMiuiMsg;
+      buttonLabel = AppL.openSettingsBtn;
       channelMethod = 'openAutoStartSettings';
     } else {
-      title = '📱 Widget GymApp';
-      message = 'Su Samsung il widget potrebbe non funzionare se l\'app è in risparmio energetico.\n\nVai in:\nImpostazioni App → Batteria → Nessuna restrizione';
-      buttonLabel = 'Apri impostazioni batteria';
+      title = AppL.widgetGymAppTitle;
+      message = AppL.widgetSamsungMsg;
+      buttonLabel = AppL.openBatteryBtn;
       channelMethod = 'openBatterySettings';
     }
 
@@ -6339,7 +6339,7 @@ class _ClientMainPageState extends State<ClientMainPage>
           style: TextStyle(color: textColor, height: 1.45),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(c), child: const Text('Dopo')),
+          TextButton(onPressed: () => Navigator.pop(c), child: Text(AppL.laterBtn)),
           ElevatedButton(
             onPressed: () async {
               Navigator.pop(c);
@@ -8434,9 +8434,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
             Row(
               children: [
                 Text(
-                  AppL.lang == 'en'
-                      ? 'Choose a template'
-                      : 'Scegli un template',
+                  AppL.templateChoose,
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -8451,9 +8449,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
               ],
             ),
             Text(
-              AppL.lang == 'en'
-                  ? 'Load a pre-built plan as a starting point. You can edit it afterwards.'
-                  : 'Carica una scheda pre-impostata come punto di partenza. Puoi modificarla dopo il caricamento.',
+              AppL.templateDesc,
               style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
             ),
             const SizedBox(height: 16),
@@ -9134,9 +9130,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                 TextField(
                   style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
                   decoration: InputDecoration(
-                    hintText: AppL.lang == 'en'
-                        ? 'Search exercise...'
-                        : 'Cerca esercizio...',
+                    hintText: AppL.searchExerciseHint,
                     hintStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
                     prefixIcon: Icon(Icons.search, color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
                     filled: true,
@@ -9723,9 +9717,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           const SizedBox(width: 10),
                           Flexible(
                             child: Text(
-                              AppL.lang == 'en'
-                                  ? "Don't know where to start?\nTap to browse pre-built plans!"
-                                  : "Non sai da dove iniziare?\nSfoglia le schede precompilate!",
+                              AppL.scheduleNudge,
                               style: TextStyle(
                                 color: accent,
                                 fontSize: 13,
@@ -10123,10 +10115,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       builder: (_) => AlertDialog(
         backgroundColor: _isDarkCtx(context) ? const Color(0xFF121620) : Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Text('💪 Come funziona',
+        title: Text(AppL.demoHintTitle,
             style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontWeight: FontWeight.bold)),
         content: Text(
-          'Prima esegui la serie fisicamente.\n\nPoi inserisci il peso e le ripetizioni e premi CONFERMA SERIE per registrare il risultato.',
+          AppL.demoHintBody,
           style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, height: 1.5),
         ),
         actions: [
@@ -10863,7 +10855,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             Icon(Icons.emoji_events, color: Colors.amber, size: 52),
             SizedBox(height: 8),
             Text(
-              'Demo completata! 💪',
+              AppL.demoCompleteTitle,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: _isDarkCtx(context) ? Colors.white : Colors.black87,
@@ -10874,7 +10866,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           ],
         ),
         content: Text(
-          'Hai appena simulato un vero allenamento! Ora sai come funziona l\'app: registra pesi, reps, e il timer parte automaticamente.\n\nNessun dato è stato salvato.',
+          AppL.demoCompleteBody,
           style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 14),
           textAlign: TextAlign.center,
         ),
@@ -12573,7 +12565,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              'SUPERSERIE ${ex.supersetGroup}',
+                              '${AppL.supersetPrefix} ${ex.supersetGroup}',
                               style: TextStyle(
                                 color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                                 fontWeight: FontWeight.bold,
@@ -13766,9 +13758,7 @@ class _RecordOverlayState extends State<_RecordOverlay>
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      widget.lang == 'en'
-                          ? '🚀 Keep pushing! 💪'
-                          : '🚀 Continua così! 💪',
+                      AppL.keepPushing,
                       style: const TextStyle(
                         color: Colors.black87,
                         fontSize: 14,
@@ -14151,7 +14141,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      '$doneCount/$total questo microciclo',
+                      '$doneCount/$total ${AppL.thisMicrocycleLabel}',
                       style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 9),
                       textAlign: TextAlign.center,
                     ),
@@ -16526,7 +16516,7 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
       builder: (_) => AlertDialog(
         backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         title: Text(
-          'Serie ${serieIdx + 1}',
+          '${AppL.setLabel} ${serieIdx + 1}',
           style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
         ),
         content: Column(
@@ -16660,9 +16650,7 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
                                 color: Colors.redAccent,
                                 size: 20,
                               ),
-                              tooltip: AppL.lang == 'en'
-                                  ? 'Delete session'
-                                  : 'Elimina sessione',
+                              tooltip: AppL.deleteSession,
                               onPressed: () => _eliminaSessione(sIdx),
                             ),
                           ],
@@ -16678,7 +16666,7 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
                         return ListTile(
                           dense: true,
                           title: Text(
-                            'Serie ${idx + 1}:  ${w}kg × ${r} reps',
+                            '${AppL.setLabel} ${idx + 1}:  ${w}kg × ${r} reps',
                             style: TextStyle(
                               color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
                               fontSize: 13,
