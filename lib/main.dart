@@ -4594,8 +4594,15 @@ class _ClientMainPageState extends State<ClientMainPage>
     if (kIsWeb || !_overallProgressNativeAdLoaded || _overallProgressNativeAd == null)
       return const SizedBox.shrink();
     return Padding(
-      padding: const EdgeInsets.only(top: 12),
-      child: SizedBox(height: 160, child: AdWidget(ad: _overallProgressNativeAd!)),
+      padding: const EdgeInsets.only(top: 16),
+      child: SizedBox(
+        width: double.infinity,
+        height: 250,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: AdWidget(ad: _overallProgressNativeAd!),
+        ),
+      ),
     );
   }
 
@@ -12415,7 +12422,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       ),
     );
     overlay.insert(entry);
-    Future.delayed(const Duration(milliseconds: 3200), () {
+    Future.delayed(const Duration(milliseconds: 1800), () {
       if (entry.mounted) entry.remove();
     });
   }
@@ -13666,12 +13673,15 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     var suggest = _getSuggest(ex.name, setN);
     // Auto-show suggestion overlay when rest timer starts
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      final _s2 = _computeSuggestions(ex, setN,
-          (suggest['r'] as num?)?.toInt() ?? 0,
-          ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
-      if (_s2['aumento']!) _showSuggestionOverlay(isWeight: true, targetReps: ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
-      else if (_s2['reps']!) _showSuggestionOverlay(isWeight: false, targetReps: ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
+      final suggDelay = _isNewRecord ? const Duration(milliseconds: 2000) : Duration.zero;
+      Future.delayed(suggDelay, () {
+        if (!mounted) return;
+        final _s2 = _computeSuggestions(ex, setN,
+            (suggest['r'] as num?)?.toInt() ?? 0,
+            ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
+        if (_s2['aumento']!) _showSuggestionOverlay(isWeight: true, targetReps: ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
+        else if (_s2['reps']!) _showSuggestionOverlay(isWeight: false, targetReps: ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
+      });
     });
     double lastW = (suggest['w'] as num?)?.toDouble() ?? 0.0;
     int lastR = (suggest['r'] as num?)?.toInt() ?? 0;
@@ -17656,7 +17666,6 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                           ),
                         ),
                         const SizedBox(height: 12),
-                        widget.buildAd(),
                         if (!kIsWeb) ...[
                           const SizedBox(height: 16),
                           SizedBox(
@@ -17676,6 +17685,8 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                             ),
                           ),
                         ],
+                        const SizedBox(height: 12),
+                        widget.buildAd(),
                       ],
                     ),
                   ),
