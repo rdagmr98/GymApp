@@ -1800,9 +1800,9 @@ String translateExerciseText(String italian) {
         'Do not push beyond your comfort limit. Breathe deeply.',
     'Non tirare il collo. Respira normalmente.':
         'Do not pull on your neck. Breathe normally.',
-    'Non tirare il collo. Concentrati sulla contrazione dell\'addome.':
+    "Non tirare il collo. Concentrati sulla contrazione dell\'addome.":
         'Do not pull on your neck. Focus on contracting your abs.',
-    'Contrai l\'addome durante tutto l\'esercizio. Controlla la fase eccentrica.':
+    "Contrai l\'addome durante tutto l\'esercizio. Controlla la fase eccentrica.":
         'Keep your core engaged throughout the exercise. Control the eccentric phase.',
     'Concentrati sulla contrazione dei glutei. Mantieni il core stabile.':
         'Focus on squeezing your glutes and keep your core stable.',
@@ -1810,83 +1810,110 @@ String translateExerciseText(String italian) {
         'Control both the eccentric and concentric phases of the movement.',
     'Esegui il movimento con controllo. Mantieni il core stabile.':
         'Perform the movement under control and keep your core stable.',
-    'Esegui il movimento esplosivo verso l\'alto. Controlla la discesa.':
+    "Esegui il movimento esplosivo verso l\'alto. Controlla la discesa.":
         'Drive the movement explosively upward and control the lowering phase.',
-    'Mantieni il core stabile durante l\'esercizio.':
+    "Mantieni il core stabile durante l\'esercizio.":
         'Keep your core stable throughout the exercise.',
     'Evita di dondolare. Controlla sia la fase ascendente che discendente.':
-        'Avoid swinging. Control both the upward and downward phases.',
-    'Non arrotondare la schiena. Mantieni il core contratto.':
-        'Do not round your back. Keep your core braced.',
-    'Non usare lo slancio. Concentrati sull\'isolamento dei muscoli target.':
-        'Do not use momentum. Focus on isolating the target muscles.',
+        'Avoid swinging. Control both the ascending and descending phases.',
+    "Spingi i talloni verso il basso. Mantieni il core contratto durante l\'esercizio.":
+        'Push your heels down. Keep your core engaged throughout the exercise.',
+    'Mantieni le spalle indietro e il petto aperto durante il movimento.':
+        'Keep your shoulders back and chest open throughout the movement.',
+    'Mantieni una traiettoria costante. Non iperestendere i gomiti.':
+        'Maintain a consistent arc. Do not hyperextend your elbows.',
+    "Mantieni i polsi allineati con l\'avambraccio durante tutto il movimento.":
+        'Keep your wrists aligned with your forearm throughout the movement.',
+    'Mantieni schiena dritta e busto eretto durante il movimento.':
+        'Keep your back straight and torso upright throughout the movement.',
+    'Contrai i glutei al culmine del movimento.':
+        'Squeeze your glutes at the top of the movement.',
+    'Evita di iperestendere la zona lombare.':
+        'Avoid hyperextending the lower back.',
+    'Scendi fino a quando le cosce sono parallele al suolo.':
+        'Lower until your thighs are parallel to the floor.',
+    'Spingi con i talloni durante la fase ascendente.':
+        'Push through your heels during the ascent phase.',
+    'Mantieni il gomito fermo e vicino al busto.':
+        'Keep your elbow fixed and close to your torso.',
+    'Mantieni i gomiti fermi e puntati verso il basso.':
+        'Keep your elbows fixed and pointing downward.',
+    'Non lasciare che i gomiti vadano avanti.':
+        'Do not let your elbows flare forward.',
+    'Mantieni la testa neutra e lo sguardo avanti.':
+        'Keep your head neutral and gaze forward.',
+    'Evita di ruotare il busto durante il movimento.':
+        'Avoid rotating your torso during the movement.',
+    'Mantieni le ginocchia in linea con le punte dei piedi.':
+        'Keep your knees in line with your toes.',
+    'Concentrati sulla contrazione del muscolo target.':
+        'Focus on contracting the target muscle.',
+    'Esegui una contrazione isometrica di 1-2 secondi al culmine.':
+        'Hold an isometric contraction for 1-2 seconds at the top.',
+    'Mantieni il peso distribuito su tutta la pianta del piede.':
+        'Keep the weight evenly distributed across the entire foot.',
+    'Non iperestendere le ginocchia al termine del movimento.':
+        'Do not hyperextend your knees at the end of the movement.',
+    'Abbassa il peso lentamente, senza rimbalzare.':
+        'Lower the weight slowly, without bouncing.',
+    'Utilizza una presa prona o supina a seconda del comfort.':
+        'Use a pronated or supinated grip based on comfort.',
+    'Esegui il cardio a ritmo costante per tutta la durata.':
+        'Perform cardio at a steady pace throughout.',
+    'Aumenta il ritmo progressivamente nella seconda met\u00e0.':
+        'Increase the pace progressively in the second half.',
+    'Mantieni una frequenza cardiaca moderata durante tutto il set.':
+        'Maintain a moderate heart rate throughout the set.',
+    'Utilizza un range di movimento completo.':
+        'Use a full range of motion.',
+    'Tieni i piedi alla larghezza delle spalle.':
+        'Keep your feet shoulder-width apart.',
   };
-  if (exactPhrases.containsKey(source)) return exactPhrases[source]!;
+
+  if (exactPhrases.containsKey(source)) {
+    final en = exactPhrases[source]!;
+    return _translateEnToLang(en);
+  }
 
   const fragmentMap = {
-    'Esegui il movimento lentamente e con controllo.':
-        'Perform the movement slowly and under control.',
-    'Esegui il movimento con controllo.': 'Perform the movement under control.',
-    'Esegui il movimento controllando fase eccentrica e concentrica.':
-        'Control both the eccentric and concentric phases of the movement.',
-    'Esegui il movimento esplosivo verso l\'alto.':
-        'Drive the movement explosively upward.',
-    'Mantieni una postura corretta.': 'Maintain correct posture.',
-    'Mantieni il core stabile.': 'Keep your core stable.',
-    'Mantieni il core contratto.': 'Keep your core braced.',
-    'Mantieni il petto alto': 'Keep your chest high',
-    'Mantieni il busto eretto': 'Keep your torso upright',
-    'Mantieni il busto stabile': 'Keep your torso stable',
+    'Abbassa lentamente': 'Lower slowly',
+    'abbassa lentamente': 'lower slowly',
+    'Mantieni una postura corretta': 'Maintain correct posture',
+    'mantieni una postura corretta': 'maintain correct posture',
+    'Tieni i gomiti vicini al corpo': 'Keep elbows close to your body',
+    'tieni i gomiti vicini al corpo': 'keep elbows close to your body',
+    'Evita di iperestendere': 'Avoid hyperextending',
+    'evita di iperestendere': 'avoid hyperextending',
+    'Concentrati sulla contrazione': 'Focus on the contraction',
+    'concentrati sulla contrazione': 'focus on the contraction',
+    'Mantieni il core stabile': 'Keep your core stable',
+    'mantieni il core stabile': 'keep your core stable',
+    'Mantieni il core contratto': 'Keep your core engaged',
+    'mantieni il core contratto': 'keep your core engaged',
+    'Mantieni la schiena piatta': 'Keep your back flat',
+    'mantieni la schiena piatta': 'keep your back flat',
     'Mantieni la schiena dritta': 'Keep your back straight',
-    'Mantieni la schiena in posizione neutra.':
-        'Keep your back in a neutral position.',
-    'Mantieni le scapole retratte': 'Keep your shoulder blades retracted',
-    'Controlla la discesa.': 'Control the lowering phase.',
-    'Controlla la fase eccentrica.': 'Control the eccentric phase.',
-    'Controlla entrambe le fasi.': 'Control both phases.',
-    'Controlla sia la fase ascendente che discendente.':
-        'Control both the upward and downward phases.',
-    'Respira profondamente.': 'Breathe deeply.',
-    'Respira normalmente.': 'Breathe normally.',
-    'Evita lo slancio.': 'Avoid using momentum.',
-    'Evita di dondolare.': 'Avoid swinging.',
-    'Non usare lo slancio.': 'Do not use momentum.',
-    'Non arrotondare la schiena.': 'Do not round your back.',
-    'Non forzare oltre il limite di comfort.':
-        'Do not push beyond your comfort limit.',
-    'Non forzare oltre il limite.': 'Do not force beyond your limit.',
-    'Inizia con peso moderato': 'Start with moderate weight',
-    'per padroneggiare la tecnica.': 'to master the technique.',
-    'Concentrati sulla contrazione completa.': 'Focus on a full contraction.',
-    'Concentrati sulla contrazione dell\'addome.':
-        'Focus on contracting your abs.',
-    'Concentrati sulla contrazione.': 'Focus on the contraction.',
-    'Concentrati sui muscoli target.': 'Focus on the target muscles.',
-    'Concentrati sull\'isolamento dei muscoli target.':
-        'Focus on isolating the target muscles.',
-    'Porta il corpo in posizione di allungamento.':
-        'Move into the stretch position.',
-    'Porta le braccia in posizione di allungamento.':
-        'Bring your arms into the stretch position.',
-    'Porta le gambe in posizione di allungamento.':
-        'Bring your legs into the stretch position.',
-    'Porta la gamba in posizione di allungamento.':
-        'Bring your leg into the stretch position.',
-    'Mantieni 20-30 secondi.': 'Hold for 20-30 seconds.',
-    'Tieni i gomiti fissi': 'Keep your elbows fixed',
-    'Mantieni i gomiti fissi': 'Keep your elbows fixed',
-    'Retrai le scapole': 'Retract your shoulder blades',
-    'tecnica': 'technique',
-    'muscoli target': 'target muscles',
-    'fase ascendente': 'upward phase',
-    'fase discendente': 'downward phase',
-    'fase concentrica': 'concentric phase',
-    'fase eccentrica': 'eccentric phase',
-    'Abbassa lentamente.': 'Lower slowly.',
-    'Alza le spalle verso le orecchie': 'Raise your shoulders toward your ears',
+    'mantieni la schiena dritta': 'keep your back straight',
+    'Spingi verso l\u2019alto': 'Press upward',
+    'spingi verso l\u2019alto': 'press upward',
     'Spingi verso l\'alto': 'Press upward',
+    'spingi verso l\'alto': 'press upward',
     'Tira verso il petto': 'Pull toward your chest',
+    'tira verso il petto': 'pull toward your chest',
     'Tira verso il punto vita': 'Pull toward your waist',
+    'tira verso il punto vita': 'pull toward your waist',
+    'Contrai i glutei': 'Squeeze your glutes',
+    'contrai i glutei': 'squeeze your glutes',
+    'Fai attenzione alla postura': 'Pay attention to posture',
+    'fai attenzione alla postura': 'pay attention to posture',
+    'Usa una presa neutra': 'Use a neutral grip',
+    'usa una presa neutra': 'use a neutral grip',
+    'Respira profondamente': 'Breathe deeply',
+    'respira profondamente': 'breathe deeply',
+    'Non forzare oltre il limite': 'Do not force beyond the limit',
+    'non forzare oltre il limite': 'do not force beyond the limit',
+    'Mantieni 20-30 secondi': 'Hold for 20-30 seconds',
+    'mantieni 20-30 secondi': 'hold for 20-30 seconds',
   };
 
   final fragments = fragmentMap.entries.toList()
@@ -1896,29 +1923,184 @@ String translateExerciseText(String italian) {
     result = result.replaceAll(entry.key, entry.value);
   }
 
-  if (_containsItalianMarkers(result)) {
-    return _fallbackEnglishExerciseText(source);
+  final enResult = _containsItalianMarkers(result) ? _fallbackEnglishExerciseText(source) : result;
+  return _translateEnToLang(enResult);
+}
+
+String _translateEnToLang(String en) {
+  final lang = AppL.lang;
+  if (lang == 'en' || lang == 'it' || en.isEmpty) return en;
+  const Map<String, Map<String, String>> _langTips = {
+    'es': {
+      'Perform the movement slowly and under control. Maintain correct posture.': 'Realiza el movimiento lentamente y con control. Mantén una postura correcta.',
+      'Start with moderate weight to master the technique.': 'Comienza con un peso moderado para dominar la técnica.',
+      'Breathe deeply. Never force beyond your natural range.': 'Respira profundamente. Nunca fuerces más allá de tu rango natural.',
+      'Breathe deeply. Do not force beyond your limit.': 'Respira profundamente. No forces más allá de tu límite.',
+      'Breathe deeply. Do not push beyond your comfort limit.': 'Respira profundamente. No te fuerces más allá de tu límite de confort.',
+      'Do not push beyond your comfort limit. Breathe deeply.': 'No te fuerces más allá de tu límite de confort. Respira profundamente.',
+      'Do not pull on your neck. Breathe normally.': 'No tires del cuello. Respira normalmente.',
+      'Keep your core engaged throughout the exercise. Control the eccentric phase.': 'Mantén el core activado durante todo el ejercicio. Controla la fase excéntrica.',
+      'Focus on squeezing your glutes and keep your core stable.': 'Concéntrate en contraer los glúteos y mantén el core estable.',
+      'Control both the eccentric and concentric phases of the movement.': 'Controla tanto la fase excéntrica como la concéntrica del movimiento.',
+      'Perform the movement under control and keep your core stable.': 'Realiza el movimiento con control y mantén el core estable.',
+      'Drive the movement explosively upward and control the lowering phase.': 'Impulsa el movimiento explosivamente hacia arriba y controla la bajada.',
+      'Keep your core stable throughout the exercise.': 'Mantén el core estable durante todo el ejercicio.',
+      'Avoid swinging. Control both the ascending and descending phases.': 'Evita el balanceo. Controla las fases ascendente y descendente.',
+      'Keep your shoulders back and chest open throughout the movement.': 'Mantén los hombros hacia atrás y el pecho abierto durante el movimiento.',
+      'Lower slowly': 'Baja lentamente', 'lower slowly': 'baja lentamente',
+      'Keep your core stable': 'Mantén el core estable',
+      'Breathe deeply': 'Respira profundamente',
+      'Focus on the contraction': 'Concéntrate en la contracción',
+      'Squeeze your glutes': 'Aprieta los glúteos',
+      'Use a full range of motion.': 'Usa el rango completo de movimiento.',
+      'Keep your feet shoulder-width apart.': 'Mantén los pies a la anchura de los hombros.',
+      'Bring your arms into the stretch position and hold for 20-30 seconds.': 'Lleva los brazos a la posición de estiramiento y mantén 20-30 segundos.',
+      'Bring your legs into the stretch position and hold for 20-30 seconds.': 'Lleva las piernas a la posición de estiramiento y mantén 20-30 segundos.',
+      'Move into the stretch position and hold for 20-30 seconds.': 'Adopta la posición de estiramiento y mantén 20-30 segundos.',
+    },
+    'pt': {
+      'Perform the movement slowly and under control. Maintain correct posture.': 'Execute o movimento lentamente e com controle. Mantenha uma postura correta.',
+      'Start with moderate weight to master the technique.': 'Comece com um peso moderado para dominar a técnica.',
+      'Breathe deeply. Never force beyond your natural range.': 'Respire profundamente. Nunca force além do seu limite natural.',
+      'Breathe deeply. Do not force beyond your limit.': 'Respire profundamente. Não force além do seu limite.',
+      'Keep your core engaged throughout the exercise. Control the eccentric phase.': 'Mantenha o core ativado durante todo o exercício. Controle a fase excêntrica.',
+      'Focus on squeezing your glutes and keep your core stable.': 'Concentre-se em contrair os glúteos e mantenha o core estável.',
+      'Control both the eccentric and concentric phases of the movement.': 'Controle tanto a fase excêntrica quanto a concêntrica do movimento.',
+      'Perform the movement under control and keep your core stable.': 'Execute o movimento com controle e mantenha o core estável.',
+      'Keep your core stable throughout the exercise.': 'Mantenha o core estável durante todo o exercício.',
+      'Avoid swinging. Control both the ascending and descending phases.': 'Evite balanços. Controle as fases ascendente e descendente.',
+      'Lower slowly': 'Desça lentamente', 'lower slowly': 'desça lentamente',
+      'Breathe deeply': 'Respire profundamente',
+      'Squeeze your glutes': 'Contraia os glúteos',
+      'Use a full range of motion.': 'Use a amplitude completa de movimento.',
+      'Keep your feet shoulder-width apart.': 'Mantenha os pés na largura dos ombros.',
+      'Bring your arms into the stretch position and hold for 20-30 seconds.': 'Leve os braços à posição de alongamento e segure por 20-30 segundos.',
+      'Bring your legs into the stretch position and hold for 20-30 seconds.': 'Leve as pernas à posição de alongamento e segure por 20-30 segundos.',
+      'Move into the stretch position and hold for 20-30 seconds.': 'Adote a posição de alongamento e segure por 20-30 segundos.',
+    },
+    'fr': {
+      'Perform the movement slowly and under control. Maintain correct posture.': "Effectuez le mouvement lentement et avec contrôle. Maintenez une posture correcte.",
+      'Start with moderate weight to master the technique.': 'Commencez avec un poids modéré pour maîtriser la technique.',
+      'Breathe deeply. Never force beyond your natural range.': 'Respirez profondément. Ne forcez jamais au-delà de votre limite naturelle.',
+      'Breathe deeply. Do not force beyond your limit.': 'Respirez profondément. Ne forcez pas au-delà de votre limite.',
+      'Keep your core engaged throughout the exercise. Control the eccentric phase.': "Gardez le gainage actif tout au long de l'exercice. Contrôlez la phase excentrique.",
+      'Focus on squeezing your glutes and keep your core stable.': 'Concentrez-vous sur la contraction des fessiers et gardez le gainage stable.',
+      'Control both the eccentric and concentric phases of the movement.': 'Contrôlez les phases excentrique et concentrique du mouvement.',
+      'Perform the movement under control and keep your core stable.': 'Effectuez le mouvement avec contrôle et gardez le gainage stable.',
+      'Keep your core stable throughout the exercise.': "Gardez le gainage stable tout au long de l'exercice.",
+      'Avoid swinging. Control both the ascending and descending phases.': 'Évitez de vous balancer. Contrôlez les phases montante et descendante.',
+      'Lower slowly': 'Descendez lentement', 'lower slowly': 'descendez lentement',
+      'Breathe deeply': 'Respirez profondément',
+      'Squeeze your glutes': 'Contractez les fessiers',
+      'Use a full range of motion.': 'Utilisez une amplitude complète de mouvement.',
+      'Keep your feet shoulder-width apart.': 'Gardez les pieds à la largeur des épaules.',
+      'Bring your arms into the stretch position and hold for 20-30 seconds.': "Amenez vos bras en position d'étirement et maintenez 20-30 secondes.",
+      'Bring your legs into the stretch position and hold for 20-30 seconds.': "Amenez vos jambes en position d'étirement et maintenez 20-30 secondes.",
+    },
+    'de': {
+      'Perform the movement slowly and under control. Maintain correct posture.': 'Führe die Bewegung langsam und kontrolliert aus. Halte eine korrekte Haltung.',
+      'Start with moderate weight to master the technique.': 'Beginne mit einem moderaten Gewicht, um die Technik zu meistern.',
+      'Breathe deeply. Never force beyond your natural range.': 'Atme tief. Zwinge dich nie über deinen natürlichen Bereich hinaus.',
+      'Breathe deeply. Do not force beyond your limit.': 'Atme tief. Gehe nicht über deine Grenzen hinaus.',
+      'Keep your core engaged throughout the exercise. Control the eccentric phase.': 'Halte den Rumpf während der ganzen Übung angespannt. Kontrolliere die exzentrische Phase.',
+      'Focus on squeezing your glutes and keep your core stable.': 'Konzentriere dich auf die Gesäßmuskeln und halte den Rumpf stabil.',
+      'Control both the eccentric and concentric phases of the movement.': 'Kontrolliere sowohl die exzentrische als auch die konzentrische Phase.',
+      'Perform the movement under control and keep your core stable.': 'Führe die Bewegung kontrolliert aus und halte den Rumpf stabil.',
+      'Keep your core stable throughout the exercise.': 'Halte den Rumpf während der gesamten Übung stabil.',
+      'Avoid swinging. Control both the ascending and descending phases.': 'Vermeide Schwingen. Kontrolliere Auf- und Abwärtsphase.',
+      'Lower slowly': 'Langsam senken', 'lower slowly': 'langsam senken',
+      'Breathe deeply': 'Tief atmen',
+      'Squeeze your glutes': 'Gesäß anspannen',
+      'Use a full range of motion.': 'Nutze den vollen Bewegungsumfang.',
+      'Keep your feet shoulder-width apart.': 'Halte die Füße schulterbreit auseinander.',
+      'Bring your arms into the stretch position and hold for 20-30 seconds.': 'Bringe die Arme in die Dehnposition und halte 20-30 Sekunden.',
+      'Bring your legs into the stretch position and hold for 20-30 seconds.': 'Bringe die Beine in die Dehnposition und halte 20-30 Sekunden.',
+    },
+    'el': {
+      'Perform the movement slowly and under control. Maintain correct posture.': 'Εκτέλεσε την κίνηση αργά και ελεγχόμενα. Διατήρησε σωστή στάση.',
+      'Start with moderate weight to master the technique.': 'Ξεκίνα με μέτριο βάρος για να κατακτήσεις την τεχνική.',
+      'Breathe deeply. Never force beyond your natural range.': 'Ανάπνεε βαθιά. Μην πιέζεις ποτέ πέρα από το φυσικό σου εύρος.',
+      'Keep your core engaged throughout the exercise. Control the eccentric phase.': "Κράτα τον κορμό σφιγμένο καθ' όλη την άσκηση. Έλεγξε την εκκεντρική φάση.",
+      'Focus on squeezing your glutes and keep your core stable.': 'Επικεντρώσου στη σύσπαση των γλουτών και κράτα τον κορμό σταθερό.',
+      'Keep your core stable throughout the exercise.': "Κράτα τον κορμό σταθερό καθ' όλη τη διάρκεια της άσκησης.",
+      'Lower slowly': 'Κατέβα αργά', 'lower slowly': 'κατέβα αργά',
+      'Breathe deeply': 'Ανάπνεε βαθιά',
+      'Use a full range of motion.': 'Χρησιμοποίησε πλήρες εύρος κίνησης.',
+    },
+    'ar': {
+      'Perform the movement slowly and under control. Maintain correct posture.': 'نفِّذ الحركة ببطء وتحكم. حافظ على وضعية صحيحة.',
+      'Start with moderate weight to master the technique.': 'ابدأ بوزن معتدل لإتقان التقنية.',
+      'Breathe deeply. Never force beyond your natural range.': 'تنفس بعمق. لا تتجاوز حدودك الطبيعية أبدًا.',
+      'Keep your core engaged throughout the exercise. Control the eccentric phase.': 'حافظ على توتر عضلات الجذع طوال التمرين. تحكم في المرحلة اللامركزية.',
+      'Keep your core stable throughout the exercise.': 'حافظ على استقرار الجذع طوال التمرين.',
+      'Lower slowly': 'انزل ببطء', 'lower slowly': 'انزل ببطء',
+      'Breathe deeply': 'تنفس بعمق',
+      'Use a full range of motion.': 'استخدم نطاق الحركة الكامل.',
+    },
+    'pl': {
+      'Perform the movement slowly and under control. Maintain correct posture.': 'Wykonaj ruch powoli i pod kontrolą. Utrzymaj prawidłową postawę.',
+      'Start with moderate weight to master the technique.': 'Zacznij od umiarkowanego ciężaru, aby opanować technikę.',
+      'Breathe deeply. Never force beyond your natural range.': 'Oddychaj głęboko. Nigdy nie forsuj się ponad naturalny zakres.',
+      'Keep your core engaged throughout the exercise. Control the eccentric phase.': 'Utrzymaj zaangażowanie mięśni core przez cały czas. Kontroluj fazę ekscentryczną.',
+      'Keep your core stable throughout the exercise.': 'Utrzymaj stabilność mięśni core przez całe ćwiczenie.',
+      'Lower slowly': 'Opuszczaj powoli', 'lower slowly': 'opuszczaj powoli',
+      'Breathe deeply': 'Oddychaj głęboko',
+      'Use a full range of motion.': 'Używaj pełnego zakresu ruchu.',
+      'Keep your feet shoulder-width apart.': 'Ustaw stopy na szerokość barków.',
+    },
+    'ro': {
+      'Perform the movement slowly and under control. Maintain correct posture.': 'Execută mișcarea lent și controlat. Menține o postură corectă.',
+      'Start with moderate weight to master the technique.': 'Începe cu o greutate moderată pentru a stăpâni tehnica.',
+      'Breathe deeply. Never force beyond your natural range.': 'Respiră adânc. Nu forța niciodată peste limita ta naturală.',
+      'Keep your core engaged throughout the exercise. Control the eccentric phase.': 'Menține mușchii core angajați pe tot parcursul exercițiului. Controlează faza excentrică.',
+      'Keep your core stable throughout the exercise.': 'Menține core-ul stabil pe tot parcursul exercițiului.',
+      'Lower slowly': 'Coboară lent', 'lower slowly': 'coboară lent',
+      'Breathe deeply': 'Respiră adânc',
+      'Use a full range of motion.': 'Folosește amplitudinea completă de mișcare.',
+    },
+    'hu': {
+      'Perform the movement slowly and under control. Maintain correct posture.': 'Végezd el a mozgást lassan és kontrolláltan. Tartsd meg a helyes testtartást.',
+      'Start with moderate weight to master the technique.': 'Kezdj mérsékelt súllyal a technika elsajátításához.',
+      'Breathe deeply. Never force beyond your natural range.': 'Lélegezz mélyen. Soha ne erőltesd természetes tartományodon túl.',
+      'Keep your core engaged throughout the exercise. Control the eccentric phase.': 'Tartsd a törzsizmokat feszítve az egész gyakorlat alatt. Ellenőrizd az excentrikus fázist.',
+      'Keep your core stable throughout the exercise.': 'Tartsd stabil a törzset az egész gyakorlat alatt.',
+      'Lower slowly': 'Lassan ereszd le', 'lower slowly': 'lassan ereszd le',
+      'Breathe deeply': 'Lélegezz mélyen',
+      'Use a full range of motion.': 'Használd a teljes mozgástartományt.',
+    },
+  };
+  final langMap = _langTips[lang];
+  if (langMap == null) return en;
+  // Sort by length descending for longest-match-first
+  final entries = langMap.entries.toList()..sort((a, b) => b.key.length.compareTo(a.key.length));
+  String result = en;
+  for (final e in entries) {
+    if (result.contains(e.key)) {
+      result = result.replaceAll(e.key, e.value);
+    }
   }
   return result;
 }
 
+
 /// Restituisce il nome del gruppo muscolare localizzato.
 String bodyPartName(String key) {
-  if (AppL.lang == 'en') {
-    const en = {
-      'nessuno': 'None',
-      'petto': 'Chest',
-      'dorso': 'Back',
-      'gambe': 'Legs',
-      'spalle': 'Shoulders',
-      'braccia': 'Arms',
-      'core': 'Core',
-      'full_body': 'Full Body',
-      'cardio': 'Cardio',
-      'glutei': 'Glutes',
-      'altro': 'Other',
-    };
-    return en[key] ?? key;
+  const Map<String, Map<String, String>> _bpLangs = {
+    'en': {'nessuno':'None','petto':'Chest','dorso':'Back','gambe':'Legs','spalle':'Shoulders','braccia':'Arms','core':'Core','full_body':'Full Body','cardio':'Cardio','glutei':'Glutes','altro':'Other'},
+    'es': {'nessuno':'Ninguno','petto':'Pecho','dorso':'Espalda','gambe':'Piernas','spalle':'Hombros','braccia':'Brazos','core':'Core','full_body':'Cuerpo completo','cardio':'Cardio','glutei':'Gl\u00fateos','altro':'Otro'},
+    'pt': {'nessuno':'Nenhum','petto':'Peito','dorso':'Costas','gambe':'Pernas','spalle':'Ombros','braccia':'Bra\u00e7os','core':'Core','full_body':'Corpo inteiro','cardio':'Cardio','glutei':'Gl\u00fateos','altro':'Outro'},
+    'fr': {'nessuno':'Aucun','petto':'Pectoraux','dorso':'Dos','gambe':'Jambes','spalle':'\u00c9paules','braccia':'Bras','core':'Gainage','full_body':'Corps entier','cardio':'Cardio','glutei':'Fessiers','altro':'Autre'},
+    'de': {'nessuno':'Keiner','petto':'Brust','dorso':'R\u00fccken','gambe':'Beine','spalle':'Schultern','braccia':'Arme','core':'Rumpf','full_body':'Ganzer K\u00f6rper','cardio':'Cardio','glutei':'Ges\u00e4\u00df','altro':'Andere'},
+    'el': {'nessuno':'\u039a\u03b1\u03bd\u03ad\u03bd\u03b1\u03c2','petto':'\u03a3\u03c4\u03ae\u03b8\u03bf\u03c2','dorso':'\u03a0\u03bb\u03ac\u03c4\u03b7','gambe':'\u03a0\u03cc\u03b4\u03b9\u03b1','spalle':'\u038f\u03bc\u03bf\u03b9','braccia':'\u039c\u03c0\u03c1\u03ac\u03c4\u03c3\u03b1','core':'Core','full_body':'\u039f\u03bb\u03cc\u03c3\u03c9\u03bc\u03bf','cardio':'\u039a\u03b1\u03c1\u03b4\u03b9\u03bf','glutei':'\u0393\u03bb\u03bf\u03c5\u03c4\u03b1\u03af\u03bf\u03b9','altro':'\u0386\u03bb\u03bb\u03bf'},
+    'ar': {'nessuno':'\u0644\u0627 \u0634\u064a\u0621','petto':'\u0627\u0644\u0635\u062f\u0631','dorso':'\u0627\u0644\u0638\u0647\u0631','gambe':'\u0627\u0644\u0633\u0627\u0642\u0627\u0646','spalle':'\u0627\u0644\u0623\u0643\u062a\u0627\u0641','braccia':'\u0627\u0644\u0630\u0631\u0627\u0639\u0627\u0646','core':'\u0639\u0636\u0644\u0627\u062a \u0627\u0644\u062c\u0630\u0639','full_body':'\u0627\u0644\u062c\u0633\u0645 \u0643\u0627\u0645\u0644\u0627\u064b','cardio':'\u0643\u0627\u0631\u062f\u064a\u0648','glutei':'\u0627\u0644\u0623\u0631\u062f\u0627\u0641','altro':'\u0623\u062e\u0631\u0649'},
+    'pl': {'nessuno':'\u017badne','petto':'Klatka piersiowa','dorso':'Plecy','gambe':'Nogi','spalle':'Barki','braccia':'Ramiona','core':'Core','full_body':'Ca\u0142e cia\u0142o','cardio':'Cardio','glutei':'Po\u015bladki','altro':'Inne'},
+    'ro': {'nessuno':'Niciunul','petto':'Piept','dorso':'Spate','gambe':'Picioare','spalle':'Umeri','braccia':'Bra\u0163e','core':'Core','full_body':'Corp complet','cardio':'Cardio','glutei':'Fesieri','altro':'Altele'},
+    'hu': {'nessuno':'Egyik sem','petto':'Mell','dorso':'H\u00e1t','gambe':'L\u00e1bak','spalle':'V\u00e1llak','braccia':'Karok','core':'T\u00f6rzs','full_body':'Eg\u00e9sz test','cardio':'Cardio','glutei':'Fart','altro':'Egy\u00e9b'},
+  };
+  final lang = AppL.lang;
+  if (lang != 'it') {
+    final map = _bpLangs[lang] ?? _bpLangs['en']!;
+    return map[key] ?? key;
   }
   return kBodyPartNames[key] ?? key;
 }
@@ -11523,12 +11705,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     int targetR,
     Color accent,
   ) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        if (suggerisciAumento) _showSuggestionOverlay(isWeight: true, targetReps: targetR);
-        else if (suggerisciReps) _showSuggestionOverlay(isWeight: false, targetReps: targetR);
-      }
-    });
     final info =
         (ex.gifFilename != null ? findByGifSlug(ex.gifFilename!) : null) ??
         findAnyExercise(ex.name);
@@ -11696,6 +11872,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   height: 54,
                   child: ElevatedButton.icon(
                     onPressed: () {
+                      if (suggerisciAumento) _showSuggestionOverlay(isWeight: true, targetReps: targetR);
+                      else if (suggerisciReps) _showSuggestionOverlay(isWeight: false, targetReps: targetR);
                       setState(() {
                         _awaitingFirstExerciseStart = false;
                       });
@@ -12882,51 +13060,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       ),
                   ],
                 ),
-                if (!giaFatto && (suggerisciAumento || suggerisciReps))
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        color: suggerisciAumento
-                            ? const Color(0xFFFFD700).withAlpha(20)
-                            : Colors.deepPurple.withAlpha(20),
-                        border: Border.all(
-                          color: suggerisciAumento
-                              ? const Color(0xFFFFD700)
-                              : Colors.deepPurple.shade300,
-                          width: 1.2,
-                        ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            suggerisciAumento ? Icons.trending_up : Icons.fitness_center,
-                            size: 14,
-                            color: suggerisciAumento
-                                ? const Color(0xFFFFD700)
-                                : Colors.deepPurple.shade200,
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            suggerisciAumento
-                                ? AppL.increaseWeight
-                                : AppL.tryReps(targetR + 2),
-                            style: TextStyle(
-                              color: suggerisciAumento
-                                  ? const Color(0xFFFFD700)
-                                  : Colors.deepPurple.shade200,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                 if (giaFatto)
                   Expanded(child: Center(child: _buildBoxEsercizioCompletato()))
                 else
@@ -13772,6 +13905,59 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       ),
                     ),
 
+                    // Suggestion chip
+                    if (suggerisciAumento || suggerisciReps)
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
+                        child: GestureDetector(
+                          onTap: () => _showSuggestionOverlay(
+                            isWeight: suggerisciAumento,
+                            targetReps: targetR,
+                          ),
+                          child: Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                            decoration: BoxDecoration(
+                              color: suggerisciAumento
+                                  ? const Color(0xFFFFD700).withAlpha(20)
+                                  : const Color(0xFF7C4DFF).withAlpha(20),
+                              border: Border.all(
+                                color: suggerisciAumento
+                                    ? const Color(0xFFFFD700)
+                                    : const Color(0xFF7C4DFF),
+                                width: 1.2,
+                              ),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  suggerisciAumento ? Icons.trending_up : Icons.fitness_center,
+                                  size: 14,
+                                  color: suggerisciAumento
+                                      ? const Color(0xFFFFD700)
+                                      : const Color(0xFFB388FF),
+                                ),
+                                const SizedBox(width: 6),
+                                Text(
+                                  suggerisciAumento
+                                      ? AppL.increaseWeight
+                                      : AppL.tryReps(targetR + 2),
+                                  style: TextStyle(
+                                    color: suggerisciAumento
+                                        ? const Color(0xFFFFD700)
+                                        : const Color(0xFFB388FF),
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+
                     // SKIP
                     GestureDetector(
                       onTap: _skipRest,
@@ -13851,7 +14037,7 @@ class _SuggestionOverlayState extends State<_SuggestionOverlay> with TickerProvi
     _scaleCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 420));
     _scale = CurvedAnimation(parent: _scaleCtrl, curve: Curves.elasticOut);
     _scaleCtrl.forward();
-    _auraCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 2800));
+    _auraCtrl = AnimationController(vsync: this, duration: Duration(milliseconds: widget.isWeight ? 2200 : 3400));
     _auraCtrl.repeat();
   }
 
@@ -13890,22 +14076,22 @@ class _SuggestionOverlayState extends State<_SuggestionOverlay> with TickerProvi
                   Transform.translate(
                     offset: Offset(dx1, dy1),
                     child: Container(
-                      width: 140, height: 140,
+                      width: isWeight ? 200 : 130, height: isWeight ? 200 : 130,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: c1.withAlpha(50),
-                        boxShadow: [BoxShadow(color: c1.withAlpha(90), blurRadius: 50, spreadRadius: 12)],
+                        color: c1.withAlpha(isWeight ? 60 : 45),
+                        boxShadow: [BoxShadow(color: c1.withAlpha(isWeight ? 110 : 80), blurRadius: isWeight ? 70 : 45, spreadRadius: isWeight ? 18 : 10)],
                       ),
                     ),
                   ),
                   Transform.translate(
                     offset: Offset(dx2, dy2),
                     child: Container(
-                      width: 100, height: 100,
+                      width: isWeight ? 140 : 90, height: isWeight ? 140 : 90,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: c2.withAlpha(40),
-                        boxShadow: [BoxShadow(color: c2.withAlpha(70), blurRadius: 40, spreadRadius: 8)],
+                        color: c2.withAlpha(isWeight ? 50 : 35),
+                        boxShadow: [BoxShadow(color: c2.withAlpha(isWeight ? 90 : 60), blurRadius: isWeight ? 55 : 35, spreadRadius: isWeight ? 12 : 6)],
                       ),
                     ),
                   ),
@@ -14087,16 +14273,12 @@ class _RecordOverlayState extends State<_RecordOverlay>
   late final Animation<double> _cardScale;
   late final Animation<double> _sparkAnim;
 
-  static const List<String> _sparks = [
-    '🎆',
-    '✨',
-    '🔥',
-    '⭐',
-    '💥',
-    '🎇',
-    '🏆',
-    '💫',
+    static const List<Color> _sparkColors = [
+    Color(0xFFFFD700), Color(0xFFFFA500), Color(0xFFFFE082),
+    Color(0xFFFF8C00), Color(0xFFFFD700), Color(0xFFFFC107),
+    Color(0xFFFFAB40), Color(0xFFFFD740),
   ];
+  static const List<double> _sparkSizes = [18, 12, 16, 10, 14, 11, 13, 15];
   static const List<Offset> _dirs = [
     Offset(-1.0, -1.2),
     Offset(0.0, -1.5),
@@ -14190,7 +14372,7 @@ class _RecordOverlayState extends State<_RecordOverlay>
             ),
           ),
           // Sparks on top
-          ...List.generate(_sparks.length, (i) {
+          ...List.generate(_sparkColors.length, (i) {
             final dir = _dirs[i % _dirs.length];
             return AnimatedBuilder(
               animation: _sparkAnim,
@@ -14199,12 +14381,21 @@ class _RecordOverlayState extends State<_RecordOverlay>
                 final dx = dir.dx * 180 * t;
                 final dy = dir.dy * 180 * t;
                 final opacity = (1.0 - t).clamp(0.0, 1.0);
+                final sz = _sparkSizes[i % _sparkSizes.length];
                 return Positioned(
-                  left: cx + dx - 20,
-                  top: cy + dy - 20,
+                  left: cx + dx - sz / 2,
+                  top: cy + dy - sz / 2,
                   child: Opacity(
                     opacity: opacity,
-                    child: Text(_sparks[i], style: const TextStyle(fontSize: 36)),
+                    child: Container(
+                      width: sz,
+                      height: sz,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: _sparkColors[i % _sparkColors.length],
+                        boxShadow: [BoxShadow(color: _sparkColors[i % _sparkColors.length].withAlpha(180), blurRadius: 8)],
+                      ),
+                    ),
                   ),
                 );
               },
