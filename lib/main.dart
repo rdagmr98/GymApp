@@ -1403,7 +1403,7 @@ Future<void> scheduleStreakReminder(String lang, {bool force = false}) async {
 
 /// Traduce i nomi dei muscoli dall'italiano all'inglese quando la lingua è EN.
 String translateMuscle(String italian) {
-  if (AppL.lang != 'en' || italian.isEmpty) return italian;
+  if (AppL.lang == 'it' || italian.isEmpty) return italian;
   const m = {
     'Gran dorsale': 'Latissimus Dorsi',
     'Romboidi': 'Rhomboids',
@@ -1525,7 +1525,7 @@ String _fallbackEnglishExerciseText(String italian) {
 
 /// Traduce testi di esecuzione/consigli dall'italiano all'inglese quando la lingua è EN.
 String translateExerciseText(String italian) {
-  if (AppL.lang != 'en' || italian.isEmpty) return italian;
+  if (AppL.lang == 'it' || italian.isEmpty) return italian;
   final source = _normalizeExerciseText(italian);
   const exactPhrases = {
     'Esegui il movimento lentamente e con controllo. Mantieni una postura corretta.':
@@ -11296,11 +11296,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             builder: (ctx, constraints) {
               return SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(
-                    minHeight: constraints.maxHeight - 16,
-                  ),
-                  child: Center(
+                child: Center(
                     child: Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
@@ -11349,7 +11345,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                               borderRadius: BorderRadius.circular(18),
                               child: Image.asset(
                                 gifPath,
-                                height: 220,
+                                height: 160,
                                 fit: BoxFit.contain,
                                 errorBuilder: (_, __, ___) => Icon(
                                   Icons.fitness_center,
@@ -11359,7 +11355,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                               ),
                             )
                           : SizedBox(
-                              height: 220,
+                              height: 160,
                               child: Center(
                                 child: Icon(
                                   Icons.fitness_center,
@@ -11468,7 +11464,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             ),
           ),
                   ),
-                ),
               );
             },
           ),
@@ -12753,6 +12748,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       }
     });
     return Container(
+      height: 160,
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
       decoration: BoxDecoration(
