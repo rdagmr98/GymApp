@@ -13543,7 +13543,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
 // --- SUGGESTION OVERLAY MODAL ---
 class _SuggestionOverlay extends StatefulWidget {
-  final bool isWeight; // true = peso, false = reps
+  final bool isWeight;
   final int targetReps;
   final VoidCallback onDismiss;
   const _SuggestionOverlay({required this.isWeight, required this.targetReps, required this.onDismiss});
@@ -13551,68 +13551,124 @@ class _SuggestionOverlay extends StatefulWidget {
   State<_SuggestionOverlay> createState() => _SuggestionOverlayState();
 }
 
-class _SuggestionOverlayState extends State<_SuggestionOverlay> with SingleTickerProviderStateMixin {
-  late AnimationController _ctrl;
+class _SuggestionOverlayState extends State<_SuggestionOverlay> with TickerProviderStateMixin {
+  late AnimationController _scaleCtrl;
+  late AnimationController _auraCtrl;
   late Animation<double> _scale;
 
   @override
   void initState() {
     super.initState();
-    _ctrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 350));
-    _scale = CurvedAnimation(parent: _ctrl, curve: Curves.elasticOut);
-    _ctrl.forward();
+    _scaleCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 420));
+    _scale = CurvedAnimation(parent: _scaleCtrl, curve: Curves.elasticOut);
+    _scaleCtrl.forward();
+    _auraCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 2800));
+    _auraCtrl.repeat();
   }
 
   @override
   void dispose() {
-    _ctrl.dispose();
+    _scaleCtrl.dispose();
+    _auraCtrl.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final isWeight = widget.isWeight;
-    final grad = isWeight
-        ? const LinearGradient(colors: [Color(0xFFFF6B35), Color(0xFFE53935)], begin: Alignment.topLeft, end: Alignment.bottomRight)
-        : const LinearGradient(colors: [Color(0xFF43A047), Color(0xFF00897B)], begin: Alignment.topLeft, end: Alignment.bottomRight);
-    final emoji = isWeight ? '⬆️' : '🔁';
+    final c1 = isWeight ? const Color(0xFFFF7043) : const Color(0xFF00B0FF);
+    final c2 = isWeight ? const Color(0xFFFFD600) : const Color(0xFF9C27B0);
+    final cardBorder = isWeight ? const Color(0xFFFF8A65) : const Color(0xFF40C4FF);
     final title = isWeight ? AppL.increaseWeight : AppL.tryReps(widget.targetReps + 2);
-    final btnText = isWeight ? AppL.tryWeightBtn : AppL.okBtn;
     return Material(
-      color: Colors.black.withAlpha(160),
+      color: Colors.black.withAlpha(195),
       child: Center(
         child: ScaleTransition(
           scale: _scale,
-          child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 32),
-            padding: const EdgeInsets.all(28),
-            decoration: BoxDecoration(
-              gradient: grad,
-              borderRadius: BorderRadius.circular(24),
-              boxShadow: const [BoxShadow(color: Colors.black38, blurRadius: 24, offset: Offset(0, 8))],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(emoji, style: const TextStyle(fontSize: 52)),
-                const SizedBox(height: 16),
-                Text(title,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 24),
-                ElevatedButton(
-                  onPressed: widget.onDismiss,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    foregroundColor: isWeight ? const Color(0xFFE53935) : const Color(0xFF43A047),
-                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                    textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          child: AnimatedBuilder(
+            animation: _auraCtrl,
+            builder: (context, child) {
+              final t = _auraCtrl.value * 2 * scala.pi;
+              final pulse = 0.88 + 0.12 * scala.sin(t);
+              final dx1 = 80.0 * scala.cos(t) * pulse;
+              final dy1 = 55.0 * scala.sin(t * 1.3) * pulse;
+              final dx2 = -70.0 * scala.cos(t + scala.pi * 0.7) * pulse;
+              final dy2 = -45.0 * scala.sin(t * 0.9 + 1.0) * pulse;
+              return Stack(
+                alignment: Alignment.center,
+                clipBehavior: Clip.none,
+                children: [
+                  Transform.translate(
+                    offset: Offset(dx1, dy1),
+                    child: Container(
+                      width: 140, height: 140,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: c1.withAlpha(50),
+                        boxShadow: [BoxShadow(color: c1.withAlpha(90), blurRadius: 50, spreadRadius: 12)],
+                      ),
+                    ),
                   ),
-                  child: Text(btnText),
-                ),
-              ],
-            ),
+                  Transform.translate(
+                    offset: Offset(dx2, dy2),
+                    child: Container(
+                      width: 100, height: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: c2.withAlpha(40),
+                        boxShadow: [BoxShadow(color: c2.withAlpha(70), blurRadius: 40, spreadRadius: 8)],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 36),
+                    padding: const EdgeInsets.fromLTRB(28, 32, 28, 28),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF121212),
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(color: cardBorder.withAlpha(160), width: 1.5),
+                      boxShadow: [
+                        BoxShadow(color: c1.withAlpha(70), blurRadius: 28, spreadRadius: 2),
+                        const BoxShadow(color: Colors.black54, blurRadius: 16, offset: Offset(0, 8)),
+                      ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          title,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: cardBorder,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.5,
+                            shadows: [Shadow(color: c1.withAlpha(200), blurRadius: 12)],
+                          ),
+                        ),
+                        const SizedBox(height: 28),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: widget.onDismiss,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: c1,
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                              textStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+                              elevation: 6,
+                              shadowColor: c1,
+                            ),
+                            child: Text(AppL.tryWeightBtn),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
