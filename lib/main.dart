@@ -1404,79 +1404,327 @@ Future<void> scheduleStreakReminder(String lang, {bool force = false}) async {
 /// Traduce i nomi dei muscoli dall'italiano all'inglese quando la lingua è EN.
 String translateMuscle(String italian) {
   if (AppL.lang == 'it' || italian.isEmpty) return italian;
-  const m = {
-    'Gran dorsale': 'Latissimus Dorsi',
-    'Romboidi': 'Rhomboids',
-    'Grande pettorale': 'Pectoralis Major',
-    'Gran pettorale': 'Pectoralis Major',
-    'Pettorale minore': 'Pectoralis Minor',
-    'Bicipiti': 'Biceps',
-    'Tricipiti': 'Triceps',
-    'Deltoidi anteriori': 'Front Deltoids',
-    'Deltoide anteriore': 'Front Deltoid',
-    'Deltoide laterale': 'Lateral Deltoid',
-    'Deltoide posteriore': 'Rear Deltoid',
-    'Brachioradiale': 'Brachioradialis',
-    'Deltoide (fascio anteriore e laterale)': 'Deltoid (front & lateral)',
-    'Deltoide (tutte le fasce)': 'Deltoid (all heads)',
-    'Deltoide': 'Deltoid',
-    'Trapezio superiore': 'Upper Trapezius',
-    'Trapezio medio': 'Mid Trapezius',
-    'Trapezio': 'Trapezius',
-    'Serratura anteriore': 'Serratus Anterior',
-    'Quadricipiti': 'Quadriceps',
-    'Femorali': 'Hamstrings',
-    'Ischiocrurali': 'Hamstrings',
-    'Gluteo grande': 'Gluteus Maximus',
-    'Gluteo medio': 'Gluteus Medius',
-    'Gluteo minore': 'Gluteus Minimus',
-    'Glutei': 'Glutes',
-    'Polpacci': 'Calves',
-    'Gastrocnemio': 'Gastrocnemius',
-    'Soleo': 'Soleus',
-    'Adduttori dell\'anca': 'Hip Adductors',
-    'Adduttori': 'Adductors',
-    'Abduttori': 'Abductors',
-    'Flessori anca': 'Hip Flexors',
-    'Flessori avambraccio': 'Forearm Flexors',
-    'Avambracci': 'Forearms',
-    'Lombari': 'Lower Back',
-    'Erettori spinali': 'Spinal Erectors',
-    'Rettosaddominale (fascio inferiore)': 'Lower Rectus Abdominis',
-    'Rettosaddominale': 'Rectus Abdominis',
-    'Obliqui': 'Obliques',
-    'Trasverso addome': 'Transverse Abdominis',
-    'Sovraspinato': 'Supraspinatus',
-    'Grande rotondo': 'Teres Major',
-    'Piccolo rotondo': 'Teres Minor',
-    'Piriforme': 'Piriformis',
-    'Gracile': 'Gracilis',
-    'Pettineo': 'Pectineus',
-    'Bicipiti (picco)': 'Biceps (peak)',
-    'Bicipiti, Brachioradiale': 'Biceps, Brachioradialis',
-    'Tricipiti (capo laterale)': 'Triceps (lateral head)',
-    'Tricipiti (capo lungo)': 'Triceps (long head)',
-    'Capo laterale e mediale': 'Lateral and medial heads',
-    'Petto superiore (clavicolare)': 'Upper chest (clavicular head)',
-    'Petto (grande pettorale)': 'Chest (pectoralis major)',
-    'Glutei (grande gluteo)': 'Glutes (gluteus maximus)',
-    'Muscolatura principale coinvolta': 'Main muscles',
-    'Muscolatura di supporto': 'Supporting muscles',
-    'Mobilità articolare generale': 'General joint mobility',
-    'Sistema cardiovascolare': 'Cardiovascular system',
-    'Polpacci, Sistema cardiovascolare': 'Calves, Cardiovascular system',
-    'Core': 'Core',
-    'Spalle': 'Shoulders',
-    'Dorso': 'Back',
-    'Gambe': 'Legs',
-    'Braccia': 'Arms',
+  const Map<String, Map<String, String>> _langMuscles = {
+    'en': {
+      'Gran dorsale': 'Latissimus Dorsi', 'Romboidi': 'Rhomboids',
+      'Grande pettorale': 'Pectoralis Major', 'Gran pettorale': 'Pectoralis Major',
+      'Pettorale minore': 'Pectoralis Minor', 'Bicipiti': 'Biceps', 'Tricipiti': 'Triceps',
+      'Deltoidi anteriori': 'Front Deltoids', 'Deltoide anteriore': 'Front Deltoid',
+      'Deltoide laterale': 'Lateral Deltoid', 'Deltoide posteriore': 'Rear Deltoid',
+      'Brachioradiale': 'Brachioradialis',
+      'Deltoide (fascio anteriore e laterale)': 'Deltoid (front & lateral)',
+      'Deltoide (tutte le fasce)': 'Deltoid (all heads)', 'Deltoide': 'Deltoid',
+      'Trapezio superiore': 'Upper Trapezius', 'Trapezio medio': 'Mid Trapezius', 'Trapezio': 'Trapezius',
+      'Serratura anteriore': 'Serratus Anterior', 'Quadricipiti': 'Quadriceps',
+      'Femorali': 'Hamstrings', 'Ischiocrurali': 'Hamstrings',
+      'Gluteo grande': 'Gluteus Maximus', 'Gluteo medio': 'Gluteus Medius',
+      'Gluteo minore': 'Gluteus Minimus', 'Glutei': 'Glutes',
+      'Polpacci': 'Calves', 'Gastrocnemio': 'Gastrocnemius', 'Soleo': 'Soleus',
+      "Adduttori dell'anca": 'Hip Adductors', 'Adduttori': 'Adductors', 'Abduttori': 'Abductors',
+      'Flessori anca': 'Hip Flexors', 'Flessori avambraccio': 'Forearm Flexors', 'Avambracci': 'Forearms',
+      'Lombari': 'Lower Back', 'Erettori spinali': 'Spinal Erectors',
+      'Rettosaddominale (fascio inferiore)': 'Lower Rectus Abdominis',
+      'Rettosaddominale': 'Rectus Abdominis', 'Obliqui': 'Obliques',
+      'Trasverso addome': 'Transverse Abdominis', 'Sovraspinato': 'Supraspinatus',
+      'Grande rotondo': 'Teres Major', 'Piccolo rotondo': 'Teres Minor', 'Piriforme': 'Piriformis',
+      'Gracile': 'Gracilis', 'Pettineo': 'Pectineus',
+      'Bicipiti (picco)': 'Biceps (peak)', 'Bicipiti, Brachioradiale': 'Biceps, Brachioradialis',
+      'Tricipiti (capo laterale)': 'Triceps (lateral head)', 'Tricipiti (capo lungo)': 'Triceps (long head)',
+      'Capo laterale e mediale': 'Lateral and medial heads',
+      'Petto superiore (clavicolare)': 'Upper chest (clavicular head)',
+      'Petto (grande pettorale)': 'Chest (pectoralis major)',
+      'Glutei (grande gluteo)': 'Glutes (gluteus maximus)',
+      'Muscolatura principale coinvolta': 'Main muscles', 'Muscolatura di supporto': 'Supporting muscles',
+      'Mobilità articolare generale': 'General joint mobility',
+      'Sistema cardiovascolare': 'Cardiovascular system',
+      'Polpacci, Sistema cardiovascolare': 'Calves, Cardiovascular system',
+      'Core': 'Core', 'Spalle': 'Shoulders', 'Dorso': 'Back', 'Gambe': 'Legs', 'Braccia': 'Arms',
+    },
+    'es': {
+      'Gran dorsale': 'Dorsal ancho', 'Romboidi': 'Romboides',
+      'Grande pettorale': 'Pectoral mayor', 'Gran pettorale': 'Pectoral mayor',
+      'Pettorale minore': 'Pectoral menor', 'Bicipiti': 'B\u00edceps', 'Tricipiti': 'Tr\u00edceps',
+      'Deltoidi anteriori': 'Deltoides anteriores', 'Deltoide anteriore': 'Deltoides anterior',
+      'Deltoide laterale': 'Deltoides lateral', 'Deltoide posteriore': 'Deltoides posterior',
+      'Brachioradiale': 'Braquiorradial',
+      'Deltoide (fascio anteriore e laterale)': 'Deltoides (fasc\u00edculo anterior y lateral)',
+      'Deltoide (tutte le fasce)': 'Deltoides (todas las cabezas)', 'Deltoide': 'Deltoides',
+      'Trapezio superiore': 'Trapecio superior', 'Trapezio medio': 'Trapecio medio', 'Trapezio': 'Trapecio',
+      'Serratura anteriore': 'Serrato anterior', 'Quadricipiti': 'Cu\u00e1driceps',
+      'Femorali': 'Isquiotibiales', 'Ischiocrurali': 'Isquiotibiales',
+      'Gluteo grande': 'Gl\u00fateo mayor', 'Gluteo medio': 'Gl\u00fateo medio',
+      'Gluteo minore': 'Gl\u00fateo menor', 'Glutei': 'Gl\u00fateos',
+      'Polpacci': 'Pantorrillas', 'Gastrocnemio': 'Gastrocnemio', 'Soleo': 'S\u00f3leo',
+      "Adduttori dell'anca": 'Aductores de cadera', 'Adduttori': 'Aductores', 'Abduttori': 'Abductores',
+      'Flessori anca': 'Flexores de cadera', 'Flessori avambraccio': 'Flexores del antebrazo',
+      'Avambracci': 'Antebrazos', 'Lombari': 'Lumbar', 'Erettori spinali': 'Erectores espinales',
+      'Rettosaddominale (fascio inferiore)': 'Recto abdominal (inferior)',
+      'Rettosaddominale': 'Recto abdominal', 'Obliqui': 'Oblicuos',
+      'Trasverso addome': 'Transverso abdominal', 'Sovraspinato': 'Supraespinoso',
+      'Grande rotondo': 'Redondo mayor', 'Piccolo rotondo': 'Redondo menor', 'Piriforme': 'Piriforme',
+      'Gracile': 'Gr\u00e1cil', 'Pettineo': 'Pect\u00edneo',
+      'Bicipiti (picco)': 'B\u00edceps (pico)', 'Bicipiti, Brachioradiale': 'B\u00edceps, Braquiorradial',
+      'Tricipiti (capo laterale)': 'Tr\u00edceps (cabeza lateral)',
+      'Tricipiti (capo lungo)': 'Tr\u00edceps (cabeza larga)',
+      'Capo laterale e mediale': 'Cabeza lateral y medial',
+      'Petto superiore (clavicolare)': 'Pectoral superior (clavicular)',
+      'Petto (grande pettorale)': 'Pecho (pectoral mayor)',
+      'Glutei (grande gluteo)': 'Gl\u00fateos (gl\u00fateo mayor)',
+      'Muscolatura principale coinvolta': 'M\u00fasculos principales',
+      'Muscolatura di supporto': 'M\u00fasculos de apoyo',
+      'Mobilità articolare generale': 'Movilidad articular general',
+      'Sistema cardiovascolare': 'Sistema cardiovascular',
+      'Polpacci, Sistema cardiovascolare': 'Pantorrillas, Sistema cardiovascular',
+      'Core': 'Core', 'Spalle': 'Hombros', 'Dorso': 'Espalda', 'Gambe': 'Piernas', 'Braccia': 'Brazos',
+    },
+    'pt': {
+      'Gran dorsale': 'Grande dorsal', 'Romboidi': 'Romboides',
+      'Grande pettorale': 'Peitoral maior', 'Gran pettorale': 'Peitoral maior',
+      'Pettorale minore': 'Peitoral menor', 'Bicipiti': 'B\u00edceps', 'Tricipiti': 'Tr\u00edceps',
+      'Deltoidi anteriori': 'Deltoides anteriores', 'Deltoide anteriore': 'Delt\u00f3ide anterior',
+      'Deltoide laterale': 'Delt\u00f3ide lateral', 'Deltoide posteriore': 'Delt\u00f3ide posterior',
+      'Brachioradiale': 'Braquiorradial',
+      'Deltoide (fascio anteriore e laterale)': 'Delt\u00f3ide (feixe anterior e lateral)',
+      'Deltoide (tutte le fasce)': 'Delt\u00f3ide (todas as cabe\u00e7as)', 'Deltoide': 'Delt\u00f3ide',
+      'Trapezio superiore': 'Trap\u00e9zio superior', 'Trapezio medio': 'Trap\u00e9zio m\u00e9dio',
+      'Trapezio': 'Trap\u00e9zio', 'Serratura anteriore': 'Serr\u00e1til anterior',
+      'Quadricipiti': 'Quadr\u00edceps', 'Femorali': 'Isquiotibiais', 'Ischiocrurali': 'Isquiotibiais',
+      'Gluteo grande': 'Gl\u00fateo m\u00e1ximo', 'Gluteo medio': 'Gl\u00fateo m\u00e9dio',
+      'Gluteo minore': 'Gl\u00fateo m\u00ednimo', 'Glutei': 'Gl\u00fateos',
+      'Polpacci': 'Panturrilhas', 'Gastrocnemio': 'Gastrocn\u00eamio', 'Soleo': 'S\u00f3leo',
+      "Adduttori dell'anca": 'Adutores do quadril', 'Adduttori': 'Adutores', 'Abduttori': 'Abdutores',
+      'Flessori anca': 'Flexores do quadril', 'Flessori avambraccio': 'Flexores do antebra\u00e7o',
+      'Avambracci': 'Antebra\u00e7os', 'Lombari': 'Lombar', 'Erettori spinali': 'Eretores da espinha',
+      'Rettosaddominale (fascio inferiore)': 'Reto abdominal (inferior)',
+      'Rettosaddominale': 'Reto abdominal', 'Obliqui': 'Obl\u00edquos',
+      'Trasverso addome': 'Transverso abdominal', 'Sovraspinato': 'Supraespinhoso',
+      'Grande rotondo': 'Redondo maior', 'Piccolo rotondo': 'Redondo menor', 'Piriforme': 'Piriforme',
+      'Gracile': 'Gr\u00e1cil', 'Pettineo': 'Pect\u00edneo',
+      'Bicipiti (picco)': 'B\u00edceps (pico)', 'Bicipiti, Brachioradiale': 'B\u00edceps, Braquiorradial',
+      'Tricipiti (capo laterale)': 'Tr\u00edceps (cabe\u00e7a lateral)',
+      'Tricipiti (capo lungo)': 'Tr\u00edceps (cabe\u00e7a longa)',
+      'Capo laterale e mediale': 'Cabe\u00e7a lateral e medial',
+      'Petto superiore (clavicolare)': 'Peito superior (clavicular)',
+      'Petto (grande pettorale)': 'Peito (peitoral maior)',
+      'Glutei (grande gluteo)': 'Gl\u00fateos (gl\u00fateo m\u00e1ximo)',
+      'Muscolatura principale coinvolta': 'M\u00fasculos principais',
+      'Muscolatura di supporto': 'M\u00fasculos de suporte',
+      'Mobilità articolare generale': 'Mobilidade articular geral',
+      'Sistema cardiovascolare': 'Sistema cardiovascular',
+      'Polpacci, Sistema cardiovascolare': 'Panturrilhas, Sistema cardiovascular',
+      'Core': 'Core', 'Spalle': 'Ombros', 'Dorso': 'Costas', 'Gambe': 'Pernas', 'Braccia': 'Bra\u00e7os',
+    },
+    'fr': {
+      'Gran dorsale': 'Grand dorsal', 'Romboidi': 'Rho\u00efdo\u00efdes',
+      'Grande pettorale': 'Grand pectoral', 'Gran pettorale': 'Grand pectoral',
+      'Pettorale minore': 'Petit pectoral', 'Bicipiti': 'Biceps', 'Tricipiti': 'Triceps',
+      'Deltoidi anteriori': 'Delto\u00efdes ant\u00e9rieurs', 'Deltoide anteriore': 'Delto\u00efde ant\u00e9rieur',
+      'Deltoide laterale': 'Delto\u00efde lat\u00e9ral', 'Deltoide posteriore': 'Delto\u00efde post\u00e9rieur',
+      'Brachioradiale': 'Brachio-radial',
+      'Deltoide (fascio anteriore e laterale)': 'Delto\u00efde (faisceau ant\u00e9rieur et lat\u00e9ral)',
+      'Deltoide (tutte le fasce)': 'Delto\u00efde (toutes les t\u00eates)', 'Deltoide': 'Delto\u00efde',
+      'Trapezio superiore': 'Trap\u00e8ze sup\u00e9rieur', 'Trapezio medio': 'Trap\u00e8ze moyen',
+      'Trapezio': 'Trap\u00e8ze', 'Serratura anteriore': 'Serratus ant\u00e9rieur',
+      'Quadricipiti': 'Quadriceps', 'Femorali': 'Ischio-jambiers', 'Ischiocrurali': 'Ischio-jambiers',
+      'Gluteo grande': 'Grand fessier', 'Gluteo medio': 'Moyen fessier',
+      'Gluteo minore': 'Petit fessier', 'Glutei': 'Fessiers',
+      'Polpacci': 'Mollets', 'Gastrocnemio': 'Gastrocn\u00e9mien', 'Soleo': 'Sol\u00e9aire',
+      "Adduttori dell'anca": 'Adducteurs de la hanche', 'Adduttori': 'Adducteurs', 'Abduttori': 'Abducteurs',
+      'Flessori anca': 'Fl\u00e9chisseurs de la hanche',
+      "Flessori avambraccio": "Fl\u00e9chisseurs de l'avant-bras",
+      'Avambracci': 'Avant-bras', 'Lombari': 'Lombaires', 'Erettori spinali': '\u00c9recteurs du rachis',
+      'Rettosaddominale (fascio inferiore)': 'Droit abdominal (inf\u00e9rieur)',
+      'Rettosaddominale': 'Droit abdominal', 'Obliqui': 'Obliques',
+      'Trasverso addome': 'Transverse abdominal', 'Sovraspinato': 'Sus-\u00e9pineux',
+      'Grande rotondo': 'Grand rond', 'Piccolo rotondo': 'Petit rond', 'Piriforme': 'Pyramidal',
+      'Gracile': 'Gracile', 'Pettineo': 'Pectin\u00e9',
+      'Bicipiti (picco)': 'Biceps (pic)', 'Bicipiti, Brachioradiale': 'Biceps, Brachio-radial',
+      'Tricipiti (capo laterale)': 'Triceps (chef lat\u00e9ral)',
+      'Tricipiti (capo lungo)': 'Triceps (chef long)',
+      'Capo laterale e mediale': 'Chef lat\u00e9ral et m\u00e9dial',
+      'Petto superiore (clavicolare)': 'Pectoral sup\u00e9rieur (claviculaire)',
+      'Petto (grande pettorale)': 'Pectoraux (grand pectoral)',
+      'Glutei (grande gluteo)': 'Fessiers (grand fessier)',
+      'Muscolatura principale coinvolta': 'Muscles principaux',
+      'Muscolatura di supporto': 'Muscles de soutien',
+      'Mobilità articolare generale': 'Mobilit\u00e9 articulaire g\u00e9n\u00e9rale',
+      'Sistema cardiovascolare': 'Syst\u00e8me cardiovasculaire',
+      'Polpacci, Sistema cardiovascolare': 'Mollets, Syst\u00e8me cardiovasculaire',
+      'Core': 'Gainage', 'Spalle': '\u00c9paules', 'Dorso': 'Dos', 'Gambe': 'Jambes', 'Braccia': 'Bras',
+    },
+    'de': {
+      'Gran dorsale': 'Breiter R\u00fcckenmuskel', 'Romboidi': 'Rhomboiden',
+      'Grande pettorale': 'Gro\u00dfer Brustmuskel', 'Gran pettorale': 'Gro\u00dfer Brustmuskel',
+      'Pettorale minore': 'Kleiner Brustmuskel', 'Bicipiti': 'Bizeps', 'Tricipiti': 'Trizeps',
+      'Deltoidi anteriori': 'Vordere Deltoiden', 'Deltoide anteriore': 'Vorderer Deltamuskel',
+      'Deltoide laterale': 'Seitlicher Deltamuskel', 'Deltoide posteriore': 'Hinterer Deltamuskel',
+      'Brachioradiale': 'Brachioradialis',
+      'Deltoide (fascio anteriore e laterale)': 'Deltamuskel (vorderer & seitlicher Kopf)',
+      'Deltoide (tutte le fasce)': 'Deltamuskel (alle K\u00f6pfe)', 'Deltoide': 'Deltamuskel',
+      'Trapezio superiore': 'Oberer Trapezmuskel', 'Trapezio medio': 'Mittlerer Trapezmuskel',
+      'Trapezio': 'Trapezmuskel', 'Serratura anteriore': 'S\u00e4gemuskel',
+      'Quadricipiti': 'Quadrizeps', 'Femorali': 'Ischiokrurale', 'Ischiocrurali': 'Ischiokrurale',
+      'Gluteo grande': 'Gro\u00dfer Ges\u00e4\u00dfmuskel', 'Gluteo medio': 'Mittlerer Ges\u00e4\u00dfmuskel',
+      'Gluteo minore': 'Kleiner Ges\u00e4\u00dfmuskel', 'Glutei': 'Ges\u00e4\u00dfmuskeln',
+      'Polpacci': 'Waden', 'Gastrocnemio': 'Zwillingswadenmuskel', 'Soleo': 'Schollenmuskel',
+      "Adduttori dell'anca": 'H\u00fcftadduktoren', 'Adduttori': 'Adduktoren', 'Abduttori': 'Abduktoren',
+      'Flessori anca': 'H\u00fcftbeuger', 'Flessori avambraccio': 'Unterarmbeuger', 'Avambracci': 'Unterarme',
+      'Lombari': 'Lendenmuskel', 'Erettori spinali': 'R\u00fcckenstrecker',
+      'Rettosaddominale (fascio inferiore)': 'Gerader Bauchmuskel (unterer Bereich)',
+      'Rettosaddominale': 'Gerader Bauchmuskel', 'Obliqui': 'Schr\u00e4gbauchmuskel',
+      'Trasverso addome': 'Quer verlaufender Bauchmuskel', 'Sovraspinato': 'Supraspinatus',
+      'Grande rotondo': 'Gro\u00dfer Rundmuskel', 'Piccolo rotondo': 'Kleiner Rundmuskel',
+      'Piriforme': 'Birnenf\u00f6rmiger Muskel', 'Gracile': 'Schlankmuskel', 'Pettineo': 'Kammmuskel',
+      'Bicipiti (picco)': 'Bizeps (Spitze)', 'Bicipiti, Brachioradiale': 'Bizeps, Brachioradialis',
+      'Tricipiti (capo laterale)': 'Trizeps (lateraler Kopf)',
+      'Tricipiti (capo lungo)': 'Trizeps (langer Kopf)',
+      'Capo laterale e mediale': 'Lateraler und medialer Kopf',
+      'Petto superiore (clavicolare)': 'Obere Brust (Schl\u00fcsselbein)',
+      'Petto (grande pettorale)': 'Brust (Gro\u00dfer Brustmuskel)',
+      'Glutei (grande gluteo)': 'Ges\u00e4\u00df (Gro\u00dfer Ges\u00e4\u00dfmuskel)',
+      'Muscolatura principale coinvolta': 'Hauptmuskeln', 'Muscolatura di supporto': 'St\u00fctzmuskulatur',
+      'Mobilità articolare generale': 'Allgemeine Gelenkbeweglichkeit',
+      'Sistema cardiovascolare': 'Herz-Kreislauf-System',
+      'Polpacci, Sistema cardiovascolare': 'Waden, Herz-Kreislauf-System',
+      'Core': 'Rumpfmuskulatur', 'Spalle': 'Schultern', 'Dorso': 'R\u00fccken', 'Gambe': 'Beine', 'Braccia': 'Arme',
+    },
+    'el': {
+      'Gran dorsale': '\u03a0\u03bb\u03b1\u03c4\u03cd\u03c2 \u03c1\u03b1\u03c7\u03b9\u03b1\u03af\u03bf\u03c2',
+      'Romboidi': '\u03a1\u03bf\u03bc\u03b2\u03bf\u03b5\u03b9\u03b4\u03b5\u03af\u03c2',
+      'Grande pettorale': '\u039c\u03b5\u03af\u03b6\u03c9\u03bd \u03b8\u03c9\u03c1\u03b1\u03ba\u03b9\u03ba\u03cc\u03c2',
+      'Gran pettorale': '\u039c\u03b5\u03af\u03b6\u03c9\u03bd \u03b8\u03c9\u03c1\u03b1\u03ba\u03b9\u03ba\u03cc\u03c2',
+      'Pettorale minore': '\u0395\u03bb\u03ac\u03c3\u03c3\u03c9\u03bd \u03b8\u03c9\u03c1\u03b1\u03ba\u03b9\u03ba\u03cc\u03c2',
+      'Bicipiti': '\u0394\u03b9\u03ba\u03ad\u03c6\u03b1\u03bb\u03bf\u03c2 \u03b2\u03c1\u03b1\u03c7\u03b9\u03cc\u03bd\u03b9\u03bf\u03c2',
+      'Tricipiti': '\u03a4\u03c1\u03b9\u03ba\u03ad\u03c6\u03b1\u03bb\u03bf\u03c2 \u03b2\u03c1\u03b1\u03c7\u03b9\u03cc\u03bd\u03b9\u03bf\u03c2',
+      'Deltoide anteriore': '\u03a0\u03c1\u03cc\u03c3\u03b8\u03b9\u03bf \u03c4\u03bc\u03ae\u03bc\u03b1 \u03b4\u03b5\u03bb\u03c4\u03bf\u03b5\u03b9\u03b4\u03bf\u03cd\u03c2',
+      'Deltoide laterale': '\u03a0\u03bb\u03ac\u03b3\u03b9\u03bf \u03c4\u03bc\u03ae\u03bc\u03b1 \u03b4\u03b5\u03bb\u03c4\u03bf\u03b5\u03b9\u03b4\u03bf\u03cd\u03c2',
+      'Deltoide posteriore': '\u039f\u03c0\u03af\u03c3\u03b8\u03b9\u03bf \u03c4\u03bc\u03ae\u03bc\u03b1 \u03b4\u03b5\u03bb\u03c4\u03bf\u03b5\u03b9\u03b4\u03bf\u03cd\u03c2',
+      'Deltoide': '\u0394\u03b5\u03bb\u03c4\u03bf\u03b5\u03b9\u03b4\u03ae\u03c2',
+      'Brachioradiale': '\u0392\u03c1\u03b1\u03c7\u03b9\u03bf\u03ba\u03b5\u03c1\u03ba\u03b9\u03b4\u03b9\u03ba\u03cc\u03c2',
+      'Trapezio superiore': '\u0386\u03bd\u03c9 \u03c4\u03c1\u03b1\u03c0\u03b5\u03b6\u03bf\u03b5\u03b9\u03b4\u03ae\u03c2',
+      'Trapezio medio': '\u039c\u03ad\u03c3\u03bf \u03c4\u03c1\u03b1\u03c0\u03b5\u03b6\u03bf\u03b5\u03b9\u03b4\u03ae\u03c2',
+      'Trapezio': '\u03a4\u03c1\u03b1\u03c0\u03b5\u03b6\u03bf\u03b5\u03b9\u03b4\u03ae\u03c2',
+      'Quadricipiti': '\u03a4\u03b5\u03c4\u03c1\u03b1\u03ba\u03ad\u03c6\u03b1\u03bb\u03bf\u03c2 \u03bc\u03b7\u03c1\u03b9\u03b1\u03af\u03bf\u03c2',
+      'Femorali': '\u039f\u03c0\u03af\u03c3\u03b8\u03b9\u03bf\u03b9 \u03bc\u03b7\u03c1\u03b9\u03b1\u03af\u03bf\u03b9',
+      'Ischiocrurali': '\u0399\u03c3\u03c7\u03b9\u03bf\u03ba\u03bd\u03b7\u03bc\u03b9\u03b1\u03af\u03bf\u03b9',
+      'Gluteo grande': '\u039c\u03b5\u03af\u03b6\u03c9\u03bd \u03b3\u03bb\u03bf\u03c5\u03c4\u03b9\u03b1\u03af\u03bf\u03c2',
+      'Gluteo medio': '\u039c\u03ad\u03c3\u03bf\u03c2 \u03b3\u03bb\u03bf\u03c5\u03c4\u03b9\u03b1\u03af\u03bf\u03c2',
+      'Gluteo minore': '\u0395\u03bb\u03ac\u03c3\u03c3\u03c9\u03bd \u03b3\u03bb\u03bf\u03c5\u03c4\u03b9\u03b1\u03af\u03bf\u03c2',
+      'Glutei': '\u0393\u03bb\u03bf\u03c5\u03c4\u03b9\u03b1\u03af\u03bf\u03b9',
+      'Polpacci': '\u0393\u03b1\u03c3\u03c4\u03c1\u03bf\u03ba\u03bd\u03ae\u03bc\u03b9\u03bf\u03c2',
+      'Gastrocnemio': '\u0393\u03b1\u03c3\u03c4\u03c1\u03bf\u03ba\u03bd\u03ae\u03bc\u03b9\u03bf\u03c2',
+      'Adduttori': '\u03a0\u03c1\u03bf\u03c3\u03b1\u03b3\u03c9\u03b3\u03bf\u03af',
+      'Abduttori': '\u0391\u03c0\u03b1\u03b3\u03c9\u03b3\u03bf\u03af',
+      'Avambracci': '\u0391\u03bd\u03c4\u03b9\u03b2\u03c1\u03ac\u03c7\u03b9\u03b1',
+      'Lombari': '\u039f\u03c3\u03c6\u03c5\u03ca\u03ba\u03bf\u03af',
+      'Rettosaddominale': '\u039f\u03c1\u03b8\u03cc\u03c2 \u03ba\u03bf\u03b9\u03bb\u03b9\u03b1\u03ba\u03cc\u03c2',
+      'Obliqui': '\u039b\u03bf\u03be\u03bf\u03af \u03ba\u03bf\u03b9\u03bb\u03b9\u03b1\u03ba\u03bf\u03af',
+      'Muscolatura principale coinvolta': '\u039a\u03cd\u03c1\u03b9\u03bf\u03b9 \u03bc\u03cd\u03b5\u03c2',
+      'Muscolatura di supporto': '\u0392\u03bf\u03b7\u03b8\u03b7\u03c4\u03b9\u03ba\u03bf\u03af \u03bc\u03cd\u03b5\u03c2',
+      'Sistema cardiovascolare': '\u039a\u03b1\u03c1\u03b4\u03b9\u03b1\u03b3\u03b3\u03b5\u03b9\u03b1\u03ba\u03cc \u03c3\u03cd\u03c3\u03c4\u03b7\u03bc\u03b1',
+      'Core': 'Core (\u03ba\u03b5\u03bd\u03c4\u03c1\u03b9\u03ba\u03bf\u03af \u03bc\u03cd\u03b5\u03c2)',
+      'Spalle': '\u038f\u03bc\u03bf\u03b9', 'Dorso': '\u03a0\u03bb\u03ac\u03c4\u03b7',
+      'Gambe': '\u03a0\u03cc\u03b4\u03b9\u03b1', 'Braccia': '\u039c\u03c0\u03c1\u03ac\u03c4\u03c3\u03b1',
+    },
+    'ar': {
+      'Gran dorsale': '\u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0639\u0631\u064a\u0636\u0629 \u0644\u0644\u0638\u0647\u0631',
+      'Grande pettorale': '\u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0635\u062f\u0631\u064a\u0629 \u0627\u0644\u0643\u0628\u0631\u0649',
+      'Gran pettorale': '\u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0635\u062f\u0631\u064a\u0629 \u0627\u0644\u0643\u0628\u0631\u0649',
+      'Pettorale minore': '\u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0635\u062f\u0631\u064a\u0629 \u0627\u0644\u0635\u063a\u0631\u0649',
+      'Bicipiti': '\u0627\u0644\u0639\u0636\u0644\u0629 \u0630\u0627\u062a \u0627\u0644\u0631\u0623\u0633\u064a\u0646',
+      'Tricipiti': '\u0627\u0644\u0639\u0636\u0644\u0629 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633',
+      'Deltoide': '\u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u062f\u0627\u0644\u064a\u0629',
+      'Trapezio': '\u0627\u0644\u0639\u0636\u0644\u0629 \u0634\u0628\u064a\u0647\u0629 \u0628\u0627\u0644\u0645\u0646\u062d\u0631\u0641',
+      'Quadricipiti': '\u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0631\u0628\u0627\u0639\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633',
+      'Femorali': '\u0623\u0648\u062a\u0627\u0631 \u0627\u0644\u0631\u0643\u0628\u0629',
+      'Ischiocrurali': '\u0623\u0648\u062a\u0627\u0631 \u0627\u0644\u0631\u0643\u0628\u0629',
+      'Gluteo grande': '\u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0623\u0644\u0648\u064a\u0629 \u0627\u0644\u0643\u0628\u0631\u0649',
+      'Glutei': '\u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0623\u0631\u062f\u0627\u0641',
+      'Polpacci': '\u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0633\u0627\u0642',
+      'Adduttori': '\u0627\u0644\u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0642\u0631\u0628\u0629',
+      'Abduttori': '\u0627\u0644\u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0628\u0639\u062f\u0629',
+      'Avambracci': '\u0627\u0644\u0633\u0648\u0627\u0639\u062f',
+      'Lombari': '\u0623\u0633\u0641\u0644 \u0627\u0644\u0638\u0647\u0631',
+      'Rettosaddominale': '\u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0645\u0633\u062a\u0642\u064a\u0645\u0629 \u0627\u0644\u0628\u0637\u0646\u064a\u0629',
+      'Obliqui': '\u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0628\u0637\u0646 \u0627\u0644\u0645\u0627\u0626\u0644\u0629',
+      'Muscolatura principale coinvolta': '\u0627\u0644\u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629',
+      'Muscolatura di supporto': '\u0639\u0636\u0644\u0627\u062a \u0627\u0644\u062f\u0639\u0645',
+      'Sistema cardiovascolare': '\u0627\u0644\u062c\u0647\u0627\u0632 \u0627\u0644\u0642\u0644\u0628\u064a \u0627\u0644\u0648\u0639\u0627\u0626\u064a',
+      'Core': '\u0639\u0636\u0644\u0627\u062a \u0627\u0644\u062c\u0630\u0639',
+      'Spalle': '\u0627\u0644\u0623\u0643\u062a\u0627\u0641', 'Dorso': '\u0627\u0644\u0638\u0647\u0631',
+      'Gambe': '\u0627\u0644\u0633\u0627\u0642\u0627\u0646', 'Braccia': '\u0627\u0644\u0630\u0631\u0627\u0639\u0627\u0646',
+    },
+    'pl': {
+      'Gran dorsale': 'Mi\u0119sie\u0144 najszerszy grzbietu', 'Romboidi': 'Mi\u0119\u015bnie r\u00f3wnoleglob\u00f3czne',
+      'Grande pettorale': 'Mi\u0119sie\u0144 piersiowy wi\u0119kszy', 'Gran pettorale': 'Mi\u0119sie\u0144 piersiowy wi\u0119kszy',
+      'Pettorale minore': 'Mi\u0119sie\u0144 piersiowy mniejszy',
+      'Bicipiti': 'Biceps (dwug\u0142owy)', 'Tricipiti': 'Triceps (tr\u00f3jg\u0142owy)',
+      'Deltoide anteriore': 'Przednia g\u0142owa naramiennego',
+      'Deltoide laterale': 'Boczna g\u0142owa naramiennego', 'Deltoide posteriore': 'Tylna g\u0142owa naramiennego',
+      'Deltoide': 'Mi\u0119sie\u0144 naramienny',
+      'Trapezio superiore': 'G\u00f3rna cz\u0119\u015b\u0107 czworobocznego',
+      'Trapezio': 'Mi\u0119sie\u0144 czworoboczny',
+      'Quadricipiti': 'Mi\u0119sie\u0144 czworog\u0142owy uda',
+      'Femorali': 'Mi\u0119\u015bnie kulszowo-goleniowe', 'Ischiocrurali': 'Mi\u0119\u015bnie kulszowo-goleniowe',
+      'Gluteo grande': 'Mi\u0119sie\u0144 po\u015bladkowy wielki',
+      'Glutei': 'Po\u015bladki', 'Polpacci': '\u0141ydki',
+      'Gastrocnemio': 'Mi\u0119sie\u0144 brzuchaty \u0142ydki',
+      'Adduttori': 'Przywodziciele', 'Abduttori': 'Odwodziciele',
+      'Avambracci': 'Przedramiona', 'Lombari': 'Mi\u0119\u015bnie l\u0119d\u017awiowe',
+      'Erettori spinali': 'Prostowniki kr\u0119gos\u0142upa',
+      'Rettosaddominale': 'Mi\u0119sie\u0144 prosty brzucha',
+      'Obliqui': 'Mi\u0119\u015bnie sko\u015bne brzucha',
+      'Muscolatura principale coinvolta': 'G\u0142\u00f3wne mi\u0119\u015bnie',
+      'Muscolatura di supporto': 'Mi\u0119\u015bnie pomocnicze',
+      'Sistema cardiovascolare': 'Uk\u0142ad sercowo-naczyniowy',
+      'Core': 'Mi\u0119\u015bnie g\u0142\u0119bokie (Core)',
+      'Spalle': 'Barki', 'Dorso': 'Plecy', 'Gambe': 'Nogi', 'Braccia': 'Ramiona',
+    },
+    'ro': {
+      'Gran dorsale': 'Marele dorsal', 'Romboidi': 'Romboizi',
+      'Grande pettorale': 'Marele pectoral', 'Gran pettorale': 'Marele pectoral',
+      'Pettorale minore': 'Micul pectoral', 'Bicipiti': 'Biceps', 'Tricipiti': 'Triceps',
+      'Deltoide': 'Deltoid', 'Trapezio': 'Trapez', 'Quadricipiti': 'Cvadriceps',
+      'Femorali': 'Ischiogambieri', 'Ischiocrurali': 'Ischiogambieri',
+      'Gluteo grande': 'Marele fesier', 'Glutei': 'Fesieri',
+      'Polpacci': 'Gambe (mole\u0163e)', 'Gastrocnemio': 'Gastrocnemian',
+      'Adduttori': 'Adductori', 'Abduttori': 'Abductori',
+      'Avambracci': 'Antebra\u0163e', 'Lombari': 'Lombar',
+      'Erettori spinali': 'Erectorii coloanei', 'Rettosaddominale': 'Dreptul abdominal',
+      'Obliqui': 'Oblici',
+      'Muscolatura principale coinvolta': 'Mu\u015fchii principali',
+      'Muscolatura di supporto': 'Mu\u015fchi de sus\u0163inere',
+      'Sistema cardiovascolare': 'Sistem cardiovascular',
+      'Core': 'Core', 'Spalle': 'Umeri', 'Dorso': 'Spate', 'Gambe': 'Picioare', 'Braccia': 'Bra\u0163e',
+    },
+    'hu': {
+      'Gran dorsale': 'Sz\u00e9les h\u00e1tizom', 'Romboidi': 'Rombuszizmok',
+      'Grande pettorale': 'Nagy mellizom', 'Gran pettorale': 'Nagy mellizom',
+      'Pettorale minore': 'Kis mellizom', 'Bicipiti': 'Bicepsz', 'Tricipiti': 'Tricepsz',
+      'Deltoide': 'Deltaizom', 'Trapezio': 'Trap\u00e9zizom', 'Quadricipiti': 'N\u00e9gyf\u00e9j\u0171 combizom',
+      'Femorali': 'Combhajl\u00edt\u00f3k', 'Ischiocrurali': 'Combhajl\u00edt\u00f3k',
+      'Gluteo grande': 'Nagy farizom', 'Glutei': 'Farizom',
+      'Polpacci': 'V\u00e1dli', 'Gastrocnemio': 'K\u00e9tf\u00e9j\u0171 l\u00e1bikraizom',
+      'Adduttori': 'K\u00f6zel\u00edt\u0151 izmok', 'Abduttori': 'T\u00e1vol\u00edt\u00f3 izmok',
+      'Avambracci': 'Alkarok', 'Lombari': '\u00c1gy\u00e9ki izmok',
+      'Erettori spinali': 'Gerincegyenes\u00edt\u0151k', 'Rettosaddominale': 'Egyenes hasizom',
+      'Obliqui': 'Ferde hasizmok',
+      'Muscolatura principale coinvolta': 'F\u0151 izmok',
+      'Muscolatura di supporto': 'Kiseg\u00edt\u0151 izmok',
+      'Sistema cardiovascolare': 'Sz\u00edv- \u00e9s \u00e9rrendszer',
+      'Core': 'T\u00f6rzs (core) izmok',
+      'Spalle': 'V\u00e1llak', 'Dorso': 'H\u00e1t', 'Gambe': 'L\u00e1bak', 'Braccia': 'Karok',
+    },
   };
+  final langMap = _langMuscles[AppL.lang] ?? _langMuscles['en']!;
   // Sort by length descending to match longer phrases first
-  final sorted = m.entries.toList()
+  final sorted = langMap.entries.toList()
     ..sort((a, b) => b.key.length.compareTo(a.key.length));
   String result = italian;
   for (final e in sorted) {
-    result = result.replaceAll(e.key, e.value);
+    if (result.contains(e.key)) {
+      result = result.replaceAll(e.key, e.value);
+    }
   }
   return result;
 }
@@ -11962,7 +12210,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
 
   void _showSuggestionOverlay({required bool isWeight, required int targetReps}) {
-    final key = isWeight ? 'peso_$exI' : 'reps_$exI';
+    final key = isWeight ? 'peso_${exI}_${currentExSeries.length}' : 'reps_${exI}_${currentExSeries.length}';
     if (_shownSuggestions.contains(key)) return;
     _shownSuggestions.add(key);
     OverlayEntry? entry;
@@ -12634,6 +12882,51 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       ),
                   ],
                 ),
+                if (!giaFatto && (suggerisciAumento || suggerisciReps))
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
+                    child: Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: suggerisciAumento
+                            ? const Color(0xFFFFD700).withAlpha(20)
+                            : Colors.deepPurple.withAlpha(20),
+                        border: Border.all(
+                          color: suggerisciAumento
+                              ? const Color(0xFFFFD700)
+                              : Colors.deepPurple.shade300,
+                          width: 1.2,
+                        ),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            suggerisciAumento ? Icons.trending_up : Icons.fitness_center,
+                            size: 14,
+                            color: suggerisciAumento
+                                ? const Color(0xFFFFD700)
+                                : Colors.deepPurple.shade200,
+                          ),
+                          const SizedBox(width: 6),
+                          Text(
+                            suggerisciAumento
+                                ? AppL.increaseWeight
+                                : AppL.tryReps(targetR + 2),
+                            style: TextStyle(
+                              color: suggerisciAumento
+                                  ? const Color(0xFFFFD700)
+                                  : Colors.deepPurple.shade200,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 if (giaFatto)
                   Expanded(child: Center(child: _buildBoxEsercizioCompletato()))
                 else
@@ -13847,86 +14140,77 @@ class _RecordOverlayState extends State<_RecordOverlay>
     final cx = size.width / 2;
     final cy = size.height * 0.4;
     return Material(
-      color: Colors.black.withAlpha(160),
+      color: Colors.transparent,
       child: Stack(
-      children: [
-        ...List.generate(_sparks.length, (i) {
-          final dir = _dirs[i % _dirs.length];
-          return AnimatedBuilder(
-            animation: _sparkAnim,
-            builder: (_, __) {
-              final t = _sparkAnim.value;
-              final dx = dir.dx * 120 * t;
-              final dy = dir.dy * 120 * t;
-              final opacity = (1.0 - t).clamp(0.0, 1.0);
-              return Positioned(
-                left: cx + dx - 16,
-                top: cy + dy - 16,
-                child: Opacity(
-                  opacity: opacity,
-                  child: Text(_sparks[i], style: const TextStyle(fontSize: 24)),
-                ),
-              );
-            },
-          );
-        }),
-        Positioned(
-          top: cy - 90,
-          left: 24,
-          right: 24,
-          child: Material(
-            color: Colors.transparent,
+        children: [
+          // Fullscreen gold card
+          Positioned.fill(
             child: ScaleTransition(
               scale: _cardScale,
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 20,
-                ),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
                     colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.amber.withAlpha(120),
-                      blurRadius: 20,
-                      spreadRadius: 2,
-                    ),
-                  ],
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text('🏆', style: TextStyle(fontSize: 52)),
-                    const SizedBox(height: 8),
-                    Text(
-                      AppL.newPersonalRecord,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1,
-                      ),
-                      textAlign: TextAlign.center,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text('🏆', style: TextStyle(fontSize: 88)),
+                        const SizedBox(height: 20),
+                        Text(
+                          AppL.newPersonalRecord,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w900,
+                            letterSpacing: 1,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          AppL.keepPushing,
+                          style: const TextStyle(
+                            color: Colors.black87,
+                            fontSize: 20,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      AppL.keepPushing,
-                      style: const TextStyle(
-                        color: Colors.black87,
-                        fontSize: 14,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+          // Sparks on top
+          ...List.generate(_sparks.length, (i) {
+            final dir = _dirs[i % _dirs.length];
+            return AnimatedBuilder(
+              animation: _sparkAnim,
+              builder: (_, __) {
+                final t = _sparkAnim.value;
+                final dx = dir.dx * 180 * t;
+                final dy = dir.dy * 180 * t;
+                final opacity = (1.0 - t).clamp(0.0, 1.0);
+                return Positioned(
+                  left: cx + dx - 20,
+                  top: cy + dy - 20,
+                  child: Opacity(
+                    opacity: opacity,
+                    child: Text(_sparks[i], style: const TextStyle(fontSize: 36)),
+                  ),
+                );
+              },
+            );
+          }),
+        ],
       ),
     );
   }
