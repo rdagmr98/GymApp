@@ -12387,9 +12387,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
 
 
-  void _showSuggestionOverlay({required bool isWeight, required int targetReps}) {
+  void _showSuggestionOverlay({required bool isWeight, required int targetReps, bool force = false}) {
     final key = isWeight ? 'peso_${exI}_${currentExSeries.length}' : 'reps_${exI}_${currentExSeries.length}';
-    if (_shownSuggestions.contains(key)) return;
+    if (!force && _shownSuggestions.contains(key)) return;
     _shownSuggestions.add(key);
     OverlayEntry? entry;
     entry = OverlayEntry(
@@ -13167,14 +13167,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     int targetR,
     bool suggerisciReps,
   ) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        if (suggerisciAumento) _showSuggestionOverlay(isWeight: true, targetReps: targetR);
-        else if (suggerisciReps) _showSuggestionOverlay(isWeight: false, targetReps: targetR);
-      }
-    });
     return Container(
-      height: 160,
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
       decoration: BoxDecoration(
@@ -13232,6 +13225,56 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               ],
             ),
           ],
+          if (suggerisciAumento || suggerisciReps)
+            GestureDetector(
+              onTap: () => _showSuggestionOverlay(
+                isWeight: suggerisciAumento,
+                targetReps: targetR,
+                force: true,
+              ),
+              child: Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(top: 6),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                decoration: BoxDecoration(
+                  color: suggerisciAumento
+                      ? const Color(0xFFFFD700).withAlpha(20)
+                      : const Color(0xFF7C4DFF).withAlpha(20),
+                  border: Border.all(
+                    color: suggerisciAumento
+                        ? const Color(0xFFFFD700)
+                        : const Color(0xFF7C4DFF),
+                    width: 1.2,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      suggerisciAumento ? Icons.trending_up : Icons.fitness_center,
+                      size: 14,
+                      color: suggerisciAumento
+                          ? const Color(0xFFFFD700)
+                          : const Color(0xFFB388FF),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      suggerisciAumento
+                          ? AppL.increaseWeight
+                          : AppL.tryReps(targetR + 2),
+                      style: TextStyle(
+                        color: suggerisciAumento
+                            ? const Color(0xFFFFD700)
+                            : const Color(0xFFB388FF),
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           if (ex.notePT.isNotEmpty) ...[
             if (lastW > 0) Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 10),
             Row(
@@ -13621,6 +13664,15 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   Widget _buildRestUI() {
     var ex = widget.day.exercises[exI];
     var suggest = _getSuggest(ex.name, setN);
+    // Auto-show suggestion overlay when rest timer starts
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final _s2 = _computeSuggestions(ex, setN,
+          (suggest['r'] as num?)?.toInt() ?? 0,
+          ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
+      if (_s2['aumento']!) _showSuggestionOverlay(isWeight: true, targetReps: ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
+      else if (_s2['reps']!) _showSuggestionOverlay(isWeight: false, targetReps: ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
+    });
     double lastW = (suggest['w'] as num?)?.toDouble() ?? 0.0;
     int lastR = (suggest['r'] as num?)?.toInt() ?? 0;
 
@@ -13905,59 +13957,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       ),
                     ),
 
-                    // Suggestion chip
-                    if (suggerisciAumento || suggerisciReps)
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 4),
-                        child: GestureDetector(
-                          onTap: () => _showSuggestionOverlay(
-                            isWeight: suggerisciAumento,
-                            targetReps: targetR,
-                          ),
-                          child: Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
-                            decoration: BoxDecoration(
-                              color: suggerisciAumento
-                                  ? const Color(0xFFFFD700).withAlpha(20)
-                                  : const Color(0xFF7C4DFF).withAlpha(20),
-                              border: Border.all(
-                                color: suggerisciAumento
-                                    ? const Color(0xFFFFD700)
-                                    : const Color(0xFF7C4DFF),
-                                width: 1.2,
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  suggerisciAumento ? Icons.trending_up : Icons.fitness_center,
-                                  size: 14,
-                                  color: suggerisciAumento
-                                      ? const Color(0xFFFFD700)
-                                      : const Color(0xFFB388FF),
-                                ),
-                                const SizedBox(width: 6),
-                                Text(
-                                  suggerisciAumento
-                                      ? AppL.increaseWeight
-                                      : AppL.tryReps(targetR + 2),
-                                  style: TextStyle(
-                                    color: suggerisciAumento
-                                        ? const Color(0xFFFFD700)
-                                        : const Color(0xFFB388FF),
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-
                     // SKIP
                     GestureDetector(
                       onTap: _skipRest,
@@ -14056,57 +14055,76 @@ class _SuggestionOverlayState extends State<_SuggestionOverlay> with TickerProvi
     final cardBorder = isWeight ? const Color(0xFFFF8A65) : const Color(0xFF40C4FF);
     final title = isWeight ? AppL.increaseWeight : AppL.tryReps(widget.targetReps + 2);
     return Material(
-      color: Colors.black.withAlpha(195),
-      child: Center(
-        child: ScaleTransition(
-          scale: _scale,
-          child: AnimatedBuilder(
-            animation: _auraCtrl,
-            builder: (context, child) {
-              final t = _auraCtrl.value * 2 * scala.pi;
-              final pulse = 0.88 + 0.12 * scala.sin(t);
-              final dx1 = 80.0 * scala.cos(t) * pulse;
-              final dy1 = 55.0 * scala.sin(t * 1.3) * pulse;
-              final dx2 = -70.0 * scala.cos(t + scala.pi * 0.7) * pulse;
-              final dy2 = -45.0 * scala.sin(t * 0.9 + 1.0) * pulse;
-              return Stack(
-                alignment: Alignment.center,
-                clipBehavior: Clip.none,
-                children: [
-                  Transform.translate(
-                    offset: Offset(dx1, dy1),
-                    child: Container(
-                      width: isWeight ? 200 : 130, height: isWeight ? 200 : 130,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: c1.withAlpha(isWeight ? 60 : 45),
-                        boxShadow: [BoxShadow(color: c1.withAlpha(isWeight ? 110 : 80), blurRadius: isWeight ? 70 : 45, spreadRadius: isWeight ? 18 : 10)],
+      color: Colors.transparent,
+      child: BackdropFilter(
+        filter: ui.ImageFilter.blur(sigmaX: 14, sigmaY: 14),
+        child: Container(
+          color: (isWeight ? const Color(0xFFFF5722) : const Color(0xFF1565C0)).withAlpha(35),
+          child: Center(
+            child: ScaleTransition(
+              scale: _scale,
+              child: AnimatedBuilder(
+                animation: _auraCtrl,
+                builder: (context, child) {
+                  final t = _auraCtrl.value * 2 * scala.pi;
+                  final pulse1 = 0.88 + 0.12 * scala.sin(t);
+                  final pulse2 = 0.90 + 0.10 * scala.sin(t + 1.2);
+                  return Stack(
+                    alignment: Alignment.center,
+                    clipBehavior: Clip.none,
+                    children: [
+                      // Outer halo
+                      Container(
+                        width: (isWeight ? 320.0 : 260.0) * pulse1,
+                        height: (isWeight ? 320.0 : 260.0) * pulse1,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: RadialGradient(
+                            colors: [
+                              c1.withAlpha(isWeight ? 70 : 50),
+                              c2.withAlpha(isWeight ? 35 : 25),
+                              Colors.transparent,
+                            ],
+                            stops: const [0.0, 0.5, 1.0],
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  Transform.translate(
-                    offset: Offset(dx2, dy2),
-                    child: Container(
-                      width: isWeight ? 140 : 90, height: isWeight ? 140 : 90,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: c2.withAlpha(isWeight ? 50 : 35),
-                        boxShadow: [BoxShadow(color: c2.withAlpha(isWeight ? 90 : 60), blurRadius: isWeight ? 55 : 35, spreadRadius: isWeight ? 12 : 6)],
+                      // Inner halo (offset phase for flame flicker)
+                      Container(
+                        width: (isWeight ? 200.0 : 160.0) * pulse2,
+                        height: (isWeight ? 200.0 : 160.0) * pulse2,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: RadialGradient(
+                            colors: [
+                              c1.withAlpha(isWeight ? 110 : 80),
+                              Colors.transparent,
+                            ],
+                          ),
+                        ),
                       ),
+                      // Card
+                      child!,
+                    ],
+                  );
+                },
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 36),
+                  padding: const EdgeInsets.fromLTRB(28, 32, 28, 28),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: isWeight
+                          ? [const Color(0xFF1A0800), const Color(0xFF2D1200)]
+                          : [const Color(0xFF00081A), const Color(0xFF0A0028)],
                     ),
+                    borderRadius: BorderRadius.circular(24),
+                    border: Border.all(color: cardBorder.withAlpha(180), width: 1.5),
+                    boxShadow: [
+                      BoxShadow(color: c1.withAlpha(100), blurRadius: 40, spreadRadius: 8),
+                    ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 36),
-                    padding: const EdgeInsets.fromLTRB(28, 32, 28, 28),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF121212),
-                      borderRadius: BorderRadius.circular(24),
-                      border: Border.all(color: cardBorder.withAlpha(160), width: 1.5),
-                      boxShadow: [
-                        BoxShadow(color: c1.withAlpha(70), blurRadius: 28, spreadRadius: 2),
-                        const BoxShadow(color: Colors.black54, blurRadius: 16, offset: Offset(0, 8)),
-                      ],
-                    ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -14141,12 +14159,11 @@ class _SuggestionOverlayState extends State<_SuggestionOverlay> with TickerProvi
                       ],
                     ),
                   ),
-                ],
-              );
-            },
+                ),
+              ),
+            ),
           ),
         ),
-      ),
     );
   }
 }
