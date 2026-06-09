@@ -322,6 +322,16 @@ class AppL {
     'widgetSamsungMsg': {'it': 'Su Samsung il widget potrebbe non funzionare se l\'app è in risparmio energetico.\n\nVai in:\nImpostazioni App → Batteria → Nessuna restrizione', 'en': 'On Samsung the widget may not work if the app is in battery saver mode.\n\nGo to:\nApp Settings → Battery → No restrictions', 'es': 'En Samsung el widget puede no funcionar si la app está en ahorro de batería.\n\nVe a:\nAjustes App → Batería → Sin restricciones', 'pt': 'No Samsung o widget pode não funcionar se o app estiver em economia de energia.\n\nVá em:\nConfigurações App → Bateria → Sem restrições', 'fr': 'Sur Samsung le widget peut ne pas fonctionner si l\'app est en mode économie d\'énergie.\n\nAllez dans:\nParamètres App → Batterie → Aucune restriction', 'de': 'Bei Samsung funktioniert das Widget möglicherweise nicht im Stromsparmodus.\n\nGehe zu:\nApp-Einstellungen → Akku → Keine Einschränkungen', 'el': 'Σε Samsung το widget μπορεί να μην λειτουργεί σε εξοικονόμηση ενέργειας.\n\nΠήγαινε σε:\nΡυθμίσεις Εφαρμογής → Μπαταρία → Χωρίς περιορισμούς', 'ar': 'على Samsung قد لا يعمل الودجت في وضع توفير الطاقة.\n\nاذهب إلى:\nإعدادات التطبيق → البطارية → بدون قيود', 'pl': 'Na Samsung widget może nie działać w trybie oszczędzania baterii.\n\nIdź do:\nUstawienia Aplikacji → Bateria → Bez ograniczeń', 'ro': 'Pe Samsung widget-ul poate să nu funcționeze dacă app-ul e în modul economisire baterie.\n\nMergi la:\nSetări App → Baterie → Fără restricții', 'hu': 'Samsungon a widget esetleg nem működik energiatakarékos módban.\n\nMenj ide:\nAlkalmazás beállítások → Akkumulátor → Nincs korlátozás'},
     'openSettingsBtn': {'it': 'Apri impostazioni', 'en': 'Open settings', 'es': 'Abrir ajustes', 'pt': 'Abrir configurações', 'fr': 'Ouvrir paramètres', 'de': 'Einstellungen öffnen', 'el': 'Άνοιγμα ρυθμίσεων', 'ar': 'فتح الإعدادات', 'pl': 'Otwórz ustawienia', 'ro': 'Deschide setările', 'hu': 'Beállítások megnyitása'},
     'openBatteryBtn': {'it': 'Apri impostazioni batteria', 'en': 'Open battery settings', 'es': 'Abrir ajustes de batería', 'pt': 'Abrir configurações de bateria', 'fr': 'Ouvrir paramètres batterie', 'de': 'Akku-Einstellungen öffnen', 'el': 'Άνοιγμα ρυθμίσεων μπαταρίας', 'ar': 'فتح إعدادات البطارية', 'pl': 'Otwórz ustawienia baterii', 'ro': 'Deschide setările bateriei', 'hu': 'Akkumulátor beállítások megnyitása'},
+    'cardioDurationSec': {'it': 'Durata (s)', 'en': 'Duration (s)', 'es': 'Duración (s)', 'pt': 'Duração (s)', 'fr': 'Durée (s)', 'de': 'Dauer (s)', 'el': 'Διάρκεια (s)', 'ar': 'المدة (s)', 'pl': 'Czas trwania (s)', 'ro': 'Durată (s)', 'hu': 'Időtartam (s)'},
+    'alarmSound': {'it': 'Suono allarme', 'en': 'Alarm sound', 'es': 'Sonido alarma', 'pt': 'Som alarme', 'fr': 'Son alarme', 'de': 'Alarm-Ton', 'el': 'Ήχος ειδοποίησης', 'ar': 'صوت المنبه', 'pl': 'Dźwięk alarmu', 'ro': 'Sunet alarmă', 'hu': 'Riasztás hangja'},
+    'alarmBeep': {'it': 'Beep (default)', 'en': 'Beep (default)', 'es': 'Pitido (defecto)', 'pt': 'Bipe (padrão)', 'fr': 'Bip (défaut)', 'de': 'Piep (Standard)', 'el': 'Μπιπ (προεπιλογή)', 'ar': 'صفير (افتراضي)', 'pl': 'Pisk (domyślny)', 'ro': 'Bip (implicit)', 'hu': 'Síp (alapért.)'},
+    'alarmLongBeep': {'it': 'Beep lungo', 'en': 'Long beep', 'es': 'Pitido largo', 'pt': 'Bipe longo', 'fr': 'Long bip', 'de': 'Langer Piep', 'el': 'Μακρύ μπιπ', 'ar': 'صفير طويل', 'pl': 'Długi pisk', 'ro': 'Bip lung', 'hu': 'Hosszú síp'},
+    'alarmTripleBeep': {'it': 'Triplo beep', 'en': 'Triple beep', 'es': 'Triple pitido', 'pt': 'Bipe triplo', 'fr': 'Triple bip', 'de': 'Dreifaches Piepen', 'el': 'Τριπλό μπιπ', 'ar': 'صفير ثلاثي', 'pl': 'Potrójny pisk', 'ro': 'Triplu bip', 'hu': 'Háromszoros síp'},
+    'alarmCustomFile': {'it': 'File personalizzato', 'en': 'Custom file', 'es': 'Archivo personalizado', 'pt': 'Arquivo personalizado', 'fr': 'Fichier personnalisé', 'de': 'Eigene Datei', 'el': 'Προσαρμοσμένο αρχείο', 'ar': 'ملف مخصص', 'pl': 'Własny plik', 'ro': 'Fișier personalizat', 'hu': 'Egyéni fájl'},
+    'pickAudioFile': {'it': 'Scegli file audio', 'en': 'Pick audio file', 'es': 'Elegir archivo de audio', 'pt': 'Escolher arquivo de áudio', 'fr': 'Choisir fichier audio', 'de': 'Audiodatei wählen', 'el': 'Επιλογή αρχείου ήχου', 'ar': 'اختر ملفاً صوتياً', 'pl': 'Wybierz plik audio', 'ro': 'Alege fișier audio', 'hu': 'Hangfájl választása'},
+    'noFileSelected': {'it': 'Nessun file', 'en': 'No file', 'es': 'Sin archivo', 'pt': 'Sem arquivo', 'fr': 'Aucun fichier', 'de': 'Keine Datei', 'el': 'Κανένα αρχείο', 'ar': 'لا يوجد ملف', 'pl': 'Brak pliku', 'ro': 'Niciun fișier', 'hu': 'Nincs fájl'},
+    'startCardio': {'it': 'INIZIA', 'en': 'START', 'es': 'INICIAR', 'pt': 'INICIAR', 'fr': 'DÉMARRER', 'de': 'STARTEN', 'el': 'ΕΝΑΡΞΗ', 'ar': 'ابدأ', 'pl': 'START', 'ro': 'START', 'hu': 'INDÍT'},
+    'cardioRunning': {'it': 'IN CORSO...', 'en': 'RUNNING...', 'es': 'EN CURSO...', 'pt': 'EM CURSO...', 'fr': 'EN COURS...', 'de': 'LÄUFT...', 'el': 'ΣΕ ΕΞΕΛΙΞΗ...', 'ar': 'جارٍ...', 'pl': 'W TOKU...', 'ro': 'ÎN CURS...', 'hu': 'FOLYAMATBAN...'},
   };
 
   static String get mySchedule => _t('mySchedule');
@@ -613,4 +623,14 @@ class AppL {
   static String get widgetSamsungMsg => _t('widgetSamsungMsg');
   static String get openSettingsBtn => _t('openSettingsBtn');
   static String get openBatteryBtn => _t('openBatteryBtn');
+  static String get cardioDurationSec => _t('cardioDurationSec');
+  static String get alarmSound => _t('alarmSound');
+  static String get alarmBeep => _t('alarmBeep');
+  static String get alarmLongBeep => _t('alarmLongBeep');
+  static String get alarmTripleBeep => _t('alarmTripleBeep');
+  static String get alarmCustomFile => _t('alarmCustomFile');
+  static String get pickAudioFile => _t('pickAudioFile');
+  static String get noFileSelected => _t('noFileSelected');
+  static String get startCardio => _t('startCardio');
+  static String get cardioRunning => _t('cardioRunning');
 }

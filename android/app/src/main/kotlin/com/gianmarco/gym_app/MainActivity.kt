@@ -8,7 +8,9 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.Context
 import android.media.AudioManager
+import android.media.MediaPlayer
 import android.media.ToneGenerator
+import java.io.File
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -181,6 +183,63 @@ class MainActivity : FlutterActivity() {
                             result.error("BEEP_ERROR", e.message, null)
                         }
                     }
+                    "playAlarm" -> {
+                        try {
+                            @Suppress("UNCHECKED_CAST")
+                            val args = call.arguments as Map<String, Any>
+                            val type = args["type"] as? String ?: "beep"
+                            val path = args["path"] as? String ?: ""
+                            val h = Handler(Looper.getMainLooper())
+                            when (type) {
+                                "long" -> {
+                                    val tone = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
+                                    tone.startTone(ToneGenerator.TONE_PROP_BEEP2, 1500)
+                                    h.postDelayed({ tone.release() }, 1800)
+                                }
+                                "triple" -> {
+                                    val tone = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
+                                    repeat(3) { i ->
+                                        h.postDelayed({
+                                            tone.startTone(ToneGenerator.TONE_PROP_BEEP, 200)
+                                        }, (i * 350).toLong())
+                                    }
+                                    h.postDelayed({ tone.release() }, 1200)
+                                }
+                                "custom" -> {
+                                    if (path.isNotEmpty() && File(path).exists()) {
+                                        val mp = MediaPlayer()
+                                        mp.setAudioStreamType(AudioManager.STREAM_MUSIC)
+                                        mp.setDataSource(path)
+                                        mp.prepare()
+                                        mp.setOnCompletionListener { it.release() }
+                                        mp.start()
+                                    } else {
+                                        // Fallback to default beep
+                                        val tone = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
+                                        repeat(3) { i ->
+                                            h.postDelayed({
+                                                tone.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 500)
+                                            }, (i * 850).toLong())
+                                        }
+                                        h.postDelayed({ tone.release() }, 2700)
+                                    }
+                                }
+                                else -> {
+                                    // "beep" default: 3x beep sequence
+                                    val tone = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
+                                    repeat(3) { i ->
+                                        h.postDelayed({
+                                            tone.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, if (i < 2) 500 else 700)
+                                        }, (i * 850).toLong())
+                                    }
+                                    h.postDelayed({ tone.release() }, 2700)
+                                }
+                            }
+                            result.success(null)
+                        } catch (e: Exception) {
+                            result.error("ALARM_ERROR", e.message, null)
+                        }
+                    }
                     "showTimerNotification" -> {
                         try {
                             @Suppress("UNCHECKED_CAST")
@@ -196,21 +255,36 @@ class MainActivity : FlutterActivity() {
                             }
                             timerNotificationToken = token
 
-                            val views = RemoteViews(packageName, R.layout.notification_timer)
-                            views.setTextViewText(R.id.notif_label, subtitle)
-                            // Adaptive text color based on system dark/light mode
+                            val durationMs = remainingSeconds.coerceAtLeast(0L) * 1000L
+                            val chronometerBase = SystemClock.elapsedRealtime() + durationMs
+
+                            // Adaptive text color
                             val nightMode = resources.configuration.uiMode and android.content.res.Configuration.UI_MODE_NIGHT_MASK
                             val isDarkMode = nightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES
                             val textColor = if (isDarkMode) 0xFFFFFFFF.toInt() else 0xFF212121.toInt()
-                            views.setInt(R.id.notif_time, "setTextColor", textColor)
-                            views.setInt(R.id.notif_label, "setTextColor", textColor)
-                            val durationMs = remainingSeconds.coerceAtLeast(0L) * 1000L
-                            val chronometerBase = SystemClock.elapsedRealtime() + durationMs
-                            views.setChronometer(R.id.notif_time, chronometerBase, null, true)
-                            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                                views.setChronometerCountDown(R.id.notif_time, true)
+
+                            // Expanded view (big Chronometer)
+                            val bigViews = RemoteViews(packageName, R.layout.notification_timer)
+                            bigViews.setTextViewText(R.id.notif_label, subtitle)
+                            bigViews.setInt(R.id.notif_time, "setTextColor", textColor)
+                            bigViews.setInt(R.id.notif_label, "setTextColor", textColor)
+                            bigViews.setChronometer(R.id.notif_time, chronometerBase, null, true)
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                bigViews.setChronometerCountDown(R.id.notif_time, true)
                             } else {
-                                views.setTextViewText(R.id.notif_time, timeStr)
+                                bigViews.setTextViewText(R.id.notif_time, timeStr)
+                            }
+
+                            // Collapsed view (28sp Chronometer, fits in 64dp)
+                            val collapsedViews = RemoteViews(packageName, R.layout.notification_timer_collapsed)
+                            collapsedViews.setTextViewText(R.id.notif_label_c, subtitle)
+                            collapsedViews.setInt(R.id.notif_time_c, "setTextColor", textColor)
+                            collapsedViews.setInt(R.id.notif_label_c, "setTextColor", textColor)
+                            collapsedViews.setChronometer(R.id.notif_time_c, chronometerBase, null, true)
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                collapsedViews.setChronometerCountDown(R.id.notif_time_c, true)
+                            } else {
+                                collapsedViews.setTextViewText(R.id.notif_time_c, timeStr)
                             }
 
                             val launchIntent = Intent(this, MainActivity::class.java).apply {
@@ -229,7 +303,8 @@ class MainActivity : FlutterActivity() {
                                 .setAutoCancel(false)
                                 .setOnlyAlertOnce(true)
                                 .setCategory(NotificationCompat.CATEGORY_STOPWATCH)
-                                .setCustomContentView(views)
+                                .setCustomContentView(collapsedViews)
+                                .setCustomBigContentView(bigViews)
                                 .setStyle(NotificationCompat.DecoratedCustomViewStyle())
                                 .setContentIntent(launchPendingIntent)
                                 .build()

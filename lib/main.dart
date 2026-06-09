@@ -20,6 +20,7 @@ import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:file_picker/file_picker.dart';
 // ignore: deprecated_member_use
 import 'js_stub.dart' if (dart.library.js) 'dart:js' as js;
 import 'gif_exercise_catalog.dart';
@@ -230,6 +231,11 @@ void main() async {
     );
   }
 
+  // Inizializza MobileAds PRIMA di runApp — stesso pattern di app_cliente (evita crash ads)
+  try {
+    if (!kIsWeb) await MobileAds.instance.initialize();
+  } catch (_) {}
+
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -243,12 +249,7 @@ void main() async {
 }
 
 Future<void> _initPluginsBackground() async {
-  // AdMob
-  try {
-    if (!kIsWeb) await MobileAds.instance.initialize();
-  } catch (_) {}
-
-  // Precarica annuncio interstitial
+  // Precarica annuncio interstitial (MobileAds già inizializzato in main)
   if (!kIsWeb) {
     try {
       AdManager.instance.loadInterstitial();
@@ -1316,24 +1317,14 @@ Future<void> checkAndScheduleStreakNotification(String lang) async {
   final last = DateTime.tryParse(lastStr);
   if (last == null) return;
   final daysSince = DateTime.now().difference(last).inDays;
+  // Don't show immediate notification — AlarmManager handles background delivery.
+  // Only reschedule if no alarm is pending (alarm was somehow missed).
   if (daysSince >= 2) {
-    const channelId = 'streak_reminder';
-    const androidDetails = AndroidNotificationDetails(
-      channelId,
-      'Streak Reminder',
-      channelDescription: 'Remind user to train to keep their streak',
-      importance: Importance.high,
-      priority: Priority.high,
-      icon: 'ic_notification',
-    );
-    final title = AppL.t(lang, 'keepStreakAlive');
-    final body = AppL.t(lang, 'streakReminderBody').replaceAll('{days}', '$daysSince');
-    await flutterLocalNotificationsPlugin.show(
-      9902,
-      title,
-      body,
-      const NotificationDetails(android: androidDetails),
-    );
+    final nextFireStr = prefs.getString('streak_reminder_next_fire');
+    final nextFireMs = int.tryParse(nextFireStr ?? '0') ?? 0;
+    if (nextFireMs <= DateTime.now().millisecondsSinceEpoch) {
+      await scheduleStreakReminder(lang, force: true);
+    }
   }
 }
 
@@ -4442,6 +4433,10 @@ class ExerciseConfig {
   bool useQuarterStep;
   bool useEvenStep;
   bool useSingleStep;
+  // 0 = strength exercise; >0 = cardio duration in seconds
+  int cardioSeconds;
+
+  bool get isCardio => cardioSeconds > 0;
 
   ExerciseConfig({
     required this.name,
@@ -4456,6 +4451,7 @@ class ExerciseConfig {
     this.useQuarterStep = false,
     this.useEvenStep = false,
     this.useSingleStep = false,
+    this.cardioSeconds = 0,
   });
 
   Map<String, dynamic> toJson() => {
@@ -4472,6 +4468,7 @@ class ExerciseConfig {
     if (useQuarterStep) 'useQuarterStep': useQuarterStep,
     if (useEvenStep) 'useEvenStep': useEvenStep,
     if (useSingleStep) 'useSingleStep': useSingleStep,
+    if (cardioSeconds > 0) 'cardioSeconds': cardioSeconds,
   };
 
   factory ExerciseConfig.fromJson(Map<String, dynamic> json) {
@@ -4497,6 +4494,7 @@ class ExerciseConfig {
       useQuarterStep: json['useQuarterStep'] == true,
       useEvenStep: json['useEvenStep'] == true,
       useSingleStep: json['useSingleStep'] == true,
+      cardioSeconds: (json['cardioSeconds'] as num?)?.toInt() ?? 0,
     );
     if (json['results'] != null) {
       ex.results = List<Map<String, dynamic>>.from(json['results']);
@@ -6543,6 +6541,8 @@ class _ClientMainPageState extends State<ClientMainPage>
   bool _stUsePounds = false;
   bool _stDisableWeightKeyboard = false;
   bool _stDarkMode = true;
+  String _stAlarmType = 'beep';
+  String _stAlarmPath = '';
 
   String _appLang = 'it';
   BannerAd? _bannerAd;
@@ -6969,6 +6969,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                   _saveMainSettings();
                 },
               ),
+              _alarmSoundSettingRow(),
               _mainSettingRow(
                 Icons.vibration,
                 AppL.timerVibration,
@@ -7416,6 +7417,131 @@ class _ClientMainPageState extends State<ClientMainPage>
     );
   }
 
+  Widget _alarmSoundSettingRow() {
+    final labelMap = {
+      'beep': AppL.alarmBeep,
+      'long': AppL.alarmLongBeep,
+      'triple': AppL.alarmTripleBeep,
+      'custom': AppL.alarmCustomFile,
+    };
+    final currentLabel = labelMap[_stAlarmType] ?? AppL.alarmBeep;
+    return Builder(builder: (ctx) {
+      final textClr = Theme.of(ctx).colorScheme.onSurface;
+      final subClr = textClr.withAlpha(140);
+      return InkWell(
+        borderRadius: BorderRadius.circular(8),
+        onTap: () => _showAlarmSoundSheet(ctx),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Icon(Icons.music_note_outlined, color: appAccentNotifier.value, size: 20),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(AppL.alarmSound, style: TextStyle(color: textClr, fontSize: 14)),
+                    Text(currentLabel, style: TextStyle(color: subClr, fontSize: 12)),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right, color: subClr, size: 20),
+            ],
+          ),
+        ),
+      );
+    });
+  }
+
+  void _showAlarmSoundSheet(BuildContext ctx) {
+    final options = [
+      ('beep', AppL.alarmBeep),
+      ('long', AppL.alarmLongBeep),
+      ('triple', AppL.alarmTripleBeep),
+      ('custom', AppL.alarmCustomFile),
+    ];
+    showModalBottomSheet(
+      context: ctx,
+      backgroundColor: Theme.of(ctx).colorScheme.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) => StatefulBuilder(
+        builder: (bCtx, setSheetState) {
+          return SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(AppL.alarmSound,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Theme.of(bCtx).colorScheme.onSurface,
+                      )),
+                  const SizedBox(height: 12),
+                  ...options.map((opt) {
+                    final isSelected = _stAlarmType == opt.$1;
+                    return ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(
+                        isSelected ? Icons.radio_button_checked : Icons.radio_button_off,
+                        color: isSelected ? appAccentNotifier.value : null,
+                      ),
+                      title: Text(opt.$2),
+                      subtitle: opt.$1 == 'custom' && _stAlarmType == 'custom' && _stAlarmPath.isNotEmpty
+                          ? Text(
+                              _stAlarmPath.split('/').last,
+                              style: const TextStyle(fontSize: 11),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          : null,
+                      onTap: () async {
+                        if (opt.$1 == 'custom') {
+                          final picked = await FilePicker.platform.pickFiles(
+                            type: FileType.audio,
+                            allowMultiple: false,
+                          );
+                          if (picked != null && picked.files.isNotEmpty) {
+                            final path = picked.files.single.path ?? '';
+                            if (path.isNotEmpty) {
+                              setState(() {
+                                _stAlarmType = 'custom';
+                                _stAlarmPath = path;
+                              });
+                              setSheetState(() {});
+                              _saveMainSettings();
+                            }
+                          }
+                        } else {
+                          setState(() {
+                            _stAlarmType = opt.$1;
+                            _stAlarmPath = '';
+                          });
+                          setSheetState(() {});
+                          _saveMainSettings();
+                          Navigator.of(bCtx).pop();
+                        }
+                      },
+                    );
+                  }),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Widget _mainSettingRow(
     IconData icon,
     String label,
@@ -7527,6 +7653,8 @@ class _ClientMainPageState extends State<ClientMainPage>
       _stDisableWeightKeyboard =
           prefs.getBool('disable_weight_keyboard') ?? false;
       _stDarkMode = prefs.getBool('dark_mode') ?? true;
+      _stAlarmType = prefs.getString('alarm_sound_type') ?? 'beep';
+      _stAlarmPath = prefs.getString('alarm_sound_path') ?? '';
     });
   }
 
@@ -7541,6 +7669,8 @@ class _ClientMainPageState extends State<ClientMainPage>
     await prefs.setBool('use_pounds', _stUsePounds);
     await prefs.setBool('disable_weight_keyboard', _stDisableWeightKeyboard);
     await prefs.setBool('dark_mode', _stDarkMode);
+    await prefs.setString('alarm_sound_type', _stAlarmType);
+    await prefs.setString('alarm_sound_path', _stAlarmPath);
   }
 
   Future<void> _loadData() async {
@@ -10156,6 +10286,9 @@ class _ClientMainPageState extends State<ClientMainPage>
       text: '${original.interExercisePause}',
     );
     final noteCtrl = TextEditingController(text: original.notePT);
+    final cardioCtrl = TextEditingController(
+      text: '${original.cardioSeconds > 0 ? original.cardioSeconds : 300}',
+    );
     int supersetGroup = original.supersetGroup;
     int currentSets = original.targetSets;
     List<TextEditingController> repsCtrls = List.generate(
@@ -10166,6 +10299,8 @@ class _ClientMainPageState extends State<ClientMainPage>
     if (original.gifFilename != null) {
       selectedExInfo = findByGifSlug(original.gifFilename!);
     }
+    bool isCardioMode = original.isCardio ||
+        (resolveExerciseInfo(original.name)?.category == 'cardio');
     List<ExerciseInfo> suggestions = [];
 
     await showModalBottomSheet(
@@ -10240,10 +10375,10 @@ class _ClientMainPageState extends State<ClientMainPage>
                         borderSide: BorderSide.none,
                       ),
                     ),
-                    onChanged: (v) => setS(
-                      () =>
-                          suggestions = searchExercisesWithItalian(v, limit: 6),
-                    ),
+                    onChanged: (v) => setS(() {
+                      suggestions = searchExercisesWithItalian(v, limit: 6);
+                      isCardioMode = resolveExerciseInfo(v)?.category == 'cardio';
+                    }),
                   ),
                   if (suggestions.isNotEmpty)
                     Container(
@@ -10298,6 +10433,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                               setS(() {
                                 suggestions = [];
                                 selectedExInfo = ex;
+                                isCardioMode = ex.category == 'cardio';
                               });
                             },
                           );
@@ -10321,105 +10457,139 @@ class _ClientMainPageState extends State<ClientMainPage>
                     ),
                     const SizedBox(height: 12),
                   ],
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: setsCtrl,
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                          decoration: InputDecoration(
-                            labelText: AppL.sets,
-                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                            filled: true,
-                            fillColor: Colors.black26,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          onChanged: updateSets,
+                  if (isCardioMode) ...[
+                    TextField(
+                      controller: cardioCtrl,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                      decoration: InputDecoration(
+                        labelText: AppL.cardioDurationSec,
+                        labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                        filled: true,
+                        fillColor: Colors.black26,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: TextField(
-                          controller: recoveryCtrl,
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                          decoration: InputDecoration(
-                            labelText: AppL.recovery,
-                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                            filled: true,
-                            fillColor: Colors.black26,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: pausaCtrl,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                      decoration: InputDecoration(
+                        labelText: AppL.pauseSec,
+                        labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                        filled: true,
+                        fillColor: Colors.black26,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                  ] else ...[
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: setsCtrl,
+                            keyboardType: TextInputType.number,
+                            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                            decoration: InputDecoration(
+                              labelText: AppL.sets,
+                              labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                              filled: true,
+                              fillColor: Colors.black26,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            onChanged: updateSets,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: TextField(
+                            controller: recoveryCtrl,
+                            keyboardType: TextInputType.number,
+                            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                            decoration: InputDecoration(
+                              labelText: AppL.recovery,
+                              labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                              filled: true,
+                              fillColor: Colors.black26,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: TextField(
-                          controller: pausaCtrl,
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                          decoration: InputDecoration(
-                            labelText: AppL.pauseSec,
-                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                            filled: true,
-                            fillColor: Colors.black26,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: TextField(
+                            controller: pausaCtrl,
+                            keyboardType: TextInputType.number,
+                            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                            decoration: InputDecoration(
+                              labelText: AppL.pauseSec,
+                              labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                              filled: true,
+                              fillColor: Colors.black26,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    AppL.repsPerSet,
-                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
-                  ),
-                  const SizedBox(height: 6),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: List.generate(
-                      currentSets,
-                      (i) => SizedBox(
-                        width: 58,
-                        child: TextField(
-                          controller: repsCtrls[i],
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-                            fontSize: 13,
-                          ),
-                          decoration: InputDecoration(
-                            labelText: 'S${i + 1}',
-                            labelStyle: TextStyle(
-                              color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
-                              fontSize: 11,
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      AppL.repsPerSet,
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
+                    ),
+                    const SizedBox(height: 6),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: List.generate(
+                        currentSets,
+                        (i) => SizedBox(
+                          width: 58,
+                          child: TextField(
+                            controller: repsCtrls[i],
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: _isDarkCtx(context) ? Colors.white : Colors.black87,
+                              fontSize: 13,
                             ),
-                            filled: true,
-                            fillColor: Colors.black26,
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 8,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
+                            decoration: InputDecoration(
+                              labelText: 'S${i + 1}',
+                              labelStyle: TextStyle(
+                                color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
+                                fontSize: 11,
+                              ),
+                              filled: true,
+                              fillColor: Colors.black26,
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 8,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                   const SizedBox(height: 16),
                   TextField(
                     controller: noteCtrl,
@@ -10490,13 +10660,11 @@ class _ClientMainPageState extends State<ClientMainPage>
                       onPressed: () {
                         final name = nameCtrl.text.trim();
                         if (name.isEmpty) return;
-                        final sets = (int.tryParse(setsCtrl.text) ?? 3).clamp(
-                          1,
-                          20,
-                        );
-                        final repsList = repsCtrls
-                            .map((c) => int.tryParse(c.text) ?? 10)
-                            .toList();
+                        final cardioSec = isCardioMode
+                            ? (int.tryParse(cardioCtrl.text) ?? 300).clamp(1, 86400)
+                            : 0;
+                        final sets = isCardioMode ? 1 : (int.tryParse(setsCtrl.text) ?? 3).clamp(1, 20);
+                        final repsList = isCardioMode ? [1] : repsCtrls.map((c) => int.tryParse(c.text) ?? 10).toList();
                         final recovery = int.tryParse(recoveryCtrl.text) ?? 90;
                         final pausa = int.tryParse(pausaCtrl.text) ?? 120;
                         Navigator.pop(c);
@@ -10514,6 +10682,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                 selectedExInfo?.gifFilename ??
                                 original.gifFilename,
                             useQuarterStep: original.useQuarterStep,
+                            cardioSeconds: cardioSec,
                           );
                           updated.results = original.results;
                           myRoutine[dayIdx].exercises[exIdx] = updated;
@@ -11993,6 +12162,9 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     final recoveryCtrl = TextEditingController(text: '${orig.recoveryTime}');
     final pausaCtrl = TextEditingController(text: '${orig.interExercisePause}');
     final noteCtrl = TextEditingController(text: orig.notePT);
+    final cardioCtrl = TextEditingController(
+      text: '${orig.cardioSeconds > 0 ? orig.cardioSeconds : 300}',
+    );
     int supersetGroup = orig.supersetGroup;
     int currentSets = orig.targetSets;
     List<TextEditingController> repsCtrls = List.generate(
@@ -12001,6 +12173,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     );
     if (repsCtrls.isEmpty) repsCtrls = [TextEditingController(text: '10')];
     ExerciseInfo? selectedExInfo;
+    bool isCardioMode = orig.isCardio || (resolveExerciseInfo(orig.name)?.category == 'cardio');
 
     showModalBottomSheet(
       context: context,
@@ -12075,12 +12248,18 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         borderSide: BorderSide.none,
                       ),
                     ),
+                    onChanged: (v) => setS(() {
+                      isCardioMode = resolveExerciseInfo(v)?.category == 'cardio';
+                    }),
                   ),
                   const SizedBox(height: 8),
                   OutlinedButton.icon(
                     onPressed: () => _apriArchivioEsercizi(ctx, setS, (ex) {
                       nameCtrl.text = ex.name;
-                      setS(() => selectedExInfo = ex);
+                      setS(() {
+                        selectedExInfo = ex;
+                        isCardioMode = ex.category == 'cardio';
+                      });
                     }),
                     icon: const Icon(Icons.library_books_rounded, size: 18),
                     label: Text(AppL.browseArchive),
@@ -12093,105 +12272,139 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     ),
                   ),
                   const SizedBox(height: 12),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextField(
-                          controller: setsCtrl,
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                          decoration: InputDecoration(
-                            labelText: AppL.sets,
-                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                            filled: true,
-                            fillColor: Colors.black26,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
-                          onChanged: updateSets,
+                  if (isCardioMode) ...[
+                    TextField(
+                      controller: cardioCtrl,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                      decoration: InputDecoration(
+                        labelText: AppL.cardioDurationSec,
+                        labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                        filled: true,
+                        fillColor: Colors.black26,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
                         ),
                       ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: TextField(
-                          controller: recoveryCtrl,
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                          decoration: InputDecoration(
-                            labelText: AppL.recovery,
-                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                            filled: true,
-                            fillColor: Colors.black26,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: pausaCtrl,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                      decoration: InputDecoration(
+                        labelText: AppL.pauseSec,
+                        labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                        filled: true,
+                        fillColor: Colors.black26,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                  ] else ...[
+                    Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            controller: setsCtrl,
+                            keyboardType: TextInputType.number,
+                            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                            decoration: InputDecoration(
+                              labelText: AppL.sets,
+                              labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                              filled: true,
+                              fillColor: Colors.black26,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
+                            ),
+                            onChanged: updateSets,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: TextField(
+                            controller: recoveryCtrl,
+                            keyboardType: TextInputType.number,
+                            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                            decoration: InputDecoration(
+                              labelText: AppL.recovery,
+                              labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                              filled: true,
+                              fillColor: Colors.black26,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: TextField(
-                          controller: pausaCtrl,
-                          keyboardType: TextInputType.number,
-                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                          decoration: InputDecoration(
-                            labelText: AppL.pauseSec,
-                            labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                            filled: true,
-                            fillColor: Colors.black26,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide.none,
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: TextField(
+                            controller: pausaCtrl,
+                            keyboardType: TextInputType.number,
+                            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                            decoration: InputDecoration(
+                              labelText: AppL.pauseSec,
+                              labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                              filled: true,
+                              fillColor: Colors.black26,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(12),
+                                borderSide: BorderSide.none,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    AppL.repsPerSet,
-                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
-                  ),
-                  const SizedBox(height: 6),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: List.generate(
-                      currentSets,
-                      (i) => SizedBox(
-                        width: 58,
-                        child: TextField(
-                          controller: repsCtrls[i],
-                          keyboardType: TextInputType.number,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-                            fontSize: 13,
-                          ),
-                          decoration: InputDecoration(
-                            labelText: 'S${i + 1}',
-                            labelStyle: TextStyle(
-                              color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
-                              fontSize: 11,
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      AppL.repsPerSet,
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
+                    ),
+                    const SizedBox(height: 6),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: List.generate(
+                        currentSets,
+                        (i) => SizedBox(
+                          width: 58,
+                          child: TextField(
+                            controller: repsCtrls[i],
+                            keyboardType: TextInputType.number,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: _isDarkCtx(context) ? Colors.white : Colors.black87,
+                              fontSize: 13,
                             ),
-                            filled: true,
-                            fillColor: Colors.black26,
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 8,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
+                            decoration: InputDecoration(
+                              labelText: 'S${i + 1}',
+                              labelStyle: TextStyle(
+                                color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
+                                fontSize: 11,
+                              ),
+                              filled: true,
+                              fillColor: Colors.black26,
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 8,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide.none,
+                              ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                   const SizedBox(height: 16),
                   TextField(
                     controller: noteCtrl,
@@ -12215,13 +12428,11 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                       onPressed: () {
                         final name = nameCtrl.text.trim();
                         if (name.isEmpty) return;
-                        final sets = (int.tryParse(setsCtrl.text) ?? 3).clamp(
-                          1,
-                          20,
-                        );
-                        final repsList = repsCtrls
-                            .map((c) => int.tryParse(c.text) ?? 10)
-                            .toList();
+                        final cardioSec = isCardioMode
+                            ? (int.tryParse(cardioCtrl.text) ?? 300).clamp(1, 86400)
+                            : 0;
+                        final sets = isCardioMode ? 1 : (int.tryParse(setsCtrl.text) ?? 3).clamp(1, 20);
+                        final repsList = isCardioMode ? [1] : repsCtrls.map((c) => int.tryParse(c.text) ?? 10).toList();
                         final recovery = int.tryParse(recoveryCtrl.text) ?? 90;
                         final pausa = int.tryParse(pausaCtrl.text) ?? 120;
                         final newEx = ExerciseConfig(
@@ -12236,6 +12447,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           gifFilename:
                               selectedExInfo?.gifFilename ?? orig.gifFilename,
                           useQuarterStep: orig.useQuarterStep,
+                          cardioSeconds: cardioSec,
                         );
                         Navigator.pop(c);
                         setState(() => _days[dayIdx].exercises[exIdx] = newEx);
@@ -12669,6 +12881,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   bool _timerSoundEnabled = true;
   bool _vibrationEnabled = true;
   bool _wakelockEnabled = true;
+  // Alarm sound customization
+  String _alarmSoundType = 'beep';
+  String _alarmSoundPath = '';
+  // Cardio countdown timer
+  Timer? _cardioCountdownTimer;
+  int _cardioCountdownRemaining = 0;
+  bool _cardioTimerRunning = false;
   AppLifecycleState _appLifecycleState = AppLifecycleState.resumed;
   // Contatore generazione notifica (annulla notifiche di timer precedenti)
   int _notifGen = 0;
@@ -12773,6 +12992,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         _displayInPounds = prefs.getBool('use_pounds') ?? false;
         _disableWeightKeyboard =
             prefs.getBool('disable_weight_keyboard') ?? false;
+        _alarmSoundType = prefs.getString('alarm_sound_type') ?? 'beep';
+        _alarmSoundPath = prefs.getString('alarm_sound_path') ?? '';
       });
   }
 
@@ -13148,6 +13369,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     if (_bgTimer != null) _bgTimer!.cancel();
+    _cardioCountdownTimer?.cancel();
     _clearTimerNotifications();
     _inlineWorkoutNativeAd?.dispose();
     _startWorkoutNativeAd?.dispose();
@@ -14236,24 +14458,39 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (c) {
-        // Compute session progress vs previous session
+        // Compute session progress using the MAX-WEIGHT set per exercise.
+        // Using the heaviest set (S1 in a pyramid) avoids distortions from
+        // the last/lightest set, which varies with fatigue and is not a
+        // reliable strength indicator. Weight-up rule: cap both at min(currR,prevR).
         double? progressPct;
         if (_previousResults.isNotEmpty && _allCompletedExercises.isNotEmpty) {
-          double curMax = 0, prevMax = 0;
+          double cur1RM = 0, prev1RM = 0;
           for (final ex in _allCompletedExercises) {
-            for (final s in (ex['series'] as List)) {
+            final currSeries = (ex['series'] as List);
+            final prevSeries = _previousResults[ex['exercise']] ?? [];
+            if (currSeries.isEmpty || prevSeries.isEmpty) continue;
+            // Find max-weight set in each session
+            double bestCW = 0, bestCR = 0;
+            for (final s in currSeries) {
               final w = (s['w'] ?? 0.0).toDouble();
-              if (w > curMax) curMax = w;
+              final r = (s['r'] ?? 0.0).toDouble();
+              if (w > bestCW) { bestCW = w; bestCR = r; }
             }
-            final pSeries = _previousResults[ex['exercise']];
-            if (pSeries != null) {
-              for (final s in pSeries) {
-                final w = (s['w'] ?? 0.0).toDouble();
-                if (w > prevMax) prevMax = w;
-              }
+            double bestPW = 0, bestPR = 0;
+            for (final s in prevSeries) {
+              final w = (s['w'] ?? 0.0).toDouble();
+              final r = (s['r'] ?? 0.0).toDouble();
+              if (w > bestPW) { bestPW = w; bestPR = r; }
             }
+            final weightUp = bestCW > bestPW;
+            final effCR = weightUp ? (bestCR < bestPR ? bestCR : bestPR) : bestCR;
+            final effPR = weightUp ? (bestPR < bestCR ? bestPR : bestCR) : bestPR;
+            final ec = effCR > 0 ? bestCW * (1 + effCR / (30.0 + bestCW / 10.0)) : bestCW;
+            final ep = effPR > 0 ? bestPW * (1 + effPR / (30.0 + bestPW / 10.0)) : bestPW;
+            if (ec > cur1RM) cur1RM = ec;
+            if (ep > prev1RM) prev1RM = ep;
           }
-          if (prevMax > 0) progressPct = (curMax - prevMax) / prevMax * 100;
+          if (prev1RM > 0) progressPct = (cur1RM - prev1RM) / prev1RM * 100;
         }
         return _WorkoutShareSheet(
           dayName: widget.day.dayName,
@@ -14401,19 +14638,17 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     });
   }
 
-  // Suono di avviso tramite ToneGenerator nativo Android — campanella bassa x3
+  // Suono di avviso tramite ToneGenerator nativo Android
   Future<void> _playBeep() async {
     if (kIsWeb) {
       _playWebTimerBeep();
       return;
     }
     try {
-      // ♪ dong dong DONG — tre rintocchi lenti da campanella
-      await _gymFileChannel.invokeMethod('playBeep', 500);
-      await Future.delayed(const Duration(milliseconds: 350));
-      await _gymFileChannel.invokeMethod('playBeep', 500);
-      await Future.delayed(const Duration(milliseconds: 350));
-      await _gymFileChannel.invokeMethod('playBeep', 700);
+      await _gymFileChannel.invokeMethod('playAlarm', {
+        'type': _alarmSoundType,
+        'path': _alarmSoundPath,
+      });
     } catch (e) {
       debugPrint("Errore beep: $e");
     }
@@ -14435,6 +14670,73 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         () => HapticFeedback.heavyImpact(),
       );
     }
+  }
+
+  void _startCardioCountdown() {
+    final ex = widget.day.exercises[exI];
+    final secs = ex.cardioSeconds;
+    _cardioCountdownTimer?.cancel();
+    setState(() {
+      _cardioCountdownRemaining = secs;
+      _cardioTimerRunning = true;
+    });
+    if (_wakelockEnabled) try { WakelockPlus.enable(); } catch (_) {}
+    _cardioCountdownTimer = Timer.periodic(const Duration(seconds: 1), (t) {
+      if (!mounted) { t.cancel(); return; }
+      setState(() {
+        if (_cardioCountdownRemaining > 1) {
+          _cardioCountdownRemaining--;
+        } else {
+          _cardioCountdownRemaining = 0;
+          _cardioTimerRunning = false;
+          t.cancel();
+          _eseguiFeedbackFineTimer();
+          // auto-save cardio set
+          wC.text = '0';
+          rC.text = '${ex.cardioSeconds}';
+          _saveSet();
+        }
+      });
+    });
+  }
+
+  String _formatCardioTime(int secs) {
+    final m = secs ~/ 60;
+    final s = secs % 60;
+    return '${m.toString().padLeft(2, '0')}:${s.toString().padLeft(2, '0')}';
+  }
+
+  Widget _buildCardioCountdownWidget(ExerciseConfig ex, Color accent) {
+    final total = ex.cardioSeconds;
+    final remaining = _cardioTimerRunning ? _cardioCountdownRemaining : total;
+    final progress = total > 0 ? (total - remaining) / total : 0.0;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          _formatCardioTime(remaining),
+          style: TextStyle(
+            fontSize: 72,
+            fontWeight: FontWeight.bold,
+            color: accent,
+            fontFeatures: const [ui.FontFeature.tabularFigures()],
+          ),
+        ),
+        const SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 32),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearProgressIndicator(
+              value: progress.clamp(0.0, 1.0),
+              minHeight: 6,
+              backgroundColor: accent.withAlpha(40),
+              valueColor: AlwaysStoppedAnimation<Color>(accent),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Future<void> _aggiornaJsonSuDisco() async {
@@ -14461,6 +14763,11 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   }
 
   void _confermaSerie() {
+    final currentEx = widget.day.exercises[exI];
+    if (currentEx.isCardio) {
+      if (!_cardioTimerRunning) _startCardioCountdown();
+      return;
+    }
     final double w = double.tryParse(wC.text) ?? -1;
     final int r = int.tryParse(rC.text) ?? 0;
     if (w < 0 || r <= 0) {
@@ -14473,7 +14780,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       );
       return;
     }
-    final currentEx = widget.day.exercises[exI];
     _setExerciseWeightMode(
       currentEx,
       useQuarterStep: _usesQuarterStepForExercise(currentEx, w),
@@ -14484,6 +14790,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       _saveSet();
       return;
     }
+
+    // Start rest timer immediately so the chip appears on screen during the popup
+    final bool _isLastSet = setN >= currentEx.targetSets;
+    final int _timerSec = _isLastSet
+        ? (currentEx.interExercisePause > 0 ? currentEx.interExercisePause : 120)
+        : (currentEx.recoveryTime > 0 ? currentEx.recoveryTime : 90);
+    _avviaTimerSeNonAttivo(_timerSec);
 
     showModalBottomSheet(
       context: context,
@@ -15259,6 +15572,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                 ),
                 if (giaFatto)
                   Expanded(child: Center(child: _buildBoxEsercizioCompletato()))
+                else if (ex.isCardio)
+                  Expanded(child: _buildCardioCountdownWidget(ex, accent))
                 else
                   Expanded(
                     child: _DrumPickers(
@@ -15291,6 +15606,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       onInteraction: () => _avviaTimerConTempo(timeToUse),
                     ),
                   ),
+                if (!giaFatto && timerActive) _buildFloatingTimerChip(accent),
                 if (!giaFatto)
                   Container(
                     padding: EdgeInsets.fromLTRB(
@@ -15312,10 +15628,24 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     child: SizedBox(
                       width: double.infinity,
                       height: 56,
-                      child: ElevatedButton(
-                        onPressed: _confermaSerie,
-                        child: Text(AppL.confirmSeries),
-                      ),
+                      child: ex.isCardio
+                          ? ElevatedButton(
+                              onPressed: _cardioTimerRunning ? null : _confermaSerie,
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: _cardioTimerRunning ? Colors.grey.shade700 : accent,
+                                foregroundColor: Colors.black,
+                              ),
+                              child: Text(
+                                _cardioTimerRunning
+                                    ? _formatCardioTime(_cardioCountdownRemaining)
+                                    : AppL.startCardio,
+                                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
+                            )
+                          : ElevatedButton(
+                              onPressed: _confermaSerie,
+                              child: Text(AppL.confirmSeries),
+                            ),
                     ),
                   ),
               ],
@@ -15324,6 +15654,46 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         ), // closes GestureDetector (body)
       ), // closes Scaffold
     ); // chiude PopScope
+  }
+
+  Widget _buildFloatingTimerChip(Color accent) {
+    final int s = _bgCounter;
+    final String label = s >= 60
+        ? '${(s ~/ 60).toString().padLeft(2, '0')}:${(s % 60).toString().padLeft(2, '0')}'
+        : '$s s';
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Center(
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+          decoration: BoxDecoration(
+            color: accent.withAlpha(230),
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 8)],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.timer, color: Colors.white, size: 16),
+              const SizedBox(width: 6),
+              Text(
+                label,
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+              const SizedBox(width: 10),
+              GestureDetector(
+                onTap: () {
+                  _bgTimer?.cancel();
+                  setState(() { timerActive = false; _bgCounter = 0; _endTime = null; });
+                  _clearTimerNotifications();
+                },
+                child: const Icon(Icons.close, color: Colors.white, size: 18),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   void _setDrumValues(int targetExI, int targetSetN) {
@@ -18477,7 +18847,7 @@ class _WorkoutProgressChartState extends State<_WorkoutProgressChart> {
       for (final s in series) {
         final w = (s['w'] ?? 0.0).toDouble();
         final r = (s['r'] ?? 0).toDouble();
-        final est1RM = r > 0 ? w * (1 + r / 30.0) : w;
+        final est1RM = r > 0 ? w * (1 + r / (30.0 + w / 10.0)) : w;
         if (est1RM > maxEst1RM) maxEst1RM = est1RM;
       }
       bySession.putIfAbsent(sessionKey, () => {})[exName] = maxEst1RM;
@@ -18673,7 +19043,7 @@ class _PTGraphWidgetState extends State<PTGraphWidget> {
       if (series.length > maxSetsFound) maxSetsFound = series.length;
     }
 
-    // 2. Score = 1RM stimato (Epley) per serie → normalizzazione min-max per indice serie
+    // 2. Score = 1RM stimato (adattivo) per serie → normalizzazione min-max per indice serie
     Map<int, double> minScore = {};
     Map<int, double> maxScore = {};
     for (var l in logs) {
@@ -18681,7 +19051,7 @@ class _PTGraphWidgetState extends State<PTGraphWidget> {
       for (int i = 0; i < series.length; i++) {
         double w = (series[i]['w'] ?? 0.0).toDouble();
         double r = (series[i]['r'] ?? 0.0).toDouble();
-        double sc = w * (1 + r / 30.0); // Epley 1RM estimate
+        double sc = w * (1 + r / (30.0 + w / 10.0));
         minScore[i] = sc < (minScore[i] ?? sc) ? sc : (minScore[i] ?? sc);
         maxScore[i] = sc > (maxScore[i] ?? sc) ? sc : (maxScore[i] ?? sc);
       }
@@ -18693,7 +19063,7 @@ class _PTGraphWidgetState extends State<PTGraphWidget> {
       for (int i = 0; i < series.length; i++) {
         double w = (series[i]['w'] ?? 0.0).toDouble();
         double r = (series[i]['r'] ?? 0.0).toDouble();
-        double sc = w * (1 + r / 30.0); // Epley 1RM estimate
+        double sc = w * (1 + r / (30.0 + w / 10.0));
         double lo = minScore[i] ?? 0;
         double hi = maxScore[i] ?? 1;
         double range = hi - lo;
@@ -19616,7 +19986,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
       for (final s in series) {
         final w = (s['w'] ?? 0.0).toDouble();
         final r = (s['r'] ?? 0).toDouble();
-        final est1RM = r > 0 ? w * (1 + r / 30.0) : w;
+        final est1RM = r > 0 ? w * (1 + r / (30.0 + w / 10.0)) : w;
         if (est1RM > maxEst1RM) maxEst1RM = est1RM;
       }
       final exMap = bySessionEx.putIfAbsent(sid, () => {});
