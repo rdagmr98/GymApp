@@ -103,10 +103,19 @@ class MainActivity : FlutterActivity() {
         val pendingIntent = streakReminderPendingIntent(title, body)
         alarmManager.cancel(pendingIntent)
         val triggerAt = System.currentTimeMillis() + delayMs.coerceAtLeast(0L)
+        val isSamsung = isSamsungDevice()
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+            if (isSamsung) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+            } else {
+                alarmManager.setAndAllowWhileIdle(AlarmManager.RTC, triggerAt, pendingIntent)
+            }
         } else {
-            alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+            if (isSamsung) {
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+            } else {
+                alarmManager.set(AlarmManager.RTC, triggerAt, pendingIntent)
+            }
         }
     }
 
