@@ -36,7 +36,12 @@ class BootCompletedReceiver : BroadcastReceiver() {
             nextFireAt + daysLate * AlarmManager.INTERVAL_DAY
         }
 
-        val streakIntent = Intent(context, StreakReminderReceiver::class.java)
+        val title = prefs.getString("flutter.streak_reminder_title", "🔥 Non perdere i tuoi progressi!") ?: "🔥 Non perdere i tuoi progressi!"
+        val body = prefs.getString("flutter.streak_reminder_body", "Non ti alleni da 2 giorni. Allenati oggi per non perdere i tuoi progressi!") ?: "Non ti alleni da 2 giorni. Allenati oggi per non perdere i tuoi progressi!"
+        val streakIntent = Intent(context, StreakReminderReceiver::class.java).apply {
+            putExtra("title", title)
+            putExtra("body", body)
+        }
         val pendingIntent = PendingIntent.getBroadcast(
             context,
             1991,
