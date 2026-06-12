@@ -62,11 +62,11 @@ def parse_r3(filename):
 # ── Helpers formula ───────────────────────────────────────────────────────────
 
 def shift_formula(formula):
-    """Aggiunge +3 a tutti i riferimenti di riga relativi."""
+    """Aggiunge +1 a tutti i riferimenti di riga relativi."""
     def rep(m):
         if m.group(3) == "$":   # riga assoluta
             return m.group(0)
-        return f"{m.group(1)}{m.group(2)}{int(m.group(4)) + 3}"
+        return f"{m.group(1)}{m.group(2)}{int(m.group(4)) + 1}"
     return re.sub(r"(\$?)([A-Z]+)(\$?)(\d+)", rep, formula)
 
 
@@ -89,19 +89,23 @@ def process_xlsx(data_bytes, cognome, nome, luogo):
         out = io.BytesIO(); wb.save(out); wb.close()
         return out.getvalue(), False   # già processato
 
-    # 1. Inserisci 3 righe in cima
-    ws.insert_rows(1, 3)
+    # 1. Inserisci 1 riga in cima
+    ws.insert_rows(1, 1)
 
-    # 2. Header con fill arancione
-    for r, label, val in [(1,"NOME",nome),(2,"COGNOME",cognome),(3,"LUOGO DI LAVORO",luogo)]:
-        for c, v in [(1, label), (2, val)]:
-            cell = ws.cell(r, c, v)
-            cell.fill = ORANGE
-            cell.font = BOLD
+    # 2. Header riga 1 – per colonne: A/B=NOME, C/D=COGNOME, I/J=LUOGO DI LAVORO
+    for label_col, label_txt, val_txt in [
+        (1,  "NOME",            nome),
+        (3,  "COGNOME",         cognome),
+        (9,  "LUOGO DI LAVORO", luogo),
+    ]:
+        lc = ws.cell(1, label_col, label_txt)
+        lc.fill = ORANGE; lc.font = BOLD
+        vc = ws.cell(1, label_col + 1, val_txt)
+        vc.fill = ORANGE; vc.font = BOLD
 
-    # 3. Rileva blocchi anno, applica arancione su righe ANNO
+    # 3. Rileva blocchi anno — colora SOLO la cella col A (non tutta la riga)
     year_medie = {}
-    for r in range(4, ws.max_row + 1):
+    for r in range(2, ws.max_row + 1):
         val = ws.cell(r, 1).value
         if val and isinstance(val, str) and val.startswith("ANNO "):
             try:
@@ -109,10 +113,9 @@ def process_xlsx(data_bytes, cognome, nome, luogo):
                 year_medie[year] = r + 15   # riga Medie annue nel blocco
             except ValueError:
                 pass
-            for c in range(1, 9):   # cols A-H
-                cell = ws.cell(r, c)
-                cell.fill = ORANGE
-                if c == 1: cell.font = BOLD
+            cell = ws.cell(r, 1)
+            cell.fill = ORANGE
+            cell.font = BOLD
 
     # 4. Arancione sulle celle Medie annue (col G)
     for mr in year_medie.values():
@@ -120,7 +123,7 @@ def process_xlsx(data_bytes, cognome, nome, luogo):
         cell.fill = ORANGE
         cell.font = BOLD
 
-    # 5. Tabella riepilogo cols L-M
+    # 5. Tabella riepilogo cols L-M (riga 1 = header, stessa riga del NOME)
     sorted_years = sorted(year_medie.keys())
     tot_r = 2 + len(sorted_years)
 
@@ -142,8 +145,8 @@ def process_xlsx(data_bytes, cognome, nome, luogo):
         cell.fill = ORANGE; cell.font = BOLD; cell.alignment = CENTER
         if c == 13: cell.number_format = EUR_FMT
 
-    # 6. Fix riferimenti formula (+3) — solo cols A-K, righe 4+
-    for r in range(4, ws.max_row + 1):
+    # 6. Fix riferimenti formula (+1) — solo cols A-K, righe 2+
+    for r in range(2, ws.max_row + 1):
         for c in range(1, 12):
             cell = ws.cell(r, c)
             if isinstance(cell.value, str) and cell.value.startswith("="):
