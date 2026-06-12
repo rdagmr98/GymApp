@@ -62,11 +62,11 @@ def parse_r3(filename):
 # ── Helpers formula ───────────────────────────────────────────────────────────
 
 def shift_formula(formula):
-    """Aggiunge +3 a tutti i riferimenti di riga relativi."""
+    """Aggiunge +2 a tutti i riferimenti di riga relativi."""
     def rep(m):
         if m.group(3) == "$":
             return m.group(0)
-        return f"{m.group(1)}{m.group(2)}{int(m.group(4)) + 3}"
+        return f"{m.group(1)}{m.group(2)}{int(m.group(4)) + 2}"
     return re.sub(r"(\$?)([A-Z]+)(\$?)(\d+)", rep, formula)
 
 
@@ -89,19 +89,19 @@ def process_xlsx(data_bytes, cognome, nome, luogo):
         out = io.BytesIO(); wb.save(out); wb.close()
         return out.getvalue(), False
 
-    # 1. Inserisci 3 righe in cima
-    ws.insert_rows(1, 3)
+    # 1. Inserisci 2 righe in cima
+    ws.insert_rows(1, 2)
 
-    # 2. Header: riga 1 = NOME, riga 2 = COGNOME, riga 3 = LUOGO DI LAVORO
-    for r, label, val in [(1, "NOME", nome), (2, "COGNOME", cognome), (3, "LUOGO DI LAVORO", luogo)]:
-        for c, v in [(1, label), (2, val)]:
-            cell = ws.cell(r, c, v)
-            cell.fill = ORANGE
-            cell.font = BOLD
+    # 2. Header: 3 colonne × 2 righe — etichette (riga 1, scuro) + valori (riga 2, chiaro)
+    for c, label, val in [(1, "NOME", nome), (2, "COGNOME", cognome), (3, "LUOGO DI LAVORO", luogo)]:
+        cell = ws.cell(1, c, label)
+        cell.fill = ORANGE; cell.font = BOLD
+        cell = ws.cell(2, c, val)
+        cell.fill = ORANGE_L; cell.font = BOLD
 
     # 3. Rileva blocchi anno — colora SOLO la cella A
     year_medie = {}
-    for r in range(4, ws.max_row + 1):
+    for r in range(3, ws.max_row + 1):
         val = ws.cell(r, 1).value
         if val and isinstance(val, str) and val.startswith("ANNO "):
             try:
@@ -141,8 +141,8 @@ def process_xlsx(data_bytes, cognome, nome, luogo):
         cell.fill = ORANGE; cell.font = BOLD; cell.alignment = CENTER
         if c == 13: cell.number_format = EUR_FMT
 
-    # 6. Fix riferimenti formula (+3) — cols A-K, righe 4+
-    for r in range(4, ws.max_row + 1):
+    # 6. Fix riferimenti formula (+2) — cols A-K, righe 3+
+    for r in range(3, ws.max_row + 1):
         for c in range(1, 12):
             cell = ws.cell(r, c)
             if isinstance(cell.value, str) and cell.value.startswith("="):
