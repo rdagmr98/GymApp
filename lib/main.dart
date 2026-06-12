@@ -11221,82 +11221,92 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (c) => Container(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  AppL.templateChoose,
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: accent,
+      builder: (c) {
+        final bottomPad = MediaQuery.of(c).padding.bottom;
+        return Container(
+          padding: EdgeInsets.fromLTRB(24, 24, 24, 12 + bottomPad),
+          constraints: BoxConstraints(
+            maxHeight: MediaQuery.of(c).size.height * 0.85,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    AppL.templateChoose,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: accent,
+                    ),
                   ),
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: Icon(Icons.close, color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
-                  onPressed: () => Navigator.pop(c),
-                ),
-              ],
-            ),
-            Text(
-              AppL.templateDesc,
-              style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
-            ),
-            const SizedBox(height: 16),
-            ...kAllWorkoutTemplates.map(
-              (t) => ListTile(
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 8,
-                  vertical: 4,
-                ),
-                leading: Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: accent.withAlpha(20),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: accent.withAlpha(60)),
+                  const Spacer(),
+                  IconButton(
+                    icon: Icon(Icons.close, color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
+                    onPressed: () => Navigator.pop(c),
                   ),
-                  alignment: Alignment.center,
-                  child: Text(
-                    t['icon'] as String,
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ),
-                title: Text(
-                  localizeMixedLabel(t['name'] as String),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                subtitle: Text(
-                  t['desc'] as String,
-                  style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
-                ),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 14,
-                  color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
-                ),
-                onTap: () {
-                  Navigator.pop(c);
-                  _confermaCaricaTemplate(t);
-                },
+                ],
               ),
-            ),
-            const SizedBox(height: 12),
-          ],
-        ),
-      ),
+              Text(
+                AppL.templateDesc,
+                style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
+              ),
+              const SizedBox(height: 16),
+              Flexible(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: kAllWorkoutTemplates.map(
+                    (t) => ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      leading: Container(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: accent.withAlpha(20),
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: accent.withAlpha(60)),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          t['icon'] as String,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                      title: Text(
+                        localizeMixedLabel(t['name'] as String),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                          color: _isDarkCtx(context) ? Colors.white : Colors.black87,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      subtitle: Text(
+                        t['desc'] as String,
+                        style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        size: 14,
+                        color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
+                      ),
+                      onTap: () {
+                        Navigator.pop(c);
+                        _confermaCaricaTemplate(t);
+                      },
+                    ),
+                  ).toList(),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
