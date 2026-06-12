@@ -61,15 +61,6 @@ def parse_r3(filename):
 
 # ── Helpers formula ───────────────────────────────────────────────────────────
 
-def shift_formula(formula):
-    """Aggiunge +1 a tutti i riferimenti di riga relativi."""
-    def rep(m):
-        if m.group(3) == "$":   # riga assoluta
-            return m.group(0)
-        return f"{m.group(1)}{m.group(2)}{int(m.group(4)) + 1}"
-    return re.sub(r"(\$?)([A-Z]+)(\$?)(\d+)", rep, formula)
-
-
 def fix_div0(formula):
     """=(Gx/Hx*22.5) → =IF(Hx=0,0,Gx/Hx*22.5)"""
     m = re.match(r"^=\(?G(\d+)/H(\d+)\*22\.5\)?$", formula)
@@ -85,49 +76,41 @@ def process_xlsx(data_bytes, cognome, nome, luogo):
     wb = openpyxl.load_workbook(io.BytesIO(data_bytes))
     ws = wb.active
 
-    if ws.cell(1, 1).value == "NOME":
+    if ws.cell(1, 9).value == "NOME":   # col I già presente → già processato
         out = io.BytesIO(); wb.save(out); wb.close()
-        return out.getvalue(), False   # già processato
+        return out.getvalue(), False
 
-    # 1. Inserisci 1 riga in cima
-    ws.insert_rows(1, 1)
+    # 1. Header in col I – stacked: NOME / nome / COGNOME / cognome / LUOGO / luogo
+    for i, text in enumerate([("NOME"), nome, "COGNOME", cognome, "LUOGO DI LAVORO", luogo], 1):
+        cell = ws.cell(i, 9, text)
+        cell.fill = ORANGE
+        cell.font = BOLD
 
-    # 2. Header riga 1 – per colonne: A/B=NOME, C/D=COGNOME, I/J=LUOGO DI LAVORO
-    for label_col, label_txt, val_txt in [
-        (1,  "NOME",            nome),
-        (3,  "COGNOME",         cognome),
-        (9,  "LUOGO DI LAVORO", luogo),
-    ]:
-        lc = ws.cell(1, label_col, label_txt)
-        lc.fill = ORANGE; lc.font = BOLD
-        vc = ws.cell(1, label_col + 1, val_txt)
-        vc.fill = ORANGE; vc.font = BOLD
-
-    # 3. Rileva blocchi anno — colora SOLO la cella col A (non tutta la riga)
+    # 2. Rileva blocchi anno — colora SOLO la cella A (non tutta la riga)
     year_medie = {}
-    for r in range(2, ws.max_row + 1):
+    for r in range(1, ws.max_row + 1):
         val = ws.cell(r, 1).value
         if val and isinstance(val, str) and val.startswith("ANNO "):
             try:
                 year = int(val.strip().split()[-1])
-                year_medie[year] = r + 15   # riga Medie annue nel blocco
+                year_medie[year] = r + 15
             except ValueError:
                 pass
             cell = ws.cell(r, 1)
             cell.fill = ORANGE
             cell.font = BOLD
 
-    # 4. Arancione sulle celle Medie annue (col G)
+    # 3. Arancione su cella Medie annue (col G)
     for mr in year_medie.values():
         cell = ws.cell(mr, 7)
         cell.fill = ORANGE
         cell.font = BOLD
 
-    # 5. Tabella riepilogo cols L-M (riga 1 = header, stessa riga del NOME)
+    # 4. Tabella riepilogo cols L-M (parte da riga 1)
     sorted_years = sorted(year_medie.keys())
     tot_r = 2 + len(sorted_years)
 
-    for c, v in [(12,"ANNO"),(13,"IMPORTO")]:
+    for c, v in [(12, "ANNO"), (13, "IMPORTO")]:
         cell = ws.cell(1, c, v)
         cell.fill = ORANGE; cell.font = BOLD; cell.alignment = CENTER
         if c == 13: cell.number_format = EUR_FMT
@@ -135,26 +118,17 @@ def process_xlsx(data_bytes, cognome, nome, luogo):
     for i, year in enumerate(sorted_years):
         r  = 2 + i
         mr = year_medie[year]
-        for c, v in [(12, year),(13, f"=G{mr}")]:
+        for c, v in [(12, year), (13, f"=G{mr}")]:
             cell = ws.cell(r, c, v)
             cell.fill = ORANGE_L; cell.font = BOLD; cell.alignment = CENTER
             if c == 13: cell.number_format = EUR_FMT
 
-    for c, v in [(12,"TOTALE"),(13,f"=SUM(M2:M{tot_r-1})")]:
+    for c, v in [(12, "TOTALE"), (13, f"=SUM(M2:M{tot_r-1})")]:
         cell = ws.cell(tot_r, c, v)
         cell.fill = ORANGE; cell.font = BOLD; cell.alignment = CENTER
         if c == 13: cell.number_format = EUR_FMT
 
-    # 6. Fix riferimenti formula (+1) — solo cols A-K, righe 2+
-    for r in range(2, ws.max_row + 1):
-        for c in range(1, 12):
-            cell = ws.cell(r, c)
-            if isinstance(cell.value, str) and cell.value.startswith("="):
-                new_val = shift_formula(cell.value)
-                if new_val != cell.value:
-                    cell.value = new_val
-
-    # 7. Fix DIV/0 nelle Medie annue (col G, righe medie)
+    # 5. Fix DIV/0 nelle Medie annue (col G)
     for mr in year_medie.values():
         cell = ws.cell(mr, 7)
         if isinstance(cell.value, str) and cell.value.startswith("="):
