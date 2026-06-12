@@ -18513,13 +18513,13 @@ class _DrumPickersState extends State<_DrumPickers>
     double _itemSize(int dist) {
       switch (dist) {
         case 0:
-          return 82;
+          return 96;
         case 1:
-          return 54;
+          return 64;
         case 2:
-          return 38;
+          return 44;
         default:
-          return 26;
+          return 30;
       }
     }
 
@@ -18667,7 +18667,7 @@ class _DrumPickersState extends State<_DrumPickers>
           ? (isKg ? (isAmber ? Colors.amber : accent) : accent)
           : (_isDarkCtx(context) ? Colors.white : Colors.black87).withAlpha(itemAlpha(dist));
       final fontSize = isKg && displayText.length >= 4
-          ? (itemSize(dist) - (dist == 0 ? 16 : 8)).clamp(18.0, 82.0)
+          ? (itemSize(dist) - (dist == 0 ? 16 : 8)).clamp(18.0, 96.0)
           : itemSize(dist);
       final textWidget = Text(
         displayText,
@@ -18702,7 +18702,7 @@ class _DrumPickersState extends State<_DrumPickers>
     if (Theme.of(context).platform == TargetPlatform.android) {
       return ListWheelScrollView.useDelegate(
         controller: ctrl,
-        itemExtent: 96,
+        itemExtent: 112,
         diameterRatio: 1.2,
         perspective: 0.003,
         physics: const FixedExtentScrollPhysics(),
@@ -18725,7 +18725,7 @@ class _DrumPickersState extends State<_DrumPickers>
 
     return CupertinoPicker.builder(
       scrollController: ctrl,
-      itemExtent: 96,
+      itemExtent: 112,
       diameterRatio: 1.2,
       squeeze: 0.85,
       selectionOverlay: const SizedBox.shrink(),
