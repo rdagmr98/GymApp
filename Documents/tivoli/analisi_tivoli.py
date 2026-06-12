@@ -212,6 +212,9 @@ def detect_format(text: str) -> str:
         return 'NEW'
     if 'STAMPA CARTELLINO' in text:
         return 'CART'
+    # Formato OLD invertito (testo RTL): AZIENDA → ADNEIZA, Cartellino → onilletraC
+    if 'ADNEIZA' in text and 'onilletraC' in text:
+        return 'OLD_REV'
     return 'UNKNOWN'
 
 # ─── OLD FORMAT PARSER ────────────────────────────────────────────────────────
@@ -333,6 +336,147 @@ def _extract_name_old(lines_dict, nom_x, pia_x):
             if name_words:
                 return ' '.join(name_words)
     return None
+
+# ─── OLD REVERSED FORMAT PARSER ──────────────────────────────────────────────
+
+def parse_reversed_old_format(page, text: str):
+    """
+    OLD format PDFs con testo RTL (caratteri invertiti per riflessione).
+    x0 in portrait = posizione colonna landscape (giorno); top = riga dati landscape.
+    Tutti i testi sono invertiti carattere per carattere.
+    """
+    words = page.extract_words(x_tolerance=3, y_tolerance=3)
+
+    # '.vaL' = 'Lav.' invertito
+    lav_h = next((w for w in words if w['text'] == '.vaL'), None)
+    if not lav_h:
+        return None
+    lav_top = lav_h['top']
+
+    # Mese/anno dalle righe di testo invertite
+    rev_lines = [ln[::-1].strip() for ln in text.splitlines() if ln.strip()]
+    month_name = None
+    year = None
+    for ln in rev_lines:
+        if re.match(r'^\d{4}$', ln):
+            y = int(ln)
+            if 2000 <= y <= 2030:
+                year = y
+        if ln.lower() in MONTHS_IT:
+            month_name = ln.lower()
+    if not (month_name and year):
+        return None
+    month = MONTHS_IT.get(month_name)
+    if not month:
+        return None
+
+    # Nome lavoratore: parole maiuscole vicino all'header 'ovitanimoN' (Nominativo inv.)
+    nom_h = next((w for w in words if w['text'] == 'ovitanimoN'), None)
+    nom_top = nom_h['top'] if nom_h else 720
+    name_cands = sorted(
+        [(w['top'], w['text'][::-1]) for w in words
+         if 45 <= w['x0'] <= 70
+         and (nom_top - 160) <= w['top'] <= (nom_top + 50)
+         and w['text'][::-1].isupper()
+         and not w['text'][::-1].isdigit()
+         and len(w['text']) >= 3],
+        key=lambda x: x[0], reverse=True
+    )
+    worker = ' '.join(r for _, r in name_cands[:2]) if name_cands else 'SCONOSCIUTO'
+
+    # Erogati dal testo ricostruito
+    erogati = 0
+    erogati_found = False
+    reconstructed = ' '.join(rev_lines)
+    m_buoni = re.search(r'Buoni\s+Pasto\s+Salvo\s+Conguaglio\s+(\d+)', reconstructed, re.I)
+    if m_buoni:
+        erogati = int(m_buoni.group(1))
+        erogati_found = True
+
+    # Trova day_num_top: top più frequente tra interi 1-31 a x0 > 80
+    from collections import Counter as _Counter
+    cand_tops = []
+    for w in words:
+        if w['x0'] <= 80:
+            continue
+        rev = w['text'][::-1]
+        if re.match(r'^\d{1,2}$', rev):
+            try:
+                d = int(rev)
+                if 1 <= d <= 31:
+                    cand_tops.append(round(w['top']))
+            except Exception:
+                pass
+    if not cand_tops:
+        return None
+    day_num_top = _Counter(cand_tops).most_common(1)[0][0]
+
+    # Parole numero-giorno
+    day_words = sorted(
+        [w for w in words
+         if abs(round(w['top']) - day_num_top) <= 6
+         and w['x0'] > 80
+         and re.match(r'^\d{1,2}$', w['text'][::-1])
+         and 1 <= int(w['text'][::-1]) <= 31],
+        key=lambda w: w['x0']
+    )
+
+    LAV_TOP_TOL = 12
+    maturati = 0
+    details  = []
+
+    for dw in day_words:
+        day_num = dw['text'][::-1]
+        day_x0  = dw['x0']
+
+        # DOW: parola multi-char vicino a day_num_top - 20
+        dow_cands = [
+            w for w in words
+            if abs(w['x0'] - day_x0) <= 5
+            and (day_num_top - 33) <= w['top'] <= (day_num_top - 8)
+            and len(w['text']) > 1
+        ]
+        dow_str = ''
+        if dow_cands:
+            dow_cands.sort(key=lambda w: abs(w['top'] - (day_num_top - 20)))
+            dow_str = re.sub(r'[^A-Z]', '', dow_cands[0]['text'][::-1].upper())[:3]
+
+        # Valore Lav. a lav_top
+        lav_cands = [
+            w for w in words
+            if abs(w['x0'] - day_x0) <= 5
+            and abs(w['top'] - lav_top) <= LAV_TOP_TOL
+        ]
+        lav_min = 0
+        if lav_cands:
+            lav_raw   = lav_cands[0]['text'][::-1]
+            lav_clean = re.sub(r'[A-Z]+$', '', lav_raw)
+            if re.match(r'^\d{1,2}\.\d{2}', lav_clean):
+                lav_min = hhmm_to_min(lav_clean)
+
+        worked    = lav_min > 0
+        qualifies = worked and (lav_min >= THRESHOLD)
+        if qualifies:
+            maturati += 1
+
+        details.append({
+            'day': day_num, 'dow': dow_str,
+            'worked': worked,
+            'lav_min': lav_min,
+            'lav_hm': f"{lav_min//60}h{lav_min%60:02d}m" if lav_min else '',
+            'qualifies': qualifies,
+        })
+
+    return {
+        'worker': worker,
+        'year': year,
+        'month': month,
+        'maturati': maturati,
+        'erogati': erogati,
+        'erogati_found': erogati_found,
+        'details': details,
+    }
+
 
 # ─── NEW FORMAT PARSER ────────────────────────────────────────────────────────
 
@@ -626,6 +770,12 @@ def process_pdf(pdf_path: str) -> list:
 
                 elif fmt == 'NEW':
                     r = parse_new_format(page, text)
+                    if r:
+                        results.append(r)
+                    i += 1
+
+                elif fmt == 'OLD_REV':
+                    r = parse_reversed_old_format(page, text)
                     if r:
                         results.append(r)
                     i += 1
