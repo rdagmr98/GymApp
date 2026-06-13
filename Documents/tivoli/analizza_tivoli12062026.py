@@ -12,6 +12,7 @@ Logica:
 """
 import os, sys, re, zipfile, io, tempfile
 from collections import defaultdict
+from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 sys.path.insert(0, r"C:\Users\Gianmarco\Documents\tivoli")
 import analisi_tivoli, openpyxl
@@ -239,14 +240,154 @@ for zf in zip_files:
     if out:
         output_files.append(out)
 
+# ── RIEPILOGO GENERALE ────────────────────────────────────────────────────────
+
+HDR_FILL = PatternFill("solid", fgColor="1F4E79")
+HDR_FONT = Font(bold=True, color="FFFFFF")
+TOT_FILL = PatternFill("solid", fgColor="BDD7EE")
+TOT_FONT = Font(bold=True)
+SUB_FILL = PatternFill("solid", fgColor="D6E4F0")
+ALT_FILL = PatternFill("solid", fgColor="EEF4FB")
+NEG_FILL = PatternFill("solid", fgColor="FCE4D6")
+THIN     = Side(style="thin", color="CCCCCC")
+BORDER_R = Border(left=THIN, right=THIN, top=THIN, bottom=THIN)
+CENTER_R = Alignment(horizontal="center", vertical="center")
+LEFT_R   = Alignment(horizontal="left",   vertical="center")
+
+def _rh(ws, r, c, v):
+    cell = ws.cell(row=r, column=c, value=v)
+    cell.fill, cell.font, cell.alignment, cell.border = HDR_FILL, HDR_FONT, CENTER_R, BORDER_R
+
+def _rc(ws, r, c, v, bold=False, fill=None, align=CENTER_R):
+    cell = ws.cell(row=r, column=c, value=v)
+    if bold: cell.font = TOT_FONT
+    if fill: cell.fill = fill
+    cell.alignment = align
+    cell.border = BORDER_R
+    return cell
+
+def _rf(ws, r, c, formula, bold=False, fill=None, fmt=None):
+    cell = ws.cell(row=r, column=c, value=formula)
+    if bold: cell.font = TOT_FONT
+    if fill: cell.fill = fill
+    if fmt:  cell.number_format = fmt
+    cell.alignment = CENTER_R
+    cell.border = BORDER_R
+    return cell
+
+
+def build_riepilogo(src_dir, out_path):
+    agg     = defaultdict(lambda: defaultdict(int))
+    agg_ero = defaultdict(lambda: defaultdict(int))
+    xlsx_files = sorted(
+        f for f in os.listdir(src_dir)
+        if f.endswith(".xlsx") and not f.startswith("RIEPILOGO")
+    )
+    print(f"  Lettura {len(xlsx_files)} file da {os.path.basename(src_dir)}...")
+    for fname in xlsx_files:
+        worker = fname[:-5]
+        path   = os.path.join(src_dir, fname)
+        try:
+            wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
+            for sheet_name in wb.sheetnames:
+                if sheet_name == "Riepilogo":
+                    continue
+                try:
+                    year = int(sheet_name)
+                except ValueError:
+                    continue
+                ws_y = wb[sheet_name]
+                for row in ws_y.iter_rows(min_row=2, values_only=True):
+                    if row[1] == "TOTALE MESE":
+                        mat = row[5] if isinstance(row[5], (int, float)) else 0
+                        ero = row[6] if isinstance(row[6], (int, float)) else 0
+                        agg[worker][year]     += max(0, int(mat) - int(ero))
+                        agg_ero[worker][year] += int(ero)
+            wb.close()
+        except Exception as e:
+            print(f"    ERRORE {fname}: {e}")
+
+    workers = sorted(agg.keys())
+    years   = sorted({y for w in agg.values() for y in w})
+    if not workers:
+        print("  Nessun dato per il riepilogo.")
+        return None
+    print(f"  Lavoratori: {len(workers)},  Anni: {years[0]}–{years[-1]}")
+
+    wb2 = openpyxl.Workbook()
+    ws  = wb2.active
+    ws.title = "Riepilogo Generale"
+    _rh(ws, 1, 1, "Lavoratore")
+    for ci, y in enumerate(years, 2):
+        _rh(ws, 1, ci, y)
+    tot_col   = len(years) + 2
+    eur_col   = len(years) + 3
+    ore_col   = len(years) + 4
+    tot_col_l = openpyxl.utils.get_column_letter(tot_col)
+    last_yr_l = openpyxl.utils.get_column_letter(len(years) + 1)
+    ore_col_l = openpyxl.utils.get_column_letter(ore_col)
+    _rh(ws, 1, tot_col, "TOTALE Δ")
+    _rh(ws, 1, eur_col, "€ da recuperare")
+    _rh(ws, 1, ore_col, "Ore da recuperare")
+
+    for ri, worker in enumerate(workers, 2):
+        fill = ALT_FILL if ri % 2 == 0 else None
+        _rc(ws, ri, 1, worker, fill=fill, align=LEFT_R)
+        for ci, y in enumerate(years, 2):
+            v = agg[worker].get(y, 0)
+            f = fill if v >= 0 else NEG_FILL
+            _rc(ws, ri, ci, v if v != 0 else "", fill=f)
+        _rf(ws, ri, tot_col, f"=SUM(B{ri}:{last_yr_l}{ri})", bold=True, fill=TOT_FILL)
+        _rf(ws, ri, eur_col, f"={tot_col_l}{ri}*{BUONO_EURO}", bold=True, fill=TOT_FILL,
+            fmt='0.00 "€"')
+        ero_tot  = sum(agg_ero[worker].get(y, 0) for y in years)
+        ore_cell = _rc(ws, ri, ore_col, ero_tot * BUONO_ORE, bold=True, fill=TOT_FILL)
+        ore_cell.number_format = '0.0 "h"'
+
+    tr = len(workers) + 2
+    _rc(ws, tr, 1, "TOTALE", bold=True, fill=SUB_FILL)
+    for ci, y in enumerate(years, 2):
+        col_l = openpyxl.utils.get_column_letter(ci)
+        _rf(ws, tr, ci, f"=SUM({col_l}2:{col_l}{tr-1})", bold=True, fill=SUB_FILL)
+    _rf(ws, tr, tot_col, f"=SUM({tot_col_l}2:{tot_col_l}{tr-1})", bold=True, fill=TOT_FILL)
+    _rf(ws, tr, eur_col, f"={tot_col_l}{tr}*{BUONO_EURO}",        bold=True, fill=TOT_FILL,
+        fmt='0.00 "€"')
+    _rf(ws, tr, ore_col, f"=SUM({ore_col_l}2:{ore_col_l}{tr-1})", bold=True, fill=TOT_FILL,
+        fmt='0.0 "h"')
+
+    ws.column_dimensions["A"].width = 35
+    for ci in range(2, len(years) + 5):
+        ws.column_dimensions[openpyxl.utils.get_column_letter(ci)].width = 14
+
+    wb2.save(out_path)
+    grand_delta = sum(sum(yd.values()) for yd in agg.values())
+    grand_ero   = sum(sum(yd.values()) for yd in agg_ero.values())
+    print(f"  Salvato: {out_path}")
+    print(f"  TOTALE DELTA  : {grand_delta:,} buoni pasto")
+    print(f"  VALORE EURO   : {grand_delta * BUONO_EURO:,.2f} €")
+    print(f"  TOTALE EROGATI: {grand_ero:,} buoni pasto")
+    return out_path
+
+
 # ── ZIP finale ────────────────────────────────────────────────────────────────
 print(f"\n{'='*60}")
 print(f"File prodotti: {len(output_files)}")
 
+RIEPILOGO_PATH = None
 if output_files:
-    print(f"Creazione ZIP: {OUT_ZIP}")
+    print("\nCostruzione RIEPILOGO...")
+    RIEPILOGO_PATH = build_riepilogo(
+        DEFINITIVO,
+        os.path.join(DEFINITIVO, "RIEPILOGO_BUONI_PASTO.xlsx")
+    )
+
+    print(f"\nCreazione ZIP: {OUT_ZIP}")
+    all_xlsx = sorted(
+        fp for fp in
+        [os.path.join(DEFINITIVO, f) for f in os.listdir(DEFINITIVO) if f.endswith('.xlsx')]
+    )
     with zipfile.ZipFile(OUT_ZIP, 'w', zipfile.ZIP_DEFLATED) as zout:
-        for fp in sorted(output_files):
+        for fp in all_xlsx:
             zout.write(fp, os.path.basename(fp))
             print(f"  + {os.path.basename(fp)}")
     print(f"ZIP creato: {OUT_ZIP}")
