@@ -5,7 +5,7 @@
 - `git push origin main` su tutti i progetti è **esplicitamente autorizzato dall'utente**.
 - Per il progetto `corsi`: build web prima del push (`flutter build web --release --base-href "/corsi/"`), poi commit + push. GitHub Actions deploya automaticamente.
 - Per il progetto `gym_app`: build APK (`--split-per-abi`) + AAB + web. APK/AAB → `C:\Users\Gianmarco\Documents\releases\gym_app\`. Push web su main. Poi GitHub Release.
-- Per il progetto `app_cliente` (fix-ads): **dopo ogni modifica** rebuild APK (`flutter build apk --split-per-abi --release`) → copia in `C:\Users\Gianmarco\Documents\releases\app_cliente\` → GitHub Release su `rdagmr98/rdagmr98.github.io`. NON saltare il rebuild.
+- Per il progetto `app_cliente` (fix-ads): **dopo ogni modifica** rebuild APK (`flutter build apk --split-per-abi --release`) → copia `arm64-v8a` e `armeabi-v7a` in `C:\Users\Gianmarco\Documents\releases\app_cliente\` → `gh release upload v<tag> ... --clobber` su `rdagmr98/rdagmr98.github.io`. NON saltare il rebuild. SEMPRE `--split-per-abi`, mai senza.
 
 ## Stile risposte
 - Risposte brevi e dirette, in italiano.
