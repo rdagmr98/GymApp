@@ -19,12 +19,16 @@
 - La memoria è in `C:\Users\Gianmarco\.claude\projects\C--Users-Gianmarco\memory\`.
 - Aggiornare il `CLAUDE.md` del progetto (sezione STATO SESSIONE) ad ogni push.
 
-## Vault Obsidian — Knowledge Graph
+## Vault Obsidian — Knowledge Graph (USARE SEMPRE)
 - Percorso: `C:\Users\Gianmarco\ObsidianVault\`
-- MCP `obsidian` disponibile (scope user) — usa `mcp__obsidian__*` per leggere/aggiornare i grafi
-- Grafi Canvas: `ObsidianVault\Grafi\` (Buoni Pasti Pipeline, Gym App, AVES Piloti e Corsi)
-- Note per Graph View neural: `Buoni Pasti\`, `Gym App\`, `AVES Corsi\`
-- Aggiornare le note vault quando cambia architettura significativa
+- MCP `obsidian` disponibile (scope user) — strumenti `mcp__obsidian__*`
+- **All'inizio di ogni sessione**: leggere la nota hub del progetto corrente con `mcp__obsidian__read_note`
+  - corsi/piloti/AVES → `AVES Corsi/<NomeApp>.md`
+  - gym → `Gym App/Gym App.md`
+  - buoni pasti → `Buoni Pasti/Pipeline.md`
+- **Quando cambia architettura**: aggiornare la nota Obsidian corrispondente oltre al CLAUDE.md
+- Grafi Canvas: `Grafi/` (Buoni Pasti Pipeline, Gym App, AVES Piloti e Corsi)
+- Note collegate (Graph View neural): `Buoni Pasti/`, `Gym App/`, `AVES Corsi/`
 
 ## Progetti attivi
 | Progetto | Path | CLAUDE.md |
