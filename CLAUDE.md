@@ -28,6 +28,7 @@
   - **Buoni Pasti** (cedolini / cartellini lavoratori) — topic buoni pasto/presenze → `Buoni Pasti/Pipeline.md`
 - Sessioni generiche (cleanup, config, domande) → NON leggere note Obsidian.
 - **Quando cambia architettura**: aggiornare la nota Obsidian corrispondente oltre al CLAUDE.md
+- **Per aggiornare note**: usare il tool `Write` direttamente su `C:\Users\Gianmarco\ObsidianVault\...` — NON usare `mcp__obsidian__edit-note` (lento, si blocca)
 - Grafi Canvas: `Grafi/` (Buoni Pasti Pipeline, Gym App, AVES Piloti e Corsi)
 - Note collegate (Graph View neural): `Buoni Pasti/`, `Gym App/`, `AVES Corsi/`
 
