@@ -19,13 +19,16 @@
 - La memoria è in `C:\Users\Gianmarco\.claude\projects\C--Users-Gianmarco\memory\`.
 - Aggiornare il `CLAUDE.md` del progetto (sezione STATO SESSIONE) ad ogni push.
 
-## Vault Obsidian — Knowledge Graph (USARE SEMPRE)
+## Vault Obsidian — Knowledge Graph (USARE SOLO SE PERTINENTE)
 - Percorso: `C:\Users\Gianmarco\ObsidianVault\`
 - MCP `obsidian` disponibile (scope user) — strumenti `mcp__obsidian__*`
-- **All'inizio di ogni sessione**: leggere la nota hub del progetto corrente con `mcp__obsidian__read_note`
-  - corsi/piloti/AVES → `AVES Corsi/<NomeApp>.md`
-  - gym → `Gym App/Gym App.md`
-  - buoni pasti → `Buoni Pasti/Pipeline.md`
+- **Solo se la sessione riguarda uno di questi progetti**, leggere la nota hub con `mcp__obsidian__read_note`:
+  - sessione in `C:\Users\Gianmarco\corsi\` → `AVES Corsi/Corsi EASA.md`
+  - sessione in `C:\Users\Gianmarco\piloti\` → `AVES Corsi/AVES Piloti.md`
+  - sessione in `C:\Users\Gianmarco\AVES\` → `AVES Corsi/AVES Tecnici.md`
+  - sessione in root con script Python buoni pasti → `Buoni Pasti/Pipeline.md`
+  - sessione su gym_app/app_coach/fix-ads → `Gym App/Gym App.md`
+- Sessioni generiche (cleanup, config, domande) → NON leggere note Obsidian.
 - **Quando cambia architettura**: aggiornare la nota Obsidian corrispondente oltre al CLAUDE.md
 - Grafi Canvas: `Grafi/` (Buoni Pasti Pipeline, Gym App, AVES Piloti e Corsi)
 - Note collegate (Graph View neural): `Buoni Pasti/`, `Gym App/`, `AVES Corsi/`
