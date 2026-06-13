@@ -4,7 +4,8 @@
 - Dopo ogni modifica al codice: **commit + push immediatamente**, senza chiedere conferma.
 - `git push origin main` su tutti i progetti è **esplicitamente autorizzato dall'utente**.
 - Per il progetto `corsi`: build web prima del push (`flutter build web --release --base-href "/corsi/"`), poi commit + push. GitHub Actions deploya automaticamente.
-- Per il progetto `gym_app`: build APK + web, GitHub Release se APK >100MB (non commit per APK), push web su main.
+- Per il progetto `gym_app`: build APK (`--split-per-abi`) + AAB + web. APK/AAB → `C:\Users\Gianmarco\Documents\releases\gym_app\` (non committare, >100MB). Push web su main.
+- Per il progetto `app_cliente` (fix-ads): build APK → `C:\Users\Gianmarco\Documents\releases\app_cliente\`. Stessa regola.
 
 ## Stile risposte
 - Risposte brevi e dirette, in italiano.
