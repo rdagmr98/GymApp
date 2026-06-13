@@ -22,12 +22,10 @@
 ## Vault Obsidian — Knowledge Graph (USARE SOLO SE PERTINENTE)
 - Percorso: `C:\Users\Gianmarco\ObsidianVault\`
 - MCP `obsidian` disponibile (scope user) — strumenti `mcp__obsidian__*`
-- **Solo se la sessione riguarda uno di questi progetti**, leggere la nota hub con `mcp__obsidian__read_note`:
-  - sessione in `C:\Users\Gianmarco\corsi\` → `AVES Corsi/Corsi EASA.md`
-  - sessione in `C:\Users\Gianmarco\piloti\` → `AVES Corsi/AVES Piloti.md`
-  - sessione in `C:\Users\Gianmarco\AVES\` → `AVES Corsi/AVES Tecnici.md`
-  - sessione in root con script Python buoni pasti → `Buoni Pasti/Pipeline.md`
-  - sessione su gym_app/app_coach/fix-ads → `Gym App/Gym App.md`
+- **Solo se la sessione riguarda uno di questi gruppi**, leggere il hub con `mcp__obsidian__read_note`:
+  - **AVES** (piloti / corsi / tecnici) — dir `piloti/`, `corsi/`, `AVES/` o topic militare → `AVES Corsi/AVES Hub.md`
+  - **Gym** (gym_app / app_coach / app_cliente) — dir root gym, `fix-ads/` o topic palestra → `Gym App/Gym App.md`
+  - **Buoni Pasti** (cedolini / cartellini lavoratori) — topic buoni pasto/presenze → `Buoni Pasti/Pipeline.md`
 - Sessioni generiche (cleanup, config, domande) → NON leggere note Obsidian.
 - **Quando cambia architettura**: aggiornare la nota Obsidian corrispondente oltre al CLAUDE.md
 - Grafi Canvas: `Grafi/` (Buoni Pasti Pipeline, Gym App, AVES Piloti e Corsi)
