@@ -22,10 +22,12 @@
 ## Vault Obsidian — Knowledge Graph (USARE SOLO SE PERTINENTE)
 - Percorso: `C:\Users\Gianmarco\ObsidianVault\`
 - MCP `obsidian` disponibile (scope user) — strumenti `mcp__obsidian__*`
-- **Solo se la sessione riguarda uno di questi gruppi**, leggere il hub con `mcp__obsidian__read_note`:
+- Master index vault: `_INDEX.md` — elenco tutti i gruppi e ComfyUI setup
+- **Solo se la sessione riguarda uno di questi gruppi**, leggere il hub con il tool `Read`:
   - **AVES** (piloti / corsi / tecnici) — dir `piloti/`, `corsi/`, `AVES/` o topic militare → `AVES Corsi/AVES Hub.md`
   - **Gym** (gym_app / app_coach / app_cliente) — dir root gym, `fix-ads/` o topic palestra → `Gym App/Gym App.md`
   - **Buoni Pasti** (cedolini / cartellini lavoratori) — topic buoni pasto/presenze → `Buoni Pasti/Pipeline.md`
+  - **Centri Storici** (centri storici / indirizzi / OSM / parola chiave) → `Centri Storici/Hub.md`
 - Sessioni generiche (cleanup, config, domande) → NON leggere note Obsidian.
 - **Quando cambia architettura**: aggiornare la nota Obsidian corrispondente oltre al CLAUDE.md
 - **Per aggiornare note**: usare il tool `Write` direttamente su `C:\Users\Gianmarco\ObsidianVault\...` — NON usare `mcp__obsidian__edit-note` (lento, si blocca)
@@ -42,3 +44,4 @@
 | app_coach (PT) | `rdagmr98/gymapp-coach` | — |
 | app_cliente | `C:\Users\Gianmarco\fix-ads` | — |
 | buoni pasti | script Python in `C:\Users\Gianmarco` | — |
+| centri storici | `C:\Users\Gianmarco\Documents\` | — |

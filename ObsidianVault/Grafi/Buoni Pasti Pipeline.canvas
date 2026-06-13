@@ -1,0 +1,34 @@
+{
+	"nodes":[
+		{"id":"zip_in","type":"text","text":"## ZIP Input\nCartellini timbrature PDF\n(un PDF per worker)","x":-700,"y":-40,"width":220,"height":90,"color":"3"},
+		{"id":"storico","type":"text","text":"## Storico XLSX\nOre erogate precedenti\n(riferimento buoni già dati)","x":-700,"y":120,"width":220,"height":90,"color":"3"},
+		{"id":"workers","type":"text","text":"## 9 Workers\nMastrogiacomo, Zandrelli\n+ 7 altri dipendenti","x":-700,"y":280,"width":220,"height":90,"color":"3"},
+		{"id":"script","type":"text","text":"## analizza_tivoli12062026.py\nOrchestrator: legge ZIP,\nchiama analisi_tivoli.py","x":-380,"y":-40,"width":250,"height":90,"color":"4"},
+		{"id":"analisi","type":"text","text":"## analisi_tivoli.py\nParser core (1155 righe)\nLogica buoni + validazione","x":-380,"y":120,"width":250,"height":90,"color":"4"},
+		{"id":"detect","type":"text","text":"## detect_format()\nRiconosce formato PDF:\nNEW (CartellinoOrario)\nvs OLD_REV (RTL)","x":-20,"y":40,"width":240,"height":100,"color":"5"},
+		{"id":"parse_new","type":"text","text":"## parse_new_format()\nCartellino Orario moderno\nRegex mese+anno concatenato","x":300,"y":-60,"width":240,"height":90,"color":"5"},
+		{"id":"parse_old","type":"text","text":"## parse_old_rev()\nFormato OLD_REV (RTL)\nLettura destra→sinistra","x":300,"y":120,"width":240,"height":90,"color":"5"},
+		{"id":"calcolo","type":"text","text":"## Calcolo buoni pasto\ncalcola_ore() +\ncalcola_buoni_pasto()\n(soglia ore giornaliere)","x":640,"y":20,"width":240,"height":100,"color":"4"},
+		{"id":"excel_w","type":"text","text":"## Excel per worker\nOrario mensile + buoni\nspettanti per giorno","x":980,"y":-100,"width":220,"height":90,"color":"6"},
+		{"id":"cartellino","type":"text","text":"## Cartellini PDF\nDocumento firmabile\nper ogni dipendente","x":980,"y":30,"width":220,"height":90,"color":"6"},
+		{"id":"riepilogo","type":"text","text":"## RIEPILOGO.xlsx\nTotale buoni per tutti\ni worker del mese","x":980,"y":160,"width":220,"height":90,"color":"6"},
+		{"id":"zip_out","type":"text","text":"## ZIP DEFINITIVO\n*_DEFINITIVO.zip\nOutput finale completo","x":1300,"y":30,"width":220,"height":90,"color":"2"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"zip_in","fromSide":"right","toNode":"script","toSide":"left","label":"legge"},
+		{"id":"e2","fromNode":"storico","fromSide":"right","toNode":"analisi","toSide":"left","label":"riferimento"},
+		{"id":"e3","fromNode":"workers","fromSide":"right","toNode":"script","toSide":"bottom","label":"per ognuno"},
+		{"id":"e4","fromNode":"script","fromSide":"bottom","toNode":"analisi","toSide":"top","label":"chiama"},
+		{"id":"e5","fromNode":"analisi","fromSide":"right","toNode":"detect","toSide":"left"},
+		{"id":"e6","fromNode":"detect","fromSide":"right","toNode":"parse_new","toSide":"left","label":"NEW"},
+		{"id":"e7","fromNode":"detect","fromSide":"right","toNode":"parse_old","toSide":"left","label":"OLD_REV"},
+		{"id":"e8","fromNode":"parse_new","fromSide":"right","toNode":"calcolo","toSide":"left"},
+		{"id":"e9","fromNode":"parse_old","fromSide":"right","toNode":"calcolo","toSide":"left"},
+		{"id":"e10","fromNode":"calcolo","fromSide":"right","toNode":"excel_w","toSide":"left"},
+		{"id":"e11","fromNode":"calcolo","fromSide":"right","toNode":"cartellino","toSide":"left"},
+		{"id":"e12","fromNode":"calcolo","fromSide":"right","toNode":"riepilogo","toSide":"left"},
+		{"id":"e13","fromNode":"excel_w","fromSide":"right","toNode":"zip_out","toSide":"left"},
+		{"id":"e14","fromNode":"cartellino","fromSide":"right","toNode":"zip_out","toSide":"left"},
+		{"id":"e15","fromNode":"riepilogo","fromSide":"right","toNode":"zip_out","toSide":"left"}
+	]
+}

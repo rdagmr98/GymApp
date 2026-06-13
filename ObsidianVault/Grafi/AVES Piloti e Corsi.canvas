@@ -1,0 +1,37 @@
+{
+	"nodes":[
+		{"id":"grp_aves","type":"group","label":"AVES Piloti — C:\\Users\\Gianmarco\\piloti","x":-860,"y":-380,"width":780,"height":760},
+		{"id":"grp_corsi","type":"group","label":"Corsi EASA Part-66 — C:\\Users\\Gianmarco\\corsi","x":60,"y":-380,"width":860,"height":760},
+		{"id":"grp_shared","type":"group","label":"Pattern condiviso","x":-860,"y":440,"width":1720,"height":140},
+		{"id":"piloti_app","type":"text","text":"## piloti Flutter app\nHUD dark-theme militare\nkCyan/kBg/kGo/kNoGo/kWarning","x":-840,"y":-360,"width":260,"height":90,"color":"4"},
+		{"id":"admin_dash","type":"text","text":"## Admin Dashboard\nadmin_dashboard.dart\nGestione piloti, visualizza\nstato GO/NO-GO","x":-840,"y":-220,"width":260,"height":100,"color":"5"},
+		{"id":"gonogo","type":"text","text":"## Go/No-Go Logic\nMedical fitness scaduta → NO-GO\nSemestre prec. <6h → NO-GO\nScade ≤60gg o <6h → WARNING\n_pilotOverallStatus()","x":-840,"y":-60,"width":260,"height":120,"color":"1"},
+		{"id":"pilot_services","type":"text","text":"## Services\nuser_service.dart → CRUD piloti\nflight_service.dart → voli\ngh_db_service.dart → JSON DB","x":-840,"y":110,"width":260,"height":90,"color":"5"},
+		{"id":"piloti_db","type":"text","text":"## GitHub JSON DB\nrdagmr98/piloti-data\nusers.json\nflights.json\ncapabilities.json\nreference.json","x":-540,"y":-140,"width":220,"height":140,"color":"3"},
+		{"id":"corsi_app","type":"text","text":"## corsi Flutter web\ndeploy: rdagmr98.github.io/corsi/\nGitHub Actions auto-deploy","x":80,"y":-360,"width":260,"height":90,"color":"4"},
+		{"id":"roles","type":"text","text":"## 4 Ruoli\nadmin_master → /master (NavigationRail)\ncourse_director → /director\ninstructor → /instructor (BottomNav)\nattendee → /attendee","x":80,"y":-220,"width":300,"height":110,"color":"5"},
+		{"id":"course_types","type":"text","text":"## Tipi corso\nB1mil: 138h (50,51,53,54)\nB2mil: 130h (50-55)\nB1: 2074h (moduli 1-17)\nB2: 1760h (moduli 1-14 parziale)","x":80,"y":-60,"width":300,"height":110,"color":"5"},
+		{"id":"schedule","type":"text","text":"## Schedule\ngenerateRemainingSchedule()\n6 slot Lun-Gio, 3 slot Ven\n27h/settimana\nRecupero assenze >10%","x":80,"y":100,"width":280,"height":100,"color":"5"},
+		{"id":"grades","type":"text","text":"## Voti 0-30\nAccertamenti peso 1x\nEsami peso 2x\nSoglia: 75% = ≥22.5","x":420,"y":-220,"width":240,"height":90,"color":"3"},
+		{"id":"currency","type":"text","text":"## Currency istruttori\n≥6h insegnamento/anno\n≥35h aggiornamenti/2 anni\ngetTeachingHoursRollingYear()","x":420,"y":-80,"width":260,"height":100,"color":"3"},
+		{"id":"corsi_db","type":"text","text":"## GitHub JSON DB\nrdagmr98/corsi-data\nusers, courses, schedules\nrecords, grades, updates\namc, reference (8 file)","x":420,"y":80,"width":260,"height":110,"color":"3"},
+		{"id":"active_course","type":"text","text":"## Corso attivo: 3BTC\n8 allievi, ~71% completato\n1511 lezioni confermate\nmoduli 1-10,12,15,16 ✓\n11,13,17 rimanenti","x":740,"y":-80,"width":260,"height":120,"color":"2"},
+		{"id":"gh_db_shared","type":"text","text":"## GhDbService (pattern condiviso)\nSHA versioning • AES-CBC encryption PII • 3-attempt conflict retry\nREST API GitHub • READ_PAT via --dart-define","x":-840,"y":460,"width":700,"height":80,"color":"4"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"piloti_app","fromSide":"bottom","toNode":"admin_dash","toSide":"top"},
+		{"id":"e2","fromNode":"admin_dash","fromSide":"bottom","toNode":"gonogo","toSide":"top"},
+		{"id":"e3","fromNode":"gonogo","fromSide":"bottom","toNode":"pilot_services","toSide":"top"},
+		{"id":"e4","fromNode":"pilot_services","fromSide":"right","toNode":"piloti_db","toSide":"left","label":"CRUD"},
+		{"id":"e5","fromNode":"corsi_app","fromSide":"bottom","toNode":"roles","toSide":"top"},
+		{"id":"e6","fromNode":"roles","fromSide":"bottom","toNode":"course_types","toSide":"top"},
+		{"id":"e7","fromNode":"course_types","fromSide":"bottom","toNode":"schedule","toSide":"top"},
+		{"id":"e8","fromNode":"roles","fromSide":"right","toNode":"grades","toSide":"left"},
+		{"id":"e9","fromNode":"roles","fromSide":"right","toNode":"currency","toSide":"left"},
+		{"id":"e10","fromNode":"schedule","fromSide":"right","toNode":"corsi_db","toSide":"left","label":"read/write"},
+		{"id":"e11","fromNode":"grades","fromSide":"right","toNode":"active_course","toSide":"left"},
+		{"id":"e12","fromNode":"corsi_db","fromSide":"right","toNode":"active_course","toSide":"left"},
+		{"id":"e13","fromNode":"pilot_services","fromSide":"bottom","toNode":"gh_db_shared","toSide":"top","label":"usa"},
+		{"id":"e14","fromNode":"schedule","fromSide":"bottom","toNode":"gh_db_shared","toSide":"top","label":"usa"}
+	]
+}

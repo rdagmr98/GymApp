@@ -1,0 +1,223 @@
+{
+  "main": {
+    "id": "ab7ef6f396eeec2e",
+    "type": "split",
+    "children": [
+      {
+        "id": "c27ebb79a42c208f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b2fcac949fe73651",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Vista grafo"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a7b986946d23a7e0",
+    "type": "split",
+    "children": [
+      {
+        "id": "47f4e2862b12451b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6a177425a69092ee",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": true
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Esplora risorse"
+            }
+          },
+          {
+            "id": "2230b21ad6607a57",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Ricerca"
+            }
+          },
+          {
+            "id": "86cd10d9562b49da",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Segnalibri"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 200,
+    "collapsed": true
+  },
+  "right": {
+    "id": "0e20d402b64a663a",
+    "type": "split",
+    "children": [
+      {
+        "id": "676a2fd1b840a2ee",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fd8cd92e95e4c282",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Riferimenti"
+            }
+          },
+          {
+            "id": "920863d64a5c7085",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Collegamenti in uscita"
+            }
+          },
+          {
+            "id": "89ee9955506525fa",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etichette"
+            }
+          },
+          {
+            "id": "1bd27b6b62498175",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Tutte le proprietà"
+            }
+          },
+          {
+            "id": "3dbfce7f2369d650",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Struttura"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Apri selezione rapida": false,
+      "graph:Apri vista grafo": false,
+      "canvas:Crea nuova lavagna": false,
+      "daily-notes:Apri nota del giorno": false,
+      "templates:Inserisci modello": false,
+      "command-palette:Apri riquadro comandi": false,
+      "bases:Crea nuova Base": false
+    }
+  },
+  "active": "b2fcac949fe73651",
+  "lastOpenFiles": [
+    "Senza nome 1.canvas",
+    "Senza nome 2.base",
+    "Senza nome 3.base",
+    "Senza nome.canvas",
+    "2026-06-13.md",
+    "Senza nome 1.base",
+    "Senza nome.base",
+    "Grafi/Gym App.canvas",
+    "Grafi/Buoni Pasti Pipeline.canvas",
+    "Grafi/AVES Piloti e Corsi.canvas",
+    "AVES Corsi/GhDbService.md.tmp.17116.2e30c0e86ef7",
+    "AVES Corsi/GitHub JSON DB AVES Tecnici.md",
+    "AVES Corsi/GitHub JSON DB AVES Tecnici.md.tmp.17116.8978172d609f",
+    "AVES Corsi/Currency Tecnici.md",
+    "AVES Corsi/Currency Tecnici.md.tmp.17116.fb73ae39de6b",
+    "AVES Corsi/Admin Tecnici.md",
+    "AVES Corsi/Admin Tecnici.md.tmp.17116.166433324704",
+    "AVES Corsi/AVES Tecnici.md",
+    "AVES Corsi/AVES Tecnici.md.tmp.17116.5cccd40eb6c2",
+    "Gym App/Shared Data.md.tmp.17116.5505ab3ad33f",
+    "Gym App/APK app_coach.md",
+    "Gym App/app_coach.md",
+    "AVES Corsi/GhDbService.md",
+    "AVES Corsi/Corso Attivo 3BTC.md",
+    "AVES Corsi/GitHub JSON DB Corsi.md",
+    "AVES Corsi/Currency Istruttori.md",
+    "AVES Corsi/Voti.md",
+    "AVES Corsi/Schedule.md",
+    "AVES Corsi/Tipi Corso.md",
+    "AVES Corsi/4 Ruoli.md",
+    "AVES Corsi/Corsi EASA.md",
+    "AVES Corsi/GitHub JSON DB AVES.md",
+    "AVES Corsi/Pilot Services.md",
+    "AVES Corsi/Go No-Go Logic.md",
+    "AVES Corsi/Admin Dashboard.md",
+    "AVES Corsi/AVES Piloti.md",
+    "Gym App/GitHub Pages.md",
+    "Gym App/GitHub Release.md",
+    "Gym App/releases.md",
+    "Gym App/Web Build.md"
+  ]
+}

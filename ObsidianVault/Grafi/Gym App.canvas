@@ -1,0 +1,27 @@
+{
+	"nodes":[
+		{"id":"grp_apps","type":"group","label":"Sorgenti Flutter","x":-460,"y":-300,"width":300,"height":480},
+		{"id":"grp_build","type":"group","label":"Build","x":-80,"y":-300,"width":280,"height":480},
+		{"id":"grp_deploy","type":"group","label":"Deploy","x":300,"y":-300,"width":300,"height":480},
+		{"id":"gymapp_src","type":"text","text":"## gym_app\nFlutter - vista trainer\nrdagmr98/GymApp\napp\\miadiariogym","x":-440,"y":-260,"width":260,"height":100,"color":"4"},
+		{"id":"cliente_src","type":"text","text":"## app_cliente\nFlutter - vista utente\nrdagmr98/gymapplogbook\n(logbook personale)","x":-440,"y":-100,"width":260,"height":100,"color":"4"},
+		{"id":"shared_data","type":"text","text":"## Dati condivisi\nEsercizi, schede\nallenamenti, utenti","x":-440,"y":80,"width":260,"height":80,"color":"3"},
+		{"id":"build_apk_gym","type":"text","text":"## APK gym_app\nflutter build apk --release\n--target android-arm64\n→ GymApp-arm64-v8a.apk","x":-60,"y":-260,"width":240,"height":100,"color":"5"},
+		{"id":"build_apk_cli","type":"text","text":"## APK app_cliente\nflutter build apk --release\n--target android-arm64\n→ GymLogbook-arm64.apk","x":-60,"y":-100,"width":240,"height":100,"color":"5"},
+		{"id":"build_web","type":"text","text":"## Web build\nflutter build web --release\n--base-href '/GymApp/'\n(PowerShell, non bash)","x":-60,"y":80,"width":240,"height":100,"color":"5"},
+		{"id":"releases","type":"text","text":"## releases/\n~150MB per APK\nin .gitignore\nNON su git","x":-60,"y":220,"width":240,"height":90,"color":"3"},
+		{"id":"gh_release","type":"text","text":"## GitHub Release\ngh release create <tag> <apk>\nSupport fino a 2GB\n(APK >100MB)","x":320,"y":-200,"width":260,"height":100,"color":"6"},
+		{"id":"gh_pages","type":"text","text":"## GitHub Pages\nrdagmr98.github.io/GymApp/\ngit push → deploy web\nautomatico","x":320,"y":-60,"width":260,"height":100,"color":"6"}
+	],
+	"edges":[
+		{"id":"e1","fromNode":"gymapp_src","fromSide":"right","toNode":"build_apk_gym","toSide":"left"},
+		{"id":"e2","fromNode":"gymapp_src","fromSide":"right","toNode":"build_web","toSide":"left"},
+		{"id":"e3","fromNode":"cliente_src","fromSide":"right","toNode":"build_apk_cli","toSide":"left"},
+		{"id":"e4","fromNode":"build_apk_gym","fromSide":"bottom","toNode":"releases","toSide":"top"},
+		{"id":"e5","fromNode":"build_apk_cli","fromSide":"bottom","toNode":"releases","toSide":"top"},
+		{"id":"e6","fromNode":"releases","fromSide":"right","toNode":"gh_release","toSide":"left"},
+		{"id":"e7","fromNode":"build_web","fromSide":"right","toNode":"gh_pages","toSide":"left"},
+		{"id":"e8","fromNode":"shared_data","fromSide":"top","toNode":"gymapp_src","toSide":"bottom"},
+		{"id":"e9","fromNode":"shared_data","fromSide":"top","toNode":"cliente_src","toSide":"bottom"}
+	]
+}
