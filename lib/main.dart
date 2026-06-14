@@ -15675,7 +15675,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.symmetric(vertical: 6),
       child: Center(
         child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
             color: accent.withAlpha(230),
             borderRadius: BorderRadius.circular(24),
@@ -15684,20 +15684,20 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.timer, color: Colors.white, size: 16),
-              const SizedBox(width: 6),
+              const Icon(Icons.timer, color: Colors.white, size: 22),
+              const SizedBox(width: 8),
               Text(
                 label,
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 22),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 12),
               GestureDetector(
                 onTap: () {
                   _bgTimer?.cancel();
                   setState(() { timerActive = false; _bgCounter = 0; _endTime = null; });
                   _clearTimerNotifications();
                 },
-                child: const Icon(Icons.close, color: Colors.white, size: 18),
+                child: const Icon(Icons.close, color: Colors.white, size: 22),
               ),
             ],
           ),
@@ -15779,24 +15779,24 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               runSpacing: 6,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
                     color: const Color(0xFFFFD700).withAlpha(30),
                     border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg',
-                    style: const TextStyle(color: Color(0xFFFFD700), fontSize: 13, fontWeight: FontWeight.bold)),
+                    style: const TextStyle(color: Color(0xFFFFD700), fontSize: 17, fontWeight: FontWeight.bold)),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
                   decoration: BoxDecoration(
                     color: accent.withAlpha(30),
                     border: Border.all(color: accent.withAlpha(180), width: 1.5),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text('$lastR reps',
-                    style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
+                    style: TextStyle(color: accent, fontSize: 17, fontWeight: FontWeight.bold)),
                 ),
 
               ],
@@ -15812,7 +15812,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               child: Container(
                 width: double.infinity,
                 margin: const EdgeInsets.only(top: 6),
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
                 decoration: BoxDecoration(
                   color: suggerisciAumento
                       ? const Color(0xFFFFD700).withAlpha(20)
@@ -15830,7 +15830,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   children: [
                     Icon(
                       suggerisciAumento ? Icons.trending_up : Icons.fitness_center,
-                      size: 14,
+                      size: 16,
                       color: suggerisciAumento
                           ? const Color(0xFFFFD700)
                           : const Color(0xFFB388FF),
@@ -15844,7 +15844,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         color: suggerisciAumento
                             ? const Color(0xFFFFD700)
                             : const Color(0xFFB388FF),
-                        fontSize: 12,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

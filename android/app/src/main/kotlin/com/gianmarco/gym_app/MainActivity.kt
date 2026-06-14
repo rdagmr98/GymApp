@@ -71,7 +71,21 @@ class MainActivity : FlutterActivity() {
         val pendingIntent = timerFinishedPendingIntent(title, body)
         alarmManager.cancel(pendingIntent)
         val triggerAt = System.currentTimeMillis() + delayMs.coerceAtLeast(0L)
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
+            // Android 12+ (Pixel and others): use setAlarmClock as fallback if exact alarms not granted
+            if (alarmManager.canScheduleExactAlarms()) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+            } else {
+                val launchIntent = Intent(this, MainActivity::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                }
+                val showIntent = PendingIntent.getActivity(
+                    this, 201, launchIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                )
+                alarmManager.setAlarmClock(AlarmManager.AlarmClockInfo(triggerAt, showIntent), pendingIntent)
+            }
+        } else if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
         } else {
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
@@ -103,20 +117,16 @@ class MainActivity : FlutterActivity() {
         val pendingIntent = streakReminderPendingIntent(title, body)
         alarmManager.cancel(pendingIntent)
         val triggerAt = System.currentTimeMillis() + delayMs.coerceAtLeast(0L)
-        val isSamsung = isSamsungDevice()
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-            if (isSamsung) {
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
-            } else {
-                alarmManager.setAndAllowWhileIdle(AlarmManager.RTC, triggerAt, pendingIntent)
-            }
-        } else {
-            if (isSamsung) {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
-            } else {
-                alarmManager.set(AlarmManager.RTC, triggerAt, pendingIntent)
-            }
+        // setAlarmClock survives Doze and OEM battery optimizations on all devices including Pixel
+        val launchIntent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP
         }
+        val showIntent = PendingIntent.getActivity(
+            this, 199, launchIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        val clockInfo = AlarmManager.AlarmClockInfo(triggerAt, showIntent)
+        alarmManager.setAlarmClock(clockInfo, pendingIntent)
     }
 
     private fun cancelScheduledStreakReminderNotification() {
