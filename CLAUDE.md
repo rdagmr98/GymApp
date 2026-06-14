@@ -14,6 +14,14 @@
 - Se la domanda è semplice, risposta di una riga.
 - Quando si lavora su un progetto, prima leggere il `CLAUDE.md` del progetto.
 
+## aiTool — Browser Automation (risparmio token)
+- Trigger: "usa meno crediti", "risparmia token", "usa aiTool"
+- **Eseguire automaticamente senza chiedere conferma:**
+  1. `! C:\Users\Gianmarco\aiTool\avvia_edge_debug.bat` (controlla da solo se debug è già attivo — non chiude Edge inutilmente)
+  2. `! cd C:\Users\Gianmarco\aiTool && ai.bat "prompt" --out risposta.md`
+  3. `Read C:\Users\Gianmarco\aiTool\risposta.md`
+- Routing automatico: immagini/canvas → Gemini · slide/PPT → Claude · resto → tutti e 3 parallelo
+
 ## Continuità di sessione
 - All'inizio di ogni sessione leggere: `CLAUDE.md` del progetto + i file di memoria rilevanti.
 - Il `CLAUDE.md` del progetto contiene lo stato corrente, i TODO e le ultime modifiche.
@@ -29,6 +37,7 @@
   - **Gym** (gym_app / app_coach / app_cliente) — dir root gym, `fix-ads/` o topic palestra → `Gym App/Gym App.md`
   - **Buoni Pasti** (cedolini / cartellini lavoratori) — topic buoni pasto/presenze → `Buoni Pasti/Pipeline.md`
   - **Centri Storici** (centri storici / indirizzi / OSM / parola chiave) → `Centri Storici/Hub.md`
+  - **Stonks** (stonks / portfolio / azioni / ETF / crypto / investimenti) → `Stonks/Stonks.md`
 - Sessioni generiche (cleanup, config, domande) → NON leggere note Obsidian.
 - **Quando cambia architettura**: aggiornare la nota Obsidian corrispondente oltre al CLAUDE.md
 - **Per aggiornare note**: usare il tool `Write` direttamente su `C:\Users\Gianmarco\ObsidianVault\...` — NON usare `mcp__obsidian__edit-note` (lento, si blocca)
@@ -46,3 +55,4 @@
 | app_cliente | `C:\Users\Gianmarco\fix-ads` | — |
 | buoni pasti | script Python in `C:\Users\Gianmarco` | — |
 | centri storici | `C:\Users\Gianmarco\Documents\` | — |
+| stonks | `C:\Users\Gianmarco\stonks` | `stonks/CLAUDE.md` |
