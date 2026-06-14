@@ -11,6 +11,7 @@ Master index di tutti i progetti. Leggere per orientarsi nel vault.
 | [[Gym App/Gym App]] | 3 app palestra (trainer/coach/cliente) | directory root gym, `fix-ads/` |
 | [[Buoni Pasti/Pipeline]] | Script buoni pasto e cartellini lavoratori | topic buoni pasto/cedolini |
 | [[Centri Storici/Hub]] | DB indirizzi centro storico comuni italiani | topic centri storici/OSM |
+| [[Stonks/Stonks]] | Portfolio tracker (clone getquin) — azioni/ETF/crypto | directory `stonks/`, topic investimenti/portafoglio |
 
 ---
 
@@ -21,6 +22,15 @@ Master index di tutti i progetti. Leggere per orientarsi nel vault.
 - **MCP**: `comfyui-mcp` (88 tool, usa `enqueue_workflow` con UnetLoaderGGUF)
 - **Output**: `C:\Users\Gianmarco\ComfyUI\output\`
 - **Nota**: DirectML NON funziona (crash DLL), usare sempre `--cpu`
+
+---
+
+## aiTool — Browser Automation Multi-AI (risparmio token)
+- **Path**: `C:\Users\Gianmarco\aiTool` | Fork: `rdagmr98/aiTool`
+- **Hub**: [[aiTool/aiTool Hub]]
+- **Avvio**: `avvia_edge_debug.bat` poi `ai.bat "prompt"`
+- **Auto-routing**: immagine/canvas → Gemini · slide/ppt → Claude · resto → tutti e 3 in parallelo
+- **Quando usarlo**: se l'utente dice "usa meno crediti" o "risparmia token"
 
 ---
 
