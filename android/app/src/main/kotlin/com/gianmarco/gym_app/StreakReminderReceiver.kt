@@ -13,15 +13,12 @@ import androidx.core.app.NotificationCompat
 class StreakReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val isSamsung = Build.MANUFACTURER.lowercase() == "samsung"
-        // Samsung: IMPORTANCE_HIGH (heads-up, suona) — altri dispositivi: IMPORTANCE_DEFAULT (silenzioso, no sveglia)
-        val channelId = if (isSamsung) "streak_reminder" else "streak_reminder_default"
+        val channelId = "streak_reminder"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val importance = if (isSamsung) NotificationManager.IMPORTANCE_HIGH else NotificationManager.IMPORTANCE_DEFAULT
-            nm.createNotificationChannel(NotificationChannel(channelId, "Streak Reminder", importance))
+            nm.createNotificationChannel(NotificationChannel(channelId, "Streak Reminder", NotificationManager.IMPORTANCE_HIGH))
         }
 
-        val title = intent.getStringExtra("title") ?: "🔥 Non perdere i tuoi progressi!"
+        val title = intent.getStringExtra("title") ?: "Non perdere i tuoi progressi!"
         val body = intent.getStringExtra("body")
             ?: "Non ti alleni da 2 giorni. Allenati oggi per non perdere i tuoi progressi!"
 
@@ -38,12 +35,12 @@ class StreakReminderReceiver : BroadcastReceiver() {
             .setContentTitle(title)
             .setContentText(body)
             .setStyle(NotificationCompat.BigTextStyle().bigText(body))
-            .setPriority(if (isSamsung) NotificationCompat.PRIORITY_HIGH else NotificationCompat.PRIORITY_DEFAULT)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setCategory(NotificationCompat.CATEGORY_REMINDER)
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .setAutoCancel(true)
+            .setDefaults(NotificationCompat.DEFAULT_ALL)
             .setContentIntent(launchPendingIntent)
-        if (isSamsung) builder.setDefaults(NotificationCompat.DEFAULT_ALL)
 
         nm.notify(9901, builder.build())
 
@@ -60,18 +57,9 @@ class StreakReminderReceiver : BroadcastReceiver() {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val nextTriggerAt = System.currentTimeMillis() + AlarmManager.INTERVAL_DAY
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (isSamsung) {
-                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextTriggerAt, pendingIntent)
-            } else {
-                // RTC (non wakeup) + inexact: non appare come sveglia nel Clock su Pixel/stock Android
-                alarmManager.setAndAllowWhileIdle(AlarmManager.RTC, nextTriggerAt, pendingIntent)
-            }
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextTriggerAt, pendingIntent)
         } else {
-            if (isSamsung) {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, nextTriggerAt, pendingIntent)
-            } else {
-                alarmManager.set(AlarmManager.RTC, nextTriggerAt, pendingIntent)
-            }
+            alarmManager.set(AlarmManager.RTC_WAKEUP, nextTriggerAt, pendingIntent)
         }
         context.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
             .edit()
