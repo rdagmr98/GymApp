@@ -17364,8 +17364,11 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                                           0.2126, 0.7152, 0.0722, 0, 0,
                                           0,      0,      0,      1, 0,
                                         ]),
-                                  child: Image.asset('assets/icon_client.png', width: 28, height: 28,
-                                      errorBuilder: (_, __, ___) => Icon(Icons.fitness_center, color: done ? Colors.white : Colors.white24, size: 24)),
+                                  child: Transform.scale(
+                                    scale: 1.18,
+                                    child: Image.asset('assets/icon_client.png', width: 28, height: 28,
+                                        errorBuilder: (_, __, ___) => Icon(Icons.fitness_center, color: done ? Colors.white : Colors.white24, size: 24)),
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 3),

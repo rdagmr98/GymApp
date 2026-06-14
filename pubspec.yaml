@@ -36,7 +36,6 @@ flutter:
   assets:
     - assets/muscle/
     - assets/gif/
-    - assets/videos/
     - assets/icon_client.png
 
 flutter_launcher_icons:
