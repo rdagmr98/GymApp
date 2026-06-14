@@ -9014,6 +9014,14 @@ class _ClientMainPageState extends State<ClientMainPage>
 
   Future<void> _maybeShowIosInstallHint() async {
     if (!kIsWeb) return;
+    try {
+      final ua = js.context['navigator']['userAgent'] as String? ?? '';
+      final isIos = ua.contains('iPhone') || ua.contains('iPad');
+      final isStandalone = js.context['navigator']['standalone'];
+      if (!isIos || isStandalone == true) return;
+    } catch (_) {
+      return;
+    }
     final prefs = await SharedPreferences.getInstance();
     if (prefs.getBool(_webIosInstallHintSeenKey) ?? false) return;
     if (!mounted) return;
