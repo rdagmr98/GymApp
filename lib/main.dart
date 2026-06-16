@@ -14476,18 +14476,17 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (c) {
-        // Compute session progress using the MAX-WEIGHT set per exercise.
-        // Using the heaviest set (S1 in a pyramid) avoids distortions from
-        // the last/lightest set, which varies with fatigue and is not a
-        // reliable strength indicator. Weight-up rule: cap both at min(currR,prevR).
+        // Compute session progress: average delta% across each exercise vs previous.
+        // Per-exercise comparison avoids the independent-max bug where cur and prev
+        // best come from different exercises and small improvements net to 0%.
         double? progressPct;
         if (_previousResults.isNotEmpty && _allCompletedExercises.isNotEmpty) {
-          double cur1RM = 0, prev1RM = 0;
+          double totalDelta = 0;
+          int matchCount = 0;
           for (final ex in _allCompletedExercises) {
             final currSeries = (ex['series'] as List);
             final prevSeries = _previousResults[ex['exercise']] ?? [];
             if (currSeries.isEmpty || prevSeries.isEmpty) continue;
-            // Find max-weight set in each session
             double bestCW = 0, bestCR = 0;
             for (final s in currSeries) {
               final w = (s['w'] ?? 0.0).toDouble();
@@ -14505,10 +14504,12 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             final effPR = weightUp ? (bestPR < bestCR ? bestPR : bestCR) : bestPR;
             final ec = effCR > 0 ? bestCW * (1 + effCR / (30.0 + bestCW / 10.0)) : bestCW;
             final ep = effPR > 0 ? bestPW * (1 + effPR / (30.0 + bestPW / 10.0)) : bestPW;
-            if (ec > cur1RM) cur1RM = ec;
-            if (ep > prev1RM) prev1RM = ep;
+            if (ep > 0) {
+              totalDelta += (ec - ep) / ep;
+              matchCount++;
+            }
           }
-          if (prev1RM > 0) progressPct = (cur1RM - prev1RM) / prev1RM * 100;
+          if (matchCount > 0) progressPct = totalDelta / matchCount * 100;
         }
         return _WorkoutShareSheet(
           dayName: widget.day.dayName,
@@ -17321,7 +17322,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                   _badgeChip(
                     icon: widget.progressPercent! >= 0 ? '📈' : '📉',
                     label: AppL.vsPrev,
-                    value: '${widget.progressPercent! >= 0 ? '+' : ''}${widget.progressPercent!.toStringAsFixed(0)}%',
+                    value: '${widget.progressPercent! >= 0 ? '+' : ''}${widget.progressPercent!.toStringAsFixed(1)}%',
                     accent: widget.progressPercent! >= 0 ? Colors.greenAccent : Colors.redAccent,
                   ),
               ],
@@ -17581,7 +17582,6 @@ class _StreakShareSheet extends StatefulWidget {
 class _StreakShareSheetState extends State<_StreakShareSheet> {
   bool _sharing = false;
   bool _showBadges = true;
-  bool _showSessionCount = true;
   final GlobalKey _cardKey = GlobalKey();
 
   // Day-of-week badges: Mon-Sun, highlight those with a completed session
@@ -17747,13 +17747,6 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                       );
                     }),
                   ),
-                  if (_showSessionCount) ...[
-                    const SizedBox(height: 12),
-                    Text(
-                      '$doneCount / $total ${AppL.sessionsDone}',
-                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
-                    ),
-                  ],
                 ],
                 const Spacer(),
                 // Bottom hashtags
@@ -17820,12 +17813,6 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                 label: AppL.badgesIcon,
                 active: _showBadges,
                 onTap: () => setState(() => _showBadges = !_showBadges),
-              ),
-              const SizedBox(width: 8),
-              _toggleChip(
-                label: AppL.sessionsIcon,
-                active: _showSessionCount,
-                onTap: () => setState(() => _showSessionCount = !_showSessionCount),
               ),
             ],
           ),
