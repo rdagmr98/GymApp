@@ -93,42 +93,49 @@ Output: `ZTL_ITALIA_righe.xlsx` — 7 colonne fisse, 1 riga per keyword (LONG).
 
 | Voce | Valore |
 |------|--------|
-| Comuni | 58 |
-| Strade ZTL | 6.095 |
-| Righe keyword | 7.009 |
+| Comuni | 85 (84 OSM + Milano) |
+| Strade ZTL | 7.022 |
+| Righe keyword | 7.969 |
 | Max keyword/strada | 5 |
-| Distribuzione kw | {1: 5390, 2: 553, 3: 102, 4: 43, 5: 7} |
+| Distribuzione kw | {1: 6264, 2: 608, 3: 113, 4: 35, 5: 2} |
 
-**Fonte strade:** riuso dei file `centri_storici_v2/*.xlsx` non-fallback (strade ricavate dai
-poligoni OSM `boundary=limited_traffic_zone` — il tag ZTL italiano corretto, **non**
-`restricted_traffic_zone` che dà 0 risultati). Le keyword vecchie sono ignorate: si ricalcola
-con `processa_comune` (test unicità vs strade FUORI ZTL nello stesso comune) + normalizzazione
-finale identica al centro storico (apostrofo tenuto, doppia variante trattino/slash, alias numerici).
+**Fonte strade — query OSM NAZIONALE (`ztl_full.py`, NON più i file v2).** Interroga tutte le
+**225 zone** italiane con tag `boundary=limited_traffic_zone` (128 way + 97 relation) — il tag ZTL
+italiano corretto (`restricted_traffic_zone` dà 0 risultati in Italia). Per ogni zona:
+1. **Comune** = reverse-geocoding Nominatim del centroide (zoom 14) → normalizzato vs
+   `cap_cache.json` (più affidabile del `comune_da_tags` v2 difettoso). Mappa `COMUNE_ALIAS` per
+   varianti nome ("Reggio Emilia"→`reggio nell'emilia`, "Montecatini Terme"→`montecatini-terme`) e
+   frazioni→comune padre (Polpet→Ponte nelle Alpi, Monti di Licciana→Licciana Nardi, Gorfigliano→Minucciano).
+2. **Strade nella zona** = strategia ibrida robusta su tutti i tipi OSM:
+   - `map_to_area` → `way[highway][name](area)` per i poligoni (way chiuse + relation `type=boundary`);
+   - se vuoto, fallback **membri-strada** `<type>(<id>);>;out geom;` filtrando way con `highway`+`name`
+     (copre `type=enforcement` e `type=site`, i cui membri SONO già le strade della ZTL).
 
-**Script:** `ztl_v6.py`. Resume-safe via `ztl_v6_master.csv(.bak)` + `geo_cache_ztl.json`.
-`python ztl_v6.py` (ricalcolo se manca `.bak`) · `--no-skip` forza · `--solo-righe` solo rebuild xlsx.
+Le keyword si ricalcolano con `processa_comune` (test unicità vs strade FUORI ZTL nello stesso
+comune) + normalizzazione finale identica al centro storico (apostrofo tenuto, doppia variante
+trattino/slash, alias numerici).
 
-**Pulizia dati v2** (il geocoding inverso `comune_da_tags` del v2 era difettoso):
-- `FILE_FIX`: `bergamo.xlsx` aveva tutte le righe etichettate comune="Viale" (estratto da
-  "Viale Libertà"; "Viale" è un comune reale in AT → passava il check) → forzate a **Bergamo**.
-- Scarto cross-provincia: in ogni file si tiene solo la sigla **modale**; intrusi scartati
-  (Milano/Gozzano in la_spezia, Tarsia in napoli, Firenze in verona) = 65 righe.
-- `SPLIT` province ambigue risolte assegnando ogni strada al comune candidato che la contiene
-  (match Overpass): Barletta-Andria-Trani → Barletta 56 / Andria 1 / Trani 0; Massa-Carrara →
-  Carrara 1 / Massa 0; "Monza e della Brianza" → Monza (7 assegnate, 32 duplicati scartati).
+**Milano integrato dal file produzione.** OSM ha solo ~26 strade ZTL per Milano (incompleto),
+quindi si usano le **683 keyword** del file `Downloads/ztl milano.xlsx` (685 righe, dedotte con
+`clean_kw`); Milano è escluso dalla pipeline OSM. (Area C/B = `low_emission_zone`, tag diverso, escluse.)
 
-**ATTENZIONE Milano:** in OSM la ZTL di Milano (`limited_traffic_zone`) ha solo ~26 strade,
-mentre il file di esempio produzione (`Downloads/ztl milano.xlsx`) ne ha 685. OSM è incompleto
-per Milano. Da integrare a mano se serve copertura completa Milano (Area C/B sono `low_emission_zone`,
-tag diverso, non incluse).
+**Copertura:** 225 zone → 0 senza comune, ~11 zone vuote scartate (geometrie senza strade nominate),
+84 comuni OSM + Milano. Include ora **Roma** (718 strade), Cagliari/Sassari/Alghero/Olbia,
+Bolzano/Merano/Bressanone/Trento, Udine, Lecce, tutto il Garda. Il vecchio `ztl_v6.py`
+(58 comuni dai file v2) è **superato**.
+
+**Script:** `ztl_full.py`. Resume-safe via cache: `ztl_list.json` (225 zone),
+`ztl_reverse_cache.json` (centroide→comune), `ztl_zone_streets.json` (zona→strade),
+`geo_cache_ztl.json`, `ztl_full_master.csv(.bak)`.
+`python ztl_full.py` (ricalcola se manca `.bak`) · `--no-skip` forza · `--solo-righe` solo rebuild xlsx.
 
 ## TODO
 - [x] Completare v5 (tutti i comuni — 310.423 righe, 7126 comuni)
 - [ ] Completare run v6 keyword multiple (background, ~8h) → v6_larga + v6_righe
 - [ ] Validare campione keyword v6 (no falsi positivi su vie fuori centro)
 - [ ] Gestire CAP multipli per grandi città (MI, RM, TO hanno CAP per quartiere)
-- [x] Dataset ZTL formato righe (`ZTL_ITALIA_righe.xlsx`, 58 comuni, 7009 righe)
-- [ ] Integrare Milano ZTL (OSM ha 26 strade vs 685 reali)
+- [x] Dataset ZTL formato righe (`ZTL_ITALIA_righe.xlsx`, 85 comuni, 7969 righe — query OSM nazionale)
+- [x] Integrare Milano ZTL (683 keyword dal file produzione)
 
 ---
-*Aggiornato: 2026-06-17*
+*Aggiornato: 2026-06-17 — ZTL esteso a tutti i comuni italiani (query OSM nazionale) + Milano*
