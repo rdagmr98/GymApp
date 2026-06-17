@@ -6,6 +6,7 @@
 - Per il progetto `corsi`: build web prima del push (`flutter build web --release --base-href "/corsi/"`), poi commit + push. GitHub Actions deploya automaticamente.
 - Per il progetto `gym_app`: build APK (`--split-per-abi`) + AAB + web. APK/AAB → `C:\Users\Gianmarco\Documents\releases\gym_app\`. Push web su main. Poi GitHub Release.
 - Per il progetto `app_cliente` (fix-ads): **dopo ogni modifica** rebuild APK (`flutter build apk --split-per-abi --release`) → copia `arm64-v8a` e `armeabi-v7a` in `C:\Users\Gianmarco\Documents\releases\app_cliente\` → `gh release upload v<tag> ... --clobber` su `rdagmr98/rdagmr98.github.io`. NON saltare il rebuild. SEMPRE `--split-per-abi`, mai senza.
+- Per il progetto `gymapplogbook` (web + **QR pubblico**): il QR `https://rdagmr98.github.io/gymapplogbook/download.html` è stato dato a **migliaia di persone** e **non deve MAI dare 404**. La landing vive in `web/download.html` su `main` (Flutter la include in ogni build); deploy automatico via push su `main` (workflow `web-deploy.yml` → `gh-pages`). ❌ Mai cancellare `web/download.html`, ❌ mai aggiungere file statici a mano su `gh-pages` (un rebuild li cancella). Dettagli: `gymapplogbook/CLAUDE.md` + nota Obsidian `Gym App/QR download.html FIX`.
 
 ## Stile risposte
 - Risposte brevi e dirette, in italiano.
@@ -53,6 +54,7 @@
 | gym_app (trainer) | `C:\Users\Gianmarco` (root) | — |
 | app_coach (PT) | `rdagmr98/gymapp-coach` | — |
 | app_cliente | `C:\Users\Gianmarco\fix-ads` | — |
+| gymapplogbook (web + QR) | `rdagmr98/gymapplogbook` (branch main) | `gymapplogbook/CLAUDE.md` |
 | buoni pasti | script Python in `C:\Users\Gianmarco` | — |
 | centri storici | `C:\Users\Gianmarco\Documents\` | — |
 | stonks | `C:\Users\Gianmarco\stonks` | `stonks/CLAUDE.md` |
