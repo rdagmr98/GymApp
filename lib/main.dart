@@ -14280,6 +14280,28 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         child: Text('$lastR reps',
                           style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
                       ),
+                      if (suggerisciReps && _showWeightSuggestion)
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.green.withAlpha(30),
+                            border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Text(AppL.tryReps(targetR + 2),
+                            style: const TextStyle(color: Colors.green, fontSize: 13, fontWeight: FontWeight.bold)),
+                        ),
+                      if (suggerisciAumento && _showWeightSuggestion)
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          decoration: BoxDecoration(
+                            color: Colors.amber.withAlpha(30),
+                            border: Border.all(color: Colors.amber.withAlpha(180), width: 1.5),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Text('↑ AUMENTA PESO',
+                            style: TextStyle(color: Colors.amber, fontSize: 13, fontWeight: FontWeight.bold)),
+                        ),
                     ],
                   ),
 
