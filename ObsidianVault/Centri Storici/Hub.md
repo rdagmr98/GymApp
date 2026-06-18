@@ -134,8 +134,9 @@ Bolzano/Merano/Bressanone/Trento, Udine, Lecce, tutto il Garda. Il vecchio `ztl_
 - [ ] Completare run v6 keyword multiple (background, ~8h) → v6_larga + v6_righe
 - [ ] Validare campione keyword v6 (no falsi positivi su vie fuori centro)
 - [ ] Gestire CAP multipli per grandi città (MI, RM, TO hanno CAP per quartiere)
-- [x] Dataset ZTL formato righe (`ZTL_ITALIA_righe.xlsx`, 85 comuni, 7969 righe — query OSM nazionale)
+- [x] Dataset ZTL formato righe (`ZTL_ITALIA_righe.xlsx`, 86 comuni, 8148 righe — query OSM nazionale + SM)
 - [x] Integrare Milano ZTL (683 keyword dal file produzione)
+- [x] San Marino aggiunto a centri storici (402307 righe) e ZTL (178 righe, 131 strade, Città di San Marino rel 3012945)
 
 ---
-*Aggiornato: 2026-06-17 — ZTL esteso a tutti i comuni italiani (query OSM nazionale) + Milano*
+*Aggiornato: 2026-06-18 — San Marino (SM, CAP 47890) aggiunto a entrambi i dataset*
