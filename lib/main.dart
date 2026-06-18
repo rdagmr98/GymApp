@@ -13222,6 +13222,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     if (widget.demoMode) {
       _timerRunId = _newTimerRunId();
       _bgTimer?.cancel();
+    _stopCardioTimer();
       timerActive = false;
       _bgCounter = 0;
       _endTime = null;
@@ -13253,6 +13254,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
     _timerRunId = _newTimerRunId();
     _bgTimer?.cancel();
+    _stopCardioTimer();
     timerActive = false;
     _bgCounter = 0;
     _endTime = null;
@@ -14577,6 +14579,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   void _avviaTimerConTempo(int sec) {
     if (timerActive && _maxTime == sec) return;
     _bgTimer?.cancel();
+    _stopCardioTimer();
     timerActive = false;
     setState(() { _maxTime = sec; });
     _avviaTimerSeNonAttivo(sec);
@@ -14595,6 +14598,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
   void _cambiaEsercizioMethod(int nuovoIndice) {
     _shownSuggestions.clear();
+    _stopCardioTimer();
     setState(() {
       widget.day.exercises[exI].results = List.from(currentExSeries);
       exI = nuovoIndice;
@@ -14621,6 +14625,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         WakelockPlus.enable();
       } catch (_) {}
     _bgTimer?.cancel();
+    _stopCardioTimer();
 
     // 1. Calcoliamo l'orario esatto di fine
     _endTime = DateTime.now().add(Duration(seconds: sec));
@@ -14711,6 +14716,11 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         () => HapticFeedback.heavyImpact(),
       );
     }
+  }
+
+  void _stopCardioTimer() {
+    _cardioCountdownTimer?.cancel();
+    _cardioCountdownTimer = null;
   }
 
   void _startCardioCountdown() {
@@ -15093,6 +15103,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
       if (nextExInRound != null) {
         // Vai al prossimo esercizio nel round, senza riposo
+        _stopCardioTimer();
         setState(() {
           exI = nextExInRound!;
           currentExSeries = List.from(_supersetAccumulated[exI] ?? []);
@@ -15110,6 +15121,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             break;
           }
         }
+        _stopCardioTimer();
         setState(() {
           setN = nextRound;
           exI = firstExNextRound;
@@ -15148,6 +15160,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             eserciziCompletati.length == widget.day.exercises.length;
         if (tuttoFinito) {
           _bgTimer?.cancel();
+    _stopCardioTimer();
           await _clearTimerNotifications();
           if (widget.demoMode) {
             if (mounted) _showDemoRecapDialog();
@@ -15199,6 +15212,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           final pause = widget.day.exercises[groupEnd].interExercisePause > 0
               ? widget.day.exercises[groupEnd].interExercisePause
               : 120;
+          _stopCardioTimer();
           setState(() {
             exI = nextIndex;
             setN = 1;
@@ -15244,6 +15258,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           eserciziCompletati.length == widget.day.exercises.length;
       if (tuttoFinito) {
         if (_bgTimer != null) _bgTimer!.cancel();
+        _stopCardioTimer();
         await _clearTimerNotifications();
         if (widget.demoMode) {
           if (mounted) _showDemoRecapDialog();
@@ -15290,6 +15305,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         final pauseTime = currentEx.interExercisePause > 0
             ? currentEx.interExercisePause
             : 120;
+        _stopCardioTimer();
         setState(() {
           isRestingFullScreen = true;
           exI = nextIndex;
@@ -15315,6 +15331,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     ++_notifGen; // previene notifica Future.delayed pendente
     _timerRunId = _newTimerRunId();
     _bgTimer?.cancel();
+    _stopCardioTimer();
     setState(() {
       isRestingFullScreen = false;
       timerActive = false;
@@ -15440,6 +15457,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         bool conferma = await _mostraDialogConfermaUscita();
         if (conferma) {
           _bgTimer?.cancel();
+    _stopCardioTimer();
           timerActive = false;
           _bgCounter = 0;
           _endTime = null;
@@ -15508,6 +15526,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               bool conferma = await _mostraDialogConfermaUscita();
               if (conferma) {
                 _bgTimer?.cancel();
+    _stopCardioTimer();
                 timerActive = false;
                 _bgCounter = 0;
                 _endTime = null;
@@ -15737,6 +15756,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               GestureDetector(
                 onTap: () {
                   _bgTimer?.cancel();
+    _stopCardioTimer();
                   setState(() { timerActive = false; _bgCounter = 0; _endTime = null; });
                   _clearTimerNotifications();
                 },
