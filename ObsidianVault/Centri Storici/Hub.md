@@ -136,7 +136,10 @@ Bolzano/Merano/Bressanone/Trento, Udine, Lecce, tutto il Garda. Il vecchio `ztl_
 - [ ] Gestire CAP multipli per grandi città (MI, RM, TO hanno CAP per quartiere)
 - [x] Dataset ZTL formato righe (`ZTL_ITALIA_righe.xlsx`, 86 comuni, 8148 righe — query OSM nazionale + SM)
 - [x] Integrare Milano ZTL (683 keyword dal file produzione)
-- [x] San Marino aggiunto a centri storici (402307 righe) e ZTL (178 righe, 131 strade, Città di San Marino rel 3012945)
+- [x] San Marino — tutti i castelli aggiunti a centri storici (403385 righe) e ZTL (9226 righe, 97 comuni)
+  - Città di San Marino 47890 · Acquaviva 47892 · Borgo Maggiore 47893 · Chiesanuova 47894
+  - Dogana 47891 · Domagnano 47895 · Faetano 47896 · Fiorentino 47897 · Gualdicciolo 47892
+  - Montegiardino 47898 · Serravalle 47899 (sigla SM, script: aggiungi_sanmarino.py)
 
 ---
-*Aggiornato: 2026-06-18 — San Marino (SM, CAP 47890) aggiunto a entrambi i dataset*
+*Aggiornato: 2026-06-18 — San Marino completo (11 castelli, sigla SM)*
