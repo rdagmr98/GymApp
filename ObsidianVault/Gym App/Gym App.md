@@ -34,9 +34,8 @@ flutter build web --release                   # Web → branch gh-pages (NO base
 ```
 > Web deploy: worktree su `C:\temp\gymapp-gh-pages` (NON in home, sarebbe dentro il repo)
 **Releases locali**: `C:\Users\Gianmarco\Documents\releases\gym_app\`
-- `GymApp-arm64-v8a.apk` (148 MB)
-- `GymApp-armeabi-v7a.apk` (146 MB)
-- `GymApp.aab` (174 MB)
+- `gym_app-1.0.2+20-arm64-v8a.apk` / `-armeabi-v7a.apk` / `-x86_64.apk`
+- `gym_app-1.0.2+20.aab`
 
 > **REGOLA**: dopo ogni modifica a qualsiasi app → rebuild APK → copia in `Documents\releases\<app>\` → GitHub Release
 
@@ -118,10 +117,12 @@ Dati condivisi tra le tre app via Firebase Firestore.
 
 ## STATO SESSIONE
 _Aggiornare ad ogni push significativo_
-- **GymApp web — root cause vero freeze iPhone, risolto per davvero** (18 giu 2026): il "fix" di domenica 14 giu (commit `4a5825d`) aveva aggiornato `flutter_bootstrap.js`/`main.dart.js` su `gh-pages` ma **senza pulire la cartella prima di copiare la build** — i vecchi `main.dart.wasm`/`main.dart.mjs` erano rimasti sepolti lì, mai cancellati nei deploy successivi. Risultato: gli utenti Apple hanno continuato a segnalare blocchi anche dopo il "fix" (probabile service worker che cacheava ancora asset/path wasm). Nessun codice ha più toccato wasm da allora (verificato `git log --grep wasm --all`).
-  - **FIX DEFINITIVO E REGOLA PERMANENTE**: ogni deploy su `gh-pages` di GymApp DEVE pulire la cartella prima di copiare (`rm -rf` tutto tranne `.git`, poi copia `build/web/`) — mai un overlay incrementale. Verificare sempre dopo il deploy che `main.dart.wasm` risponda **404** (`curl -I https://rdagmr98.github.io/GymApp/main.dart.wasm`).
-  - Deploy pulito eseguito: `flutter build web --release` (confermato `compileTarget: dart2js`, zero file `.wasm`/`.mjs` in output) → worktree `C:\temp\gymapp-gh-pages` (branch locale `gh-pages-fix` → push a `gh-pages`). Verificato live: `main.dart.js` 200, `main.dart.wasm` 404.
-  - Se qualche utente Apple continua a vedere il blocco: è cache del service worker sul suo device (PWA aggressiva) — consigliare di rimuovere l'app dalla home e riaggiungerla, o chiudere completamente Safari/la web app e riaprirla.
+- **GymApp web — root cause VERO del freeze iPhone trovato e risolto** (19 giu 2026): il fix del wasm stale (18 giu, vedi sotto) NON era la causa reale — l'utente ha confermato che dopo quel deploy il freeze persisteva identico ("ad ogni tocco risponde dopo mezzo minuto", solo su iPhone, mai su Android/Windows, mai su gymapplogbook/fix-ads che non ha questo problema).
+  - **Causa reale**: leak di `Timer.periodic` nel countdown cardio (`_cardioCountdownTimer`, esclusivo di gym_app — fix-ads non ha la feature cardio). Veniva cancellato solo a fine countdown naturale o in `dispose()`, ma MAI quando si abbandonava l'esercizio cardio a metà (skip rest, cambio esercizio, fine round, fine workout, uscita anticipata). Ogni cardio abbandonato lasciava un timer orfano attivo nello stesso State, che continuava a fare `setState()` ogni secondo per tutta la sessione. Più cardio abbandonati = più timer accumulati = più `setState`/sec. Su Safari/CanvasKit (più lento di Chrome nel rendering) questo saturava il render thread fino a bloccare ogni tap per decine di secondi.
+  - **Fix**: aggiunta `_stopCardioTimer()` (cancella + azzera `_cardioCountdownTimer`), richiamata in tutti i punti dove si esce dal cardio/si cambia esercizio: `_avviaTimerConTempo`, `_skipRest`, `_cambiaEsercizioMethod`, fine round superset, fine esercizio (2 varianti), uscita con conferma (2 varianti), tap manuale stop timer. Commit `89101fb` su `main`.
+  - **Release**: `v1.0.2+20` — web ridepl. su `gh-pages` (deploy pulito, verificato `main.dart.wasm` 404 / `main.dart.js` 200), APK arm64/armeabi/x86_64 + AAB → GitHub Release `v1.0.2-20`.
+  - **Lezione**: comparare sempre col comportamento di fix-ads quando un bug è "solo su una delle due app" — la feature assente nell'altra app è il primo sospetto, non l'ambiente/deploy.
+- ~~**GymApp web — fix wasm stale su gh-pages**~~ (18 giu 2026, **INSUFFICIENTE**, vedi sopra per la causa reale): il deploy di domenica 14 giu (commit `4a5825d`) aveva aggiornato `flutter_bootstrap.js`/`main.dart.js` su `gh-pages` senza pulire la cartella prima — vecchi `main.dart.wasm`/`main.dart.mjs` restavano sepolti lì. Risolto comunque (deploy pulito, regola permanente: ogni deploy DEVE `rm -rf` la cartella gh-pages tranne `.git` prima di copiare `build/web/`, verificare `main.dart.wasm` → 404 post-deploy) ma non era la causa del freeze riportato dall'utente.
 - **App Cliente `v1.0.5+3002` + QR fix** (17 giu 2026): portate le stesse fix di gym_app (progressPercent media delta%, sessioni rimossa da streak sharecard). CRITICO: il rebuild aveva cancellato `download.html` da `gh-pages` → QR in 404. Fix: `download.html` spostato in `web/download.html` nella sorgente (commit `b1ca316`), Pages portato a tipo "legacy". Ora sopravvive a ogni rebuild. Creato `fix-ads/CLAUDE.md` con regola permanente. APK aggiornati in releases e su GitHub.
 - **GymApp trainer `v1.0.1+19`** (17 giu 2026): chip verde "prova X+2 reps" + chip ambra "↑ AUMENTA PESO" nella schermata ready allenamento (portati da app_cliente). Fix progressPercent sharecard (media delta% per esercizio). Fix numero sessioni streak sharecard rimosso. GitHub Release con APK arm64/armeabi + AAB.
 - **Gif esercizi su sito + 5 locandine frame esercizi** (15 giu 2026):
