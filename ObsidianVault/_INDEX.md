@@ -1,6 +1,15 @@
 # Vault Index — Gianmarco
 Master index di tutti i progetti. Leggere per orientarsi nel vault.
 
+> **Claude**: leggi prima `[[_CLAUDE]]` — contiene contesto completo, progetti e ultime sessioni.
+
+---
+
+## File Claude (leggi sempre)
+- [[_CLAUDE]] — contesto master: profilo, progetti, sessioni recenti, strumenti
+- [[Preferenze]] — preferenze permanenti utente e workflow
+- `Sessioni/` — log sessioni (una nota per data)
+
 ---
 
 ## Progetti attivi
@@ -12,6 +21,7 @@ Master index di tutti i progetti. Leggere per orientarsi nel vault.
 | [[Buoni Pasti/Pipeline]] | Script buoni pasto e cartellini lavoratori | topic buoni pasto/cedolini |
 | [[Centri Storici/Hub]] | DB indirizzi centro storico comuni italiani | topic centri storici/OSM |
 | [[Stonks/Stonks]] | Portfolio tracker (clone getquin) — azioni/ETF/crypto | directory `stonks/`, topic investimenti/portafoglio |
+| [[SIEL/SIEL]] | Gestionale elicotteri AVES (ex Access) — desktop Flask + web app static | `SIEL_Portable/`, `siel_app/`, topic SIEL/elicotteri/manutenzione |
 
 ---
 
@@ -41,5 +51,6 @@ Master index di tutti i progetti. Leggere per orientarsi nel vault.
 
 ---
 
-## Note giornaliere
+## Note giornaliere / Sessioni
+- `Sessioni/2026-06-20.md` — aiTool batch mode, Obsidian memoria Claude impostata
 - `2026-06-13.md` — cleanup disco, ComfyUI setup, Obsidian reorganization

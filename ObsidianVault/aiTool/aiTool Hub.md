@@ -26,17 +26,18 @@ ai.bat "il tuo prompt"
 | Keyword nel prompt | Provider scelto |
 |---|---|
 | immagine, foto, logo, canvas, diagram, grafico | **Gemini** (+ salva img automatico) |
-| presentazione, slide, ppt, deck | **Claude** (artifact HTML) |
 | tutto il resto | **Tutti e 3 in parallelo** |
+
+> PPT/slide rimosso: Claude.ai richiede Pro per artifacts — non gratis.
 
 ```powershell
 ai.bat "genera un logo"              # → Gemini
-ai.bat "crea slide su Python"        # → Claude
 ai.bat "cos'è il SQL injection"      # → Perplexity + Gemini + Claude parallelo
 ai.bat "..." -p all                  # forza tutti e 3
 ai.bat "..." -p claude               # forza provider specifico
 ai.bat "..." -r                      # abilita Reasoning/Thinking
 ai.bat "..." --out note.md           # salva output su file
+ai.bat --batch "task1" "task2" "task3"  # task diversi in parallelo
 ```
 
 ---

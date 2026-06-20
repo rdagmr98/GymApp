@@ -21,29 +21,24 @@
   1. `! C:\Users\Gianmarco\aiTool\avvia_edge_debug.bat` (controlla da solo se debug è già attivo — non chiude Edge inutilmente)
   2. `! cd C:\Users\Gianmarco\aiTool && ai.bat "prompt" --out risposta.md`
   3. `Read C:\Users\Gianmarco\aiTool\risposta.md`
-- Routing automatico: immagini/canvas → Gemini · slide/PPT → Claude · resto → tutti e 3 parallelo
+- Routing automatico: immagini/canvas → Gemini · resto → tutti e 3 parallelo · `--batch` per task diversi in parallelo
 
-## Continuità di sessione
-- All'inizio di ogni sessione leggere: `CLAUDE.md` del progetto + i file di memoria rilevanti.
-- Il `CLAUDE.md` del progetto contiene lo stato corrente, i TODO e le ultime modifiche.
-- La memoria è in `C:\Users\Gianmarco\.claude\projects\C--Users-Gianmarco\memory\`.
-- Aggiornare il `CLAUDE.md` del progetto (sezione STATO SESSIONE) ad ogni push.
+## Vault Obsidian — Memoria Persistente (PROTOCOLLO OBBLIGATORIO)
 
-## Vault Obsidian — Knowledge Graph (USARE SOLO SE PERTINENTE)
-- Percorso: `C:\Users\Gianmarco\ObsidianVault\`
-- MCP `obsidian` disponibile (scope user) — strumenti `mcp__obsidian__*`
-- Master index vault: `_INDEX.md` — elenco tutti i gruppi e ComfyUI setup
-- **Solo se la sessione riguarda uno di questi gruppi**, leggere il hub con il tool `Read`:
-  - **AVES** (piloti / corsi / tecnici) — dir `piloti/`, `corsi/`, `AVES/` o topic militare → `AVES Corsi/AVES Hub.md`
-  - **Gym** (gym_app / app_coach / app_cliente) — dir root gym, `fix-ads/` o topic palestra → `Gym App/Gym App.md`
-  - **Buoni Pasti** (cedolini / cartellini lavoratori) — topic buoni pasto/presenze → `Buoni Pasti/Pipeline.md`
-  - **Centri Storici** (centri storici / indirizzi / OSM / parola chiave) → `Centri Storici/Hub.md`
-  - **Stonks** (stonks / portfolio / azioni / ETF / crypto / investimenti) → `Stonks/Stonks.md`
-- Sessioni generiche (cleanup, config, domande) → NON leggere note Obsidian.
-- **Quando cambia architettura**: aggiornare la nota Obsidian corrispondente oltre al CLAUDE.md
-- **Per aggiornare note**: usare il tool `Write` direttamente su `C:\Users\Gianmarco\ObsidianVault\...` — NON usare `mcp__obsidian__edit-note` (lento, si blocca)
-- Grafi Canvas: `Grafi/` (Buoni Pasti Pipeline, Gym App, AVES Piloti e Corsi)
-- Note collegate (Graph View neural): `Buoni Pasti/`, `Gym App/`, `AVES Corsi/`
+**STEP 1 — SEMPRE, prima di tutto**: `Read C:\Users\Gianmarco\ObsidianVault\_CLAUDE.md`
+- Dà: profilo utente, progetti attivi, ultime sessioni, strumenti disponibili
+- 30 secondi, evita di re-derivare contesto ogni sessione
+
+**STEP 2 — se la sessione riguarda un progetto specifico**: leggere il hub (colonna "Hub" in `_CLAUDE.md`)
+
+**STEP 3 — a fine di ogni sessione significativa**:
+1. Aggiornare il hub del progetto (stato, decisioni, TODO)
+2. Creare/aggiornare `ObsidianVault/Sessioni/YYYY-MM-DD.md`
+3. Aggiornare `_CLAUDE.md` → sezione "Ultime sessioni"
+
+- Vault path: `C:\Users\Gianmarco\ObsidianVault\`
+- MCP disponibile: `mcp__obsidian__search-vault`, `mcp__obsidian__read-note`, etc.
+- **Scrivere/aggiornare note**: `Write` tool su path diretto — NON `mcp__obsidian__edit-note` (lento, si blocca)
 
 ## Progetti attivi
 | Progetto | Path | CLAUDE.md |
@@ -58,3 +53,5 @@
 | buoni pasti | script Python in `C:\Users\Gianmarco` | — |
 | centri storici | `C:\Users\Gianmarco\Documents\` | — |
 | stonks | `C:\Users\Gianmarco\stonks` | `stonks/CLAUDE.md` |
+| SIEL desktop | `C:\Users\Gianmarco\Documents\SIEL_Portable` (+ `siel_app`) | — |
+| SIEL web app | `rdagmr98/siel` + dati `rdagmr98/siel-data` (privati) | `SIEL/SIEL.md` (Obsidian) |
