@@ -38,6 +38,12 @@ ZIP Definitivo → consegna
 
 ---
 
+## Altri progetti buoni pasto
+- [[Verona]] — ASL Verona, 99 lavoratori, criteri durata/orario turno diversi da Tivoli
+- Regione Lazio (in corso) — metodologia "Sangiovanni", indennità da `annistampa.xlsx`
+
+---
+
 ## Formati supportati
 - **Nuovo formato**: `parse_new_format()` — struttura post-2025
 - **Vecchio formato**: `parse_old_rev()` — struttura legacy
