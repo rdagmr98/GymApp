@@ -5,14 +5,16 @@ Hub per il sistema di calcolo buoni pasto e cartellini lavoratori. Leggi questo 
 
 ---
 
-## Script principali
+## Script principali (Tivoli)
 
 | Script | Scopo |
 |--------|-------|
-| `analizza_tivoli12062026.py` | Versione corrente per elaborazione tivoli 12/06/2026 |
-| `analisi_tivoli.py` | Script base storico |
+| `analizza_tivoli20062026.py` | Driver corrente (sostituisce le versioni datate precedenti: 12/06, 17/06) |
+| `analisi_tivoli.py` | Motore di parsing base |
 
-**Path**: `C:\Users\Gianmarco\`
+**Path**: `C:\Users\Gianmarco\Documents\tivoli\` (corretto 2026-06-20 — non in root come riportato prima)
+
+→ Dettagli completi: [[Tivoli]]
 
 ---
 
@@ -39,8 +41,20 @@ ZIP Definitivo → consegna
 ---
 
 ## Altri progetti buoni pasto
-- [[Verona]] — ASL Verona, 99 lavoratori, criteri durata/orario turno diversi da Tivoli
-- [[Lazio]] — Regione Lazio, Coletti Ambra, metodologia "Sangiovanni", indennità da codici reali cedolini NoiPA (pattern concettuale da `annistampa.xlsx`)
+
+**Solo buoni pasto** (soglia minuti su cartellino, no indennità):
+- [[Verona]] — ASL Verona, 99 lavoratori, soglia 385 min, criteri durata/orario turno diversi da Tivoli
+- [[Cittadella]] — Ospedale Cittadella, soglia 375 min (identica a Tivoli)
+- [[Rieti]] — ASL Rieti, soglia 380 min, notti consecutive (ogni 2 = 1 buono)
+- [[Padova]] — vertenza UIL FPL, NON soglia fissa: regole notturni consecutivi + festivi/domeniche (≥385 min)
+
+**Solo indennità da cedolino** (metodologia "Sangiovanni", no buoni pasto):
+- [[San Giovanni]] — origine della metodologia, 5 categorie indennità (B-F), template `modello.xlsx` riusato dagli altri due
+- [[Roma3]] — ASL Roma 3 Ostia, stesse 5 categorie e template di San Giovanni
+- [[Lazio]] — Regione Lazio, Coletti Ambra, stessa metodologia ma **7 categorie** (B-H, 2 in più di San Giovanni/Roma3), indennità da codici reali cedolini NoiPA (pattern concettuale da `annistampa.xlsx`)
+
+**Da chiarire**:
+- **"Enti Locali"** — menzionata dall'utente insieme alle altre sedi, ma nessuna cartella/script con questo nome esiste (verificato su Documents, Python, Desktop, root). Ipotesi non confermata: potrebbe essere la categoria CCNL "Enti Locali" (vs Sanità/Regione) — coerente col fatto che Coletti Ambra (Lazio) ha "Categoria C1 Enti Locali" nel cedolino — non una sede separata. Da chiedere all'utente.
 
 ---
 
@@ -67,6 +81,7 @@ pandas, openpyxl, fpdf2 / reportlab, zipfile
 
 ## STATO SESSIONE
 _Aggiornare dopo ogni elaborazione_
-- Ultima elaborazione: Regione Lazio (Coletti Ambra) — vedi [[Lazio]]
+- 2026-06-20: documentate tutte le sedi lavorate finora — criteri di assegnazione/maturazione buoni pasto, criteri di ricerca indennità, output desiderato e formato output per ciascuna: [[Tivoli]], [[Cittadella]], [[Rieti]], [[Padova]] (solo buoni pasto) + [[San Giovanni]], [[Roma3]], [[Lazio]] (solo indennità). "Enti Locali" resta non identificata come sede — ipotesi: categoria CCNL, non sede separata.
+- Ultima elaborazione reale: Regione Lazio (Coletti Ambra) — vedi [[Lazio]]
 - Sequenza completata: Tivoli (4 nuovi lavoratori) → Verona (99 lavoratori) → Lazio (Coletti Ambra)
-- Script attivo: `analizza_tivoli12062026.py` (Tivoli) — altri script per progetto in [[Verona]] e [[Lazio]]
+- Script attivo Tivoli: `analizza_tivoli20062026.py` — altri script per progetto nelle rispettive note

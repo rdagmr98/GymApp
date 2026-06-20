@@ -19,7 +19,15 @@ Elaborazione buoni pasto maturati per i lavoratori ASL Verona (Az. Osp. Universi
 ## Cartelle senza dati (da verificare con l'utente)
 - `127 andolfo maria`, `139 buscemi massimo uls9`, `156 niselli daniele`, `83 Marconi Elisa` — nessun cartellino PDF valido trovato nella cartella USB.
 
+## Risultato finale (confermato 2026-06-20)
+- **Lavoratori totali: 99**
+- **Totale buoni pasto maturati: 94981**
+- Cartelle senza dati: 4 (`127 andolfo maria`, `139 buscemi massimo uls9`, `156 niselli daniele`, `83 Marconi Elisa`) — nessun cartellino PDF valido trovato, da verificare con l'utente
+- Conflitti dati reali risolti: 2 — FULLONE FRANCESCA 2026/3 (tenuto 8 buoni ≥ 7) e MINI' FRANCESCA 2026/3 (tenuto 10 buoni ≥ 9), entrambi confermati via campo "Elaborato il" nel PDF
+- Duplicati residui innocui: 2 (Antolini Michael 2024/3, Rossi Fabio 2020/5 — pattern spillover noto, contributo 0)
+- Output: `riepilogo_buoni_pasto_verona.xlsx`
+
 ## STATO SESSIONE
 _Aggiornare dopo ogni elaborazione_
-- 2026-06-20: pipeline rifinito con dedup a doppio livello + fix falsi positivi conflitto. Run in corso con la logica corretta — risultati finali da confermare (attesi: 99 lavoratori, ~95mila buoni totali, 2 conflitti reali auto-risolti, 4 cartelle senza dati).
-- Prossimo step dopo Verona: Regione Lazio, metodologia "Sangiovanni" con indennità da `Copia di annistampa.xlsx`.
+- 2026-06-20: Verona completato. Pipeline rifinito con dedup a doppio livello + fix falsi positivi conflitto (10 dei 12 "CONFLITTO DATI" erano falsi positivi da pagine di spillover). Run finale eseguito e confermato, Excel generato, fix committato e pushato.
+- Prossimo step: Regione Lazio, metodologia "Sangiovanni" con indennità da `Copia di annistampa.xlsx`.
