@@ -40,7 +40,7 @@ ZIP Definitivo → consegna
 
 ## Altri progetti buoni pasto
 - [[Verona]] — ASL Verona, 99 lavoratori, criteri durata/orario turno diversi da Tivoli
-- Regione Lazio (in corso) — metodologia "Sangiovanni", indennità da `annistampa.xlsx`
+- [[Lazio]] — Regione Lazio, Coletti Ambra, metodologia "Sangiovanni", indennità da codici reali cedolini NoiPA (pattern concettuale da `annistampa.xlsx`)
 
 ---
 
@@ -67,5 +67,6 @@ pandas, openpyxl, fpdf2 / reportlab, zipfile
 
 ## STATO SESSIONE
 _Aggiornare dopo ogni elaborazione_
-- Ultima elaborazione: tivoli 12/06/2026
-- Script attivo: `analizza_tivoli12062026.py`
+- Ultima elaborazione: Regione Lazio (Coletti Ambra) — vedi [[Lazio]]
+- Sequenza completata: Tivoli (4 nuovi lavoratori) → Verona (99 lavoratori) → Lazio (Coletti Ambra)
+- Script attivo: `analizza_tivoli12062026.py` (Tivoli) — altri script per progetto in [[Verona]] e [[Lazio]]

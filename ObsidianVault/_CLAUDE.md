@@ -42,7 +42,7 @@ Militare AVES (aviazione esercito), sviluppatore amatoriale. Stack: Flutter (mob
 | aiTool | `C:\Users\Gianmarco\aiTool` | [[aiTool/aiTool Hub]] | Browser automation Playwright/Edge CDP |
 
 ## Ultime sessioni
-- [[Sessioni/2026-06-20]] — aiTool batch mode parallelo, routing Gemini immagini, rimosso PPT; Obsidian come memoria Claude impostato
+- [[Sessioni/2026-06-20]] — aiTool batch mode parallelo, routing Gemini immagini, rimosso PPT; Obsidian come memoria Claude impostato; Buoni Pasti: Tivoli (4 nuovi) + Verona (99 lavoratori) + Lazio (Coletti Ambra, indennità da codici reali cedolini)
 - [[Sessioni/2026-06-13]] — cleanup disco, ComfyUI setup, riorganizzazione Obsidian
 
 ## Percorsi chiave
