@@ -82,6 +82,7 @@ pandas, openpyxl, fpdf2 / reportlab, zipfile
 ## STATO SESSIONE
 _Aggiornare dopo ogni elaborazione_
 - 2026-06-20: documentate tutte le sedi lavorate finora — criteri di assegnazione/maturazione buoni pasto, criteri di ricerca indennità, output desiderato e formato output per ciascuna: [[Tivoli]], [[Cittadella]], [[Rieti]], [[Padova]] (solo buoni pasto) + [[San Giovanni]], [[Roma3]], [[Lazio]] (solo indennità). "Enti Locali" resta non identificata come sede — ipotesi: categoria CCNL, non sede separata.
+- 2026-06-20: risolta ambiguità script San Giovanni — confermato `sangiovanniprogrammaversionegianmarco.py` come script attivo tramite prova sui file di output reali (cartella ELABORATI con decine di lavoratori), non solo timestamp. Dettagli in [[San Giovanni]].
 - Ultima elaborazione reale: Regione Lazio (Coletti Ambra) — vedi [[Lazio]]
 - Sequenza completata: Tivoli (4 nuovi lavoratori) → Verona (99 lavoratori) → Lazio (Coletti Ambra)
 - Script attivo Tivoli: `analizza_tivoli20062026.py` — altri script per progetto nelle rispettive note

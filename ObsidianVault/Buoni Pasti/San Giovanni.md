@@ -6,8 +6,8 @@ Estrazione indennità accessorie da cedolino + giorni/ferie da cartellino per i 
 - Cedolini + cartellini PDF per lavoratore in `C:\Users\Gianmarco\Documents\sangiovanni\OUTPUT_FINALE\<LAVORATORE>\`
 
 ## Script
-- Tre varianti in `C:\Users\Gianmarco\Python\`: `sangiovanni.py` (più vecchio, 03/03), `sangiovanniprogramma.py` (24/03, legge PDF con `os.walk` ricorsivo, genera anche report mancanti), `sangiovanniprogrammaversionegianmarco.py` (24/03, stesso giorno — legge PDF con `os.listdir` non ricorsivo, senza report mancanti)
-- **Script attivo**: `sangiovanniprogrammaversionegianmarco.py` (variante esplicitamente personalizzata da Gianmarco — nome del file) — ma non è confermato al 100% che sia quella effettivamente usata per l'ultimo run reale; se in dubbio confrontare con l'utente prima di rielaborare dati esistenti
+- Tre varianti in `C:\Users\Gianmarco\Python\`: `sangiovanni.py` (più vecchio, 03/03), `sangiovanniprogramma.py` (24/03, 227 righe, legge PDF con `os.walk` ricorsivo, genera report mancanti), `sangiovanniprogrammaversionegianmarco.py` (24/03, stesso timestamp esatto, 158 righe, legge PDF con `os.listdir` non ricorsivo, senza report mancanti)
+- **Script confermato attivo**: `sangiovanniprogrammaversionegianmarco.py` — i due script hanno timestamp identico (non distinguibile da mtime/atime), ma `sangiovanniprogramma.py` ha `BASE_PATH`/`OUTPUT_PATH` puntati su `ARCHIVIO GIANMARCO\ZANOTTI IRENE` (cartella di **un solo lavoratore**), mentre `sangiovanniprogrammaversionegianmarco.py` punta su `sangiovanni\OUTPUT_FINALE`/`ELABORATI` (cartella generale). La cartella `ELABORATI` contiene realmente file di **decine di lavoratori diversi** (Alma, Andriani, Bellavia, Benedetti, Capozzolo, Casari, ...) generati il 23/03 — prova diretta che è `sangiovanniprogrammaversionegianmarco.py` ad aver prodotto l'elaborazione collettiva reale. `sangiovanniprogramma.py` è quindi una variante one-off per il caso singolo Zanotti Irene, non lo script generale.
 - `BASE_PATH = C:\Users\Gianmarco\Documents\sangiovanni\OUTPUT_FINALE`
 - `OUTPUT_PATH = C:\Users\Gianmarco\Documents\sangiovanni\ELABORATI`
 - Template: `C:\Users\Gianmarco\Documents\sangiovanni\modello.xlsx`
@@ -40,4 +40,4 @@ File riepilogativo annuale per lavoratore con le 5 indennità mese per mese + gi
 
 ## STATO SESSIONE
 _Aggiornare dopo ogni elaborazione_
-- 2026-06-20: documentazione criteri/formato consolidata. Da chiarire con l'utente quale delle 3 varianti script è effettivamente quella "in uso" per eventuali rielaborazioni future.
+- 2026-06-20: documentazione criteri/formato consolidata. Confermato (su richiesta utente "prendi quelli usati più di recente") quale script è realmente attivo, tramite evidenza sui file di output reali, non solo timestamp — vedi sezione Script.
