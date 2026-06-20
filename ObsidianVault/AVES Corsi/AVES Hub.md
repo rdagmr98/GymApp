@@ -99,6 +99,31 @@ p66_service.dart       — qualifiche Part-66
 
 ---
 
+## Flutter — Regole anti-overflow testo (OBBLIGATORIO)
+
+**SEMPRE aggiungere `overflow: TextOverflow.ellipsis` nei seguenti contesti:**
+
+1. `ListTile(title: Text(...))` — il title NON ha ellipsis di default, viene tagliato di netto
+2. `Row(children: [..., Text(...)])` — qualsiasi Text in una Row non-Expanded viene tagliato. Usa `Flexible(child: Text(..., overflow: TextOverflow.ellipsis))`
+3. `TableCell` / `DataCell` con `Text(...)` — stessa regola, aggiungi overflow
+4. `_tCell()` helper o simili: aggiungere `overflow` dentro il Text
+
+**Pattern corretto:**
+```dart
+// ListTile title
+title: Text(u.fullName, overflow: TextOverflow.ellipsis, style: ...)
+
+// Row con testo variabile
+Flexible(child: Text(label, overflow: TextOverflow.ellipsis, style: ...))
+
+// TableCell
+Padding(..., child: Text(text, overflow: TextOverflow.ellipsis, style: ...))
+```
+
+**Cosa NON taglia mai:** `subtitle: Text(...)` su ListTile (è già wrapped); testo in Column a larghezza libera.
+
+---
+
 ## Riferimenti documentali
 → [[Shared/Riferimenti Documentali]] — AER.P-66, Controlloistruttori.xlsx, Annesso AMC
 
@@ -107,5 +132,5 @@ p66_service.dart       — qualifiche Part-66
 ## STATO SESSIONE
 _Aggiornare ad ogni push significativo_
 - **Piloti**: produzione, nessun TODO critico
-- **Corsi**: produzione, deploy automatico via GitHub Actions
+- **Corsi**: produzione, deploy automatico via GitHub Actions. 2026-06-16: ricostruzione lezioni/record BTC3 da Controlloistruttori.xlsx (script `reconstruct_btc3.py`, corsi-data 5fecbfc) + visibilità recuperi per tipo teoria/pratica nelle assenze frequentatore (corsi 47ca62c). Gap 2h modulo 6 colmato: 6.6 teoria 2025-11-07 slot 4-5, Palmieri Biagio. Poi (corsi d1eed86): ore da recuperare visibili a frequentatore e direttore — pratica 100% delle assenze, teoria solo le ore oltre il 10% del modulo (floor(ore/10)); campi `toRecover/toRecoverT/toRecoverP` in `computePerModuleStats`. 2026-06-17: titoli istruttori — campo `qualifications` (licenze categoria+aeromobile dai 'stato di servizio' 2026 ∪ reverse griglie AMC ∪ 4 lauree note) su 22 istruttori, griglie AMC rigenerate additive (661 add, 0 rimozioni) (corsi-data 27e2bc7). 2026-06-17 (s13): toggle **Solo GO/Tutti** in tabella AMC (corsi 13c9d98) + griglie AMC popolate dai **conferimenti ufficiali** (`Conferimenti_Istruttori.xlsx`, +170: 153 teoria/17 pratica, 0 rimozioni, corsi-data d355dbd). `qualifications` NON toccate (conferimento d'insegnamento ≠ licenza categoria+aeromobile). Caveat: codici rule-covered su istruttori senza qualifications verrebbero rimossi se un admin risalva l'istruttore (applyQualifications gira solo su save esplicito). **2026-06-18 (s14) — SUPERA s12 e s13(conferimenti)**: modello autoritativo utente = l'UNICO modo di assegnare moduli è la griglia AMC derivata dai **TITOLI**; i conferimenti (`Conferimenti_Istruttori.xlsx`) NON sono più validi. `qualifications` ricostruite SOLO dai titoli nei doc (licenza categoria+aeromobile, 4 lauree dal testo, corso Sicurezza Volo→`sv`, Istruttore Normativa Aeronautica→`nam`); niente più reverse-griglie né conferimenti. Griglie AMC rigenerate 100% dai titoli via amcRules (aggiunge/RIMUOVE): **+128 / −918** (corsi-data b4b8529). **Modulo 3 solo a chi ha `laurea_elettronica`** (Ardia, Principe, Carrino, Onofri); **Ciula e Mirizzi non insegnano più Modulo 3**. Regola **macchina→sotto-categoria B1** (UC-228/VC-180A→b1.1, elicotteri→b1.3) corregge il refuso B1.1→B1.3 di Balloi. 15 istruttori restano senza qualifiche (doc senza licenze su macchina). Script locale `build_quals_from_titoli.py` NON committato + `.gitignore` per blindare la KEY AES (corsi-data 27ee086). Doc: corsi 2644bb5. **2026-06-20 (s15) — admin CRUD tipi corso**: nuova richiesta utente (creare/modificare tipi corso con moduli+ore T/P+task pratica id/nome/durata, perché alcune durate attuali sono sbagliate). `reference.json` diventa scrivibile (`GhDbService.saveReference`, `ReferenceService.saveCourseTypes/nextTaskId/isCourseTypeInUse`); nuovo campo `PracticalTask.name`; nuova schermata `course_types_tab.dart` (5° tab admin). Nome task — prima scrivibile ma mai mostrato — ora visibile ovunque si referenzia un taskId (calendario direttore, dropdown _addLesson, agenda istruttore, oggi istruttore, agenda frequentatore) via `ReferenceService.taskName()`. Verificato (nessuna modifica necessaria): riepiloghi e controllo istruttori leggono già lezioni/reference.json live a ogni build(), nessuna cache da invalidare. Non testato in browser (nessun tool di controllo browser disponibile in sessione). Doc: corsi f4085af. **2026-06-20 (s16) — fix syllabus ufficiale + discrepanze BTC3**: estratti da PDF syllabus ufficiale (`02 - SYLLABUS_EI_B1_Combinato_(T+P)_Rev.1.pdf`) nomi/ore/ID task e ore teoria sottomoduli reali; corretto `reference.json` b1 (corsi-data b10b2fe) — fix teoria modulo 1 (1.1/1.2/1.3), ricostruiti `practicalTasks` 11A/11B con id/nome/ore corretti, invariante "somma ore task = ore pratica sottomodulo" verificata su tutto b1. Fix bug ricorrente label UI tagliata a metà bordo in `course_types_tab.dart` (corsi 4c05c3a) — vedi [[Shared/Riferimenti Documentali]] e memoria `feedback_flutter_label_cutoff`. **Confronto programma corretto vs Controllo istruttori (BTC3)** — 3 discrepanze reali: **Modulo 3 pratica 23h vs 20h previste (+3h)**, **Modulo 8 teoria 59h vs 50h previste (+9h)**, **Modulo 9 teoria 26h vs 22h previste (+4h)**. Tutto il resto corrisponde esattamente o è sotto piano perché il modulo è ancora in corso (normale); moduli 11A/11B/17/50/51/53/54 a 0 ore (non ancora iniziati in BTC3). Metodologia: righe `3btc` con `Istruttore` nullo (recuperi/assenze) escluse dal conteggio — cross-validato contro riga "ore fatte" di `Attività formativa 3btc` (match esatto). Doc: corsi c08379b.
 - **Tecnici**: sviluppo attivo
