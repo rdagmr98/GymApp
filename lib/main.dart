@@ -11887,6 +11887,12 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     String? selectedCategory;
     String searchQuery = '';
 
+    final Map<String, ExerciseInfo> archiveByName = {};
+    for (final e in [...kExerciseCatalog, ...kGifCatalog]) {
+      archiveByName.putIfAbsent(e.name.toLowerCase(), () => e);
+    }
+    final List<ExerciseInfo> archiveAll = archiveByName.values.toList();
+
     showModalBottomSheet(
       context: context,
       backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
@@ -11897,20 +11903,20 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
       builder: (c) => StatefulBuilder(
         builder: (ctx, setA) {
           final cats =
-              kGifCatalog
+              archiveAll
                   .map((e) => e.category)
                   .toSet()
-                  .where((c) => c.isNotEmpty && c != 'altro')
+                  .where((c) => c.isNotEmpty)
                   .toList()
                 ..sort();
 
           List<ExerciseInfo> filtered = selectedCategory != null
-              ? kGifCatalog
+              ? archiveAll
                     .where(
                       (e) => exerciseAllCategories(e).contains(selectedCategory),
                     )
                     .toList()
-              : kGifCatalog.where((e) => e.category != 'altro').toList();
+              : archiveAll;
 
           if (searchQuery.isNotEmpty) {
             final q = searchQuery.toLowerCase();
