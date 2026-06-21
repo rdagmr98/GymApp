@@ -39,7 +39,7 @@ Master index di tutti i progetti. Leggere per orientarsi nel vault.
 - **Path**: `C:\Users\Gianmarco\aiTool` | Fork: `rdagmr98/aiTool`
 - **Hub**: [[aiTool/aiTool Hub]]
 - **Avvio**: `avvia_edge_debug.bat` poi `ai.bat "prompt"`
-- **Auto-routing**: immagine/canvas → Gemini · slide/ppt → Claude · resto → tutti e 3 in parallelo
+- **Auto-routing**: immagine/canvas → Gemini · resto → tutti e 3 in parallelo (PPT/slide → Claude abbandonato, richiede Pro)
 - **Quando usarlo**: se l'utente dice "usa meno crediti" o "risparmia token"
 
 ---

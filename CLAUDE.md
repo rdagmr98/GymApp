@@ -5,8 +5,9 @@
 - `git push origin main` su tutti i progetti è **esplicitamente autorizzato dall'utente**.
 - Per il progetto `corsi`: build web prima del push (`flutter build web --release --base-href "/corsi/"`), poi commit + push. GitHub Actions deploya automaticamente.
 - Per il progetto `gym_app`: build APK (`--split-per-abi`) + AAB + web. APK/AAB → `C:\Users\Gianmarco\Documents\releases\gym_app\`. Push web su main. Poi GitHub Release.
-- Per il progetto `app_cliente` (fix-ads): **dopo ogni modifica** rebuild APK (`flutter build apk --split-per-abi --release`) → copia `arm64-v8a` e `armeabi-v7a` in `C:\Users\Gianmarco\Documents\releases\app_cliente\` → `gh release upload v<tag> ... --clobber` su `rdagmr98/rdagmr98.github.io`. NON saltare il rebuild. SEMPRE `--split-per-abi`, mai senza.
-- Per il progetto `gymapplogbook` (web + **QR pubblico**): il QR `https://rdagmr98.github.io/gymapplogbook/download.html` è stato dato a **migliaia di persone** e **non deve MAI dare 404**. La landing vive in `web/download.html` su `main` (Flutter la include in ogni build); deploy automatico via push su `main` (workflow `web-deploy.yml` → `gh-pages`). ❌ Mai cancellare `web/download.html`, ❌ mai aggiungere file statici a mano su `gh-pages` (un rebuild li cancella). Dettagli: `gymapplogbook/CLAUDE.md` + nota Obsidian `Gym App/QR download.html FIX`.
+- `app_cliente` e `gymapplogbook` sono **lo stesso repo** (`rdagmr98/gymapplogbook`, branch `main`) clonato localmente nella cartella storica `C:\Users\Gianmarco\fix-ads` — NON due progetti distinti (verificato via `git remote -v` il 2026-06-20). Un solo progetto Flutter, due output con due regole separate:
+  - **Mobile (app_cliente)**: dopo ogni modifica rebuild APK (`flutter build apk --split-per-abi --release`) → copia `arm64-v8a` e `armeabi-v7a` in `C:\Users\Gianmarco\Documents\releases\app_cliente\` → `gh release upload v<tag> ... --clobber` su `rdagmr98/rdagmr98.github.io`. NON saltare il rebuild. SEMPRE `--split-per-abi`, mai senza.
+  - **Web (gymapplogbook, QR pubblico)**: il QR `https://rdagmr98.github.io/gymapplogbook/download.html` è stato dato a **migliaia di persone** e **non deve MAI dare 404**. La landing vive in `web/download.html` su `main` (Flutter la include in ogni build, dentro la STESSA cartella `fix-ads`); deploy automatico via push su `main` (workflow `web-deploy.yml` → `gh-pages`). ❌ Mai cancellare `web/download.html`, ❌ mai aggiungere file statici a mano su `gh-pages` (un rebuild li cancella). Dettagli: `fix-ads/CLAUDE.md` (= `gymapplogbook/CLAUDE.md`, stesso file) + nota Obsidian `Gym App/app_cliente` e `Gym App/QR download.html FIX`.
 
 ## Stile risposte
 - Risposte brevi e dirette, in italiano.
@@ -31,10 +32,19 @@
 
 **STEP 2 — se la sessione riguarda un progetto specifico**: leggere il hub (colonna "Hub" in `_CLAUDE.md`)
 
+**STEP 2.5 — DURANTE il lavoro, non solo a fine sessione**: scrivere subito nel vault (hub progetto o `Sessioni/YYYY-MM-DD.md`) quando si verifica:
+- Un errore/bug capito o risolto (causa + fix, non solo il sintomo)
+- Un file/script analizzato per la prima volta (cosa fa, dove vive, come si collega ad altri)
+- Una decisione presa con l'utente (non solo a posteriori nel riepilogo)
+Non aspettare la fine della sessione per non perdere il contesto se la sessione si interrompe (compattazione, crash, rate limit).
+
 **STEP 3 — a fine di ogni sessione significativa**:
 1. Aggiornare il hub del progetto (stato, decisioni, TODO)
 2. Creare/aggiornare `ObsidianVault/Sessioni/YYYY-MM-DD.md`
 3. Aggiornare `_CLAUDE.md` → sezione "Ultime sessioni"
+
+## Note vuote/stub nel vault
+Se una nota ha solo titolo + 1 riga (creata per il Graph View), e durante il lavoro si scopre il contenuto reale (da codice, script, hub), arricchirla subito invece di lasciarla stub. Non creare nuove note-stub senza poi riempirle nella stessa sessione.
 
 - Vault path: `C:\Users\Gianmarco\ObsidianVault\`
 - MCP disponibile: `mcp__obsidian__search-vault`, `mcp__obsidian__read-note`, etc.
@@ -48,8 +58,7 @@
 | AVES tecnici | `C:\Users\Gianmarco\AVES` | `AVES/CLAUDE.md` |
 | gym_app (trainer) | `C:\Users\Gianmarco` (root) | — |
 | app_coach (PT) | `rdagmr98/gymapp-coach` | — |
-| app_cliente | `C:\Users\Gianmarco\fix-ads` | — |
-| gymapplogbook (web + QR) | `rdagmr98/gymapplogbook` (branch main) | `gymapplogbook/CLAUDE.md` |
+| app_cliente / gymapplogbook (mobile+web, stesso repo) | `C:\Users\Gianmarco\fix-ads` → remote `rdagmr98/gymapplogbook` (branch main) | `fix-ads/CLAUDE.md` |
 | buoni pasti | script Python in `C:\Users\Gianmarco` | — |
 | centri storici | `C:\Users\Gianmarco\Documents\` | — |
 | stonks | `C:\Users\Gianmarco\stonks` | `stonks/CLAUDE.md` |

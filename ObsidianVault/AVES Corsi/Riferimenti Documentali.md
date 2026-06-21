@@ -89,11 +89,11 @@ Contiene le griglie AMC (Abilitazioni Materie Corso):
 
 ## Normativa
 
-| File | Path | Contenuto |
-|------|------|-----------|
+| File                                                  | Path                                            | Contenuto                                                      |
+| ----------------------------------------------------- | ----------------------------------------------- | -------------------------------------------------------------- |
 | `Direttiva_Norme_Svolgimento_Corsi_AVES_Ed._2022.pdf` | `C:\Users\Gianmarco\Documents\corso formatori\` | Regole formali del corso AVES: presenze, recuperi, valutazione |
-| `AER_EP_P_66_Em1_Ed_100620191.pdf` | `C:\Users\Gianmarco\Documents\corso formatori\` | Regolamento EASA Part-66 |
-| `AEREP.P147_Ed_09042018.pdf` | `C:\Users\Gianmarco\Documents\corso formatori\` | Regolamento AER-EP.P-147 |
+| `AER_EP_P_66_Em1_Ed_100620191.pdf`                    | `C:\Users\Gianmarco\Documents\corso formatori\` | Regolamento EASA Part-66                                       |
+| `AEREP.P147_Ed_09042018.pdf`                          | `C:\Users\Gianmarco\Documents\corso formatori\` | Regolamento AER-EP.P-147                                       |
 
 ---
 
