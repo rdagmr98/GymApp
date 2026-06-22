@@ -6,6 +6,7 @@ Pattern condiviso: [[GhDbService]]
 
 ## File di riferimento
 → [[Riferimenti Documentali]] — programmi PDF, Controlloistruttori.xlsx, Annesso AMC
+→ [[Programma B2]] — moduli/sottomoduli/ore/livelli B2, B2mil e delta B2-da-B1.3 estratti e verificati dai PDF ufficiali
 
 ## Regole presenze
 - **Pratica**: recupero al 100% obbligatorio (unrecoveredP > 0 → fuori limite)

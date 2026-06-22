@@ -9,12 +9,16 @@ Questi file sono la fonte primaria di verità. **Consultarli sempre** quando i d
 | File | Path | Contenuto |
 |------|------|-----------|
 | `b1.pdf` | `C:\Users\Gianmarco\Documents\programmi\b1.pdf` | Programma ufficiale B1: M1-M12, M15-M17 + M18 (11B), 2044h totali. Fonte per ore T/P di ogni sottomodulo. |
-| `b2.pdf` | `C:\Users\Gianmarco\Documents\programmi\b2.pdf` | Programma ufficiale B2: M1-M10, M13-M14, 1755h. |
-| `b1mil.pdf` | `C:\Users\Gianmarco\Documents\programmi\b1mil.pdf` | Moduli militari B1: M50, M51, M53, M54 (138h). Si aggiunge a B1, non lo sostituisce. |
-| `b2mil.pdf` | `C:\Users\Gianmarco\Documents\programmi\b2mil.pdf` | Moduli militari B2: M50, M51, M53, M54, M55 (130h). |
+| `b2.pdf` | `C:\Users\Gianmarco\Documents\programmi\b2.pdf` | Programma ufficiale B2: M1-M10, M13-M14, 1755h. Testo nativo, estratto e verificato interamente — vedi [[Programma B2]]. |
+| `b1mil.pdf` | `C:\Users\Gianmarco\Documents\programmi\b1mil.pdf` | Moduli militari B1: M50, M51, M53, M54 (138h). Si aggiunge a B1, non lo sostituisce. Non ancora riverificato (solo letto per confronto modulo 54, vedi [[Programma B2]]). |
+| `b2mil.pdf` | `C:\Users\Gianmarco\Documents\programmi\b2mil.pdf` | Moduli militari B2: M50, M51, M53, M54, M55 (130h). **PDF vettoriale, no testo estraibile** (font→curve anti-copia) — estratto via rendering pagina→immagine. Verificato e corretto (4/7 livelli sbagliati in reference.json) — vedi [[Programma B2]]. |
+| `01_BTC_MAML_B2_da_B1_3_AVES.pdf` | `C:\Users\Gianmarco\Documents\programmi\01_BTC_MAML_B2_da_B1_3_AVES.pdf` | Programma delta per chi ha già B1.3 (elicottero turbina) + estensione mil. M50/51/53/54 e deve completare B2. Testo nativo, estratto e verificato interamente (378h teo/63h pra/41 task) — vedi [[Programma B2]]. |
+| `TB1/TB2 MIL 23_12 commenti DAAA...pdf` | `C:\Users\Gianmarco\Documents\programmi\` | Edizioni precedenti con commenti revisione DAAA (06.12.2021) — probabili bozze superate da b1mil.pdf/b2mil.pdf (Ed. 01.00, 2024). Non confrontate. |
 | `b1_pages/` | `C:\Users\Gianmarco\Documents\programmi\b1_pages\` | PNG pagina per pagina del b1.pdf (per OCR). |
 
 **Quando consultare**: se le ore di un modulo/sottomodulo sembrano sbagliate in `reference.json`, il programma ufficiale PDF è la fonte. Font trick per OCR: codici in Times New Roman con "3.2" = in realtà "3.1".
+
+**Dettaglio completo B2 + B2mil** (tabelle foglia per modulo, scoperte di disallineamento, metodologia): vedi nota dedicata [[Programma B2]].
 
 ---
 
@@ -59,7 +63,9 @@ Contiene le griglie AMC (Abilitazioni Materie Corso):
 **Font trick critico**: i codici sottomodulo in font Times New Roman che mostrano "3.2" sono in realtà "3.1" (la codifica usa 2 al posto di 1). Si applica a tutti i pattern `X.2` → `X.1`, incluso `13.2x` → `13.1x` e `53.2` → `53.1`. I codici in Calibri sono letterali.
 
 **28 qualifiche**:
-- Laurea (Ing. elettronico/meccanico), B1.1 (Turbina), B1.2 (Pistone), B1.3 (Aliante), B1.4 (Elicottero turbina), B2 (Avionica), Altro
+- Laurea (Ing. elettronica/meccanica/aerospaziale), B1.1 (aeroplano turbina: UC-228, VC-180A), B1.2 (aeroplano pistone, generico), B1.3 (elicottero turbina: AH-129D, CH-47F, HH-412A, UH-212, RH-206C, UH-205A, NH-90, UH-169D), B1.4 (elicottero pistone, generico), B2 (avionica, stessi tipi B1.1+B1.3 + APR), Altro (Istruttore SV/NAM)
+
+**Correzione 2026-06-22**: la versione precedente di questa nota riportava erroneamente "B1.3 (Aliante)" e "B1.4 (Elicottero turbina)" — invertito. Lo standard EASA Part-66 è B1.1=aeroplano turbina, B1.2=aeroplano pistone, B1.3=elicottero turbina, B1.4=elicottero pistone (nessuna categoria "aliante" esiste in Part-66 B1). Verificato contro `amcRules.qualifications` in reference.json (righe 3357-3499) e contro il testo di `01_BTC_MAML_B2_da_B1_3_AVES.pdf` pag.7 ("manutentore di aeromobili militari su elicotteri con motore(i) a turbina (Cat. B1.3)").
 
 **Verificato**: griglie in `amc.json` (corsi-data) = annesso, zero discrepanze.
 
