@@ -163,7 +163,7 @@ class _YouTubeSearchViewState extends State<YouTubeSearchView> {
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
                 child: SizedBox(
                   width: double.infinity,
-                  height: 160,
+                  height: 260,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
                     child: AdWidget(ad: _tutorialNativeAd!),
@@ -6745,7 +6745,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
       child: SizedBox(
         width: double.infinity,
-        height: 160,
+        height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _exerciseListNativeAd!),
@@ -6762,7 +6762,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       padding: const EdgeInsets.only(top: 16),
       child: SizedBox(
         width: double.infinity,
-        height: 160,
+        height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _graphNativeAd!),
@@ -6776,7 +6776,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 12),
-      child: SizedBox(height: 160, child: AdWidget(ad: _workoutProgressNativeAd!)),
+      child: SizedBox(height: 260, child: AdWidget(ad: _workoutProgressNativeAd!)),
     );
   }
 
@@ -14376,7 +14376,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 2),
       child: SizedBox(
         width: double.infinity,
-        height: 160,
+        height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _inlineWorkoutNativeAd!),
@@ -14395,7 +14395,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(16, 10, 16, 2),
       child: SizedBox(
         width: double.infinity,
-        height: 160,
+        height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _startWorkoutNativeAd!),
@@ -14414,7 +14414,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
       child: SizedBox(
         width: double.infinity,
-        height: 160,
+        height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _chooseExerciseNativeAd!),
@@ -14433,7 +14433,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
       child: SizedBox(
         width: double.infinity,
-        height: 160,
+        height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _confirmPopupNativeAd!),
@@ -14450,7 +14450,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.only(top: 4),
       child: SizedBox(
         width: double.infinity,
-        height: 160,
+        height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _timerRestNativeAd!),
@@ -14469,7 +14469,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       padding: const EdgeInsets.only(top: 10),
       child: SizedBox(
         width: double.infinity,
-        height: 160,
+        height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _recapWorkoutNativeAd!),
@@ -15627,7 +15627,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         padding: const EdgeInsets.fromLTRB(0, 8, 16, 4),
                         child: SizedBox(
                           width: 140,
-                          height: 160,
+                          height: 260,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: AdWidget(ad: _inlineWorkoutNativeAd!),
