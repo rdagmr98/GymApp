@@ -6555,6 +6555,8 @@ class _ClientMainPageState extends State<ClientMainPage>
   bool _graphNativeAdLoaded = false;
   bool _workoutProgressNativeAdLoaded = false;
   bool _overallProgressNativeAdLoaded = false;
+  NativeAd? _trainPageNativeAd;
+  bool _trainPageNativeAdLoaded = false;
   bool _webDonationLocked = false;
   bool _webDonationAcknowledged = false;
   bool _webDonationBannerHidden = false;
@@ -6604,6 +6606,9 @@ class _ClientMainPageState extends State<ClientMainPage>
     _bannerAd?.dispose();
     _exerciseListNativeAd?.dispose();
     _graphNativeAd?.dispose();
+    _workoutProgressNativeAd?.dispose();
+    _overallProgressNativeAd?.dispose();
+    _trainPageNativeAd?.dispose();
     super.dispose();
   }
 
@@ -6651,6 +6656,7 @@ class _ClientMainPageState extends State<ClientMainPage>
         'graph' => _graphNativeAd,
         'workout-progress' => _workoutProgressNativeAd,
         'overall-progress' => _overallProgressNativeAd,
+        'train-page' => _trainPageNativeAd,
         _ => null,
       };
       current?.dispose();
@@ -6682,6 +6688,10 @@ class _ClientMainPageState extends State<ClientMainPage>
                   _overallProgressNativeAd = loadedAd as NativeAd;
                   _overallProgressNativeAdLoaded = true;
                   break;
+                case 'train-page':
+                  _trainPageNativeAd = loadedAd as NativeAd;
+                  _trainPageNativeAdLoaded = true;
+                  break;
               }
             });
           },
@@ -6706,6 +6716,10 @@ class _ClientMainPageState extends State<ClientMainPage>
                   _overallProgressNativeAd = null;
                   _overallProgressNativeAdLoaded = false;
                   break;
+                case 'train-page':
+                  _trainPageNativeAd = null;
+                  _trainPageNativeAdLoaded = false;
+                  break;
               }
             });
             debugPrint('$placement native ad failed to load: $error');
@@ -6725,6 +6739,9 @@ class _ClientMainPageState extends State<ClientMainPage>
         case 'overall-progress':
           _overallProgressNativeAd = ad;
           break;
+        case 'train-page':
+          _trainPageNativeAd = ad;
+          break;
       }
       ad.load();
     }
@@ -6733,6 +6750,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     loadAd(placement: 'graph', adUnitId: kChartsNativeAdUnitId);
     loadAd(placement: 'workout-progress', adUnitId: kWorkoutProgressNativeAdUnitId);
     loadAd(placement: 'overall-progress', adUnitId: kOverallProgressNativeAdUnitId);
+    loadAd(placement: 'train-page', adUnitId: kWorkoutStartNativeAdUnitId);
   }
 
   Widget _buildExerciseListNativeAd() {
@@ -6791,6 +6809,22 @@ class _ClientMainPageState extends State<ClientMainPage>
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _overallProgressNativeAd!),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTrainPageNativeAd() {
+    if (kIsWeb || !_trainPageNativeAdLoaded || _trainPageNativeAd == null)
+      return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+      child: SizedBox(
+        width: double.infinity,
+        height: 260,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: AdWidget(ad: _trainPageNativeAd!),
         ),
       ),
     );
@@ -10229,6 +10263,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             }, childCount: myRoutine.length),
           ),
         ),
+        SliverToBoxAdapter(child: _buildTrainPageNativeAd()),
       ],
     );
   }
@@ -15550,9 +15585,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               : () => _triggerTimer(timeToUse, force: false),
           child: Column(
             children: [
-              _showWorkoutReadyScreen
-                  ? _buildWorkoutStartNativeAd()
-                  : const SizedBox.shrink(),
               // Demo mode banner handled via popup in initState
               // Compact badges row (only superset, record badge removed - shown as overlay at save time)
               if (ex.supersetGroup > 0)
