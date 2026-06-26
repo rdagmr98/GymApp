@@ -145,7 +145,7 @@ HTML_TEMPLATE = """\
       <label for="sName">\U0001f464 Nome e Cognome</label>
       <input type="text" id="sName" placeholder="es. Rossi Mario" autocomplete="name"/>
     </div>
-    <button class="btn-start" onclick="startExam()">▶ Avvia Esame</button>
+    <button type="button" id="btn-avvia" class="btn-start">▶ Avvia Esame</button>
   </div>
 
   <!-- Fase 2: domande -->
@@ -153,63 +153,66 @@ HTML_TEMPLATE = """\
     __TIMER_HTML__
     <div class="progress-bar" id="prog">0 / __NUM_QUESTIONS__ risposte</div>
     <div class="questions" id="questions"></div>
-    <button class="btn" onclick="saveAnswers()">\U0001f4be Salva Risposte</button>
+    <button type="button" id="btn-salva" class="btn">\U0001f4be Salva Risposte</button>
     <div id="status"></div>
   </div>
 </div>
 
 <script>
-const N = __NUM_QUESTIONS__;
-const CHOICES = __CHOICES_JSON__;
-const DURATION = __DURATION_SECONDS__;
-const EXAM_NAME = __EXAM_NAME_JS__;
+var N = __NUM_QUESTIONS__;
+var CHOICES = __CHOICES_JSON__;
+var DURATION = __DURATION_SECONDS__;
+var EXAM_NAME = __EXAM_NAME_JS__;
 
-let studentName = "";
-let secondsLeft = DURATION;
-let timerInterval = null;
+var studentName = "";
+var secondsLeft = DURATION;
+var timerInterval = null;
 
 function updateProgress() {
-  let count = 0;
-  for (let i = 1; i <= N; i++) {
+  var count = 0;
+  for (var i = 1; i <= N; i++) {
     if (document.querySelector('input[name="q' + i + '"]:checked')) count++;
   }
-  const pb = document.getElementById('prog');
-  pb.textContent = count + ' / ' + N + ' risposte' + (count === N ? '  ✓ Tutte completate' : '');
-  pb.style.color = count === N ? '#1e5928' : '#444';
+  var pb = document.getElementById('prog');
+  pb.textContent = count + ' / ' + N + ' risposte' + (count == N ? '  ✓ Tutte completate' : '');
+  pb.style.color = count == N ? '#1e5928' : '#444';
 }
 
 function buildQuestions() {
-  const qDiv = document.getElementById('questions');
-  const frag = document.createDocumentFragment();
-  for (let i = 1; i <= N; i++) {
-    const row = document.createElement('div');
-    row.className = 'q-row';
-    const numSpan = document.createElement('span');
-    numSpan.className = 'q-num';
-    numSpan.textContent = i + '.';
-    const rg = document.createElement('div');
-    rg.className = 'radio-group';
-    CHOICES.forEach(function(c) {
-      const lbl = document.createElement('label');
-      const inp = document.createElement('input');
-      inp.type = 'radio';
-      inp.name = 'q' + i;
-      inp.value = c;
-      inp.addEventListener('change', updateProgress);
-      lbl.appendChild(inp);
-      lbl.appendChild(document.createTextNode(' ' + c));
-      rg.appendChild(lbl);
-    });
-    row.appendChild(numSpan);
-    row.appendChild(rg);
-    frag.appendChild(row);
+  var qDiv = document.getElementById('questions');
+  for (var i = 1; i <= N; i++) {
+    (function(qNum) {
+      var row = document.createElement('div');
+      row.className = 'q-row';
+      var numSpan = document.createElement('span');
+      numSpan.className = 'q-num';
+      numSpan.textContent = qNum + '.';
+      var rg = document.createElement('div');
+      rg.className = 'radio-group';
+      for (var j = 0; j < CHOICES.length; j++) {
+        (function(ch) {
+          var lbl = document.createElement('label');
+          var inp = document.createElement('input');
+          inp.type = 'radio';
+          inp.name = 'q' + qNum;
+          inp.value = ch;
+          inp.onchange = updateProgress;
+          lbl.appendChild(inp);
+          lbl.appendChild(document.createTextNode(' ' + ch));
+          rg.appendChild(lbl);
+        })(CHOICES[j]);
+      }
+      row.appendChild(numSpan);
+      row.appendChild(rg);
+      qDiv.appendChild(row);
+    })(i);
   }
-  qDiv.appendChild(frag);
 }
 
 function startExam() {
-  const inp = document.getElementById('sName');
-  const name = inp.value.trim();
+  var inp = document.getElementById('sName');
+  if (!inp) { alert('Errore: campo nome non trovato'); return; }
+  var name = (inp.value || '').replace(/^\s+|\s+$/g, '');
   if (!name) {
     inp.style.border = '2px solid #c0392b';
     inp.focus();
@@ -247,31 +250,47 @@ function startTimer() {
 }
 
 function saveAnswers(auto) {
-  const name = studentName || document.getElementById('sName').value.trim();
+  var name = studentName || (document.getElementById('sName').value || '').replace(/^\s+|\s+$/g, '');
   if (!name && !auto) { alert('Avvia prima l\'esame!'); return; }
-  const answers = [];
-  for (let i = 1; i <= N; i++) {
-    const r = document.querySelector(`input[name="q${i}"]:checked`);
+  var answers = [];
+  for (var i = 1; i <= N; i++) {
+    var r = document.querySelector('input[name="q' + i + '"]:checked');
     answers.push(r ? r.value : '');
   }
-  if (!auto && answers.some(a => a === '')) {
+  if (!auto && answers.indexOf('') >= 0) {
     if (!confirm('Non tutte le domande hanno una risposta. Continuare?')) return;
   }
   if (timerInterval) clearInterval(timerInterval);
-  const data = { name, exam_name: EXAM_NAME, num_questions: N, answers, timestamp: new Date().toISOString() };
-  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
+  var data = { name: name, exam_name: EXAM_NAME, num_questions: N, answers: answers, timestamp: new Date().toISOString() };
+  var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = (name || 'studente').replace(/\s+/g, '_') + '_risposte.json';
+  document.body.appendChild(a);
   a.click();
-  const st = document.getElementById('status');
-  st.textContent = (auto ? '⏰ Tempo scaduto — ' : '✅ ') + 'Risposte salvate in ' + a.download;
+  document.body.removeChild(a);
+  var st = document.getElementById('status');
+  st.textContent = (auto ? 'Tempo scaduto — ' : 'Risposte salvate in ') + a.download;
   st.className = 'saved';
 }
+
+window.addEventListener('load', function() {
+  document.getElementById('btn-avvia').addEventListener('click', startExam);
+  document.getElementById('btn-salva').addEventListener('click', function() { saveAnswers(false); });
+});
+
+window.onerror = function(msg, src, line) {
+  alert('Errore JavaScript (riga ' + line + '): ' + msg);
+};
 </script>
 </body>
 </html>
 """
+
+
+def _safe_fn(name: str) -> str:
+    safe = re.sub(r'[/\\:*?"<>|]', '_', name)
+    return safe.strip('. ')
 
 
 def generate_student_html(exam_name: str, num_questions: int, output_path: str,
@@ -1274,7 +1293,7 @@ class TeacherApp(tk.Tk):
             return
         path = filedialog.asksaveasfilename(
             defaultextension=".json", filetypes=[("Config JSON", "*.json")],
-            initialfile=f"{cfg.exam_name}_config.json",
+            initialfile=f"{_safe_fn(cfg.exam_name)}_config.json",
         )
         if path:
             data = {"exam_name": cfg.exam_name, "num_questions": cfg.num_questions,
@@ -1343,7 +1362,7 @@ class TeacherApp(tk.Tk):
             return
         path = filedialog.asksaveasfilename(
             defaultextension=".html", filetypes=[("HTML", "*.html")],
-            initialfile=f"{cfg.exam_name}_risposte.html",
+            initialfile=f"{_safe_fn(cfg.exam_name)}_risposte.html",
         )
         if path:
             generate_student_html(cfg.exam_name, cfg.num_questions, path,
@@ -1524,7 +1543,7 @@ class TeacherApp(tk.Tk):
             return
         path = filedialog.asksaveasfilename(
             defaultextension=".csv", filetypes=[("CSV", "*.csv")],
-            initialfile=f"{self._config.exam_name}_voti.csv",
+            initialfile=f"{_safe_fn(self._config.exam_name)}_voti.csv",
         )
         if path:
             try:
@@ -1542,7 +1561,7 @@ class TeacherApp(tk.Tk):
             return
         path = filedialog.asksaveasfilename(
             defaultextension=".xlsx", filetypes=[("Excel", "*.xlsx")],
-            initialfile=f"{self._config.exam_name}_voti.xlsx",
+            initialfile=f"{_safe_fn(self._config.exam_name)}_voti.xlsx",
         )
         if path:
             try:
@@ -1560,7 +1579,7 @@ class TeacherApp(tk.Tk):
             return
         path = filedialog.asksaveasfilename(
             defaultextension=".xlsx", filetypes=[("Excel", "*.xlsx")],
-            initialfile=f"{self._config.exam_name}_report_studenti.xlsx",
+            initialfile=f"{_safe_fn(self._config.exam_name)}_report_studenti.xlsx",
         )
         if path:
             try:
@@ -1820,7 +1839,7 @@ class TeacherApp(tk.Tk):
             return
         path = filedialog.asksaveasfilename(
             defaultextension=".pdf", filetypes=[("PDF", "*.pdf")],
-            initialfile=f"{self._config.exam_name}_report_studenti.pdf",
+            initialfile=f"{_safe_fn(self._config.exam_name)}_report_studenti.pdf",
         )
         if not path:
             return
@@ -1840,7 +1859,7 @@ class TeacherApp(tk.Tk):
             return
         path = filedialog.asksaveasfilename(
             defaultextension=".pdf", filetypes=[("PDF", "*.pdf")],
-            initialfile=f"{self._config.exam_name}_statistiche.pdf",
+            initialfile=f"{_safe_fn(self._config.exam_name)}_statistiche.pdf",
         )
         if not path:
             return
