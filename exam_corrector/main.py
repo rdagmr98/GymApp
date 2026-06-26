@@ -168,30 +168,58 @@ let studentName = "";
 let secondsLeft = DURATION;
 let timerInterval = null;
 
-const qDiv = document.getElementById('questions');
-for (let i = 1; i <= N; i++) {
-  const opts = CHOICES.map(c =>
-    `<label><input type="radio" name="q${i}" value="${c}" onchange="updateProgress()"/> ${c}</label>`
-  ).join('');
-  qDiv.innerHTML += `<div class="q-row"><span class="q-num">${i}.</span><div class="radio-group">${opts}</div></div>`;
-}
-
 function updateProgress() {
   let count = 0;
   for (let i = 1; i <= N; i++) {
-    if (document.querySelector(`input[name="q${i}"]:checked`)) count++;
+    if (document.querySelector('input[name="q' + i + '"]:checked')) count++;
   }
   const pb = document.getElementById('prog');
   pb.textContent = count + ' / ' + N + ' risposte' + (count === N ? '  ✓ Tutte completate' : '');
   pb.style.color = count === N ? '#1e5928' : '#444';
 }
 
+function buildQuestions() {
+  const qDiv = document.getElementById('questions');
+  const frag = document.createDocumentFragment();
+  for (let i = 1; i <= N; i++) {
+    const row = document.createElement('div');
+    row.className = 'q-row';
+    const numSpan = document.createElement('span');
+    numSpan.className = 'q-num';
+    numSpan.textContent = i + '.';
+    const rg = document.createElement('div');
+    rg.className = 'radio-group';
+    CHOICES.forEach(function(c) {
+      const lbl = document.createElement('label');
+      const inp = document.createElement('input');
+      inp.type = 'radio';
+      inp.name = 'q' + i;
+      inp.value = c;
+      inp.addEventListener('change', updateProgress);
+      lbl.appendChild(inp);
+      lbl.appendChild(document.createTextNode(' ' + c));
+      rg.appendChild(lbl);
+    });
+    row.appendChild(numSpan);
+    row.appendChild(rg);
+    frag.appendChild(row);
+  }
+  qDiv.appendChild(frag);
+}
+
 function startExam() {
-  const name = document.getElementById('sName').value.trim();
-  if (!name) { alert('Inserisci il tuo nome e cognome!'); return; }
+  const inp = document.getElementById('sName');
+  const name = inp.value.trim();
+  if (!name) {
+    inp.style.border = '2px solid #c0392b';
+    inp.focus();
+    return;
+  }
+  inp.style.border = '';
   studentName = name;
-  document.getElementById('phase-setup').classList.remove('active');
-  document.getElementById('phase-exam').classList.add('active');
+  document.getElementById('phase-setup').style.display = 'none';
+  document.getElementById('phase-exam').style.display = 'block';
+  buildQuestions();
   if (DURATION > 0) startTimer();
 }
 
