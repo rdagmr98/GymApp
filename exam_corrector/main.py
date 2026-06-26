@@ -102,73 +102,144 @@ HTML_TEMPLATE = """\
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>{exam_name} — Foglio Risposte</title>
+<title>__EXAM_NAME__ — Foglio Risposte</title>
 <style>
-  body {{ font-family: 'Segoe UI', Arial, sans-serif; background:#f0f4f8; margin:0; padding:20px; color:#1a1a2e; }}
-  .container {{ max-width:800px; margin:auto; background:#fff; border-radius:12px; padding:30px; box-shadow:0 4px 20px rgba(0,0,0,0.12); }}
-  h1 {{ color:#1F4E79; margin-bottom:6px; font-size:1.6em; }}
-  .subtitle {{ color:#555; margin-bottom:20px; font-size:0.95em; }}
-  .student-section {{ background:#f0f4f8; border-radius:8px; padding:16px; margin-bottom:24px; }}
-  label {{ font-weight:600; display:block; margin-bottom:6px; }}
-  input[type=text] {{ width:100%; padding:10px; border:2px solid #d1d9e0; border-radius:6px; font-size:1em; box-sizing:border-box; }}
-  input[type=text]:focus {{ outline:none; border-color:#1F4E79; }}
-  .questions {{ column-count:3; column-gap:16px; }}
-  @media(max-width:600px) {{ .questions {{ column-count:2; }} }}
-  .q-row {{ break-inside:avoid; background:#fff; border:1px solid #d1d9e0; border-radius:8px; padding:10px 14px; margin-bottom:10px; display:flex; align-items:center; gap:10px; }}
-  .q-num {{ font-weight:700; color:#1F4E79; min-width:28px; font-size:0.95em; }}
-  .radio-group {{ display:flex; gap:14px; }}
-  .radio-group label {{ font-weight:normal; display:flex; align-items:center; gap:5px; cursor:pointer; margin:0; }}
-  input[type=radio] {{ accent-color:#1F4E79; width:16px; height:16px; }}
-  .btn {{ display:block; width:100%; padding:14px; background:#1F4E79; color:#fff; border:none; border-radius:8px; font-size:1.1em; font-weight:700; cursor:pointer; margin-top:24px; letter-spacing:0.5px; }}
-  .btn:hover {{ background:#2E75B6; }}
-  #status {{ margin-top:14px; text-align:center; font-weight:600; min-height:22px; color:#1e5928; }}
-  .saved {{ background:#C6EFCE; border-radius:6px; padding:8px 14px; }}
+  body { font-family:'Segoe UI',Arial,sans-serif; background:#f0f4f8; margin:0; padding:20px; color:#1a1a2e; }
+  .container { max-width:800px; margin:auto; background:#fff; border-radius:12px; padding:30px; box-shadow:0 4px 20px rgba(0,0,0,.12); }
+  h1 { color:#1F4E79; margin-bottom:4px; font-size:1.6em; }
+  .subtitle { color:#555; margin-bottom:20px; font-size:.95em; }
+  .phase { display:none; }
+  .phase.active { display:block; }
+  .student-section { background:#f0f4f8; border-radius:8px; padding:16px; margin-bottom:20px; }
+  label { font-weight:600; display:block; margin-bottom:6px; }
+  input[type=text] { width:100%; padding:10px; border:2px solid #d1d9e0; border-radius:6px; font-size:1em; box-sizing:border-box; }
+  input[type=text]:focus { outline:none; border-color:#1F4E79; }
+  .btn-start { display:block; width:100%; padding:14px; background:#1e5928; color:#fff; border:none; border-radius:8px; font-size:1.1em; font-weight:700; cursor:pointer; margin-top:16px; letter-spacing:.5px; }
+  .btn-start:hover { background:#2a7a38; }
+  #timer-bar { background:#dce6f0; border-radius:8px; padding:10px 16px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; transition:background .4s; }
+  #timer-bar.warn { background:#FFEB9C; }
+  #timer-bar.alert { background:#FFC7CE; }
+  #timer-val { font-size:1.6em; font-weight:700; color:#1F4E79; font-family:monospace; letter-spacing:2px; }
+  .progress-bar { background:#f0f4f8; border-radius:6px; padding:7px 12px; margin-bottom:12px; font-size:.9em; color:#444; }
+  .questions { column-count:3; column-gap:16px; }
+  @media(max-width:600px) { .questions { column-count:2; } }
+  .q-row { break-inside:avoid; background:#fff; border:1px solid #d1d9e0; border-radius:8px; padding:10px 14px; margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+  .q-num { font-weight:700; color:#1F4E79; min-width:28px; font-size:.95em; }
+  .radio-group { display:flex; gap:14px; }
+  .radio-group label { font-weight:normal; display:flex; align-items:center; gap:5px; cursor:pointer; margin:0; }
+  input[type=radio] { accent-color:#1F4E79; width:16px; height:16px; }
+  .btn { display:block; width:100%; padding:14px; background:#1F4E79; color:#fff; border:none; border-radius:8px; font-size:1.1em; font-weight:700; cursor:pointer; margin-top:24px; letter-spacing:.5px; }
+  .btn:hover { background:#2E75B6; }
+  #status { margin-top:14px; text-align:center; font-weight:600; min-height:22px; color:#1e5928; }
+  .saved { background:#C6EFCE; border-radius:6px; padding:8px 14px; }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>📋 {exam_name}</h1>
-  <p class="subtitle">Seleziona una risposta (A, B o C) per ogni domanda, poi clicca <strong>Salva</strong>.</p>
-  <div class="student-section">
-    <label for="studentName">👤 Nome e Cognome</label>
-    <input type="text" id="studentName" placeholder="es. Rossi Mario" autocomplete="name"/>
+  <h1>\U0001f4cb __EXAM_NAME__</h1>
+
+  <!-- Fase 1: dati studente -->
+  <div id="phase-setup" class="phase active">
+    <p class="subtitle">__START_SUBTITLE__</p>
+    <div class="student-section">
+      <label for="sName">\U0001f464 Nome e Cognome</label>
+      <input type="text" id="sName" placeholder="es. Rossi Mario" autocomplete="name"/>
+    </div>
+    <button class="btn-start" onclick="startExam()">▶ Avvia Esame</button>
   </div>
-  <div class="questions" id="questions"></div>
-  <button class="btn" onclick="saveAnswers()">💾 Salva Risposte</button>
-  <div id="status"></div>
+
+  <!-- Fase 2: domande -->
+  <div id="phase-exam" class="phase">
+    __TIMER_HTML__
+    <div class="progress-bar" id="prog">0 / __NUM_QUESTIONS__ risposte</div>
+    <div class="questions" id="questions"></div>
+    <button class="btn" onclick="saveAnswers()">\U0001f4be Salva Risposte</button>
+    <div id="status"></div>
+  </div>
 </div>
+
 <script>
-const N = {num_questions};
-const CHOICES = {choices_json};
+const N = __NUM_QUESTIONS__;
+const CHOICES = __CHOICES_JSON__;
+const DURATION = __DURATION_SECONDS__;
+const EXAM_NAME = __EXAM_NAME_JS__;
+
+let studentName = "";
+let secondsLeft = DURATION;
+let timerInterval = null;
+
 const qDiv = document.getElementById('questions');
-for(let i=1;i<=N;i++){{
-  let opts = CHOICES.map(c => `<label><input type="radio" name="q${{i}}" value="${{c}}"/> ${{c}}</label>`).join('');
-  qDiv.innerHTML += `<div class="q-row">
-    <span class="q-num">${{i}}.</span>
-    <div class="radio-group">${{opts}}</div>
-  </div>`;
-}}
-function saveAnswers(){{
-  const name = document.getElementById('studentName').value.trim();
-  if(!name){{ alert('Inserisci il tuo nome!'); return; }}
+for (let i = 1; i <= N; i++) {
+  const opts = CHOICES.map(c =>
+    `<label><input type="radio" name="q${i}" value="${c}" onchange="updateProgress()"/> ${c}</label>`
+  ).join('');
+  qDiv.innerHTML += `<div class="q-row"><span class="q-num">${i}.</span><div class="radio-group">${opts}</div></div>`;
+}
+
+function updateProgress() {
+  let count = 0;
+  for (let i = 1; i <= N; i++) {
+    if (document.querySelector(`input[name="q${i}"]:checked`)) count++;
+  }
+  const pb = document.getElementById('prog');
+  pb.textContent = count + ' / ' + N + ' risposte' + (count === N ? '  ✓ Tutte completate' : '');
+  pb.style.color = count === N ? '#1e5928' : '#444';
+}
+
+function startExam() {
+  const name = document.getElementById('sName').value.trim();
+  if (!name) { alert('Inserisci il tuo nome e cognome!'); return; }
+  studentName = name;
+  document.getElementById('phase-setup').classList.remove('active');
+  document.getElementById('phase-exam').classList.add('active');
+  if (DURATION > 0) startTimer();
+}
+
+function startTimer() {
+  const bar = document.getElementById('timer-bar');
+  const el  = document.getElementById('timer-val');
+  function tick() {
+    if (secondsLeft <= 0) {
+      clearInterval(timerInterval);
+      bar.className = 'alert';
+      el.textContent = 'TEMPO SCADUTO';
+      saveAnswers(true);
+      return;
+    }
+    const m = Math.floor(secondsLeft / 60);
+    const s = secondsLeft % 60;
+    el.textContent = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    if (secondsLeft <= 60) bar.className = 'alert';
+    else if (secondsLeft <= 300) bar.className = 'warn';
+    else bar.className = '';
+    secondsLeft--;
+  }
+  tick();
+  timerInterval = setInterval(tick, 1000);
+}
+
+function saveAnswers(auto) {
+  const name = studentName || document.getElementById('sName').value.trim();
+  if (!name && !auto) { alert('Avvia prima l\'esame!'); return; }
   const answers = [];
-  for(let i=1;i<=N;i++){{
-    const r = document.querySelector(`input[name="q${{i}}"]:checked`);
+  for (let i = 1; i <= N; i++) {
+    const r = document.querySelector(`input[name="q${i}"]:checked`);
     answers.push(r ? r.value : '');
-  }}
-  if(answers.some(a=>a==='')){{
-    if(!confirm('Non tutte le domande hanno una risposta. Continuare?')) return;
-  }}
-  const data = {{name, exam_name:"{exam_name}", num_questions:N, answers, timestamp: new Date().toISOString()}};
-  const blob = new Blob([JSON.stringify(data, null, 2)], {{type:'application/json'}});
+  }
+  if (!auto && answers.some(a => a === '')) {
+    if (!confirm('Non tutte le domande hanno una risposta. Continuare?')) return;
+  }
+  if (timerInterval) clearInterval(timerInterval);
+  const data = { name, exam_name: EXAM_NAME, num_questions: N, answers, timestamp: new Date().toISOString() };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = name.replace(/\s+/g,'_') + '.json';
+  a.download = (name || 'studente').replace(/\s+/g, '_') + '_risposte.json';
   a.click();
   const st = document.getElementById('status');
-  st.textContent = '✅ Risposte salvate in ' + a.download;
+  st.textContent = (auto ? '⏰ Tempo scaduto — ' : '✅ ') + 'Risposte salvate in ' + a.download;
   st.className = 'saved';
-}}
+}
 </script>
 </body>
 </html>
@@ -176,14 +247,28 @@ function saveAnswers(){{
 
 
 def generate_student_html(exam_name: str, num_questions: int, output_path: str,
-                          num_choices: int = 3):
+                          num_choices: int = 3, duration_minutes: int = 0):
     """Generate the student HTML answer form."""
     choices = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"[:max(2, min(num_choices, 26))])
-    html = HTML_TEMPLATE.format(
-        exam_name=exam_name,
-        num_questions=num_questions,
-        choices_json=json.dumps(choices),
-    )
+    if duration_minutes > 0:
+        start_subtitle = (f"Durata: <strong>{duration_minutes} minuti</strong>. "
+                          "Inserisci il tuo nome e clicca <strong>Avvia Esame</strong>.")
+        timer_html = ('<div id="timer-bar">'
+                      '<span>&#x23F1; Tempo rimanente</span>'
+                      '<span id="timer-val">--:--</span>'
+                      '</div>')
+    else:
+        start_subtitle = "Inserisci il tuo nome e clicca <strong>Avvia Esame</strong>."
+        timer_html = ""
+    html = (HTML_TEMPLATE
+            .replace("__EXAM_NAME__", exam_name)
+            .replace("__EXAM_NAME_JS__", json.dumps(exam_name))
+            .replace("__NUM_QUESTIONS__", str(num_questions))
+            .replace("__CHOICES_JSON__", json.dumps(choices))
+            .replace("__DURATION_SECONDS__", str(duration_minutes * 60))
+            .replace("__TIMER_HTML__", timer_html)
+            .replace("__START_SUBTITLE__", start_subtitle)
+            )
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(html)
 
@@ -202,6 +287,7 @@ class ExamConfig:
     passing_pct: float = 75.0      # percentage (0-100)
     decimal_places: int = 1
     num_choices: int   = 3
+    duration_minutes: int = 0
 
     @property
     def passing_score(self) -> float:
@@ -920,6 +1006,16 @@ class TeacherApp(tk.Tk):
         tk.Label(params_card, text="(A-B, A-B-C, A-B-C-D, A-B-C-D-E) — auto da PDF",
                  bg=C_BG, fg="#666", font=("Segoe UI", 8)).grid(
             row=1, column=4, columnspan=2, sticky="w", padx=4)
+        # Duration
+        tk.Label(params_card, text="Durata (min):", bg=C_BG, font=FONT_UI).grid(
+            row=2, column=0, sticky="w", padx=10, pady=6)
+        self._duration_var = tk.IntVar(value=0)
+        ttk.Spinbox(params_card, from_=0, to=300, increment=5,
+                    textvariable=self._duration_var, width=7).grid(
+            row=2, column=1, padx=4, sticky="w")
+        tk.Label(params_card, text="0 = nessun timer  —  incluso in exam_info.json e nel modulo HTML",
+                 bg=C_BG, fg="#666", font=("Segoe UI", 8)).grid(
+            row=2, column=2, columnspan=4, sticky="w", padx=4)
 
         pdf_card = tk.LabelFrame(tab, text="  \U0001f4c4  Importa PDF Marksheet  ",
                                   bg=C_BG, fg=C_NAVY, font=FONT_BOLD, relief="groove", bd=2)
@@ -1068,6 +1164,10 @@ class TeacherApp(tk.Tk):
             num_choices = int(self._num_choices_var.get())
         except Exception:
             num_choices = 3
+        try:
+            duration_minutes = int(self._duration_var.get())
+        except Exception:
+            duration_minutes = 0
         return ExamConfig(
             exam_name=self._name_var.get().strip() or "Esame",
             num_questions=nq,
@@ -1077,6 +1177,7 @@ class TeacherApp(tk.Tk):
             passing_pct=passing_pct,
             decimal_places=decimal_places,
             num_choices=num_choices,
+            duration_minutes=duration_minutes,
         )
 
     def _browse_pdf(self):
@@ -1152,7 +1253,8 @@ class TeacherApp(tk.Tk):
                     "correct_answers": cfg.correct_answers,
                     "course_name": cfg.course_name,
                     "scale": cfg.scale, "passing_pct": cfg.passing_pct,
-                    "decimal_places": cfg.decimal_places, "num_choices": cfg.num_choices}
+                    "decimal_places": cfg.decimal_places, "num_choices": cfg.num_choices,
+                    "duration_minutes": cfg.duration_minutes}
             with open(path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
             self._tab1_status.set(f"\u2713 Config salvata: {Path(path).name}")
@@ -1187,6 +1289,7 @@ class TeacherApp(tk.Tk):
             self._decimal_var.set(data.get("decimal_places", 1))
             # Set num_choices BEFORE _refresh_grid
             self._num_choices_var.set(data.get("num_choices", 3))
+            self._duration_var.set(data.get("duration_minutes", 0))
             self._refresh_grid()
             for i, a in enumerate(data.get("correct_answers", [])):
                 if i < len(self._answer_vars):
@@ -1200,6 +1303,7 @@ class TeacherApp(tk.Tk):
                 passing_pct=data.get("passing_pct", 75.0),
                 decimal_places=data.get("decimal_places", 1),
                 num_choices=data.get("num_choices", 3),
+                duration_minutes=data.get("duration_minutes", 0),
             )
             self._status_var.set(f"\u2713 Config: {self._config.exam_name} ({nq}Q)")
         except Exception as e:
@@ -1214,7 +1318,9 @@ class TeacherApp(tk.Tk):
             initialfile=f"{cfg.exam_name}_risposte.html",
         )
         if path:
-            generate_student_html(cfg.exam_name, cfg.num_questions, path, num_choices=cfg.num_choices)
+            generate_student_html(cfg.exam_name, cfg.num_questions, path,
+                                  num_choices=cfg.num_choices,
+                                  duration_minutes=cfg.duration_minutes)
             self._tab1_status.set(f"\u2713 Modulo HTML: {Path(path).name}")
             import webbrowser
             webbrowser.open(path)

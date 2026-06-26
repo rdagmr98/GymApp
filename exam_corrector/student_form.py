@@ -3,7 +3,8 @@
 ExamCorrector - Modulo Risposta Studente
 
 Legge exam_info.json dalla stessa cartella e mostra il modulo di risposta.
-Salva le risposte come Nome_Cognome_risposte.json nella stessa cartella.
+Fase 1: inserimento nome. Fase 2: avvia esame (con timer countdown se configurato).
+Salva le risposte come NomeCognome_risposte.json nella stessa cartella.
 """
 
 import tkinter as tk
@@ -48,10 +49,11 @@ def main():
         root.destroy()
         return
 
-    exam_name     = info.get("exam_name", "Esame")
-    num_questions = info.get("num_questions", 0)
-    num_choices   = info.get("num_choices", 3)
-    choices       = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"[:max(2, min(num_choices, 26))])
+    exam_name        = info.get("exam_name", "Esame")
+    num_questions    = info.get("num_questions", 0)
+    num_choices      = info.get("num_choices", 3)
+    duration_minutes = int(info.get("duration_minutes", 0))
+    choices          = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ"[:max(2, min(num_choices, 26))])
 
     if num_questions <= 0:
         messagebox.showerror("Errore", "Configurazione non valida (num_questions <= 0).")
@@ -61,66 +63,179 @@ def main():
     # ── Style ────────────────────────────────────────────────────────────────
     s = ttk.Style(root)
     s.theme_use("clam")
-    s.configure("TButton",  font=FONT_UI,  padding=[8, 5])
-    s.configure("TLabel",   background=C_BG, foreground=C_TEXT, font=FONT_UI)
-    s.configure("TFrame",   background=C_BG)
-    s.configure("TEntry",   fieldbackground=C_WHITE, font=("Segoe UI", 11))
+    s.configure("TButton",    font=FONT_UI, padding=[8, 5])
+    s.configure("TLabel",     background=C_BG, foreground=C_TEXT, font=FONT_UI)
+    s.configure("TFrame",     background=C_BG)
+    s.configure("TEntry",     fieldbackground=C_WHITE, font=("Segoe UI", 11))
     s.configure("TScrollbar", background=C_BORDER, troughcolor=C_BG)
-    s.configure("Accent.TButton", background=C_NAVY, foreground="white", font=FONT_BOLD)
-    s.map("Accent.TButton",
-          background=[("active", C_BLUE), ("pressed", "#163a5a")])
+    s.configure("Accent.TButton",  background=C_NAVY,    foreground="white", font=FONT_BOLD)
+    s.configure("Start.TButton",   background="#1e5928", foreground="white",
+                font=("Segoe UI", 11, "bold"))
+    s.map("Accent.TButton", background=[("active", C_BLUE), ("pressed", "#163a5a")])
+    s.map("Start.TButton",  background=[("active", "#2a7a38"), ("pressed", "#155520")])
 
     root.deiconify()
     root.title(f"Modulo Risposte — {exam_name}")
     root.configure(bg=C_BG)
-    root.geometry("720x580")
-    root.minsize(580, 440)
+    root.geometry("720x600")
+    root.minsize(580, 460)
 
     # ── Header ────────────────────────────────────────────────────────────────
     header = tk.Frame(root, bg=C_NAVY, height=58)
     header.pack(fill="x", side="top")
     header.pack_propagate(False)
+
     hf = tk.Frame(header, bg=C_NAVY)
     hf.pack(side="left", fill="y", padx=14, pady=8)
     tk.Label(hf, text=exam_name, bg=C_NAVY, fg="white",
              font=("Segoe UI", 13, "bold")).pack(anchor="w")
-    tk.Label(hf, text="Seleziona una risposta per ogni domanda, poi clicca Salva",
+    header_sub_var = tk.StringVar(value="Inserisci i tuoi dati e avvia l'esame")
+    tk.Label(hf, textvariable=header_sub_var,
              bg=C_NAVY, fg="#7db3e0", font=("Segoe UI", 8)).pack(anchor="w")
 
-    # ── Body ─────────────────────────────────────────────────────────────────
-    body = tk.Frame(root, bg=C_BG)
-    body.pack(fill="both", expand=True, padx=12, pady=8)
+    # Timer widget in header (right side) — solo se durata > 0
+    timer_var       = tk.StringVar()
+    timer_val_label = None
+    timer_bg_frames = []
+    if duration_minutes > 0:
+        tf = tk.Frame(header, bg=C_NAVY)
+        tf.pack(side="right", fill="y", padx=14, pady=6)
+        timer_bg_frames.extend([header, hf, tf])
+        tk.Label(tf, text="Tempo rimanente", bg=C_NAVY, fg="#7db3e0",
+                 font=("Segoe UI", 7)).pack(anchor="e")
+        timer_val_label = tk.Label(tf, textvariable=timer_var,
+                                    bg=C_NAVY, fg="white",
+                                    font=("Segoe UI", 18, "bold"), width=5)
+        timer_val_label.pack(anchor="e")
+        timer_var.set(f"{duration_minutes:02d}:00")
 
-    # Name row
-    name_row = tk.Frame(body, bg=C_BG)
-    name_row.pack(fill="x", pady=(0, 6))
-    tk.Label(name_row, text="Nome e Cognome:", bg=C_BG, fg=C_TEXT,
-             font=FONT_BOLD).pack(side="left", padx=(0, 8))
+    # ── Timer logic ───────────────────────────────────────────────────────────
+    _remaining    = [duration_minutes * 60]
+    _timer_active = [False]
+
+    def _tick():
+        if not _timer_active[0]:
+            return
+        if _remaining[0] <= 0:
+            _timer_active[0] = False
+            timer_var.set("00:00")
+            if timer_val_label:
+                timer_val_label.config(fg="#FF6666")
+            _auto_save()
+            return
+        m, s = divmod(_remaining[0], 60)
+        timer_var.set(f"{m:02d}:{s:02d}")
+        if timer_val_label:
+            if _remaining[0] <= 60:
+                timer_val_label.config(fg="#FF4444")
+                for fr in timer_bg_frames:
+                    fr.config(bg="#8B1a1a")
+                timer_val_label.config(bg="#8B1a1a")
+            elif _remaining[0] <= 300:
+                timer_val_label.config(fg="#FFDD44")
+                for fr in timer_bg_frames:
+                    fr.config(bg="#7d5000")
+                timer_val_label.config(bg="#7d5000")
+        _remaining[0] -= 1
+        root.after(1000, _tick)
+
+    def _auto_save():
+        name    = name_var.get().strip() or "studente"
+        answers = [v.get() for v in answer_vars]
+        out     = Path(__file__).parent / f"{_safe_name(name)}_risposte.json"
+        data    = {"name": name, "exam_name": exam_name,
+                   "num_questions": num_questions, "answers": answers, "auto_saved": True}
+        try:
+            with open(out, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=2, ensure_ascii=False)
+            messagebox.showwarning(
+                "Tempo scaduto",
+                f"Il tempo è scaduto!\n\nRisposte salvate automaticamente in:\n{out.name}"
+                "\n\nConsegna questo file al docente.",
+            )
+        except Exception as e:
+            messagebox.showerror("Errore salvataggio automatico", str(e))
+
+    # ── Bottom bar (switcha contenuto tra le due fasi) ────────────────────────
+    bottom_bar = tk.Frame(root, bg=C_BG)
+    bottom_bar.pack(fill="x", side="bottom", padx=12, pady=(4, 10))
+
+    status_var = tk.StringVar()
+    status_lbl = tk.Label(bottom_bar, textvariable=status_var, bg=C_BG,
+                           fg="#1e5928", font=FONT_UI)
+
+    # ── Contenuto centrale (si scambia tra fase 1 e fase 2) ──────────────────
+    middle = tk.Frame(root, bg=C_BG)
+    middle.pack(fill="both", expand=True, padx=12, pady=8)
+
+    # ════════════════════════════════════════════════════════════
+    # FASE 1 — inserimento dati studente
+    # ════════════════════════════════════════════════════════════
+    setup_frame = tk.Frame(middle, bg=C_BG)
+    setup_frame.pack(fill="both", expand=True)
+
+    if duration_minutes > 0:
+        dur_banner = tk.Frame(setup_frame, bg="#dce6f0",
+                               highlightbackground=C_BORDER, highlightthickness=1)
+        dur_banner.pack(fill="x", pady=(0, 12))
+        tk.Label(dur_banner, text=f"  Durata: {duration_minutes} minuti",
+                 bg="#dce6f0", fg=C_NAVY, font=FONT_BOLD, pady=9, anchor="w").pack(
+            fill="x", padx=14)
+
+    name_card = tk.LabelFrame(setup_frame, text="  Dati Studente  ",
+                               bg=C_BG, fg=C_NAVY, font=FONT_BOLD, relief="groove", bd=2)
+    name_card.pack(fill="x", pady=(0, 12))
+    tk.Label(name_card, text="Nome e Cognome:", bg=C_BG, font=FONT_BOLD).pack(
+        anchor="w", padx=12, pady=(8, 2))
     name_var = tk.StringVar()
-    ttk.Entry(name_row, textvariable=name_var, font=("Segoe UI", 11)).pack(
-        side="left", fill="x", expand=True)
+    name_entry = ttk.Entry(name_card, textvariable=name_var, font=("Segoe UI", 12))
+    name_entry.pack(fill="x", padx=12, pady=(0, 12))
+    name_entry.focus_set()
 
-    # Progress row
-    prog_row = tk.Frame(body, bg=C_BG)
-    prog_row.pack(fill="x", pady=(0, 4))
+    def start_exam():
+        name = name_var.get().strip()
+        if not name:
+            messagebox.showwarning("Attenzione", "Inserisci il tuo nome e cognome.")
+            name_entry.focus_set()
+            return
+        setup_frame.pack_forget()
+        avvia_btn.pack_forget()
+        exam_frame.pack(fill="both", expand=True)
+        status_lbl.pack(side="left")
+        salva_btn.pack(side="right")
+        header_sub_var.set("Rispondi a tutte le domande, poi clicca Salva")
+        if duration_minutes > 0:
+            _timer_active[0] = True
+            _tick()
+
+    avvia_btn = ttk.Button(bottom_bar, text="▶  Avvia Esame",
+                            style="Start.TButton", command=start_exam)
+    avvia_btn.pack(fill="x")
+    name_entry.bind("<Return>", lambda e: start_exam())
+
+    # ════════════════════════════════════════════════════════════
+    # FASE 2 — griglia risposte
+    # ════════════════════════════════════════════════════════════
+    exam_frame = tk.Frame(middle, bg=C_BG)
+
+    # Progress counter
     progress_var = tk.StringVar(value=f"0 / {num_questions} risposte")
-    prog_label = tk.Label(prog_row, textvariable=progress_var, bg=C_BG,
-                          fg="#888", font=("Segoe UI", 9))
-    prog_label.pack(side="right")
+    prog_label   = tk.Label(exam_frame, textvariable=progress_var, bg=C_BG,
+                             fg="#888", font=("Segoe UI", 9))
+    prog_label.pack(anchor="e", pady=(0, 4))
 
-    # ── Scrollable question area ──────────────────────────────────────────────
-    q_outer = tk.Frame(body, bg=C_BG)
+    # Scrollable question area
+    q_outer = tk.Frame(exam_frame, bg=C_BG)
     q_outer.pack(fill="both", expand=True)
 
-    canvas = tk.Canvas(q_outer, bg=C_BG, highlightthickness=0)
-    vsb = ttk.Scrollbar(q_outer, orient="vertical", command=canvas.yview)
+    canvas     = tk.Canvas(q_outer, bg=C_BG, highlightthickness=0)
+    vsb        = ttk.Scrollbar(q_outer, orient="vertical", command=canvas.yview)
     canvas.configure(yscrollcommand=vsb.set)
     vsb.pack(side="right", fill="y")
     canvas.pack(side="left", fill="both", expand=True)
 
-    inner = tk.Frame(canvas, bg=C_BG)
+    inner      = tk.Frame(canvas, bg=C_BG)
     canvas_win = canvas.create_window((0, 0), window=inner, anchor="nw")
-
     inner.bind("<Configure>",
                lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
     canvas.bind("<Configure>",
@@ -128,7 +243,7 @@ def main():
     canvas.bind_all("<MouseWheel>",
                     lambda e: canvas.yview_scroll(-1 * (e.delta // 120), "units"))
 
-    # ── Questions ─────────────────────────────────────────────────────────────
+    # Questions
     answer_vars = []
     COLS = 4
 
@@ -146,18 +261,12 @@ def main():
         var.trace_add("write", _update_progress)
         answer_vars.append(var)
 
-        col_g = q % COLS
-        row_g = q // COLS
-
         cell = tk.Frame(inner, bg=C_WHITE,
                         highlightbackground=C_BORDER, highlightthickness=1,
                         padx=4, pady=3)
-        cell.grid(row=row_g, column=col_g, padx=3, pady=3, sticky="nsew")
-
-        # Number badge
+        cell.grid(row=q // COLS, column=q % COLS, padx=3, pady=3, sticky="nsew")
         tk.Label(cell, text=str(q + 1), bg=C_NAVY, fg="white",
                  font=("Segoe UI", 8, "bold"), width=3, pady=1).pack(side="left", padx=(0, 5))
-
         for ch in choices:
             tk.Radiobutton(
                 cell, text=ch, variable=var, value=ch,
@@ -173,21 +282,9 @@ def main():
     for c in range(COLS):
         inner.columnconfigure(c, weight=1)
 
-    # ── Footer ────────────────────────────────────────────────────────────────
-    footer = tk.Frame(root, bg=C_BG)
-    footer.pack(fill="x", padx=12, pady=(4, 10))
-
-    status_var = tk.StringVar()
-    tk.Label(footer, textvariable=status_var, bg=C_BG, fg="#1e5928",
-             font=FONT_UI).pack(side="left")
-
+    # ── Save button (aggiunto alla bottom_bar alla transizione fase 1→2) ──────
     def save():
-        name = name_var.get().strip()
-        if not name:
-            messagebox.showwarning("Attenzione",
-                                   "Inserisci il tuo nome e cognome prima di salvare.")
-            return
-
+        name    = name_var.get().strip()
         missing = [i + 1 for i, v in enumerate(answer_vars) if not v.get()]
         if missing:
             if not messagebox.askyesno(
@@ -196,32 +293,24 @@ def main():
                 "Le domande senza risposta verranno conteggiate come errate.\nSalvare ugualmente?",
             ):
                 return
-
-        out_path = Path(__file__).parent / f"{_safe_name(name)}_risposte.json"
-        if out_path.exists():
+        out = Path(__file__).parent / f"{_safe_name(name)}_risposte.json"
+        if out.exists():
             if not messagebox.askyesno(
                 "File già esistente",
-                f"Esiste già un file per '{name}':\n{out_path.name}\n\nSovrascrivere?",
+                f"Esiste già un file per '{name}':\n{out.name}\n\nSovrascrivere?",
             ):
                 return
-
-        data = {
-            "name":          name,
-            "exam_name":     exam_name,
-            "num_questions": num_questions,
-            "answers":       [v.get() for v in answer_vars],
-        }
-        with open(out_path, "w", encoding="utf-8") as f:
+        _timer_active[0] = False
+        data = {"name": name, "exam_name": exam_name,
+                "num_questions": num_questions, "answers": [v.get() for v in answer_vars]}
+        with open(out, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
+        status_var.set(f"✓ Risposte salvate: {out.name}")
+        messagebox.showinfo("Salvato",
+                            f"Risposte salvate in:\n{out}\n\nConsegna questo file al docente.")
 
-        status_var.set(f"✓ Risposte salvate: {out_path.name}")
-        messagebox.showinfo(
-            "Salvato",
-            f"Risposte salvate in:\n{out_path}\n\nConsegna questo file al docente.",
-        )
-
-    ttk.Button(footer, text="Salva le mie risposte", style="Accent.TButton",
-               command=save).pack(side="right")
+    salva_btn = ttk.Button(bottom_bar, text="Salva le mie risposte",
+                            style="Accent.TButton", command=save)
 
     root.mainloop()
 
