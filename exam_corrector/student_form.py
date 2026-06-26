@@ -75,6 +75,13 @@ def main():
     s.map("Start.TButton",  background=[("active", "#2a7a38"), ("pressed", "#155520")])
 
     root.deiconify()
+
+    def _on_error(exc_type, exc_val, exc_tb):
+        import traceback
+        messagebox.showerror("Errore interno",
+                             ''.join(traceback.format_exception(exc_type, exc_val, exc_tb)))
+    root.report_callback_exception = _on_error
+
     root.title(f"Modulo Risposte — {exam_name}")
     root.configure(bg=C_BG)
     root.geometry("720x600")
@@ -203,14 +210,20 @@ def main():
         exam_frame.pack(fill="both", expand=True)
         status_lbl.pack(side="left")
         salva_btn.pack(side="right")
+        root.update_idletasks()
         header_sub_var.set("Rispondi a tutte le domande, poi clicca Salva")
         if duration_minutes > 0:
             _timer_active[0] = True
             _tick()
 
-    avvia_btn = ttk.Button(bottom_bar, text="▶  Avvia Esame",
-                            style="Start.TButton", command=start_exam)
-    avvia_btn.pack(fill="x")
+    avvia_btn = tk.Button(bottom_bar, text="▶  Avvia Esame",
+                          bg="#1e5928", fg="white",
+                          font=("Segoe UI", 11, "bold"),
+                          relief="flat", bd=0,
+                          activebackground="#2a7a38", activeforeground="white",
+                          cursor="hand2",
+                          command=start_exam)
+    avvia_btn.pack(fill="x", ipady=8)
     name_entry.bind("<Return>", lambda e: start_exam())
 
     # ════════════════════════════════════════════════════════════
