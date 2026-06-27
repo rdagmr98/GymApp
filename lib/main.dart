@@ -15642,34 +15642,36 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   ),
                 )
               else ...[
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: _buildInfoPanel(
-                        ex,
-                        lastW,
-                        lastR,
-                        suggerisciAumento,
-                        accent,
-                        timeToUse,
-                        targetR,
-                        suggerisciReps,
-                      ),
-                    ),
-                    if (!kIsWeb && _isInlineWorkoutNativeAdLoaded && _inlineWorkoutNativeAd != null)
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 8, 16, 4),
-                        child: SizedBox(
-                          width: 140,
-                          height: 260,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: AdWidget(ad: _inlineWorkoutNativeAd!),
-                          ),
+                IntrinsicHeight(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Expanded(
+                        child: _buildInfoPanel(
+                          ex,
+                          lastW,
+                          lastR,
+                          suggerisciAumento,
+                          accent,
+                          timeToUse,
+                          targetR,
+                          suggerisciReps,
                         ),
                       ),
-                  ],
+                      if (!kIsWeb && _isInlineWorkoutNativeAdLoaded && _inlineWorkoutNativeAd != null)
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 8, 16, 4),
+                          child: SizedBox(
+                            width: 140,
+                            height: 260,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: AdWidget(ad: _inlineWorkoutNativeAd!),
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
                 if (giaFatto)
                   Expanded(child: Center(child: _buildBoxEsercizioCompletato()))
@@ -15858,7 +15860,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisSize: MainAxisSize.max,
         children: [
           if (lastW > 0) ...[
             Row(
@@ -15986,6 +15988,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               ],
             ),
           ],
+          const Spacer(),
           Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 10),
           TextField(
             decoration: InputDecoration(
