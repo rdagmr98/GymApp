@@ -251,7 +251,7 @@ function startTimer() {
 
 function saveAnswers(auto) {
   var name = studentName || (document.getElementById('sName').value || '').replace(/^\s+|\s+$/g, '');
-  if (!name && !auto) { alert('Avvia prima l\'esame!'); return; }
+  if (!name && !auto) { alert("Avvia prima l'esame!"); return; }
   var answers = [];
   for (var i = 1; i <= N; i++) {
     var r = document.querySelector('input[name="q' + i + '"]:checked');
