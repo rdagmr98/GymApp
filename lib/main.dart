@@ -7938,22 +7938,46 @@ class _ClientMainPageState extends State<ClientMainPage>
         ),
       );
     }
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(20, 28, 20, 32),
-      children: [
-        for (int i = 0; i < myRoutine.length; i++) ...[
-          _buildRoutineCard(myRoutine[i], accent, i),
-          const SizedBox(height: 14),
-        ],
-        Center(
-          child: TextButton.icon(
-            onPressed: _apriCostruttoreScheda,
-            icon: const Icon(Icons.edit_note_rounded, size: 16),
-            label: Text(AppL.editOrCreate),
-            style: TextButton.styleFrom(foregroundColor: Colors.white38),
+    return LayoutBuilder(
+      builder: (ctx, constraints) {
+        final n = myRoutine.length;
+        const double topPad = 28, bottomSlot = 80;
+        final double gaps = 14.0 * (n > 1 ? n - 1 : 0);
+        final double cardH = n > 0
+            ? ((constraints.maxHeight - topPad - bottomSlot - gaps) / n)
+                .clamp(80.0, 220.0)
+            : 100.0;
+        return SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(20, 28, 20, 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (int i = 0; i < n; i++) ...[
+                SizedBox(
+                  height: cardH,
+                  child: _buildRoutineCard(myRoutine[i], accent, i),
+                ),
+                if (i < n - 1) const SizedBox(height: 14),
+              ],
+              const SizedBox(height: 20),
+              OutlinedButton.icon(
+                onPressed: _apriCostruttoreScheda,
+                icon: const Icon(Icons.edit_note_rounded, size: 18),
+                label: Text(AppL.editOrCreate.toUpperCase()),
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: accent,
+                  side: BorderSide(color: accent.withAlpha(100)),
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 12),
+            ],
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -7988,6 +8012,7 @@ class _ClientMainPageState extends State<ClientMainPage>
           child: ClipRRect(
             borderRadius: BorderRadius.circular(20),
             child: Stack(
+              alignment: Alignment.centerLeft,
               children: [
                 // Immagine sfondo sfumata a destra
                 if (day.muscleImage != null)
