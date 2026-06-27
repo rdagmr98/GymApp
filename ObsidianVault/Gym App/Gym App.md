@@ -9,9 +9,9 @@ Hub per le tre app dell'ecosistema palestra. Leggi questo file all'inizio di ogn
 
 | App | Repo | Path locale | Ruolo |
 |-----|------|-------------|-------|
-| [[Apps/Gym App Trainer]] | `rdagmr98/GymApp` | `C:\Users\Gianmarco` (root) | Trainer/Admin |
-| [[Apps/App Coach]] | `rdagmr98/gymapp-coach` | — | Personal Trainer |
-| [[Apps/App Cliente]] | `rdagmr98/fix-ads` branch | `C:\Users\Gianmarco\fix-ads` | Cliente finale |
+| [[gym_app]] | `rdagmr98/GymApp` | `C:\Users\Gianmarco` (root) | Trainer/Admin |
+| [[app_coach]] | `rdagmr98/gymapp-coach` | — | Personal Trainer |
+| [[app_cliente]] | `rdagmr98/gymapplogbook` | `C:\Users\Gianmarco\fix-ads` | Cliente finale |
 
 ---
 
@@ -39,7 +39,13 @@ flutter build web --release --base-href "/GymApp/"   # Web → commit build/web/
 - `gym_app-1.0.2+20-arm64-v8a.apk` / `-armeabi-v7a.apk` / `-x86_64.apk`
 - `gym_app-1.0.2+20.aab`
 
-> **REGOLA**: dopo ogni modifica a qualsiasi app → rebuild APK → copia in `Documents\releases\<app>\` → GitHub Release
+> ⚠️ **REGOLA OBBLIGATORIA — NON SALTARE MAI**: dopo ogni modifica al codice di qualsiasi app gym:
+> 1. bump versione in `pubspec.yaml` (+1 build number)
+> 2. `flutter build apk --split-per-abi --release` → copia arm64 + armeabi in `Documents\releases\<app>\gym_app-<ver>-*.apk`
+> 3. `flutter build appbundle --release` → copia in `Documents\releases\<app>\gym_app-<ver>.aab`
+> 4. `gh release create v<ver>` con APK + AAB
+> 5. `flutter build web --release --base-href "/<repo>/"` → copia `build/web/*` in root → commit + push main
+> **Non chiedere conferma. Non aspettare. Farlo sempre, anche per fix minimi.**
 
 ---
 
@@ -119,6 +125,7 @@ Dati condivisi tra le tre app via Firebase Firestore.
 
 ## STATO SESSIONE
 _Aggiornare ad ogni push significativo_
+- **GymApp `v1.0.2+24` + app_cliente + app_pt** (27 giu 2026): card giorni a altezza variabile (LayoutBuilder, no clamp superiore), tutti gli esercizi visibili in "Allenati" (no +N altri), storyCard streak senza height fissa, app_pt auto-switch tab PROGRESSI dopo import. APK aggiornati + GitHub Release. Web GymApp su `main` root (build 24, verificato live). Nota: deploy GymApp web va su `main` root NON su `gh-pages` (branch orfano — confusione passata documentata in [[Sessioni/2026-06-27]]).
 - **GymApp web — causa VERA del freeze/white-screen iPhone trovata e risolta: deploy fermo a build 18 + regressione `viewport-fit=cover`** (19 giu 2026, corregge la voce sotto): l'utente ha riportato che il freeze persisteva identico anche dopo il "fix" del timer cardio, e su Safari puro è apparso pure **schermo bianco**. Controllo a fondo (richiesto esplicitamente dall'utente: "controlla co'hai cambiato dalla versione di mercoledì 10 giugno che funzionava benissimo") ha rivelato due problemi distinti:
   - **Il deploy web non era mai stato aggiornato**: fermo al commit `fc78282` (build 18, 12 giu) da **8 commit** — il fix cardio `89101fb` e tutti gli altri non erano mai arrivati live, nonostante la voce sotto dica "web ridepl. su gh-pages" (quella verifica non era stata fatta a fondo).
   - **Causa reale del freeze/white-screen**: commit `fc78282` (12 giu) ha introdotto `<meta name="viewport" content="...viewport-fit=cover">` — prima non c'era nessun meta viewport. Combinato con `apple-mobile-web-app-status-bar-style: black-translucent` (già presente da prima), è un pattern noto che rompe il rendering/reflow di WebKit su iOS Safari con Flutter CanvasKit.
