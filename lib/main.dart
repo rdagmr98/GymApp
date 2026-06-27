@@ -7945,7 +7945,7 @@ class _ClientMainPageState extends State<ClientMainPage>
         final double gaps = 14.0 * (n > 1 ? n - 1 : 0);
         final double cardH = n > 0
             ? ((constraints.maxHeight - topPad - bottomSlot - gaps) / n)
-                .clamp(80.0, 220.0)
+                .clamp(80.0, double.infinity)
             : 100.0;
         return SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 28, 20, 12),
@@ -8997,12 +8997,9 @@ class _ClientMainPageState extends State<ClientMainPage>
   Widget _buildExPreviewList(WorkoutDay d, Color accent) {
     final List<Widget> items = [];
     final Set<int> processedGroups = {};
-    int count = 0;
     for (final ex in d.exercises) {
-      if (count >= 4) break;
       if (ex.supersetGroup == 0) {
         items.add(_exPreviewRow(ex.name, _repsSchemeText(ex), accent, false));
-        count++;
       } else {
         if (!processedGroups.contains(ex.supersetGroup)) {
           processedGroups.add(ex.supersetGroup);
@@ -9012,7 +9009,6 @@ class _ClientMainPageState extends State<ClientMainPage>
           final names = group.map((e) => e.name).join(' + ');
           final schemes = group.map((e) => _repsSchemeText(e)).join(' / ');
           items.add(_exPreviewRow(names, schemes, accent, true));
-          count++;
         }
       }
     }
@@ -10230,25 +10226,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                       // Exercise preview list
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
-                        child: Column(
-                          children: [
-                            _buildExPreviewList(d, accent),
-                            if (d.exercises.length > 4)
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    '+ ${d.exercises.length - 4} ${AppL.others}',
-                                    style: TextStyle(
-                                      color: accent.withAlpha(150),
-                                      fontSize: 12,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
+                        child: _buildExPreviewList(d, accent),
                       ),
                       // CTA button
                       Padding(
@@ -17698,7 +17676,6 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
 
     return Container(
       width: 340,
-      height: 600,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         gradient: const LinearGradient(
@@ -17710,6 +17687,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
         border: Border.all(color: Colors.orange.withAlpha(60)),
       ),
       child: Stack(
+        clipBehavior: Clip.none,
         children: [
           // Glowing fire effect at top
           Positioned(
@@ -17732,6 +17710,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
           Padding(
             padding: const EdgeInsets.all(28),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // Header with icon + name
@@ -17853,13 +17832,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                     }),
                   ),
                 ],
-                const Spacer(),
-                // Bottom hashtags
-                Text(
-                  '',
-                  style: TextStyle(color: widget.accent.withAlpha(100), fontSize: 10),
-                  textAlign: TextAlign.center,
-                ),
+                const SizedBox(height: 20),
               ],
             ),
           ),
