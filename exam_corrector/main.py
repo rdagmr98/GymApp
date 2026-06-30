@@ -1003,6 +1003,7 @@ class TeacherApp(tk.Tk):
         self._nq_var = tk.IntVar(value=10)
         ttk.Spinbox(info, from_=1, to=200, textvariable=self._nq_var, width=7).grid(
             row=1, column=1, sticky="w", padx=8)
+        self._nq_var.trace_add("write", self._on_nq_changed)
         ttk.Button(info, text="\u21bb Aggiorna griglia",
                    command=self._refresh_grid).grid(row=1, column=1, sticky="e", padx=8)
         tk.Label(info, text="Nome corso:", bg=C_BG, font=FONT_UI).grid(
@@ -1056,11 +1057,11 @@ class TeacherApp(tk.Tk):
         # Duration
         tk.Label(params_card, text="Durata (min):", bg=C_BG, font=FONT_UI).grid(
             row=2, column=0, sticky="w", padx=10, pady=6)
-        self._duration_var = tk.IntVar(value=0)
-        ttk.Spinbox(params_card, from_=0, to=300, increment=5,
+        self._duration_var = tk.IntVar(value=13)  # 10 domande × 75s / 60
+        ttk.Spinbox(params_card, from_=0, to=300, increment=1,
                     textvariable=self._duration_var, width=7).grid(
             row=2, column=1, padx=4, sticky="w")
-        tk.Label(params_card, text="0 = nessun timer  —  incluso in exam_info.json e nel modulo HTML",
+        tk.Label(params_card, text="0 = nessun timer  —  aggiornato auto (75s/domanda)  —  incluso in exam_info.json e nel modulo HTML",
                  bg=C_BG, fg="#666", font=("Segoe UI", 8)).grid(
             row=2, column=2, columnspan=4, sticky="w", padx=4)
 
@@ -1123,6 +1124,13 @@ class TeacherApp(tk.Tk):
         tk.Label(act, textvariable=self._tab1_status,
                  fg="#1e5928", bg=C_BG, font=FONT_UI).pack(side="left", padx=12)
         self._refresh_grid()
+
+    def _on_nq_changed(self, *_):
+        try:
+            nq = self._nq_var.get()
+            self._duration_var.set(max(1, round(nq * 75 / 60)))
+        except Exception:
+            pass
 
     def _on_scale_mode_changed(self, event=None):
         mode = self._scale_mode_var.get()
