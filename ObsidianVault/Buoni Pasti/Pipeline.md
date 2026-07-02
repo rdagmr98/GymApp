@@ -9,7 +9,9 @@ Hub per il sistema di calcolo buoni pasto e cartellini lavoratori. Leggi questo 
 
 | Script | Scopo |
 |--------|-------|
-| `analizza_tivoli20062026.py` | Driver corrente (sostituisce le versioni datate precedenti: 12/06, 17/06) |
+| `analizza_tivoli02072026.py` | Driver corrente (2 nuovi lavoratori, carry-forward semplificato) |
+| `analizza_tivoli01072026.py` | Versione precedente (unifica due archivi + supporto 7z) |
+| `analizza_tivoli23062026.py` | Versione precedente (secondo archivio, 31 lavoratori) |
 | `analisi_tivoli.py` | Motore di parsing base |
 
 **Path**: `C:\Users\Gianmarco\Documents\tivoli\` (corretto 2026-06-20 — non in root come riportato prima)
@@ -81,8 +83,10 @@ pandas, openpyxl, fpdf2 / reportlab, zipfile
 
 ## STATO SESSIONE
 _Aggiornare dopo ogni elaborazione_
+- 2026-06-23: Tivoli — integrati 9 nuovi lavoratori (Rosati, Salvati Simona, Scalabrino, Tanoni, Bugara, Gennari, Lombardi, Panunzi, Marraccini — quest'ultima del tutto nuova all'archivio). Totale ora 31 lavoratori, 122.966,62 EUR da recuperare. Dettagli in [[Tivoli]].
 - 2026-06-20: documentate tutte le sedi lavorate finora — criteri di assegnazione/maturazione buoni pasto, criteri di ricerca indennità, output desiderato e formato output per ciascuna: [[Tivoli]], [[Cittadella]], [[Rieti]], [[Padova]] (solo buoni pasto) + [[San Giovanni]], [[Roma3]], [[Lazio]] (solo indennità). "Enti Locali" resta non identificata come sede — ipotesi: categoria CCNL, non sede separata.
 - 2026-06-20: risolta ambiguità script San Giovanni — confermato `sangiovanniprogrammaversionegianmarco.py` come script attivo tramite prova sui file di output reali (cartella ELABORATI con decine di lavoratori), non solo timestamp. Dettagli in [[San Giovanni]].
-- Ultima elaborazione reale: Regione Lazio (Coletti Ambra) — vedi [[Lazio]]
-- Sequenza completata: Tivoli (4 nuovi lavoratori) → Verona (99 lavoratori) → Lazio (Coletti Ambra)
-- Script attivo Tivoli: `analizza_tivoli20062026.py` — altri script per progetto nelle rispettive note
+- 2026-07-01: unificazione due archivi Tivoli (191+31 → 213 lavoratori, 870.380,98 EUR). Silvestri Paola, Papa Antonella aggiornate; Iachini Sandra nuova.
+- 2026-07-02: Tivoli — 2 nuovi lavoratori (TILIA EMANUELA, ABBATI MARIA), risolta ambiguità identità TILIA vs ATTILIA EMANUELA via verifica matricola/CF sui documenti sorgente. Totale ora 215 lavoratori, 883.423,52 EUR.
+- Sequenza completata: Tivoli (4 nuovi, 20/06) → Verona (99) → Lazio (Coletti Ambra) → Tivoli (9 nuovi, 23/06) → Tivoli (unificazione+3, 01/07) → Tivoli (2 nuovi, 02/07)
+- Script attivo Tivoli: `analizza_tivoli02072026.py`
