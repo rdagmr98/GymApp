@@ -51,9 +51,10 @@ ZIP Definitivo → consegna
 - [[Padova]] — vertenza UIL FPL, NON soglia fissa: regole notturni consecutivi + festivi/domeniche (≥385 min)
 
 **Solo indennità da cedolino** (metodologia "Sangiovanni", no buoni pasto):
-- [[San Giovanni]] — origine della metodologia, 5 categorie indennità (B-F), template `modello.xlsx` riusato dagli altri due
+- [[San Giovanni]] — origine della metodologia, 5 categorie indennità (B-F), template `modello.xlsx` riusato dagli altri
 - [[Roma3]] — ASL Roma 3 Ostia, stesse 5 categorie e template di San Giovanni
 - [[Lazio]] — Regione Lazio, Coletti Ambra, stessa metodologia ma **7 categorie** (B-H, 2 in più di San Giovanni/Roma3), indennità da codici reali cedolini NoiPA (pattern concettuale da `annistampa.xlsx`)
+- [[Rieti]] (`elabora_rieti.py`) — stesse 5 categorie e template di San Giovanni, **oltre** alla pipeline separata di soli buoni pasto già elencata sopra (Rieti è l'unica sede con entrambe le pipeline)
 
 **Da chiarire**:
 - **"Enti Locali"** — menzionata dall'utente insieme alle altre sedi, ma nessuna cartella/script con questo nome esiste (verificato su Documents, Python, Desktop, root). Ipotesi non confermata: potrebbe essere la categoria CCNL "Enti Locali" (vs Sanità/Regione) — coerente col fatto che Coletti Ambra (Lazio) ha "Categoria C1 Enti Locali" nel cedolino — non una sede separata. Da chiedere all'utente.

@@ -7,8 +7,9 @@ Elaborazione buoni pasto maturati per i lavoratori ASL Rieti, inclusa gestione t
 - Archivi raw aggiuntivi (PDF/7z per lavoratore, non script): `C:\Users\Gianmarco\Documents\ARCHIVIO RIETI\`, `ARCHIVIO RIETI PER GIANMARCO\`
 
 ## Script
-- `C:\Users\Gianmarco\Documents\ELABORATI_RIETI\elabora_rieti.py` (28/03, versione precedente, logica turni semplificata, output da template)
-- `C:\Users\Gianmarco\Documents\rieti\analisi_rieti.py` (20/05, **script attivo/definitivo**, più recente e completo: parsing turni notturni con marcatori split-row `-LF`/`-_J`, output "riepilogo + fogli anno" come Tivoli)
+Rieti ha **due pipeline distinte e complementari**, non due versioni della stessa cosa:
+- `C:\Users\Gianmarco\Documents\rieti\analisi_rieti.py` (20/05) — **solo buoni pasto**: parsing turni notturni con marcatori split-row `-LF`/`-_J`, output "riepilogo + fogli anno" come Tivoli. Vedi criteri sotto.
+- `C:\Users\Gianmarco\Documents\ELABORATI_RIETI\elabora_rieti.py` — **indennità da cedolino + giorni da cartellino**, metodologia [[San Giovanni]] applicata a Rieti (stesso template `sangiovanni\modello.xlsx`, stessa `MAPPATURA_IND` B-F). Input: `Documents\ARCHIVIO RIETI\{COGNOME NOME}\` (ricerca ricorsiva, apre anche PDF dentro ZIP/7z annidati). Output: `Documents\ELABORATI_RIETI\{COGNOME_NOME}.xlsx`. Usato per la richiesta "nuovo formato con formule corrette e specchio riassuntivo in alto a destra" (zip `ASL RIETI COMPLETARE.zip`, 2026-07-07).
 
 ## Criteri di assegnazione/maturazione buono pasto
 - **Soglia minima**: `THRESHOLD = 380` minuti (6h20m)
@@ -21,7 +22,7 @@ Elaborazione buoni pasto maturati per i lavoratori ASL Rieti, inclusa gestione t
 - **Valore buono**: `BUONO_EURO = 4.13`
 
 ## Criteri di ricerca indennità da cedolino
-N/A — Rieti riguarda solo buoni pasto da cartellino.
+Via `elabora_rieti.py` — stessa metodologia di [[San Giovanni]] (5 categorie, colonne B-F, stessi codici cedolino NoiPA — vedi tabella nella nota San Giovanni). Giorni lavorati/ferie letti dal cartellino con la stessa logica San Giovanni/Roma3.
 
 ## Output desiderato
 Conteggio buoni maturati da cartellini (turni diurni + notturni con regola consecutivi) per vertenza contro ASL Rieti.
@@ -33,4 +34,5 @@ Conteggio buoni maturati da cartellini (turni diurni + notturni con regola conse
 
 ## STATO SESSIONE
 _Aggiornare dopo ogni elaborazione_
+- 2026-07-07: **bug di parsing trovato e corretto in `elabora_rieti.py`** (indennità). Causa: `_processa_zip()` apriva solo `.pdf` dentro uno zip e saltava silenziosamente (nessun avviso) le entry `.zip`/`.7z` annidate — asimmetrico rispetto a `_processa_7z()` che già gestiva correttamente la ricorsione. Cartelle come `stefania cassanelli.zip` (contiene `cedolini (8..13).zip`) e `Cedolini Petracchiola.zip` (contiene `cedolini 2020..2025.zip`) hanno esattamente questa forma zip-dentro-zip: tutto il contenuto reale veniva scartato senza errore, con indennità totale 0,00 EUR. Scansione completa dei 62 lavoratori: **9 su 62 (14,5%) colpiti** — CAMAGNA ANTONIETTA, CASSANELLI STEFANIA, DEL VESCOVO ALESSANDRO, LA MESA DEBORA, LELLI PATRIZIA, LUCIANI MADDALENA, MANCINI ROBERTA, MARTINES VINCENZO, PETRACCHIOLA VALENTINA. Non tutti a zero: LA MESA DEBORA aveva già un totale non-zero (90.120,25 EUR, 2° per importo) ma era **sottocontata silenziosamente** — conferma che il bug non si limitava ai 3 casi a zero individuati inizialmente. Fix: `_processa_zip()` reso ricorsivo (parametro `depth`, cap a 3 come `_processa_7z`), gestisce entry `.zip` (ricorsione diretta via `io.BytesIO`) e `.7z` (via file temporaneo + `_processa_7z`). Rielaborazione mirata dei 9 lavoratori via `--solo` (nessun nuovo codice CLI, già esistente). Caso a parte: **GENNARO GIUSEPPE** resta a 0,00 EUR per fonte dati realmente corrotta (4 stub JSON di errore API salvati con estensione `.zip`, non un bug di parsing) — richiede ri-reperimento cedolini dall'utente, non risolvibile via codice.
 - 2026-06-20: documentazione criteri/formato consolidata.

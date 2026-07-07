@@ -27,7 +27,18 @@ Elaborazione buoni pasto maturati per i lavoratori ASL Verona (Az. Osp. Universi
 - Duplicati residui innocui: 2 (Antolini Michael 2024/3, Rossi Fabio 2020/5 — pattern spillover noto, contributo 0)
 - Output: `riepilogo_buoni_pasto_verona.xlsx`
 
+## Integrazione incrementale 2026-07-07 (`verona gianmarco.zip`)
+Script separato: `C:\Users\Gianmarco\Documents\VERONA\integra_verona_gianmarco.py` — NON tocca il motore `analisi_verona.py` (la chiavetta USB `E:\verona` con i dati grezzi dei 99 lavoratori esistenti era scollegata, quindi rigenerazione completa non possibile). Integrazione incrementale: legge i totali anno-per-anno già presenti nel foglio `Riepilogo`, aggiunge i nuovi lavoratori, riscrive SOLO `Riepilogo` (i 99 fogli di dettaglio esistenti restano intatti).
+
+**Risultato**: 10 lavoratori integrati su 11 nel pacchetto (1 escluso, vedi sotto). Totale ora **109 lavoratori, 105.688 buoni pasto** (da 94.981 su 99 lavoratori). Backup pre-modifica: `riepilogo_buoni_pasto_verona_BACKUP_pre_gianmarco.xlsx`.
+
+Nuovi lavoratori integrati (totale buoni tra parentesi): BIFFARA ALESSANDRA (578), CIULLO ELISA (1999), FANTUCCHIO FABRIZIO (450), FILARDI LUCA (1841), FORAFO' SILVIA (637), KHADDADI YOSSRA (430), MACCHIELLA CARMEN (782), PASQUALI ALICE (781), RUFFO SIMONETTA (1063), SALERNO STEFANIA (2146).
+
+Due discrepanze di grafia nella cartella zip risolte usando il nome estratto dal testo del PDF (fonte autoritativa, stesso criterio di `process_page()`): cartella "Bifarra" → nome vero **BIFFARA ALESSANDRA** (typo nel nome cartella); cartella "macchiella" → **MACCHIELLA CARMEN** (corrisponde già alla cartella, nessuna discrepanza reale).
+
+**Escluso — CARDONE FABIOLA (formato dati incompatibile)**: 74 PDF trovati, tutti restituiscono 0 mesi elaborati. Causa diagnosticata (via ispezione diretta `pdfplumber`, non un bug): i suoi cartellini sono un formato completamente diverso da tutti gli altri lavoratori Verona — export web "GPI - Elenco timbrature" dal portale self-service "Angolo del dipendente", non il cartellino standard che `process_page()` sa leggere. Header diverso (niente pattern "RILEVAZIONE...Cognome...Nome"), struttura tabella diversa (codici turno tipo `B00 / RRR`, `B00 / T74`), orari inline ("E 06:50 U 14:16") invece che a colonne. Non risolvibile con una piccola patch al parser esistente — servirebbe un ramo di parsing dedicato per questo formato, non giustificato per 1 lavoratore su 110 senza richiesta esplicita. Struttura cartelle sua: `Cardone Fabiola/Cartellini CARDONE FABIOLA/{YYYY}/{M.YYYY}.pdf` (un livello più annidato degli altri, ma non è la causa del fallimento — `find_worker_pdfs` è ricorsivo e trova tutti i 74 file).
+
 ## STATO SESSIONE
 _Aggiornare dopo ogni elaborazione_
+- 2026-07-07: integrati 10 nuovi lavoratori da `verona gianmarco.zip` (109 tot, 105.688 buoni). 1 escluso (CARDONE FABIOLA, formato cartellino incompatibile "GPI - Elenco timbrature", da segnalare all'utente per ri-reperimento dati in formato standard). Dettagli sopra.
 - 2026-06-20: Verona completato. Pipeline rifinito con dedup a doppio livello + fix falsi positivi conflitto (10 dei 12 "CONFLITTO DATI" erano falsi positivi da pagine di spillover). Run finale eseguito e confermato, Excel generato, fix committato e pushato.
-- Prossimo step: Regione Lazio, metodologia "Sangiovanni" con indennità da `Copia di annistampa.xlsx`.
