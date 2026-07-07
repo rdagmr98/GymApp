@@ -12,7 +12,7 @@ App per allenarsi all'**esame teorico PPL(A)** (licenza di pilota privato). Velo
 | Repo | `github.com/rdagmr98/ppl` (branch `main`) |
 | Web live | https://rdagmr98.github.io/ppl/ |
 | APK (release) | `C:\Users\Gianmarco\Documents\releases\ppl\` — `ppl-v1.1.0-arm64-v8a.apk` (15,0 MB, telefoni moderni 64-bit), `ppl-v1.1.0-armeabi-v7a.apk` (12,5 MB, telefoni vecchi 32-bit) |
-| Versione | `1.1.0+2` (era `1.0.0+1`) |
+| Versione | `1.2.0+3` (era `1.0.0+1` → `1.1.0+2` → `1.2.0+3`) |
 | Stack | Flutter 3.38.5 / Dart 3.10.4 / Java 17 |
 
 ## Database quesiti
@@ -21,6 +21,7 @@ App per allenarsi all'**esame teorico PPL(A)** (licenza di pilota privato). Velo
 - Bundled come asset: `assets/ppl_quiz.json` (UTF-8 pulito, **0 mojibake**, 1592 quesiti con accenti veri à è é ì ò ù).
 - Distribuzione per materia (PARTE) dopo il merge: P1=267, P2=220, P3=230, P4=122, P5=315, P6=289, P7=293, P8=170, P9=158, P10=209.
 - Sorgente quesito tracciata nel campo `src` (`quizvds` per quelli aggiunti/corretti).
+- **Fix testo OCR/scraping (03/07)**: corretti ~130 errori nel testo dei quesiti — pattern I/l confuse (`l-ABCD`→`I-ABCD`, 63 occorrenze), `rn`→`m` (intemazionale→internazionale, attomo→attorno, alternate, pattern, tum→turn), `i`→`dl`/`di` (32x; in/Hg), refusi radiotelefonia EN (temporarily, probability, surveillance, reselecting, instructions, transmitting, wicken, apache, five). Zero residui verificati via scan automatico. Commit `77a152a`.
 
 ### Harvest quizvds (28/06)
 - `quizvds.it` è CakePHP: pagine esame per-materia sotto `/it-it/esame/ppl/<slug>` (mapping 1:1 slug↔materia). Form `manda_form`, niente CSRF.
@@ -58,9 +59,11 @@ App per allenarsi all'**esame teorico PPL(A)** (licenza di pilota privato). Velo
 |------|-------|
 | `models.dart` | `Question`, `Subject`, `QuizDb` (+ `QuizDb.load()` da rootBundle), costanti (`examDistribution`, `subjectNames`, `passThreshold=0.75`) |
 | `builder.dart` | `buildExam(withEnglish)`, `buildStudy(subject,limit)`, `buildMixed(count)`, `AnsweredQuestion` |
-| `quiz_screen.dart` | UI core del quiz veloce (tap→verde/rosso, auto-advance, `_OptionCard`) |
+| `quiz_screen.dart` | UI core del quiz veloce (tap→verde/rosso, auto-advance, `_OptionCard`); a fine tentativo chiama `StatsService.record(...)` |
 | `results_screen.dart` | esito PROMOSSO/NON PROMOSSO, score per materia, revisione errori |
-| `main.dart` | `HomeScreen` FutureBuilder<QuizDb>, 4 card modalità, `SubjectPickerScreen` |
+| `main.dart` | `HomeScreen` FutureBuilder<QuizDb>, 5 card modalità (+ Statistiche), `SubjectPickerScreen` |
+| `stats_service.dart` | `QuizAttempt` (timestamp, titolo, isExam, perSubject) + `StatsService` (persistenza `shared_preferences`, chiave `quiz_attempts_v1`, cap 300 tentativi) |
+| `stats_screen.dart` | `StatsScreen`: verdetto prontezza (pronto/quasi pronto/da migliorare, soglia 75%), bar chart per materia, trend line nel tempo, donut corrette/errate — libreria `fl_chart 1.2.0` |
 
 ## Deploy
 - **Web**: `.github/workflows/deploy.yml` — push su `main` → `flutter build web --release --base-href "/ppl/"` → `peaceiris/actions-gh-pages` (`force_orphan`) su branch `gh-pages`.
@@ -79,14 +82,23 @@ App per allenarsi all'**esame teorico PPL(A)** (licenza di pilota privato). Velo
 - **GitHub Release v1.0.0 NEGATA** dal classifier auto (l'utente aveva chiesto APK locale + web, non una release pubblica). **Non ritentare** senza richiesta esplicita; consegnato l'APK via path locale.
 - **Mojibake accenti (U+FFFD)**: il primo dataset da tastoeffeuno aveva perso à/è/ì/ò/ù (decode windows-1252 sbagliato → carattere irreversibile per-char). Fix 28/06: sostituiti 1163 quesiti con la versione UTF-8 pulita di quizvds → 0 mojibake residui. NB: la console Windows mostra `�` quando stampa à, ma è solo un artefatto di code page del terminale, **non** corruzione dei dati (validator: 0 U+FFFD reali).
 
+## Statistiche / prontezza esame (v1.2.0, 03/07)
+- Nuova card "Statistiche" in home → `StatsScreen`. Ogni quiz/esame completato viene registrato da `StatsService.record()` (shared_preferences, locale, no backend).
+- Verdetto a 3 livelli calcolato su **aggregato cumulativo di tutti i tentativi salvati** (non solo l'ultimo): PRONTO (tutte le materie ≥75%), QUASI PRONTO (overall ≥65%), DA MIGLIORARE (sotto).
+- 3 grafici differenziati (`fl_chart 1.2.0`): bar chart per materia (con linea tratteggiata soglia 75%), line chart andamento nel tempo (1 punto per tentativo, solo se >1 tentativo), donut corrette/errate totali. Dettaglio per materia anche in righe testuali con barra di progresso.
+- Pulsante cancella storico con conferma (dialog "azione non reversibile").
+- **Verifica**: `flutter analyze` pulito (solo 2 lint info preesistenti non correlati), `flutter build web --release` completato senza errori. **Non verificato visivamente in browser** (nessun tool di automazione browser disponibile in questa sessione) — solo verifica di compilazione, non di resa grafica reale.
+
 ## TODO / possibili evoluzioni
 - [x] Icona app personalizzata (aereo su anello di prua) — fatta 28/06, web + Android.
 - [x] Ampliare il pool oltre i 1384 (preoccupazione utente "~4000 EASA") — portato a 2273 via quizvds.
-- [ ] Salvataggio progressi/statistiche storiche (al momento nessuna persistenza).
+- [x] Correggere errori di testo OCR/scraping nelle domande — fatto 03/07, ~130 fix (commit `77a152a`).
+- [x] Salvataggio progressi/statistiche storiche — fatto 03/07, `StatsScreen` + grafici (v1.2.0).
+- [ ] Verifica visiva delle statistiche in un browser reale (non fatta in questa sessione, nessun tool disponibile).
 - [ ] Modalità "ripassa solo gli errori".
 - [ ] Aggiornamento periodico del database (ri-harvest quizvds).
 - [ ] (Se l'utente la vuole) GitHub Release con gli APK allegati.
 
 ## Collegamenti
 - Profilo aviazione utente: vedi [[_CLAUDE]] (militare AVES).
-- Sessione di creazione: [[Sessioni/2026-06-28]]. Espansione pool + icona (v1.1.0): [[Sessioni/2026-06-29]].
+- Sessione di creazione: [[Sessioni/2026-06-28]]. Espansione pool + icona (v1.1.0): [[Sessioni/2026-06-29]]. Fix testo + statistiche (v1.2.0): [[Sessioni/2026-07-03]].

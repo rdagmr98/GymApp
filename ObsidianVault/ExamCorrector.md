@@ -25,10 +25,25 @@ Python 3.x, tkinter/ttk, PyMuPDF (fitz), pdfplumber, openpyxl, matplotlib, repor
 - **student_form.py**: redesign completo con ttk, Segoe UI, header navy, progress counter live, stile coerente con main.py
 - **Bug fix**: grader ora legge `name` e `student_name` come fallback (era solo `name`); file detection accetta entrambe le chiavi
 
+## Timer esame (2026-06-26)
+Campo `duration_minutes` (Spinbox, 0 = nessun timer) in Tab 1 → salvato in `exam_info.json` e nel config JSON.
+
+**Flusso studente (sia student_form.py che HTML):**
+1. Schermata dati: inserisci nome → "Avvia Esame"
+2. Il countdown parte nel header (nave blu); warning giallo <5 min, rosso <1 min
+3. A zero: auto-salva il file JSON con `"auto_saved": true` e mostra dialogo
+4. "Salva Risposte" manuale ferma il timer
+
+**Note implementative:**
+- `HTML_TEMPLATE` usa `__PLACEHOLDER__` invece di `{format}` per evitare l'escaping `{{}}` in JS/CSS
+- Il timer usa `root.after(1000, _tick)` in tkinter, `setInterval` in HTML
+- `_timer_active[0]` (lista mutable) per stoppar il tick da closure senza `nonlocal`
+
 ## Idee per sviluppi futuri
-- Timer di esame in student_form.py (countdown configurabile)
-- Importa risposte da Excel invece di solo PDF
-- Storico sessioni con SQLite (confronto cross-sessione KPI)
-- Report PDF per singolo studente (per invio email)
-- OCR webcam per fogli cartacei (OpenCV)
-- Correzione penalità (−0.5 per sbagliata)
+- **KPI cross-sessione**: SQLite locale che accumula risultati sessione per sessione; Tab 3 aggiunge un grafico di trend (media voto, % idonei nel tempo)
+- **QBGenerator multi-variante**: carica N marksheet PDF (uno per variante A/B/C/...); studente seleziona la propria variante nel form; grader usa la chiave giusta per ognuno — utile se QBGenerator genera copie con domande rimescolate per anticopying
+- **Watch folder**: monitora cartella per nuovi PDF QBGenerator → auto-import risposte
+- **Importa risposte da Excel** invece di solo PDF
+- **Report PDF per singolo studente** (per invio email) — reportlab già disponibile
+- **OCR webcam per fogli cartacei** (OpenCV)
+- **Correzione penalità** (−0.5 per sbagliata)

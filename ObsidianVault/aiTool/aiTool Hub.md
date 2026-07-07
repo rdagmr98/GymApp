@@ -53,6 +53,27 @@ Quando l'utente dice "usa meno crediti" o "risparmia token":
 
 ---
 
+## Immagini per il materiale didattico CAAE (policy — deciso 2026-06-29)
+Per i PDF dell'MTO (documento controllato, AER(EP).P-147):
+1. **Schemi/diagrammi tecnici** (architetture, principi, catene funzionali) → li genera **Claude/Opus con matplotlib** (raster, mai ASCII). Non delegati a Sonnet.
+2. **Foto reali** → solo da fonti **libere e senza watermark**, in quest'ordine di preferenza:
+   - **Wikimedia Commons** (CC / pubblico dominio) — API `https://commons.wikimedia.org/w/api.php`
+   - **DVIDS** `dvidshub.net` (immagini DoD, pubblico dominio)
+   - foto PA militari / Difesa con licenza compatibile
+   Claude scarica il **file originale pulito** (curl / Invoke-WebRequest) in `_engine\figcache\`.
+3. **NO Getty Images / Shutterstock**: le anteprime sono **watermarkate** e a **licenza a pagamento** → inutilizzabili in un documento ufficiale.
+4. Le foto reali libere sono la **scelta preferita**; se non si trova nulla di adatto → Claude genera lo schema con matplotlib (come moduli 50/51).
+5. Gemini (via aiTool) si usa per **individuare** le immagini candidate e le loro fonti, non per scaricare watermark.
+
+## Chiedere a Gemini e copiare (risparmio token — contenuti)
+Per bozze/ricerca lunga senza bruciare token API:
+```powershell
+! cd C:\Users\Gianmarco\aiTool && ai.bat "prompt di ricerca o bozza" --out risposta.md
+```
+Poi `Read risposta.md` e Claude **integra/corregge** (accenti à è é ì ò ù, fisica dai fondamenti, vincolo Latin-1 dell'engine). Utile per abbozzare prosa; la correttezza tecnica la rifinisce Claude/Opus.
+
+---
+
 ## Architettura
 
 ```

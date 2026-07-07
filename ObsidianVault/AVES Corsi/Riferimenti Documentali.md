@@ -10,15 +10,18 @@ Questi file sono la fonte primaria di verità. **Consultarli sempre** quando i d
 |------|------|-----------|
 | `b1.pdf` | `C:\Users\Gianmarco\Documents\programmi\b1.pdf` | Programma ufficiale B1: M1-M12, M15-M17 + M18 (11B), 2044h totali. Fonte per ore T/P di ogni sottomodulo. |
 | `b2.pdf` | `C:\Users\Gianmarco\Documents\programmi\b2.pdf` | Programma ufficiale B2: M1-M10, M13-M14, 1755h. Testo nativo, estratto e verificato interamente — vedi [[Programma B2]]. |
-| `b1mil.pdf` | `C:\Users\Gianmarco\Documents\programmi\b1mil.pdf` | Moduli militari B1: M50, M51, M53, M54 (138h). Si aggiunge a B1, non lo sostituisce. Non ancora riverificato (solo letto per confronto modulo 54, vedi [[Programma B2]]). |
-| `b2mil.pdf` | `C:\Users\Gianmarco\Documents\programmi\b2mil.pdf` | Moduli militari B2: M50, M51, M53, M54, M55 (130h). **PDF vettoriale, no testo estraibile** (font→curve anti-copia) — estratto via rendering pagina→immagine. Verificato e corretto (4/7 livelli sbagliati in reference.json) — vedi [[Programma B2]]. |
+| `b1mil.pdf` | `C:\Users\Gianmarco\Documents\programmi\b1mil.pdf` | Moduli militari B1: M50, M51, M53, M54 (138h). Si aggiunge a B1, non lo sostituisce. Verificato e corretto (1/6 livelli sbagliato + 25 task pratici mancanti) — vedi [[Programma B1]]. |
+| `b2mil.pdf` | `C:\Users\Gianmarco\Documents\programmi\b2mil.pdf` | Moduli militari B2: M50, M51, M53, M54, M55 (130h). Testo nativo, leggibile direttamente col tool Read (un primo tentativo con PyMuPDF/`get_text()` aveva dato risultato vuoto, presunto erroneamente "tutto vettoriale"). Verificato e corretto (4/7 livelli sbagliati) + 28 task pratici completati (id 179-206) — vedi [[Programma B2]]. |
 | `01_BTC_MAML_B2_da_B1_3_AVES.pdf` | `C:\Users\Gianmarco\Documents\programmi\01_BTC_MAML_B2_da_B1_3_AVES.pdf` | Programma delta per chi ha già B1.3 (elicottero turbina) + estensione mil. M50/51/53/54 e deve completare B2. Testo nativo, estratto e verificato interamente (378h teo/63h pra/41 task) — vedi [[Programma B2]]. |
 | `TB1/TB2 MIL 23_12 commenti DAAA...pdf` | `C:\Users\Gianmarco\Documents\programmi\` | Edizioni precedenti con commenti revisione DAAA (06.12.2021) — probabili bozze superate da b1mil.pdf/b2mil.pdf (Ed. 01.00, 2024). Non confrontate. |
+| `TB2_AVES_RIDOTTO.PDF` | `C:\Users\Gianmarco\Documents\programmi\TB2_AVES_RIDOTTO.PDF` | Tabella ufficiale AVES con task pratici FASE B (8.1-8.3, 8.6) per i moduli B2 a pratica forfettaria (M3,M4,M5,M7,M13,M14) — fornito dall'utente il 2026-06-22 dopo che `b2.pdf` si era rivelato insufficiente per task/ore pratiche per-sottomodulo. Contiene anche una tabella ufficiale di sottomoduli per i Moduli 7 e 13, più completa/corretta di `b2.pdf` per questi 2 moduli (usata per ristrutturarli interamente). 84 task pratici inseriti (id 207-290), commit `c6dd36e`/`37208d4`/`cdb180e` — vedi [[Programma B2]]. |
+| `BTC VFI AVES.pdf` | `C:\Users\Gianmarco\Documents\programmi\BTC VFI AVES.pdf` | Programma ufficiale "BTC MAML Cat. B" — Manutentore di Aeromobili Militari, combo massimale B1.1+B1.2+B2 → B1+B2MIL. 11 moduli (7,9,10,11,12,13,50,51,53,54,55), 275h teoria + 45h pratica, 33 task pratici (id 291-323). Integrato come nuovo courseType `maml`, commit corsi-data `12f4139` — vedi [[Programma B2]]. |
 | `b1_pages/` | `C:\Users\Gianmarco\Documents\programmi\b1_pages\` | PNG pagina per pagina del b1.pdf (per OCR). |
 
 **Quando consultare**: se le ore di un modulo/sottomodulo sembrano sbagliate in `reference.json`, il programma ufficiale PDF è la fonte. Font trick per OCR: codici in Times New Roman con "3.2" = in realtà "3.1".
 
 **Dettaglio completo B2 + B2mil** (tabelle foglia per modulo, scoperte di disallineamento, metodologia): vedi nota dedicata [[Programma B2]].
+**Dettaglio completo B1mil** (task pratici, migrazione dati storici, metodologia): vedi nota dedicata [[Programma B1]].
 
 ---
 
