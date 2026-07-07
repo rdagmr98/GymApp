@@ -42,6 +42,7 @@ Non aspettare la fine della sessione per non perdere il contesto se la sessione 
 1. Aggiornare il hub del progetto (stato, decisioni, TODO)
 2. Creare/aggiornare `ObsidianVault/Sessioni/YYYY-MM-DD.md`
 3. Aggiornare `_CLAUDE.md` → sezione "Ultime sessioni"
+4. **Rolling window (anti-bloat, OBBLIGATORIO)**: `_CLAUDE.md` → "Ultime sessioni" tiene SOLO le ultime 3 giornate — quando si aggiunge la voce nuova, comprimere o rimuovere quelle più vecchie della finestra. Ogni hub progetto → sezione "STATO SESSIONE" tiene SOLO le ultime 1-2 voci, stesso criterio. Non è perdita di dati: lo storico completo resta sempre recuperabile da `Sessioni/YYYY-MM-DD.md` e dalla cronologia git della nota (il vault è nello stesso repo). Verificato il 2026-07-06: senza questa regola le sezioni crescono senza limite e vengono rilette per intero ad ogni sessione, indipendentemente dalla rilevanza per il task corrente — è il costo reale in token, non le note atomiche del vault (quelle restano piccole per natura).
 
 ## Note vuote/stub nel vault
 Se una nota ha solo titolo + 1 riga (creata per il Graph View), e durante il lavoro si scopre il contenuto reale (da codice, script, hub), arricchirla subito invece di lasciarla stub. Non creare nuove note-stub senza poi riempirle nella stessa sessione.
