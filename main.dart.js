@@ -73,8 +73,8 @@ if(s==null)return B.CP
 if(s===Object.prototype)return B.CP
 if(typeof q=="function"){o=$.axX
 if(o==null)o=$.axX=v.getIsolateTag("_$dart_js")
-Object.defineProperty(q,o,{value:B.ol,enumerable:false,writable:true,configurable:true})
-return B.ol}return B.ol},
+Object.defineProperty(q,o,{value:B.ok,enumerable:false,writable:true,configurable:true})
+return B.ok}return B.ok},
 Cm(a,b){if(a<0||a>4294967295)throw A.j(A.d1(a,0,4294967295,"length",null))
 return J.oy(new Array(a),b)},
 aQn(a,b){if(a>4294967295)throw A.j(A.d1(a,0,4294967295,"length",null))
@@ -176,7 +176,7 @@ dQ(a,b){return J.cM(a).F(a,b)},
 aYR(a,b){return J.cM(a).M(a,b)},
 aYS(a,b){return J.aNo(a).vH(a,b)},
 aYT(a,b,c){return J.aNo(a).B2(a,b,c)},
-aOl(a,b){return J.cM(a).f1(a,b)},
+aOl(a,b){return J.cM(a).f0(a,b)},
 LX(a){return J.e7(a).XM(a)},
 uJ(a,b,c){return J.e7(a).B6(a,b,c)},
 aYU(a,b,c){return J.e7(a).XN(a,b,c)},
@@ -231,7 +231,7 @@ iU(a,b){return J.cM(a).E(a,b)},
 aZ7(a){return J.cM(a).jK(a)},
 aZ8(a,b){return J.an(a).sA(a,b)},
 uL(a,b){return J.cM(a).iu(a,b)},
-aOu(a,b){return J.cM(a).eY(a,b)},
+aOu(a,b){return J.cM(a).eX(a,b)},
 aOv(a,b){return J.cM(a).Ma(a,b)},
 jR(a){return J.aJj(a).Me(a)},
 aH(a){return J.aJj(a).bE(a)},
@@ -377,7 +377,7 @@ aSa(a){var s,r,q=a.graphemeLayoutBounds,p=B.c.dF(q,t.i)
 q=p.a
 s=J.an(q)
 r=p.$ti.y[1]
-return new A.r0(new A.E(r.a(s.h(q,0)),r.a(s.h(q,1)),r.a(s.h(q,2)),r.a(s.h(q,3))),new A.cy(J.aH(a.graphemeClusterTextRange.start),J.aH(a.graphemeClusterTextRange.end)),B.mX[J.aH(a.dir.value)])},
+return new A.r0(new A.E(r.a(s.h(q,0)),r.a(s.h(q,1)),r.a(s.h(q,2)),r.a(s.h(q,3))),new A.cy(J.aH(a.graphemeClusterTextRange.start),J.aH(a.graphemeClusterTextRange.end)),B.mW[J.aH(a.dir.value)])},
 b93(a){var s,r="chromium/canvaskit.js"
 switch(a.a){case 0:s=A.c([],t.s)
 if(A.aUZ())s.push(r)
@@ -559,10 +559,10 @@ case 1:return A.M(q,r)}})
 return A.N($async$a6i,r)},
 b1K(a,b){var s=A.aPv(new A.agJ(),t.Oz),r=A.ct(v.G.document,"flt-scene")
 a.gfH().Nt(r)
-return new A.rM(s,a,new A.RE(),B.oT,new A.Ni(),r)},
+return new A.rM(s,a,new A.RE(),B.oS,new A.Ni(),r)},
 b1Y(a,b){var s=A.aPv(new A.ah1(),t.vA),r=A.ct(v.G.document,"flt-scene")
 a.gfH().Nt(r)
-return new A.rS(b,s,a,new A.RE(),B.oT,new A.Ni(),r)},
+return new A.rS(b,s,a,new A.RE(),B.oS,new A.Ni(),r)},
 b0(){return new A.j0(B.cq,B.bC,B.dG,B.e_,B.cR)},
 aZT(){var s=new v.G.window.flutterCanvasKit.Path()
 s.setFillType($.a4z()[0])
@@ -596,7 +596,7 @@ if(q==null)q=b==null?null:b.c
 switch(q){case null:case void 0:break
 case B.a5:s.halfLeading=!0
 break
-case B.ob:s.halfLeading=!1
+case B.oa:s.halfLeading=!1
 break}r=a.e
 if(r!=null)s.leading=r
 r=a.f
@@ -638,7 +638,7 @@ break
 case 1:n=o.c
 q=q.e4(A.LF(l,new A.E(n.a,n.b,n.c,n.d)))
 break
-case 2:n=o.d.gf2().a
+case 2:n=o.d.gf1().a
 n===$&&A.a()
 n=n.a.getBounds()
 q.e4(A.LF(l,new A.E(n[0],n[1],n[2],n[3])))
@@ -1018,7 +1018,7 @@ s.a8H()
 return s},
 b1c(a){var s
 $label0$0:{if(B.c2===a||B.dc===a){s=new A.CJ(A.aNI("M,2\u201ew\u2211wa2\u03a9q\u2021qb2\u02dbx\u2248xc3 c\xd4j\u2206jd2\xfee\xb4ef2\xfeu\xa8ug2\xfe\xff\u02c6ih3 h\xce\xff\u2202di3 i\xc7c\xe7cj2\xd3h\u02d9hk2\u02c7\xff\u2020tl5 l@l\xfe\xff|l\u02dcnm1~mn3 n\u0131\xff\u222bbo2\xaer\u2030rp2\xacl\xd2lq2\xc6a\xe6ar3 r\u03c0p\u220fps3 s\xd8o\xf8ot2\xa5y\xc1yu3 u\xa9g\u02ddgv2\u02dak\uf8ffkw2\xc2z\xc5zx2\u0152q\u0153qy5 y\xcff\u0192f\u02c7z\u03a9zz5 z\xa5y\u2021y\u2039\xff\u203aw.2\u221av\u25cav;4\xb5m\xcds\xd3m\xdfs/2\xb8z\u03a9z"))
-break $label0$0}if(B.nw===a){s=new A.CJ(A.aNI(';b1{bc1&cf1[fg1]gm2<m?mn1}nq3/q@q\\qv1@vw3"w?w|wx2#x)xz2(z>y'))
+break $label0$0}if(B.nv===a){s=new A.CJ(A.aNI(';b1{bc1&cf1[fg1]gm2<m?mn1}nq3/q@q\\qv1@vw3"w?w|wx2#x)xz2(z>y'))
 break $label0$0}if(B.hX===a||B.k3===a||B.zd===a){s=new A.CJ(A.aNI("8a2@q\u03a9qk1&kq3@q\xc6a\xe6aw2<z\xabzx1>xy2\xa5\xff\u2190\xffz5<z\xbby\u0141w\u0142w\u203ay;2\xb5m\xbam"))
 break $label0$0}s=null}return s},
 b1b(a){var s
@@ -1189,15 +1189,15 @@ if(s!=null)r+=s
 return r.length!==0?r.charCodeAt(0)==0?r:r:null},
 b6k(a,b){var s=t.Ri,r=new A.aZ(new A.cT(A.c([a,b],t.XS),s),new A.aIc(),s.i("aZ<u.E>")).bB(0," ")
 return r.length!==0?r:null},
-b3m(a){var s=new A.SA(B.mF,a),r=A.tz(s.ct(0),a)
+b3m(a){var s=new A.SA(B.mE,a),r=A.tz(s.ct(0),a)
 s.a!==$&&A.bK()
 s.a=r
-s.Fc(B.mF,a)
+s.Fc(B.mE,a)
 return s},
-b3k(a){var s,r=new A.Sx(B.mh,a),q=A.tz(r.ct(0),a)
+b3k(a){var s,r=new A.Sx(B.mg,a),q=A.tz(r.ct(0),a)
 r.a!==$&&A.bK()
 r.a=q
-r.Fc(B.mh,a)
+r.Fc(B.mg,a)
 s=A.av("dialog")
 s.toString
 q.setAttribute("role",s)
@@ -1205,10 +1205,10 @@ s=A.av(!0)
 s.toString
 q.setAttribute("aria-modal",s)
 return r},
-b3j(a){var s,r=new A.Sw(B.mi,a),q=A.tz(r.ct(0),a)
+b3j(a){var s,r=new A.Sw(B.mh,a),q=A.tz(r.ct(0),a)
 r.a!==$&&A.bK()
 r.a=q
-r.Fc(B.mi,a)
+r.Fc(B.mh,a)
 s=A.av("alertdialog")
 s.toString
 q.setAttribute("role",s)
@@ -1287,9 +1287,9 @@ if(B.aqV.p(0,m)){++o;++n}else if(B.ar3.p(0,m))++n
 else if(n>0){k.push(new A.rk(r,p,B.t7,o,n))
 r=p
 o=0
-n=0}}if(o>0)l=B.mU
+n=0}}if(o>0)l=B.mT
 else l=q===s?B.t8:B.t7
-k.push(new A.rk(r,q,l,o,n))}if(k.length===0||B.c.gac(k).c===B.mU)k.push(new A.rk(s,s,B.t8,0,0))
+k.push(new A.rk(r,q,l,o,n))}if(k.length===0||B.c.gac(k).c===B.mT)k.push(new A.rk(s,s,B.t8,0,0))
 return k},
 b8Z(a){switch(a){case 0:return"100"
 case 1:return"200"
@@ -1337,7 +1337,7 @@ return s},
 b3Y(a){var s
 if(a==="TextCapitalization.words")s=B.Ee
 else if(a==="TextCapitalization.characters")s=B.Eg
-else s=a==="TextCapitalization.sentences"?B.Ef:B.o8
+else s=a==="TextCapitalization.sentences"?B.Ef:B.o7
 return new A.FC(s)},
 b6w(a){},
 a43(a,b,c,d){var s="transparent",r="none",q=a.style
@@ -1387,7 +1387,7 @@ c=s.a(d.h(e,"autofill"))
 b=A.bw(d.h(e,"textCapitalization"))
 if(b==="TextCapitalization.words")b=B.Ee
 else if(b==="TextCapitalization.characters")b=B.Eg
-else b=b==="TextCapitalization.sentences"?B.Ef:B.o8
+else b=b==="TextCapitalization.sentences"?B.Ef:B.o7
 a=A.aKB(c,new A.FC(b))
 b=a.b
 m.push(b)
@@ -1527,7 +1527,7 @@ m[1]=0
 for(s=0;s<n;++s){r=o[s]
 q=2+s*2
 m[q]=r.b
-p=r.c===B.mU?100:0
+p=r.c===B.mT?100:0
 m[q+1]=p}return m},
 aVb(a){var s=A.aVG(a)
 if(s===B.EE)return"matrix("+A.t(a[0])+","+A.t(a[1])+","+A.t(a[4])+","+A.t(a[5])+","+A.t(a[12])+","+A.t(a[13])+")"
@@ -5043,12 +5043,12 @@ if(B.f.cG(a,"Digit"))return a.charCodeAt(5)
 s=b.charCodeAt(0)
 if(b.length<=1)r=!(s>=32&&s<=127)
 else r=!0
-if(r){r=B.nl.h(0,a)
+if(r){r=B.nk.h(0,a)
 return r==null?null:r.charCodeAt(0)}if(!(s>=$.aY2()&&s<=$.aY3()))r=s>=$.aYc()&&s<=$.aYd()
 else r=!0
 if(r)return b.toLowerCase().charCodeAt(0)
 return null},
-b5v(a){var s=B.nl.geR(B.nl),r=A.z(t.S,t.N)
+b5v(a){var s=B.nk.geR(B.nk),r=A.z(t.S,t.N)
 r.Xy(r,s.hO(s,new A.aEt(),t.q9))
 return new A.aEs(a,r)},
 b7V(a){var s,r,q,p,o=a.a1i(),n=A.z(t.N,t.S)
@@ -6028,7 +6028,7 @@ Km(a,b,c,d){var s,r,q,p,o,n="0123456789ABCDEF"
 if(c===B.ba){s=$.aXy()
 s=s.b.test(b)}else s=!1
 if(s)return b
-r=B.ef.f4(b)
+r=B.ef.f3(b)
 for(s=r.length,q=0,p="";q<s;++q){o=r[q]
 if(o<128&&(u.ER.charCodeAt(o)&a)!==0)p+=A.fc(o)
 else p=d&&o===32?p+"+":p+"%"+n[o>>>4&15]+n[o&15]}return p.charCodeAt(0)==0?p:p},
@@ -8341,7 +8341,7 @@ return new A.GI(s,r,new A.a7_(a),new A.a70(a))},
 b_b(a,b,c,d,e,f){var s=a.b.cy.a
 return new A.B0(new A.yg(e,new A.a71(a),new A.a72(a,f),null,f.i("yg<0>")),c,d,s,null)},
 b_9(a,b,c,d,e){var s
-b=A.bQ(B.lU,c,B.qt)
+b=A.bQ(B.lT,c,B.qt)
 s=$.aOa()
 t.v.a(b)
 b.l()
@@ -8591,10 +8591,10 @@ $label0$0:{if(B.j4===s){r="Cut"
 break $label0$0}if(B.j5===s){r="Copy"
 break $label0$0}if(B.j6===s){r="Paste"
 break $label0$0}if(B.j7===s){r="Select All"
-break $label0$0}if(B.lP===s){r="Look Up"
-break $label0$0}if(B.lQ===s){r="Search Web"
+break $label0$0}if(B.lO===s){r="Look Up"
+break $label0$0}if(B.lP===s){r="Search Web"
 break $label0$0}if(B.j8===s){r="Share..."
-break $label0$0}if(B.lR===s||B.qn===s||B.lS===s){r=""
+break $label0$0}if(B.lQ===s||B.qn===s||B.lR===s){r=""
 break $label0$0}r=null}return r},
 o9:function o9(a,b,c,d,e){var _=this
 _.c=a
@@ -8801,7 +8801,7 @@ _.G$=0
 _.L$=b
 _.a4$=_.a6$=0},
 aPo(a,b){var s=null
-return A.kU("",s,b,B.cP,a,s,s,B.c_,!1,!1,!0,B.lZ,s)},
+return A.kU("",s,b,B.cP,a,s,s,B.c_,!1,!1,!0,B.lY,s)},
 kU(a,b,c,d,e,f,g,h,i,j,k,l,m){var s
 if(g==null)s=i?"MISSING":null
 else s=g
@@ -9601,7 +9601,7 @@ a3L:function a3L(){},
 a3M:function a3M(){},
 a3N:function a3N(){},
 b0J(a,b){var s=t.S
-return new A.k2(B.ox,A.z(s,t.SP),A.dK(s),a,b,A.zB(),A.z(s,t.C))},
+return new A.k2(B.ow,A.z(s,t.SP),A.dK(s),a,b,A.zB(),A.z(s,t.C))},
 aPY(a,b,c){var s=(c-a)/(b-a)
 return!isNaN(s)?A.D(s,0,1):s},
 uc:function uc(a,b){this.a=a
@@ -10618,7 +10618,7 @@ k=f.i("aD<0?>")
 j=f.i("bG<0?>")
 return h.hq(new A.CW(b,s,d,0.5625,a,i,e,i,i,r.ry.e,!0,!0,i,i,i,!1,i,"Close Bottom Sheet",new A.cg(B.ak,q),"Scrim",i,i,i,p,A.aV(t.f9),new A.bI(i,f.i("bI<kC<0>>")),new A.bI(i,t.A),new A.rW(),i,0,new A.bG(new A.aD(o,f.i("aD<0?>")),f.i("bG<0?>")),n,m,i,B.i3,new A.cg(i,q),new A.bG(new A.aD(l,k),j),new A.bG(new A.aD(l,k),j),f.i("CW<0>")))},
 aMq(a){var s=null
-return new A.apY(a,s,s,1,s,s,s,1,B.aqa,s,s,s,s,B.p0)},
+return new A.apY(a,s,s,1,s,s,s,1,B.aqa,s,s,s,s,B.p_)},
 Ar:function Ar(a,b,c,d,e,f,g,h,i,j,k,l,m){var _=this
 _.c=a
 _.d=b
@@ -11250,7 +11250,7 @@ case 0:p=s.a<=q
 break
 default:p=null}return p},
 b4Q(a,b){var s=null
-return new A.arf(a,b,s,s,s,s,s,s,s,s,s,!0,s,s,s,s,B.nE,s,s,s,0,s,s,s,s)},
+return new A.arf(a,b,s,s,s,s,s,s,s,s,s,!0,s,s,s,s,B.nD,s,s,s,0,s,s,s,s)},
 DP:function DP(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,b0,b1,b2,b3,b4,b5,b6,b7,b8,b9){var _=this
 _.c=a
 _.d=b
@@ -15028,7 +15028,7 @@ _.fr=!1
 _.ci$=h
 _.hH$=i
 _.rU$=j
-_.f5$=k
+_.f4$=k
 _.hI$=l
 _.bW$=m
 _.aE$=n
@@ -15691,7 +15691,7 @@ return r==null?A.f(a).er:r},
 FB:function FB(a){this.a=a},
 a1l:function a1l(){},
 dl(a,b,c,d,e,f,g,h,i,j){var s
-if(d==null)s=e===1?B.atk:B.oa
+if(d==null)s=e===1?B.atk:B.o9
 else s=d
 return new A.FF(b,c,s,j,h,i,a,B.asm,B.asn,e,f,g,!0,null)},
 b40(a,b){var s,r=!1
@@ -15734,7 +15734,7 @@ _.z=null
 _.ci$=b
 _.hH$=c
 _.rU$=d
-_.f5$=e
+_.f4$=e
 _.hI$=f
 _.c=_.a=null},
 aEQ:function aEQ(){},
@@ -15900,11 +15900,11 @@ _.e=c
 _.a=d},
 a3e:function a3e(){},
 a3u:function a3u(){},
-b4b(a){if(a===B.F6||a===B.oM)return 14.5
+b4b(a){if(a===B.F6||a===B.oL)return 14.5
 return 9.5},
-b48(a){if(a===B.F7||a===B.oM)return 14.5
+b48(a){if(a===B.F7||a===B.oL)return 14.5
 return 9.5},
-b4a(a,b){if(a===0)return b===1?B.oM:B.F6
+b4a(a,b){if(a===0)return b===1?B.oL:B.F6
 if(a===b-1)return B.F7
 return B.aBD},
 b49(a){var s,r=null,q=a.a.a
@@ -16052,9 +16052,9 @@ a8=n?B.v:B.h
 d2=A.a6O(p,o,B.pD,c7,c7,c7,a4?B.h:B.v,a8,c7,c7,a6,c7,c7,c7,a5,c7,c7,c7,a7,c7,c7,c7,c7,c7,c7,c7,B.jZ,c7,c7,c7,c7,a3,c7,c7,c7,c7,d,c7,c7,c7,c7,c7,c7,c7,c7,c7,c7,c7,c7,c7)}a9=n?B.R:B.A
 b0=n?B.ej:B.pA
 b1=n?B.cA:A.Z(153,B.v.m()>>>16&255,B.v.m()>>>8&255,B.v.m()&255)
-b2=A.aOX(!1,n?B.q4:B.q8,d2,c7,a1,36,c7,a2,B.GI,s,88,c7,c7,c7,B.p4)
+b2=A.aOX(!1,n?B.q4:B.q8,d2,c7,a1,36,c7,a2,B.GI,s,88,c7,c7,c7,B.p3)
 b3=n?B.J:B.U
-b4=n?B.q1:B.lI
+b4=n?B.q1:B.lH
 b5=n?B.q1:B.IA
 if(d3){b6=A.aSI(d0,c7,c7,B.ay8,B.ayd,B.ayf)
 p=d2.a===B.aK
@@ -16207,7 +16207,7 @@ g9.toString
 return A.aM9(b5,r,b6,q,b7,new A.CP(c0,c1,c2,c3,c4,c5,c6,b8),b9,c7,c8,g7,s,g,f,c9,d0,d1,d2,e,p,d3,d4,g8,d5,d,c,d6,d7,d8,d9,e0,o,e1,e2,b,a,a0,a1,e3,b0,g9,n,e4,m,e5,e6,e7,e8,e9,f0,f1,l,k,f2,a2,a3,a4,b1,b2,f3,f4,a5,j,f5,f6,a6,f7,a7,f8,f9,a8,i,g0,g1,g2,g3,b3,g4,g5,g6,b4,a9,!0,h)},
 b1q(a,b){var s=b.r
 if(s==null)s=a.cq.c
-return new A.Q4(a,b,B.ou,b.a,b.b,b.c,b.d,b.e,b.f,s,b.w)},
+return new A.Q4(a,b,B.ot,b.a,b.b,b.c,b.d,b.e,b.f,s,b.w)},
 b4z(a){var s
 $label0$0:{if(B.ax===a||B.ac===a||B.cz===a){s=B.eW
 break $label0$0}if(B.cl===a||B.bD===a||B.cm===a){s=B.aAe
@@ -17626,7 +17626,7 @@ break
 case 0:s=a.d
 r=a.c
 if(s!=null){q=r==null?null:r.gtO(r)
-r=new A.bk(s,q==null?B.q:q)}else if(r==null)r=B.oX
+r=new A.bk(s,q==null?B.q:q)}else if(r==null)r=B.oW
 break
 default:r=null}return new A.hv(a.a,a.f,a.b,a.e,r)},
 alX(a,b,c){var s,r,q,p,o,n,m=null
@@ -18225,7 +18225,7 @@ _.dx=$},
 IG:function IG(){},
 a_l:function a_l(){},
 aRN(a,b){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e
-if(a==null)a=B.mY
+if(a==null)a=B.mX
 s=J.an(a)
 r=s.gA(a)-1
 q=A.bY(0,null,!1,t.LQ)
@@ -18404,7 +18404,7 @@ r.gLx()
 q.sLx(r.gLx())
 r.gLw()
 q.sLw(r.gLw())
-s.mv(0,B.mY,q)
+s.mv(0,B.mX,q)
 s.sbe(0,b.gbe(b))
 s.sc0(0,b.gc0(b))
 s.dy=b.gaBm()
@@ -18487,7 +18487,7 @@ _.hK=0
 _.dU=a7
 _.t6=_.mb=_.i9=null
 _.ZC=_.ZB=$
-_.aug=_.wC=_.f6=null
+_.aug=_.wC=_.f5=null
 _.eT=$
 _.hl=a8
 _.m7=null
@@ -19146,9 +19146,9 @@ e=c.b}else{b=A.c([q],r)
 a=q.gbd(q)
 for(;;){r=a==null
 i=!r
-if(!(i&&a.gf_().r==null))break
+if(!(i&&a.geZ().r==null))break
 b.push(a)
-a=a.gbd(a)}a0=r?a5:a.gf_().r
+a=a.gbd(a)}a0=r?a5:a.geZ().r
 r=a0==null
 d=r?a5:a0.r
 e=r?a5:a0.f
@@ -20023,8 +20023,8 @@ else s=!0
 if(s)return c===B.az?new A.k(a.a,r):new A.k(a.c,r)
 else{s=a.d
 return c===B.az?new A.k(a.c,s):new A.k(a.a,s)}},
-akD(a,b){return new A.EM(a,b==null?B.o9:b,B.aqq)},
-akC(a,b){return new A.EM(a,b==null?B.o9:b,B.dY)},
+akD(a,b){return new A.EM(a,b==null?B.o8:b,B.aqq)},
+akC(a,b){return new A.EM(a,b==null?B.o8:b,B.dY)},
 p7:function p7(a,b){this.a=a
 this.b=b},
 fe:function fe(){},
@@ -20627,9 +20627,9 @@ jH:function jH(){},
 b8W(a){var s
 switch(a.a){case 0:s=B.eO
 break
-case 1:s=B.nJ
+case 1:s=B.nI
 break
-case 2:s=B.nI
+case 2:s=B.nH
 break
 default:s=null}return s},
 EF:function EF(a,b){this.a=a
@@ -20764,7 +20764,7 @@ n=null}}B.c.hZ(o)
 s=t.IX
 s=A.a4(new A.hk(o,new A.aI9(),s),s.i("u.E"))
 return s},
-i0(){return new A.eu(A.z(t._S,t.HT),A.z(t.I7,t.O),B.ko,new A.d7("",B.bc),new A.d7("",B.bc),new A.d7("",B.bc),new A.d7("",B.bc),new A.d7("",B.bc),B.fK,B.nP,B.kn)},
+i0(){return new A.eu(A.z(t._S,t.HT),A.z(t.I7,t.O),B.ko,new A.d7("",B.bc),new A.d7("",B.bc),new A.d7("",B.bc),new A.d7("",B.bc),new A.d7("",B.bc),B.fK,B.nO,B.kn)},
 aId(a,b,c,d){var s
 if(a.a.length===0)return c
 if(d!=b&&b!=null){switch(b.a){case 0:s=new A.d7("\u202b",B.bc)
@@ -21134,8 +21134,8 @@ s=B.aeB.h(0,q)
 if(s==null)s=new A.l(q)
 r=a.a
 switch(a.b.a){case 0:return new A.mE(p,s,a.f,r,a.r)
-case 1:return A.aQu(B.mS,s,p,a.r,r)
-case 2:return A.aQt(a.f,B.mS,s,p,r)}},
+case 1:return A.aQu(B.mR,s,p,a.r,r)
+case 2:return A.aQt(a.f,B.mR,s,p,r)}},
 wi:function wi(a,b,c){this.c=a
 this.a=b
 this.b=c},
@@ -22806,7 +22806,7 @@ _.d=$
 _.e=a
 _.f=b
 _.c=_.a=null},
-b0a(){return B.p2},
+b0a(){return B.p1},
 b0b(){if(A.aX()===B.ac||$.aNL().ge1()===B.cr)return B.GH
 return B.eb},
 b08(){return!0},
@@ -22817,7 +22817,7 @@ s=A.c([],t.RW)
 r=A.aX()
 $label0$0:{if(B.ax===r||B.ac===r){q=!0
 break $label0$0}if(B.cz===r||B.cl===r||B.bD===r||B.cm===r){q=!1
-break $label0$0}q=p}return new A.og(new A.cg(!0,o),new A.bI(p,n),new A.a2o(B.lx,B.ly,o),new A.bI(p,n),new A.Cy(),new A.Cy(),new A.Cy(),m,s,q,p,p,p)},
+break $label0$0}q=p}return new A.og(new A.cg(!0,o),new A.bI(p,n),new A.a2o(B.lw,B.lx,o),new A.bI(p,n),new A.Cy(),new A.Cy(),new A.Cy(),m,s,q,p,p,p)},
 b07(a){var s=a.a,r=a.j(0,B.ij),q=s==null
 if(q){$.aa.toString
 $.bh()}if(r||q)return B.ij
@@ -23194,9 +23194,9 @@ aal(a,b,c,d,e,f,g){return new A.dt(g,a,c,!0,e,f,A.c([],t.bp),$.ah())},
 b0E(a){return a.ghc()},
 OB(a,b,c){var s=t.bp
 return new A.mw(B.EH,B.EI,A.c([],s),c,a,!0,!0,null,null,A.c([],s),$.ah())},
-uf(){switch(A.aX().a){case 0:case 1:case 2:if($.aa.ax$.c.a!==0)return B.mN
-return B.mM
-case 3:case 4:case 5:return B.mN}},
+uf(){switch(A.aX().a){case 0:case 1:case 2:if($.aa.ax$.c.a!==0)return B.mM
+return B.mL
+case 3:case 4:case 5:return B.mM}},
 l6:function l6(a,b){this.a=a
 this.b=b},
 UZ:function UZ(a,b){this.a=a
@@ -24439,7 +24439,7 @@ _.cx=_.CW=_.ch=_.ay=null
 _.ci$=f
 _.hH$=g
 _.rU$=h
-_.f5$=i
+_.f4$=i
 _.hI$=j
 _.bW$=k
 _.aE$=l
@@ -24840,7 +24840,7 @@ r.toString
 A.ey(r)
 q=s[1]
 q.toString
-return new A.YE(r,A.bw(q),A.aQj(s,2),B.oG)
+return new A.YE(r,A.bw(q),A.aQj(s,2),B.oF)
 case 1:s=s.i_(a,1)
 r=s[0]
 r.toString
@@ -24936,7 +24936,7 @@ _.db=i
 _.ci$=j
 _.hH$=k
 _.rU$=l
-_.f5$=m
+_.f4$=m
 _.hI$=n
 _.bW$=o
 _.aE$=p
@@ -25677,7 +25677,7 @@ a_P:function a_P(a,b,c,d,e){var _=this
 _.ci$=a
 _.hH$=b
 _.rU$=c
-_.f5$=d
+_.f4$=d
 _.hI$=e
 _.c=_.a=null},
 G2:function G2(a,b,c){this.f=a
@@ -25752,7 +25752,7 @@ _.w=!1
 _.ci$=b
 _.hH$=c
 _.rU$=d
-_.f5$=e
+_.f4$=e
 _.hI$=f
 _.c=_.a=null
 _.$ti=g},
@@ -26205,7 +26205,7 @@ if(p===1)return B.c.gbm(o)
 p=t.H
 return A.k3(o,!1,p).bJ(new A.akA(),p)},
 b39(){var s=null,r=t.A
-return new A.n9(new A.J7($.ah()),new A.bI(s,r),new A.bI(s,t.hA),new A.bI(s,r),B.nk,s,A.z(t.yb,t.O),s,!0,s,s,s)},
+return new A.n9(new A.J7($.ah()),new A.bI(s,r),new A.bI(s,t.hA),new A.bI(s,r),B.nj,s,A.z(t.yb,t.O),s,!0,s,s,s)},
 a3Y(a){var s
 switch(a.a.c.a){case 0:s=a.d.at
 s.toString
@@ -26259,7 +26259,7 @@ _.cx=_.CW=_.ch=_.ay=null
 _.ci$=f
 _.hH$=g
 _.rU$=h
-_.f5$=i
+_.f4$=i
 _.hI$=j
 _.bW$=k
 _.aE$=l
@@ -27934,8 +27934,8 @@ aZf(a){switch(a.a){case 0:return $.a4s()?1:0
 case 1:return $.a4s()?0:1
 case 2:return 2
 case 3:return 3}},
-aZe(a){switch(a){case 0:return $.a4s()?B.oO:B.oN
-case 1:return $.a4s()?B.oN:B.oO
+aZe(a){switch(a){case 0:return $.a4s()?B.oN:B.oM
+case 1:return $.a4s()?B.oM:B.oN
 case 2:return B.Fb
 case 3:return B.Fc
 default:return null}},
@@ -28137,8 +28137,8 @@ if($.cq==="en"){for(p=0;p<1213;++p){o=B.et[p]
 if(!A.fw(o.a.toLowerCase(),s,0))n=A.fw(o.b.toLowerCase(),s,0)
 else n=!0
 if(n)q.$1(o)}for(p=0;p<62;++p){o=B.fm[p]
-if(A.fw(o.b.toLowerCase(),s,0)||B.c.f1(o.x,new A.aJJ(s)))q.$1(o)}return r}for(p=0;p<62;++p){o=B.fm[p]
-if(!A.fw(o.a.toLowerCase(),s,0))n=A.fw(o.b.toLowerCase(),s,0)||B.c.f1(o.x,new A.aJK(s))
+if(A.fw(o.b.toLowerCase(),s,0)||B.c.f0(o.x,new A.aJJ(s)))q.$1(o)}return r}for(p=0;p<62;++p){o=B.fm[p]
+if(!A.fw(o.a.toLowerCase(),s,0))n=A.fw(o.b.toLowerCase(),s,0)||B.c.f0(o.x,new A.aJK(s))
 else n=!0
 if(n)q.$1(o)}for(p=0;p<1213;++p){o=B.et[p]
 if(!A.fw(o.a.toLowerCase(),s,0))n=A.fw(o.b.toLowerCase(),s,0)
@@ -28335,7 +28335,7 @@ s=B.ajR.h(0,m)
 if(s==null)s=B.yT
 m=s.geR(s)
 r=m.dN(m)
-B.c.eY(r,new A.aJS())
+B.c.eX(r,new A.aJS())
 for(m=r.length,q=a,p=0;p<r.length;r.length===m||(0,A.K)(r),++p){o=r[p]
 n=o.a
 if(A.fw(q,n,0))q=A.bt(q,n,o.b)}return q},
@@ -28358,7 +28358,7 @@ if(B.yy.aH(0,s)){r=B.yy.h(0,s)
 r.toString
 return A.aUP(r)}r=B.yz.geR(B.yz)
 q=r.dN(r)
-B.c.eY(q,new A.aJR())
+B.c.eX(q,new A.aJR())
 for(r=q.length,p=s,o=0;o<q.length;q.length===r||(0,A.K)(q),++o){n=q[o]
 p=A.bt(p,n.a,n.b)}r=A.aN5(p)
 m=A.cf("\\b(?:il|lo|la|le|gli|dei|delle|della|dello|degli|con|verso|durante|mantieni|controlla|evita|abbassa|alz[aei]|spingi|tira|porta|respira|schiena|petto|gomiti|gomito|ginocchio|ginocchia|fianchi|busto|addome|glute[io]|allungamento|slancio|discesa|salita|panca|cavo|manubri?|bilanciere|sbarra|presa|prona|supinata|neutra|punta|piede|piedi|polsi?|spalle|avambracci|quadricipiti|femorali|lombare|lombari|tallone|talloni|contrazione|allinea|ruota|macchina|lateralmente|indietro|avanti|sdraiati|siediti|afferra|estendi|fletti|contrai|dondolare|concentrati|retrai|tecnica|muscoli|completa|padroneggiare|ascendente|discendente|eccentrica|concentrica|collo|orecchie)\\b",!0,!1)
@@ -28369,14 +28369,14 @@ s=B.amC.h(0,l)
 if(s==null)return a
 r=s.geR(s)
 q=r.dN(r)
-B.c.eY(q,new A.aIU())
+B.c.eX(q,new A.aIU())
 for(r=q.length,p=a,o=0;o<q.length;q.length===r||(0,A.K)(q),++o){n=q[o]
 m=n.a
 if(A.fw(p,m,0))p=A.bt(p,m,n.b)}return p},
 aUY(a){var s,r,q=$.cq
 if(q!=="it"){s=B.ajQ.h(0,q)
 r=(s==null?B.yx:s).h(0,a)
-return r==null?a:r}r=B.nh.h(0,a)
+return r==null?a:r}r=B.ng.h(0,a)
 return r==null?a:r},
 aVq(a){var s,r
 if($.cq==="en"){s=J.an(a)
@@ -28514,9 +28514,9 @@ if(B.f.cG(r,"GYM1:")){k=B.f.eO(r,5)
 q=A.cf("\\s",!0,!1)
 p=A.bt(k,q,"")
 k=p.length
-o=B.p8.f4(B.f.ayE(p,k+B.l.aX(4-B.l.aX(k,4),4),"="))
+o=B.p8.f3(B.f.ayE(p,k+B.l.aX(4-B.l.aX(k,4),4),"="))
 n=A.b20(32768)
-B.HO.JR(A.aLr(o,B.p5,null,null),n,!1,!1)
+B.HO.JR(A.aLr(o,B.p4,null,null),n,!1,!1)
 r=B.ba.fm(0,n.a2F())}m=B.ar.hF(0,r,null)
 if(t.P.b(m)){l=J.ae(m,"routine")
 if(i.b(l))return l}return i.b(m)?m:B.dz},
@@ -28538,7 +28538,7 @@ if(A.fw(s,o,0))++l}for(r=["curl","bicep","tricep","pressdown","skull"],k=0,p=0;p
 if(A.fw(s,o,0))++k}j=A.aA(["push",q,"pull",n,"legs",m,"shoulders",l,"arms",k],t.N,t.S)
 r=A.v(j)
 if(new A.bE(j,r.i("bE<2>")).d3(0,new A.aIy()))return i
-switch(new A.fN(j,r.i("fN<1,2>")).eX(0,new A.aIz()).a){case"push":return h
+switch(new A.fN(j,r.i("fN<1,2>")).f6(0,new A.aIz()).a){case"push":return h
 case"pull":return g
 case"legs":return f
 case"shoulders":return e
@@ -31049,7 +31049,7 @@ aZK(a,b,c){return a.xO(c,!0)},
 SF(a,b,c){var s=0,r=A.O(t.H)
 var $async$SF=A.P(function(d,e){if(d===1)return A.L(e,r)
 for(;;)switch(s){case 0:s=2
-return A.x(B.f3.lC(0,new A.a5c(a.a,b,c,B.oR,"announce").a1R()),$async$SF)
+return A.x(B.f3.lC(0,new A.a5c(a.a,b,c,B.oQ,"announce").a1R()),$async$SF)
 case 2:return A.M(null,r)}})
 return A.N($async$SF,r)},
 alP(a){var s=0,r=A.O(t.H)
@@ -31105,14 +31105,14 @@ for(;;)switch(s){case 0:s=2
 return A.x(B.bv.cR("SystemNavigator.pop",null,t.H),$async$anc)
 case 2:return A.M(null,r)}})
 return A.N($async$anc,r)},
-b3R(a,b,c){return B.ny.cR("routeInformationUpdated",A.aA(["uri",c.k(0),"state",b,"replace",a],t.N,t.z),t.H)},
+b3R(a,b,c){return B.nx.cR("routeInformationUpdated",A.aA(["uri",c.k(0),"state",b,"replace",a],t.N,t.z),t.H)},
 aSs(a){switch(a){case 9:case 10:case 11:case 12:case 13:case 28:case 29:case 30:case 31:case 32:case 160:case 5760:case 8192:case 8193:case 8194:case 8195:case 8196:case 8197:case 8198:case 8199:case 8200:case 8201:case 8202:case 8239:case 8287:case 12288:break
 default:return!1}return!0},
 aM7(a){switch(a){case 10:case 11:case 12:case 13:case 133:case 8232:case 8233:return!0
 default:return!1}},
 a9Q(a){var s=0,r=A.O(t.H),q
 var $async$a9Q=A.P(function(b,c){if(b===1)return A.L(c,r)
-for(;;)$async$outer:switch(s){case 0:a.gZ().u8(B.o7)
+for(;;)$async$outer:switch(s){case 0:a.gZ().u8(B.o6)
 switch(A.aX().a){case 0:case 1:q=A.xA(B.E8)
 s=1
 break $async$outer
@@ -31369,7 +31369,7 @@ for(s=m,r=s;s<a;++s)if(a0[s]===0){f.push(B.p7.fm(0,J.fn(B.aa.gc4(a0),a0.byteOffs
 r=s+1}for(r=k,s=0;s<j;++s,r=q){q=r+8
 e.push(new A.xN(p.getInt32(r,!1)*1000,p.getUint8(r+4)===1,f[p.getUint8(r+5)]))}for(r=i,s=0;s<h;++s){c.push(B.e.bE(p.getFloat64(r,!1))*1000)
 r+=8}for(s=0;s<h;++s){b.push(p.getUint8(r));++r}return A.aQL(g,c,b,e)},
-b8u(a){switch(a.a){case 0:return B.nB
+b8u(a){switch(a.a){case 0:return B.nA
 case 2:return B.CU
 case 1:return B.CT
 case 3:return B.apm
@@ -31487,7 +31487,7 @@ if(p!=null){p=p.a
 p===$&&A.a()
 p.l()}q.d=null}}}
 A.MW.prototype={
-Jq(a,b,c){var s=b.gf2().a
+Jq(a,b,c){var s=b.gf1().a
 s===$&&A.a()
 s=s.a
 s.toString
@@ -31532,7 +31532,7 @@ s===$&&A.a()
 s=s.a
 s.toString
 this.a.drawParagraph(s,b.a,b.b)}else if(!(a instanceof A.Uc))throw A.j(A.fh("Unknown paragraph type."))},
-fn(a,b){var s=b.dd(),r=t.gN.a(a).gf2().a
+fn(a,b){var s=b.dd(),r=t.gN.a(a).gf1().a
 r===$&&A.a()
 r=r.a
 r.toString
@@ -31548,7 +31548,7 @@ r=k.a
 q=k.b
 p=this.a
 p.translate(r,q)
-o=t.gN.a(s).gf2().a
+o=t.gN.a(s).gf1().a
 o===$&&A.a()
 o=o.a
 o.toString
@@ -31558,7 +31558,7 @@ n.delete()},
 fo(a,b){var s=b.dd()
 this.a.drawRect(A.dh(a),s)
 s.delete()},
-Zn(a,b,c,d){var s,r,q,p,o=a.gf2(),n=$.e8(),m=n.d
+Zn(a,b,c,d){var s,r,q,p,o=a.gf1(),n=$.e8(),m=n.d
 n=m==null?n.gcV():m
 s=d?5:4
 r=b.aM(B.e.aL(b.ged(b)*0.039))
@@ -31621,7 +31621,7 @@ a.$1(s)
 s.delete()},
 gJ5(){return B.c5},
 C9(a){var s=A.lF("result")
-this.lu(new A.a6l(s,a),B.od)
+this.lu(new A.a6l(s,a),B.oc)
 return s.b8()},
 $iis:1}
 A.a6l.prototype={
@@ -31905,7 +31905,7 @@ gJe(){return this.c}}
 A.MZ.prototype={
 gJ5(){return B.c5},
 C9(a){var s=A.lF("result")
-this.lu(new A.a6p(s,a),B.od)
+this.lu(new A.a6p(s,a),B.oc)
 return s.b8()},
 $iis:1}
 A.a6p.prototype={
@@ -32118,7 +32118,7 @@ s.toString
 l.setMaskFilter(s)}}n=m.ay
 if(n!=null)n.lu(new A.a6q(l),a)
 return l},
-dd(){return this.a1U(B.od)},
+dd(){return this.a1U(B.oc)},
 sKZ(a){var s,r=this
 if(a===r.w)return
 if(!a){r.at=r.x
@@ -32534,7 +32534,7 @@ if(a8!=null)b3.heightMultiplier=a8
 switch(d.ch){case null:case void 0:break
 case B.a5:b3.halfLeading=!0
 break
-case B.ob:b3.halfLeading=!1
+case B.oa:b3.halfLeading=!1
 break}q=d.fr
 if(q===$){p=A.aMT(d.y,d.Q)
 d.fr!==$&&A.aK()
@@ -32599,7 +32599,7 @@ NA(a){var s,r,q,p,o,n,m,l=A.c([],t.Lx)
 for(s=a.a,r=J.an(s),q=a.$ti.y[1],p=0;p<r.gA(s);++p){o=q.a(r.h(s,p))
 n=o.rect
 m=J.aH(o.dir.value)
-l.push(new A.h7(n[0],n[1],n[2],n[3],B.mX[m]))}return l},
+l.push(new A.h7(n[0],n[1],n[2],n[3],B.mW[m]))}return l},
 dG(a){var s,r,q=this.a
 q===$&&A.a()
 s=q.a.getGlyphPositionAtCoordinate(a.a,a.b)
@@ -33870,43 +33870,43 @@ A.fM.prototype={
 gCR(){return!this.b.gag(0)}}
 A.AY.prototype={}
 A.S_.prototype={
-f0(a,b){return b.o9(this)},
-jd(a,b){return this.f0(0,b,t.z)}}
+f_(a,b){return b.o9(this)},
+jd(a,b){return this.f_(0,b,t.z)}}
 A.Mt.prototype={
-f0(a,b){return b.Mz(this)},
-jd(a,b){return this.f0(0,b,t.z)},
+f_(a,b){return b.Mz(this)},
+jd(a,b){return this.f_(0,b,t.z)},
 $iaOH:1}
 A.N7.prototype={
-f0(a,b){return b.MA(this)},
-jd(a,b){return this.f0(0,b,t.z)},
+f_(a,b){return b.MA(this)},
+jd(a,b){return this.f_(0,b,t.z)},
 $iaP2:1}
 A.N9.prototype={
-f0(a,b){return b.MC(this)},
-jd(a,b){return this.f0(0,b,t.z)},
+f_(a,b){return b.MC(this)},
+jd(a,b){return this.f_(0,b,t.z)},
 $iaP4:1}
 A.N8.prototype={
-f0(a,b){return b.MB(this)},
-jd(a,b){return this.f0(0,b,t.z)},
+f_(a,b){return b.MB(this)},
+jd(a,b){return this.f_(0,b,t.z)},
 $iaP3:1}
 A.QA.prototype={
-f0(a,b){return b.MF(this)},
-jd(a,b){return this.f0(0,b,t.z)},
+f_(a,b){return b.MF(this)},
+jd(a,b){return this.f_(0,b,t.z)},
 $iaRa:1}
 A.FX.prototype={
-f0(a,b){return b.tV(this)},
-jd(a,b){return this.f0(0,b,t.z)},
+f_(a,b){return b.tV(this)},
+jd(a,b){return this.f_(0,b,t.z)},
 $iaMf:1}
 A.Dl.prototype={
-f0(a,b){return b.ME(this)},
-jd(a,b){return this.f0(0,b,t.z)},
+f_(a,b){return b.ME(this)},
+jd(a,b){return this.f_(0,b,t.z)},
 $iaR8:1}
 A.Pn.prototype={
-f0(a,b){return b.MD(this)},
-jd(a,b){return this.f0(0,b,t.z)},
+f_(a,b){return b.MD(this)},
+jd(a,b){return this.f_(0,b,t.z)},
 $iaQb:1}
 A.mT.prototype={
-f0(a,b){return b.MG(this)},
-jd(a,b){return this.f0(0,b,t.z)},
+f_(a,b){return b.MG(this)},
+jd(a,b){return this.f_(0,b,t.z)},
 gCR(){return A.fM.prototype.gCR.call(this)&&!this.w}}
 A.acI.prototype={}
 A.acJ.prototype={
@@ -33965,7 +33965,7 @@ break
 case 1:p=p.c
 o=new A.E(p.a,p.b,p.c,p.d)
 break
-case 2:p=p.d.gf2().a
+case 2:p=p.d.gf1().a
 p===$&&A.a()
 p=p.a.getBounds()
 o=new A.E(p[0],p[1],p[2],p[3])
@@ -33982,7 +33982,7 @@ Mz(a){a.b=this.nV(a).hh(this.gat8())},
 MA(a){var s,r,q=null,p=a.f,o=this.a.a
 o.push(new A.ke(B.amX,q,q,p,q,q))
 s=this.nV(a)
-p=p.gf2().a
+p=p.gf1().a
 p===$&&A.a()
 r=A.aJi(p.a.getBounds())
 if(s.fO(r))a.b=s.e4(r)
@@ -34263,7 +34263,7 @@ if(r)A.ap(A.cZ('"matrix4" must have 16 entries.',null))
 p.a.concat(A.aNH(A.LE(o)))}},
 arD(a,b,c){var s,r,q,p
 for(s=this.a,r=0;r<s.length;++r){q=s[r]
-p=b.gf2().a
+p=b.gf1().a
 p===$&&A.a()
 p=p.a
 p.toString
@@ -34335,10 +34335,10 @@ A.uR.prototype={
 d1(a){var s,r=this.a.a1S(),q=r.a,p=null,o=r.b
 p=o
 s=q
-a.aqF(0,t.gN.a(s).gf2(),p)},
+a.aqF(0,t.gN.a(s).gf1(),p)},
 $ie3:1}
 A.M5.prototype={
-d1(a){a.XA(0,this.a.gf2(),this.b,this.c)},
+d1(a){a.XA(0,this.a.gf1(),this.b,this.c)},
 $ie3:1}
 A.ma.prototype={
 d1(a){var s=a.a
@@ -34350,7 +34350,7 @@ sC7(a){var s
 this.c=a
 s=this.d
 if(s!=null)s.sC7(a)},
-gf2(){var s,r,q,p=this,o=p.d
+gf1(){var s,r,q,p=this,o=p.d
 if(o!=null)return o
 s=p.b.$0()
 s.sC7(p.c)
@@ -34376,7 +34376,7 @@ A.acP.prototype={
 $0(){return A.aZT()},
 $S:181}
 A.acO.prototype={
-$0(){var s,r=this.a.gf2(),q=this.b,p=r.a
+$0(){var s,r=this.a.gf1(),q=this.b,p=r.a
 p===$&&A.a()
 s=p.a.copy()
 A.fv(s,"transform",[1,0,q.a,0,1,q.b,0,0,1])
@@ -34806,7 +34806,7 @@ r.n(0,"attributeFilter",s)
 s=A.av(r)
 s.toString
 p.observe(q,s)},
-anJ(a){this.jE("flutter/lifecycle",J.LX(B.aa.gc4(B.ef.f4(a.I()))),new A.a9w())},
+anJ(a){this.jE("flutter/lifecycle",J.LX(B.aa.gc4(B.ef.f3(a.I()))),new A.a9w())},
 WX(a){var s=this,r=s.d
 if(r.d!==a){s.d=r.asx(a)
 A.lT(null,null)
@@ -35025,7 +35025,7 @@ q=s}return q},
 Sb(a){var s,r=this,q=r.Xl(a),p=r.c
 if(q==p)return
 if(q==null){p.toString
-s=new A.y3(p,B.aAd,B.aAb)}else s=new A.y3(q,B.on,r.d)
+s=new A.y3(p,B.aAd,B.aAb)}else s=new A.y3(q,B.om,r.d)
 r.IF(p,!0)
 r.IF(q,!1)
 r.c=q
@@ -35613,7 +35613,7 @@ if(J.e(a.target,q.a.b.gfH().a)){a.preventDefault()
 A.cL(B.a6,new A.azK(q))}},
 $S:52}
 A.azK.prototype={
-$0(){$.bh().gAM().Yk(this.a.a.b.a,B.on)},
+$0(){$.bh().gAM().Yk(this.a.a.b.a,B.om)},
 $S:0}
 A.azM.prototype={
 $1(a){var s,r,q,p,o=this.a,n=o.qP(a),m=o.Gc(n),l=A.c([],t.D9)
@@ -35684,14 +35684,14 @@ break
 case 3:s=$.lW()
 r=s.a.aH(0,d)
 s.BV(d,g,h)
-if(!r)a.push(n.n8(b,B.nA,d,0,0,e,!1,0,g,h,0,i,j,0,0,0,0,0,k,l,m,0,a1,a2,a3))
+if(!r)a.push(n.n8(b,B.nz,d,0,0,e,!1,0,g,h,0,i,j,0,0,0,0,0,k,l,m,0,a1,a2,a3))
 a.push(n.qO(b,c,d,0,0,e,!1,0,g,h,0,i,j,0,0,0,0,0,k,l,m,a0,0,a1,a2,a3))
 s.b=b
 break
 case 4:s=$.lW()
 r=s.a.aH(0,d)
 s.BV(d,g,h).a=$.aTm=$.aTm+1
-if(!r)a.push(n.n8(b,B.nA,d,0,0,e,!1,0,g,h,0,i,j,0,0,0,0,0,k,l,m,0,a1,a2,a3))
+if(!r)a.push(n.n8(b,B.nz,d,0,0,e,!1,0,g,h,0,i,j,0,0,0,0,0,k,l,m,0,a1,a2,a3))
 if(n.H3(d,g,h))a.push(n.n8(0,B.eI,d,0,0,e,!1,0,g,h,0,0,j,0,0,0,0,0,k,l,m,0,a1,a2,a3))
 a.push(n.qO(b,c,d,0,0,e,!1,0,g,h,0,i,j,0,0,0,0,0,k,l,m,a0,0,a1,a2,a3))
 s.b=b
@@ -35716,7 +35716,7 @@ break
 case 7:case 8:case 9:break}else switch(a0.a){case 1:case 2:case 3:s=$.lW()
 r=s.a.aH(0,d)
 s.BV(d,g,h)
-if(!r)a.push(n.n8(b,B.nA,d,0,0,e,!1,0,g,h,0,i,j,0,0,0,0,0,k,l,m,0,a1,a2,a3))
+if(!r)a.push(n.n8(b,B.nz,d,0,0,e,!1,0,g,h,0,i,j,0,0,0,0,0,k,l,m,0,a1,a2,a3))
 if(n.H3(d,g,h))if(b!==0)a.push(n.n8(b,B.k7,d,0,0,e,!1,0,g,h,0,i,j,0,0,0,0,0,k,l,m,0,a1,a2,a3))
 else a.push(n.n8(b,B.eI,d,0,0,e,!1,0,g,h,0,i,j,0,0,0,0,0,k,l,m,0,a1,a2,a3))
 a.push(n.Rn(b,c,d,0,0,e,!1,f,0,g,h,0,i,j,0,0,0,0,0,k,l,m,a0,0,a1,a2,a3))
@@ -36430,7 +36430,7 @@ q.toString
 B.c.M(l,q)}while(l.length!==0){s=B.c.hr(l,0)
 if(p.h(0,s)!=null){q=p.h(0,s).p1
 q===$&&A.a()
-q=q===B.nQ||q===B.Do||q===B.Dp}else q=!1
+q=q===B.nP||q===B.Do||q===B.Dp}else q=!1
 if(q)n.push(s)
 else{q=p.h(0,s)
 if((q==null?null:q.dy)!=null){q=p.h(0,s).dy
@@ -36458,7 +36458,7 @@ q.toString
 B.c.M(l,q)}while(l.length!==0){s=B.c.hr(l,0)
 if(p.h(0,s)!=null){q=p.h(0,s).p1
 q===$&&A.a()
-q=q===B.nQ||q===B.Do||q===B.Dp}else q=!1
+q=q===B.nP||q===B.Do||q===B.Dp}else q=!1
 if(q)n.push(s)
 else{q=p.h(0,s)
 if((q==null?null:q.dy)!=null){q=p.h(0,s).dy
@@ -36922,34 +36922,34 @@ r.insertBefore(l,a)}i.RG=a0
 m.r.n(0,a1,a0)}a1=i.ry.a
 a1===$&&A.a()}a0.rx=n},
 aer(){var s,r,q=this
-if(q.go!==-1)return B.mG
+if(q.go!==-1)return B.mF
 s=q.p1
 s===$&&A.a()
-switch(s.a){case 1:return B.me
-case 3:return B.mg
-case 2:return B.mf
-case 4:return B.mh
-case 5:return B.mi
-case 6:return B.mj
-case 7:return B.mk
-case 8:return B.ml
-case 9:return B.mm
-case 25:return B.mD
-case 14:return B.ms
-case 13:return B.mt
-case 15:return B.mu
-case 16:return B.mv
-case 17:return B.mw
-case 27:return B.mo
-case 26:return B.mn
-case 18:return B.mp
-case 19:return B.mq
-case 28:return B.mx
-case 29:return B.my
-case 30:return B.mz
-case 31:return B.mA
-case 32:return B.mB
-case 20:return B.mC
+switch(s.a){case 1:return B.md
+case 3:return B.mf
+case 2:return B.me
+case 4:return B.mg
+case 5:return B.mh
+case 6:return B.mi
+case 7:return B.mj
+case 8:return B.mk
+case 9:return B.ml
+case 25:return B.mC
+case 14:return B.mr
+case 13:return B.ms
+case 15:return B.mt
+case 16:return B.mu
+case 17:return B.mv
+case 27:return B.mn
+case 26:return B.mm
+case 18:return B.mo
+case 19:return B.mp
+case 28:return B.mw
+case 29:return B.mx
+case 30:return B.my
+case 31:return B.mz
+case 32:return B.mA
+case 20:return B.mB
 case 10:case 11:case 12:case 21:case 22:case 23:case 24:case 0:break}if(q.id===0){s=!1
 if(q.a.z){r=q.z
 if(r!=null&&r.length!==0){s=q.dy
@@ -36961,16 +36961,16 @@ else{r=q.b
 r.toString
 if((r&64)!==0||(r&128)!==0)return B.r6
 else if(q.gL6())return B.r9
-else if(q.gL1())return B.mE
-else if(s.db)return B.mc
+else if(q.gL1())return B.mD
+else if(s.db)return B.mb
 else if(s.w)return B.jh
-else if(s.CW)return B.mb
-else if(s.as)return B.mF
-else if(s.z)return B.md
+else if(s.CW)return B.ma
+else if(s.as)return B.mE
+else if(s.z)return B.mc
 else{if((r&1)!==0){s=q.dy
 s=!(s!=null&&!B.cV.gag(s))}else s=!1
 if(s)return B.jh
-else return B.mr}}}},
+else return B.mq}}}},
 ac0(a){var s,r,q,p=this
 switch(a.a){case 3:s=new A.alo(B.r7,p)
 r=A.tz(s.ct(0),p)
@@ -36978,8 +36978,8 @@ s.a!==$&&A.bK()
 s.a=r
 s.aiD()
 break
-case 1:s=new A.alf(A.ct(v.G.document,"flt-semantics-scroll-overflow"),B.mb,p)
-s.d9(B.mb,p,B.aL)
+case 1:s=new A.alf(A.ct(v.G.document,"flt-semantics-scroll-overflow"),B.ma,p)
+s.d9(B.ma,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("group")
@@ -36997,16 +36997,16 @@ q=A.av("button")
 q.toString
 r.setAttribute("role",q)
 break
-case 4:s=new A.al9(B.mD,p)
-s.d9(B.mD,p,B.aL)
+case 4:s=new A.al9(B.mC,p)
+s.d9(B.mC,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("radiogroup")
 q.toString
 r.setAttribute("role",q)
 break
-case 5:s=new A.akO(A.b6g(p),B.mE,p)
-s.d9(B.mE,p,B.aL)
+case 5:s=new A.akO(A.b6g(p),B.mD,p)
+s.d9(B.mD,p,B.aL)
 s.dh(A.xC(p,s))
 break
 case 8:s=A.b3m(p)
@@ -37023,23 +37023,23 @@ s.dh(new A.tn(p,s))
 s.dh(A.xC(p,s))
 s.IW()
 break
-case 9:s=new A.al8(B.mG,p)
-s.d9(B.mG,p,B.aL)
+case 9:s=new A.al8(B.mF,p)
+s.d9(B.mF,p,B.aL)
 break
-case 10:s=new A.akZ(B.mc,p)
-s.d9(B.mc,p,B.jG)
+case 10:s=new A.akZ(B.mb,p)
+s.d9(B.mb,p,B.jG)
 s.dh(A.xC(p,s))
 break
-case 23:s=new A.al_(B.mp,p)
-s.d9(B.mp,p,B.aL)
+case 23:s=new A.al_(B.mo,p)
+s.d9(B.mo,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("list")
 q.toString
 r.setAttribute("role",q)
 break
-case 24:s=new A.al0(B.mq,p)
-s.d9(B.mq,p,B.aL)
+case 24:s=new A.al0(B.mp,p)
+s.d9(B.mp,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("listitem")
@@ -37058,11 +37058,11 @@ s.dh(new A.tn(p,s))
 s.IR(B.jG)
 s.IW()
 break
-case 11:s=new A.akT(B.md,p)
-s.d9(B.md,p,B.hE)
+case 11:s=new A.akT(B.mc,p)
+s.d9(B.mc,p,B.hE)
 break
-case 12:s=new A.alk(B.me,p)
-s.d9(B.me,p,B.aL)
+case 12:s=new A.alk(B.md,p)
+s.d9(B.md,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("tab")
@@ -37070,16 +37070,16 @@ q.toString
 r.setAttribute("role",q)
 s.dh(A.xC(p,s))
 break
-case 13:s=new A.all(B.mf,p)
-s.d9(B.mf,p,B.aL)
+case 13:s=new A.all(B.me,p)
+s.d9(B.me,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("tablist")
 q.toString
 r.setAttribute("role",q)
 break
-case 14:s=new A.alm(B.mg,p)
-s.d9(B.mg,p,B.aL)
+case 14:s=new A.alm(B.mf,p)
+s.d9(B.mf,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("tabpanel")
@@ -37090,56 +37090,56 @@ case 15:s=A.b3k(p)
 break
 case 16:s=A.b3j(p)
 break
-case 17:s=new A.aln(B.mj,p)
-s.d9(B.mj,p,B.aL)
+case 17:s=new A.aln(B.mi,p)
+s.d9(B.mi,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("table")
 q.toString
 r.setAttribute("role",q)
 break
-case 18:s=new A.akN(B.mk,p)
-s.d9(B.mk,p,B.hE)
+case 18:s=new A.akN(B.mj,p)
+s.d9(B.mj,p,B.hE)
 r=s.a
 r===$&&A.a()
 q=A.av("cell")
 q.toString
 r.setAttribute("role",q)
 break
-case 19:s=new A.ale(B.ml,p)
-s.d9(B.ml,p,B.aL)
+case 19:s=new A.ale(B.mk,p)
+s.d9(B.mk,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("row")
 q.toString
 r.setAttribute("role",q)
 break
-case 20:s=new A.akP(B.mm,p)
-s.d9(B.mm,p,B.aL)
+case 20:s=new A.akP(B.ml,p)
+s.d9(B.ml,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("columnheader")
 q.toString
 r.setAttribute("role",q)
 break
-case 26:s=new A.Sy(B.ms,p)
-s.d9(B.ms,p,B.aL)
+case 26:s=new A.Sy(B.mr,p)
+s.d9(B.mr,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("menu")
 q.toString
 r.setAttribute("role",q)
 break
-case 27:s=new A.Sz(B.mt,p)
-s.d9(B.mt,p,B.aL)
+case 27:s=new A.Sz(B.ms,p)
+s.d9(B.ms,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("menubar")
 q.toString
 r.setAttribute("role",q)
 break
-case 28:s=new A.al3(B.mu,p)
-s.d9(B.mu,p,B.aL)
+case 28:s=new A.al3(B.mt,p)
+s.d9(B.mt,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("menuitem")
@@ -37148,8 +37148,8 @@ r.setAttribute("role",q)
 s.dh(new A.v2(p,s))
 s.dh(A.xC(p,s))
 break
-case 29:s=new A.al4(B.mv,p)
-s.d9(B.mv,p,B.aL)
+case 29:s=new A.al4(B.mu,p)
+s.d9(B.mu,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("menuitemcheckbox")
@@ -37158,8 +37158,8 @@ r.setAttribute("role",q)
 s.dh(new A.AB(p,s))
 s.dh(new A.v2(p,s))
 break
-case 30:s=new A.al5(B.mw,p)
-s.d9(B.mw,p,B.aL)
+case 30:s=new A.al5(B.mv,p)
+s.d9(B.mv,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("menuitemradio")
@@ -37168,70 +37168,70 @@ r.setAttribute("role",q)
 s.dh(new A.AB(p,s))
 s.dh(new A.v2(p,s))
 break
-case 22:s=new A.akL(B.mo,p)
-s.d9(B.mo,p,B.aL)
+case 22:s=new A.akL(B.mn,p)
+s.d9(B.mn,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("alert")
 q.toString
 r.setAttribute("role",q)
 break
-case 21:s=new A.alj(B.mn,p)
-s.d9(B.mn,p,B.aL)
+case 21:s=new A.alj(B.mm,p)
+s.d9(B.mm,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("status")
 q.toString
 r.setAttribute("role",q)
 break
-case 25:s=new A.aaS(B.mr,p)
-s.d9(B.mr,p,B.hE)
+case 25:s=new A.aaS(B.mq,p)
+s.d9(B.mq,p,B.hE)
 r=p.b
 r.toString
 if((r&1)!==0)s.dh(A.xC(p,s))
 break
-case 31:s=new A.akQ(B.mx,p)
-s.d9(B.mx,p,B.aL)
+case 31:s=new A.akQ(B.mw,p)
+s.d9(B.mw,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("complementary")
 q.toString
 r.setAttribute("role",q)
 break
-case 32:s=new A.akR(B.my,p)
-s.d9(B.my,p,B.aL)
+case 32:s=new A.akR(B.mx,p)
+s.d9(B.mx,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("contentinfo")
 q.toString
 r.setAttribute("role",q)
 break
-case 33:s=new A.al1(B.mz,p)
-s.d9(B.mz,p,B.aL)
+case 33:s=new A.al1(B.my,p)
+s.d9(B.my,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("main")
 q.toString
 r.setAttribute("role",q)
 break
-case 34:s=new A.al7(B.mA,p)
-s.d9(B.mA,p,B.aL)
+case 34:s=new A.al7(B.mz,p)
+s.d9(B.mz,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("navigation")
 q.toString
 r.setAttribute("role",q)
 break
-case 35:s=new A.ala(B.mB,p)
-s.d9(B.mB,p,B.aL)
+case 35:s=new A.ala(B.mA,p)
+s.d9(B.mA,p,B.aL)
 r=s.a
 r===$&&A.a()
 q=A.av("region")
 q.toString
 r.setAttribute("role",q)
 break
-case 36:s=new A.akS(B.mC,p)
-s.d9(B.mC,p,B.aL)
+case 36:s=new A.akS(B.mB,p)
+s.d9(B.mB,p,B.aL)
 break
 default:s=null}return s},
 apK(){var s,r,q,p,o,n,m,l=this,k=l.ry,j=l.aer(),i=l.ry
@@ -37919,9 +37919,9 @@ A.TS.prototype={}
 A.jh.prototype={
 k(a){return A.C(this).k(0)+"("+this.a+", "+A.t(this.b)+")"}}
 A.aca.prototype={
-cD(a){return J.LX(B.aa.gc4(B.ef.f4(B.ar.Kh(a))))},
+cD(a){return J.LX(B.aa.gc4(B.ef.f3(B.ar.Kh(a))))},
 hG(a){if(a==null)return a
-return B.ar.fm(0,B.eT.f4(J.uK(B.bu.gc4(a))))}}
+return B.ar.fm(0,B.eT.f3(J.uK(B.bu.gc4(a))))}}
 A.acc.prototype={
 kc(a){return B.aR.cD(A.aA(["method",a.a,"args",a.b],t.N,t.z))},
 jp(a){var s,r,q,p=null,o=B.aR.hG(a)
@@ -37961,7 +37961,7 @@ q.setInt32(0,c,B.by===s)
 r.AR(0,b.d,0,4)}else{r.fd(0,4)
 B.bu.No(q,0,c,$.eM())}}else if(typeof c=="string"){s=b.b
 s.fd(0,7)
-p=B.ef.f4(c)
+p=B.ef.f3(c)
 o.hV(b,p.length)
 s.M(0,p)}else if(t.H3.b(c)){s=b.b
 s.fd(0,8)
@@ -37999,7 +37999,7 @@ break
 case 4:s=b.Ek(0)
 break
 case 5:q=j.fQ(b)
-s=A.hd(B.eT.f4(b.qf(q)),16)
+s=A.hd(B.eT.f3(b.qf(q)),16)
 break
 case 6:b.mO(8)
 r=b.a.getFloat64(b.b,B.by===$.eM())
@@ -38007,7 +38007,7 @@ b.b+=8
 s=r
 break
 case 7:q=j.fQ(b)
-s=B.eT.f4(b.qf(q))
+s=B.eT.f3(b.qf(q))
 break
 case 8:s=b.qf(j.fQ(b))
 break
@@ -38842,7 +38842,7 @@ m=A.fU(r.h(s,"fontWeightIndex"))
 l=m!=null?A.b8Z(m):"normal"
 q=A.eL(r.h(s,"fontSize"))
 if(q==null)q=null
-p=new A.anF(new A.a92(q,l,A.b2(r.h(s,"fontFamily")),B.a9v[o],B.mX[n]))
+p=new A.anF(new A.a92(q,l,A.b2(r.h(s,"fontFamily")),B.a9v[o],B.mW[n]))
 break
 case"TextInput.clearClient":p=B.HB
 break
@@ -39962,7 +39962,7 @@ return r.join(b)},
 CD(a){return this.bB(a,"")},
 Ma(a,b){return A.i2(a,0,A.nI(b,"count",t.S),A.a7(a).c)},
 iu(a,b){return A.i2(a,b,null,A.a7(a).c)},
-eX(a,b){var s,r,q=a.length
+f6(a,b){var s,r,q=a.length
 if(q===0)throw A.j(A.c6())
 s=a[0]
 for(r=1;r<q;++r){s=b.$2(s,a[r])
@@ -40018,13 +40018,13 @@ if(q+s>p.gA(r))throw A.j(A.aQh())
 if(q<b)for(o=s-1;o>=0;--o)a[b+o]=p.h(r,q+o)
 else for(o=0;o<s;++o)a[b+o]=p.h(r,q+o)},
 kA(a,b,c,d){return this.eb(a,b,c,d,0)},
-f1(a,b){var s,r=a.length
+f0(a,b){var s,r=a.length
 for(s=0;s<r;++s){if(b.$1(a[s]))return!0
 if(a.length!==r)throw A.j(A.cd(a))}return!1},
 d3(a,b){var s,r=a.length
 for(s=0;s<r;++s){if(!b.$1(a[s]))return!1
 if(a.length!==r)throw A.j(A.cd(a))}return!0},
-eY(a,b){var s,r,q,p,o
+eX(a,b){var s,r,q,p,o
 a.$flags&2&&A.aN(a,"sort")
 s=a.length
 if(s<2)return
@@ -40035,7 +40035,7 @@ if(b.$2(r,q)>0){a[0]=q
 a[1]=r}return}p=0
 if(A.a7(a).c.b(null))for(o=0;o<a.length;++o)if(a[o]===void 0){a[o]=null;++p}a.sort(A.uC(b,2))
 if(p>0)this.amy(a,p)},
-hZ(a){return this.eY(a,null)},
+hZ(a){return this.eX(a,null)},
 amy(a,b){var s,r=a.length
 for(;s=r-1,r>0;r=s)if(a[s]===null){a[s]=void 0;--b
 if(b===0)break}},
@@ -40474,7 +40474,7 @@ if(o!==p.gA(p))throw A.j(A.cd(p))}return r.charCodeAt(0)==0?r:r}else{for(q=0,r="
 if(o!==p.gA(p))throw A.j(A.cd(p))}return r.charCodeAt(0)==0?r:r}},
 ip(a,b){return this.mJ(0,b)},
 hO(a,b,c){return new A.a_(this,b,A.v(this).i("@<aI.E>").bO(c).i("a_<1,2>"))},
-eX(a,b){var s,r,q=this,p=q.gA(q)
+f6(a,b){var s,r,q=this,p=q.gA(q)
 if(p===0)throw A.j(A.c6())
 s=q.bt(0,0)
 for(r=1;r<p;++r){s=b.$2(s,q.bt(0,r))
@@ -41015,7 +41015,7 @@ return r[b]!=null}else return this.awf(b)},
 awf(a){var s=this.d
 if(s==null)return!1
 return this.wW(s[this.wV(a)],a)>=0},
-arZ(a,b){return new A.bA(this,A.v(this).i("bA<1>")).f1(0,new A.acg(this,b))},
+arZ(a,b){return new A.bA(this,A.v(this).i("bA<1>")).f0(0,new A.acg(this,b))},
 M(a,b){J.nN(b,new A.acf(this))},
 h(a,b){var s,r,q,p,o=null
 if(typeof b=="string"){s=this.b
@@ -42702,7 +42702,7 @@ if(r!==this.gA(a))throw A.j(A.cd(a))}return!1},
 d3(a,b){var s,r=this.gA(a)
 for(s=0;s<r;++s){if(!b.$1(this.h(a,s)))return!1
 if(r!==this.gA(a))throw A.j(A.cd(a))}return!0},
-f1(a,b){var s,r=this.gA(a)
+f0(a,b){var s,r=this.gA(a)
 for(s=0;s<r;++s){if(b.$1(this.h(a,s)))return!0
 if(r!==this.gA(a))throw A.j(A.cd(a))}return!1},
 mc(a,b,c){var s,r,q,p=this.gA(a)
@@ -43092,7 +43092,7 @@ kd(a,b,c){var s,r
 for(s=this.gai(this),r=b;s.v();)r=c.$2(r,s.gO(s))
 return r},
 iP(a,b,c){return this.kd(0,b,c,t.z)},
-f1(a,b){var s
+f0(a,b){var s
 for(s=this.gai(this);s.v();)if(b.$1(s.gO(s)))return!0
 return!1},
 iu(a,b){return A.aSd(this,b,A.v(this).c)},
@@ -43476,10 +43476,10 @@ try{s=new TextDecoder("utf-8",{fatal:false})
 return s}catch(r){}return null},
 $S:191}
 A.a5o.prototype={
-fm(a,b){var s=B.Fj.f4(b)
+fm(a,b){var s=B.Fj.f3(b)
 return s}}
 A.a2g.prototype={
-f4(a){var s,r,q,p=null,o=A.eU(0,p,a.length,p,p)
+f3(a){var s,r,q,p=null,o=A.eU(0,p,a.length,p,p)
 for(s=~this.b,r=0;r<o;++r){q=a[r]
 if((q&s)!==0){if(!this.a)throw A.j(A.cH("Invalid value in input: "+q,p,p))
 return this.abO(a,0,o)}}return A.tE(a,0,o)},
@@ -43558,7 +43558,7 @@ A.aFK.prototype={
 Qj(a,b,c,d,e){var s=this.b.atK(b,c,d,e)
 if(s!=null)this.a.k5(s,0,s.length,e)}}
 A.Mv.prototype={
-f4(a){var s,r,q=A.eU(0,null,a.length,null,null)
+f3(a){var s,r,q=A.eU(0,null,a.length,null,null)
 if(0===q)return new Uint8Array(0)
 s=new A.V1()
 r=s.JQ(0,a,0,q)
@@ -43778,9 +43778,9 @@ k5(a,b,c,d){var s=this.c,r=this.a.Qk(a,b,c,!1)
 s.a+=r
 if(d)this.bR(0)}}
 A.aox.prototype={
-fm(a,b){return B.eT.f4(b)}}
+fm(a,b){return B.eT.f3(b)}}
 A.U4.prototype={
-f4(a){var s,r,q=A.eU(0,null,a.length,null,null)
+f3(a){var s,r,q=A.eU(0,null,a.length,null,null)
 if(q===0)return new Uint8Array(0)
 s=new Uint8Array(q*3)
 r=new A.a2j(s)
@@ -43858,7 +43858,7 @@ if(o)s.bR(0)
 n.b=0}while(b<c)
 if(d)n.bR(0)}}
 A.U3.prototype={
-f4(a){return new A.Kn(this.a).Qk(a,0,null,!0)},
+f3(a){return new A.Kn(this.a).Qk(a,0,null,!0)},
 kB(a){return a.XU(this.a)}}
 A.Kn.prototype={
 Qk(a,b,c,d){var s,r,q,p,o,n,m=this,l=A.eU(b,c,J.bS(a),null,null)
@@ -44114,7 +44114,7 @@ for(s=this.gai(this);s.v();)if(J.e(s.gO(s),b))return!0
 return!1},
 ap(a,b){var s
 for(s=this.gai(this);s.v();)b.$1(s.gO(s))},
-eX(a,b){var s,r=this.gai(this)
+f6(a,b){var s,r=this.gai(this)
 if(!r.v())throw A.j(A.c6())
 s=r.gO(r)
 while(r.v())s=b.$2(s,r.gO(r))
@@ -44136,7 +44136,7 @@ while(q.v())}else{r=s
 do r=r+b+J.f2(q.gO(q))
 while(q.v())}return r.charCodeAt(0)==0?r:r},
 CD(a){return this.bB(0,"")},
-f1(a,b){var s
+f0(a,b){var s
 for(s=this.gai(this);s.v();)if(b.$1(s.gO(s)))return!0
 return!1},
 ex(a,b){var s=A.ci(this).i("u.E")
@@ -46547,7 +46547,7 @@ return B.dc}else if(B.f.p(s.toLowerCase(),"iphone")||B.f.p(s.toLowerCase(),"ipad
 else{q=this.gn9()
 if(B.f.p(q,"Android"))return B.hX
 else if(B.f.cG(s,"Linux"))return B.k3
-else if(B.f.cG(s,"Win"))return B.nw
+else if(B.f.cG(s,"Win"))return B.nv
 else return B.zd}}}
 A.aJ1.prototype={
 $1(a){return this.a2y(a)},
@@ -46885,17 +46885,17 @@ gA(a){var s=this.b
 return s==null?0:s.length-this.c},
 h(a,b){return this.b[this.c+b]},
 a4b(a,b){var s=this.b
-if(s==null)return A.aLr(A.c([],t.t),B.p5,null,null)
+if(s==null)return A.aLr(A.c([],t.t),B.p4,null,null)
 return A.aLr(s,this.a,a,b)},
 lm(){var s=this.b
 s.toString
 return s[this.c++]}}
 A.ac4.prototype={
 LV(){var s=this.lm(),r=this.lm()
-if(this.a===B.p6)return(s<<8|r)>>>0
+if(this.a===B.p5)return(s<<8|r)>>>0
 return(r<<8|s)>>>0},
 xt(){var s=this,r=s.lm(),q=s.lm(),p=s.lm(),o=s.lm()
-if(s.a===B.p6)return(r<<24|q<<16|p<<8|o)>>>0
+if(s.a===B.p5)return(r<<24|q<<16|p<<8|o)>>>0
 return(o<<24|p<<16|q<<8|r)>>>0},
 a1h(a){var s=this,r=s.a4b(a,s.c)
 s.c=s.c+r.gA(0)
@@ -46911,7 +46911,7 @@ if(s===0)return q.$1(p)
 p.push(s)}return q.$1(p)}}
 A.ac5.prototype={
 $1(a){var s,r,q,p
-try{r=B.eT.f4(a)
+try{r=B.eT.f3(a)
 s=r
 return s}catch(q){p=A.tE(a,0,null)
 return p}},
@@ -47888,7 +47888,7 @@ if(q.x&&r!==q.w){q.w=r
 q.uu(0)}},
 Pt(a){var s=this.a.w
 if(s!=null){s.$0()
-this.c.gZ().u8(B.o7)}},
+this.c.gZ().u8(B.o6)}},
 Ps(){return this.Pt(null)},
 uu(a){var s,r,q,p=this.e
 p===$&&A.a()
@@ -47897,7 +47897,7 @@ if(s!=null&&s.a!=null)return
 r=this.w
 if(r){p.z=B.bE
 q=p.kG(1,B.fP,B.La)}else{p.z=B.bE
-q=p.kG(0,B.lT,B.qE)}q.bJ(new A.au6(this,r),t.H)},
+q=p.kG(0,B.lS,B.qE)}q.bJ(new A.au6(this,r),t.H)},
 akE(a){this.N(new A.aub(this,a))},
 K(a3){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b=this,a=null,a0=b.a,a1=a0.w==null,a2=!a1
 a0=a0.y
@@ -48473,8 +48473,8 @@ if(r!=null)r.l()
 s.x=s.w=s.r=null},
 Vp(){var s,r,q=this,p=q.a
 if(!p.f){q.r=A.bQ(B.kH,p.d,new A.j7(B.kH))
-q.w=A.bQ(B.lU,q.a.e,B.qt)
-q.x=A.bQ(B.lU,q.a.d,null)}p=q.r
+q.w=A.bQ(B.lT,q.a.e,B.qt)
+q.x=A.bQ(B.lT,q.a.d,null)}p=q.r
 if(p==null)p=q.a.d
 s=$.aYb()
 r=t.v
@@ -48750,7 +48750,7 @@ case 1:return new A.k(6,s-12+1.5)
 case 2:return new A.k(6,b+(s-b)/2)}}}
 A.VZ.prototype={}
 A.Nv.prototype={
-K(a){var s,r,q=null,p=t.l,o=A.bx(a,B.bZ,p).w.r,n=o.b+8,m=26+o.a,l=A.bx(a,B.oy,p).w.a.a-o.c-26
+K(a){var s,r,q=null,p=t.l,o=A.bx(a,B.bZ,p).w.r,n=o.b+8,m=26+o.a,l=A.bx(a,B.ox,p).w.a.a-o.c-26
 p=this.c
 s=new A.k(A.D(p.a,m,l),p.b-8-n)
 p=this.d
@@ -48878,7 +48878,7 @@ s===$&&A.a()
 s.bp(0)
 r.d.cJ(r.gAv())},
 an(){this.aF()
-this.d=A.bz(null,B.m2,null,1,this)},
+this.d=A.bz(null,B.m1,null,1,this)},
 aS(a){var s,r=this
 r.aZ(a)
 if(r.a.e!==a.e){r.f=0
@@ -48898,7 +48898,7 @@ s=k.d
 r=p.d
 r===$&&A.a()
 q=p.f
-return k.aAc(a,j,s,new A.dk(r,!1,A.aOA(A.cI(o,new A.GR(m,i,B.Kr.cP(a),1/A.bx(a,B.e7,t.l).w.b,l,q,p.r),B.V,!1,o,o,o,o,p.gako(),o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,!1,B.ao),B.dO,B.m2),o))}}
+return k.aAc(a,j,s,new A.dk(r,!1,A.aOA(A.cI(o,new A.GR(m,i,B.Kr.cP(a),1/A.bx(a,B.e7,t.l).w.b,l,q,p.r),B.V,!1,o,o,o,o,p.gako(),o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,!1,B.ao),B.dO,B.m1),o))}}
 A.auv.prototype={
 $0(){var s=this.a,r=s.e
 r.toString
@@ -48939,10 +48939,10 @@ A.W0.prototype={
 gZ(){return t.l0.a(A.ba.prototype.gZ.call(this))},
 WZ(a,b){var s
 switch(b.a){case 0:s=t.l0.a(A.ba.prototype.gZ.call(this))
-s.G=s.W8(s.G,a,B.os)
+s.G=s.W8(s.G,a,B.or)
 break
 case 1:s=t.l0.a(A.ba.prototype.gZ.call(this))
-s.L=s.W8(s.L,a,B.ot)
+s.L=s.W8(s.L,a,B.os)
 break}},
 iR(a,b){var s,r
 if(b instanceof A.u4){this.WZ(t.x.a(a),b)
@@ -48983,8 +48983,8 @@ r.ow(a,b)
 s=r.e
 s.toString
 t.bY.a(s)
-r.zU(s.c,B.os)
-r.zU(s.r,B.ot)
+r.zU(s.c,B.or)
+r.zU(s.r,B.os)
 q.a=null
 r.p1=A.rr(s.d.length,new A.aux(q,r,s),!1,t.h)},
 cA(a,b){var s,r,q,p=this
@@ -48992,8 +48992,8 @@ p.lI(0,b)
 s=p.e
 s.toString
 t.bY.a(s)
-p.zU(s.c,B.os)
-p.zU(s.r,B.ot)
+p.zU(s.c,B.or)
+p.zU(s.r,B.os)
 r=p.p1
 r===$&&A.a()
 q=p.p3
@@ -49188,8 +49188,8 @@ q.toString
 q=A.aPi(a,q)}else q=p
 s=A.r(q,r,B.aD,r,r,B.avX.bZ(this.a.d!=null?B.jc.cP(a):B.hf),r,r)
 q=this.a.e
-switch(q==null?r:q.b){case B.j4:case B.j5:case B.j6:case B.j7:case B.qn:case B.lP:case B.lQ:case B.j8:case B.lS:case null:case void 0:return s
-case B.lR:q=B.jc.cP(a)
+switch(q==null?r:q.b){case B.j4:case B.j5:case B.j6:case B.j7:case B.qn:case B.lO:case B.lP:case B.j8:case B.lR:case null:case void 0:return s
+case B.lQ:q=B.jc.cP(a)
 $.ab()
 p=A.b0()
 p.d=B.dH
@@ -49226,7 +49226,7 @@ o=new A.aY(r)
 o.df()
 o.DO(1.5707963267948966)
 for(n=0;n<4;++n){m=l.dd()
-q=p.gf2().a
+q=p.gf1().a
 q===$&&A.a()
 q=q.a
 q.toString
@@ -49513,7 +49513,7 @@ k(a){return this.xC(0,B.c_)}}
 A.a7A.prototype={
 dw(){return"<optimized out>#"+A.bH(this)}}
 A.j5.prototype={
-k(a){return this.a1P(B.lZ).jV(0)},
+k(a){return this.a1P(B.lY).jV(0)},
 dw(){return"<optimized out>#"+A.bH(this)},
 aA3(a,b){return A.aKY(a,b,this)},
 a1P(a){return this.aA3(null,a)}}
@@ -50236,7 +50236,7 @@ A.k2.prototype={
 hB(a){var s=this
 if(a.gxp()<=1)s.X(B.b3)
 else{s.uk(a)
-if(s.dy===B.ox){s.dy=B.kU
+if(s.dy===B.ow){s.dy=B.kU
 s.db=new A.fb(a.gdl(),a.gaR(a))}}},
 hL(a){var s,r=this
 if(t.n2.b(a)||t.pY.b(a)){s=A.aPY(a.gDt(),a.gxp(),a.ga11(a))
@@ -50252,7 +50252,7 @@ if(s.at!=null&&r===B.kV)s.cI("onStart",new A.aaz(s))},
 rP(a){var s=this,r=s.dy,q=r===B.kV||r===B.aAH
 if(r===B.kU){s.X(B.b3)
 return}if(q&&s.ch!=null)if(s.ch!=null)s.cI("onEnd",new A.aaA(s))
-s.dy=B.ox},
+s.dy=B.ow},
 f7(a){this.j3(a)
 this.rP(a)}}
 A.aaB.prototype={
@@ -50510,7 +50510,7 @@ s=r==null||a===r
 break
 default:s=null}return s},
 amj(a,b){var s
-if(this.ax!==B.nr)return
+if(this.ax!==B.nq)return
 if(this.fy!==B.it||b.j(0,B.m))return
 s=this.p3
 if(s.aH(0,a))s.n(0,a,s.h(0,a).S(0,b))
@@ -50533,7 +50533,7 @@ s=q}}else{r.toString
 if(p<r){r=p
 s=q}}}return s},
 amK(a,b){var s,r,q,p,o,n,m,l,k=this
-if(k.ax!==B.nr){if(k.p4!=null){k.p3.P(0)
+if(k.ax!==B.nq){if(k.p4!=null){k.p3.P(0)
 k.p4=null
 k.R8=B.m}return b}s=$.c0.rx$
 if(!J.e(k.p4,s)){k.p3.P(0)
@@ -51235,7 +51235,7 @@ p=q.R8
 if(p.a===0){q.RG=1
 q.rx=0}else{q.RG=q.gr5()/q.gve()
 s=A.v(p).i("bE<2>")
-q.rx=A.wr(new A.bE(p,s),new A.ak1(),s.i("u.E"),t.i).eX(0,new A.ak2())}if(q.CW===B.le){if(q.ch!=null){p={}
+q.rx=A.wr(new A.bE(p,s),new A.ak1(),s.i("u.E"),t.i).f6(0,new A.ak2())}if(q.CW===B.le){if(q.ch!=null){p={}
 r=q.p2.h(0,a).xT()
 p.a=r
 s=r.a
@@ -51284,7 +51284,7 @@ s=q.R8
 if(s.a===0){q.RG=1
 q.rx=0}else{q.RG=q.gr5()/q.gve()
 r=A.v(s).i("bE<2>")
-q.rx=A.wr(new A.bE(s,r),new A.ak5(),r.i("u.E"),t.i).eX(0,new A.ak6())}}}},
+q.rx=A.wr(new A.bE(s,r),new A.ak5(),r.i("u.E"),t.i).f6(0,new A.ak6())}}}},
 f7(a){var s=this
 s.R8.E(0,a)
 s.ok.E(0,a)
@@ -51519,7 +51519,7 @@ hB(a){var s,r=this
 if(r.k2===B.is){r.a6A(a)
 r.go=a.gb0()
 r.p2=r.p1=0
-r.k2=B.ov
+r.k2=B.ou
 s=a.gaR(a)
 r.ok=r.k4=new A.fb(a.gdl(),s)
 r.id=A.cL(B.bI,new A.a5I(r,a))}},
@@ -51564,7 +51564,7 @@ r=a.gaR(a).U(0,r.b).gco()>s}else r=!0
 m.fr=r
 r=m.k2
 if(r===B.fU){m.ok=new A.fb(a.gdl(),a.gaR(a))
-m.aaR(a)}else if(r===B.ov){if(m.k3==null){if(a.gc0(a)==null)q=null
+m.aaR(a)}else if(r===B.ou){if(m.k3==null){if(a.gc0(a)==null)q=null
 else{r=a.gc0(a)
 r.toString
 q=A.rI(r)}p=m.VV(a.gpS())
@@ -51583,7 +51583,7 @@ if(m.ch){m.k2=B.fU
 if(!m.fy)m.X(B.ce)}}}r=m.k3
 if(r!=null&&m.fy){m.k2=B.fU
 m.yA(r)}}}else if(t.oN.b(a)){r=m.k2
-if(r===B.ov)m.yg(a)
+if(r===B.ou)m.yg(a)
 else if(r===B.fU)m.Ia(a.gb0())}else if(t.Ko.b(a)){m.k2=B.is
 m.Ia(a.gb0())}},
 f7(a){var s=this
@@ -51795,7 +51795,7 @@ s=++r.d
 if(s===20)s=r.d=0
 r.c[s]=new A.In(a,b)},
 u5(){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a
-if(this.goR().gKe()>40)return B.om
+if(this.goR().gKe()>40)return B.ol
 s=t.n
 r=A.c([],s)
 q=A.c([],s)
@@ -51857,7 +51857,7 @@ if(s==null||r==null)return B.m
 q=s.a.a-r.a.a
 return q>0?s.b.U(0,r.b).a9(0,1000).dB(0,q/1000):B.m},
 u5(){var s,r,q,p,o,n,m=this
-if(m.goR().gKe()>40)return B.om
+if(m.goR().gKe()>40)return B.ol
 s=m.r0(-2).a9(0,0.6).S(0,m.r0(-1).a9(0,0.35)).S(0,m.r0(0).a9(0,0.05))
 r=m.e
 q=m.d
@@ -51867,7 +51867,7 @@ if(o!=null)break}if(o==null||p==null)return B.EL
 else return new A.pq(s,1,new A.bb(p.a.a-o.a.a),p.b.U(0,o.b))}}
 A.wp.prototype={
 u5(){var s,r,q,p,o,n,m=this
-if(m.goR().gKe()>40)return B.om
+if(m.goR().gKe()>40)return B.ol
 s=m.r0(-2).a9(0,0.15).S(0,m.r0(-1).a9(0,0.65)).S(0,m.r0(0).a9(0,0.2))
 r=m.e
 q=m.d
@@ -52121,7 +52121,7 @@ K(c3){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,b0
 c3.ab(t.N8)
 s=A.aV(t.R)
 r=b5.e
-if(r)s.F(0,B.oq)
+if(r)s.F(0,B.op)
 r=c1==null
 if(r)q=b6
 else{c1.a.toString
@@ -52139,14 +52139,14 @@ k=b9.gbC(b9)
 j=A.f(c3).ax
 i=j.p4
 h=b5.UG(s,n,k,i==null?j.k2:i)
-g=s.p(0,B.oq)?h:l
+g=s.p(0,B.op)?h:l
 b5.a.toString
 f=b9.gcC()
 if(f==null)f=c0.gcC()
 n=b5.a.y
 e=n==null?b9.c:n
 if(e==null)e=0
-if(s.p(0,B.oq)){b5.a.toString
+if(s.p(0,B.op)){b5.a.toString
 s=b9.d
 if(s==null)s=3
 d=s==null?e:s}else d=e
@@ -52710,7 +52710,7 @@ q=l.b
 if(q==null)q=8
 p=n.f.dN(0)
 o=a.ab(t.I).w
-return A.bR(m,m,new A.V0(new A.e_(new A.af(0,1/0,56+s,1/0),A.fG(A.eS(!1,B.a3,!0,m,new A.aw(new A.a0(0,0,0,s),A.afW(A.aPn(A.aP(n.ac4(B.oY),B.t,B.eC,B.r,0),B.aD,m),a,!0,!1,!1,!1),m),B.p,m,0,m,m,m,m,m,B.fp),m,m,new A.ZT(p,o,m),B.a2),m),B.oY,q,r,m),!1,m,m,m,m,!0,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m)}}
+return A.bR(m,m,new A.V0(new A.e_(new A.af(0,1/0,56+s,1/0),A.fG(A.eS(!1,B.a3,!0,m,new A.aw(new A.a0(0,0,0,s),A.afW(A.aPn(A.aP(n.ac4(B.oX),B.t,B.eC,B.r,0),B.aD,m),a,!0,!1,!1,!1),m),B.p,m,0,m,m,m,m,m,B.fp),m,m,new A.ZT(p,o,m),B.a2),m),B.oX,q,r,m),!1,m,m,m,m,!0,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m,m)}}
 A.apX.prototype={
 $0(){},
 $S:0}
@@ -52719,7 +52719,7 @@ $0(){this.a.a.d.$1(this.b)},
 $S:0}
 A.V0.prototype={
 K(a){var s=this,r=null,q=s.c,p=t.l
-if(A.bx(a,B.l0,p).w.glg(0)===B.fx&&s.d===B.FR)q=new A.dE(B.dj,r,1,A.bs(q,r,A.bx(a,B.oB,p).w.a.b),r)
+if(A.bx(a,B.l0,p).w.glg(0)===B.fx&&s.d===B.FR)q=new A.dE(B.dj,r,1,A.bs(q,r,A.bx(a,B.oA,p).w.a.b),r)
 return A.eS(!1,B.a3,!0,r,q,B.p,s.f,s.e,r,r,r,r,r,B.c1)}}
 A.aMt.prototype={
 $1(a){return new A.a_(a,this.a.a.gadB(),A.a7(a).i("a_<1,H>")).iP(0,0,new A.arl())},
@@ -53030,7 +53030,7 @@ gbf(a){return B.F},
 gBP(){var s=this.gFs(),r=s.rx
 return r==null?s.k3:r},
 gBQ(){return B.DW},
-gW(){return B.p0}}
+gW(){return B.p_}}
 A.v0.prototype={
 gD(a){var s=this
 return A.Y(s.gbC(s),s.gbr(),s.c,s.d,s.e,s.gbf(s),s.r,s.w,s.x,s.gBP(),s.gBQ(),s.Q,s.gW(),B.a,B.a,B.a,B.a,B.a,B.a,B.a)},
@@ -53075,7 +53075,7 @@ q=A.cb(a2.f,a3,t.WV)
 a0.a.toString
 a2=s.a
 a3=s.b
-p=B.ak.F(0,new A.a0(a2,a3,a2,a3)).bL(0,B.ak,B.oC)
+p=B.ak.F(0,new A.a0(a2,a3,a2,a3)).bL(0,B.ak,B.oB)
 o=a0.gadj()
 n=a0.a.r.bZ(a4)
 m=a0.a.w
@@ -53319,7 +53319,7 @@ c2=a7.b
 if(isFinite(c2))a6=a6.asN(c2,c2)}a8=a1.b
 c2=a1.a
 a9=Math.max(0,c2)
-b0=l.F(0,new A.a0(a9,a8,a9,a8)).bL(0,B.ak,B.oC)
+b0=l.F(0,new A.a0(a9,a8,a9,a8)).bL(0,B.ak,B.oB)
 q=!1
 if(b.a>0){b1=b8.e
 if(b1!=null){b2=b8.f
@@ -53555,7 +53555,7 @@ break
 default:s=null}return s},
 gbq(a){var s,r=this.f
 if(r==null){s=this.c
-$label0$0:{if(B.p4===s||B.GK===s){r=B.nF
+$label0$0:{if(B.p3===s||B.GK===s){r=B.nE
 break $label0$0}if(B.GL===s){r=B.D2
 break $label0$0}r=null}}return r},
 j(a,b){var s=this
@@ -53855,7 +53855,7 @@ gcN(){return new A.bl(new A.ara(this),t.mN)},
 ghy(){return 20},
 gmk(){return this.y.f},
 ge7(){return B.eW},
-gbq(a){return B.nF}}
+gbq(a){return B.nE}}
 A.arb.prototype={
 $1(a){var s,r,q=this
 if(a.p(0,B.C)){if(a.p(0,B.Z))return B.FN
@@ -54036,7 +54036,7 @@ p=t.KX
 s=A.cb(this.a.db,q.a,p)
 if(s==null)s=A.cb(b.ax,q.a,p)
 r=s==null?A.cb(c.ax,q.a,p):s
-if(r==null)r=B.o6
+if(r==null)r=B.o5
 if(o!=null)return r.jo(o)
 return!r.a.j(0,B.q)?r:r.jo(c.gdg())},
 M7(a,b,c,d,e){var s=this.as,r=new A.XL(b,a,e,d).X(s.a)
@@ -54330,7 +54330,7 @@ r=this.c6$.h(0,B.co)
 r.toString
 return Math.max(32,o+p+(s+q)+r.a8(B.b9,a,r.gbs()))},
 b9(a){return this.a8(B.b9,a,this.gbs())},
-f3(a){var s,r=this.c6$,q=r.h(0,B.co)
+f2(a){var s,r=this.c6$,q=r.h(0,B.co)
 q.toString
 s=q.j0(a)
 r=r.h(0,B.co)
@@ -54788,7 +54788,7 @@ s=p.x
 r=s?n.ch:o
 q=n.y
 if(q==null){A.f(a)
-q=!0}return A.aRG(!1,o,B.iL,o,p.cx,o,o,B.p,o,new A.arj(a,!0,s,B.e2,o,o,o,o,o,o,o,o,o,!0,o,o,o,o,B.nE,o,o,o,o,o,o,o,o),o,o,o,o,o,o,o,o,!0,p.d,o,r,o,o,o,p.r,o,o,s,p.z,o,o,o,q,p.as,o,o,o)}}
+q=!0}return A.aRG(!1,o,B.iL,o,p.cx,o,o,B.p,o,new A.arj(a,!0,s,B.e2,o,o,o,o,o,o,o,o,o,!0,o,o,o,o,B.nD,o,o,o,o,o,o,o,o),o,o,o,o,o,o,o,o,!0,p.d,o,r,o,o,o,p.r,o,o,s,p.z,o,o,o,q,p.as,o,o,o)}}
 A.arj.prototype={
 geB(){var s,r=this,q=r.id
 if(q===$){s=A.f(r.fr)
@@ -55499,7 +55499,7 @@ gQD(){var s,r,q,p,o,n,m,l,k,j,i=null,h=this.c.ab(t.I).w,g=this.a.d
 $label0$0:{s=B.bk===h
 r=s
 q=i
-if(r){q=B.m0===g
+if(r){q=B.m_===g
 r=q
 p=g
 o=!0
@@ -55522,7 +55522,7 @@ if(r)if(o)r=q
 else{if(n)r=p
 else{r=g
 p=r
-n=!0}q=B.m0===r
+n=!0}q=B.m_===r
 r=q}else r=!1
 if(r){r=1
 break $label0$0}if(j)if(k)r=l
@@ -55579,7 +55579,7 @@ break $label0$0}s=a3}r=a2.a
 q=r.y
 p=r.d
 o=a5.ab(t.I).w
-$label1$1:{n=B.m0===p
+$label1$1:{n=B.m_===p
 r=n
 m=a3
 if(r){m=B.az===o
@@ -55730,13 +55730,13 @@ s=m===n.eF
 r=$.aa.aj$.d.a.b
 if(r==null)r=A.uf()
 q.a.toString
-if(r===B.mM)o=A.ac_(l,s?A.f(a).CW:p,p)
+if(r===B.mL)o=A.ac_(l,s?A.f(a).CW:p,p)
 else o=l
 l=A.k7(s,p,!0,o,p,!0,p,p,p,p,p,q.gad4(),p,p,p,q.gagI(),p,p,p,p,p,p,p)
 o=q.d
 o===$&&A.a()
 l=A.am8(new A.dk(o,!1,l,p),p,B.aeC)
-return A.bR(p,p,l,!1,p,p,p,p,!1,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,B.nQ,p,p,p,p,p,p,p,p)}}
+return A.bR(p,p,l,!1,p,p,p,p,!1,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,p,B.nP,p,p,p,p,p,p,p,p)}}
 A.ym.prototype={
 aa(){return new A.H7(this.$ti.i("H7<1>"))}}
 A.H7.prototype={
@@ -55778,9 +55778,9 @@ l===$&&A.a()
 p=p.x
 k=B.aeo.h(0,m)
 h.a.toString
-j=A.kn(a).YO(!1,B.lw,A.f(a).w,!1)
+j=A.kn(a).YO(!1,B.lv,A.f(a).w,!1)
 i=h.a.y
-return new A.dk(q,!1,A.fG(A.bR(g,g,A.en(B.aW,A.eS(!1,B.a3,!0,g,A.aS_(j,A.aRm(A.aS1(A.oE(r,g,B.en,!0,!0),g,!0),i)),B.p,g,0,g,g,g,g,s.l5,B.fp),B.p),!1,g,g,g,g,!0,g,g,g,g,g,g,g,"Popup menu",g,g,g,g,!0,g,g,g,g,g,g,g,g,g,g,B.aqP,!0,g,g,g,g,g,g,g),g,g,new A.WI(n,m,s.eF,p,l,new A.avv(s),new A.Vb(new A.ax(n,g,g,B.oU,k,g,B.z),g),l),B.a2),g)}}
+return new A.dk(q,!1,A.fG(A.bR(g,g,A.en(B.aW,A.eS(!1,B.a3,!0,g,A.aS_(j,A.aRm(A.aS1(A.oE(r,g,B.en,!0,!0),g,!0),i)),B.p,g,0,g,g,g,g,s.l5,B.fp),B.p),!1,g,g,g,g,!0,g,g,g,g,g,g,g,"Popup menu",g,g,g,g,!0,g,g,g,g,g,g,g,g,g,g,B.aqP,!0,g,g,g,g,g,g,g),g,g,new A.WI(n,m,s.eF,p,l,new A.avv(s),new A.Vb(new A.ax(n,g,g,B.oT,k,g,B.z),g),l),B.a2),g)}}
 A.avv.prototype={
 $0(){var s=this.a
 return s.MT(s.eF)},
@@ -55804,12 +55804,12 @@ A.H8.prototype={
 gjP(a){return B.bA},
 gnd(){return null},
 vQ(a,b,c){return A.l7(new A.avx(this))},
-MT(a){return this.eT.length!==0&&a>0?8+B.c.eX(B.c.d8(this.dc,0,a),new A.avy()):8},
+MT(a){return this.eT.length!==0&&a>0?8+B.c.f6(B.c.d8(this.dc,0,a),new A.avy()):8},
 Ep(a,b,c){var s,r,q,p,o=this,n=b-96,m=a.b,l=a.d,k=Math.min(l,b),j=o.MT(c),i=Math.min(48,m),h=Math.max(b-48,k),g=o.dc,f=o.eF
 l-=m
 s=m-j-(g[f]-l)/2
 r=B.en.gbK(0)+B.en.gbP(0)
-if(o.eT.length!==0)r+=B.c.eX(g,new A.avz())
+if(o.eT.length!==0)r+=B.c.f6(g,new A.avz())
 q=Math.min(n,r)
 p=s+q
 if(s<i){s=Math.min(m,i)
@@ -55974,7 +55974,7 @@ break
 case 0:q=B.R
 break}return q}else{r.toString
 q=null
-switch(s.a){case 1:q=B.lz
+switch(s.a){case 1:q=B.ly
 break
 case 0:q=B.b1
 break}return q}},
@@ -56124,8 +56124,8 @@ return new A.bm(s,t.De)},
 gbr(){return B.bW},
 gcW(a){return new A.bl(new A.aw2(),t.N5)},
 gbM(a){return new A.bm(A.b7E(this.fy),t.mD)},
-ghp(){return B.op},
-ges(){return B.oo},
+ghp(){return B.oo},
+ges(){return B.on},
 gcm(){return new A.bl(new A.aw4(this),t.mN)},
 gho(){return B.eX},
 gbq(a){return B.eY},
@@ -56271,7 +56271,7 @@ if(r==null)r=B.F
 l=n.x
 k=l.a
 q=l.b.a5(0,k.gq(k))
-if(q==null)q=B.oW
+if(q==null)q=B.oV
 n.a.toString
 n.as===$&&A.a()
 p=new A.aw(q.giM(),A.b_(A.c([b,c],t.p),B.t,B.n,B.a9),m)
@@ -56317,7 +56317,7 @@ this.a.toString
 s=this.as
 s===$&&A.a()
 r=s.z
-q.a=r==null?B.oW:r
+q.a=r==null?B.oV:r
 s=s.y
 if(s==null){s=a.ch
 s=new A.dF(new A.az(s,1,B.y,-1),B.q,new A.az(s,1,B.y,-1),B.q)}q.b=s},
@@ -56412,7 +56412,7 @@ K(a){var s,r=this,q=null
 A.f(a)
 s=r.r
 A.f(a)
-return A.aRG(!1,q,B.iL,q,r.dy,r.k4,q,B.p,q,new A.aww(a,!0,s,B.e3,q,q,q,q,q,q,q,q,q,!0,q,q,q,q,B.nE,q,q,q,q,q,q,q,q),q,B.a70,q,q,q,q,q,q,!0,r.d,q,q,q,q,q,r.w,q,q,s,r.ax,q,q,q,q,q,q,q,q)}}
+return A.aRG(!1,q,B.iL,q,r.dy,r.k4,q,B.p,q,new A.aww(a,!0,s,B.e3,q,q,q,q,q,q,q,q,q,!0,q,q,q,q,B.nD,q,q,q,q,q,q,q,q),q,B.a70,q,q,q,q,q,q,!0,r.d,q,q,q,q,q,r.w,q,q,s,r.ax,q,q,q,q,q,q,q,q)}}
 A.aww.prototype={
 geC(){var s,r=this,q=r.id
 if(q===$){s=A.f(r.fr)
@@ -56504,7 +56504,7 @@ k(a){return"<default FloatingActionButton tag>"}}
 A.awz.prototype={
 I(){return"_FloatingActionButtonType."+this.b}}
 A.Ox.prototype={
-K(a4){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b=this,a=null,a0=A.f(a4),a1=a0.G,a2=new A.awk(a4,B.EU,!0,a,a,a,a,a,6,6,8,a,6,a,!0,a,B.G_,B.FY,B.G0,B.p_,8,a,a,a),a3=a1.c
+K(a4){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b=this,a=null,a0=A.f(a4),a1=a0.G,a2=new A.awk(a4,B.EU,!0,a,a,a,a,a,6,6,8,a,6,a,!0,a,B.G_,B.FY,B.G0,B.oZ,8,a,a,a),a3=a1.c
 if(a3==null)a3=a2.gnB()
 s=a1.d
 if(s==null)s=a2.gnG()
@@ -56531,7 +56531,7 @@ if(i==null)i=a2.gbq(0)
 n=b.c
 h=A.vY(n,new A.cC(k,a,a,a,a,a,a,a,a))
 switch(3){case 3:g=a1.ch
-if(g==null)g=B.p_
+if(g==null)g=B.oZ
 f=a1.CW
 if(f==null)f=8
 e=a1.cx
@@ -57684,10 +57684,10 @@ s.dq()
 this.hj$=null}this.mL()}}
 A.iq.prototype={}
 A.YK.prototype={
-Bo(a){return B.oD},
+Bo(a){return B.oC},
 gnJ(){return!1},
 giM(){return B.ak},
-aO(a,b){return B.oD},
+aO(a,b){return B.oC},
 hX(a,b){var s=A.c2($.ab().w)
 s.au(new A.fV(a))
 return s},
@@ -58247,18 +58247,18 @@ f=Math.max(a4-h-A.jG(a2.h(0,B.c8),g)-r-p,0)
 o=A.c([a2.h(0,B.bY)],t.iG)
 if(a1.u.y)o.push(a2.h(0,B.c6))
 e=t.n
-d=B.c.eX(A.c([a1.aj3(0,f,o),i,g],e),B.lt)
+d=B.c.f6(A.c([a1.aj3(0,f,o),i,g],e),B.p6)
 o=a1.u
 a2=a2.h(0,B.b0)==null?0:a1.u.c
 c=a1.u
 b=c.z
-a=B.c.eX(A.c([a3,o.a.b+a2+d+c.a.d+new A.k(b.a,b.b).a9(0,4).b,s,q],e),B.lt)
+a=B.c.f6(A.c([a3,o.a.b+a2+d+c.a.d+new A.k(b.a,b.b).a9(0,4).b,s,q],e),B.p6)
 a2=a1.u.x
 a2.toString
 a0=a2?0:48
 return Math.max(a,a0)+j},
 b9(a){return this.a8(B.b9,a,this.gbs())},
-f3(a){var s,r,q=this.c6$.h(0,B.bY)
+f2(a){var s,r,q=this.c6$.h(0,B.bY)
 if(q==null)return 0
 s=q.b
 s.toString
@@ -58583,7 +58583,7 @@ r.f=s},
 bH(){var s,r,q=this
 q.dr()
 q.z=null
-if(q.gaC().dy!==B.mL){s=q.a
+if(q.gaC().dy!==B.mK){s=q.a
 if(s.y)s=s.r
 else s=!0
 r=s||q.gaC().dy===B.jt}else r=!1
@@ -58625,7 +58625,7 @@ if(r.y)r=r.r
 else r=!0
 if(a.y)p=a.r
 else p=!0
-if(r!==p||q){if(n.gaC().dy!==B.mL){r=n.a
+if(r!==p||q){if(n.gaC().dy!==B.mK){r=n.a
 if(r.y)r=r.r
 else r=!0
 r=r||n.gaC().dy===B.jt}else r=!1
@@ -58738,7 +58738,7 @@ if(a1)d0.gaC()
 a2=d0.gaC().d
 if((a2==null?d0.gaC().c:a2)!=null){a2=d0.f
 a2===$&&A.a()
-a3=d0.gSE()||d0.gaC().dy!==B.mL?1:0
+a3=d0.gSE()||d0.gaC().dy!==B.mK?1:0
 a4=d0.a
 if(a4.y)a4=a4.r
 else a4=!0
@@ -58770,12 +58770,12 @@ a9=a8?18:24
 d0.gaC()
 if(d0.gaC().id==null)b0=d1
 else{d0.gaC()
-k=s.BT(B.oZ)
+k=s.BT(B.oY)
 a2=d0.RK(q,r)
 a3=A.qe(d1,d1,d1,d1,d1,d1,d1,d1,new A.bm(d0.RK(q,r),t.De),d1,d1,new A.bm(a9,t.XR),d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1).ba(q.a)
 b0=A.c4(A.kd(new A.e_(k,A.vY(A.C9(A.bR(d1,d1,d0.gaC().id,!1,d1,d1,d1,d1,!1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,B.Ds,d1,d1,d1,d1),new A.l1(a3)),new A.cC(a9,d1,d1,d1,d1,a2,d1,d1,d1)),d1),B.bK,d1,d1,d1,d1),1,1)}if(d0.gaC().p1==null)b1=d1
 else{d0.gaC()
-k=s.BT(B.oZ)
+k=s.BT(B.oY)
 a2=d0.RR(q,r)
 a3=A.qe(d1,d1,d1,d1,d1,d1,d1,d1,new A.bm(d0.RR(q,r),t.De),d1,d1,new A.bm(a9,t.XR),d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1).ba(q.a)
 b1=A.c4(A.kd(new A.e_(k,A.vY(A.C9(A.bR(d1,d1,d0.gaC().p1,!1,d1,d1,d1,d1,!1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,d1,B.Dr,d1,d1,d1,d1),new A.l1(a3)),new A.cC(a9,d1,d1,d1,d1,a2,d1,d1,d1)),d1),B.bK,d1,d1,d1,d1),1,1)}k=d0.a.e
@@ -59208,7 +59208,7 @@ b4=a5.k4
 if(b4==null)b4=a9.ch
 if(a5.R8)r=b3!=null
 else r=!1
-p=b1==null?B.oX:b1
+p=b1==null?B.oW:b1
 c=a9.z
 b=c==null?a7.a6.z:c
 c=b==null?b0.gxB():b
@@ -59346,7 +59346,7 @@ s=s.h(0,B.e6)
 s=s==null?null:s.a8(B.b9,a,s.gbs())
 return Math.max(q,r+(s==null?0:s))},
 b9(a){return this.a8(B.b9,a,this.gbs())},
-f3(a){var s=this.c6$,r=s.h(0,B.cN)
+f2(a){var s=this.c6$,r=s.h(0,B.cN)
 r.toString
 r=r.b
 r.toString
@@ -59594,7 +59594,7 @@ h=k.a
 r=h.at
 return new A.A_(p,h.as,h.f,l,!1,q,B.as,r,j,j)}if(m==null){$label1$1:{if(B.yX===r){r=B.iL
 break $label1$1}if(B.c1===r||B.fp===r){r=B.i2
-break $label1$1}if(B.eF===r||B.k_===r){r=B.nF
+break $label1$1}if(B.eF===r||B.k_===r){r=B.nE
 break $label1$1}r=j}m=r}if(o){h=A.d_(a)
 return A.a6A(new A.Jx(p,m,!0,j),k.a.as,new A.pc(m,h,j))}g.toString
 return new A.HW(p,m,h.Q,h.as,h.f,g,q,h.x,B.as,h.at,j,j)}}
@@ -59811,8 +59811,8 @@ gbf(a){return B.bW},
 gbr(){return B.bW},
 gcW(a){return B.fR},
 gbM(a){return new A.bm(A.b7F(this.fy),t.mD)},
-ghp(){return B.op},
-ges(){return B.oo},
+ghp(){return B.oo},
+ges(){return B.on},
 gcm(){return new A.bl(new A.az0(this),t.mN)},
 gho(){return B.eX},
 gdg(){return new A.bl(new A.az3(this),t.GD)},
@@ -60353,7 +60353,7 @@ r=q
 break $label0$0}r=o.as
 r===$&&A.a()
 q=r.a
-q=o.at=new A.k(r.b.a5(0,q.gq(q)).a,o.zl(A.bx(a,B.oB,t.l).w.a.b))
+q=o.at=new A.k(r.b.a5(0,q.gq(q)).a,o.zl(A.bx(a,B.oA,t.l).w.a.b))
 r=q
 break $label0$0}q=o.e.a5(0,o.r.gq(0))
 r=A.aoe(A.oN(A.en(A.a2(o.d.a5(0,n.gq(0))),b,B.aF),q),r)
@@ -60642,7 +60642,7 @@ r.CW!==$&&A.aK()
 q=r.CW=s.ax}return q.b},
 gqq(){return 4},
 gqp(){return 0},
-gW(){return B.p1}}
+gW(){return B.p0}}
 A.ay6.prototype={
 gvf(){var s,r=this,q=r.CW
 if(q===$){s=A.f(r.ch)
@@ -60659,7 +60659,7 @@ r.CW!==$&&A.aK()
 q=r.CW=s.ax}return q.b},
 gqq(){return 4},
 gqp(){return 0},
-gW(){return B.p1}}
+gW(){return B.p0}}
 A.ay7.prototype={
 gvf(){var s,r=this,q=r.CW
 if(q===$){s=A.f(r.ch)
@@ -60775,7 +60775,7 @@ return new A.Ey(A.mG(t.Np),A.mI(s,t.nY),A.mI(s,t.BL),s,s)}}
 A.Ey.prototype={
 bH(){var s=this.c
 s.toString
-this.y=A.bx(s,B.oz,t.l).w.z
+this.y=A.bx(s,B.oy,t.l).w.z
 this.dr()},
 Iz(){var s,r,q,p,o,n
 for(s=this.d,r=A.cD(s,s.r,A.v(s).c),q=t.Np,p=r.$ti.c;r.v();){o=r.d
@@ -60832,7 +60832,7 @@ if(p!=null)p.aP(0)
 q.x=null},
 avK(){return this.a_n(B.ass)},
 K(a){var s,r,q,p=this
-p.y=A.bx(a,B.oz,t.l).w.z
+p.y=A.bx(a,B.oy,t.l).w.z
 s=p.r
 if(!s.gag(0)){r=A.rK(a,null,t.X)
 if(r==null||r.gih())if(p.w.gaG(0)===B.au&&p.x==null){q=s.ga3(0).a
@@ -60893,8 +60893,8 @@ r=s}else{r=0
 s=0}if(a2.b.h(0,B.lc)!=null){q=0+a2.eH(B.lc,a5).b
 p=Math.max(0,a6-q)
 a2.hQ(B.lc,new A.k(0,p))}else{q=0
-p=null}if(a2.b.h(0,B.oH)!=null){q+=a2.eH(B.oH,new A.af(0,a5.b,0,Math.max(0,a6-q-r))).b
-a2.hQ(B.oH,new A.k(0,Math.max(0,a6-q)))}if(a2.b.h(0,B.lb)!=null){o=a2.eH(B.lb,a5)
+p=null}if(a2.b.h(0,B.oG)!=null){q+=a2.eH(B.oG,new A.af(0,a5.b,0,Math.max(0,a6-q-r))).b
+a2.hQ(B.oG,new A.k(0,Math.max(0,a6-q)))}if(a2.b.h(0,B.lb)!=null){o=a2.eH(B.lb,a5)
 a2.hQ(B.lb,new A.k(0,s))
 if(!a2.ay)r+=o.b}else o=B.a2
 n=a2.f
@@ -60918,15 +60918,15 @@ b=d!=null&&d<a4
 if(k.j(0,B.a2))k=a2.eH(B.fX,b?a3:a5)
 $label0$0:{c=!0
 a=!0
-a=B.lv===a2.z
+a=B.lu===a2.z
 if(a)break $label0$0
 break $label0$0}a=i.b8()
 if(!new A.F(a.c-a.a,a.d-a.b).j(0,B.a2)&&a2.at&&c)a0=p!=null?Math.min(p,i.b8().b):i.b8().b
 else a0=a2.at?Math.min(m,a6-a2.r.d):m
 a1=b?(a4-d)/2:0
 a2.hQ(B.fX,new A.k(a1,a0-k.b))}if(a2.b.h(0,B.l8)!=null){a2.eH(B.l8,a5.Mc(n.b))
-a2.hQ(B.l8,B.m)}if(a2.b.h(0,B.oI)!=null){a2.eH(B.oI,A.o0(a7))
-a2.hQ(B.oI,B.m)}if(a2.b.h(0,B.l7)!=null){a2.eH(B.l7,A.o0(a7))
+a2.hQ(B.l8,B.m)}if(a2.b.h(0,B.oH)!=null){a2.eH(B.oH,A.o0(a7))
+a2.hQ(B.oH,B.m)}if(a2.b.h(0,B.l7)!=null){a2.eH(B.l7,A.o0(a7))
 a2.hQ(B.l7,B.m)}a2.x.aq3(p,i.b8())},
 mF(a){var s=this,r=!0
 if(a.f.j(0,s.f))if(a.r.j(0,s.r))if(a.w===s.w)if(a.Q===s.Q)if(a.y===s.y)r=a.z!==s.z
@@ -61103,9 +61103,9 @@ s=r.c
 s.toString
 r.dx=new A.a00(s,B.aqe,$.ah())
 r.a.toString
-r.cy=B.lv
+r.cy=B.lu
 r.CW=B.HT
-r.cx=B.lv
+r.cx=B.lu
 r.ch=A.bz(q,new A.bb(4e5),q,1,r)
 r.db=A.bz(q,B.a3,q,q,r)
 r.dy=A.bz(q,q,q,q,r)},
@@ -61230,7 +61230,7 @@ A.ajW.prototype={
 $0(){this.a.Q=this.b},
 $S:0}
 A.ajY.prototype={
-$2(a,b){var s,r,q,p,o,n,m,l=this,k=A.aA([B.og,new A.Wp(a,new A.bv(A.c([],t.e),t.g))],t.u,t.od),j=l.b
+$2(a,b){var s,r,q,p,o,n,m,l=this,k=A.aA([B.of,new A.Wp(a,new A.bv(A.c([],t.e),t.g))],t.u,t.od),j=l.b
 j.a.toString
 s=j.cy
 s.toString
@@ -61296,8 +61296,8 @@ q.toString
 q=A.tm(q)
 o.hI$=q
 p=o.oS(q,r)
-if(r){o.kr(s,o.f5$)
-o.f5$=!1}if(p)if(s!=null)s.l()},
+if(r){o.kr(s,o.f4$)
+o.f4$=!1}if(p)if(s!=null)s.l()},
 l(){var s,r=this
 r.hH$.ap(0,new A.aBK())
 s=r.ci$
@@ -61314,7 +61314,7 @@ s.aE$=null
 s.az()}}
 A.Sq.prototype={
 K(a){var s=this,r=null
-if(A.f(a).w===B.ac)return new A.vs(8,B.eJ,s.c,s.d,s.e===!0,B.apq,3,r,B.fa,B.m1,A.LD(),r,r,3,r)
+if(A.f(a).w===B.ac)return new A.vs(8,B.eJ,s.c,s.d,s.e===!0,B.apq,3,r,B.fa,B.m0,A.LD(),r,r,3,r)
 return new A.yI(s.c,s.d,s.e,r,r,r,B.bA,B.hn,A.LD(),r,r,0,r)}}
 A.yI.prototype={
 aa(){var s=null
@@ -61647,7 +61647,7 @@ s.QI()
 s.az()},
 ak3(a){if(a===B.au){this.a.toString
 this.d=!0}},
-K(a7){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a=this,a0=null,a1=t.l,a2=A.bx(a7,B.oz,a1).w,a3=A.f(a7),a4=a3.hk,a5=new A.aEm(a7,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0),a6=a4.d
+K(a7){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a=this,a0=null,a1=t.l,a2=A.bx(a7,B.oy,a1).w,a3=A.f(a7),a4=a3.hk,a5=new A.aEm(a7,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0),a6=a4.d
 if(a6==null)a6=a5.gk9()
 s=a.a
 s.toString
@@ -61670,7 +61670,7 @@ a.a.toString
 k=a4.x
 s=k==null
 if(s)k=a5.gwT()
-j=A.bx(a7,B.oy,a1).w.a.a-(k.a+k.c)
+j=A.bx(a7,B.ox,a1).w.a.a-(k.a+k.c)
 a.a.toString
 i=a4.Q
 if(i==null)i=a5.gvz()
@@ -62377,7 +62377,7 @@ r=q.a4
 if(r!=null)r.l()
 r=q.a7
 r.toString
-q.a4=A.b5t(new A.hv(d,null,null,r?null:q.V,B.o6),q.gafs())}r=q.a4
+q.a4=A.b5t(new A.hv(d,null,null,r?null:q.V,B.o5),q.gafs())}r=q.a4
 r.toString
 s=r
 r=q.a7
@@ -62705,8 +62705,8 @@ gbf(a){return B.bW},
 gbr(){return B.bW},
 gcW(a){return B.fR},
 gbM(a){return new A.bm(A.b7G(this.fy),t.mD)},
-ghp(){return B.op},
-ges(){return B.oo},
+ghp(){return B.oo},
+ges(){return B.on},
 gcm(){return new A.bl(new A.aEM(this),t.mN)},
 gho(){return B.eX},
 gbq(a){return B.eY},
@@ -62915,7 +62915,7 @@ r.toString
 r=A.hr(r)
 q=n.glK().a
 p=n.a.r
-o=new A.uV(!0,"EditableText-"+r,s,q,p.z)}else o=B.oS
+o=new A.uV(!0,"EditableText-"+r,s,q,p.z)}else o=B.oR
 r=n.y.gR().glq()
 return A.aSp(r.z,r.ay,r.e,o,!1,!0,r.y,!0,r.ch,r.Q,r.b,r.at,!1,r.c,r.r,r.w,r.as,r.a)},
 K(b9){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6,a7,a8,a9,b0,b1,b2,b3,b4=this,b5=null,b6={},b7=A.f(b9),b8=b9.ab(t.Uf)
@@ -63031,7 +63031,7 @@ if(a2===1){q=A.c([$.aVW()],q)
 B.c.M(q,p)}else q=p
 p=A.b0a()
 b1=A.b0b()
-r=A.TY(b,new A.vE(m,l,"\u2022",!1,!1,b0,a1,!0,a9,a0.db,a0.dx,!0,n,b5,b5,a0.as,b5,a0.y,c,g,B.hf,a2,b5,!1,a0.ay,a3,a6,a0.w,b5,a7,b5,a4,b5,b4.gahl(),b4.gahr(),B.iq,b5,b5,q,B.d1,!0,2,b5,f,i,h,j,p,b1,r.a,B.m8,a5,B.V,b5,b5,!0,!0,!0,B.b,b4,B.Q,"editable",!0,b5,A.ba_(),k,a8,b5,b4.y))
+r=A.TY(b,new A.vE(m,l,"\u2022",!1,!1,b0,a1,!0,a9,a0.db,a0.dx,!0,n,b5,b5,a0.as,b5,a0.y,c,g,B.hf,a2,b5,!1,a0.ay,a3,a6,a0.w,b5,a7,b5,a4,b5,b4.gahl(),b4.gahr(),B.iq,b5,b5,q,B.d1,!0,2,b5,f,i,h,j,p,b1,r.a,B.m7,a5,B.V,b5,b5,!0,!0,!0,B.b,b4,B.Q,"editable",!0,b5,A.ba_(),k,a8,b5,b4.y))
 b4.a.toString
 b2=A.f5(new A.pE(A.c([l,m],t.Eo)),new A.aF1(b4,l,m),new A.hs(r,b5))
 b4.a.toString
@@ -63146,8 +63146,8 @@ q.toString
 q=A.tm(q)
 o.hI$=q
 p=o.oS(q,r)
-if(r){o.kr(s,o.f5$)
-o.f5$=!1}if(p)if(s!=null)s.l()},
+if(r){o.kr(s,o.f4$)
+o.f4$=!1}if(p)if(s!=null)s.l()},
 l(){var s,r=this
 r.hH$.ap(0,new A.aI2())
 s=r.ci$
@@ -63199,7 +63199,7 @@ if(J.a1(b)!==A.C(s))return!1
 return b instanceof A.FM&&J.e(b.a,s.a)&&J.e(b.b,s.b)&&J.e(b.c,s.c)}}
 A.a1s.prototype={}
 A.TD.prototype={
-K(a){var s=this.c.U(0,B.nv),r=this.d.S(0,B.anF),q=A.bx(a,B.bZ,t.l).w.r.b+8,p=44<=s.b-8-q,o=new A.k(8,q)
+K(a){var s=this.c.U(0,B.nu),r=this.d.S(0,B.anF),q=A.bx(a,B.bZ,t.l).w.r.b+8,p=44<=s.b-8-q,o=new A.k(8,q)
 return new A.aw(new A.a0(8,q,8,8),new A.j3(new A.TE(s.U(0,o),r.U(0,o),p),new A.K1(this.e,p,A.ba1(),null),null),null)}}
 A.K1.prototype={
 aa(){return new A.a1x(new A.lz(),null,null)},
@@ -63599,7 +63599,7 @@ n=B.dr.f
 m=B.dr.r
 l=B.dr.w
 k=m==null?f.cq.c:m
-l=new A.Q4(f,new A.rQ(s,r,q,p,o,n,m,l),B.ou,s,r,q,p,o,n,k,l)
+l=new A.Q4(f,new A.rQ(s,r,q,p,o,n,m,l),B.ot,s,r,q,p,o,n,k,l)
 f=l}f=f.cP(a)
 j=a.ab(t.Uf)
 if(j==null)j=B.f9
@@ -65811,7 +65811,7 @@ return b instanceof A.hv&&J.e(b.a,s.a)&&J.e(b.b,s.b)&&J.e(b.c,s.c)&&A.cE(b.d,s.d
 gD(a){var s=this,r=s.d
 r=r==null?null:A.bV(r)
 return A.Y(s.a,s.b,s.c,s.e,r,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a,B.a)},
-KR(a,b,c){var s=this.e.dC(new A.E(0,0,0+a.a,0+a.b),c).gf2().a
+KR(a,b,c){var s=this.e.dC(new A.E(0,0,0+a.a,0+a.b),c).gf1().a
 s===$&&A.a()
 return s.a.contains(b.a,b.b)},
 Bs(a){return new A.a0r(this,a)}}
@@ -65863,7 +65863,7 @@ p=p[r]
 o=m.z
 o===$&&A.a()
 n=o[r].dd()
-p=q.a(p).gf2().a
+p=q.a(p).gf1().a
 p===$&&A.a()
 p=p.a
 p.toString
@@ -66351,7 +66351,7 @@ break $label0$0}return s},
 MQ(a,b){var s,r,q
 if(this.gaoH()){s=this.yP(a)
 r=s==null?null:s.c
-if(r!=null)return r}q=B.c.gbm(this.d0().Ef(0,1,B.p3))
+if(r!=null)return r}q=B.c.gbm(this.d0().Ef(0,1,B.p2))
 return q.d-q.b},
 yP(a0){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d=this,c=null,b=d.b,a=b.a
 if(a.c.gLu()<1)return c
@@ -66390,7 +66390,7 @@ r=g.a
 o=g.b
 if(r===o)return d.yP(new A.aF(n+1,B.x))
 if(m&&r!==n)return d.yP(new A.aF(o,B.x))
-f=a.c.Ef(r,o,B.p3)
+f=a.c.Ef(r,o,B.p2)
 switch(j.c.a){case 1:a=m
 break
 case 0:a=!m
@@ -66837,7 +66837,7 @@ if(o!=null)o.fL(r)
 return}s.ce(r,!0)
 switch(p.fp.a){case 0:o=p.c5
 o.a=o.b=p.B$.gt(0)
-p.fp=B.nD
+p.fp=B.nC
 break
 case 1:s=p.c5
 if(!J.e(s.b,p.B$.gt(0))){s.a=p.gt(0)
@@ -66853,14 +66853,14 @@ case 2:s=p.c5
 if(!J.e(s.b,p.B$.gt(0))){s.a=s.b=p.B$.gt(0)
 p.dk=0
 o.jA(0,0)
-p.fp=B.aq8}else{p.fp=B.nD
+p.fp=B.aq8}else{p.fp=B.nC
 s=o.r
 if(!(s!=null&&s.a!=null))o.bp(0)}break
 case 3:s=p.c5
 if(!J.e(s.b,p.B$.gt(0))){s.a=s.b=p.B$.gt(0)
 p.dk=0
 o.jA(0,0)}else{o.dZ(0)
-p.fp=B.nD}break}o=p.c5
+p.fp=B.nC}break}o=p.c5
 s=p.bX
 s===$&&A.a()
 s=o.a5(0,s.gq(0))
@@ -67130,7 +67130,7 @@ try{s=this.j0(a)}finally{}if(s==null&&!b)return this.gt(0).b
 return s},
 mx(a){return this.xO(a,!1)},
 j0(a){return this.a8(B.h2,new A.au(t.k.a(A.y.prototype.gW.call(this)),a),new A.air(this))},
-f3(a){return null},
+f2(a){return null},
 gW(){return t.k.a(A.y.prototype.gW.call(this))},
 a0(){var s=this,r=null,q=s.dy,p=q.b,o=p==null,n=o?r:p.a!==0,m=!0
 if(n!==!0){n=q.a
@@ -67178,7 +67178,7 @@ gkm(){var s=this.gt(0)
 return new A.E(0,0,0+s.a,0+s.b)},
 la(a,b){this.a5r(a,b)}}
 A.air.prototype={
-$1(a){return this.a.f3(a.b)},
+$1(a){return this.a.f2(a.b)},
 $S:267}
 A.dB.prototype={
 ath(a){var s,r,q,p=this.a2$
@@ -67643,7 +67643,7 @@ r.toString
 q=A.c([],t.O_)
 r.Bk(q)
 d.i9=q
-if(B.c.f1(q,new A.aiv())&&A.aX()!==B.bD){a.e=a.a=!0
+if(B.c.f0(q,new A.aiv())&&A.aX()!==B.bD){a.e=a.a=!0
 return}if(d.eG==null){p=new A.dM("")
 o=A.c([],t.oU)
 for(r=d.i9,n=r.length,m=0,l=0,k="";l<r.length;r.length===n||(0,A.K)(r),++l){j=r[l]
@@ -67940,7 +67940,7 @@ return n.gbl(n)}return n*o},
 b4(a){return this.a8(B.bg,a,this.gbA())},
 b9(a){this.gmV().is(this.jF(a,A.eZ(),A.id()))
 return this.Ub(a)},
-f3(a){this.jX()
+f2(a){this.jX()
 return this.aU.b.a.mx(a)},
 jB(a){return!0},
 cM(a,b){var s,r=b.U(0,this.gfe()),q=this.aU,p=q.MM(r),o=p!=null&&p.a.p(0,r)?q.e.N0(new A.aF(p.b.a,B.x)):null
@@ -67949,11 +67949,11 @@ s=q?o:null
 if(q){a.F(0,new A.io(s,t.AL))
 return!0}return this.a_q(a,r)},
 la(a,b){},
-adf(a){this.f6=a.a},
-ahT(){var s=this.f6
+adf(a){this.f5=a.a},
+ahT(){var s=this.f5
 s.toString
 this.fY(B.bw,s)},
-adc(){var s=this.f6
+adc(){var s=this.f5
 s.toString
 this.lB(B.cw,s)},
 y4(a,b,c){var s,r,q,p,o,n=this
@@ -68389,7 +68389,7 @@ break $label0$0}if(B.bj===p){s=new A.au(a/2,d)
 break $label0$0}if(r){s=new A.au(0,a/(b-1)+d)
 break $label0$0}if(q){s=a/b
 s=new A.au(s/2,s+d)
-break $label0$0}if(B.ng===p){s=a/(b+1)
+break $label0$0}if(B.nf===p){s=a/(b+1)
 s=new A.au(s,s+d)
 break $label0$0}s=null}return s}}
 A.qu.prototype={
@@ -68431,7 +68431,7 @@ b5(a){return this.zg(new A.aiD(),a,B.aV)},
 b3(a){return this.zg(new A.aiB(),a,B.aV)},
 b4(a){return this.zg(new A.aiC(),a,B.al)},
 b9(a){return this.zg(new A.aiA(),a,B.al)},
-f3(a){var s
+f2(a){var s
 switch(this.u.a){case 0:s=this.BD(a)
 break
 case 1:s=this.ath(a)
@@ -69055,7 +69055,7 @@ r.shf(a.mn(new A.N8(q,s,A.c([],t.k5),B.av)))
 r.jf(a)
 a.eI()}}
 A.AN.prototype={
-ia(a,b,c,d){var s=this.k3.gf2().a
+ia(a,b,c,d){var s=this.k3.gf1().a
 s===$&&A.a()
 if(!s.a.contains(b.a,b.b))return!1
 return this.or(a,b,!0,d)},
@@ -69768,7 +69768,7 @@ p=m==null?n.a(m):m
 p.ZM()}}finally{h.f=!1}},
 ads(a){try{a.$0()}finally{this.f=!0}},
 ZK(){var s,r,q,p,o=this.z
-B.c.eY(o,new A.ahr())
+B.c.eX(o,new A.ahr())
 for(s=o.length,r=0;r<o.length;o.length===s||(0,A.K)(o),++r){q=o[r]
 if(q.CW&&q.y===this)q.WD()}B.c.P(o)
 for(o=this.CW,o=A.cD(o,o.r,A.v(o).c),s=o.$ti.c;o.v();){p=o.d;(p==null?s.a(p):p).ZK()}},
@@ -69799,14 +69799,14 @@ if(g.at==null)return
 try{n=g.ch
 m=A.v(n).i("aZ<1>")
 l=A.a4(new A.aZ(n,new A.ahu(g),m),m.i("u.E"))
-B.c.eY(l,new A.ahv())
+B.c.eX(l,new A.ahv())
 s=l
 n.P(0)
 for(n=s,m=n.length,k=0;k<n.length;n.length===m||(0,A.K)(n),++k){r=n[k]
-if(r.gf_().gmm())continue
-r.gf_().E4()}for(n=s,m=n.length,k=0;k<n.length;n.length===m||(0,A.K)(n),++k){q=n[k]
-if(q.gf_().gmm())continue
-j=q.gf_()
+if(r.geZ().gmm())continue
+r.geZ().E4()}for(n=s,m=n.length,k=0;k<n.length;n.length===m||(0,A.K)(n),++k){q=n[k]
+if(q.geZ().gmm())continue
+j=q.geZ()
 i=j.b
 if(i.gjT()==null){h=j.at
 h=h==null?null:h.d
@@ -69816,8 +69816,8 @@ h=new A.aY(new Float64Array(16))
 h.df()
 j.at=new A.a0o(h,null,null,i,!1)}j.Wz()}for(n=s,m=A.a7(n).i("cO<1>"),n=new A.cO(n,m),n=new A.bX(n,n.gA(0),m.i("bX<aI.E>")),j=t.S,m=m.i("aI.E");n.v();){i=n.d
 p=i==null?m.a(i):i
-if(p.gf_().gmm())continue
-i=p.gf_()
+if(p.geZ().gmm())continue
+i=p.geZ()
 if(!i.f)i.Ft(A.aV(j))
 else i.aak(A.aV(j))}g.at.a3l()
 for(n=g.CW,n=A.cD(n,n.r,A.v(n).c),m=n.$ti.c;n.v();){j=n.d
@@ -69883,7 +69883,7 @@ r.y=a
 if(r.z&&r.Q!=null){r.z=!1
 r.a0()}if(r.CW){r.CW=!1
 r.le()}if(r.cy&&r.ch.a!=null){r.cy=!1
-r.aI()}s=r.gf_()
+r.aI()}s=r.geZ()
 if(s.ax.geE().a)s=s.gmm()||!s.f
 else s=!1
 if(s)r.b2()},
@@ -70029,10 +70029,10 @@ this.y.tG()},
 e3(a){},
 u8(a){var s,r=this
 if(r.y.at==null)return
-s=r.gf_().r
+s=r.geZ().r
 if(s!=null&&!s.x)s.a3k(a)
 else if(r.gbd(r)!=null)r.gbd(r).u8(a)},
-p5(){var s=this.gf_()
+p5(){var s=this.geZ()
 s.f=!1
 s.d=s.at=s.as=s.r=null
 s.e=!1
@@ -70044,8 +70044,8 @@ s.ax.P(0)
 this.bw(new A.aiX())},
 b2(){var s=this.y
 if(s==null||s.at==null)return
-this.gf_().axh()},
-gf_(){var s,r,q,p,o=this,n=o.dx
+this.geZ().axh()},
+geZ(){var s,r,q,p,o=this,n=o.dx
 if(n===$){s=A.c([],t.QF)
 r=A.c([],t.g9)
 q=A.c([],t.z_)
@@ -70604,8 +70604,8 @@ n=o
 for(;;){if(n.gjT()!=null)s=q||!p
 else s=!1
 if(!s)break
-if(n!==o&&n.gf_().gmm()&&!q)break
-s=n.gf_()
+if(n!==o&&n.geZ().gmm()&&!q)break
+s=n.geZ()
 s.d=s.as=s.at=null
 if(p)q=!1
 s=s.ax
@@ -70616,15 +70616,15 @@ s.a.e3(m)}s=s.c
 s.toString}else s=m
 q=B.hB.xW(q,s.p2!=null)
 n=n.gjT()
-s=n.gf_()
+s=n.geZ()
 m=s.ax
 l=m.d
 if(l==null){if(m.c==null){l=A.i0()
 m.d=m.c=l
 m.a.e3(l)}m=m.c
 m.toString}else m=l
-p=m.a&&s.f}if(n!==o&&j&&n.gf_().gmm())o.y.ch.E(0,o)
-if(!n.gf_().gmm()){j=o.y
+p=m.a&&s.f}if(n!==o&&j&&n.geZ().gmm())o.y.ch.E(0,o)
+if(!n.geZ().gmm()){j=o.y
 if(j!=null)if(j.ch.F(0,n))o.y.tG()}},
 H6(a,b){var s,r,q,p,o,n,m,l,k=A.aV(t.vC)
 for(s=J.an(a),r=this.ax,q=r.a,p=0;p<s.gA(a);++p){o=s.h(a,p)
@@ -70643,7 +70643,7 @@ if(!n.a_U(l.gjm())){k.F(0,o)
 k.F(0,l)}}}for(s=A.cD(k,k.r,k.$ti.c),r=s.$ti.c;s.v();){q=s.d;(q==null?r.a(q):q).Lk(!0)}},
 ajo(a){return this.H6(a,!1)}}
 A.aAT.prototype={
-$1(a){if(a.gf_().ga_Q())this.a.d=!0},
+$1(a){if(a.geZ().ga_Q())this.a.d=!0},
 $S:19}
 A.aAU.prototype={
 $1(a){return a.gjm()},
@@ -70658,7 +70658,7 @@ A.aAX.prototype={
 $1(a){a.c=this.a},
 $S:57}
 A.aAN.prototype={
-$1(a){var s=a.gf_()
+$1(a){var s=a.geZ()
 if(s.ga_Q())B.c.P(this.a)
 this.a.push(s)},
 $S:19}
@@ -70877,7 +70877,7 @@ sa3g(a){var s,r=this
 if(J.e(r.a6,a))return
 r.a6=a
 s=r.V
-s=s==null?null:B.c.f1(s,new A.aj3())
+s=s==null?null:B.c.f0(s,new A.aj3())
 if(s===!0)r.aI()},
 uQ(a){var s=this,r=s.lw(a,B.av)
 s.n_(t.k.a(A.y.prototype.gW.call(s)))
@@ -70918,7 +70918,7 @@ r=r.b
 q=r.c
 r=r.a.c
 return a.b6(new A.F(q,r.gbl(r)))},
-f3(a){this.n_(t.k.a(A.y.prototype.gW.call(this)))
+f2(a){this.n_(t.k.a(A.y.prototype.gW.call(this)))
 return this.u.b.a.mx(B.G)},
 d2(a,b){var s=this,r=s.grg(),q=a.b
 r.is(s.jF(q,A.eZ(),A.id()))
@@ -71189,7 +71189,7 @@ a0=n.d0()
 a0=a0.gbl(a0)
 n=n.d0()
 n=n.gbl(n)
-p=p?B.aqu:B.nO
+p=p?B.aqu:B.nN
 return new A.p6(new A.tx(q,a0,c),new A.tx(o,n,e),p,j,!0)},
 np(a){var s=this,r=A.ck(),q=s.d,p=s.e,o=a.a
 switch(o.a){case 0:case 1:t.mb.a(a)
@@ -71666,9 +71666,9 @@ if(n>s)n=s
 else if(n<r)n=r
 return this.Fl(new A.cy(m,n),a)},
 afw(a,b,c){var s,r,q,p,o,n,m,l,k=this,j=k.b,i=j.aW(0,null)
-if(i.hb(i)===0)switch(c){case B.nL:case B.kh:return B.aj
-case B.nM:case B.kg:return B.ab}s=A.bF(i,new A.k(a,0)).a
-switch(c){case B.nL:case B.nM:if(b){j=k.e
+if(i.hb(i)===0)switch(c){case B.nK:case B.kh:return B.aj
+case B.nL:case B.kg:return B.ab}s=A.bF(i,new A.k(a,0)).a
+switch(c){case B.nK:case B.nL:if(b){j=k.e
 j.toString
 r=j}else{j=k.d
 j.toString
@@ -71704,7 +71704,7 @@ s=b?s:r
 if(a&&s.a===m.a.b)return B.ab
 l=!a
 if(l&&s.a===m.a.a)return B.aj
-switch(c){case B.o9:l=m.a
+switch(c){case B.o8:l=m.a
 q=m.zV(s,a,new A.v4(B.f.ar(m.c,l.a,l.b)))
 p=B.ap
 break
@@ -71777,7 +71777,7 @@ glZ(){var s,r,q,p,o,n,m,l=this
 if(l.y==null){s=l.b
 r=l.a
 q=r.a
-p=s.ML(A.cK(B.x,q,r.b,!1),B.p2)
+p=s.ML(A.cK(B.x,q,r.b,!1),B.p1)
 r=t.AO
 if(p.length!==0){l.y=A.c([],r)
 for(s=p.length,o=0;o<p.length;p.length===s||(0,A.K)(p),++o){n=p[o]
@@ -72156,7 +72156,7 @@ s.au(new A.fV(new A.E(0,0,0+r.a,0+r.b)))
 return s},
 cl(a,b){var s,r=this
 if(r.C!=null){r.kP()
-s=r.Y.gf2().a
+s=r.Y.gf1().a
 s===$&&A.a()
 if(!s.a.contains(b.a,b.b))return!1}return r.kE(a,b)},
 aA(a,b){var s,r,q,p=this,o=p.B$
@@ -72238,7 +72238,7 @@ s.au(new A.fV(new A.E(0,0,0+r.a,0+r.b)))
 return s},
 cl(a,b){var s,r=this
 if(r.C!=null){r.kP()
-s=r.Y.gf2().a
+s=r.Y.gf1().a
 s===$&&A.a()
 if(!s.a.contains(b.a,b.b))return!1}return r.kE(a,b)},
 aA(a,b){var s,r,q,p,o,n,m,l,k=this
@@ -72461,7 +72461,7 @@ b4(a){if(this.C)return 0
 return this.F4(a)},
 b9(a){if(this.C)return 0
 return this.F2(a)},
-f3(a){if(this.C)return null
+f2(a){if(this.C)return null
 return this.a76(a)},
 gj2(){return this.C},
 d2(a,b){return this.C?null:this.a5y(a,b)},
@@ -72660,7 +72660,7 @@ this.dJ(0)
 s=this.B$
 if(s!=null)s.ah(0)}}
 A.IW.prototype={
-f3(a){var s=this.B$
+f2(a){var s=this.B$
 s=s==null?null:s.j0(a)
 return s==null?this.yo(a):s}}
 A.a_w.prototype={
@@ -72825,7 +72825,7 @@ return s==null?0:s},
 b9(a){var s=this.B$
 s=s==null?null:s.a8(B.bg,a,s.gbA())
 return s==null?0:s},
-f3(a){var s,r,q=this.B$
+f2(a){var s,r,q=this.B$
 if(q!=null){s=q.j0(a)
 r=q.b
 r.toString
@@ -73210,7 +73210,7 @@ s.toString
 a.cO(r,b.S(0,t.jB.a(s).a))}}}
 A.RP.prototype={
 bj(){var s,r,q,p,o,n=this
-if(n.B$==null){n.dy=B.o5
+if(n.B$==null){n.dy=B.o4
 return}s=t.r.a(A.y.prototype.gW.call(n))
 r=n.B$
 r.toString
@@ -73490,7 +73490,7 @@ s=a6.d
 r=s+a6.z
 q=r+a6.Q
 p=a6.XL()
-if(a3.a2$==null)if(!a3.Xz()){a3.dy=B.o5
+if(a3.a2$==null)if(!a3.Xz()){a3.dy=B.o4
 a7.pk()
 return}a5.a=null
 o=a3.a2$
@@ -73506,7 +73506,7 @@ if(!k)break
 k=o.b
 k.toString
 o=n.a(k).am$;++l}a3.p7(l,0)
-if(a3.a2$==null)if(!a3.Xz()){a3.dy=B.o5
+if(a3.a2$==null)if(!a3.Xz()){a3.dy=B.o4
 a7.pk()
 return}}o=a3.a2$
 n=o.b
@@ -74104,7 +74104,7 @@ b5(a){return A.tj(this.a2$,new A.aji(a))},
 b3(a){return A.tj(this.a2$,new A.ajg(a))},
 b4(a){return A.tj(this.a2$,new A.ajh(a))},
 b9(a){return A.tj(this.a2$,new A.ajf(a))},
-f3(a){return this.BD(a)},
+f2(a){return this.BD(a)},
 d2(a,b){var s,r,q,p,o,n,m,l=this
 switch(l.V.a){case 0:s=new A.af(0,a.b,0,a.d)
 break
@@ -74197,7 +74197,7 @@ for(;;){if(!(q<o&&s!=null))break
 p=s.b
 p.toString
 s=r.a(p).am$;++q}return s},
-f3(a){var s,r=this.uy()
+f2(a){var s,r=this.uy()
 if(r==null)return null
 s=r.b
 s.toString
@@ -74874,7 +74874,7 @@ A.Gd.prototype={
 I(){return"WrapCrossAlignment."+this.b},
 gadW(){switch(this.a){case 0:var s=B.aAm
 break
-case 1:s=B.or
+case 1:s=B.oq
 break
 case 2:s=B.aAn
 break
@@ -74949,7 +74949,7 @@ q+=o
 p=s.b
 p.toString
 s=r.a(p).am$}return q}},
-f3(a){return this.BD(a)},
+f2(a){return this.BD(a)},
 aez(a){var s
 switch(this.u.a){case 0:s=a.a
 break
@@ -75284,7 +75284,7 @@ m=0
 for(;m<o.length;o.length===n||(0,A.K)(o),++m){s=o[m]
 l=j.ry$
 l.toString
-j.SV(s,l)}j.p2$=B.nH
+j.SV(s,l)}j.p2$=B.nG
 o=j.k4$
 k=A.a4(o,p)
 r=k
@@ -75602,7 +75602,7 @@ q.aT=c.bu
 q.aQ=c.bv
 q.u=c.bk
 q.CW=c.c
-q.amv(b==null?B.mY:b)
+q.amv(b==null?B.mX:b)
 if(s!==r)q.WC()},
 E7(a,b){return this.mv(0,null,b)},
 a2X(){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4,a5,a6=this,a7={}
@@ -75763,7 +75763,7 @@ if(n.e.a==="")n.e=a.go
 if(n.f.a==="")n.f=a.id
 if(n.r.a==="")n.r=a.k1
 if(n.dy===B.ko)n.dy=a.y2
-if(n.fy===B.nP)n.fy=a.u
+if(n.fy===B.nO)n.fy=a.u
 if(n.x==="")n.x=a.k3
 s=a.dy
 if(s!=null){r=n.z;(r==null?n.z=A.aV(t.g3):r).M(0,s)}for(s=a.db,s=new A.er(s,s.r,s.e),r=this.b;s.v();)r.F(0,A.a7c(s.d))
@@ -75835,7 +75835,7 @@ if(o)a0=b<-2.356194490192345||b>2.356194490192345
 else a0=!1
 if(a||a0)q.n(0,l.b,f.b)}}a1=A.c([],t.t)
 a2=A.c(a3.slice(0),A.a7(a3))
-B.c.eY(a2,new A.aE9())
+B.c.eX(a2,new A.aE9())
 new A.a_(a2,new A.aEa(),A.a7(a2).i("a_<1,o>")).ap(0,new A.aEc(A.aV(s),q,a1))
 a3=t.qn
 a3=A.a4(new A.a_(a1,new A.aEb(r),a3),a3.i("aI.E"))
@@ -75894,14 +75894,14 @@ r=A.c([],t.QF)
 for(q=g.d,p=A.v(f).i("aZ<1>"),o=p.i("u.E");f.a!==0;){n=A.a4(new A.aZ(f,new A.alL(g),p),o)
 f.P(0)
 q.P(0)
-B.c.eY(n,new A.alM())
+B.c.eX(n,new A.alM())
 B.c.M(r,n)
 for(m=n.length,l=0;l<n.length;n.length===m||(0,A.K)(n),++l){k=n[l]
 if(k.z||k.x){j=k.ay
 if(j!=null)i=j.z||j.x
 else i=!1
 if(i){j.jc()
-k.cx=!1}}}}B.c.eY(r,new A.alN())
+k.cx=!1}}}}B.c.eX(r,new A.alN())
 $.xg.toString
 q=A.c([],t.o4)
 h=new A.alR(q)
@@ -76124,7 +76124,7 @@ if(p.aT.a==="")p.aT=a.aT
 if(p.aQ.a==="")p.aQ=a.aQ
 if(p.u.a==="")p.u=a.u
 if(p.y1===B.ko)p.y1=a.y1
-if(p.bk===B.nP)p.bk=a.bk
+if(p.bk===B.nO)p.bk=a.bk
 s=p.T
 r=p.V
 p.T=A.aId(a.T,a.V,s,r)
@@ -76217,16 +76217,16 @@ q.n(0,"viewId",r.b)
 q.n(0,"message",r.c)
 q.n(0,"textDirection",r.d.a)
 s=r.e
-if(s!==B.oR)q.n(0,"assertiveness",s.a)
+if(s!==B.oQ)q.n(0,"assertiveness",s.a)
 return q}}
 A.aob.prototype={
 qc(){return A.aA(["message",this.b],t.N,t.z)}}
 A.adc.prototype={
-qc(){return B.nj}}
+qc(){return B.ni}}
 A.ank.prototype={
-qc(){return B.nj}}
+qc(){return B.ni}}
 A.aao.prototype={
-qc(){return B.nj}}
+qc(){return B.ni}}
 A.Mj.prototype={
 pR(a,b){return this.ax3(a,!0)},
 ax3(a,b){var s=0,r=A.O(t.N),q,p=this,o,n
@@ -76271,7 +76271,7 @@ $2(a,b){this.b.b.E(0,this.c)
 this.a.b.rF(a,b)},
 $S:53}
 A.ahw.prototype={
-mi(a,b){var s,r=B.ef.f4(A.aFF(null,A.Km(4,b,B.ba,!1),null).e),q=$.ev.bG$
+mi(a,b){var s,r=B.ef.f3(A.aFF(null,A.Km(4,b,B.ba,!1),null).e),q=$.ev.bG$
 q===$&&A.a()
 s=q.EA(0,"flutter/assets",A.aKH(r)).bJ(new A.ahx(b),t.V4)
 return s},
@@ -76295,7 +76295,7 @@ A.a5u.prototype={
 $1(a){return this.a2l(a)},
 a2l(a){var s=0,r=A.O(t.CL),q
 var $async$$1=A.P(function(b,c){if(b===1)return A.L(c,r)
-for(;;)switch(s){case 0:q=new A.u0(t.pE.a(B.f4.hG(A.aKH(B.p8.f4(A.bw(B.ar.fm(0,a)))))),A.z(t.N,t.Rk))
+for(;;)switch(s){case 0:q=new A.u0(t.pE.a(B.f4.hG(A.aKH(B.p8.f3(A.bw(B.ar.fm(0,a)))))),A.z(t.N,t.Rk))
 s=1
 break
 case 1:return A.M(q,r)}})
@@ -76595,7 +76595,7 @@ s=1
 break
 case 1:return A.M(q,r)}})
 return A.N($async$KF,r)},
-abN(a){return B.mS},
+abN(a){return B.mR},
 abQ(a0){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e=this,d=null,c=a0.c,b=c.gkn(),a=c.gLh()
 c=e.b.a
 s=A.v(c).i("bA<1>")
@@ -76662,13 +76662,13 @@ A.an1.prototype={
 hG(a){if(a==null)return null
 return B.ba.fm(0,A.aop(a,0,null))},
 cD(a){if(a==null)return null
-return A.aKH(B.ef.f4(a))}}
+return A.aKH(B.ef.f3(a))}}
 A.acb.prototype={
 cD(a){if(a==null)return null
-return B.lu.cD(B.ar.Kh(a))},
+return B.lt.cD(B.ar.Kh(a))},
 hG(a){var s
 if(a==null)return a
-s=B.lu.hG(a)
+s=B.lt.hG(a)
 s.toString
 return B.ar.fm(0,s)}}
 A.acd.prototype={
@@ -76740,7 +76740,7 @@ for(;;){if(!(n<s)){p=null
 o=0
 break}m=c.charCodeAt(n)
 if(m<=127)q[n]=m
-else{p=B.ef.f4(B.f.eO(c,n))
+else{p=B.ef.f3(B.f.eO(c,n))
 o=n
 break}++n}if(p!=null){l.hV(b,o+p.length)
 b.oA(A.aop(q,0,o))
@@ -76785,7 +76785,7 @@ q=b.a.getFloat64(s,B.by===r)
 b.b+=8
 return q
 case 5:case 7:p=k.fQ(b)
-return B.eT.f4(b.qf(p))
+return B.eT.f3(b.qf(p))
 case 8:return b.qf(k.fQ(b))
 case 9:p=k.fQ(b)
 b.kF(4)
@@ -77156,7 +77156,7 @@ if(n==null)continue
 m=B.yU.h(0,s)
 if(n.p(0,m==null?new A.A(98784247808+B.f.gD(s)):m))r=p
 if(f.h(0,p)===B.fk){c.M(0,n)
-if(n.f1(0,a.gm0(a)))continue}l=f.h(0,p)==null?A.aV(e):o.h(0,new A.dO(p,f.h(0,p)))
+if(n.f0(0,a.gm0(a)))continue}l=f.h(0,p)==null?A.aV(e):o.h(0,new A.dO(p,f.h(0,p)))
 if(l==null)continue
 for(o=A.v(l),m=new A.lI(l,l.r,o.i("lI<1>")),m.c=l.e,o=o.c;m.v();){k=m.d
 if(k==null)k=o.a(k)
@@ -77190,10 +77190,10 @@ $label0$0:{if(B.fq===a){s=(r.d&4)!==0
 break $label0$0}if(B.fr===a){s=(r.d&1)!==0
 break $label0$0}if(B.fs===a){s=(r.d&2)!==0
 break $label0$0}if(B.ft===a){s=(r.d&8)!==0
-break $label0$0}if(B.no===a){s=(r.d&16)!==0
-break $label0$0}if(B.nn===a){s=(r.d&32)!==0
-break $label0$0}if(B.np===a){s=(r.d&64)!==0
-break $label0$0}if(B.nq===a||B.yZ===a){s=!1
+break $label0$0}if(B.nn===a){s=(r.d&16)!==0
+break $label0$0}if(B.nm===a){s=(r.d&32)!==0
+break $label0$0}if(B.no===a){s=(r.d&64)!==0
+break $label0$0}if(B.np===a||B.yZ===a){s=!1
 break $label0$0}s=null}return s},
 j(a,b){var s=this
 if(b==null)return!1
@@ -77210,7 +77210,7 @@ s.zj()}return s.b.a},
 zj(){var s=0,r=A.O(t.H),q,p=this,o
 var $async$zj=A.P(function(a,b){if(a===1)return A.L(b,r)
 for(;;)switch(s){case 0:s=3
-return A.x(B.nx.iS("get",t.pE),$async$zj)
+return A.x(B.nw.iS("get",t.pE),$async$zj)
 case 3:o=b
 if(p.b==null){s=1
 break}p.U3(o)
@@ -77257,7 +77257,7 @@ o.f=!1
 for(s=o.r,r=A.cD(s,s.r,A.v(s).c),q=r.$ti.c;r.v();){p=r.d;(p==null?q.a(p):p).w=!1}s.P(0)
 s=B.f4.cD(o.a.a)
 s.toString
-B.nx.cR("put",J.fn(B.bu.gc4(s),s.byteOffset,s.byteLength),t.H)},
+B.nw.cR("put",J.fn(B.bu.gc4(s),s.byteOffset,s.byteLength),t.H)},
 ZL(){if($.c0.p1$)return
 this.QL()},
 l(){var s=this.a
@@ -77923,7 +77923,7 @@ A.FH.prototype={}
 A.Z9.prototype={
 Qd(a){var s,r=a.fw()
 if($.cF().a!==$.aKf()){s=B.atl.fw()
-s.n(0,"isMultiline",a.b.j(0,B.oa))
+s.n(0,"isMultiline",a.b.j(0,B.o9))
 r.n(0,"inputType",s)}return r},
 a3x(a){var s,r=$.cF().c
 r===$&&A.a()
@@ -78594,7 +78594,7 @@ l.c=new A.TL(s.cx,s.dx.b7(1),l.b,m)
 s=n.a.p4
 r=A.b4E()
 q=A.mF($.aX6(),t.u,t.od)
-q.n(0,B.oi,new A.EC(new A.bv(A.c([],t.e),t.g)).dK(a))
+q.n(0,B.oh,new A.EC(new A.bv(A.c([],t.e),t.g)).dK(a))
 p=A.aik()
 return new A.Er(new A.EY(new A.dw(n.gace(),A.am8(new A.NJ(A.q6(q,A.aLa(new A.To(new A.EZ(new A.oF(new A.aFV(l,n),m,n.gzI(),m),m),m),p)),m),"<Default WidgetsApp Shortcuts>",r),m,t.w3),m),s,m)}}
 A.aFT.prototype={
@@ -78675,14 +78675,14 @@ s=r.d=new A.X()
 q.c.hu(new A.awP(r,s),new A.awQ(r,s),t.H)
 q=r.e
 q===$&&A.a()
-if(q.a!==B.lO)r.e=new A.iZ(B.Kd,q.b,q.c,q.d,q.$ti)}}
+if(q.a!==B.lN)r.e=new A.iZ(B.Kd,q.b,q.c,q.d,q.$ti)}}
 A.awP.prototype={
 $1(a){var s=this.a
 if(s.d===this.b)s.N(new A.awO(s,a))},
 $S(){return this.a.$ti.i("bB(1)")}}
 A.awO.prototype={
 $0(){var s=this.a
-s.e=new A.iZ(B.lO,this.b,null,null,s.$ti.i("iZ<1>"))},
+s.e=new A.iZ(B.lN,this.b,null,null,s.$ti.i("iZ<1>"))},
 $S:0}
 A.awQ.prototype={
 $2(a,b){var s=this.a
@@ -78690,7 +78690,7 @@ if(s.d===this.b)s.N(new A.awN(s,a,b))},
 $S:53}
 A.awN.prototype={
 $0(){var s=this.a
-s.e=new A.iZ(B.lO,null,this.b,this.c,s.$ti.i("iZ<1>"))},
+s.e=new A.iZ(B.lN,null,this.b,this.c,s.$ti.i("iZ<1>"))},
 $S:0}
 A.uW.prototype={
 aa(){return new A.Gk()}}
@@ -79127,7 +79127,7 @@ if(q!=null)q.a0()}}}
 A.vK.prototype={}
 A.Un.prototype={
 aK(a){var s=A.d_(a)
-s=new A.Eh(B.aV,this.f,this.r,B.cn,this.x,B.or,s,B.e1,B.p,A.al(),0,null,null,new A.aW(),A.al())
+s=new A.Eh(B.aV,this.f,this.r,B.cn,this.x,B.oq,s,B.e1,B.p,A.al(),0,null,null,new A.aW(),A.al())
 s.aJ()
 s.M(0,null)
 return s},
@@ -79137,7 +79137,7 @@ b.sfj(this.f)
 b.sud(0,this.r)
 b.sazO(B.cn)
 b.sazS(this.x)
-b.sat6(B.or)
+b.sat6(B.oq)
 s=A.d_(a)
 if(b.G!=s){b.G=s
 b.a0()}if(b.L!==B.e1){b.L=B.e1
@@ -79375,11 +79375,11 @@ l=0
 case 3:if(!(l<o.length)){s=5
 break}s=6
 return A.x(o[l].rO(),$async$Cl)
-case 6:if(b===B.oQ)m=!0
+case 6:if(b===B.oP)m=!0
 case 4:o.length===n||(0,A.K)(o),++l
 s=3
 break
-case 5:q=m?B.oQ:B.ln
+case 5:q=m?B.oP:B.ln
 s=1
 break
 case 1:return A.M(q,r)}})
@@ -79587,7 +79587,7 @@ $.ev=r
 r.bG$!==$&&A.bK()
 r.bG$=B.HN
 s=new A.Eo(A.aV(t.z4),$.ah())
-B.nx.mC(s.gajC())
+B.nw.mC(s.gajC())
 r.aU$=s
 r.aiz()
 s=$.aQB
@@ -79698,7 +79698,7 @@ s.a=l.gafb()
 s=$.bh()
 s.k3=l.gauU()
 s.k4=$.aG
-B.ny.mC(l.gagD())
+B.nx.mC(l.gagD())
 B.aom.mC(l.gaf7())
 s=new A.NI(A.z(p,t.qa),B.zg)
 B.zg.mC(s.gajA())
@@ -79902,14 +79902,14 @@ var s=this.f
 if(s!=null)s.l()
 this.a7S()},
 gj9(){var s=this.a.x
-return s===B.KR||s===B.qB||s===B.m_},
+return s===B.KR||s===B.qB||s===B.lZ},
 uL(a){var s,r,q,p
 if(a===0)return B.qD
 if(this.gj9()){s=this.c.ab(t.I).w
 $label0$0:{r=B.bk===s
-if(r&&a<0){q=B.m_
+if(r&&a<0){q=B.lZ
 break $label0$0}p=B.az===s
-if(p&&a>0){q=B.m_
+if(p&&a>0){q=B.lZ
 break $label0$0}if(!r)q=p
 else q=!0
 if(q){q=B.qB
@@ -79969,14 +79969,14 @@ p=new A.k(r,0)}else{o.toString
 p=new A.k(0,r)}o=t.Ni
 s.e=new A.at(t.v.a(q),new A.aB(B.m,p,o),o.i("at<ar.T>"))},
 acj(a){var s,r,q,p,o=this
-if(o.w===0)return B.ow
+if(o.w===0)return B.ov
 s=a.a
 r=s.a
 q=s.b
 if(o.gj9()){s=Math.abs(r)
-if(s-Math.abs(q)<400||s<700)return B.ow
+if(s-Math.abs(q)<400||s<700)return B.ov
 p=o.uL(r)}else{s=Math.abs(q)
-if(s-Math.abs(r)<400||s<700)return B.ow
+if(s-Math.abs(r)<400||s<700)return B.ov
 p=o.uL(q)}if(p===o.uL(o.w))return B.aAF
 return B.aAG},
 afF(a){var s,r,q,p,o=this
@@ -80458,7 +80458,7 @@ s=s.a!==s.b
 return s},
 gq_(){var s=this.a
 if(!t.qY.b(s.p2))return s.z.c&&!s.x
-return!s.x&&this.x.ay===B.lx},
+return!s.x&&this.x.ay===B.lw},
 gEy(){var s,r=this.a
 if(!t.qY.b(r.p2)){if(r.z.d)r=r.aB
 else r=!1
@@ -80648,7 +80648,7 @@ l=g.gLf()?new A.a8T(g):f
 k=t.ZD
 j=A.c([],k)
 i=q!=null
-if(!i||e!==B.ly){h=A.aX()===B.ax
+if(!i||e!==B.lx){h=A.aX()===B.ax
 e=A.c([],k)
 if(r!=null)e.push(new A.e1(r,B.j4,f))
 if(s!=null)e.push(new A.e1(s,B.j5,f))
@@ -80656,16 +80656,16 @@ if(i)e.push(new A.e1(q,B.j6,f))
 s=m!=null
 if(s&&h)e.push(new A.e1(m,B.j8,f))
 if(p!=null)e.push(new A.e1(p,B.j7,f))
-if(o!=null)e.push(new A.e1(o,B.lP,f))
-if(n!=null)e.push(new A.e1(n,B.lQ,f))
+if(o!=null)e.push(new A.e1(o,B.lO,f))
+if(n!=null)e.push(new A.e1(n,B.lP,f))
 if(s&&!h)e.push(new A.e1(m,B.j8,f))
-B.c.M(j,e)}if(l!=null)j.push(new A.e1(l,B.lR,f))
+B.c.M(j,e)}if(l!=null)j.push(new A.e1(l,B.lQ,f))
 e=j}B.c.M(e,g.gaoS())
 return e},
 gaoS(){var s,r,q,p,o=A.c([],t.ZD),n=this.a.c.a.b
 if(!n.gc8()||n.a===n.b)return o
 for(s=this.go,r=s.length,q=0;q<s.length;s.length===r||(0,A.K)(s),++q){p=s[q]
-o.push(new A.e1(new A.a8y(this,n,p),B.lS,p.b))}return o},
+o.push(new A.e1(new A.a8y(this,n,p),B.lR,p.b))}return o},
 an(){var s,r,q=this
 q.a6F()
 q.x.a1(0,q.gTI())
@@ -80694,7 +80694,7 @@ bH(){var s,r,q,p,o=this
 o.dr()
 s=o.c
 s.toString
-s=A.c8(s,B.oA)
+s=A.c8(s,B.oz)
 s=s==null?null:s.ay
 r=o.a
 o.fr=s===!0?r.CW.ba(B.im):r.CW
@@ -80762,7 +80762,7 @@ s=m.a.cE
 s=s.glq()
 $.cF().In(s)}}if(!m.a.CW.j(0,a.CW)){s=m.c
 s.toString
-s=A.c8(s,B.oA)
+s=A.c8(s,B.oz)
 s=s==null?null:s.ay
 r=m.a
 s=s===!0?r.CW.ba(B.im):r.CW
@@ -80889,7 +80889,7 @@ case 2:if(k.a.d.gcb())k.vn()
 if(k.p2!=null&&k.p4!=null){k.id.sq(0,0)
 i=k.id
 i.z=B.bE
-i.kG(1,B.dO,B.m2)}break}},
+i.kG(1,B.dO,B.m1)}break}},
 TM(){var s,r,q,p,o=this,n=o.gaq(),m=o.p2
 m.toString
 m=n.jS(m).gYi()
@@ -81423,7 +81423,7 @@ ayL(a){var s,r,q=B.amD.h(0,a)
 if(q!=null){s=$.aa.aj$.d.c
 r=s==null?null:s.e
 if(r!=null)A.lZ(r,q,t.vz)}},
-glq(){var s,r,q,p,o,n,m,l,k,j,i=this,h=i.a.eG,g=J.oy(h.slice(0),A.a7(h).c),f=g!=null?new A.uV(!0,"EditableText-"+A.hr(i),g,i.a.c.a,null):B.oS
+glq(){var s,r,q,p,o,n,m,l,k,j,i=this,h=i.a.eG,g=J.oy(h.slice(0),A.a7(h).c),f=g!=null?new A.uV(!0,"EditableText-"+A.hr(i),g,i.a.c.a,null):B.oR
 h=i.c
 h.toString
 h=A.no(h).a
@@ -81436,7 +81436,7 @@ o=s.ax
 n=s.ay
 m=s.aB
 s=s.p4
-s=r.j(0,B.oa)?B.Ek:B.El
+s=r.j(0,B.o9)?B.Ek:B.El
 l=i.a
 k=l.dy
 j=l.a6
@@ -81461,7 +81461,7 @@ if(r.aB)if(r.d.gcb()){r=s.a.p2
 if(t.qY.b(r))r=s.gq_()
 else if(s.gq_()){r=r==null&&null
 r=r===!0}else r=!1
-r=r&&s.x.ay===B.lx}else r=q
+r=r&&s.x.ay===B.lw}else r=q
 else r=q
 return r?new A.a8w(s,a):null},
 ajM(a,b,c){var s,r=a.a
@@ -81672,7 +81672,7 @@ b5=new A.WQ(new A.bv(b4,l)).dK(b5)
 n=A.c([],n)
 b4=b7.c
 b4.toString
-b6=A.aA([B.ayY,new A.Bi(!1,new A.bv(m,l)),B.azv,o,B.azL,j,B.EK,new A.Bf(!0,new A.bv(k,l)),B.og,new A.di(b7.gait(),new A.bv(i,l),t.OX),B.az5,e,B.azR,c,B.az6,a,B.azh,a0,B.aza,h,B.azS,a2,B.azZ,a4,B.azY,a1,B.azE,a7,B.azF,a5,B.azt,a3,B.azT,a9,B.azX,a6,B.azV,f,B.oi,new A.di(b7.gank(),new A.bv(g,l),t.fn),B.ayW,d,B.ayX,b0,B.azy,a8,B.az3,b1,B.azq,b2,B.azD,b,B.az9,b5,B.ayV,new A.WR(new A.bv(n,l)).dK(b4)],t.u,t.od)
+b6=A.aA([B.ayY,new A.Bi(!1,new A.bv(m,l)),B.azv,o,B.azL,j,B.EK,new A.Bf(!0,new A.bv(k,l)),B.of,new A.di(b7.gait(),new A.bv(i,l),t.OX),B.az5,e,B.azR,c,B.az6,a,B.azh,a0,B.aza,h,B.azS,a2,B.azZ,a4,B.azY,a1,B.azE,a7,B.azF,a5,B.azt,a3,B.azT,a9,B.azX,a6,B.azV,f,B.oh,new A.di(b7.gank(),new A.bv(g,l),t.fn),B.ayW,d,B.ayX,b0,B.azy,a8,B.az3,b1,B.azq,b2,B.azD,b,B.az9,b5,B.ayV,new A.WR(new A.bv(n,l)).dK(b4)],t.u,t.od)
 b7.L!==$&&A.aK()
 b7.L=b6
 o=b6}return new A.Vy(b7.gabs(),p,A.q6(o,new A.dG(new A.a8H(b9,b7,s,r),b8)),b8)},
@@ -82092,7 +82092,7 @@ q=s.gb_()
 p=o.c
 p.toString
 m.wN(r,q,A.no(p).a)
-return B.c.f1(r.a,new A.aDY(o))},
+return B.c.f0(r.a,new A.aDY(o))},
 grt(a){var s=t.Qv.a(this.c.gZ())
 if(s==null||this.c==null||s.y==null)return B.av
 return A.ec(s.aW(0,null),new A.E(0,0,0+s.gt(0).a,0+s.gt(0).b))},
@@ -82374,7 +82374,7 @@ A.aaj.prototype={
 ah(a){var s,r=this.a
 if(r.ax===this){if(!r.gic()){s=r.w
 s=s!=null&&s.r===r}else s=!0
-if(s)r.E1(B.ok)
+if(s)r.E1(B.oj)
 s=r.w
 if(s!=null){if(s.c===r)s.c=null
 if(s.f===r)s.f=null
@@ -82399,7 +82399,7 @@ if(s!=null){s.v6()
 s.d.F(0,r)}}},
 skY(a){var s,r=this
 if(a!==r.b){r.b=a
-if(r.gcb()&&!a)r.E1(B.ok)
+if(r.gcb()&&!a)r.E1(B.oj)
 s=r.w
 if(s!=null){s.v6()
 s.d.F(0,r)}}},
@@ -82407,7 +82407,7 @@ ghc(){return this.c},
 shc(a){var s,r=this
 if(a===r.c)return
 r.c=a
-if(!a&&r.gcb())r.E1(B.ok)
+if(!a&&r.gcb())r.E1(B.oj)
 s=r.w
 if(s!=null){s.v6()
 s.d.F(0,r)}},
@@ -82689,7 +82689,7 @@ this.Mr()}},
 Mr(){var s,r,q,p=this
 switch(0){case 0:s=p.a
 if(s==null)return
-r=s?B.mM:B.mN
+r=s?B.mL:B.mM
 break}q=p.b
 if(q==null)q=A.uf()
 p.b=r
@@ -82977,22 +82977,22 @@ r=a.e
 r.toString
 q=A.hu(r,B.aV)
 if(q!=null){p=new A.aZ(s,new A.a7F(q),A.a7(s).i("aZ<1>"))
-if(!p.gag(0))s=p}if(c===B.of){r=J.uM(s)
+if(!p.gag(0))s=p}if(c===B.oe){r=J.uM(s)
 s=new A.cO(r,A.a7(r).i("cO<1>"))}o=J.aKr(s,new A.a7G(new A.E(-1/0,a.gbe(0).b,1/0,a.gbe(0).d)))
 if(!o.gag(0)){if(d)return B.c.ga3(A.aPq(a.gbe(0).gb_(),o))
 return B.c.gac(A.aPq(a.gbe(0).gb_(),o))}if(d)return B.c.ga3(A.aPt(a.gbe(0).gb_(),s))
 return B.c.gac(A.aPt(a.gbe(0).gb_(),s))}return null},
 Rb(a,b,c){return this.Gm(a,b,c,!0)},
 aot(a,b,c,d){var s,r
-$label0$0:{if(B.of===a){s=new A.a7I(b,d)
+$label0$0:{if(B.oe===a){s=new A.a7I(b,d)
 break $label0$0}if(B.EG===a){s=new A.a7J(b,d)
-break $label0$0}s=B.kJ===a||B.oe===a?A.ap(A.cZ("Invalid direction "+a.k(0),null)):null}r=c.ip(0,s).dN(0)
+break $label0$0}s=B.kJ===a||B.od===a?A.ap(A.cZ("Invalid direction "+a.k(0),null)):null}r=c.ip(0,s).dN(0)
 A.nL(r,new A.a7K(),t.mx)
 return r},
 aou(a,b,c,d){var s,r
 $label0$0:{if(B.kJ===a){s=new A.a7L(b,d)
-break $label0$0}if(B.oe===a){s=new A.a7M(b,d)
-break $label0$0}s=B.of===a||B.EG===a?A.ap(A.cZ("Invalid direction "+a.k(0),null)):null}r=c.ip(0,s).dN(0)
+break $label0$0}if(B.od===a){s=new A.a7M(b,d)
+break $label0$0}s=B.oe===a||B.EG===a?A.ap(A.cZ("Invalid direction "+a.k(0),null)):null}r=c.ip(0,s).dN(0)
 A.nL(r,new A.a7N(),t.mx)
 return r},
 alX(a,b,c){var s,r,q=this,p=q.rZ$,o=p.h(0,b),n=o!=null
@@ -83351,7 +83351,7 @@ A.ua.prototype={
 I(){return"_ElementLifecycle."+this.b}}
 A.XJ.prototype={
 apn(){var s,r=this.b,q=A.a4(r,A.v(r).c)
-B.c.eY(q,A.aNn())
+B.c.eX(q,A.aNn())
 s=q
 r.P(0)
 try{r=s
@@ -83371,7 +83371,7 @@ try{a.mq()}catch(q){s=A.aR(q)
 r=A.bp(q)
 A.aIP(A.bT("while rebuilding dirty elements"),s,r,new A.a5Z(a))}},
 adY(a){var s,r,q,p,o,n=this,m=n.e
-B.c.eY(m,A.aNn())
+B.c.eX(m,A.aNn())
 n.d=!1
 try{for(s=0;s<m.length;s=n.acu(s)){r=m[s]
 if(r.gm_()===n)n.apf(r)}}finally{for(p=m.length,o=0;o<m.length;m.length===p||(0,A.K)(m),++o){q=m[o]
@@ -83382,7 +83382,7 @@ acu(a){var s,r=this.d
 r.toString
 if(!r)return a+1;++a
 r=this.e
-B.c.eY(r,A.aNn())
+B.c.eX(r,A.aNn())
 s=this.d=!1
 for(;;){if(!(a>0?r[a-1].as:s))break;--a}return a}}
 A.a5Z.prototype={
@@ -83658,7 +83658,7 @@ return!0},
 $S:37}
 A.a96.prototype={
 $1(a){var s=null
-return A.kU("",a,!0,B.cP,s,s,s,B.c_,!1,!0,!0,B.lZ,s)},
+return A.kU("",a,!0,B.cP,s,s,s,B.c_,!1,!0,!0,B.lY,s)},
 $S:438}
 A.a9a.prototype={
 $1(a){var s=this.a.p(0,a)
@@ -83932,11 +83932,11 @@ if(q)r.n(0,B.kM,new A.cJ(new A.aaY(s),new A.aaZ(s,p),t.UN))
 if(s.ch!=null)r.n(0,B.az8,new A.cJ(new A.ab_(s),new A.ab3(s,p),t.uA))
 q=!0
 if(s.db==null)q=s.fr!=null
-if(q)r.n(0,B.oh,new A.cJ(new A.ab4(s),new A.ab5(s,p),t.jn))
+if(q)r.n(0,B.og,new A.cJ(new A.ab4(s),new A.ab5(s,p),t.jn))
 q=!0
 if(s.ry==null)if(s.to==null)q=s.x1!=null
 if(q)r.n(0,B.kO,new A.cJ(new A.ab6(s),new A.ab7(s,o,a,p),t.ok))
-if(s.xr!=null||s.y1!=null||s.y2!=null||s.aT!=null||s.aQ!=null)r.n(0,B.oj,new A.cJ(new A.ab8(s),new A.ab9(s,o,a,p),t.Uv))
+if(s.xr!=null||s.y1!=null||s.y2!=null||s.aT!=null||s.aQ!=null)r.n(0,B.oi,new A.cJ(new A.ab8(s),new A.ab9(s,o,a,p),t.Uv))
 q=!0
 q=s.a7!=null
 if(q)r.n(0,B.kL,new A.cJ(new A.aba(s),new A.ab0(s,o,a,p),t.YC))
@@ -84120,10 +84120,10 @@ a.sa0I(s.RX(a,r))},
 RS(a,b){var s=t.f3.a(b.h(0,B.kM))
 if(s==null)return null
 return new A.auK(a,s)},
-RA(a,b){var s=t.qA.a(b.h(0,B.oh))
+RA(a,b){var s=t.qA.a(b.h(0,B.og))
 if(s==null)return null
 return new A.auJ(a,s)},
-Ry(a,b){var s=t.gx.a(b.h(0,B.oj)),r=t.uR.a(b.h(0,B.kL)),q=s==null?null:new A.auG(a,s),p=r==null?null:new A.auH(a,r)
+Ry(a,b){var s=t.gx.a(b.h(0,B.oi)),r=t.uR.a(b.h(0,B.kL)),q=s==null?null:new A.auG(a,s),p=r==null?null:new A.auH(a,r)
 if(q==null&&p==null)return null
 return new A.auI(q,p)},
 RX(a,b){var s=t.Wn.a(b.h(0,B.kO)),r=t.uR.a(b.h(0,B.kL)),q=s==null?null:new A.auL(a,s),p=r==null?null:new A.auM(a,r)
@@ -84983,7 +84983,7 @@ A.UC.prototype={
 md(a){this.CW=t.Om.a(a.$3(this.CW,this.a.r,new A.api()))},
 K(a){var s=this.CW
 s.toString
-return new A.aw(J.aYW(s.a5(0,this.geA().gq(0)),B.ak,B.oC),this.a.w,null)}}
+return new A.aw(J.aYW(s.a5(0,this.geA().gq(0)),B.ak,B.oB),this.a.w,null)}}
 A.api.prototype={
 $1(a){return new A.ml(t.A0.a(a),null)},
 $S:141}
@@ -85555,7 +85555,7 @@ ane(){var s,r,q,p=this
 if(p.p3)return
 s=$.c0
 r=s.p2$
-$label0$0:{if(B.eM===r||B.nH===r){q=!0
+$label0$0:{if(B.eM===r||B.nG===r){q=!0
 break $label0$0}if(B.D5===r||B.D6===r||B.eN===r){q=!1
 break $label0$0}q=null}if(!q){p.$ti.i("eF<1,y>").a(A.ba.prototype.gZ.call(p)).oh()
 return}p.p3=!0
@@ -85644,7 +85644,7 @@ r.a1M()
 s=r.B$
 if(s!=null){s.ce(q,!0)
 r.fy=q.b6(r.B$.gt(0))}else r.fy=new A.F(A.D(1/0,q.a,q.b),A.D(1/0,q.c,q.d))},
-f3(a){var s=this.B$
+f2(a){var s=this.B$
 s=s==null?null:s.j0(a)
 return s==null?this.yo(a):s},
 cM(a,b){var s=this.B$
@@ -85738,7 +85738,7 @@ return new A.vN(n,k,s,r,q,o,p)},
 $ivN:1}
 A.Hm.prototype={
 aa(){var s=null,r=t.A
-return new A.Hn(new A.J7($.ah()),new A.bI(s,r),new A.bI(s,t.hA),new A.bI(s,r),B.nk,s,A.z(t.yb,t.O),s,!0,s,s,s)}}
+return new A.Hn(new A.J7($.ah()),new A.bI(s,r),new A.bI(s,t.hA),new A.bI(s,r),B.nj,s,A.z(t.yb,t.O),s,!0,s,s,s)}}
 A.Hn.prototype={}
 A.Ot.prototype={
 ji(a){return new A.Ot(this.jk(a))},
@@ -86195,7 +86195,7 @@ $1(a){return this.a.fO(a.grt(a))},
 $S:231}
 A.kc.prototype={
 cT(a){return!this.w.j(0,a.w)},
-Ms(a,b){return b.f1(0,new A.afY(this,a))}}
+Ms(a,b){return b.f0(0,new A.afY(this,a))}}
 A.afZ.prototype={
 $1(a){var s=A.bx(a,null,t.l).w
 return A.wv(this.c,s.asD(s.gcz().Bh(0,this.b,this.a)))},
@@ -86541,7 +86541,7 @@ av7(a,b,c,d){var s,r,q,p=this,o=p.d,n=p.a
 n.b=b
 n.pL()
 s=p.d
-if(s===B.F0||s===B.oF){r=n.pl()
+if(s===B.F0||s===B.oE){r=n.pl()
 p.d=B.F1
 r.a2f(new A.aBz(p,b))}else{if(c instanceof A.dd){s=n.CW
 s.toString
@@ -86549,7 +86549,7 @@ q=c.CW.x
 q===$&&A.a()
 s.sq(0,q)}n.a5T(c)
 p.d=B.ix}if(a)n.pj(null)
-s=o===B.aBx||o===B.oF
+s=o===B.aBx||o===B.oE
 q=b.w
 if(s)q.h1(0,new A.Ib(n,d))
 else q.h1(0,new A.yN(n,d))},
@@ -86677,7 +86677,7 @@ else{s=s.e
 s.toString}t._I.a(s)
 o.Iq(s==null?null:s.f)
 o.a.toString
-B.ny.iS("selectSingleEntryHistory",t.H)
+B.nx.iS("selectSingleEntryHistory",t.H)
 $.ev.av$.a1(0,o.gUl())
 o.e.a1(0,o.gSe())},
 ami(){var s=this.e,r=A.k8(new A.aZ(s,A.jP(),A.v(s).i("aZ<u.E>")))
@@ -86696,7 +86696,7 @@ p=0
 for(;!1;++p){o=B.abs[p]
 n=l.c
 n.toString
-m=new A.iP(o.JI(n),null,!0,B.oE,B.dm,new A.ux(new ($.a4v())(B.dm)),B.dm)
+m=new A.iP(o.JI(n),null,!0,B.oD,B.dm,new A.ux(new ($.a4v())(B.dm)),B.dm)
 q.push(m)
 r.ae()
 n=s.a1D(m,l)
@@ -86962,7 +86962,7 @@ this.za()
 this.yJ()
 return a.e.a},
 hq(a){return this.ayX(a,t.X)},
-az1(a){var s=A.aMG(a,B.oF,!1,null),r=this.e
+az1(a){var s=A.aMG(a,B.oE,!1,null),r=this.e
 r.a0i(0,A.jP()).Yt(0,null,!0,!0)
 r.a.push(s)
 r.ae()
@@ -87071,8 +87071,8 @@ if(q!=null){s=this.a.at
 r=s.y
 if(r==null)r=s.$ti.i("cw.T").a(r)
 s.Ou(0,r+1)
-q=new A.YE(r,q,null,B.oG)}else q=null
-return A.aMG(a,B.oE,!1,q)},
+q=new A.YE(r,q,null,B.oF)}else q=null
+return A.aMG(a,B.oD,!1,q)},
 $S:489}
 A.agP.prototype={
 $1(a){a.d=B.l4
@@ -87172,7 +87172,7 @@ s.toString
 r=J.ae(s,a==null?null:a.geK())
 if(r==null)return p
 for(s=J.bf(r);s.v();){q=A.b5m(s.gO(s))
-p.push(new A.iP(q.JI(b),q,!1,B.oE,B.dm,new A.ux(new ($.a4v())(B.dm)),B.dm))}return p},
+p.push(new A.iP(q.JI(b),q,!1,B.oD,B.dm,new A.ux(new ($.a4v())(B.dm)),B.dm))}return p},
 w6(){return null},
 pG(a){a.toString
 return J.zO(t.f.a(a),new A.axj(),t.ob,t.UX)},
@@ -87207,8 +87207,8 @@ q.toString
 q=A.tm(q)
 o.hI$=q
 p=o.oS(q,r)
-if(r){o.kr(s,o.f5$)
-o.f5$=!1}if(p)if(s!=null)s.l()},
+if(r){o.kr(s,o.f4$)
+o.f4$=!1}if(p)if(s!=null)s.l()},
 l(){var s,r=this
 r.hH$.ap(0,new A.ayR())
 s=r.ci$
@@ -87329,7 +87329,7 @@ r+=p
 q=n.b
 q.toString
 n=s.a(q).am$}return r+o.u*(o.ca$-1)},
-f3(a){return this.BD(a)},
+f2(a){return this.BD(a)},
 d2(a2,a3){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b=this,a=null,a0=a2.b,a1=new A.af(0,a0,0,a2.d)
 switch(b.V.a){case 1:s=new A.au(b.gvU(),b.a2$)
 break
@@ -87444,7 +87444,7 @@ case B.yv:a=a3.ca$>0?(a3.gt(0).a-o)/a3.ca$:0
 s=a/2
 b.b=k?a3.gt(0).a-s-d:s
 break
-case B.ng:a=(a3.gt(0).a-o)/(a3.ca$+1)
+case B.nf:a=(a3.gt(0).a-o)/(a3.ca$+1)
 b.b=k?a3.gt(0).a-a-d:a
 break}for(s=!k,p=t.pi,l=b.a;g=a5.a,g!=null;){f=g.b
 f.toString
@@ -87667,7 +87667,7 @@ s.at=t.KJ.a(t.f2.a(r).c[b.b]).c},
 iV(a,b,c){this.O4(a,b,c)}}
 A.pM.prototype={
 ec(a){if(!(a.b instanceof A.ew))a.b=new A.ew(null,null,B.m)},
-f3(a){var s,r,q,p,o,n
+f2(a){var s,r,q,p,o,n
 for(s=this.lJ(),s=s.gai(s),r=t.Q,q=null;s.v();){p=s.gO(s)
 o=p.b
 o.toString
@@ -88456,7 +88456,7 @@ A.JS.prototype={
 grf(){var s,r,q,p,o,n=this,m=null,l=n.d
 if(l===$){s=t.Y
 r=new A.aB(0,0,s)
-q=new A.JR(r,B.oJ,B.lf,$.ah())
+q=new A.JR(r,B.oI,B.lf,$.ah())
 p=A.bz(m,m,m,m,n)
 p.bi()
 o=p.c9$
@@ -88505,7 +88505,7 @@ s.toString
 m=A.D(Math.abs(r)/s,0,1)
 l.grf().ayW(0,m,l.r)}}else if(a instanceof A.jp||a instanceof A.iE){l.r=0
 s=l.grf()
-if(s.e===B.oK)s.oI(B.je)}l.e=a
+if(s.e===B.oJ)s.oI(B.je)}l.e=a
 return!1},
 l(){this.grf().l()
 this.a8n()},
@@ -88515,9 +88515,9 @@ $2(a,b){var s,r,q,p,o,n=null,m=this.a,l=m.grf(),k=l.b
 k===$&&A.a()
 s=k.a
 r=k.b.a5(0,s.gq(s))
-switch(A.b5(m.a.c).a){case 0:q=A.bx(a,B.oy,t.l).w.a.a
+switch(A.b5(m.a.c).a){case 0:q=A.bx(a,B.ox,t.l).w.a.a
 break
-case 1:q=A.bx(a,B.oB,t.l).w.a.b
+case 1:q=A.bx(a,B.oA,t.l).w.a.b
 break
 default:q=n}k=m.f
 if(k==null)p=n
@@ -88537,7 +88537,7 @@ A.zb.prototype={
 I(){return"_StretchState."+this.b}}
 A.JR.prototype={
 ayW(a,b,c){var s,r,q,p=this,o=c>0?B.lf:B.F5
-if(p.r!==o&&p.e===B.oL)return
+if(p.r!==o&&p.e===B.oK)return
 p.r=o
 p.f=b
 s=p.d
@@ -88550,19 +88550,19 @@ s.b=0.016*q+0.016*(1-Math.exp(-q*8.237217661997105))
 q=p.a
 q===$&&A.a()
 q.e=B.je
-if(p.e!==B.oK){q.jA(0,0)
-p.e=B.oK}else{s=q.r
+if(p.e!==B.oJ){q.jA(0,0)
+p.e=B.oJ}else{s=q.r
 if(!(s!=null&&s.a!=null))p.ae()}},
 FA(a){var s=this
 if(a!==B.au)return
 switch(s.e.a){case 1:s.oI(B.je)
 break
-case 3:s.e=B.oJ
+case 3:s.e=B.oI
 s.f=0
 break
 case 2:case 0:break}},
 oI(a){var s,r,q=this,p=q.e
-if(p===B.oL||p===B.oJ)return
+if(p===B.oK||p===B.oI)return
 p=q.d
 s=q.b
 s===$&&A.a()
@@ -88573,7 +88573,7 @@ p=q.a
 p===$&&A.a()
 p.e=a
 p.jA(0,0)
-q.e=B.oL},
+q.e=B.oK},
 l(){var s=this.a
 s===$&&A.a()
 s.l()
@@ -89542,7 +89542,7 @@ if(s)return
 r=q.ci$
 if(q.oS(q.hI$,!1))if(r!=null)r.l()},
 go_(){var s,r,q=this
-if(q.f5$)return!0
+if(q.f4$)return!0
 if(q.geK()==null)return!1
 s=q.c
 s.toString
@@ -89602,8 +89602,8 @@ q.toString
 q=A.tm(q)
 o.hI$=q
 p=o.oS(q,r)
-if(r){o.kr(s,o.f5$)
-o.f5$=!1}if(p)if(s!=null)s.l()},
+if(r){o.kr(s,o.f4$)
+o.f4$=!1}if(p)if(s!=null)s.l()},
 l(){var s,r=this
 r.hH$.ap(0,new A.aI0())
 s=r.ci$
@@ -89824,8 +89824,8 @@ q.toString
 q=A.tm(q)
 o.hI$=q
 p=o.oS(q,r)
-if(r){o.kr(s,o.f5$)
-o.f5$=!1}if(p)if(s!=null)s.l()},
+if(r){o.kr(s,o.f4$)
+o.f4$=!1}if(p)if(s!=null)s.l()},
 l(){var s,r=this
 r.hH$.ap(0,new A.aI1())
 s=r.ci$
@@ -90029,7 +90029,7 @@ I(){return"_ModalRouteAspect."+this.b}}
 A.I4.prototype={
 cT(a){var s=this
 return s.w!==a.w||s.x!==a.x||s.y!==a.y||s.Q!==a.Q||s.z!==a.z},
-Ms(a,b){return b.f1(0,new A.ayQ(this,a))}}
+Ms(a,b){return b.f0(0,new A.ayQ(this,a))}}
 A.ayQ.prototype={
 $1(a){var s,r=this
 switch(a.a){case 0:s=r.a.w!==r.b.w
@@ -90102,7 +90102,7 @@ b.toString
 return new A.p3(b,s,null)},
 $S:504}
 A.ayP.prototype={
-$1(a){var s,r=A.aA([B.og,new A.Wq(a,new A.bv(A.c([],t.e),t.g))],t.u,t.od),q=this.a,p=q.e
+$1(a){var s,r=A.aA([B.of,new A.Wq(a,new A.bv(A.c([],t.e),t.g))],t.u,t.od),q=this.a,p=q.e
 p===$&&A.a()
 s=q.d
 if(s==null)s=q.d=new A.hs(new A.dG(new A.ayM(q),null),q.a.c.ry)
@@ -90475,7 +90475,7 @@ YO(a,b,c,d){var s=null
 return this.nj(s,s,s,a,b,c,s,d)},
 j1(a){return A.aX()},
 gnr(){return B.Dx},
-of(a){switch(this.j1(a).a){case 4:case 2:return B.nr
+of(a){switch(this.j1(a).a){case 4:case 2:return B.nq
 case 3:case 5:case 0:case 1:return B.fu}},
 gxn(){return A.cs([B.dW,B.ew],t.bd)},
 Bd(a,b,c){var s=null
@@ -91299,7 +91299,7 @@ if(s!=null)s.l()
 r.ok=null
 if(!r.fr.gkk())r.Mu(B.eO)},
 J2(a){var s,r=this
-r.Mu(a>0?B.nI:B.nJ)
+r.Mu(a>0?B.nH:B.nI)
 s=r.at
 s.toString
 r.F7(s-r.r.J1(r,a))},
@@ -91359,7 +91359,7 @@ q=o.Q
 q.toString
 p=Math.min(r,q)
 if(p!==s){o.i8(new A.on(o))
-o.Mu(-a>0?B.nI:B.nJ)
+o.Mu(-a>0?B.nH:B.nI)
 s=o.at
 s.toString
 o.dy.sq(0,!0)
@@ -91600,10 +91600,10 @@ a3m(a){var s,r,q=this
 if(a===q.ay)s=!a||A.b5(q.a.c)===q.ch
 else s=!1
 if(s)return
-if(!a){q.at=B.nk
+if(!a){q.at=B.nj
 q.V3()}else{switch(A.b5(q.a.c).a){case 1:q.at=A.aA([B.kO,new A.cJ(new A.akw(q),new A.akx(q),t.ok)],t.u,t.xR)
 break
-case 0:q.at=A.aA([B.oj,new A.cJ(new A.aky(q),new A.akz(q),t.Uv)],t.u,t.xR)
+case 0:q.at=A.aA([B.oi,new A.cJ(new A.aky(q),new A.akz(q),t.Uv)],t.u,t.xR)
 break}a=!0}q.ay=a
 q.ch=A.b5(q.a.c)
 s=q.Q
@@ -91651,7 +91651,7 @@ r=A.es(new A.bE(p,s),s.i("u.E"))
 p=this.w
 p===$&&A.a()
 p=p.gxn()
-q=r.f1(0,p.gm0(p))&&a.gcw(a)===B.cK
+q=r.f0(0,p.gm0(p))&&a.gcw(a)===B.cK
 p=this.a
 switch((q?A.b8U(A.b5(p.c)):A.b5(p.c)).a){case 0:p=a.glA().a
 break
@@ -91825,10 +91825,10 @@ o=-s.b
 if(a.a===B.dY){r=m.fy=m.SN(r)
 a=A.akC(new A.k(r.a+p,r.b+o),q)}else{r=m.fx=m.SN(r)
 a=A.akD(new A.k(r.a+p,r.b+o),q)}n=m.Oa(a)
-if(n===B.nN){m.dy.e=!1
+if(n===B.nM){m.dy.e=!1
 return n}if(m.go){r=m.dy
 r.EN(A.aRJ(a.b,0,0))
-if(r.e)return B.nN}return n},
+if(r.e)return B.nM}return n},
 SN(a){var s,r,q,p=this.dx,o=p.c.gZ()
 o.toString
 t.x.a(o)
@@ -92106,8 +92106,8 @@ q.toString
 q=A.tm(q)
 o.hI$=q
 p=o.oS(q,r)
-if(r){o.kr(s,o.f5$)
-o.f5$=!1}if(p)if(s!=null)s.l()},
+if(r){o.kr(s,o.f4$)
+o.f4$=!1}if(p)if(s!=null)s.l()},
 l(){var s,r=this
 r.hH$.ap(0,new A.aE1())
 s=r.ci$
@@ -92572,7 +92572,7 @@ if(q==null)q=6
 p=r.r
 o=r.db
 r=r.dx
-r=new A.xd(B.lI,B.F,B.F,m,q,s,r,0,p,m,B.ak,18,18,o,B.ak,$.ah())
+r=new A.xd(B.lH,B.F,B.F,m,q,s,r,0,p,m,B.ak,18,18,o,B.ak,$.ah())
 s.a.a1(0,r.gcZ())
 n.CW!==$&&A.bK()
 n.CW=r},
@@ -92588,7 +92588,7 @@ if(s)return}},
 xG(){var s,r=this,q=r.c.ab(t.I).w,p=r.CW
 p===$&&A.a()
 r.a.toString
-p.sbV(0,B.lI)
+p.sbV(0,B.lH)
 r.a.toString
 p.saAg(null)
 if(r.gVB()){r.a.toString
@@ -93115,10 +93115,10 @@ UZ(){var s,r
 if(!this.y){this.y=!0
 s=new A.agD(this)
 r=$.c0
-if(r.p2$===B.nH)A.fj(s)
+if(r.p2$===B.nG)A.fj(s)
 else r.k4$.push(s)}},
 adX(){var s,r,q,p,o,n,m,l,k=this,j=k.Q,i=A.a4(j,A.v(j).c)
-B.c.eY(i,k.gvX())
+B.c.eX(i,k.gvX())
 s=k.b
 k.b=A.c([],t.D1)
 r=k.d
@@ -93149,7 +93149,7 @@ gvX(){return A.b9R()},
 ahk(){if(this.x)return
 this.AH()},
 a2W(){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c=this,b=null,a=c.c
-if(a===-1||c.d===-1||c.b.length===0)return new A.p6(b,b,B.dZ,B.mZ,c.b.length!==0)
+if(a===-1||c.d===-1||c.b.length===0)return new A.p6(b,b,B.dZ,B.mY,c.b.length!==0)
 if(!c.as){a=c.OY(c.d,a)
 c.d=a
 c.c=c.OY(c.c,a)}a=c.b[c.d]
@@ -93184,10 +93184,10 @@ for(f=c.d;f<=c.c;++f){a=c.b[f]
 e=a.gq(a).d
 a=new A.a_(e,new A.agE(c,f,g),A.a7(e).i("a_<1,E>")).mJ(0,new A.agF())
 d=A.a4(a,a.$ti.i("u.E"))
-B.c.M(h,d)}return new A.p6(m,i,!s.j(0,l)?B.nO:s.c,h,!0)},
+B.c.M(h,d)}return new A.p6(m,i,!s.j(0,l)?B.nN:s.c,h,!0)},
 OY(a,b){var s,r=b>a
 for(;;){if(a!==b){s=this.b[a]
-s=s.gq(s).c!==B.nO}else s=!1
+s=s.gq(s).c!==B.nN}else s=!1
 if(!s)break
 a+=r?1:-1}return a},
 lk(a,b){return},
@@ -93268,9 +93268,9 @@ Kw(a){var s,r,q,p=this
 if(p.d===-1){a.gpn(a)
 $label0$0:{}p.d=p.c=null}s=a.gkj()?p.c:p.d
 r=p.ep(p.b[s],a)
-switch(a.gpn(a)){case B.nL:if(r===B.aj)if(s>0){--s
+switch(a.gpn(a)){case B.nK:if(r===B.aj)if(s>0){--s
 r=p.ep(p.b[s],a.as8(B.kh))}break
-case B.nM:if(r===B.ab){q=p.b
+case B.nL:if(r===B.ab){q=p.b
 if(s<q.length-1){++s
 r=p.ep(q[s],a.as8(B.kg))}}break
 case B.kg:case B.kh:break}if(a.gkj())p.c=s
@@ -93280,7 +93280,7 @@ lb(a){var s=this
 if(a.a===B.dY)return s.c===-1?s.SS(a,!0):s.OX(a,!0)
 return s.d===-1?s.SS(a,!1):s.OX(a,!1)},
 np(a){var s,r=this,q=!(a instanceof A.AL)
-if(!r.z&&q)B.c.eY(r.b,r.gvX())
+if(!r.z&&q)B.c.eX(r.b,r.gvX())
 r.z=q
 r.x=!0
 s=A.ck()
@@ -93329,7 +93329,7 @@ o=r
 break
 case 3:o=r
 p=m
-n=B.nN
+n=B.nM
 break}++m}if(p===-1)return B.i7
 if(b)q.c=p
 else q.d=p
@@ -93577,9 +93577,9 @@ A.ay.prototype={
 anY(a){var s
 switch(this.f.a){case 0:s=!0
 break
-case 1:s=a.b.p(0,B.mT)
+case 1:s=a.b.p(0,B.mS)
 break
-case 2:s=!a.b.p(0,B.mT)
+case 2:s=!a.b.p(0,B.mS)
 break
 default:s=null}return s},
 $ixj:1}
@@ -94519,7 +94519,7 @@ K(a){var s,r,q,p,o,n,m,l,k,j,i,h,g,f=this,e=null,d=a.ab(t.yS)
 if(d==null)d=B.qA
 s=f.e
 if(s==null||s.a)s=d.w.ba(s)
-r=A.c8(a,B.oA)
+r=A.c8(a,B.oz)
 r=r==null?e:r.ay
 if(r===!0)s=s.ba(B.im)
 q=A.EL(a)
@@ -95381,7 +95381,7 @@ if(o)p.geD()
 if(!o)return
 p=p.y
 o=p.gR().gaq()
-o=o.f6=a.a
+o=o.f5=a.a
 s=a.c
 q.c=q.b=s===B.b4||s===B.bS
 r=q.d
@@ -95393,16 +95393,16 @@ break $label0$1}break $label0$1}if(o)A.akf().bJ(new A.anX(q),t.a)
 break
 case 1:case 2:break
 case 4:p.gR().hm()
-if(r){q.Gh(o,B.bw,p.gR().gaq().cX?null:B.oc)
+if(r){q.Gh(o,B.bw,p.gR().gaq().cX?null:B.ob)
 return}p=p.gR().gaq()
-o=p.f6
+o=p.f5
 o.toString
 p.fY(B.bw,o)
 break
 case 3:case 5:p.gR().hm()
 if(r){q.qM(o,B.bw)
 return}p=p.gR().gaq()
-o=p.f6
+o=p.f5
 o.toString
 p.fY(B.bw,o)
 break}},
@@ -95428,7 +95428,7 @@ case 0:g=h.y
 g.gR().kg(!1)
 if(s){i.qM(a.a,B.bw)
 return}r=g.gR().gaq()
-q=r.f6
+q=r.f5
 q.toString
 r.fY(B.bw,q)
 g.gR().Nx()
@@ -95437,15 +95437,15 @@ case 1:g=h.y
 g.gR().kg(!1)
 if(s){i.qM(a.a,B.bw)
 return}g=g.gR().gaq()
-r=g.f6
+r=g.f5
 r.toString
 g.fY(B.bw,r)
 break
-case 2:if(s){p=h.y.gR().gaq().cX?null:B.oc
+case 2:if(s){p=h.y.gR().gaq().cX?null:B.ob
 i.Gh(a.a,B.bw,p)
 return}switch(a.c.a){case 1:case 4:case 2:case 3:g=h.y
 r=g.gR().gaq()
-q=r.f6
+q=r.f5
 q.toString
 r.fY(B.bw,q)
 g.gR().hm()
@@ -95454,7 +95454,7 @@ case 0:case 5:g=h.y
 o=g.gR().gaq().C
 n=g.gR().gaq().fV(a.a)
 if(g.gR().aul(n.a)!=null){r=g.gR().gaq()
-q=r.f6
+q=r.f5
 q.toString
 r.lB(B.bw,q)
 if(!o.j(0,g.gR().a.c.a.b))g.gR().Nx()
@@ -95464,7 +95464,7 @@ if(r&&g.gR().gaq().cX)g.gR().DX(!1)
 else{r=g.gR().gaq()
 r.jX()
 q=r.aU
-m=r.f6
+m=r.f5
 m.toString
 l=q.dG(r.ea(m).U(0,r.gfe()))
 k=q.b.a.c.hx(l)
@@ -95482,10 +95482,10 @@ if(!n)return
 switch(A.aX().a){case 2:case 4:n=o.y
 if(!n.gR().gaq().cX){p.w=!0
 n=n.gR().gaq()
-s=n.f6
+s=n.f5
 s.toString
 n.lB(B.cw,s)}else if(n.gR().gaq().eq){s=n.gR().gaq()
-r=s.f6
+r=s.f5
 r.toString
 s.lB(B.cw,r)
 if(n.gR().c.e!=null){n=n.gR().c
@@ -95498,7 +95498,7 @@ q=n.gR().a.c.a.b
 n.gR().E5(new A.wT(B.m,new A.au(s,new A.aF(r.c,q.e)),B.rs))}break
 case 0:case 1:case 3:case 5:n=o.y
 s=n.gR().gaq()
-r=s.f6
+r=s.f5
 r.toString
 s.lB(B.cw,r)
 if(n.gR().c.e!=null){n=n.gR().c
@@ -95537,19 +95537,19 @@ ay5(){var s,r=this.a,q=r.a.aQ
 if(q)r.geD()
 if(!q)return
 switch(A.aX().a){case 2:case 4:if(!this.gaiY()||!r.y.gR().gaq().cX){q=r.y.gR().gaq()
-s=q.f6
+s=q.f5
 s.toString
 q.lB(B.bw,s)}if(this.b){r=r.y
 r.gR().hm()
 r.gR().it()}break
 case 0:case 1:case 3:case 5:r=r.y
 if(!r.gR().gaq().cX){q=r.gR().gaq()
-s=q.f6
+s=q.f5
 s.toString
 q.fY(B.bw,s)}r.gR().a1W()
 break}},
 ay7(a){var s=this.a.y.gR().gaq()
-s.wC=s.f6=a.a
+s.wC=s.f5=a.a
 this.b=!0
 s=a.c
 this.c=s==null||s===B.b4||s===B.bS},
@@ -95557,7 +95557,7 @@ axM(a){var s,r=this.a,q=r.a.aQ
 if(q)r.geD()
 if(q){r=r.y
 q=r.gR().gaq()
-s=q.f6
+s=q.f5
 s.toString
 q.lB(B.Dg,s)
 if(this.b)r.gR().it()}},
@@ -95671,7 +95671,7 @@ s.SH()}}
 A.anX.prototype={
 $1(a){var s,r
 if(a){s=this.a.a.y.gR().gaq()
-r=s.f6
+r=s.f5
 r.toString
 s.fY(B.i6,r)
 B.ze.iS("Scribe.startStylusHandwriting",t.H)}},
@@ -95704,7 +95704,7 @@ agm(){this.a.ay.$0()},
 K(a){var s,r,q=this,p=A.z(t.u,t.xR)
 p.n(0,B.kM,new A.cJ(new A.aFa(q),new A.aFb(q),t.UN))
 q.a.toString
-p.n(0,B.oh,new A.cJ(new A.aFc(q),new A.aFd(q),t.jn))
+p.n(0,B.og,new A.cJ(new A.aFc(q),new A.aFd(q),t.jn))
 q.a.toString
 switch(A.aX().a){case 0:case 1:case 2:p.n(0,B.aA_,new A.cJ(new A.aFe(q),new A.aFf(q),t.hg))
 break
@@ -95778,7 +95778,7 @@ $S:554}
 A.AR.prototype={
 a1(a,b){var s=this
 if(s.G$<=0)$.aa.cq$.push(s)
-if(s.ay===B.ly)A.dJ(null,t.H)
+if(s.ay===B.lx)A.dJ(null,t.H)
 s.a4m(0,b)},
 H(a,b){var s=this
 s.a4n(0,b)
@@ -95922,7 +95922,7 @@ r.gMj()
 s.$1(!1)
 break
 case null:case void 0:r.gfN().$1(!1)
-break}r.c.gZ().u8(B.o7)},
+break}r.c.gZ().u8(B.o6)},
 ap6(){return this.Wg(null)},
 Sx(a){var s,r=this
 if(r.pC$!=null)r.N(new A.aoa(r))
@@ -96328,7 +96328,7 @@ if(this.f===r.gcb()||!r.gcb())return
 $.aa.toString
 r=$.bh()
 s=this.a.c
-r.gAM().Yk(s.a,B.on)},
+r.gAM().Yk(s.a,B.om)},
 Z6(a){var s,r,q=this,p=a.b.a
 switch(p){case 1:s=a.a===q.a.c.a
 break
@@ -96631,7 +96631,7 @@ b5(a){var s=this.B$
 s=s==null?null:s.a8(B.aU,a/this.u,s.gbh())
 if(s==null)s=0
 return s*this.u},
-f3(a){var s=this.B$,r=s==null?null:s.j0(a)
+f2(a){var s=this.B$,r=s==null?null:s.j0(a)
 $label0$0:{if(r==null){s=this.yo(a)
 break $label0$0}s=this.u*r
 break $label0$0}return s},
@@ -97266,7 +97266,7 @@ axk(a){var s=this,r=A.q0(a)
 if(A.q0(s.a)===r)return!0
 if(A.q0(s.b)===r)return!0
 if(A.q0(s.gkx())===r)return!0
-return B.c.f1(s.x,new A.a9K(r))}}
+return B.c.f0(s.x,new A.a9K(r))}}
 A.a9K.prototype={
 $1(a){return A.q0(a)===this.a},
 $S:13}
@@ -97301,8 +97301,8 @@ s=A.hj(r,r,b,r,r,r,0,r,r,B.v,r,r,r,r,new A.bk(A.a2(12),B.q),r,r,r,B.Ev,r)
 return new A.rB(B.a61,p,q.asX(A.aKz(B.v,!0,r,r,0,B.rU,B.asX,B.aw5),new A.o5(B.d,b,B.v,r,r,r,r,r,r,B.pE,B.v,r,r,r,r,r,r,r,r,r,r,r,r,r,r,B.JM,B.v,r,r,B.ad,B.h,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,B.Is,B.h),new A.qI(s),b,B.v),this.b,!1,r)},
 $S:565}
 A.a4S.prototype={
-H0(){A.Px(new A.Pw(new A.a4V(this),new A.a4W(this)),"ca-app-pub-2556899149200560/4751310597",B.oP)},
-H2(){A.Px(new A.Pw(new A.a4Z(this),new A.a5_(this)),"ca-app-pub-2556899149200560/8622605985",B.oP)},
+H0(){A.Px(new A.Pw(new A.a4V(this),new A.a4W(this)),"ca-app-pub-2556899149200560/4751310597",B.oO)},
+H2(){A.Px(new A.Pw(new A.a4Z(this),new A.a5_(this)),"ca-app-pub-2556899149200560/8622605985",B.oO)},
 a3O(a){a.$0()
 return}}
 A.a4V.prototype={
@@ -97447,7 +97447,7 @@ o=m.e
 m.gA_()
 if(o===4){o=A.hj(l,l,B.dQ,l,l,l,l,l,l,B.v,l,l,l,l,new A.bk(A.a2(16),B.q),l,l,l,l,l)
 o=A.bs(A.eN(!1,A.r(A.w("startBtn"),l,l,l,l,B.axk,l,l),l,l,l,l,l,l,m.gabq(),l,o),56,1/0)}else{o=A.hj(l,l,B.dQ,l,l,l,l,l,l,B.v,l,l,l,l,new A.bk(A.a2(16),B.q),l,l,l,l,l)
-o=A.bs(A.eN(!1,A.r(A.w("nextBtn"),l,l,l,l,B.io,l,l),l,l,l,l,l,l,new A.ayZ(m),l,o),56,1/0)}return A.iD(l,k,A.jo(!0,A.b_(A.c([s,p,new A.aw(B.ma,o,l)],t.p),B.t,B.n,B.r),B.ak,!0),l,l,l)},
+o=A.bs(A.eN(!1,A.r(A.w("nextBtn"),l,l,l,l,B.io,l,l),l,l,l,l,l,l,new A.ayZ(m),l,o),56,1/0)}return A.iD(l,k,A.jo(!0,A.b_(A.c([s,p,new A.aw(B.m9,o,l)],t.p),B.t,B.n,B.r),B.ak,!0),l,l,l)},
 aaf(a,b){var s,r,q=null,p=A.r(a.a,q,q,q,q,B.Ep,q,q),o=this.c
 o.toString
 s=A.r(a.b,q,q,q,q,A.G(q,q,A.f(o).ax.a===B.d?B.h:B.k,q,q,q,q,q,q,q,q,26,q,q,B.bB,q,q,!0,q,-0.5,q,q,q,q,q,q),B.a1,q)
@@ -97720,7 +97720,7 @@ b6=A.r(b6,b8,b8,b8,b8,A.G(b8,b8,A.f(b2).ax.a===B.d?B.R:B.k,b8,b8,b8,b8,b8,b8,b8,
 b2=b7.c
 b2.toString
 b2=A.f(b2).ax.a===B.d?B.aN:B.Y
-return new A.O5(c2.ax.k2,A.jo(!0,A.jt(A.b_(A.c([new A.vS(p,new A.as3(c0,r),b8,t.tN),B.c3,o,new A.aw(B.du,n,b8),m,l,k,j,new A.aw(B.du,i,b8),h,g,f,new A.aw(B.du,e,b8),d,c,a,a0,b,new A.aw(B.du,a1,b8),a2,new A.aw(B.du,a3,b8),a5,a6,new A.aw(B.du,a4,b8),a8,a9,b0,new A.aw(B.du,b1,b8),b3,b4,new A.aw(B.du,b5,b8),A.bs(A.jj(B.aym,b6,new A.as4(b7),A.hY(b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,new A.bk(A.a2(12),B.q),new A.az(b2,1,B.y,-1),b8,b8,b8,b8)),b8,1/0),A.eC(q,b8,b8,b8),new A.aw(B.du,A.r(A.w("dataSection"),b8,b8,b8,b8,A.G(b8,b8,r,b8,b8,b8,b8,b8,b8,b8,b8,11,b8,b8,b8,b8,b8,!0,b8,1.5,b8,b8,b8,b8,b8,b8),b8,b8),b8),A.bs(A.jj(B.a6R,A.r(A.w("dataManagement"),b8,b8,b8,b8,B.eQ,b8,b8),new A.as5(b7),A.hY(b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,new A.bk(A.a2(12),B.q),B.oV,b8,b8,b8,b8)),b8,1/0),B.c3],a7),B.a0,B.n,B.r),b8,B.m8,B.al),B.ak,!0),b8)},
+return new A.O5(c2.ax.k2,A.jo(!0,A.jt(A.b_(A.c([new A.vS(p,new A.as3(c0,r),b8,t.tN),B.c3,o,new A.aw(B.du,n,b8),m,l,k,j,new A.aw(B.du,i,b8),h,g,f,new A.aw(B.du,e,b8),d,c,a,a0,b,new A.aw(B.du,a1,b8),a2,new A.aw(B.du,a3,b8),a5,a6,new A.aw(B.du,a4,b8),a8,a9,b0,new A.aw(B.du,b1,b8),b3,b4,new A.aw(B.du,b5,b8),A.bs(A.jj(B.aym,b6,new A.as4(b7),A.hY(b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,new A.bk(A.a2(12),B.q),new A.az(b2,1,B.y,-1),b8,b8,b8,b8)),b8,1/0),A.eC(q,b8,b8,b8),new A.aw(B.du,A.r(A.w("dataSection"),b8,b8,b8,b8,A.G(b8,b8,r,b8,b8,b8,b8,b8,b8,b8,b8,11,b8,b8,b8,b8,b8,!0,b8,1.5,b8,b8,b8,b8,b8,b8),b8,b8),b8),A.bs(A.jj(B.a6R,A.r(A.w("dataManagement"),b8,b8,b8,b8,B.eQ,b8,b8),new A.as5(b7),A.hY(b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,b8,new A.bk(A.a2(12),B.q),B.oU,b8,b8,b8,b8)),b8,1/0),B.c3],a7),B.a0,B.n,B.r),b8,B.m7,B.al),B.ak,!0),b8)},
 a9p(){var s="alarmBeep",r=t.N,q=A.aA(["beep",A.w(s),"long",A.w("alarmLongBeep"),"triple",A.w("alarmTripleBeep"),"custom",A.w("alarmCustomFile")],r,r).h(0,this.cx)
 return new A.dG(new A.arx(this,q==null?A.w(s):q),null)},
 ao3(a){var s=A.c([new A.au("beep",A.w("alarmBeep")),new A.au("long",A.w("alarmLongBeep")),new A.au("triple",A.w("alarmTripleBeep")),new A.au("custom",A.w("alarmCustomFile"))],t.Wy)
@@ -97729,7 +97729,7 @@ n0(a,b,c,d){return new A.dG(new A.asZ(a,b,c,d),null)},
 ajm(a,b,c,d,e){var s,r,q=null,p=A.bn(a,$.d6().a,q,20),o=this.c
 o.toString
 s=t.p
-p=A.bg(A.aP(A.c([new A.aw(B.m3,p,q),B.be,A.bg(A.r(b,q,q,q,!0,A.G(q,q,A.f(o).ax.a===B.d?B.h:B.k,q,q,q,q,q,q,q,q,14,q,q,q,q,q,!0,q,q,q,q,q,q,q,q),q,q),1)],s),B.a0,B.n,B.r,0),1)
+p=A.bg(A.aP(A.c([new A.aw(B.m2,p,q),B.be,A.bg(A.r(b,q,q,q,!0,A.G(q,q,A.f(o).ax.a===B.d?B.h:B.k,q,q,q,q,q,q,q,q,14,q,q,q,q,q,!0,q,q,q,q,q,q,q,q),q,q),1)],s),B.a0,B.n,B.r,0),1)
 r=A.v(d).i("fN<1,2>")
 r=A.wr(new A.fN(d,r),new A.asY(this,e,c),r.i("u.E"),t.Vo)
 o=A.a4(r,A.v(r).i("u.E"))
@@ -97818,7 +97818,7 @@ p=b.aM(15)
 o=A.a2(20)
 n=A.c([b.aM(28),s],t.F)
 m=A.cc(b.aM(55),1.2)
-l=A.c([new A.bD(0,B.a7,b.aM(30),B.nt,12)],t.V)
+l=A.c([new A.bD(0,B.a7,b.aM(30),B.ns,12)],t.V)
 k=A.a2(20)
 j=t.p
 i=A.c([],j)
@@ -98066,7 +98066,7 @@ m=l.c
 m.toString
 n=A.r(n,k,k,k,k,A.G(k,k,A.f(m).ax.a===B.d?B.R:B.k,k,k,k,k,k,k,k,k,k,k,k,k,k,1.35,!0,k,k,k,k,k,k,k,k),B.a1,k)
 m=A.bs(A.jj(B.rY,A.r($.cq==="en"?"Open paypal.me/gianmarcosare":"Apri paypal.me/gianmarcosare",k,k,k,k,k,k,k),A.aNw(),A.hY(k,k,k,k,k,k,k,k,k,s,k,k,k,k,k,new A.az(s,1,B.y,-1),k,k,k,k)),k,1/0)
-return A.DF(0,A.aE(k,A.c4(new A.e_(B.FZ,A.aE(k,A.b_(A.c([B.a6V,B.aO,o,B.cy,n,B.aP,m,B.cy,A.bs(A.eN(!1,A.r($.cq==="en"?"Enter transaction ID":"Inserisci ID transazione",k,k,k,k,k,k,k),k,k,k,k,k,k,l.gON(),k,k),k,1/0)],t.p),B.t,B.n,B.a9),B.p,k,k,new A.ax(r,k,p,q,k,k,B.z),k,k,k,B.m8,k,k,k),k),k,k),B.p,j,k,k,k,k,k,B.Mi,k,k,k))},
+return A.DF(0,A.aE(k,A.c4(new A.e_(B.FZ,A.aE(k,A.b_(A.c([B.a6V,B.aO,o,B.cy,n,B.aP,m,B.cy,A.bs(A.eN(!1,A.r($.cq==="en"?"Enter transaction ID":"Inserisci ID transazione",k,k,k,k,k,k,k),k,k,k,k,k,k,l.gON(),k,k),k,1/0)],t.p),B.t,B.n,B.a9),B.p,k,k,new A.ax(r,k,p,q,k,k,B.z),k,k,k,B.m7,k,k,k),k),k,k),B.p,j,k,k,k,k,k,B.Mi,k,k,k))},
 rd(a){return this.aoE(a)},
 aoE(a){var s=0,r=A.O(t.H),q,p=this,o,n,m,l,k
 var $async$rd=A.P(function(b,c){if(b===1)return A.L(c,r)
@@ -98351,7 +98351,7 @@ $1(a){},
 $S:590}
 A.arG.prototype={
 $4(a,b,c,d){var s=t.Ni
-return A.nd(d,new A.at(A.bQ(B.lT,b,null),new A.aB(B.cJ,B.m,s),s.i("at<ar.T>")),null,!0)},
+return A.nd(d,new A.at(A.bQ(B.lS,b,null),new A.aB(B.cJ,B.m,s),s.i("at<ar.T>")),null,!0)},
 $C:"$4",
 $R:4,
 $S:162}
@@ -98443,7 +98443,7 @@ $1(a){if(J.e(a,!0))this.a.oG()},
 $S:43}
 A.arx.prototype={
 $1(a){var s=null,r=A.f(a).ax.k3,q=A.Z(140,r.m()>>>16&255,r.m()>>>8&255,r.m()&255),p=t.p
-return A.k7(!1,A.a2(8),!0,new A.aw(B.m4,A.aP(A.c([new A.aw(B.m3,A.bn(B.a6t,$.d6().a,s,20),s),B.be,A.bg(A.b_(A.c([A.r(A.w("alarmSound"),s,s,s,s,A.G(s,s,r,s,s,s,s,s,s,s,s,14,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s),A.r(this.b,s,s,s,s,A.G(s,s,q,s,s,s,s,s,s,s,s,12,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],p),B.a0,B.n,B.r),1),A.bn(B.jz,q,s,20)],p),B.t,B.n,B.r,0),s),s,!0,s,s,s,s,s,s,s,s,s,new A.arw(this.a,a),s,s,s,s,s,s,s)},
+return A.k7(!1,A.a2(8),!0,new A.aw(B.m3,A.aP(A.c([new A.aw(B.m2,A.bn(B.a6t,$.d6().a,s,20),s),B.be,A.bg(A.b_(A.c([A.r(A.w("alarmSound"),s,s,s,s,A.G(s,s,r,s,s,s,s,s,s,s,s,14,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s),A.r(this.b,s,s,s,s,A.G(s,s,q,s,s,s,s,s,s,s,s,12,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s)],p),B.a0,B.n,B.r),1),A.bn(B.jz,q,s,20)],p),B.t,B.n,B.r,0),s),s,!0,s,s,s,s,s,s,s,s,s,new A.arw(this.a,a),s,s,s,s,s,s,s)},
 $S:597}
 A.arw.prototype={
 $0(){return this.a.ao3(this.b)},
@@ -98505,7 +98505,7 @@ $0(){},
 $S:0}
 A.asZ.prototype={
 $1(a){var s=this,r=null,q=A.f(a),p=$.d6(),o=t.p
-return A.aP(A.c([A.bg(A.aP(A.c([new A.aw(B.m3,A.bn(s.a,p.a,r,20),r),B.be,A.bg(A.r(s.b,r,r,r,!0,A.G(r,r,q.ax.k3,r,r,r,r,r,r,r,r,14,r,r,r,r,r,!0,r,r,r,r,r,r,r,r),r,r),1)],o),B.a0,B.n,B.r,0),1),B.be,new A.Ti(s.c,s.d,p.a,r)],o),B.a0,B.n,B.r,0)},
+return A.aP(A.c([A.bg(A.aP(A.c([new A.aw(B.m2,A.bn(s.a,p.a,r,20),r),B.be,A.bg(A.r(s.b,r,r,r,!0,A.G(r,r,q.ax.k3,r,r,r,r,r,r,r,r,14,r,r,r,r,r,!0,r,r,r,r,r,r,r,r),r,r),1)],o),B.a0,B.n,B.r,0),1),B.be,new A.Ti(s.c,s.d,p.a,r)],o),B.a0,B.n,B.r,0)},
 $S:159}
 A.asY.prototype={
 $1(a){var s,r,q,p,o,n=this,m=null,l=n.b===a.a
@@ -98518,11 +98518,11 @@ q=r.a
 p=n.a
 o=p.c
 o.toString
-o=A.f(o).ax.a===B.d?B.b1:B.lG
+o=A.f(o).ax.a===B.d?B.b1:B.lF
 if(l)r=r.a
 else{r=p.c
 r.toString
-r=A.f(r).ax.a===B.d?B.b2:B.lz}return new A.qn(s,new A.asX(n.c,a),l,q,new A.az(r,1,B.y,-1),o,m)},
+r=A.f(r).ax.a===B.d?B.b2:B.ly}return new A.qn(s,new A.asX(n.c,a),l,q,new A.az(r,1,B.y,-1),o,m)},
 $S:602}
 A.asX.prototype={
 $1(a){return this.a.$1(this.b.a)},
@@ -98844,11 +98844,11 @@ h.push(A.aP(s,B.t,B.n,B.r,0))
 i=r.f
 if(i.length!==0){s=A.Z(20,B.aB.m()>>>16&255,B.aB.m()>>>8&255,B.aB.m()&255)
 o=A.a2(10)
-B.c.M(h,A.c([B.aO,A.aE(j,A.r("NOTE COACH: "+i,j,j,j,j,B.awB,j,j),B.p,j,j,new A.ax(s,j,B.FP,o,j,j,B.z),j,j,j,B.m5,j,j,j)],q))}h.push(B.aP)
+B.c.M(h,A.c([B.aO,A.aE(j,A.r("NOTE COACH: "+i,j,j,j,j,B.awB,j,j),B.p,j,j,new A.ax(s,j,B.FP,o,j,j,B.z),j,j,j,B.m4,j,j,j)],q))}h.push(B.aP)
 i=A.r(A.w("watchOnYoutube"),j,j,j,j,B.Ey,j,j)
 s=A.Z(80,B.cG.m()>>>16&255,B.cG.m()>>>8&255,B.cG.m()&255)
 h.push(A.bs(A.jj(B.a6S,i,new A.ats(k.f,p,r),A.hY(j,j,j,j,j,j,j,j,j,j,j,j,B.em,j,new A.bk(A.a2(12),B.q),new A.az(s,1,B.y,-1),j,j,j,j)),j,1/0))
-return A.oE(h,b,B.ma,j,!1)},
+return A.oE(h,b,B.m9,j,!1)},
 $S:78}
 A.atp.prototype={
 $3(a,b,c){return B.rW},
@@ -99033,7 +99033,7 @@ return A.N($async$$1,r)},
 $S:620}
 A.atO.prototype={
 $4(a,b,c,d){var s=t.Ni
-return A.nd(d,new A.at(A.bQ(B.lT,b,null),new A.aB(B.cJ,B.m,s),s.i("at<ar.T>")),null,!0)},
+return A.nd(d,new A.at(A.bQ(B.lS,b,null),new A.aB(B.cJ,B.m,s),s.i("at<ar.T>")),null,!0)},
 $C:"$4",
 $R:4,
 $S:162}
@@ -99081,7 +99081,7 @@ p.push(A.d3(!1,B.ayv,k,k,k,k,k,k,new A.atD(a),k,k))
 return A.f4(p,k,i,j,new A.bk(s,B.q),q)},
 $S:15}
 A.atB.prototype={
-$1(a){return B.c.f1(this.a.d,new A.atA(a))},
+$1(a){return B.c.f0(this.a.d,new A.atA(a))},
 $S:13}
 A.atA.prototype={
 $1(a){return a.a===this.a},
@@ -99145,7 +99145,7 @@ n=j?1:0.2
 return A.bg(A.c4(A.Ma(A.en(o,A.oN(A.eq("assets/icon_client.png",B.N,m,B.aS,B.bP,!1,m,m),n),B.aF),new A.ax(q,m,m,s,p,r,B.z),B.bA,l,m,m,l),m,m),1)},
 $S:129}
 A.ass.prototype={
-$1(a){return B.c.f1(this.a.d,new A.ask(a))},
+$1(a){return B.c.f0(this.a.d,new A.ask(a))},
 $S:13}
 A.ask.prototype={
 $1(a){return a.a===this.a},
@@ -99267,7 +99267,7 @@ j=t.p
 o=A.c([a1,r,B.aP,A.dl(!1,q,A.dA(b,new A.cn(4,A.a2(12),B.q),b,b,b,b,b,b,!0,b,b,b,b,b,b,B.Y,!0,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,m,n,!0,!0,b,b,b,b,b,b,b,b,b,b,b,b,b,b),b,1,new A.asD(l,k),b,o,B.ag,B.aM)],j)
 a1=l.e.length
 if(a1!==0){r=A.a2(12)
-o.push(A.aE(b,A.CG(new A.asE(l,a0,q,k),a1,b,B.lw,B.al,new A.asF(a0),!0),B.p,b,B.G3,new A.ax(B.ei,b,b,r,b,b,B.z),b,b,B.qQ,b,b,b,b))}o.push(B.aC)
+o.push(A.aE(b,A.CG(new A.asE(l,a0,q,k),a1,b,B.lv,B.al,new A.asF(a0),!0),B.p,b,B.G3,new A.ax(B.ei,b,b,r,b,b,B.z),b,b,B.qQ,b,b,b,b))}o.push(B.aC)
 a1=l.c
 if(a1!=null&&a1.y!=null){r=A.a2(12)
 a1=a1.y
@@ -99355,7 +99355,7 @@ p=p?B.v:B.h
 g[f]=new A.aw(B.hq,A.cI(b,A.aE(b,new A.fB(B.N,b,b,A.r(""+f,b,b,b,b,new A.p(!0,p,b,b,b,b,b,B.D,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b),b,b),b),B.p,b,b,new A.ax(n,b,b,new A.ch(m,m,m,m),b,b,B.z),b,40,b,b,b,b,40),B.V,!1,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,b,new A.asH(l,k,f),b,b,b,b,b,b,!1,B.ao),b)}o.push(A.aP(g,B.t,B.n,B.r,0))
 o.push(B.c3)
 o.push(A.bs(A.eN(!1,A.r(A.w("save"),b,b,b,b,B.io,b,b),b,b,b,b,b,b,new A.asI(l,a0,q,c.f,c.w,c.z,c.y,c.r,c.as,a1,c.at,c.ax,c.ay),b,b),b,1/0))
-return A.oE(o,a3,B.m9,b,!1)},
+return A.oE(o,a3,B.m8,b,!1)},
 $S:78}
 A.asD.prototype={
 $1(a){return this.b.$1(new A.asC(this.a,a))},
@@ -99373,13 +99373,13 @@ return A.eC(A.f(s).ax.a===B.d?B.b1:B.am,null,1,null)},
 $S:132}
 A.asE.prototype={
 $2(a,b){var s,r=this,q=null,p=r.a,o=p.e[b],n=o.y
-n=n!=null?A.en(A.a2(8),A.eq("assets/gif/"+n+".webp",B.N,new A.asA(),B.aS,B.bP,!1,48,48),B.aF):B.mR
+n=n!=null?A.en(A.a2(8),A.eq("assets/gif/"+n+".webp",B.N,new A.asA(),B.aS,B.bP,!1,48,48),B.aF):B.mQ
 s=r.b.c
 s.toString
 return A.rm(B.qT,q,q,!0,!0,q,n,q,new A.asB(p,r.c,o,r.d),q,q,A.r(o.a,q,q,q,q,A.G(q,q,A.f(s).ax.a===B.d?B.h:B.k,q,q,q,q,q,q,q,q,13,q,q,q,q,q,!0,q,q,q,q,q,q,q,q),q,q),q,q)},
 $S:203}
 A.asA.prototype={
-$3(a,b,c){return B.mR},
+$3(a,b,c){return B.mQ},
 $S:79}
 A.asB.prototype={
 $0(){var s=this,r=s.c
@@ -99462,20 +99462,20 @@ o=A.a4(o,o.$ti.i("aI.E"))
 q.d=o}catch(i){q.d=A.c([],t.fz)}if(q.c!=null)q.N(new A.aDd(q))
 return A.M(null,r)}})
 return A.N($async$zE,r)},
-eZ(){var s=0,r=A.O(t.H),q=this,p,o,n
-var $async$eZ=A.P(function(a,b){if(a===1)return A.L(b,r)
+eY(){var s=0,r=A.O(t.H),q=this,p,o,n
+var $async$eY=A.P(function(a,b){if(a===1)return A.L(b,r)
 for(;;)switch(s){case 0:s=2
-return A.x(A.cx(),$async$eZ)
+return A.x(A.cx(),$async$eY)
 case 2:p=b
 o=q.d
 n=A.a7(o).i("a_<1,aj<m,@>>")
 o=A.a4(new A.a_(o,new A.aDC(),n),n.i("aI.E"))
 s=3
-return A.x(p.bQ("String","client_routine",B.ar.he(o,null)),$async$eZ)
+return A.x(p.bQ("String","client_routine",B.ar.he(o,null)),$async$eY)
 case 3:s=4
-return A.x(p.bQ("String","microcycle_done","[]"),$async$eZ)
+return A.x(p.bQ("String","microcycle_done","[]"),$async$eY)
 case 4:return A.M(null,r)}})
-return A.N($async$eZ,r)},
+return A.N($async$eY,r)},
 a9o(){var s,r={},q=$.ah(),p=A.c([],t.s)
 r.a=null
 r.b=0
@@ -99491,7 +99491,7 @@ s=3
 return A.x(A.fk(!0,new A.aDa(p),o,t.y),$async$z6)
 case 3:if(c!==!0){s=1
 break}p.N(new A.aDb(p,a))
-p.eZ()
+p.eY()
 case 1:return A.M(q,r)}})
 return A.N($async$z6,r)},
 Ai(a){var s,r=this
@@ -99541,17 +99541,17 @@ o=A.cc(o,d?1.5:1)
 s=d?a:B.cA
 return A.cI(r,A.aE(r,A.r(b,r,r,r,r,A.G(r,r,s,r,r,r,r,r,r,r,r,12,r,r,d?B.D:B.I,r,r,!0,r,r,r,r,r,r,r,r),r,r),B.p,r,r,new A.ax(q,r,o,p,r,r,B.z),r,r,B.hq,B.LN,r,r,r),B.V,!1,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,r,c,r,r,r,r,r,r,!1,B.ao)},
 adl(a,b){this.N(new A.aD7(this,a,b))
-this.eZ()},
+this.eY()},
 amU(a,b){var s={}
 s.a=b
 if(b>a)s.a=b-1
 this.N(new A.aDB(s,this,a))
-this.eZ()},
+this.eY()},
 amS(a,b,c){var s={}
 s.a=c
 if(c>b)s.a=c-1
 this.N(new A.aDA(s,this,a,b))
-this.eZ()},
+this.eY()},
 amR(a){var s=this.d[a].a,r=$.ah(),q=this.c
 q.toString
 A.fk(!0,new A.aDz(this,new A.ce(new A.bO(s,B.aE,B.ai),r),a),q,t.z)},
@@ -99572,7 +99572,7 @@ f=this.c
 f.toString
 s=A.f(f).ax.a===B.d?B.ad:B.h
 A.jQ(s,new A.aDq(m,this,k,new A.ce(new A.bO(j,B.aE,B.ai),i),new A.ce(new A.bO(""+g,B.aE,B.ai),i),new A.ce(new A.bO(""+l.e,B.aE,B.ai),i),new A.ce(new A.bO(""+h,B.aE,B.ai),i),new A.ce(new A.bO(""+l.d,B.aE,B.ai),i),new A.ce(new A.bO(l.f,B.aE,B.ai),i),l,l.w,a,b),f,!0,B.fI,t.z)},
-K(a){var s,r,q,p,o,n,m=this,l=null,k=$.d6().a,j=A.f(a).ax.a===B.d?B.iP:B.h,i=A.r(A.w("mySchedule"),l,l,l,l,l,l,l),h=A.eb(l,l,A.bn(B.mO,A.f(a).ax.a===B.d?B.h:B.k,l,l),l,l,new A.aDS(a),l,l,l),g=t.p
+K(a){var s,r,q,p,o,n,m=this,l=null,k=$.d6().a,j=A.f(a).ax.a===B.d?B.iP:B.h,i=A.r(A.w("mySchedule"),l,l,l,l,l,l,l),h=A.eb(l,l,A.bn(B.mN,A.f(a).ax.a===B.d?B.h:B.k,l,l),l,l,new A.aDS(a),l,l,l),g=t.p
 i=A.Ad(A.c([A.d3(!1,A.r(A.w("save"),l,l,l,l,A.G(l,l,k,l,l,l,l,l,l,l,l,l,l,l,B.D,l,l,!0,l,l,l,l,l,l,l,l),l,l),l,l,l,l,l,l,new A.aDT(m,a),l,l)],g),l,l,l,h,i)
 h=m.gajI()
 s=A.f(a).ax.a===B.d?B.ei:B.qc
@@ -99765,7 +99765,7 @@ A.aCw.prototype={
 $0(){var s,r=null,q=A.w("selectMusclesOpt"),p=this.a.c
 p.toString
 q=A.r(q,r,r,r,r,A.G(r,r,A.f(p).ax.a===B.d?B.R:B.k,r,r,r,r,r,r,r,r,13,r,r,r,r,r,!0,r,r,r,r,r,r,r,r),r,r)
-s=B.nh.geR(B.nh)
+s=B.ng.geR(B.ng)
 return A.b_(A.c([q,B.cy,A.kw(B.cn,s.ip(s,new A.aCm()).hO(0,new A.aCn(this.b,this.c),t.LD).dN(0),8,8)],t.p),B.a0,B.n,B.a9)},
 $S:34}
 A.aCm.prototype={
@@ -99827,7 +99827,7 @@ if(q.length===0)return
 A.b1(r.d,!1).bc(null)
 s=r.b
 s.N(new A.aCb(r.a,s,q,r.e))
-s.eZ()},
+s.eY()},
 $S:0}
 A.aCb.prototype={
 $0(){var s=this,r=s.b.d,q=A.dv(s.d,!0,t.N),p=s.a.a
@@ -99949,7 +99949,7 @@ p=q.a
 o=q.c
 p.N(new A.aD3(p,o))
 s=2
-return A.x(p.eZ(),$async$$0)
+return A.x(p.eY(),$async$$0)
 case 2:p=p.c
 if(p!=null){p=p.ab(t.Pu).f
 n=J.an(o)
@@ -100027,7 +100027,7 @@ j=t.p
 o=A.c([a2,r,B.aP,A.dl(!1,q,A.dA(a0,new A.cn(4,A.a2(12),B.q),a0,a0,a0,a0,a0,a0,!0,a0,a0,a0,a0,a0,a0,B.Y,!0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,m,n,!0,!0,a0,a0,a0,a0,a0,a0,a0,a0,p,a0,a0,a0,a0,a0),a0,1,new A.aBX(l,k),a0,o,B.ag,B.aM)],j)
 a2=l.d.length
 if(a2!==0){r=A.a2(12)
-o.push(A.aE(a0,A.CG(new A.aBY(l,a1,q,k),a2,a0,B.lw,B.al,new A.aBZ(a1),!0),B.p,a0,B.G4,new A.ax(B.ei,a0,a0,r,a0,a0,B.z),a0,a0,B.qQ,a0,a0,a0,a0))}o.push(B.aC)
+o.push(A.aE(a0,A.CG(new A.aBY(l,a1,q,k),a2,a0,B.lv,B.al,new A.aBZ(a1),!0),B.p,a0,B.G4,new A.ax(B.ei,a0,a0,r,a0,a0,B.z),a0,a0,B.qQ,a0,a0,a0,a0))}o.push(B.aC)
 a2=A.r(A.w("browseArchive"),a0,a0,a0,a0,a0,a0,a0)
 r=s.aM(80)
 o.push(A.jj(B.rV,a2,new A.aC_(l,a1,a.f,k,q),A.hY(a0,a0,a0,a0,a0,a0,a0,a0,a0,s,a0,a0,a0,a0,new A.bk(A.a2(12),B.q),new A.az(r,1,B.y,-1),a0,a0,a0,a0)))
@@ -100117,7 +100117,7 @@ j=j?B.v:B.h
 d[c]=new A.aw(B.hq,A.cI(a0,A.aE(a0,new A.fB(B.N,a0,a0,A.r(""+c,a0,a0,a0,a0,new A.p(!0,j,a0,a0,a0,a0,a0,B.D,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0),a0,a0),a0),B.p,a0,a0,new A.ax(h,a0,a0,new A.ch(g,g,g,g),a0,a0,B.z),a0,40,a0,a0,a0,a0,40),B.V,!1,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,a0,new A.aC1(l,k,c),a0,a0,a0,a0,a0,a0,!1,B.ao),a0)}o.push(A.aP(d,B.t,B.n,B.r,0))
 o.push(B.c3)
 o.push(A.bs(A.eN(!1,A.r(A.w("save"),a0,a0,a0,a0,B.io,a0,a0),a0,a0,a0,a0,a0,a0,new A.aC2(l,a1,q,a2,r,n,i,m,a.as,a.at),a0,a0),a0,1/0))
-return A.oE(o,a4,B.m9,a0,!1)},
+return A.oE(o,a4,B.m8,a0,!1)},
 $S:78}
 A.aBW.prototype={
 $0(){this.b.qu(0,B.at5)
@@ -100209,7 +100209,7 @@ l=A.BE(0,q==null?j:q.y,n,i,"",s,o,p,m,r,!1,!1,!1)
 A.b1(k.x,!1).bc(j)
 s=k.b
 s.N(new A.aBP(s,k.y,l))
-s.eZ()},
+s.eY()},
 $S:0}
 A.aBO.prototype={
 $1(a){var s=A.dW(a.a.a,null)
@@ -100264,7 +100264,7 @@ $1(a){return A.b8P(a).p(0,this.a.a)},
 $S:215}
 A.aCV.prototype={
 $1(a){var s=this.a
-return B.f.p(a.a.toLowerCase(),s)||B.f.p(a.b.toLowerCase(),s)||B.c.f1(a.x,new A.aCR(s))},
+return B.f.p(a.a.toLowerCase(),s)||B.f.p(a.b.toLowerCase(),s)||B.c.f0(a.x,new A.aCR(s))},
 $S:215}
 A.aCR.prototype={
 $1(a){return B.f.p(a.toLowerCase(),this.a)},
@@ -100352,7 +100352,7 @@ $0(){var s,r=B.f.bU(this.b.a.a)
 if(r.length===0)return
 s=this.a
 s.N(new A.aDw(s,this.c,r))
-s.eZ()
+s.eY()
 s=s.c
 s.toString
 A.b1(s,!1).bc(null)},
@@ -100468,7 +100468,7 @@ o=A.G(d,d,A.f(s).ax.a===B.d?B.ae:B.A,d,d,d,d,d,d,d,d,d,d,d,d,d,d,!0,d,d,d,d,d,d,
 m.push(A.dl(!1,a,A.dA(d,new A.cn(4,A.a2(12),B.q),d,d,d,d,d,d,!0,d,d,d,d,d,d,B.Y,!0,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,d,o,p,!0,!0,d,d,d,d,d,d,d,d,d,d,d,d,d,d),d,3,d,d,r,B.ag,B.aM))
 m.push(B.c3)
 m.push(A.bs(A.eN(!1,A.r(A.w("save"),d,d,d,d,B.io,d,d),d,d,d,d,d,d,new A.aDl(l,b,q,e.r,e.x,e.z,e.w,a,e.as,e.at,e.ax,e.ay,e.ch),d,d),d,1/0))
-return A.oE(m,a1,B.m9,d,!1)},
+return A.oE(m,a1,B.m8,d,!1)},
 $S:78}
 A.aDj.prototype={
 $1(a){return this.b.$1(new A.aDi(this.a,a))},
@@ -100516,7 +100516,7 @@ j=A.BE(q,s,l,g,k,r,m,o,i.y,p,!1,n.z,!1)
 A.b1(i.z,!1).bc(h)
 n=i.b
 n.N(new A.aDg(n,i.Q,i.as,j))
-n.eZ()},
+n.eY()},
 $S:0}
 A.aDf.prototype={
 $1(a){var s=A.dW(a.a.a,null)
@@ -100536,7 +100536,7 @@ $0(){var s=0,r=A.O(t.H),q=this,p
 var $async$$0=A.P(function(a,b){if(a===1)return A.L(b,r)
 for(;;)switch(s){case 0:p=q.a
 s=2
-return A.x(p.eZ(),$async$$0)
+return A.x(p.eY(),$async$$0)
 case 2:if(p.c!=null)A.b1(q.b,!1).bc(null)
 return A.M(null,r)}})
 return A.N($async$$0,r)},
@@ -100855,13 +100855,13 @@ j=J.ek(r.a(l.h(m,"series")),q)
 i=p.h(0,k)
 if(i==null||i.length===0||j.gA(0)===0)continue
 m=A.a7(i).i("a_<1,H>")
-h=new A.a_(i,new A.aGk(),m).eX(0,new A.aGl())/i.length
-g=new A.a_(i,new A.aGm(),m).eX(0,new A.aGn())/i.length
+h=new A.a_(i,new A.aGk(),m).f6(0,new A.aGl())/i.length
+g=new A.a_(i,new A.aGm(),m).f6(0,new A.aGn())/i.length
 m=j.$ti.i("a_<ac.E,H>")
 l=j.a
 f=J.an(l)
-e=new A.a_(j,new A.aGo(),m).eX(0,new A.aGp())/f.gA(l)
-d=new A.a_(j,new A.aGq(),m).eX(0,new A.aGr())/f.gA(l)
+e=new A.a_(j,new A.aGo(),m).f6(0,new A.aGp())/f.gA(l)
+d=new A.a_(j,new A.aGq(),m).f6(0,new A.aGr())/f.gA(l)
 if(e>h+0.05||d>g+0.05)++o
 else if(e<h-0.05&&d<g-0.05)++n}return o-n},
 ao6(a){A.fk(!0,new A.aH9(this),a,t.z)},
@@ -100891,7 +100891,7 @@ p.toString
 s=A.r(b,r,r,r,r,A.G(r,r,A.f(p).ax.a===B.d?B.cA:B.A,r,r,r,r,r,r,r,r,r,r,r,r,r,r,!0,r,r,r,r,r,r,r,r),r,r)
 p=this.c
 p.toString
-return new A.aw(B.m4,A.aP(A.c([q,B.be,new A.fJ(1,B.ct,s,r),B.kz,A.r(c,r,r,r,r,A.G(r,r,A.f(p).ax.a===B.d?B.h:B.k,r,r,r,r,r,r,r,r,16,r,r,B.D,r,r,!0,r,r,r,r,r,r,r,r),r,r)],t.p),B.t,B.n,B.r,0),r)},
+return new A.aw(B.m3,A.aP(A.c([q,B.be,new A.fJ(1,B.ct,s,r),B.kz,A.r(c,r,r,r,r,A.G(r,r,A.f(p).ax.a===B.d?B.h:B.k,r,r,r,r,r,r,r,r,16,r,r,B.D,r,r,!0,r,r,r,r,r,r,r,r),r,r)],t.p),B.t,B.n,B.r,0),r)},
 yG(a){if(this.ay)return
 this.Wl(a,!0)},
 yF(a){var s,r=this
@@ -101045,9 +101045,9 @@ b=j.length-1
 a=d
 for(;;){if(!(a<b&&j[a+1].w===f))break;++a}b=a+1
 j=B.c.d8(j,c,b)
-a0=new A.a_(j,new A.aGL(),A.a7(j).i("a_<1,o>")).eX(0,new A.aGO())
+a0=new A.a_(j,new A.aGL(),A.a7(j).i("a_<1,o>")).f6(0,new A.aGO())
 b=B.c.d8(p.a.c.d,c,b)
-a1=new A.a_(b,new A.aGP(),A.a7(b).i("a_<1,o>")).eX(0,new A.aGQ())
+a1=new A.a_(b,new A.aGP(),A.a7(b).i("a_<1,o>")).f6(0,new A.aGQ())
 e.a=null
 for(a2=p.d+1,j=p.e,b=p.a;a2<=a;++a2)if(j<=b.c.d[a2].b){e.a=a2
 break}s=e.a!=null?5:7
@@ -101280,7 +101280,7 @@ c=A.hj(a1,a1,h?B.ej:f,a1,a1,a1,a1,a1,a1,B.v,a1,a1,a1,a1,a1,a1,a1,a1,a1,a1)
 h=A.eN(!1,A.r(a0.p3?a0.Rl(a0.p2):A.w("startCardio"),a1,a1,a1,a1,B.aul,a1,a1),a1,a1,a1,a1,a1,a1,d,a1,c)}else h=A.eN(!1,A.r(A.w("confirmSeries"),a1,a1,a1,a1,a1,a1,a1),a1,a1,a1,a1,a1,a1,a0.gQc(),a1,a1)
 p.push(A.aE(a1,A.bs(h,56,1/0),B.p,a1,a1,new A.ax(l,a1,new A.dF(new A.az(i,1,B.y,-1),B.q,B.q,B.q),a1,a1,a1,B.z),a1,a1,a1,new A.a0(24,12,24,o+16),a1,a1,a1))}B.c.M(s,p)}return A.aRk(!1,A.iD(a2,a1,A.cI(B.aT,A.b_(s,B.t,B.n,B.r),B.V,!1,a1,a1,a1,a1,a1,a1,a1,a1,a1,a1,a1,a1,a1,a1,a1,a1,a1,a3,a1,a1,a1,a1,a1,a1,!1,B.ao),a1,a1,a1),new A.aHE(a0,a5),t.K)},
 aa1(a){var s=null,r=this.z,q=r>=60?B.f.lh(B.l.k(B.l.dD(r,60)),2,"0")+":"+B.f.lh(B.l.k(B.l.aX(r,60)),2,"0"):""+r+" s",p=a.aM(230),o=A.a2(24)
-return new A.aw(B.m4,A.c4(A.aE(s,A.aP(A.c([B.a7f,B.cW,A.r(q,s,s,s,s,B.atu,s,s),B.be,A.cI(s,B.a79,B.V,!1,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,new A.aG2(this),s,s,s,s,s,s,!1,B.ao)],t.p),B.t,B.n,B.a9,0),B.p,s,s,new A.ax(p,s,s,o,B.abl,s,B.z),s,s,s,B.M6,s,s,s),s,s),s)},
+return new A.aw(B.m3,A.c4(A.aE(s,A.aP(A.c([B.a7f,B.cW,A.r(q,s,s,s,s,B.atu,s,s),B.be,A.cI(s,B.a79,B.V,!1,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,s,new A.aG2(this),s,s,s,s,s,s,!1,B.ao)],t.p),B.t,B.n,B.a9,0),B.p,s,s,new A.ax(p,s,s,o,B.abl,s,B.z),s,s,s,B.M6,s,s,s),s,s),s)},
 r8(a,b){var s,r,q,p,o=this,n=o.a.c.d
 if(a>=n.length)return
 s=n[a]
@@ -101310,7 +101310,7 @@ o=A.c([],p)
 r=b>0
 if(r){n=i.c
 n.toString
-m=A.bn(B.mP,A.f(n).ax.a===B.d?B.J:B.U,h,11)
+m=A.bn(B.mO,A.f(n).ax.a===B.d?B.J:B.U,h,11)
 l=A.w("lastTime")
 n=i.c
 n.toString
@@ -101318,11 +101318,11 @@ m=A.aP(A.c([m,B.dE,A.r(l,h,h,h,h,A.G(h,h,A.f(n).ax.a===B.d?B.J:B.U,h,h,h,h,h,h,h
 l=A.Z(30,B.aG.m()>>>16&255,B.aG.m()>>>8&255,B.aG.m()&255)
 k=A.cc(A.Z(180,B.aG.m()>>>16&255,B.aG.m()>>>8&255,B.aG.m()&255),1.5)
 j=A.a2(10)
-n=A.aE(h,A.r(A.t(B.e.aX(b,1)===0?B.e.bE(b):b)+" kg",h,h,h,h,B.axx,h,h),B.p,h,h,new A.ax(l,h,k,j,h,h,B.z),h,h,h,B.m6,h,h,h)
+n=A.aE(h,A.r(A.t(B.e.aX(b,1)===0?B.e.bE(b):b)+" kg",h,h,h,h,B.axx,h,h),B.p,h,h,new A.ax(l,h,k,j,h,h,B.z),h,h,h,B.m5,h,h,h)
 l=e.aM(30)
 k=A.cc(e.aM(180),1.5)
 j=A.a2(10)
-B.c.M(o,A.c([m,B.bV,A.kw(B.kT,A.c([n,A.aE(h,A.r(""+c+" reps",h,h,h,h,A.G(h,h,e,h,h,h,h,h,h,h,h,17,h,h,B.D,h,h,!0,h,h,h,h,h,h,h,h),h,h),B.p,h,h,new A.ax(l,h,k,j,h,h,B.z),h,h,h,B.m6,h,h,h)],p),6,8)],p))}if(d||a1){n=d?A.Z(20,B.aG.m()>>>16&255,B.aG.m()>>>8&255,B.aG.m()&255):A.Z(20,B.iR.m()>>>16&255,B.iR.m()>>>8&255,B.iR.m()&255)
+B.c.M(o,A.c([m,B.bV,A.kw(B.kT,A.c([n,A.aE(h,A.r(""+c+" reps",h,h,h,h,A.G(h,h,e,h,h,h,h,h,h,h,h,17,h,h,B.D,h,h,!0,h,h,h,h,h,h,h,h),h,h),B.p,h,h,new A.ax(l,h,k,j,h,h,B.z),h,h,h,B.m5,h,h,h)],p),6,8)],p))}if(d||a1){n=d?A.Z(20,B.aG.m()>>>16&255,B.aG.m()>>>8&255,B.aG.m()&255):A.Z(20,B.iR.m()>>>16&255,B.iR.m()>>>8&255,B.iR.m()&255)
 m=A.cc(d?B.aG:B.iR,1.2)
 l=A.a2(10)
 k=d?B.jA:B.cD
@@ -101343,7 +101343,7 @@ r.toString
 n=A.G(h,h,A.f(r).ax.a===B.d?B.aN:B.Y,h,h,h,h,h,h,h,h,12,h,h,h,h,h,!0,h,h,h,h,h,h,h,h)
 r=i.c
 r.toString
-p=A.dA(h,B.oD,h,B.ak,h,h,h,h,!0,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,n,p,h,h,h,h,h,!0,h,h,h,!0,!0,h,A.bn(B.a6M,A.f(r).ax.a===B.d?B.aN:B.Y,h,16),h,h,h,h,h,h,h,h,h,h,h,h)
+p=A.dA(h,B.oC,h,B.ak,h,h,h,h,!0,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,n,p,h,h,h,h,h,!0,h,h,h,!0,!0,h,A.bn(B.a6M,A.f(r).ax.a===B.d?B.aN:B.Y,h,16),h,h,h,h,h,h,h,h,h,h,h,h)
 o.push(A.dl(!1,i.CW.bI(0,a.a,new A.aG4(a)),p,h,1,new A.aG5(i,a,f),h,h,B.ag,B.aM))
 return A.aE(h,A.b_(o,B.t,B.n,B.r),B.p,h,h,new A.ax(g,h,q,s,h,h,B.z),h,h,B.M2,B.LO,h,h,h)},
 ao4(a,b){var s,r,q,p,o
@@ -101376,7 +101376,7 @@ k=J.fy(l,new A.aGu(),q)
 k=A.a4(k,k.$ti.i("aI.E"))
 J.hf(o,m,k)}}s=a6.$ti.i("bA<1>")
 j=A.a4(new A.bA(a6,s),s.i("u.E"))
-B.c.eY(j,new A.aGv())
+B.c.eX(j,new A.aGv())
 if(j.length<2){this.go=!1
 return}s=a6.h(0,j[0])
 s.toString
@@ -101495,7 +101495,7 @@ if(j!=null)B.c.M(a,A.c([A.en(A.a2(8),A.eq(j,B.N,new A.aGd(),B.aS,B.bP,!1,72,72),
 a0=A.c([A.r(a6.f,2,B.aD,a7,a7,A.G(a7,a7,i.aM(210),a7,a7,a7,a7,a7,a7,a7,a7,18,a7,a7,B.bb,a7,a7,!0,a7,a7,a7,a7,a7,a7,a7,a7),B.a1,a7)],f)
 if(q>0){a1=a6.c
 a1.toString
-a2=A.bn(B.mP,A.f(a1).ax.a===B.d?A.Z(70,B.h.m()>>>16&255,B.h.m()>>>8&255,B.h.m()&255):B.iU,a7,11)
+a2=A.bn(B.mO,A.f(a1).ax.a===B.d?A.Z(70,B.h.m()>>>16&255,B.h.m()>>>8&255,B.h.m()&255):B.iU,a7,11)
 a3=A.w("lastTime")
 a1=a6.c
 a1.toString
@@ -101517,7 +101517,7 @@ a8=a6.c
 a8.toString
 e.push(A.cI(a7,A.aE(a7,A.r("SKIP",a7,a7,a7,a7,A.G(a7,a7,A.f(a8).ax.a===B.d?B.h:B.k,a7,a7,a7,a7,a7,a7,a7,a7,16,a7,a7,B.bb,a7,a7,!0,a7,3,a7,a7,a7,a7,a7,a7),a7,a7),B.p,a7,a7,new A.ax(a7,a7,r,d,a7,a7,B.z),a7,a7,a7,B.Mv,a7,a7,a7),B.V,!1,a7,a7,a7,a7,a7,a7,a7,a7,a7,a7,a7,a7,a7,a7,a7,a7,a7,a6.gaon(),a7,a7,a7,a7,a7,a7,!1,B.ao))
 e.push(a6.aal())
-return A.iD(a7,s,A.jo(!0,A.b_(A.c([B.aC,o,B.bV,g,A.bg(new A.aw(B.Mk,A.b_(e,B.t,B.ng,B.r),a7),1)],f),B.t,B.n,B.r),B.ak,!0),a7,a7,a7)},
+return A.iD(a7,s,A.jo(!0,A.b_(A.c([B.aC,o,B.bV,g,A.bg(new A.aw(B.Mk,A.b_(e,B.t,B.nf,B.r),a7),1)],f),B.t,B.n,B.r),B.ak,!0),a7,a7,a7)},
 uS(a,b){var s,r,q,p,o,n,m,l
 try{s=this.fy.h(0,a)
 if(s==null||J.bS(s)===0){r=this.a.e.h(0,a)
@@ -101788,7 +101788,7 @@ b=p.c
 b.toString
 B.c.M(d,A.c([A.r(c,a1,a1,a1,a1,A.G(a1,a1,A.f(b).ax.a===B.d?B.cA:B.A,a1,a1,a1,a1,a1,a1,a1,a1,11,a1,a1,a1,a1,a1,!0,a1,a1,a1,a1,a1,a1,a1,a1),B.a1,a1)],m))}if(p.db>0){c=A.w("streakFireMsg")
 b=p.db
-B.c.M(d,A.c([B.c4,A.r(A.bt(c,"{n}",""+b),a1,a1,a1,a1,B.atw,a1,a1)],m))}k=A.c([j,B.aC,i,h,B.aC,g,B.aC,A.aE(a1,A.b_(d,B.t,B.n,B.r),B.p,a1,a1,new A.ax(k,a1,e,f,a1,a1,B.z),a1,a1,a1,B.m5,a1,a1,a1)],m)
+B.c.M(d,A.c([B.c4,A.r(A.bt(c,"{n}",""+b),a1,a1,a1,a1,B.atw,a1,a1)],m))}k=A.c([j,B.aC,i,h,B.aC,g,B.aC,A.aE(a1,A.b_(d,B.t,B.n,B.r),B.p,a1,a1,new A.ax(k,a1,e,f,a1,a1,B.z),a1,a1,a1,B.m4,a1,a1,a1)],m)
 j=A.f(a2).ax.a===B.d?B.px:B.d4
 i=A.a2(14)
 h=A.cc(A.f(a2).ax.b.aM(70),1)
@@ -101821,7 +101821,7 @@ $1(a){var s,r,q,p=null,o=this.a,n=o.a.r[a],m=o.fr.p(0,n),l=this.b,k=A.a2(7),j=m?
 if(m)o=p
 else{o=o.c
 o.toString
-o=A.f(o).ax.a===B.d?B.ad:B.lG}s=m?A.c([new A.bD(0,B.a7,A.Z(80,B.aZ.m()>>>16&255,B.aZ.m()>>>8&255,B.aZ.m()&255),B.m,6)],t.V):p
+o=A.f(o).ax.a===B.d?B.ad:B.lF}s=m?A.c([new A.bD(0,B.a7,A.Z(80,B.aZ.m()>>>16&255,B.aZ.m()>>>8&255,B.aZ.m()&255),B.m,6)],t.V):p
 r=A.a2(7)
 q=m?1:0.2
 return A.bg(A.c4(A.Ma(A.en(r,A.oN(A.eq("assets/icon_client.png",B.N,p,B.aS,B.bP,!1,p,p),q),B.aF),new A.ax(o,p,p,k,s,j,B.z),B.bA,l,p,p,l),p,p),1)},
@@ -101877,7 +101877,7 @@ k=A.c([r,B.c4,n,B.fL,A.aP(A.c([m,l,A.eb(f,f,A.bn(B.jz,A.f(j).ax.a===B.d?B.R:B.k,
 r=g.e
 if(r>0){n=e.c
 n.toString
-m=A.bn(B.mP,A.f(n).ax.a===B.d?B.J:B.U,f,11)
+m=A.bn(B.mO,A.f(n).ax.a===B.d?B.J:B.U,f,11)
 l=A.w("lastTime")
 n=e.c
 n.toString
@@ -101987,7 +101987,7 @@ s.fC()}},
 $S:0}
 A.aGz.prototype={
 $1(a){var s,r,q,p,o,n,m=this,l=null,k=t.l
-k=B.c.eX(A.c([A.bx(a,l,k).w.r.d,A.bx(a,l,k).w.w.d,64],t.n),B.lt)
+k=Math.max(A.bx(a,l,k).w.r.d,A.bx(a,l,k).w.w.d)
 s=m.a
 r=s.c
 r.toString
@@ -102277,7 +102277,7 @@ s=A.r(A.w("execution"),g,g,g,g,A.G(g,g,s,g,g,g,g,g,g,g,g,11,g,g,B.D,g,g,!0,g,1,g
 m=A.aJQ(q.r)
 l=f.c
 l.toString
-e.push(A.aE(g,A.b_(A.c([s,B.aC,A.r(m,g,g,g,g,A.G(g,g,A.f(l).ax.a===B.d?B.h:B.k,g,g,g,g,g,g,g,g,13,g,g,g,g,1.5,!0,g,g,g,g,g,g,g,g),g,g)],n),B.a0,B.n,B.r),B.p,g,g,new A.ax(r,g,g,p,g,g,B.z),g,g,g,B.m7,g,g,g))
+e.push(A.aE(g,A.b_(A.c([s,B.aC,A.r(m,g,g,g,g,A.G(g,g,A.f(l).ax.a===B.d?B.h:B.k,g,g,g,g,g,g,g,g,13,g,g,g,g,1.5,!0,g,g,g,g,g,g,g,g),g,g)],n),B.a0,B.n,B.r),B.p,g,g,new A.ax(r,g,g,p,g,g,B.z),g,g,g,B.m6,g,g,g))
 e.push(B.aC)
 s=A.Z(15,B.aB.m()>>>16&255,B.aB.m()>>>8&255,B.aB.m()&255)
 r=A.a2(14)
@@ -102285,7 +102285,7 @@ p=A.r(A.w("tips"),g,g,g,g,A.G(g,g,B.aB,g,g,g,g,g,g,g,g,11,g,g,B.D,g,g,!0,g,1,g,g
 q=A.aJQ(q.w)
 f=f.c
 f.toString
-e.push(A.aE(g,A.b_(A.c([p,B.aC,A.r(q,g,g,g,g,A.G(g,g,A.f(f).ax.a===B.d?B.h:B.k,g,g,g,g,g,g,g,g,13,g,g,g,g,1.5,!0,g,g,g,g,g,g,g,g),g,g)],n),B.a0,B.n,B.r),B.p,g,g,new A.ax(s,g,g,r,g,g,B.z),g,g,g,B.m7,g,g,g))
+e.push(A.aE(g,A.b_(A.c([p,B.aC,A.r(q,g,g,g,g,A.G(g,g,A.f(f).ax.a===B.d?B.h:B.k,g,g,g,g,g,g,g,g,13,g,g,g,g,1.5,!0,g,g,g,g,g,g,g,g),g,g)],n),B.a0,B.n,B.r),B.p,g,g,new A.ax(s,g,g,r,g,g,B.z),g,g,g,B.m6,g,g,g))
 B.c.M(o,e)}else{e=f.c
 e.toString
 e=A.f(e).ax.a===B.d?A.Z(5,B.h.m()>>>16&255,B.h.m()>>>8&255,B.h.m()&255):A.Z(5,B.k.m()>>>16&255,B.k.m()>>>8&255,B.k.m()&255)
@@ -102293,7 +102293,7 @@ s=A.a2(12)
 r=A.w("notInCatalogShort")
 f=f.c
 f.toString
-o.push(A.aE(g,A.r(r,g,g,g,g,A.G(g,g,A.f(f).ax.a===B.d?B.J:B.U,g,g,g,g,g,g,g,g,13,g,g,g,g,g,!0,g,g,g,g,g,g,g,g),B.a1,g),B.p,g,g,new A.ax(e,g,g,s,g,g,B.z),g,g,g,B.ht,g,g,g))}return A.oE(o,b,B.ma,g,!1)},
+o.push(A.aE(g,A.r(r,g,g,g,g,A.G(g,g,A.f(f).ax.a===B.d?B.J:B.U,g,g,g,g,g,g,g,g,13,g,g,g,g,g,!0,g,g,g,g,g,g,g,g),B.a1,g),B.p,g,g,new A.ax(e,g,g,s,g,g,B.z),g,g,g,B.ht,g,g,g))}return A.oE(o,b,B.m9,g,!1)},
 $S:78}
 A.aGX.prototype={
 $3(a,b,c){return B.rW},
@@ -102452,7 +102452,7 @@ p.aF()
 s=A.bz(o,B.dU,o,o,p)
 p.d!==$&&A.bK()
 p.d=s
-r=A.bz(o,B.m1,o,o,p)
+r=A.bz(o,B.m0,o,o,p)
 p.e!==$&&A.bK()
 p.e=r
 q=A.bQ(B.pd,s,o)
@@ -102881,14 +102881,14 @@ b=c>0?d*(1+c/(30+d/10)):d
 if(b>g)g=b}J.hf(s.bI(0,i,new A.aHL()),m,g)}if(s.a===0){a7=A.w("noDataRegistered")
 return A.c4(A.r(a7,a5,a5,a5,a5,A.G(a5,a5,A.f(a9).ax.a===B.d?B.J:B.U,a5,a5,a5,a5,a5,a5,a5,a5,a5,a5,a5,a5,a5,a5,!0,a5,a5,a5,a5,a5,a5,a5,a5),a5,a5),a5,a5)}q=s.$ti.i("bA<1>")
 a=A.a4(new A.bA(s,q),q.i("u.E"))
-B.c.eY(a,new A.aHM(r))
+B.c.eX(a,new A.aHM(r))
 q=A.a7(a)
 p=q.i("a_<1,H>")
 a0=A.a4(new A.a_(a,new A.aHN(s),p),p.i("aI.E"))
 q=new A.mH(a,q.i("mH<1>"))
 a1=q.geR(q).hO(0,new A.aHO(),a7).dN(0)
-a2=B.c.eX(a0,new A.aHP())
-a3=B.c.eX(a0,new A.aHQ())
+a2=B.c.f6(a0,new A.aHP())
+a3=B.c.f6(a0,new A.aHQ())
 a4.ano()
 return A.l7(new A.aHR(a4,a,a1,a0,a2,a3))}}
 A.aHH.prototype={
@@ -103119,13 +103119,13 @@ $.ab()
 f=new A.j0(B.cq,B.bC,B.dG,B.e_,B.cR)
 f.sqj(new A.hW(B.e8,B.dj,B.c5,A.c([g.aM(40),g.aM(0)],k),null,null).JJ(0,new A.E(0,0,j,i)))
 a7=f.dd()
-f=c.gf2().a
+f=c.gf1().a
 f===$&&A.a()
 f=f.a
 f.toString
 b0.drawPath(f,a7)
 a7.delete()}a7=e.dd()
-f=d.gf2().a
+f=d.gf1().a
 f===$&&A.a()
 f=f.a
 f.toString
@@ -103165,7 +103165,7 @@ q=r.length
 k=0
 for(;;){if(!(k<r.length)){l=m
 break}j=r[k]
-if(B.c.f1(j.d,new A.aqL(n))){l=j.a
+if(B.c.f0(j.d,new A.aqL(n))){l=j.a
 break}r.length===q||(0,A.K)(r);++k}if(l.length===0)l="Altro"}else l=m
 h.bI(0,l,new A.aqM())
 r=h.h(0,l)
@@ -103209,11 +103209,11 @@ case 5:l=b
 p=7
 j=t.z
 s=10
-return A.x(B.nm.h2("cancelStreakReminderNotification",null,!1,j),$async$kM)
+return A.x(B.nl.h2("cancelStreakReminderNotification",null,!1,j),$async$kM)
 case 10:s=11
-return A.x(B.nm.h2("cancelCountdownNotification",null,!1,j),$async$kM)
+return A.x(B.nl.h2("cancelCountdownNotification",null,!1,j),$async$kM)
 case 11:s=12
-return A.x(B.nm.h2("cancelTimerFinishedNotification",null,!1,j),$async$kM)
+return A.x(B.nl.h2("cancelTimerFinishedNotification",null,!1,j),$async$kM)
 case 12:p=2
 s=9
 break
@@ -103237,7 +103237,7 @@ a9E(a,b){var s,r=this.c
 r.toString
 s=A.ws(new A.aqI(this,a,b),null,t.z)
 A.b1(r,!1).hq(s)},
-K(a){var s,r=this,q=null,p=r.gaeV(),o=r.gaeU(),n=A.f(a).ax.a===B.d?B.j2:B.d4,m=A.f(a).ax.a===B.d?B.j2:B.d4,l=A.eb(q,q,A.bn(B.mO,A.f(a).ax.a===B.d?B.R:B.k,q,q),q,q,new A.ar2(a),q,q,q),k=A.w("dataManagement"),j=t.p
+K(a){var s,r=this,q=null,p=r.gaeV(),o=r.gaeU(),n=A.f(a).ax.a===B.d?B.j2:B.d4,m=A.f(a).ax.a===B.d?B.j2:B.d4,l=A.eb(q,q,A.bn(B.mN,A.f(a).ax.a===B.d?B.R:B.k,q,q),q,q,new A.ar2(a),q,q,q),k=A.w("dataManagement"),j=t.p
 k=A.Ad(q,m,0,q,l,A.aP(A.c([B.a76,B.cW,A.r(k,q,q,q,q,A.G(q,q,A.f(a).ax.a===B.d?B.h:B.k,q,q,q,q,q,q,q,q,18,q,q,B.bb,q,q,!0,q,q,q,q,q,q,q,q),q,q)],j),B.t,B.n,B.r,0))
 m=p.length
 if(m===0){m=A.w("noHistory")
@@ -103250,7 +103250,7 @@ m=m.a
 j.push(new A.aw(B.LZ,A.bs(A.a9d(l,A.r(s+" ("+m+")",q,q,q,q,A.G(q,q,A.f(a).ax.a===B.d?B.h:B.k,q,q,q,q,q,q,q,q,q,q,q,q,q,q,!0,q,q,q,q,q,q,q,q),q,q),r.gadn(),A.hj(q,q,B.aJ,q,q,q,q,q,q,q,q,q,B.em,q,new A.bk(A.a2(12),B.q),q,q,q,q,q)),q,1/0),q))}j.push(A.eC(A.f(a).ax.a===B.d?B.b2:B.am,q,1,q))
 m=A.w("totalReset")
 j.push(new A.aw(B.LV,A.r(m,q,q,q,q,A.G(q,q,A.f(a).ax.a===B.d?B.h:A.Z(100,B.k.m()>>>16&255,B.k.m()>>>8&255,B.k.m()&255),q,q,q,q,q,q,q,q,11,q,q,q,q,q,!0,q,2,q,q,q,q,q,q),q,q),q))
-j.push(new A.aw(B.LS,A.bs(A.jj(B.a6T,A.r(A.w("fullReset"),q,q,q,q,B.eQ,q,q),r.gamF(),A.hY(q,q,q,q,q,q,q,q,q,q,q,q,B.em,q,new A.bk(A.a2(12),B.q),B.oV,q,q,q,q)),q,1/0),q))
+j.push(new A.aw(B.LS,A.bs(A.jj(B.a6T,A.r(A.w("fullReset"),q,q,q,q,B.eQ,q,q),r.gamF(),A.hY(q,q,q,q,q,q,q,q,q,q,q,q,B.em,q,new A.bk(A.a2(12),B.q),B.oU,q,q,q,q)),q,1/0),q))
 return A.iD(k,n,A.b_(j,B.a0,B.n,B.r),q,q,q)}}
 A.aqP.prototype={
 $0(){return[]},
@@ -103411,7 +103411,7 @@ A.Wl.prototype={
 an(){this.aF()
 var s=t.z
 this.d=A.dv(J.fy(this.a.d,new A.av6(),s),!0,s)},
-eZ(){var s,r=this.a
+eY(){var s,r=this.a
 r.toString
 s=this.d
 s===$&&A.a()
@@ -103426,7 +103426,7 @@ return A.x(A.fk(!0,new A.auV(p),o,t.y),$async$uJ)
 case 3:if(c!==!0){s=1
 break}p.N(new A.auW(p,a))
 s=4
-return A.x(p.eZ(),$async$uJ)
+return A.x(p.eY(),$async$uJ)
 case 4:o=p.c
 if(o!=null)o.ab(t.Pu).f.mH(A.pf(null,null,null,B.aJ,null,B.Q,null,A.r(A.w("sessionDeleted"),null,null,null,null,null,null,null),null,B.hl,null,null,null,null,null,null,null,null,null,null))
 case 1:return A.M(q,r)}})
@@ -103441,7 +103441,7 @@ return A.x(A.fk(!0,new A.auR(p),o,t.y),$async$uI)
 case 3:if(d!==!0){s=1
 break}p.N(new A.auS(p,a,b))
 s=4
-return A.x(p.eZ(),$async$uI)
+return A.x(p.eY(),$async$uI)
 case 4:case 1:return A.M(q,r)}})
 return A.N($async$uI,r)},
 ajF(a,b){var s,r,q,p,o=this.d
@@ -103458,13 +103458,13 @@ o=A.t(o==null?"":o)
 p=this.c
 p.toString
 A.fk(!0,new A.av_(this,b,new A.ce(new A.bO(r,B.aE,B.ai),q),new A.ce(new A.bO(o,B.aE,B.ai),q),a),p,t.z)},
-K(a){var s=null,r=A.f(a).ax.a===B.d?B.j2:B.d4,q=A.f(a).ax.a===B.d?B.j2:B.d4,p=A.eb(s,s,A.bn(B.mO,A.f(a).ax.a===B.d?B.R:B.k,s,s),s,s,new A.av4(a),s,s,s),o=this.a.c
+K(a){var s=null,r=A.f(a).ax.a===B.d?B.j2:B.d4,q=A.f(a).ax.a===B.d?B.j2:B.d4,p=A.eb(s,s,A.bn(B.mN,A.f(a).ax.a===B.d?B.R:B.k,s,s),s,s,new A.av4(a),s,s,s),o=this.a.c
 q=A.Ad(s,q,0,s,p,A.r(o,s,s,s,s,A.G(s,s,A.f(a).ax.a===B.d?B.h:B.k,s,s,s,s,s,s,s,s,16,s,s,B.bb,s,s,!0,s,s,s,s,s,s,s,s),s,s))
 p=this.d
 p===$&&A.a()
 p=p.length
 if(p===0){p=A.w("noSession")
-p=A.c4(A.r(p,s,s,s,s,A.G(s,s,A.f(a).ax.a===B.d?B.h:A.Z(80,B.k.m()>>>16&255,B.k.m()>>>8&255,B.k.m()&255),s,s,s,s,s,s,s,s,15,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s),s,s)}else p=A.aLz(new A.av5(this,a),p,B.m5,!1)
+p=A.c4(A.r(p,s,s,s,s,A.G(s,s,A.f(a).ax.a===B.d?B.h:A.Z(80,B.k.m()>>>16&255,B.k.m()>>>8&255,B.k.m()&255),s,s,s,s,s,s,s,s,15,s,s,s,s,s,!0,s,s,s,s,s,s,s,s),s,s),s,s)}else p=A.aLz(new A.av5(this,a),p,B.m4,!1)
 return A.iD(q,r,p,s,s,s)}}
 A.av6.prototype={
 $1(a){return A.l8(a,t.N,t.z)},
@@ -103586,7 +103586,7 @@ if(p==null)p=0
 o=q.a
 o.N(new A.auX(o,q.d,q.e,n,p))
 s=2
-return A.x(o.eZ(),$async$$0)
+return A.x(o.eY(),$async$$0)
 case 2:o=o.c
 if(o!=null)A.b1(o,!1).bc(null)
 return A.M(null,r)}})
@@ -103702,7 +103702,7 @@ c=J.aOq(J.aKq(q),0,new A.azd())
 q=A.vv(d)
 if(q==null)q=A.aPl(2000,1,1)
 s=a3.h(0,s)
-e.push(new A.ia(q,c,s==null?"":s))}B.c.eY(e,new A.aze())
+e.push(new A.ia(q,c,s==null?"":s))}B.c.eX(e,new A.aze())
 if(b.d==null&&b.a.d.length>1)return b.aeT(e)
 return e},
 aeT(a1){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b=this,a=b.a.d,a0=new A.a_(a,new A.azf(),A.a7(a).i("a_<1,m>")).f8(0)
@@ -103778,15 +103778,15 @@ R6(a,b,c,d){var s,r,q,p,o=null
 if(d)s=a.aM(40)
 else{s=this.c
 s.toString
-s=A.f(s).ax.a===B.d?B.ad:B.lG}r=A.a2(20)
+s=A.f(s).ax.a===B.d?B.ad:B.lF}r=A.a2(20)
 if(d)q=a
 else{q=this.c
 q.toString
-q=A.f(q).ax.a===B.d?B.b2:B.lz}q=A.cc(q,d?1.5:1)
+q=A.f(q).ax.a===B.d?B.b2:B.ly}q=A.cc(q,d?1.5:1)
 if(d)p=a
 else{p=this.c
 p.toString
-p=A.f(p).ax.a===B.d?B.cA:B.A}return A.cI(o,A.Ma(A.r(b,o,o,o,o,A.G(o,o,p,o,o,o,o,o,o,o,o,12,o,o,d?B.D:B.I,o,o,!0,o,o,o,o,o,o,o,o),o,o),new A.ax(s,o,q,r,o,o,B.z),B.a3,o,o,B.m6,o),B.V,!1,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,c,o,o,o,o,o,o,!1,B.ao)},
+p=A.f(p).ax.a===B.d?B.cA:B.A}return A.cI(o,A.Ma(A.r(b,o,o,o,o,A.G(o,o,p,o,o,o,o,o,o,o,o,12,o,o,d?B.D:B.I,o,o,!0,o,o,o,o,o,o,o,o),o,o),new A.ax(s,o,q,r,o,o,B.z),B.a3,o,o,B.m5,o),B.V,!1,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,o,c,o,o,o,o,o,o,!1,B.ao)},
 I6(a,b,c,d){var s,r,q,p,o,n=null,m=this.c
 m.toString
 m=A.f(m).ax.a===B.d?B.ad:B.h
@@ -103863,8 +103863,8 @@ aA(a6,a7){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4=this.b,a5=a4.
 if(a5===0)return
 s=A.a7(a4).i("a_<1,H>")
 r=A.a4(new A.a_(a4,new A.azq(),s),s.i("aI.E"))
-q=B.c.eX(r,new A.azr())
-p=Math.abs(B.c.eX(r,new A.azs())-q)
+q=B.c.f6(r,new A.azr())
+p=Math.abs(B.c.f6(r,new A.azs())-q)
 a4=$.ab()
 o=A.b0()
 o.r=B.b2.gq(0)
@@ -103974,7 +103974,7 @@ aa(){return new A.KD(null,null)}}
 A.KD.prototype={
 an(){var s,r,q=this,p=null
 q.aF()
-s=A.bz(p,B.m1,p,p,q)
+s=A.bz(p,B.m0,p,p,q)
 s.DI(0,!0)
 q.r!==$&&A.bK()
 q.r=s
@@ -104030,7 +104030,7 @@ return A.iD(e,B.cQ,A.jo(!0,A.b_(A.c([new A.aw(B.Ma,q,e),A.bg(A.jt(A.b_(A.c([B.aC
 Aw(a,b,c,d,e){var s=null,r=a.aM(40),q=A.cc(a.aM(120),1),p=t.p
 return A.aP(A.c([A.aE(s,A.c4(A.r(b,s,s,s,s,A.G(s,s,a,s,s,s,s,s,s,s,s,12,s,s,B.D,s,s,!0,s,s,s,s,s,s,s,s),s,s),s,s),B.p,s,s,new A.ax(r,s,q,s,s,s,B.cc),s,24,s,s,s,s,24),B.be,A.bg(A.b_(A.c([A.aP(A.c([A.r(c,s,s,s,s,B.kE,s,s),B.df,new A.fJ(1,B.ct,A.r(d,s,s,s,s,B.awR,s,s),s)],p),B.t,B.n,B.r,0),B.ky,A.r(e,s,s,s,s,B.au3,s,s)],p),B.a0,B.n,B.r),1)],p),B.a0,B.n,B.r,0)},
 Gi(a,b,c,d){var s=null,r=A.Z(8,B.h.m()>>>16&255,B.h.m()>>>8&255,B.h.m()&255),q=A.a2(14),p=t.p
-return A.aE(s,A.aP(A.c([A.r(b,s,s,s,s,B.ave,s,s),B.as7,A.bg(A.b_(A.c([A.r(c,s,s,s,s,B.Ex,s,s),B.bV,A.r(d,s,s,s,s,B.auD,s,s)],p),B.a0,B.n,B.r),1)],p),B.a0,B.n,B.r,0),B.p,s,s,new A.ax(r,s,s,q,s,s,B.z),s,s,s,B.m7,s,s,s)}}
+return A.aE(s,A.aP(A.c([A.r(b,s,s,s,s,B.ave,s,s),B.as7,A.bg(A.b_(A.c([A.r(c,s,s,s,s,B.Ex,s,s),B.bV,A.r(d,s,s,s,s,B.auD,s,s)],p),B.a0,B.n,B.r),1)],p),B.a0,B.n,B.r,0),B.p,s,s,new A.ax(r,s,s,q,s,s,B.z),s,s,s,B.m6,s,s,s)}}
 A.aHS.prototype={
 $0(){var s=this.a
 s.f=s.d=!0},
@@ -104778,7 +104778,7 @@ gme(){var s,r=this,q=r.b
 if(q.length!==0)return q
 s=A.dv(r.gpI(),!0,t.bq)
 s.push(r.a)
-B.c.eY(s,new A.ann(r.glp()))
+B.c.eX(s,new A.ann(r.glp()))
 return r.b=s},
 glp(){var s,r,q,p,o,n,m,l,k,j,i,h,g,f,e,d,c,b,a,a0,a1,a2,a3,a4=this,a5=a4.d
 if(a5.a!==0)return a5
@@ -105028,7 +105028,7 @@ A.PK.prototype={}
 A.aov.prototype={
 x0(a,b,c,d,e,f,g,h){throw A.j(A.fh("launch() has not been implemented."))},
 x3(a,b){var s,r=B.f.cG(a,"http:")||B.f.cG(a,"https:"),q=b.a,p=!0
-if(q!==B.CT)if(q!==B.CU){s=r&&q===B.nB
+if(q!==B.CT)if(q!==B.CU){s=r&&q===B.nA
 p=s}return this.x0(a,!0,!0,b.b.c,q===B.CV,p,p,b.d)}}
 A.aow.prototype={
 ayx(a,b){var s,r=A.aSL(a),q=r==null?null:r.glz()
@@ -105042,7 +105042,7 @@ return A.dJ(s.p(0,r==null?null:r.glz()),t.y)},
 x0(a,b,c,d,e,f,g,h){return this.awR(a,!0,!0,d,e,f,g,h)},
 awR(a,b,c,d,e,f,g,h){var s=0,r=A.O(t.y),q,p=this
 var $async$x0=A.P(function(i,j){if(i===1)return A.L(j,r)
-for(;;)switch(s){case 0:q=p.x3(a,new A.PK(B.nB,B.a7A,h))
+for(;;)switch(s){case 0:q=p.x3(a,new A.PK(B.nA,B.a7A,h))
 s=1
 break
 case 1:return A.M(q,r)}})
@@ -106030,7 +106030,7 @@ s.a4l=s.j
 s=A.fA.prototype
 s.yl=s.k
 s=A.B.prototype
-s.yo=s.f3
+s.yo=s.f2
 s.mK=s.a0
 s.a5p=s.q1
 s.kE=s.cl
@@ -106112,7 +106112,7 @@ s=A.IV.prototype
 s.qv=s.ao
 s.mM=s.ah
 s=A.IW.prototype
-s.a76=s.f3
+s.a76=s.f2
 s=A.ti.prototype
 s.Os=s.b5
 s.Oq=s.b3
@@ -108576,17 +108576,17 @@ B.cV=A.D6.prototype
 B.z0=A.Db.prototype
 B.aa=A.ld.prototype
 B.CP=J.QU.prototype
-B.ol=J.lA.prototype
+B.ok=J.lA.prototype
 B.f0=new A.uN(0,"nothing")
 B.lj=new A.uN(1,"requestedFocus")
 B.F9=new A.uN(2,"receivedDomFocus")
 B.Fa=new A.uN(3,"receivedDomBlur")
 B.aBI=new A.a4I(0,"unknown")
-B.oN=new A.uP(0,"topRightCorner")
-B.oO=new A.uP(1,"topLeftCorner")
+B.oM=new A.uP(0,"topRightCorner")
+B.oN=new A.uP(1,"topLeftCorner")
 B.Fb=new A.uP(2,"bottomRightCorner")
 B.Fc=new A.uP(3,"bottomLeftCorner")
-B.oP=new A.nQ(null,null,null,null,null,null,null,null)
+B.oO=new A.nQ(null,null,null,null,null,null,null,null)
 B.Fd=new A.zR(0,"notReady")
 B.Fe=new A.zR(1,"ready")
 B.Ff=new A.fW(0,1)
@@ -108611,7 +108611,7 @@ B.bN=new A.iW(2,"reverse")
 B.au=new A.iW(3,"completed")
 B.Fi=new A.kI(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.ln=new A.Af(0,"exit")
-B.oQ=new A.Af(1,"cancel")
+B.oP=new A.Af(1,"cancel")
 B.e9=new A.jT(0,"detached")
 B.cO=new A.jT(1,"resumed")
 B.iC=new A.jT(2,"inactive")
@@ -108619,14 +108619,14 @@ B.iD=new A.jT(3,"hidden")
 B.lo=new A.jT(4,"paused")
 B.Fj=new A.Mi(!1,127)
 B.lp=new A.Ag(0,"polite")
-B.oR=new A.a5p(0,"polite")
+B.oQ=new A.a5p(0,"polite")
 B.lq=new A.Ag(1,"assertive")
 B.b=s([],t.s)
 B.x=new A.FA(1,"downstream")
 B.aE=new A.hB(-1,-1,B.x,!1,-1,-1)
 B.ai=new A.cy(-1,-1)
 B.e0=new A.bO("",B.aE,B.ai)
-B.oS=new A.uV(!1,"",B.b,B.e0,null)
+B.oR=new A.uV(!1,"",B.b,B.e0,null)
 B.cp=new A.uX(0,"up")
 B.dk=new A.uX(1,"right")
 B.bO=new A.uX(2,"down")
@@ -108645,9 +108645,9 @@ B.f3=new A.m3("flutter/accessibility",B.f4,null,t.Al)
 B.ed=new A.acb()
 B.Fp=new A.m3("flutter/keyevent",B.ed,null,t.Al)
 B.Fq=new A.m3("flutter/system",B.ed,null,t.Al)
-B.lu=new A.an1()
-B.Fr=new A.m3("flutter/lifecycle",B.lu,null,A.aQ("m3<m?>"))
-B.oT=new A.kL(0,0)
+B.lt=new A.an1()
+B.Fr=new A.m3("flutter/lifecycle",B.lt,null,A.aQ("m3<m?>"))
+B.oS=new A.kL(0,0)
 B.Fs=new A.kL(1,1)
 B.Ft=new A.uZ(12,"plus")
 B.Fu=new A.uZ(13,"modulate")
@@ -108671,7 +108671,7 @@ B.iE=new A.ch(B.eJ,B.eJ,B.O,B.O)
 B.k9=new A.aS(22,22)
 B.FE=new A.ch(B.k9,B.k9,B.k9,B.k9)
 B.fG=new A.aS(2,2)
-B.oU=new A.ch(B.fG,B.fG,B.fG,B.fG)
+B.oT=new A.ch(B.fG,B.fG,B.fG,B.fG)
 B.dM=new A.ch(B.eJ,B.eJ,B.eJ,B.eJ)
 B.aW=new A.ch(B.O,B.O,B.O,B.O)
 B.kc=new A.aS(7,7)
@@ -108691,7 +108691,7 @@ B.Ik=new A.q(1,1,0.09019607843137255,0.26666666666666666,B.j)
 B.K3=new A.q(1,0.8352941176470589,0,0,B.j)
 B.aeP=new A.cW([100,B.IO,200,B.K2,400,B.Ik,700,B.K3],t.pl)
 B.aJ=new A.rA(B.aeP,1,1,0.3215686274509804,0.3215686274509804,B.j)
-B.oV=new A.az(B.aJ,1,B.y,-1)
+B.oU=new A.az(B.aJ,1,B.y,-1)
 B.Ir=new A.q(1,1,0.9725490196078431,0.8823529411764706,B.j)
 B.Jm=new A.q(1,1,0.9254901960784314,0.7019607843137254,B.j)
 B.q_=new A.q(1,1,0.8784313725490196,0.5098039215686274,B.j)
@@ -108706,32 +108706,32 @@ B.amx=new A.cW([50,B.Ir,100,B.Jm,200,B.q_,300,B.Je,400,B.JF,500,B.pz,600,B.JE,70
 B.aB=new A.mL(B.amx,1,1,0.7568627450980392,0.027450980392156862,B.j)
 B.FO=new A.az(B.aB,3,B.y,-1)
 B.FP=new A.dF(B.q,B.q,B.q,B.FO)
-B.oW=new A.dF(B.iF,B.q,B.iF,B.q)
-B.oX=new A.dF(B.q,B.q,B.q,B.q)
+B.oV=new A.dF(B.iF,B.q,B.iF,B.q)
+B.oW=new A.dF(B.q,B.q,B.q,B.q)
 B.FQ=new A.Ao(null,null,null,null,null,null,null)
-B.oY=new A.Aq(0,"spread")
+B.oX=new A.Aq(0,"spread")
 B.FR=new A.Aq(1,"centered")
 B.FS=new A.Aq(2,"linear")
 B.FT=new A.v_(null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.FU=new A.a5M(0,"fixed")
 B.FV=new A.v0(null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.aqg=new A.Sj(0,"normal")
-B.nC=new A.R8(null)
-B.FW=new A.As(B.aqg,B.nC)
+B.nB=new A.R8(null)
+B.FW=new A.As(B.aqg,B.nB)
 B.D8=new A.Sj(1,"fast")
-B.FX=new A.As(B.D8,B.nC)
+B.FX=new A.As(B.D8,B.nB)
 B.iG=new A.af(0,1/0,0,1/0)
-B.oZ=new A.af(48,1/0,48,1/0)
+B.oY=new A.af(48,1/0,48,1/0)
 B.FY=new A.af(40,40,40,40)
 B.FZ=new A.af(0,520,0,1/0)
 B.G_=new A.af(56,56,56,56)
 B.G0=new A.af(96,96,96,96)
-B.p_=new A.af(0,1/0,56,56)
-B.p0=new A.af(0,640,0,1/0)
+B.oZ=new A.af(0,1/0,56,56)
+B.p_=new A.af(0,640,0,1/0)
 B.G1=new A.af(0,1/0,48,1/0)
 B.G2=new A.af(280,1/0,0,1/0)
 B.G3=new A.af(0,1/0,0,240)
-B.p1=new A.af(36,1/0,36,1/0)
+B.p0=new A.af(36,1/0,36,1/0)
 B.ls=new A.af(1/0,1/0,1/0,1/0)
 B.G4=new A.af(0,1/0,0,300)
 B.c5=new A.FR(0,"clamp")
@@ -108745,8 +108745,8 @@ B.ea=new A.At(1,"contain")
 B.bP=new A.At(2,"cover")
 B.G6=new A.At(6,"scaleDown")
 B.iH=new A.Au(0,"tight")
-B.p2=new A.Au(1,"max")
-B.p3=new A.Au(5,"strut")
+B.p1=new A.Au(1,"max")
+B.p2=new A.Au(5,"strut")
 B.cc=new A.MH(1,"circle")
 B.eb=new A.MI(0,"tight")
 B.GH=new A.MI(1,"max")
@@ -108757,12 +108757,12 @@ B.cr=new A.Av(1,"webkit")
 B.ec=new A.Av(2,"firefox")
 B.GI=new A.a6_(1,"padded")
 B.GJ=new A.Aw(null,null,null,null,null,null,null,null,null)
-B.p4=new A.Az(0,"normal")
+B.p3=new A.Az(0,"normal")
 B.GK=new A.Az(1,"accent")
 B.GL=new A.Az(2,"primary")
-B.p5=new A.MN(0,"littleEndian")
-B.p6=new A.MN(1,"bigEndian")
-B.lt=new A.w7(A.b9A(),A.aQ("w7<H>"))
+B.p4=new A.MN(0,"littleEndian")
+B.p5=new A.MN(1,"bigEndian")
+B.p6=new A.w7(A.b9A(),A.aQ("w7<H>"))
 B.GM=new A.a4J()
 B.aBJ=new A.a59()
 B.p7=new A.a5o()
@@ -109001,7 +109001,7 @@ B.aBS=new A.GU()
 B.d1=new A.Wi()
 B.iJ=new A.auO()
 B.a8=new A.aw_()
-B.lv=new A.aw7()
+B.lu=new A.aw7()
 B.HO=new A.ax4()
 B.HP=new A.axF()
 B.HQ=new A.axG()
@@ -109047,8 +109047,8 @@ B.iK=new A.v6(2,"isFalse")
 B.f7=new A.v6(3,"mixed")
 B.I9=new A.v8(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.iL=new A.em(0,B.q)
-B.lw=new A.AK(null)
-B.Ib=new A.AK(B.nC)
+B.lv=new A.AK(null)
+B.Ib=new A.AK(B.nB)
 B.aqr=new A.tw(2,"clear")
 B.h4=new A.AL(B.aqr)
 B.Ic=new A.AM(null)
@@ -109058,13 +109058,13 @@ B.p=new A.ve(0,"none")
 B.Q=new A.ve(1,"hardEdge")
 B.aF=new A.ve(2,"antiAlias")
 B.dn=new A.ve(3,"antiAliasWithSaveLayer")
-B.lx=new A.vj(0,"pasteable")
-B.ly=new A.vj(1,"unknown")
+B.lw=new A.vj(0,"pasteable")
+B.lx=new A.vj(1,"unknown")
 B.asE=new A.tD(1,"closeButton")
 B.Id=new A.Nc(null)
 B.Ie=new A.Nb(B.asE,null,null,B.Id,null,null,null,null,null,null)
 B.If=new A.a6N(1,"matrix")
-B.lH=new A.q(1,0.403921568627451,0.3137254901960784,0.6431372549019608,B.j)
+B.lG=new A.q(1,0.403921568627451,0.3137254901960784,0.6431372549019608,B.j)
 B.iV=new A.q(1,0.9176470588235294,0.8666666666666667,1,B.j)
 B.j3=new A.q(1,0.30980392156862746,0.21568627450980393,0.5450980392156862,B.j)
 B.h7=new A.q(1,0.8156862745098039,0.7372549019607844,1,B.j)
@@ -109072,43 +109072,43 @@ B.qh=new A.q(1,0.12941176470588237,0,0.36470588235294116,B.j)
 B.Ii=new A.q(1,0.3843137254901961,0.3568627450980392,0.44313725490196076,B.j)
 B.j0=new A.q(1,0.9098039215686274,0.8705882352941177,0.9725490196078431,B.j)
 B.iZ=new A.q(1,0.2901960784313726,0.26666666666666666,0.34509803921568627,B.j)
-B.lE=new A.q(1,0.8,0.7607843137254902,0.8627450980392157,B.j)
+B.lD=new A.q(1,0.8,0.7607843137254902,0.8627450980392157,B.j)
 B.pM=new A.q(1,0.11372549019607843,0.09803921568627451,0.16862745098039217,B.j)
 B.J8=new A.q(1,0.49019607843137253,0.3215686274509804,0.3764705882352941,B.j)
 B.iQ=new A.q(1,1,0.8470588235294118,0.8941176470588236,B.j)
 B.iO=new A.q(1,0.38823529411764707,0.23137254901960785,0.2823529411764706,B.j)
-B.lC=new A.q(1,0.9372549019607843,0.7215686274509804,0.7843137254901961,B.j)
+B.lB=new A.q(1,0.9372549019607843,0.7215686274509804,0.7843137254901961,B.j)
 B.pT=new A.q(1,0.19215686274509805,0.06666666666666667,0.11372549019607843,B.j)
 B.Jc=new A.q(1,0.7019607843137254,0.14901960784313725,0.11764705882352941,B.j)
 B.pQ=new A.q(1,0.9764705882352941,0.8705882352941177,0.8627450980392157,B.j)
 B.q9=new A.q(1,0.5490196078431373,0.11372549019607843,0.09411764705882353,B.j)
-B.lM=new A.q(1,0.996078431372549,0.9686274509803922,1,B.j)
-B.lA=new A.q(1,0.11372549019607843,0.10588235294117647,0.12549019607843137,B.j)
+B.lL=new A.q(1,0.996078431372549,0.9686274509803922,1,B.j)
+B.lz=new A.q(1,0.11372549019607843,0.10588235294117647,0.12549019607843137,B.j)
 B.Ja=new A.q(1,0.9058823529411765,0.8784313725490196,0.9254901960784314,B.j)
 B.Im=new A.q(1,0.8705882352941177,0.8470588235294118,0.8823529411764706,B.j)
 B.Jx=new A.q(1,0.9686274509803922,0.9490196078431372,0.9803921568627451,B.j)
 B.IW=new A.q(1,0.9529411764705882,0.9294117647058824,0.9686274509803922,B.j)
 B.IJ=new A.q(1,0.9254901960784314,0.9019607843137255,0.9411764705882353,B.j)
 B.iW=new A.q(1,0.9019607843137255,0.8784313725490196,0.9137254901960784,B.j)
-B.lD=new A.q(1,0.28627450980392155,0.27058823529411763,0.30980392156862746,B.j)
+B.lC=new A.q(1,0.28627450980392155,0.27058823529411763,0.30980392156862746,B.j)
 B.Iw=new A.q(1,0.4745098039215686,0.4549019607843137,0.49411764705882355,B.j)
 B.pF=new A.q(1,0.792156862745098,0.7686274509803922,0.8156862745098039,B.j)
 B.ql=new A.q(1,0.19607843137254902,0.1843137254901961,0.20784313725490197,B.j)
 B.J4=new A.q(1,0.9607843137254902,0.9372549019607843,0.9686274509803922,B.j)
-B.Ig=new A.o5(B.aK,B.lH,B.h,B.iV,B.j3,B.iV,B.h7,B.qh,B.j3,B.Ii,B.h,B.j0,B.iZ,B.j0,B.lE,B.pM,B.iZ,B.J8,B.h,B.iQ,B.iO,B.iQ,B.lC,B.pT,B.iO,B.Jc,B.h,B.pQ,B.q9,B.lM,B.lA,B.Ja,B.Im,B.lM,B.h,B.Jx,B.IW,B.IJ,B.iW,B.lD,B.Iw,B.pF,B.v,B.v,B.ql,B.J4,B.h7,B.lH,B.lM,B.lA)
+B.Ig=new A.o5(B.aK,B.lG,B.h,B.iV,B.j3,B.iV,B.h7,B.qh,B.j3,B.Ii,B.h,B.j0,B.iZ,B.j0,B.lD,B.pM,B.iZ,B.J8,B.h,B.iQ,B.iO,B.iQ,B.lB,B.pT,B.iO,B.Jc,B.h,B.pQ,B.q9,B.lL,B.lz,B.Ja,B.Im,B.lL,B.h,B.Jx,B.IW,B.IJ,B.iW,B.lC,B.Iw,B.pF,B.v,B.v,B.ql,B.J4,B.h7,B.lG,B.lL,B.lz)
 B.IU=new A.q(1,0.2196078431372549,0.11764705882352941,0.4470588235294118,B.j)
 B.J5=new A.q(1,0.2,0.17647058823529413,0.2549019607843137,B.j)
 B.Ix=new A.q(1,0.28627450980392155,0.1450980392156863,0.19607843137254902,B.j)
 B.Iv=new A.q(1,0.9490196078431372,0.7215686274509804,0.7098039215686275,B.j)
 B.Ju=new A.q(1,0.3764705882352941,0.0784313725490196,0.06274509803921569,B.j)
-B.lJ=new A.q(1,0.0784313725490196,0.07058823529411765,0.09411764705882353,B.j)
+B.lI=new A.q(1,0.0784313725490196,0.07058823529411765,0.09411764705882353,B.j)
 B.IX=new A.q(1,0.23137254901960785,0.2196078431372549,0.24313725490196078,B.j)
 B.Jl=new A.q(1,0.058823529411764705,0.050980392156862744,0.07450980392156863,B.j)
 B.Ij=new A.q(1,0.12941176470588237,0.12156862745098039,0.14901960784313725,B.j)
 B.JQ=new A.q(1,0.16862745098039217,0.1607843137254902,0.18823529411764706,B.j)
 B.IB=new A.q(1,0.21176470588235294,0.20392156862745098,0.23137254901960785,B.j)
 B.In=new A.q(1,0.5764705882352941,0.5607843137254902,0.6,B.j)
-B.Ih=new A.o5(B.d,B.h7,B.IU,B.j3,B.iV,B.iV,B.h7,B.qh,B.j3,B.lE,B.J5,B.iZ,B.j0,B.j0,B.lE,B.pM,B.iZ,B.lC,B.Ix,B.iO,B.iQ,B.iQ,B.lC,B.pT,B.iO,B.Iv,B.Ju,B.q9,B.pQ,B.lJ,B.iW,B.lD,B.lJ,B.IX,B.Jl,B.lA,B.Ij,B.JQ,B.IB,B.pF,B.In,B.lD,B.v,B.v,B.iW,B.ql,B.lH,B.h7,B.lJ,B.iW)
+B.Ih=new A.o5(B.d,B.h7,B.IU,B.j3,B.iV,B.iV,B.h7,B.qh,B.j3,B.lD,B.J5,B.iZ,B.j0,B.j0,B.lD,B.pM,B.iZ,B.lB,B.Ix,B.iO,B.iQ,B.iQ,B.lB,B.pT,B.iO,B.Iv,B.Ju,B.q9,B.pQ,B.lI,B.iW,B.lC,B.lI,B.IX,B.Jl,B.lz,B.Ij,B.JQ,B.IB,B.pF,B.In,B.lC,B.v,B.v,B.iW,B.ql,B.lG,B.h7,B.lI,B.iW)
 B.Il=new A.q(1,0.10196078431372549,0.10196078431372549,0.11764705882352941,B.j)
 B.px=new A.q(1,0.1450980392156863,0.1450980392156863,0.15294117647058825,B.j)
 B.Is=new A.q(1,0.07058823529411765,0.07058823529411765,0.07058823529411765,B.j)
@@ -109120,7 +109120,7 @@ B.pA=new A.q(1,0.8901960784313725,0.9490196078431372,0.9921568627450981,B.j)
 B.ad=new A.q(1,0.10980392156862745,0.10980392156862745,0.11764705882352941,B.j)
 B.pB=new A.q(1,1,0.42745098039215684,0,B.j)
 B.cQ=new A.q(1,0.054901960784313725,0.054901960784313725,0.06274509803921569,B.j)
-B.lz=new A.q(1,0.7411764705882353,0.7411764705882353,0.7411764705882353,B.j)
+B.ly=new A.q(1,0.7411764705882353,0.7411764705882353,0.7411764705882353,B.j)
 B.IF=new A.q(1,0.25098039215686274,0.7686274509803922,1,B.j)
 B.iP=new A.q(1,0.0392156862745098,0.0392156862745098,0.0392156862745098,B.j)
 B.IG=new A.q(1,0.39215686274509803,1,0.8549019607843137,B.j)
@@ -109150,7 +109150,7 @@ B.b1=new A.q(0.10196078431372549,1,1,1,B.j)
 B.J7=new A.q(1,0,0.6901960784313725,1,B.j)
 B.ae=new A.q(0.5411764705882353,1,1,1,B.j)
 B.iU=new A.q(0.45098039215686275,0,0,0,B.j)
-B.lG=new A.q(1,0.9333333333333333,0.9333333333333333,0.9333333333333333,B.j)
+B.lF=new A.q(1,0.9333333333333333,0.9333333333333333,0.9333333333333333,B.j)
 B.pX=new A.q(1,0.7019607843137254,0.5333333333333333,1,B.j)
 B.pY=new A.q(1,1,0.8431372549019608,0.25098039215686274,B.j)
 B.dQ=new A.q(1,0,0.9490196078431372,1,B.j)
@@ -109164,7 +109164,7 @@ B.q8=new A.q(1,0.8784313725490196,0.8784313725490196,0.8784313725490196,B.j)
 B.Jn=new A.q(0.0392156862745098,0,0,0,B.j)
 B.Jp=new A.q(0.10196078431372549,0,0,0,B.j)
 B.Jq=new A.q(1,0.06666666666666667,0.06666666666666667,0.07450980392156863,B.j)
-B.lI=new A.q(0.4,0.7372549019607844,0.7372549019607844,0.7372549019607844,B.j)
+B.lH=new A.q(0.4,0.7372549019607844,0.7372549019607844,0.7372549019607844,B.j)
 B.d4=new A.q(1,0.9607843137254902,0.9607843137254902,0.9607843137254902,B.j)
 B.U=new A.q(0.3803921568627451,0,0,0,B.j)
 B.Jv=new A.q(1,1,0.25098039215686274,0.5058823529411764,B.j)
@@ -109195,17 +109195,17 @@ B.j2=new A.q(1,0.06666666666666667,0.06666666666666667,0.06666666666666667,B.j)
 B.K9=new A.q(1,0.10980392156862745,0.10980392156862745,0.1803921568627451,B.j)
 B.qm=new A.AU(0,"none")
 B.Kd=new A.AU(1,"waiting")
-B.lO=new A.AU(3,"done")
+B.lN=new A.AU(3,"done")
 B.j4=new A.j2(0,"cut")
 B.j5=new A.j2(1,"copy")
 B.j6=new A.j2(2,"paste")
 B.j7=new A.j2(3,"selectAll")
 B.qn=new A.j2(4,"delete")
-B.lP=new A.j2(5,"lookUp")
-B.lQ=new A.j2(6,"searchWeb")
+B.lO=new A.j2(5,"lookUp")
+B.lP=new A.j2(6,"searchWeb")
 B.j8=new A.j2(7,"share")
-B.lR=new A.j2(8,"liveTextInput")
-B.lS=new A.j2(9,"custom")
+B.lQ=new A.j2(8,"liveTextInput")
+B.lR=new A.j2(9,"custom")
 B.qo=new A.kR(!1)
 B.qp=new A.kR(!0)
 B.a0=new A.qu(0,"start")
@@ -109216,10 +109216,10 @@ B.j9=new A.qu(4,"baseline")
 B.qq=new A.dI(0,0,0.2,1)
 B.Kh=new A.dI(0.05,0,0.133333,0.06)
 B.as=new A.dI(0.4,0,0.2,1)
-B.lT=new A.dI(0.215,0.61,0.355,1)
+B.lS=new A.dI(0.215,0.61,0.355,1)
 B.qr=new A.dI(0.2,0,0,1)
 B.qs=new A.dI(0.175,0.885,0.32,1.275)
-B.lU=new A.dI(0.35,0.91,0.33,0.97)
+B.lT=new A.dI(0.35,0.91,0.33,0.97)
 B.d5=new A.dI(0.42,0,1,1)
 B.Kk=new A.dI(0.208333,0.82,0.25,1)
 B.dq=new A.dI(0.42,0,0.58,1)
@@ -109240,33 +109240,33 @@ B.Kr=new A.cV(B.h9,null,null,B.h9,B.ek,B.h9,B.ek,B.h9,B.ek,B.h9,B.ek)
 B.hc=new A.q(0.6980392156862745,1,1,1,B.j)
 B.iS=new A.q(0.6980392156862745,0.18823529411764706,0.18823529411764706,0.18823529411764706,B.j)
 B.Kt=new A.cV(B.hc,null,null,B.hc,B.iS,B.hc,B.iS,B.hc,B.iS,B.hc,B.iS)
-B.lK=new A.q(1,0.20392156862745098,0.7803921568627451,0.34901960784313724,B.j)
+B.lJ=new A.q(1,0.20392156862745098,0.7803921568627451,0.34901960784313724,B.j)
 B.pH=new A.q(1,0.18823529411764706,0.8196078431372549,0.34509803921568627,B.j)
 B.pV=new A.q(1,0.1411764705882353,0.5411764705882353,0.23921568627450981,B.j)
 B.pC=new A.q(1,0.18823529411764706,0.8588235294117647,0.3568627450980392,B.j)
-B.qw=new A.cV(B.lK,"systemGreen",null,B.lK,B.pH,B.pV,B.pC,B.lK,B.pH,B.pV,B.pC)
+B.qw=new A.cV(B.lJ,"systemGreen",null,B.lJ,B.pH,B.pV,B.pC,B.lJ,B.pH,B.pV,B.pC)
 B.ha=new A.q(0.06274509803921569,0,0,0,B.j)
 B.iT=new A.q(0.06274509803921569,1,1,1,B.j)
 B.Ku=new A.cV(B.ha,null,null,B.ha,B.iT,B.ha,B.iT,B.ha,B.iT,B.ha,B.iT)
-B.lN=new A.q(1,0,0.47843137254901963,1,B.j)
+B.lM=new A.q(1,0,0.47843137254901963,1,B.j)
 B.q2=new A.q(1,0.0392156862745098,0.5176470588235295,1,B.j)
 B.py=new A.q(1,0,0.25098039215686274,0.8666666666666667,B.j)
 B.pO=new A.q(1,0.25098039215686274,0.611764705882353,1,B.j)
-B.ja=new A.cV(B.lN,"systemBlue",null,B.lN,B.q2,B.py,B.pO,B.lN,B.q2,B.py,B.pO)
-B.lL=new A.q(0.2980392156862745,0.23529411764705882,0.23529411764705882,0.2627450980392157,B.j)
+B.ja=new A.cV(B.lM,"systemBlue",null,B.lM,B.q2,B.py,B.pO,B.lM,B.q2,B.py,B.pO)
+B.lK=new A.q(0.2980392156862745,0.23529411764705882,0.23529411764705882,0.2627450980392157,B.j)
 B.pL=new A.q(0.2980392156862745,0.9215686274509803,0.9215686274509803,0.9607843137254902,B.j)
 B.qf=new A.q(0.3764705882352941,0.23529411764705882,0.23529411764705882,0.2627450980392157,B.j)
 B.pZ=new A.q(0.3764705882352941,0.9215686274509803,0.9215686274509803,0.9607843137254902,B.j)
-B.Kv=new A.cV(B.lL,"tertiaryLabel",null,B.lL,B.pL,B.qf,B.pZ,B.lL,B.pL,B.qf,B.pZ)
+B.Kv=new A.cV(B.lK,"tertiaryLabel",null,B.lK,B.pL,B.qf,B.pZ,B.lK,B.pL,B.qf,B.pZ)
 B.h5=new A.q(1,0.9647058823529412,0.9647058823529412,0.9647058823529412,B.j)
 B.iY=new A.q(1,0.13333333333333333,0.13333333333333333,0.13333333333333333,B.j)
 B.Kw=new A.cV(B.h5,null,null,B.h5,B.iY,B.h5,B.iY,B.h5,B.iY,B.h5,B.iY)
 B.jb=new A.cV(B.v,"label",null,B.v,B.h,B.v,B.h,B.v,B.h,B.v,B.h)
-B.lF=new A.q(0.1568627450980392,0.47058823529411764,0.47058823529411764,0.5019607843137255,B.j)
+B.lE=new A.q(0.1568627450980392,0.47058823529411764,0.47058823529411764,0.5019607843137255,B.j)
 B.qi=new A.q(0.3176470588235294,0.47058823529411764,0.47058823529411764,0.5019607843137255,B.j)
 B.qa=new A.q(0.23921568627450981,0.47058823529411764,0.47058823529411764,0.5019607843137255,B.j)
 B.pG=new A.q(0.4,0.47058823529411764,0.47058823529411764,0.5019607843137255,B.j)
-B.Kx=new A.cV(B.lF,"secondarySystemFill",null,B.lF,B.qi,B.qa,B.pG,B.lF,B.qi,B.qa,B.pG)
+B.Kx=new A.cV(B.lE,"secondarySystemFill",null,B.lE,B.qi,B.qa,B.pG,B.lE,B.qi,B.qa,B.pG)
 B.jc=new A.cV(B.v,null,null,B.v,B.h,B.v,B.h,B.v,B.h,B.v,B.h)
 B.hd=new A.q(1,0.7215686274509804,0.7215686274509804,0.7215686274509804,B.j)
 B.j1=new A.q(1,0.3568627450980392,0.3568627450980392,0.3568627450980392,B.j)
@@ -109274,19 +109274,19 @@ B.Ky=new A.cV(B.hd,null,null,B.hd,B.j1,B.hd,B.j1,B.hd,B.j1,B.hd,B.j1)
 B.h6=new A.q(1,0.6,0.6,0.6,B.j)
 B.iX=new A.q(1,0.4588235294117647,0.4588235294117647,0.4588235294117647,B.j)
 B.hf=new A.cV(B.h6,"inactiveGray",null,B.h6,B.iX,B.h6,B.iX,B.h6,B.iX,B.h6,B.iX)
-B.lB=new A.q(0.0784313725490196,0.4549019607843137,0.4549019607843137,0.5019607843137255,B.j)
+B.lA=new A.q(0.0784313725490196,0.4549019607843137,0.4549019607843137,0.5019607843137255,B.j)
 B.q7=new A.q(0.17647058823529413,0.4627450980392157,0.4627450980392157,0.5019607843137255,B.j)
 B.pW=new A.q(0.1568627450980392,0.4549019607843137,0.4549019607843137,0.5019607843137255,B.j)
 B.qe=new A.q(0.25882352941176473,0.4627450980392157,0.4627450980392157,0.5019607843137255,B.j)
-B.Kz=new A.cV(B.lB,"quaternarySystemFill",null,B.lB,B.q7,B.pW,B.qe,B.lB,B.q7,B.pW,B.qe)
+B.Kz=new A.cV(B.lA,"quaternarySystemFill",null,B.lA,B.q7,B.pW,B.qe,B.lA,B.q7,B.pW,B.qe)
 B.hb=new A.q(0.9411764705882353,0.9764705882352941,0.9764705882352941,0.9764705882352941,B.j)
 B.iM=new A.q(0.9411764705882353,0.11372549019607843,0.11372549019607843,0.11372549019607843,B.j)
 B.Kp=new A.cV(B.hb,null,null,B.hb,B.iM,B.hb,B.iM,B.hb,B.iM,B.hb,B.iM)
 B.JW=new A.q(1,0.1411764705882353,0.1411764705882353,0.14901960784313725,B.j)
 B.Ks=new A.cV(B.h,"systemBackground",null,B.h,B.v,B.h,B.v,B.h,B.ad,B.h,B.JW)
 B.aAt=new A.W3(B.jb,B.hf)
-B.ou=new A.W5(null,B.ja,B.h,B.Kp,B.Ks,B.ja,!1,B.aAt)
-B.dr=new A.vu(B.ou,null,null,null,null,null,null,null,null)
+B.ot=new A.W5(null,B.ja,B.h,B.Kp,B.Ks,B.ja,!1,B.aAt)
+B.dr=new A.vu(B.ot,null,null,null,null,null,null,null,null)
 B.bH=new A.Nw(0,"base")
 B.jd=new A.Nw(1,"elevated")
 B.KA=new A.a7d(1,"latency")
@@ -109307,11 +109307,11 @@ B.cY=new A.xJ(0,"clip")
 B.bl=new A.anY(0,"parent")
 B.aBo=new A.YR(null)
 B.qA=new A.oc(B.eR,null,!0,B.cY,null,B.bl,null,B.aBo,null)
-B.lV=new A.qz(!1)
+B.lU=new A.qz(!1)
 B.hg=new A.qz(!0)
-B.lW=new A.qA(!1)
-B.lX=new A.qA(!0)
-B.lY=new A.qB(!1)
+B.lV=new A.qA(!1)
+B.lW=new A.qA(!0)
+B.lX=new A.qB(!1)
 B.hh=new A.qB(!0)
 B.KG=new A.vx(0)
 B.KH=new A.vx(1)
@@ -109323,12 +109323,12 @@ B.KK=new A.mj(10,"shallow")
 B.KL=new A.mj(11,"truncateChildren")
 B.KM=new A.mj(5,"error")
 B.KN=new A.mj(6,"whitespace")
-B.lZ=new A.mj(8,"singleLine")
+B.lY=new A.mj(8,"singleLine")
 B.ds=new A.mj(9,"errorProperty")
 B.KO=new A.vy(null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.KR=new A.k_(1,"horizontal")
 B.qB=new A.k_(2,"endToStart")
-B.m_=new A.k_(3,"startToEnd")
+B.lZ=new A.k_(3,"startToEnd")
 B.KS=new A.k_(4,"up")
 B.qC=new A.k_(5,"down")
 B.qD=new A.k_(6,"none")
@@ -109336,7 +109336,7 @@ B.KT=new A.qC(B.q8,null,null,null,null,null)
 B.KU=new A.qC(null,null,null,null,null,null)
 B.hi=new A.O3(0,"down")
 B.V=new A.O3(1,"start")
-B.m0=new A.O6(0,"start")
+B.m_=new A.O6(0,"start")
 B.hj=new A.O6(1,"end")
 B.KV=new A.O8(null)
 B.KW=new A.qH(null,null,null,null,null,null,null,null,null)
@@ -109347,8 +109347,8 @@ B.L9=new A.bb(1000)
 B.bI=new A.bb(1e5)
 B.el=new A.bb(1e6)
 B.La=new A.bb(12e4)
-B.m1=new A.bb(12e5)
-B.m2=new A.bb(125e3)
+B.m0=new A.bb(12e5)
+B.m1=new A.bb(125e3)
 B.Lb=new A.bb(14e4)
 B.Lc=new A.bb(15e3)
 B.dt=new A.bb(15e4)
@@ -109409,7 +109409,7 @@ B.LC=new A.a0(0,15,0,15)
 B.qP=new A.a0(0,16,0,16)
 B.LD=new A.a0(0,1,0,0)
 B.LE=new A.a0(0,20,0,20)
-B.m3=new A.a0(0,2,0,0)
+B.m2=new A.a0(0,2,0,0)
 B.LF=new A.a0(0,2,0,2)
 B.LG=new A.a0(0,3,0,3)
 B.LH=new A.a0(0,40,0,40)
@@ -109417,13 +109417,13 @@ B.LI=new A.a0(0,48,0,0)
 B.qQ=new A.a0(0,4,0,0)
 B.qR=new A.a0(0,4,0,4)
 B.qS=new A.a0(0,6,0,0)
-B.m4=new A.a0(0,6,0,6)
+B.m3=new A.a0(0,6,0,6)
 B.en=new A.a0(0,8,0,8)
 B.LJ=new A.a0(10,10,10,10)
 B.LK=new A.a0(10,12,10,12)
 B.dV=new A.a0(10,5,10,5)
 B.LL=new A.a0(12,10,12,10)
-B.m5=new A.a0(12,12,12,12)
+B.m4=new A.a0(12,12,12,12)
 B.qT=new A.a0(12,4,12,4)
 B.LM=new A.a0(12,5,12,5)
 B.LN=new A.a0(12,6,12,6)
@@ -109431,7 +109431,7 @@ B.qU=new A.a0(12,8,12,8)
 B.LO=new A.a0(14,10,14,10)
 B.LP=new A.a0(14,12,14,12)
 B.hr=new A.a0(14,14,14,14)
-B.m6=new A.a0(14,8,14,8)
+B.m5=new A.a0(14,8,14,8)
 B.LQ=new A.a0(14,9,14,9)
 B.LR=new A.a0(15,5,15,10)
 B.hs=new A.a0(16,0,16,0)
@@ -109442,7 +109442,7 @@ B.LT=new A.a0(16,12,16,16)
 B.LU=new A.a0(16,12,16,32)
 B.LV=new A.a0(16,12,16,4)
 B.LW=new A.a0(16,12,8,8)
-B.m7=new A.a0(16,14,16,14)
+B.m6=new A.a0(16,14,16,14)
 B.LX=new A.a0(16,16,16,100)
 B.ht=new A.a0(16,16,16,16)
 B.qX=new A.a0(16,18,16,18)
@@ -109463,13 +109463,13 @@ B.M8=new A.a0(20,12,20,12)
 B.M9=new A.a0(20,14,20,14)
 B.Ma=new A.a0(20,16,20,16)
 B.Mb=new A.a0(20,18,20,14)
-B.m8=new A.a0(20,20,20,20)
-B.m9=new A.a0(20,20,20,32)
+B.m7=new A.a0(20,20,20,20)
+B.m8=new A.a0(20,20,20,32)
 B.Mc=new A.a0(20,20,20,4)
 B.Md=new A.a0(20,28,20,12)
 B.r_=new A.a0(24,0,24,0)
 B.Me=new A.a0(24,0,24,24)
-B.ma=new A.a0(24,0,24,32)
+B.m9=new A.a0(24,0,24,32)
 B.Mf=new A.a0(24,10,16,8)
 B.r0=new A.a0(24,12,24,12)
 B.Mg=new A.a0(24,12,24,8)
@@ -109505,44 +109505,44 @@ B.Mz=new A.Bx(1,"enabled")
 B.hu=new A.Bx(2,"disabled")
 B.MA=new A.Od(null)
 B.r6=new A.cv(0,"incrementable")
-B.mb=new A.cv(1,"scrollable")
-B.mc=new A.cv(10,"link")
-B.md=new A.cv(11,"header")
-B.me=new A.cv(12,"tab")
-B.mf=new A.cv(13,"tabList")
-B.mg=new A.cv(14,"tabPanel")
-B.mh=new A.cv(15,"dialog")
-B.mi=new A.cv(16,"alertDialog")
-B.mj=new A.cv(17,"table")
-B.mk=new A.cv(18,"cell")
-B.ml=new A.cv(19,"row")
+B.ma=new A.cv(1,"scrollable")
+B.mb=new A.cv(10,"link")
+B.mc=new A.cv(11,"header")
+B.md=new A.cv(12,"tab")
+B.me=new A.cv(13,"tabList")
+B.mf=new A.cv(14,"tabPanel")
+B.mg=new A.cv(15,"dialog")
+B.mh=new A.cv(16,"alertDialog")
+B.mi=new A.cv(17,"table")
+B.mj=new A.cv(18,"cell")
+B.mk=new A.cv(19,"row")
 B.jh=new A.cv(2,"button")
-B.mm=new A.cv(20,"columnHeader")
-B.mn=new A.cv(21,"status")
-B.mo=new A.cv(22,"alert")
-B.mp=new A.cv(23,"list")
-B.mq=new A.cv(24,"listItem")
-B.mr=new A.cv(25,"generic")
-B.ms=new A.cv(26,"menu")
-B.mt=new A.cv(27,"menuBar")
-B.mu=new A.cv(28,"menuItem")
-B.mv=new A.cv(29,"menuItemCheckbox")
+B.ml=new A.cv(20,"columnHeader")
+B.mm=new A.cv(21,"status")
+B.mn=new A.cv(22,"alert")
+B.mo=new A.cv(23,"list")
+B.mp=new A.cv(24,"listItem")
+B.mq=new A.cv(25,"generic")
+B.mr=new A.cv(26,"menu")
+B.ms=new A.cv(27,"menuBar")
+B.mt=new A.cv(28,"menuItem")
+B.mu=new A.cv(29,"menuItemCheckbox")
 B.r7=new A.cv(3,"textField")
-B.mw=new A.cv(30,"menuItemRadio")
-B.mx=new A.cv(31,"complementary")
-B.my=new A.cv(32,"contentInfo")
-B.mz=new A.cv(33,"main")
-B.mA=new A.cv(34,"navigation")
-B.mB=new A.cv(35,"region")
-B.mC=new A.cv(36,"form")
-B.mD=new A.cv(4,"radioGroup")
-B.mE=new A.cv(5,"checkable")
+B.mv=new A.cv(30,"menuItemRadio")
+B.mw=new A.cv(31,"complementary")
+B.mx=new A.cv(32,"contentInfo")
+B.my=new A.cv(33,"main")
+B.mz=new A.cv(34,"navigation")
+B.mA=new A.cv(35,"region")
+B.mB=new A.cv(36,"form")
+B.mC=new A.cv(4,"radioGroup")
+B.mD=new A.cv(5,"checkable")
 B.r8=new A.cv(6,"heading")
 B.r9=new A.cv(7,"image")
-B.mF=new A.cv(8,"route")
-B.mG=new A.cv(9,"platformView")
-B.mH=new A.qJ(!1,!1,!1,!1)
-B.mI=new A.qJ(!1,!1,!1,!0)
+B.mE=new A.cv(8,"route")
+B.mF=new A.cv(9,"platformView")
+B.mG=new A.qJ(!1,!1,!1,!1)
+B.mH=new A.qJ(!1,!1,!1,!0)
 B.ra=new A.qK(!1,!1,!1,!1)
 B.rb=new A.qK(!1,!1,!1,!0)
 B.a5Q=new A.vM(null,null,null,null,null,null,null,null,null,null,null,null,null)
@@ -109580,8 +109580,8 @@ B.fg=new A.oh(!0,!1,!1,!1)
 B.fh=new A.oh(!0,!1,!1,!0)
 B.jo=new A.mv(!1,!1,!1,!1)
 B.jp=new A.mv(!1,!1,!1,!0)
-B.mJ=new A.mv(!0,!1,!1,!1)
-B.mK=new A.mv(!0,!1,!1,!0)
+B.mI=new A.mv(!0,!1,!1,!1)
+B.mJ=new A.mv(!0,!1,!1,!0)
 B.aBW=new A.Oo(0,"any")
 B.a5T=new A.Oo(4,"audio")
 B.a5U=new A.BM(null)
@@ -109598,11 +109598,11 @@ B.a5X=new A.vP(null,null,null,null,null,null,null,null,null,null,null,null,null,
 B.rs=new A.BQ(0,"Start")
 B.jr=new A.BQ(1,"Update")
 B.js=new A.BQ(2,"End")
-B.mL=new A.BR(0,"never")
+B.mK=new A.BR(0,"never")
 B.rt=new A.BR(1,"auto")
 B.jt=new A.BR(2,"always")
-B.mM=new A.oj(0,"touch")
-B.mN=new A.oj(1,"traditional")
+B.mL=new A.oj(0,"touch")
+B.mM=new A.oj(1,"traditional")
 B.aBX=new A.aak(0,"automatic")
 B.ru=new A.aao("focus")
 B.rv=new A.aay(1,"italic")
@@ -109637,7 +109637,7 @@ B.d6=new A.C7(2,"translucent")
 B.a62=new A.l1(null)
 B.rA=new A.b8(57415,"MaterialIcons",!1)
 B.rB=new A.b8(57490,"MaterialIcons",!0)
-B.mO=new A.b8(57492,"MaterialIcons",!0)
+B.mN=new A.b8(57492,"MaterialIcons",!0)
 B.a65=new A.b8(57500,"MaterialIcons",!0)
 B.a66=new A.b8(57615,"MaterialIcons",!1)
 B.rC=new A.b8(57689,"MaterialIcons",!1)
@@ -109683,7 +109683,7 @@ B.jB=new A.b8(63227,"MaterialIcons",!1)
 B.hz=new A.b8(63335,"MaterialIcons",!1)
 B.a6C=new A.b8(63378,"MaterialIcons",!0)
 B.a6D=new A.b8(63420,"MaterialIcons",!1)
-B.mP=new A.b8(63471,"MaterialIcons",!1)
+B.mO=new A.b8(63471,"MaterialIcons",!1)
 B.rO=new A.b8(63520,"MaterialIcons",!1)
 B.a6G=new A.b8(63595,"MaterialIcons",!1)
 B.rQ=new A.b8(983202,"MaterialIcons",!1)
@@ -109701,7 +109701,7 @@ B.rP=new A.b8(983092,"MaterialIcons",!0)
 B.a6Q=new A.cr(B.rP,16,null,null,null)
 B.rR=new A.b8(983518,"MaterialIcons",!1)
 B.a6R=new A.cr(B.rR,null,B.aJ,null,null)
-B.mR=new A.cr(B.cD,null,B.f8,null,null)
+B.mQ=new A.cr(B.cD,null,B.f8,null,null)
 B.Js=new A.q(1,1,0.9215686274509803,0.9333333333333333,B.j)
 B.IT=new A.q(1,1,0.803921568627451,0.8235294117647058,B.j)
 B.ID=new A.q(1,0.9372549019607843,0.6039215686274509,0.6039215686274509,B.j)
@@ -109716,12 +109716,12 @@ B.cG=new A.mL(B.amv,1,0.9568627450980393,0.2627450980392157,0.21176470588235294,
 B.a6S=new A.cr(B.rQ,null,B.cG,null,null)
 B.a6o=new A.b8(61352,"MaterialIcons",!1)
 B.a6T=new A.cr(B.a6o,null,B.aJ,null,null)
-B.mQ=new A.b8(983200,"MaterialIcons",!1)
-B.a6U=new A.cr(B.mQ,20,B.cG,null,null)
+B.mP=new A.b8(983200,"MaterialIcons",!1)
+B.a6U=new A.cr(B.mP,20,B.cG,null,null)
 B.a6H=new A.b8(63624,"MaterialIcons",!1)
 B.a6V=new A.cr(B.a6H,42,B.aJ,null,null)
-B.a6W=new A.cr(B.mQ,22,null,null,null)
-B.a6X=new A.cr(B.mQ,null,null,null,null)
+B.a6W=new A.cr(B.mP,22,null,null,null)
+B.a6X=new A.cr(B.mP,null,null,null,null)
 B.a6E=new A.b8(63568,"MaterialIcons",!1)
 B.rV=new A.cr(B.a6E,18,null,null,null)
 B.a68=new A.b8(57686,"MaterialIcons",!1)
@@ -109811,7 +109811,7 @@ B.a7Y=new A.PE(null)
 B.a7Z=new A.PF(0,"rawKeyData")
 B.a8_=new A.PF(1,"keyDataThenRawKeyData")
 B.d7=new A.Ct(0,"down")
-B.mS=new A.acj(0,"keyboard")
+B.mR=new A.acj(0,"keyboard")
 B.a80=new A.hV(B.a6,B.d7,0,0,null,!1)
 B.hC=new A.l6(0,"handled")
 B.hD=new A.l6(1,"ignored")
@@ -109823,7 +109823,7 @@ B.a82=new A.wi(B.jS,1,"scrollLock")
 B.hM=new A.l(4294967556)
 B.a83=new A.wi(B.hM,2,"capsLock")
 B.jR=new A.l(4294967562)
-B.mT=new A.wi(B.jR,0,"numLock")
+B.mS=new A.wi(B.jR,0,"numLock")
 B.fk=new A.ri(0,"any")
 B.dw=new A.ri(3,"all")
 B.aL=new A.Cv(0,"ariaLabel")
@@ -109836,7 +109836,7 @@ B.a86=new A.Cx(2,"inAppBrowserView")
 B.asc=new A.c9(1/0,1/0,null,null)
 B.a87=new A.CC(0,0,B.asc,null)
 B.t7=new A.CD(0,"opportunity")
-B.mU=new A.CD(2,"mandatory")
+B.mT=new A.CD(2,"mandatory")
 B.t8=new A.CD(3,"endOfText")
 B.JP=new A.q(1,1,0.6705882352941176,0,B.j)
 B.tm=s([B.j_,B.JP],t.F)
@@ -109872,9 +109872,9 @@ B.a7p=new A.op(4,"bmp")
 B.a7x=new A.l3(B.a7p,!1,6,"bmp")
 B.a7h=new A.mB(B.a9c,B.a7x,5,"bmp")
 B.a9_=s([B.a7l,B.a7k,B.a7j,B.a7m,B.a7i,B.a7h],A.aQ("Q<mB>"))
-B.oG=new A.Ja(0,"named")
+B.oF=new A.Ja(0,"named")
 B.F3=new A.Ja(1,"anonymous")
-B.a98=s([B.oG,B.F3],A.aQ("Q<Ja>"))
+B.a98=s([B.oF,B.F3],A.aQ("Q<Ja>"))
 B.ti=s([0,4,12,1,5,13,3,7,15],t.t)
 B.IN=new A.q(1,1,0.5490196078431373,0,B.j)
 B.qk=new A.q(1,1,0.6705882352941176,0.25098039215686274,B.j)
@@ -109982,9 +109982,9 @@ B.acy=s(["Curl","Barbell curl"],t.s)
 B.a_g=new A.b("Curl con Bilanciere","Barbell Curl","braccia",B.L,"Bicipite brachiale","Brachiale, Brachioradiale","In piedi, bilanciere con presa supina alla larghezza delle spalle. Piega i gomiti portando il bilanciere verso le spalle. Abbassa lentamente.","Non oscillare il busto. I gomiti devono restare fermi ai fianchi.",B.acy,"barbell-curl")
 B.acM=s(["Curl manubri","Dumbbell curl","Curl alternato"],t.s)
 B.N7=new A.b("Curl con Manubri Alternati","Alternating Dumbbell Curl","braccia",B.L,"Bicipite brachiale","Brachiale, Brachioradiale","In piedi, manubri ai lati. Alza un manubrio ruotando il polso (supinazione) durante il movimento. Abbassa e ripeti con l'altro braccio.","La supinazione del polso massimizza l'attivazione del bicipite.",B.acM,"dumbbell-curl")
-B.n0=s(["bicipiti.png","braccia.png"],t.s)
+B.n_=s(["bicipiti.png","braccia.png"],t.s)
 B.acT=s(["Curl hammer","Hammer curl"],t.s)
-B.R7=new A.b("Curl Martello","Hammer Curl","braccia",B.n0,"Brachiale, Brachioradiale","Bicipite brachiale","Presa neutrale (pollici verso l'alto). Piega i gomiti portando i manubri verso le spalle senza ruotare il polso.","Ottimo per lo spessore del braccio e la forza dell'avambraccio.",B.acT,"hammer-curl")
+B.R7=new A.b("Curl Martello","Hammer Curl","braccia",B.n_,"Brachiale, Brachioradiale","Bicipite brachiale","Presa neutrale (pollici verso l'alto). Piega i gomiti portando i manubri verso le spalle senza ruotare il polso.","Ottimo per lo spessore del braccio e la forza dell'avambraccio.",B.acT,"hammer-curl")
 B.a9X=s(["Curl cavo","Cable curl","Pulley curl"],t.s)
 B.a5m=new A.b("Curl al Cavo Basso","Cable Curl","braccia",B.L,"Bicipite brachiale","Brachiale","In piedi davanti al cavo basso, barra o corda. Piega i gomiti portando il peso verso le spalle mantenendo i gomiti fissi.","Il cavo mantiene tensione costante anche nella posizione di massima contrazione.",B.a9X,"cable-curl")
 B.S=s(["tricipiti.png"],t.s)
@@ -110104,7 +110104,7 @@ B.b8=new A.FA(0,"upstream")
 B.aax=s([B.b8,B.x],A.aQ("Q<FA>"))
 B.bk=new A.FE(0,"rtl")
 B.az=new A.FE(1,"ltr")
-B.mX=s([B.bk,B.az],A.aQ("Q<FE>"))
+B.mW=s([B.bk,B.az],A.aQ("Q<FE>"))
 B.e5=new A.kB(0,"leading")
 B.cN=new A.kB(1,"title")
 B.e6=new A.kB(2,"subtitle")
@@ -111070,7 +111070,7 @@ B.OX=new A.b("Seated Straight Leg Calf Stretch","Seated Straight Leg Calf Stretc
 B.VQ=new A.b("Seated Toe Touches","Seated Toe Touches","core",B.b,"Rettosaddominale, Obliqui","Trasverso addome, Lombari",u.V,u.Y,B.b,"seated-toe-touches")
 B.Xq=new A.b("Seated Twist Machine","Seated Twist Machine","altro",B.b,"Muscolatura principale coinvolta","Muscolatura di supporto",u.p,u.q,B.b,"seated-twist-machine")
 B.a4a=new A.b("Seated Twist With Resistance Band","Seated Twist With Resistance Band","altro",B.b,"Muscolatura principale coinvolta","Muscolatura di supporto",u.p,u.q,B.b,"seated-twist-with-resistance-band")
-B.Uc=new A.b("Seated Zottman Curl","Seated Zottman Curl","braccia",B.n0,"Bicipiti, Brachioradiale","Brachiale",u.tu,u.gI,B.b,"seated-zottman-curl")
+B.Uc=new A.b("Seated Zottman Curl","Seated Zottman Curl","braccia",B.n_,"Bicipiti, Brachioradiale","Brachiale",u.tu,u.gI,B.b,"seated-zottman-curl")
 B.TC=new A.b("Serratus Wall Slide With Foam Roller","Serratus Wall Slide With Foam Roller","altro",B.b,"Mobilit\xe0 articolare generale","Muscolatura di supporto",u.N,u.z,B.b,"serratus-wall-slide-with-foam-roller")
 B.Z0=new A.b("Shadow Boxing","Shadow Boxing","cardio",B.b,"Sistema cardiovascolare","Muscolatura arti inferiori",u.dD,u.hQ,B.b,"shadow-boxing")
 B.a_C=new A.b("Short Stride Run","Short Stride Run","altro",B.b,"Muscolatura principale coinvolta","Muscolatura di supporto",u.p,u.q,B.b,"short-stride-run")
@@ -111349,7 +111349,7 @@ B.Sa=new A.b("Zercher Carry","Zercher Carry","altro",B.b,"Muscolatura principale
 B.Rh=new A.b("Zercher Deadlift","Zercher Deadlift","dorso",B.es,"Ischiocrurali, Glutei, Lombari","Quadricipiti, Gran dorsale, Trapezio",u.w7,u.bP,B.b,"zercher-deadlift")
 B.QN=new A.b("Zercher Squat","Zercher Squat","gambe",B.w,"Quadricipiti, Glutei","Ischiocrurali, Lombari, Core",u.r,u.w,B.b,"zercher-squat")
 B.VN=new A.b("Zig Zag Hops Plyometric","Zig Zag Hops Plyometric","altro",B.b,"Muscolatura principale coinvolta","Muscolatura di supporto",u.p,u.q,B.b,"zig-zag-hops-plyometric")
-B.N1=new A.b("Zottman Curl","Zottman Curl","braccia",B.n0,"Bicipiti, Brachioradiale","Brachiale",u.tu,u.gI,B.b,"zottman-curl")
+B.N1=new A.b("Zottman Curl","Zottman Curl","braccia",B.n_,"Bicipiti, Brachioradiale","Brachiale",u.tu,u.gI,B.b,"zottman-curl")
 B.et=s([B.Nm,B.Vb,B.a2J,B.ZP,B.a4f,B.XX,B.XY,B.a1p,B.ZJ,B.a_S,B.a5D,B.SH,B.MB,B.RV,B.RQ,B.Ry,B.a2z,B.Su,B.a2Y,B.ZD,B.O7,B.R6,B.TY,B.S8,B.a2i,B.Nt,B.XH,B.PX,B.Xo,B.Xk,B.a4_,B.a0n,B.a_9,B.Ul,B.V0,B.Xy,B.Rp,B.V1,B.Q2,B.a_q,B.a3r,B.a4N,B.Tq,B.QF,B.Z3,B.a2t,B.RA,B.Yo,B.Nf,B.Pl,B.X7,B.Y8,B.Ue,B.Ob,B.SJ,B.SB,B.MO,B.a1n,B.Sj,B.a1e,B.QS,B.a1u,B.XP,B.a59,B.Xe,B.Xf,B.St,B.a_x,B.Qf,B.Zv,B.Np,B.Qc,B.a4h,B.a2G,B.RE,B.PF,B.Nh,B.WC,B.WQ,B.a1_,B.Sh,B.a1D,B.a0h,B.PV,B.To,B.Y2,B.a04,B.Vx,B.Yj,B.a3Y,B.a1m,B.Vh,B.PW,B.RM,B.P0,B.a0S,B.XR,B.OC,B.Oz,B.a3C,B.PY,B.OK,B.Sm,B.a51,B.Yd,B.RL,B.YA,B.a34,B.Se,B.a17,B.a3y,B.a0l,B.Nb,B.Tv,B.a0H,B.a1t,B.a0O,B.Q4,B.a5q,B.Pw,B.Ve,B.ZC,B.R2,B.VL,B.WA,B.VJ,B.Wx,B.Wm,B.Vq,B.Uv,B.Vn,B.a16,B.R9,B.SA,B.ZA,B.QO,B.Zg,B.a5n,B.a4w,B.a0z,B.NW,B.X6,B.TI,B.Zu,B.SP,B.a1c,B.Qq,B.Qb,B.a0R,B.W4,B.MU,B.SU,B.a12,B.UW,B.Zj,B.a45,B.a28,B.T2,B.a2X,B.PR,B.Tg,B.XS,B.UA,B.SZ,B.PE,B.YG,B.a3l,B.T7,B.Ws,B.a3Q,B.a0T,B.NT,B.a1d,B.a1X,B.Ur,B.Zw,B.UP,B.a3v,B.a2S,B.O3,B.a3k,B.W8,B.TV,B.P1,B.a20,B.a_A,B.ZW,B.T9,B.a3P,B.SD,B.a_v,B.UV,B.PJ,B.a5M,B.a2c,B.RP,B.Ww,B.OD,B.a2Q,B.Sr,B.a_j,B.a0a,B.a2K,B.a_0,B.ZF,B.ZH,B.Ti,B.Zr,B.Xd,B.a3g,B.Vr,B.a5B,B.W1,B.U5,B.Ys,B.a3D,B.Zi,B.T_,B.a_w,B.a4K,B.Nj,B.Xl,B.Yg,B.QG,B.P9,B.Oc,B.Sk,B.U4,B.a2E,B.a49,B.a52,B.a4Z,B.XL,B.a2U,B.VG,B.Qw,B.a_a,B.XC,B.a11,B.Wp,B.WX,B.Xz,B.WB,B.a_h,B.VE,B.Ng,B.V9,B.UG,B.RU,B.Pg,B.a1w,B.a0Z,B.V8,B.ZB,B.a3w,B.WY,B.WT,B.a5s,B.a_n,B.Nv,B.a35,B.YB,B.TN,B.Ov,B.QM,B.Tr,B.a0C,B.TP,B.Nc,B.Pk,B.ON,B.Pt,B.Yq,B.XB,B.a0y,B.RB,B.MI,B.Ni,B.T5,B.a29,B.RH,B.a_N,B.Yb,B.a3B,B.a4O,B.QU,B.Ts,B.Qr,B.a0b,B.Q6,B.a_t,B.U6,B.a1S,B.a09,B.QH,B.PD,B.Q9,B.TA,B.a3i,B.a_c,B.a_b,B.a3S,B.RZ,B.VC,B.Vf,B.a0G,B.XJ,B.a3o,B.Ud,B.X5,B.Zo,B.a1f,B.OG,B.OS,B.Pi,B.a41,B.a4d,B.a_f,B.So,B.Pr,B.XM,B.PK,B.a4b,B.Qa,B.Qz,B.Rm,B.a3N,B.Wq,B.Uq,B.Nu,B.a_T,B.a1W,B.QE,B.SG,B.VM,B.a1l,B.R5,B.a4g,B.V_,B.Y4,B.a2M,B.a5G,B.a2L,B.a5C,B.a0V,B.RO,B.Uy,B.X9,B.Wd,B.a4m,B.Th,B.Xg,B.Wg,B.Uz,B.SN,B.Ye,B.a0p,B.ZR,B.MX,B.SV,B.W2,B.a4r,B.WM,B.R3,B.Tc,B.a0o,B.Px,B.a1C,B.Uw,B.a_k,B.W0,B.R_,B.MS,B.Qn,B.ZZ,B.WU,B.a_U,B.a_6,B.Tj,B.a2e,B.QT,B.Ri,B.a3Z,B.WR,B.WI,B.XA,B.a3V,B.a3u,B.OA,B.UM,B.P7,B.O2,B.Te,B.a0m,B.Qk,B.OH,B.a2B,B.RF,B.a_l,B.a_4,B.a2m,B.T6,B.a53,B.a3O,B.Tw,B.Oy,B.a5f,B.TE,B.a3E,B.On,B.PZ,B.QX,B.a58,B.Nz,B.Pn,B.V5,B.QY,B.a_3,B.Tb,B.a5l,B.TQ,B.TZ,B.R8,B.Qs,B.Zf,B.a4R,B.Ns,B.Vp,B.a5t,B.ME,B.a5u,B.a32,B.Qx,B.Wr,B.QC,B.PH,B.Ug,B.OP,B.P5,B.TR,B.a5x,B.a5y,B.a30,B.UN,B.Tp,B.Zn,B.Tk,B.TK,B.MW,B.UX,B.Z1,B.TL,B.P8,B.a2h,B.Tf,B.a5_,B.WO,B.Wa,B.P2,B.Ny,B.TG,B.SR,B.Y3,B.Tn,B.a2l,B.a3a,B.a3p,B.Pp,B.a3j,B.a4x,B.a4T,B.Uh,B.RI,B.TT,B.ZX,B.WS,B.Vw,B.Vv,B.Vy,B.a2u,B.Vo,B.a4n,B.a47,B.TH,B.Zh,B.US,B.O1,B.X1,B.Qe,B.Xs,B.a4t,B.Yu,B.Xa,B.Re,B.O9,B.O4,B.Wu,B.a_D,B.Wi,B.a0A,B.a4s,B.MJ,B.Xt,B.a_7,B.Wj,B.a5r,B.Vi,B.TM,B.Xm,B.No,B.O8,B.a3e,B.PB,B.a2W,B.a1Z,B.a_z,B.a5F,B.a1x,B.a4S,B.Un,B.a2k,B.TJ,B.Nl,B.a2s,B.Qj,B.OB,B.a1j,B.a5c,B.a4Q,B.R1,B.a2D,B.Ta,B.Pc,B.a4M,B.XN,B.Sq,B.OR,B.Si,B.Ui,B.a_P,B.Nq,B.Xp,B.a2n,B.a5v,B.P4,B.OF,B.Xu,B.a_X,B.a_Y,B.QP,B.Xv,B.Q7,B.TO,B.S_,B.Q1,B.ZQ,B.Zs,B.UI,B.MP,B.T3,B.a3M,B.a3s,B.Od,B.Vj,B.X4,B.SI,B.VV,B.a15,B.a22,B.a56,B.PU,B.Ru,B.Q3,B.a3U,B.NP,B.Rr,B.Qd,B.Xh,B.OV,B.a4v,B.W6,B.Xr,B.a1y,B.RX,B.MK,B.a2V,B.Wl,B.SY,B.a4E,B.Pq,B.WH,B.PP,B.R0,B.VA,B.NQ,B.Zz,B.a3L,B.a3_,B.a1z,B.YI,B.NH,B.R4,B.a40,B.TD,B.a_e,B.Sf,B.Yx,B.a4j,B.NC,B.Pu,B.Tz,B.a2j,B.XU,B.YM,B.UJ,B.Oh,B.a2C,B.YQ,B.VW,B.Xj,B.VK,B.a1V,B.a1Y,B.a02,B.V3,B.a5e,B.a_u,B.Q0,B.V7,B.VZ,B.T0,B.SW,B.Y5,B.Zy,B.WL,B.S9,B.Vd,B.Z2,B.V2,B.a0K,B.a1E,B.a00,B.Wk,B.UB,B.a0u,B.Sv,B.Sd,B.a4I,B.a06,B.a_r,B.a5z,B.Ux,B.N2,B.a18,B.a3h,B.a4q,B.a2a,B.a1P,B.NM,B.Y_,B.a_Q,B.WP,B.a23,B.WN,B.TB,B.Tl,B.Sp,B.QD,B.Wb,B.PO,B.S6,B.OM,B.VR,B.N_,B.a3F,B.a5P,B.Vt,B.Q5,B.a0J,B.a26,B.Rd,B.T1,B.a2F,B.YO,B.Tt,B.a_I,B.Pb,B.V4,B.a38,B.NN,B.WJ,B.RW,B.Sl,B.Pm,B.Rf,B.a1B,B.a39,B.a0U,B.Za,B.Um,B.YY,B.a4D,B.a4B,B.a4Y,B.Vu,B.XD,B.a_2,B.Vl,B.QK,B.a10,B.U2,B.ZG,B.MZ,B.X3,B.S5,B.a0s,B.a0P,B.Ol,B.WV,B.X_,B.Xw,B.Oo,B.a2_,B.a1q,B.Po,B.a5g,B.W_,B.a01,B.Yy,B.Zx,B.PI,B.N9,B.QZ,B.a1U,B.Xc,B.a4e,B.W5,B.Pv,B.a3d,B.Rl,B.NF,B.Nd,B.a08,B.a36,B.Os,B.PG,B.UO,B.PC,B.a2N,B.a3H,B.QQ,B.a24,B.UY,B.a_E,B.a5L,B.XZ,B.a_F,B.NX,B.a5o,B.Xn,B.Sg,B.U9,B.NO,B.a54,B.Qg,B.MT,B.Ty,B.NV,B.XE,B.a0t,B.Yw,B.YS,B.Zm,B.a43,B.a4X,B.RY,B.a05,B.T8,B.a0W,B.a33,B.NS,B.U0,B.a2f,B.Ok,B.a1s,B.O_,B.a21,B.a0L,B.YF,B.NB,B.TS,B.Us,B.WD,B.U_,B.YL,B.Ou,B.NZ,B.Xb,B.a1o,B.Tx,B.SM,B.UC,B.NR,B.ZS,B.PM,B.a5h,B.Wc,B.a2P,B.a1R,B.a0k,B.RJ,B.a4P,B.Ro,B.NJ,B.Oa,B.Ss,B.a2O,B.a2v,B.a_V,B.MR,B.U7,B.YT,B.a2g,B.a0e,B.SS,B.Na,B.a_m,B.Oe,B.a19,B.UR,B.a14,B.Pf,B.Oq,B.NG,B.RS,B.ZY,B.PQ,B.Rv,B.Or,B.UK,B.a0E,B.WW,B.Z4,B.a25,B.a3b,B.N8,B.OE,B.XO,B.a0B,B.MM,B.Rg,B.a3X,B.QV,B.SE,B.RN,B.Ne,B.Vc,B.a4G,B.Tu,B.a0i,B.a_8,B.Nr,B.SQ,B.N6,B.a4p,B.Uj,B.Wo,B.a5k,B.a03,B.S2,B.a3z,B.a0Q,B.Nk,B.a0v,B.ZU,B.YE,B.Sz,B.a_Z,B.a31,B.ML,B.a1K,B.S7,B.QW,B.QR,B.a5K,B.Yh,B.NL,B.RG,B.Qi,B.a3q,B.a3f,B.Vs,B.a57,B.a1h,B.UD,B.a1i,B.a2x,B.OI,B.Y6,B.NI,B.Y7,B.MY,B.Nn,B.Z5,B.Pe,B.a5d,B.Zc,B.a_H,B.Tm,B.a5J,B.YV,B.a42,B.Pd,B.VT,B.OQ,B.a5b,B.QB,B.a3A,B.Xx,B.a4y,B.a_d,B.Rj,B.a5I,B.WK,B.WG,B.a13,B.a2A,B.a0d,B.ZO,B.Ot,B.XT,B.OX,B.VQ,B.Xq,B.a4a,B.Uc,B.TC,B.Z0,B.a_C,B.W7,B.a_K,B.a_L,B.a5j,B.a_p,B.ST,B.Vk,B.a1r,B.ZN,B.YZ,B.a4c,B.a5i,B.a4l,B.Rs,B.YC,B.Pz,B.OO,B.a27,B.a37,B.TF,B.a_R,B.U1,B.a0w,B.a1T,B.Qo,B.Nw,B.a2y,B.MG,B.OL,B.Zk,B.Og,B.Zt,B.a0x,B.a1I,B.Rn,B.Yt,B.a1L,B.RD,B.We,B.a1A,B.Uf,B.Wh,B.ZI,B.Y1,B.YD,B.a4V,B.Ph,B.a2p,B.VF,B.a0N,B.XK,B.Ym,B.Uu,B.Wz,B.a07,B.YX,B.Uo,B.a5O,B.Va,B.MF,B.a3J,B.a4J,B.Qu,B.Ql,B.Sx,B.O5,B.a3t,B.a5N,B.NY,B.a5A,B.YU,B.a2o,B.a4k,B.N3,B.Zd,B.Nx,B.W3,B.a44,B.ZE,B.Qp,B.Z9,B.VH,B.a2H,B.Ut,B.a4U,B.a_O,B.a4o,B.a5E,B.SO,B.YN,B.Yp,B.Wy,B.MN,B.Zl,B.Py,B.Q_,B.UH,B.a_s,B.MQ,B.N0,B.Ra,B.VD,B.Wf,B.Oi,B.a0X,B.a4A,B.Z8,B.PL,B.UL,B.a0_,B.a2r,B.SL,B.SX,B.a5p,B.a1N,B.a3K,B.PS,B.Rx,B.a5a,B.T4,B.a3m,B.TW,B.Vg,B.a0M,B.ZL,B.a_M,B.VB,B.OZ,B.Ow,B.XQ,B.Ua,B.Td,B.a1k,B.a1G,B.a0g,B.Vm,B.Yr,B.QI,B.RC,B.WF,B.Z7,B.VU,B.Wt,B.Zp,B.MV,B.a46,B.a2d,B.WZ,B.VX,B.OU,B.a48,B.a1O,B.QJ,B.P3,B.YK,B.NE,B.MD,B.TX,B.a2q,B.Rc,B.a3n,B.N4,B.a0F,B.a_o,B.a1M,B.a0q,B.Q8,B.a55,B.Y9,B.YW,B.a_i,B.S1,B.a4L,B.Vz,B.Ze,B.RR,B.Qm,B.a3x,B.Sc,B.Sb,B.a1F,B.MH,B.a0I,B.NA,B.PA,B.a0c,B.X0,B.a3c,B.a3G,B.a2Z,B.UZ,B.a1b,B.Yz,B.Uk,B.TU,B.a1a,B.SK,B.P6,B.a4C,B.a5H,B.Rz,B.a_B,B.a_W,B.UF,B.a4i,B.NK,B.a0r,B.ZK,B.UT,B.OY,B.VO,B.P_,B.Qy,B.a3R,B.a4H,B.Y0,B.QL,B.OJ,B.Rq,B.W9,B.a2w,B.SF,B.PN,B.a1g,B.a0j,B.Qh,B.VY,B.Wn,B.Ub,B.Rt,B.Pj,B.a2R,B.X2,B.a1v,B.Zq,B.a_J,B.Qv,B.Rk,B.N5,B.SC,B.Yv,B.Yf,B.Wv,B.a0Y,B.ZV,B.a50,B.XW,B.Yn,B.Up,B.a1J,B.Zb,B.XV,B.Of,B.OW,B.Ps,B.VS,B.a4u,B.a2T,B.a3T,B.S3,B.a3I,B.Yk,B.a0f,B.Oj,B.UU,B.YJ,B.Sw,B.MC,B.UQ,B.Sa,B.Rh,B.QN,B.VN,B.N1],t.cm)
 B.EN=new A.yf(0,"topLeft")
 B.EQ=new A.yf(3,"bottomRight")
@@ -111393,9 +111393,9 @@ B.abr=s([],t.tc)
 B.jL=s([],t.jl)
 B.abt=s([],t.wi)
 B.abs=s([],A.aQ("Q<aRc<@>>"))
-B.mZ=s([],t.AO)
+B.mY=s([],t.AO)
 B.abB=s([],t.D1)
-B.mY=s([],t.QF)
+B.mX=s([],t.QF)
 B.aby=s([],t.Lx)
 B.abz=s([],t.fm)
 B.tt=s([],t.p)
@@ -111424,15 +111424,15 @@ B.hF=s([10,10,10,10],t.t)
 B.alA=new A.i(B.u,["Cable Straight Arm Pulldown",4,B.hF,90,120,"","",0,"cable-straight-arm-pulldown"],t.M)
 B.ac8=s([B.ako,B.yK,B.yG,B.alA],t.J)
 B.am1=new A.i(B.b_,["Dorso",B.acE,"dorso.png",B.ac8],t.M)
-B.n_=s(["gambe"],t.s)
+B.mZ=s(["gambe"],t.s)
 B.aaL=s([8,8,8,8,8,8,8,8],t.t)
 B.akv=new A.i(B.u,["Belt Squat",8,B.aaL,90,120,"","",0,"belt-squat"],t.M)
 B.tf=s([15,12,10],t.t)
 B.alw=new A.i(B.u,["Leg Extension",3,B.tf,90,120,"","",0,"leg-extension"],t.M)
 B.akR=new A.i(B.u,["Seated Leg Curl",4,B.cf,90,120,"","",0,"seated-leg-curl"],t.M)
-B.ni=new A.i(B.u,["Leg Curl",4,B.cf,90,120,"","",0,"leg-curl"],t.M)
-B.aaQ=s([B.akv,B.alw,B.akR,B.ni],t.J)
-B.am6=new A.i(B.b_,["Gambe",B.n_,"gambe.png",B.aaQ],t.M)
+B.nh=new A.i(B.u,["Leg Curl",4,B.cf,90,120,"","",0,"leg-curl"],t.M)
+B.aaQ=s([B.akv,B.alw,B.akR,B.nh],t.J)
+B.am6=new A.i(B.b_,["Gambe",B.mZ,"gambe.png",B.aaQ],t.M)
 B.tC=s(["spalle"],t.s)
 B.akc=new A.i(B.u,["Shoulder Press Macchina",4,B.cf,90,120,"","",0,"lever-shoulder-press"],t.M)
 B.d8=s([10,10,10],t.t)
@@ -111470,8 +111470,8 @@ B.abC=s([B.alM,B.alg,B.yE,B.akw,B.alC,B.akB],t.J)
 B.am7=new A.i(B.b_,["A",B.acl,"push.png",B.abC],t.M)
 B.abG=s(["gambe","spalle","braccia"],t.s)
 B.ak_=new A.i(B.u,["Leg Press",3,B.tf,90,120,"","",0,"leg-press"],t.M)
-B.mV=s([12,10],t.t)
-B.ajX=new A.i(B.u,["Leg Extension",2,B.mV,90,120,"","",0,"leg-extension"],t.M)
+B.mU=s([12,10],t.t)
+B.ajX=new A.i(B.u,["Leg Extension",2,B.mU,90,120,"","",0,"leg-extension"],t.M)
 B.yI=new A.i(B.u,["Leg Curl",3,B.bt,90,120,"","",0,"leg-curl"],t.M)
 B.yD=new A.i(B.u,["Lento Avanti",3,B.bt,90,120,"","",0,"barbell-shoulder-press"],t.M)
 B.akd=new A.i(B.u,["Alzate Laterali",3,B.bt,90,120,"","",0,"dumbbell-lateral-raise"],t.M)
@@ -111520,7 +111520,7 @@ B.alq=new A.i(B.u,["Cable Straight Arm Pulldown",3,B.c0,90,120,"","",0,"cable-st
 B.aly=new A.i(B.u,["Curl al Cavo Basso",3,B.c0,90,120,"","",0,"cable-curl"],t.M)
 B.a9s=s([8,8,10,10],t.t)
 B.akq=new A.i(B.u,["Romanian Deadlift",4,B.a9s,90,120,"","",0,"romanian-deadlift"],t.M)
-B.a9Q=s([B.yK,B.alq,B.aly,B.akq,B.ni],t.J)
+B.a9Q=s([B.yK,B.alq,B.aly,B.akq,B.nh],t.J)
 B.am5=new A.i(B.b_,["Pull day",B.abi,"pull.png",B.a9Q],t.M)
 B.aco=s(["petto","spalle","braccia"],t.s)
 B.akp=new A.i(B.u,["Chest Press Macchina",3,B.c0,90,120,"","",0,"chest-press-machine"],t.M)
@@ -111537,7 +111537,7 @@ B.alB=new A.i(B.u,["Leg Press",4,B.cf,90,120,"","",0,"leg-press"],t.M)
 B.akf=new A.i(B.u,["Hack Squats Machine",3,B.c0,90,120,"","",0,"hack-squats-machine"],t.M)
 B.akL=new A.i(B.u,["Leg Extension",3,B.d8,90,120,"","",0,"leg-extension"],t.M)
 B.akb=new A.i(B.u,["Hip Thrust",4,B.cf,90,120,"","",0,"barbell-hip-thrusts"],t.M)
-B.acH=s([B.alB,B.akf,B.akL,B.akb,B.ni],t.J)
+B.acH=s([B.alB,B.akf,B.akL,B.akb,B.nh],t.J)
 B.amf=new A.i(B.b_,["Leg day",B.abE,"gambe.png",B.acH],t.M)
 B.a9J=s([B.am5,B.am3,B.amf],t.J)
 B.aeI=new A.i(B.eG,["PPL Starter","3 giorni \xb7 push, pull, leg day","\u2728",B.a9J],t.yf)
@@ -111568,7 +111568,7 @@ B.alb=new A.i(B.u,["One Arm Triceps Pushdown",4,B.fl,90,120,"","",0,"one-arm-tri
 B.al3=new A.i(B.u,["Rope Pushdown",4,B.hF,90,120,"","",0,"rope-pushdown"],t.M)
 B.akK=new A.i(B.u,["French Press",3,B.c0,90,120,"","",0,"seated-ez-bar-overhead-triceps-extension"],t.M)
 B.a8B=s([B.als,B.all,B.al8,B.alI,B.alb,B.al3,B.akK],t.J)
-B.am8=new A.i(B.b_,["Legs",B.n_,"gambe.png",B.a8B],t.M)
+B.am8=new A.i(B.b_,["Legs",B.mZ,"gambe.png",B.a8B],t.M)
 B.aah=s([B.amk,B.amc,B.am8],t.J)
 B.aeF=new A.i(B.eG,["Strength Split","3 giorni \xb7 pull, push, legs","\ud83e\uddf1",B.aah],t.yf)
 B.cu=s([10,8,6],t.t)
@@ -111579,8 +111579,8 @@ B.alE=new A.i(B.u,["Cable Straight Arm Pulldown",3,B.cu,90,120,"Se c'\xe8 usa la
 B.akC=new A.i(B.u,["Dumbbell Kickback",3,B.cu,90,120,"","",0,"dumbbell-kickback"],t.M)
 B.akr=new A.i(B.u,["Rope Pushdown",3,B.cu,90,120,"","",0,"rope-pushdown"],t.M)
 B.akz=new A.i(B.u,["High Pulley Overhead Tricep Extension",2,B.td,90,120,"vulken","",0,"high-pulley-overhead-tricep-extension"],t.M)
-B.mW=s([15,15,15],t.t)
-B.alx=new A.i(B.u,["Weighted Sit Ups",3,B.mW,30,120,"3 x max","",0,"weighted-sit-ups"],t.M)
+B.mV=s([15,15,15],t.t)
+B.alx=new A.i(B.u,["Weighted Sit Ups",3,B.mV,30,120,"3 x max","",0,"weighted-sit-ups"],t.M)
 B.aaU=s([B.akF,B.ajY,B.ak6,B.alE,B.akC,B.akr,B.akz,B.alx],t.J)
 B.ami=new A.i(B.b_,["Workout 1/4",B.dz,"pull.png",B.aaU],t.M)
 B.jI=s([10,8,8,6],t.t)
@@ -111591,7 +111591,7 @@ B.aks=new A.i(B.u,["Hip Adduction Machine",3,B.cu,90,120,"","",0,"hip-adduction-
 B.akZ=new A.i(B.u,["Affondi",3,B.d8,90,120,"","",0,"bodyweight-lunge"],t.M)
 B.a8p=s([18,15,18,15],t.t)
 B.akh=new A.i(B.u,["Calf Raises",4,B.a8p,90,120,"","",0,"calf-raise"],t.M)
-B.ak8=new A.i(B.u,["Russian Twist",3,B.mW,90,120,"3 x max","",0,"russian-twist"],t.M)
+B.ak8=new A.i(B.u,["Russian Twist",3,B.mV,90,120,"3 x max","",0,"russian-twist"],t.M)
 B.a9z=s([B.ak7,B.aki,B.akn,B.aks,B.akZ,B.akh,B.ak8],t.J)
 B.amh=new A.i(B.b_,["Workout 2/4",B.dz,"quadricipiti.png",B.a9z],t.M)
 B.alu=new A.i(B.u,["Peck Deck",4,B.jI,90,120,"","",0,"pec-deck-fly"],t.M)
@@ -111619,7 +111619,7 @@ B.akV=new A.i(B.u,["Seated Row Machine",3,B.bt,90,120,"","",0,"seated-row-machin
 B.akM=new A.i(B.u,["45 Degree Incline Row",3,B.bt,90,120,"","",0,"45-degree-incline-row"],t.M)
 B.ak5=new A.i(B.u,["Cable Straight Arm Pulldown",3,B.bt,90,120,"","",0,"cable-straight-arm-pulldown"],t.M)
 B.ali=new A.i(B.u,["Overhead Tricep Extension",3,B.bt,90,120,"","",0,"seated-ez-bar-overhead-triceps-extension"],t.M)
-B.akJ=new A.i(B.u,["French Press",2,B.mV,90,120,"","",0,"seated-ez-bar-overhead-triceps-extension"],t.M)
+B.akJ=new A.i(B.u,["French Press",2,B.mU,90,120,"","",0,"seated-ez-bar-overhead-triceps-extension"],t.M)
 B.aci=s([B.akV,B.yE,B.akM,B.ak5,B.yJ,B.ali,B.akJ],t.J)
 B.am_=new A.i(B.b_,["1/4",B.abh,"pull.png",B.aci],t.M)
 B.abJ=s(["glutei"],t.s)
@@ -111630,7 +111630,7 @@ B.akl=new A.i(B.u,["Dumbbell Romanian Deadlift",4,B.hH,90,120,"","",0,"dumbbell-
 B.yF=new A.i(B.u,["Hip Abduction Machine",3,B.bt,90,120,"","",0,"hip-abduction-machine"],t.M)
 B.a8q=s([18,18,15,12],t.t)
 B.akH=new A.i(B.u,["Calf Raises",4,B.a8q,90,120,"","",0,"calf-raise"],t.M)
-B.aku=new A.i(B.u,["Crunch",3,B.mW,90,120,"3 x max","",0,"crunch"],t.M)
+B.aku=new A.i(B.u,["Crunch",3,B.mV,90,120,"3 x max","",0,"crunch"],t.M)
 B.acS=s([B.alG,B.alh,B.akl,B.yF,B.akH,B.aku],t.J)
 B.ama=new A.i(B.b_,["2/4",B.abJ,"glutei.png",B.acS],t.M)
 B.a8k=s([12,10,8,8],t.t)
@@ -111647,10 +111647,10 @@ B.akj=new A.i(B.u,["Dumbbell Goblet Squat",3,B.a8j,90,120,"","",0,"dumbbell-gobl
 B.akS=new A.i(B.u,["Leg Extension",3,B.bt,90,120,"","",0,"leg-extension"],t.M)
 B.akA=new A.i(B.u,["Curl con Manubri Alternati",3,B.bt,90,120,"","",0,"dumbbell-curl"],t.M)
 B.akD=new A.i(B.u,["Curl al Cavo Basso",3,B.bt,90,120,"","",0,"cable-curl"],t.M)
-B.akI=new A.i(B.u,["Cable Rope Hammer Curl",2,B.mV,90,120,"","",0,"cable-rope-hammer-curl"],t.M)
+B.akI=new A.i(B.u,["Cable Rope Hammer Curl",2,B.mU,90,120,"","",0,"cable-rope-hammer-curl"],t.M)
 B.al2=new A.i(B.u,["Crunch",3,B.d8,90,120,"3 x max","",0,"crunch"],t.M)
 B.a8C=s([B.akj,B.yF,B.akS,B.yI,B.akA,B.akD,B.akI,B.al2],t.J)
-B.am9=new A.i(B.b_,["4/4",B.n_,"gambe.png",B.a8C],t.M)
+B.am9=new A.i(B.b_,["4/4",B.mZ,"gambe.png",B.a8C],t.M)
 B.a9y=s([B.am_,B.ama,B.ame,B.am9],t.J)
 B.aeJ=new A.i(B.eG,["4/4 Progression","4 giorni \xb7 schiena, lower, push, legs","\u2699\ufe0f",B.a9y],t.yf)
 B.abO=s([B.aeK,B.aeH,B.aeG,B.aeI,B.aeF,B.aeL,B.aeJ],t.H7)
@@ -111703,13 +111703,13 @@ B.fq=new A.ix(0,"controlModifier")
 B.fr=new A.ix(1,"shiftModifier")
 B.fs=new A.ix(2,"altModifier")
 B.ft=new A.ix(3,"metaModifier")
-B.nn=new A.ix(4,"capsLockModifier")
-B.no=new A.ix(5,"numLockModifier")
-B.np=new A.ix(6,"scrollLockModifier")
-B.nq=new A.ix(7,"functionModifier")
+B.nm=new A.ix(4,"capsLockModifier")
+B.nn=new A.ix(5,"numLockModifier")
+B.no=new A.ix(6,"scrollLockModifier")
+B.np=new A.ix(7,"functionModifier")
 B.yZ=new A.ix(8,"symbolModifier")
-B.tD=s([B.fq,B.fr,B.fs,B.ft,B.nn,B.no,B.np,B.nq,B.yZ],A.aQ("Q<ix>"))
-B.n1=s([!0,!1],t.HZ)
+B.tD=s([B.fq,B.fr,B.fs,B.ft,B.nm,B.nn,B.no,B.np,B.yZ],A.aQ("Q<ix>"))
+B.n0=s([!0,!1],t.HZ)
 B.Iy=new A.q(0.14901960784313725,0,0,0,B.j)
 B.dX=new A.k(0,3)
 B.Gn=new A.bD(0,B.a7,B.Iy,B.dX,8)
@@ -111723,7 +111723,7 @@ B.E=new A.CL(0,"ignored")
 B.bR=new A.l(4294967304)
 B.hL=new A.l(4294967323)
 B.bJ=new A.l(4294967423)
-B.n4=new A.l(4294967558)
+B.n3=new A.l(4294967558)
 B.hP=new A.l(8589934848)
 B.jT=new A.l(8589934849)
 B.dW=new A.l(8589934850)
@@ -111732,10 +111732,10 @@ B.hQ=new A.l(8589934852)
 B.jU=new A.l(8589934853)
 B.hR=new A.l(8589934854)
 B.jV=new A.l(8589934855)
-B.n7=new A.l(8589935088)
-B.n8=new A.l(8589935090)
-B.n9=new A.l(8589935092)
-B.na=new A.l(8589935094)
+B.n6=new A.l(8589935088)
+B.n7=new A.l(8589935090)
+B.n8=new A.l(8589935092)
+B.n9=new A.l(8589935094)
 B.aem=new A.adc("longPress")
 B.i2=new A.bk(B.aW,B.q)
 B.aC_=new A.wq(1,null,B.i2)
@@ -111746,7 +111746,7 @@ B.jW=new A.oH(1,"end")
 B.bj=new A.oH(2,"center")
 B.eC=new A.oH(3,"spaceBetween")
 B.yv=new A.oH(4,"spaceAround")
-B.ng=new A.oH(5,"spaceEvenly")
+B.nf=new A.oH(5,"spaceEvenly")
 B.a9=new A.Q2(0,"min")
 B.r=new A.Q2(1,"max")
 B.ank={in:0,iw:1,ji:2,jw:3,mo:4,aam:5,adp:6,aue:7,ayx:8,bgm:9,bjd:10,ccq:11,cjr:12,cka:13,cmk:14,coy:15,cqu:16,drh:17,drw:18,gav:19,gfx:20,ggn:21,gti:22,guv:23,hrr:24,ibi:25,ilw:26,jeg:27,kgc:28,kgh:29,koj:30,krm:31,ktr:32,kvs:33,kwq:34,kxe:35,kzj:36,kzt:37,lii:38,lmm:39,meg:40,mst:41,mwj:42,myt:43,nad:44,ncp:45,nnx:46,nts:47,oun:48,pcr:49,pmc:50,pmu:51,ppa:52,ppr:53,pry:54,puz:55,sca:56,skk:57,tdu:58,thc:59,thx:60,tie:61,tkk:62,tlw:63,tmp:64,tne:65,tnf:66,tsf:67,uok:68,xba:69,xia:70,xkh:71,xsj:72,ybd:73,yma:74,ymt:75,yos:76,yuu:77}
@@ -111767,8 +111767,8 @@ B.Gd=new A.bD(0,B.a7,B.d3,B.dX,4)
 B.GE=new A.bD(0,B.a7,B.am,B.cJ,8)
 B.abT=s([B.Ga,B.Gd,B.GE],t.V)
 B.Gf=new A.bD(-1,B.a7,B.d2,B.k2,4)
-B.nt=new A.k(0,4)
-B.Gp=new A.bD(0,B.a7,B.d3,B.nt,5)
+B.ns=new A.k(0,4)
+B.Gp=new A.bD(0,B.a7,B.d3,B.ns,5)
 B.Gk=new A.bD(0,B.a7,B.am,B.cJ,10)
 B.a8y=s([B.Gf,B.Gp,B.Gk],t.V)
 B.G7=new A.bD(-1,B.a7,B.d2,B.dX,5)
@@ -111776,13 +111776,13 @@ B.z6=new A.k(0,6)
 B.Gv=new A.bD(0,B.a7,B.d3,B.z6,10)
 B.GD=new A.bD(0,B.a7,B.am,B.cJ,18)
 B.a9N=s([B.G7,B.Gv,B.GD],t.V)
-B.nu=new A.k(0,5)
-B.Gc=new A.bD(-3,B.a7,B.d2,B.nu,5)
-B.nv=new A.k(0,8)
-B.Go=new A.bD(1,B.a7,B.d3,B.nv,10)
+B.nt=new A.k(0,5)
+B.Gc=new A.bD(-3,B.a7,B.d2,B.nt,5)
+B.nu=new A.k(0,8)
+B.Go=new A.bD(1,B.a7,B.d3,B.nu,10)
 B.GC=new A.bD(2,B.a7,B.am,B.dX,14)
 B.a8X=s([B.Gc,B.Go,B.GC],t.V)
-B.G8=new A.bD(-3,B.a7,B.d2,B.nu,6)
+B.G8=new A.bD(-3,B.a7,B.d2,B.nt,6)
 B.z7=new A.k(0,9)
 B.Gy=new A.bD(1,B.a7,B.d3,B.z7,12)
 B.Gw=new A.bD(2,B.a7,B.am,B.dX,16)
@@ -111791,9 +111791,9 @@ B.anI=new A.k(0,7)
 B.Gq=new A.bD(-4,B.a7,B.d2,B.anI,8)
 B.anD=new A.k(0,12)
 B.Gm=new A.bD(2,B.a7,B.d3,B.anD,17)
-B.GB=new A.bD(4,B.a7,B.am,B.nu,22)
+B.GB=new A.bD(4,B.a7,B.am,B.nt,22)
 B.a9Z=s([B.Gq,B.Gm,B.GB],t.V)
-B.GA=new A.bD(-5,B.a7,B.d2,B.nv,10)
+B.GA=new A.bD(-5,B.a7,B.d2,B.nu,10)
 B.anE=new A.k(0,16)
 B.Gt=new A.bD(2,B.a7,B.d3,B.anE,24)
 B.GG=new A.bD(5,B.a7,B.am,B.z6,30)
@@ -111806,13 +111806,13 @@ B.Gr=new A.bD(8,B.a7,B.am,B.z7,46)
 B.aak=s([B.Ge,B.Gz,B.Gr],t.V)
 B.aeo=new A.cW([0,B.tu,1,B.acg,2,B.a9A,3,B.abT,4,B.a8y,6,B.a9N,8,B.a8X,9,B.a9b,12,B.a9Z,16,B.a9Y,24,B.aak],A.aQ("cW<o,T<bD>>"))
 B.d9=new A.l(4294968065)
-B.nU=new A.ay(B.d9,!1,!1,!0,!1,B.E)
+B.nT=new A.ay(B.d9,!1,!1,!0,!1,B.E)
 B.cS=new A.l(4294968066)
-B.nR=new A.ay(B.cS,!1,!1,!0,!1,B.E)
+B.nQ=new A.ay(B.cS,!1,!1,!0,!1,B.E)
 B.cT=new A.l(4294968067)
-B.nS=new A.ay(B.cT,!1,!1,!0,!1,B.E)
+B.nR=new A.ay(B.cT,!1,!1,!0,!1,B.E)
 B.da=new A.l(4294968068)
-B.nT=new A.ay(B.da,!1,!1,!0,!1,B.E)
+B.nS=new A.ay(B.da,!1,!1,!0,!1,B.E)
 B.DI=new A.ay(B.d9,!1,!1,!1,!0,B.E)
 B.DF=new A.ay(B.cS,!1,!1,!1,!0,B.E)
 B.DG=new A.ay(B.cT,!1,!1,!1,!0,B.E)
@@ -111829,7 +111829,7 @@ B.tJ=new A.l(32)
 B.kp=new A.ay(B.tJ,!1,!1,!1,!1,B.E)
 B.jP=new A.l(4294967309)
 B.ks=new A.ay(B.jP,!1,!1,!1,!1,B.E)
-B.yw=new A.cW([B.nU,B.H,B.nR,B.H,B.nS,B.H,B.nT,B.H,B.DI,B.H,B.DF,B.H,B.DG,B.H,B.DH,B.H,B.ih,B.H,B.kt,B.H,B.ku,B.H,B.ig,B.H,B.DJ,B.H,B.DK,B.H,B.DN,B.H,B.DO,B.H,B.kp,B.H,B.ks,B.H],t.Fp)
+B.yw=new A.cW([B.nT,B.H,B.nQ,B.H,B.nR,B.H,B.nS,B.H,B.DI,B.H,B.DF,B.H,B.DG,B.H,B.DH,B.H,B.ih,B.H,B.kt,B.H,B.ku,B.H,B.ig,B.H,B.DJ,B.H,B.DK,B.H,B.DN,B.H,B.DO,B.H,B.kp,B.H,B.ks,B.H],t.Fp)
 B.adf=new A.l(33)
 B.adg=new A.l(34)
 B.adh=new A.l(35)
@@ -111868,9 +111868,9 @@ B.aei=new A.l(93)
 B.aej=new A.l(94)
 B.aek=new A.l(95)
 B.ael=new A.l(96)
-B.ne=new A.l(97)
+B.nd=new A.l(97)
 B.yu=new A.l(98)
-B.nf=new A.l(99)
+B.ne=new A.l(99)
 B.acX=new A.l(100)
 B.tE=new A.l(101)
 B.tF=new A.l(102)
@@ -111889,9 +111889,9 @@ B.ad6=new A.l(114)
 B.ad7=new A.l(115)
 B.tI=new A.l(116)
 B.ad8=new A.l(117)
-B.n2=new A.l(118)
+B.n1=new A.l(118)
 B.ad9=new A.l(119)
-B.n3=new A.l(120)
+B.n2=new A.l(120)
 B.ada=new A.l(121)
 B.hK=new A.l(122)
 B.adb=new A.l(123)
@@ -111912,13 +111912,13 @@ B.eu=new A.l(4294968069)
 B.ev=new A.l(4294968070)
 B.hN=new A.l(4294968071)
 B.hO=new A.l(4294968072)
-B.n5=new A.l(4294968321)
+B.n4=new A.l(4294968321)
 B.tT=new A.l(4294968322)
 B.tU=new A.l(4294968323)
 B.tV=new A.l(4294968324)
 B.tW=new A.l(4294968325)
 B.tX=new A.l(4294968326)
-B.n6=new A.l(4294968327)
+B.n5=new A.l(4294968327)
 B.tY=new A.l(4294968328)
 B.tZ=new A.l(4294968329)
 B.u_=new A.l(4294968330)
@@ -112198,7 +112198,7 @@ B.adE=new A.l(8589934612)
 B.adF=new A.l(8589934624)
 B.adG=new A.l(8589934625)
 B.adH=new A.l(8589934626)
-B.nb=new A.l(8589935117)
+B.na=new A.l(8589935117)
 B.adI=new A.l(8589935144)
 B.adJ=new A.l(8589935145)
 B.yq=new A.l(8589935146)
@@ -112207,12 +112207,12 @@ B.adK=new A.l(8589935148)
 B.ys=new A.l(8589935149)
 B.ex=new A.l(8589935150)
 B.yt=new A.l(8589935151)
-B.nc=new A.l(8589935152)
+B.nb=new A.l(8589935152)
 B.hS=new A.l(8589935153)
 B.ey=new A.l(8589935154)
 B.hT=new A.l(8589935155)
 B.ez=new A.l(8589935156)
-B.nd=new A.l(8589935157)
+B.nc=new A.l(8589935157)
 B.eA=new A.l(8589935158)
 B.hU=new A.l(8589935159)
 B.eB=new A.l(8589935160)
@@ -112249,13 +112249,13 @@ B.aec=new A.l(8589935388)
 B.aed=new A.l(8589935389)
 B.aee=new A.l(8589935390)
 B.aef=new A.l(8589935391)
-B.aeB=new A.cW([32,B.tJ,33,B.adf,34,B.adg,35,B.adh,36,B.adi,37,B.adj,38,B.adk,39,B.adl,40,B.adm,41,B.adn,42,B.tK,43,B.yc,44,B.ado,45,B.yd,46,B.ye,47,B.yf,48,B.yg,49,B.yh,50,B.yi,51,B.yj,52,B.yk,53,B.yl,54,B.ym,55,B.yn,56,B.yo,57,B.yp,58,B.adp,59,B.adq,60,B.adr,61,B.ads,62,B.adt,63,B.adu,64,B.adv,91,B.aeg,92,B.aeh,93,B.aei,94,B.aej,95,B.aek,96,B.ael,97,B.ne,98,B.yu,99,B.nf,100,B.acX,101,B.tE,102,B.tF,103,B.acY,104,B.acZ,105,B.ad_,106,B.ad0,107,B.ad1,108,B.ad2,109,B.ad3,110,B.tG,111,B.ad4,112,B.tH,113,B.ad5,114,B.ad6,115,B.ad7,116,B.tI,117,B.ad8,118,B.n2,119,B.ad9,120,B.n3,121,B.ada,122,B.hK,123,B.adb,124,B.adc,125,B.add,126,B.ade,4294967297,B.tL,4294967304,B.bR,4294967305,B.jO,4294967309,B.jP,4294967323,B.hL,4294967423,B.bJ,4294967553,B.tM,4294967555,B.jQ,4294967556,B.hM,4294967558,B.n4,4294967559,B.tN,4294967560,B.tO,4294967562,B.jR,4294967564,B.jS,4294967566,B.tP,4294967567,B.tQ,4294967568,B.tR,4294967569,B.tS,4294968065,B.d9,4294968066,B.cS,4294968067,B.cT,4294968068,B.da,4294968069,B.eu,4294968070,B.ev,4294968071,B.hN,4294968072,B.hO,4294968321,B.n5,4294968322,B.tT,4294968323,B.tU,4294968324,B.tV,4294968325,B.tW,4294968326,B.tX,4294968327,B.n6,4294968328,B.tY,4294968329,B.tZ,4294968330,B.u_,4294968577,B.u0,4294968578,B.u1,4294968579,B.u2,4294968580,B.u3,4294968581,B.u4,4294968582,B.u5,4294968583,B.u6,4294968584,B.u7,4294968585,B.u8,4294968586,B.u9,4294968587,B.ua,4294968588,B.ub,4294968589,B.uc,4294968590,B.ud,4294968833,B.ue,4294968834,B.uf,4294968835,B.ug,4294968836,B.uh,4294968837,B.ui,4294968838,B.uj,4294968839,B.uk,4294968840,B.ul,4294968841,B.um,4294968842,B.un,4294968843,B.uo,4294969089,B.up,4294969090,B.uq,4294969091,B.ur,4294969092,B.us,4294969093,B.ut,4294969094,B.uu,4294969095,B.uv,4294969096,B.uw,4294969097,B.ux,4294969098,B.uy,4294969099,B.uz,4294969100,B.uA,4294969101,B.uB,4294969102,B.uC,4294969103,B.uD,4294969104,B.uE,4294969105,B.uF,4294969106,B.uG,4294969107,B.uH,4294969108,B.uI,4294969109,B.uJ,4294969110,B.uK,4294969111,B.uL,4294969112,B.uM,4294969113,B.uN,4294969114,B.uO,4294969115,B.uP,4294969116,B.uQ,4294969117,B.uR,4294969345,B.uS,4294969346,B.uT,4294969347,B.uU,4294969348,B.uV,4294969349,B.uW,4294969350,B.uX,4294969351,B.uY,4294969352,B.uZ,4294969353,B.v_,4294969354,B.v0,4294969355,B.v1,4294969356,B.v2,4294969357,B.v3,4294969358,B.v4,4294969359,B.v5,4294969360,B.v6,4294969361,B.v7,4294969362,B.v8,4294969363,B.v9,4294969364,B.va,4294969365,B.vb,4294969366,B.vc,4294969367,B.vd,4294969368,B.ve,4294969601,B.vf,4294969602,B.vg,4294969603,B.vh,4294969604,B.vi,4294969605,B.vj,4294969606,B.vk,4294969607,B.vl,4294969608,B.vm,4294969857,B.vn,4294969858,B.vo,4294969859,B.vp,4294969860,B.vq,4294969861,B.vr,4294969863,B.vs,4294969864,B.vt,4294969865,B.vu,4294969866,B.vv,4294969867,B.vw,4294969868,B.vx,4294969869,B.vy,4294969870,B.vz,4294969871,B.vA,4294969872,B.vB,4294969873,B.vC,4294970113,B.vD,4294970114,B.vE,4294970115,B.vF,4294970116,B.vG,4294970117,B.vH,4294970118,B.vI,4294970119,B.vJ,4294970120,B.vK,4294970121,B.vL,4294970122,B.vM,4294970123,B.vN,4294970124,B.vO,4294970125,B.vP,4294970126,B.vQ,4294970127,B.vR,4294970369,B.vS,4294970370,B.vT,4294970371,B.vU,4294970372,B.vV,4294970373,B.vW,4294970374,B.vX,4294970375,B.vY,4294970625,B.vZ,4294970626,B.w_,4294970627,B.w0,4294970628,B.w1,4294970629,B.w2,4294970630,B.w3,4294970631,B.w4,4294970632,B.w5,4294970633,B.w6,4294970634,B.w7,4294970635,B.w8,4294970636,B.w9,4294970637,B.wa,4294970638,B.wb,4294970639,B.wc,4294970640,B.wd,4294970641,B.we,4294970642,B.wf,4294970643,B.wg,4294970644,B.wh,4294970645,B.wi,4294970646,B.wj,4294970647,B.wk,4294970648,B.wl,4294970649,B.wm,4294970650,B.wn,4294970651,B.wo,4294970652,B.wp,4294970653,B.wq,4294970654,B.wr,4294970655,B.ws,4294970656,B.wt,4294970657,B.wu,4294970658,B.wv,4294970659,B.ww,4294970660,B.wx,4294970661,B.wy,4294970662,B.wz,4294970663,B.wA,4294970664,B.wB,4294970665,B.wC,4294970666,B.wD,4294970667,B.wE,4294970668,B.wF,4294970669,B.wG,4294970670,B.wH,4294970671,B.wI,4294970672,B.wJ,4294970673,B.wK,4294970674,B.wL,4294970675,B.wM,4294970676,B.wN,4294970677,B.wO,4294970678,B.wP,4294970679,B.wQ,4294970680,B.wR,4294970681,B.wS,4294970682,B.wT,4294970683,B.wU,4294970684,B.wV,4294970685,B.wW,4294970686,B.wX,4294970687,B.wY,4294970688,B.wZ,4294970689,B.x_,4294970690,B.x0,4294970691,B.x1,4294970692,B.x2,4294970693,B.x3,4294970694,B.x4,4294970695,B.x5,4294970696,B.x6,4294970697,B.x7,4294970698,B.x8,4294970699,B.x9,4294970700,B.xa,4294970701,B.xb,4294970702,B.xc,4294970703,B.xd,4294970704,B.xe,4294970705,B.xf,4294970706,B.xg,4294970707,B.xh,4294970708,B.xi,4294970709,B.xj,4294970710,B.xk,4294970711,B.xl,4294970712,B.xm,4294970713,B.xn,4294970714,B.xo,4294970715,B.xp,4294970882,B.xq,4294970884,B.xr,4294970885,B.xs,4294970886,B.xt,4294970887,B.xu,4294970888,B.xv,4294970889,B.xw,4294971137,B.xx,4294971138,B.xy,4294971393,B.xz,4294971394,B.xA,4294971395,B.xB,4294971396,B.xC,4294971397,B.xD,4294971398,B.xE,4294971399,B.xF,4294971400,B.xG,4294971401,B.xH,4294971402,B.xI,4294971403,B.xJ,4294971649,B.xK,4294971650,B.xL,4294971651,B.xM,4294971652,B.xN,4294971653,B.xO,4294971654,B.xP,4294971655,B.xQ,4294971656,B.xR,4294971657,B.xS,4294971658,B.xT,4294971659,B.xU,4294971660,B.xV,4294971661,B.xW,4294971662,B.xX,4294971663,B.xY,4294971664,B.xZ,4294971665,B.y_,4294971666,B.y0,4294971667,B.y1,4294971668,B.y2,4294971669,B.y3,4294971670,B.y4,4294971671,B.y5,4294971672,B.y6,4294971673,B.y7,4294971674,B.y8,4294971675,B.y9,4294971905,B.ya,4294971906,B.yb,8589934592,B.adw,8589934593,B.adx,8589934594,B.ady,8589934595,B.adz,8589934608,B.adA,8589934609,B.adB,8589934610,B.adC,8589934611,B.adD,8589934612,B.adE,8589934624,B.adF,8589934625,B.adG,8589934626,B.adH,8589934848,B.hP,8589934849,B.jT,8589934850,B.dW,8589934851,B.ew,8589934852,B.hQ,8589934853,B.jU,8589934854,B.hR,8589934855,B.jV,8589935088,B.n7,8589935090,B.n8,8589935092,B.n9,8589935094,B.na,8589935117,B.nb,8589935144,B.adI,8589935145,B.adJ,8589935146,B.yq,8589935147,B.yr,8589935148,B.adK,8589935149,B.ys,8589935150,B.ex,8589935151,B.yt,8589935152,B.nc,8589935153,B.hS,8589935154,B.ey,8589935155,B.hT,8589935156,B.ez,8589935157,B.nd,8589935158,B.eA,8589935159,B.hU,8589935160,B.eB,8589935161,B.hV,8589935165,B.adL,8589935361,B.adM,8589935362,B.adN,8589935363,B.adO,8589935364,B.adP,8589935365,B.adQ,8589935366,B.adR,8589935367,B.adS,8589935368,B.adT,8589935369,B.adU,8589935370,B.adV,8589935371,B.adW,8589935372,B.adX,8589935373,B.adY,8589935374,B.adZ,8589935375,B.ae_,8589935376,B.ae0,8589935377,B.ae1,8589935378,B.ae2,8589935379,B.ae3,8589935380,B.ae4,8589935381,B.ae5,8589935382,B.ae6,8589935383,B.ae7,8589935384,B.ae8,8589935385,B.ae9,8589935386,B.aea,8589935387,B.aeb,8589935388,B.aec,8589935389,B.aed,8589935390,B.aee,8589935391,B.aef],A.aQ("cW<o,l>"))
-B.oe=new A.po(2,"down")
-B.KQ=new A.od(B.oe)
+B.aeB=new A.cW([32,B.tJ,33,B.adf,34,B.adg,35,B.adh,36,B.adi,37,B.adj,38,B.adk,39,B.adl,40,B.adm,41,B.adn,42,B.tK,43,B.yc,44,B.ado,45,B.yd,46,B.ye,47,B.yf,48,B.yg,49,B.yh,50,B.yi,51,B.yj,52,B.yk,53,B.yl,54,B.ym,55,B.yn,56,B.yo,57,B.yp,58,B.adp,59,B.adq,60,B.adr,61,B.ads,62,B.adt,63,B.adu,64,B.adv,91,B.aeg,92,B.aeh,93,B.aei,94,B.aej,95,B.aek,96,B.ael,97,B.nd,98,B.yu,99,B.ne,100,B.acX,101,B.tE,102,B.tF,103,B.acY,104,B.acZ,105,B.ad_,106,B.ad0,107,B.ad1,108,B.ad2,109,B.ad3,110,B.tG,111,B.ad4,112,B.tH,113,B.ad5,114,B.ad6,115,B.ad7,116,B.tI,117,B.ad8,118,B.n1,119,B.ad9,120,B.n2,121,B.ada,122,B.hK,123,B.adb,124,B.adc,125,B.add,126,B.ade,4294967297,B.tL,4294967304,B.bR,4294967305,B.jO,4294967309,B.jP,4294967323,B.hL,4294967423,B.bJ,4294967553,B.tM,4294967555,B.jQ,4294967556,B.hM,4294967558,B.n3,4294967559,B.tN,4294967560,B.tO,4294967562,B.jR,4294967564,B.jS,4294967566,B.tP,4294967567,B.tQ,4294967568,B.tR,4294967569,B.tS,4294968065,B.d9,4294968066,B.cS,4294968067,B.cT,4294968068,B.da,4294968069,B.eu,4294968070,B.ev,4294968071,B.hN,4294968072,B.hO,4294968321,B.n4,4294968322,B.tT,4294968323,B.tU,4294968324,B.tV,4294968325,B.tW,4294968326,B.tX,4294968327,B.n5,4294968328,B.tY,4294968329,B.tZ,4294968330,B.u_,4294968577,B.u0,4294968578,B.u1,4294968579,B.u2,4294968580,B.u3,4294968581,B.u4,4294968582,B.u5,4294968583,B.u6,4294968584,B.u7,4294968585,B.u8,4294968586,B.u9,4294968587,B.ua,4294968588,B.ub,4294968589,B.uc,4294968590,B.ud,4294968833,B.ue,4294968834,B.uf,4294968835,B.ug,4294968836,B.uh,4294968837,B.ui,4294968838,B.uj,4294968839,B.uk,4294968840,B.ul,4294968841,B.um,4294968842,B.un,4294968843,B.uo,4294969089,B.up,4294969090,B.uq,4294969091,B.ur,4294969092,B.us,4294969093,B.ut,4294969094,B.uu,4294969095,B.uv,4294969096,B.uw,4294969097,B.ux,4294969098,B.uy,4294969099,B.uz,4294969100,B.uA,4294969101,B.uB,4294969102,B.uC,4294969103,B.uD,4294969104,B.uE,4294969105,B.uF,4294969106,B.uG,4294969107,B.uH,4294969108,B.uI,4294969109,B.uJ,4294969110,B.uK,4294969111,B.uL,4294969112,B.uM,4294969113,B.uN,4294969114,B.uO,4294969115,B.uP,4294969116,B.uQ,4294969117,B.uR,4294969345,B.uS,4294969346,B.uT,4294969347,B.uU,4294969348,B.uV,4294969349,B.uW,4294969350,B.uX,4294969351,B.uY,4294969352,B.uZ,4294969353,B.v_,4294969354,B.v0,4294969355,B.v1,4294969356,B.v2,4294969357,B.v3,4294969358,B.v4,4294969359,B.v5,4294969360,B.v6,4294969361,B.v7,4294969362,B.v8,4294969363,B.v9,4294969364,B.va,4294969365,B.vb,4294969366,B.vc,4294969367,B.vd,4294969368,B.ve,4294969601,B.vf,4294969602,B.vg,4294969603,B.vh,4294969604,B.vi,4294969605,B.vj,4294969606,B.vk,4294969607,B.vl,4294969608,B.vm,4294969857,B.vn,4294969858,B.vo,4294969859,B.vp,4294969860,B.vq,4294969861,B.vr,4294969863,B.vs,4294969864,B.vt,4294969865,B.vu,4294969866,B.vv,4294969867,B.vw,4294969868,B.vx,4294969869,B.vy,4294969870,B.vz,4294969871,B.vA,4294969872,B.vB,4294969873,B.vC,4294970113,B.vD,4294970114,B.vE,4294970115,B.vF,4294970116,B.vG,4294970117,B.vH,4294970118,B.vI,4294970119,B.vJ,4294970120,B.vK,4294970121,B.vL,4294970122,B.vM,4294970123,B.vN,4294970124,B.vO,4294970125,B.vP,4294970126,B.vQ,4294970127,B.vR,4294970369,B.vS,4294970370,B.vT,4294970371,B.vU,4294970372,B.vV,4294970373,B.vW,4294970374,B.vX,4294970375,B.vY,4294970625,B.vZ,4294970626,B.w_,4294970627,B.w0,4294970628,B.w1,4294970629,B.w2,4294970630,B.w3,4294970631,B.w4,4294970632,B.w5,4294970633,B.w6,4294970634,B.w7,4294970635,B.w8,4294970636,B.w9,4294970637,B.wa,4294970638,B.wb,4294970639,B.wc,4294970640,B.wd,4294970641,B.we,4294970642,B.wf,4294970643,B.wg,4294970644,B.wh,4294970645,B.wi,4294970646,B.wj,4294970647,B.wk,4294970648,B.wl,4294970649,B.wm,4294970650,B.wn,4294970651,B.wo,4294970652,B.wp,4294970653,B.wq,4294970654,B.wr,4294970655,B.ws,4294970656,B.wt,4294970657,B.wu,4294970658,B.wv,4294970659,B.ww,4294970660,B.wx,4294970661,B.wy,4294970662,B.wz,4294970663,B.wA,4294970664,B.wB,4294970665,B.wC,4294970666,B.wD,4294970667,B.wE,4294970668,B.wF,4294970669,B.wG,4294970670,B.wH,4294970671,B.wI,4294970672,B.wJ,4294970673,B.wK,4294970674,B.wL,4294970675,B.wM,4294970676,B.wN,4294970677,B.wO,4294970678,B.wP,4294970679,B.wQ,4294970680,B.wR,4294970681,B.wS,4294970682,B.wT,4294970683,B.wU,4294970684,B.wV,4294970685,B.wW,4294970686,B.wX,4294970687,B.wY,4294970688,B.wZ,4294970689,B.x_,4294970690,B.x0,4294970691,B.x1,4294970692,B.x2,4294970693,B.x3,4294970694,B.x4,4294970695,B.x5,4294970696,B.x6,4294970697,B.x7,4294970698,B.x8,4294970699,B.x9,4294970700,B.xa,4294970701,B.xb,4294970702,B.xc,4294970703,B.xd,4294970704,B.xe,4294970705,B.xf,4294970706,B.xg,4294970707,B.xh,4294970708,B.xi,4294970709,B.xj,4294970710,B.xk,4294970711,B.xl,4294970712,B.xm,4294970713,B.xn,4294970714,B.xo,4294970715,B.xp,4294970882,B.xq,4294970884,B.xr,4294970885,B.xs,4294970886,B.xt,4294970887,B.xu,4294970888,B.xv,4294970889,B.xw,4294971137,B.xx,4294971138,B.xy,4294971393,B.xz,4294971394,B.xA,4294971395,B.xB,4294971396,B.xC,4294971397,B.xD,4294971398,B.xE,4294971399,B.xF,4294971400,B.xG,4294971401,B.xH,4294971402,B.xI,4294971403,B.xJ,4294971649,B.xK,4294971650,B.xL,4294971651,B.xM,4294971652,B.xN,4294971653,B.xO,4294971654,B.xP,4294971655,B.xQ,4294971656,B.xR,4294971657,B.xS,4294971658,B.xT,4294971659,B.xU,4294971660,B.xV,4294971661,B.xW,4294971662,B.xX,4294971663,B.xY,4294971664,B.xZ,4294971665,B.y_,4294971666,B.y0,4294971667,B.y1,4294971668,B.y2,4294971669,B.y3,4294971670,B.y4,4294971671,B.y5,4294971672,B.y6,4294971673,B.y7,4294971674,B.y8,4294971675,B.y9,4294971905,B.ya,4294971906,B.yb,8589934592,B.adw,8589934593,B.adx,8589934594,B.ady,8589934595,B.adz,8589934608,B.adA,8589934609,B.adB,8589934610,B.adC,8589934611,B.adD,8589934612,B.adE,8589934624,B.adF,8589934625,B.adG,8589934626,B.adH,8589934848,B.hP,8589934849,B.jT,8589934850,B.dW,8589934851,B.ew,8589934852,B.hQ,8589934853,B.jU,8589934854,B.hR,8589934855,B.jV,8589935088,B.n6,8589935090,B.n7,8589935092,B.n8,8589935094,B.n9,8589935117,B.na,8589935144,B.adI,8589935145,B.adJ,8589935146,B.yq,8589935147,B.yr,8589935148,B.adK,8589935149,B.ys,8589935150,B.ex,8589935151,B.yt,8589935152,B.nb,8589935153,B.hS,8589935154,B.ey,8589935155,B.hT,8589935156,B.ez,8589935157,B.nc,8589935158,B.eA,8589935159,B.hU,8589935160,B.eB,8589935161,B.hV,8589935165,B.adL,8589935361,B.adM,8589935362,B.adN,8589935363,B.adO,8589935364,B.adP,8589935365,B.adQ,8589935366,B.adR,8589935367,B.adS,8589935368,B.adT,8589935369,B.adU,8589935370,B.adV,8589935371,B.adW,8589935372,B.adX,8589935373,B.adY,8589935374,B.adZ,8589935375,B.ae_,8589935376,B.ae0,8589935377,B.ae1,8589935378,B.ae2,8589935379,B.ae3,8589935380,B.ae4,8589935381,B.ae5,8589935382,B.ae6,8589935383,B.ae7,8589935384,B.ae8,8589935385,B.ae9,8589935386,B.aea,8589935387,B.aeb,8589935388,B.aec,8589935389,B.aed,8589935390,B.aee,8589935391,B.aef],A.aQ("cW<o,l>"))
+B.od=new A.po(2,"down")
+B.KQ=new A.od(B.od)
 B.kJ=new A.po(0,"up")
 B.KP=new A.od(B.kJ)
 B.aeC=new A.cW([B.ih,B.KQ,B.ig,B.KP],t.Fp)
-B.arA=new A.ay(B.nb,!1,!1,!1,!1,B.E)
+B.arA=new A.ay(B.na,!1,!1,!1,!1,B.E)
 B.DP=new A.ay(B.hL,!1,!1,!1,!1,B.E)
 B.DQ=new A.ay(B.jO,!1,!1,!1,!1,B.E)
 B.DD=new A.ay(B.jO,!1,!0,!1,!1,B.E)
@@ -112271,17 +112271,17 @@ B.aqi=new A.fd(B.cp,B.ke)
 B.aqh=new A.fd(B.bO,B.ke)
 B.aqk=new A.fd(B.cb,B.ke)
 B.aqj=new A.fd(B.dk,B.ke)
-B.nK=new A.fd(B.cp,B.i4)
-B.aeD=new A.cW([B.kp,B.Hv,B.ks,B.pa,B.arA,B.pa,B.DP,B.pc,B.DQ,B.pj,B.DD,B.pm,B.ig,B.aqi,B.ih,B.aqh,B.kt,B.aqk,B.ku,B.aqj,B.i9,B.nK,B.ic,B.kf],t.Fp)
+B.nJ=new A.fd(B.cp,B.i4)
+B.aeD=new A.cW([B.kp,B.Hv,B.ks,B.pa,B.arA,B.pa,B.DP,B.pc,B.DQ,B.pj,B.DD,B.pm,B.ig,B.aqi,B.ih,B.aqh,B.kt,B.aqk,B.ku,B.aqj,B.i9,B.nJ,B.ic,B.kf],t.Fp)
 B.anj={Abort:0,Again:1,AltLeft:2,AltRight:3,ArrowDown:4,ArrowLeft:5,ArrowRight:6,ArrowUp:7,AudioVolumeDown:8,AudioVolumeMute:9,AudioVolumeUp:10,Backquote:11,Backslash:12,Backspace:13,BracketLeft:14,BracketRight:15,BrightnessDown:16,BrightnessUp:17,BrowserBack:18,BrowserFavorites:19,BrowserForward:20,BrowserHome:21,BrowserRefresh:22,BrowserSearch:23,BrowserStop:24,CapsLock:25,Comma:26,ContextMenu:27,ControlLeft:28,ControlRight:29,Convert:30,Copy:31,Cut:32,Delete:33,Digit0:34,Digit1:35,Digit2:36,Digit3:37,Digit4:38,Digit5:39,Digit6:40,Digit7:41,Digit8:42,Digit9:43,DisplayToggleIntExt:44,Eject:45,End:46,Enter:47,Equal:48,Esc:49,Escape:50,F1:51,F10:52,F11:53,F12:54,F13:55,F14:56,F15:57,F16:58,F17:59,F18:60,F19:61,F2:62,F20:63,F21:64,F22:65,F23:66,F24:67,F3:68,F4:69,F5:70,F6:71,F7:72,F8:73,F9:74,Find:75,Fn:76,FnLock:77,GameButton1:78,GameButton10:79,GameButton11:80,GameButton12:81,GameButton13:82,GameButton14:83,GameButton15:84,GameButton16:85,GameButton2:86,GameButton3:87,GameButton4:88,GameButton5:89,GameButton6:90,GameButton7:91,GameButton8:92,GameButton9:93,GameButtonA:94,GameButtonB:95,GameButtonC:96,GameButtonLeft1:97,GameButtonLeft2:98,GameButtonMode:99,GameButtonRight1:100,GameButtonRight2:101,GameButtonSelect:102,GameButtonStart:103,GameButtonThumbLeft:104,GameButtonThumbRight:105,GameButtonX:106,GameButtonY:107,GameButtonZ:108,Help:109,Home:110,Hyper:111,Insert:112,IntlBackslash:113,IntlRo:114,IntlYen:115,KanaMode:116,KeyA:117,KeyB:118,KeyC:119,KeyD:120,KeyE:121,KeyF:122,KeyG:123,KeyH:124,KeyI:125,KeyJ:126,KeyK:127,KeyL:128,KeyM:129,KeyN:130,KeyO:131,KeyP:132,KeyQ:133,KeyR:134,KeyS:135,KeyT:136,KeyU:137,KeyV:138,KeyW:139,KeyX:140,KeyY:141,KeyZ:142,KeyboardLayoutSelect:143,Lang1:144,Lang2:145,Lang3:146,Lang4:147,Lang5:148,LaunchApp1:149,LaunchApp2:150,LaunchAssistant:151,LaunchControlPanel:152,LaunchMail:153,LaunchScreenSaver:154,MailForward:155,MailReply:156,MailSend:157,MediaFastForward:158,MediaPause:159,MediaPlay:160,MediaPlayPause:161,MediaRecord:162,MediaRewind:163,MediaSelect:164,MediaStop:165,MediaTrackNext:166,MediaTrackPrevious:167,MetaLeft:168,MetaRight:169,MicrophoneMuteToggle:170,Minus:171,NonConvert:172,NumLock:173,Numpad0:174,Numpad1:175,Numpad2:176,Numpad3:177,Numpad4:178,Numpad5:179,Numpad6:180,Numpad7:181,Numpad8:182,Numpad9:183,NumpadAdd:184,NumpadBackspace:185,NumpadClear:186,NumpadClearEntry:187,NumpadComma:188,NumpadDecimal:189,NumpadDivide:190,NumpadEnter:191,NumpadEqual:192,NumpadMemoryAdd:193,NumpadMemoryClear:194,NumpadMemoryRecall:195,NumpadMemoryStore:196,NumpadMemorySubtract:197,NumpadMultiply:198,NumpadParenLeft:199,NumpadParenRight:200,NumpadSubtract:201,Open:202,PageDown:203,PageUp:204,Paste:205,Pause:206,Period:207,Power:208,PrintScreen:209,PrivacyScreenToggle:210,Props:211,Quote:212,Resume:213,ScrollLock:214,Select:215,SelectTask:216,Semicolon:217,ShiftLeft:218,ShiftRight:219,ShowAllWindows:220,Slash:221,Sleep:222,Space:223,Super:224,Suspend:225,Tab:226,Turbo:227,Undo:228,WakeUp:229,ZoomToggle:230}
 B.aeE=new A.i(B.anj,[458907,458873,458978,458982,458833,458832,458831,458834,458881,458879,458880,458805,458801,458794,458799,458800,786544,786543,786980,786986,786981,786979,786983,786977,786982,458809,458806,458853,458976,458980,458890,458876,458875,458828,458791,458782,458783,458784,458785,458786,458787,458788,458789,458790,65717,786616,458829,458792,458798,458793,458793,458810,458819,458820,458821,458856,458857,458858,458859,458860,458861,458862,458811,458863,458864,458865,458866,458867,458812,458813,458814,458815,458816,458817,458818,458878,18,19,392961,392970,392971,392972,392973,392974,392975,392976,392962,392963,392964,392965,392966,392967,392968,392969,392977,392978,392979,392980,392981,392982,392983,392984,392985,392986,392987,392988,392989,392990,392991,458869,458826,16,458825,458852,458887,458889,458888,458756,458757,458758,458759,458760,458761,458762,458763,458764,458765,458766,458767,458768,458769,458770,458771,458772,458773,458774,458775,458776,458777,458778,458779,458780,458781,787101,458896,458897,458898,458899,458900,786836,786834,786891,786847,786826,786865,787083,787081,787084,786611,786609,786608,786637,786610,786612,786819,786615,786613,786614,458979,458983,24,458797,458891,458835,458850,458841,458842,458843,458844,458845,458846,458847,458848,458849,458839,458939,458968,458969,458885,458851,458836,458840,458855,458963,458962,458961,458960,458964,458837,458934,458935,458838,458868,458830,458827,458877,458824,458807,458854,458822,23,458915,458804,21,458823,458871,786850,458803,458977,458981,787103,458808,65666,458796,17,20,458795,22,458874,65667,786994],t.eL)
 B.cH={nessuno:0,petto:1,dorso:2,gambe:3,spalle:4,braccia:5,core:6,full_body:7,cardio:8,glutei:9,altro:10}
-B.nh=new A.i(B.cH,["Nessuna","Petto","Dorso","Gambe","Spalle","Braccia","Core","Full Body","Cardio","Glutei","Altro"],t.w)
+B.ng=new A.i(B.cH,["Nessuna","Petto","Dorso","Gambe","Spalle","Braccia","Core","Full Body","Cardio","Glutei","Altro"],t.w)
 B.fo=new A.i(B.cH,["","\ud83e\udd8d","\ud83d\udd19","\ud83e\uddb5","\ud83c\udfcb\ufe0f","\ud83d\udcaa","\ud83d\udd25","\ud83c\udfc3","\u2764\ufe0f","\ud83c\udf51","\u26a1"],t.w)
 B.yx=new A.i(B.cH,["None","Chest","Back","Legs","Shoulders","Arms","Core","Full Body","Cardio","Glutes","Other"],t.w)
 B.aeZ=new A.cW([0,"FontWeight.w100",1,"FontWeight.w200",2,"FontWeight.w300",3,"FontWeight.w400",4,"FontWeight.w500",5,"FontWeight.w600",6,"FontWeight.w700",7,"FontWeight.w800",8,"FontWeight.w900"],A.aQ("cW<o,m>"))
 B.z3={AVRInput:0,AVRPower:1,Accel:2,Accept:3,Again:4,AllCandidates:5,Alphanumeric:6,AltGraph:7,AppSwitch:8,ArrowDown:9,ArrowLeft:10,ArrowRight:11,ArrowUp:12,Attn:13,AudioBalanceLeft:14,AudioBalanceRight:15,AudioBassBoostDown:16,AudioBassBoostToggle:17,AudioBassBoostUp:18,AudioFaderFront:19,AudioFaderRear:20,AudioSurroundModeNext:21,AudioTrebleDown:22,AudioTrebleUp:23,AudioVolumeDown:24,AudioVolumeMute:25,AudioVolumeUp:26,Backspace:27,BrightnessDown:28,BrightnessUp:29,BrowserBack:30,BrowserFavorites:31,BrowserForward:32,BrowserHome:33,BrowserRefresh:34,BrowserSearch:35,BrowserStop:36,Call:37,Camera:38,CameraFocus:39,Cancel:40,CapsLock:41,ChannelDown:42,ChannelUp:43,Clear:44,Close:45,ClosedCaptionToggle:46,CodeInput:47,ColorF0Red:48,ColorF1Green:49,ColorF2Yellow:50,ColorF3Blue:51,ColorF4Grey:52,ColorF5Brown:53,Compose:54,ContextMenu:55,Convert:56,Copy:57,CrSel:58,Cut:59,DVR:60,Delete:61,Dimmer:62,DisplaySwap:63,Eisu:64,Eject:65,End:66,EndCall:67,Enter:68,EraseEof:69,Esc:70,Escape:71,ExSel:72,Execute:73,Exit:74,F1:75,F10:76,F11:77,F12:78,F13:79,F14:80,F15:81,F16:82,F17:83,F18:84,F19:85,F2:86,F20:87,F21:88,F22:89,F23:90,F24:91,F3:92,F4:93,F5:94,F6:95,F7:96,F8:97,F9:98,FavoriteClear0:99,FavoriteClear1:100,FavoriteClear2:101,FavoriteClear3:102,FavoriteRecall0:103,FavoriteRecall1:104,FavoriteRecall2:105,FavoriteRecall3:106,FavoriteStore0:107,FavoriteStore1:108,FavoriteStore2:109,FavoriteStore3:110,FinalMode:111,Find:112,Fn:113,FnLock:114,GoBack:115,GoHome:116,GroupFirst:117,GroupLast:118,GroupNext:119,GroupPrevious:120,Guide:121,GuideNextDay:122,GuidePreviousDay:123,HangulMode:124,HanjaMode:125,Hankaku:126,HeadsetHook:127,Help:128,Hibernate:129,Hiragana:130,HiraganaKatakana:131,Home:132,Hyper:133,Info:134,Insert:135,InstantReplay:136,JunjaMode:137,KanaMode:138,KanjiMode:139,Katakana:140,Key11:141,Key12:142,LastNumberRedial:143,LaunchApplication1:144,LaunchApplication2:145,LaunchAssistant:146,LaunchCalendar:147,LaunchContacts:148,LaunchControlPanel:149,LaunchMail:150,LaunchMediaPlayer:151,LaunchMusicPlayer:152,LaunchPhone:153,LaunchScreenSaver:154,LaunchSpreadsheet:155,LaunchWebBrowser:156,LaunchWebCam:157,LaunchWordProcessor:158,Link:159,ListProgram:160,LiveContent:161,Lock:162,LogOff:163,MailForward:164,MailReply:165,MailSend:166,MannerMode:167,MediaApps:168,MediaAudioTrack:169,MediaClose:170,MediaFastForward:171,MediaLast:172,MediaPause:173,MediaPlay:174,MediaPlayPause:175,MediaRecord:176,MediaRewind:177,MediaSkip:178,MediaSkipBackward:179,MediaSkipForward:180,MediaStepBackward:181,MediaStepForward:182,MediaStop:183,MediaTopMenu:184,MediaTrackNext:185,MediaTrackPrevious:186,MicrophoneToggle:187,MicrophoneVolumeDown:188,MicrophoneVolumeMute:189,MicrophoneVolumeUp:190,ModeChange:191,NavigateIn:192,NavigateNext:193,NavigateOut:194,NavigatePrevious:195,New:196,NextCandidate:197,NextFavoriteChannel:198,NextUserProfile:199,NonConvert:200,Notification:201,NumLock:202,OnDemand:203,Open:204,PageDown:205,PageUp:206,Pairing:207,Paste:208,Pause:209,PinPDown:210,PinPMove:211,PinPToggle:212,PinPUp:213,Play:214,PlaySpeedDown:215,PlaySpeedReset:216,PlaySpeedUp:217,Power:218,PowerOff:219,PreviousCandidate:220,Print:221,PrintScreen:222,Process:223,Props:224,RandomToggle:225,RcLowBattery:226,RecordSpeedNext:227,Redo:228,RfBypass:229,Romaji:230,STBInput:231,STBPower:232,Save:233,ScanChannelsToggle:234,ScreenModeNext:235,ScrollLock:236,Select:237,Settings:238,ShiftLevel5:239,SingleCandidate:240,Soft1:241,Soft2:242,Soft3:243,Soft4:244,Soft5:245,Soft6:246,Soft7:247,Soft8:248,SpeechCorrectionList:249,SpeechInputToggle:250,SpellCheck:251,SplitScreenToggle:252,Standby:253,Subtitle:254,Super:255,Symbol:256,SymbolLock:257,TV:258,TV3DMode:259,TVAntennaCable:260,TVAudioDescription:261,TVAudioDescriptionMixDown:262,TVAudioDescriptionMixUp:263,TVContentsMenu:264,TVDataService:265,TVInput:266,TVInputComponent1:267,TVInputComponent2:268,TVInputComposite1:269,TVInputComposite2:270,TVInputHDMI1:271,TVInputHDMI2:272,TVInputHDMI3:273,TVInputHDMI4:274,TVInputVGA1:275,TVMediaContext:276,TVNetwork:277,TVNumberEntry:278,TVPower:279,TVRadioService:280,TVSatellite:281,TVSatelliteBS:282,TVSatelliteCS:283,TVSatelliteToggle:284,TVTerrestrialAnalog:285,TVTerrestrialDigital:286,TVTimer:287,Tab:288,Teletext:289,Undo:290,Unidentified:291,VideoModeNext:292,VoiceDial:293,WakeUp:294,Wink:295,Zenkaku:296,ZenkakuHankaku:297,ZoomIn:298,ZoomOut:299,ZoomToggle:300}
-B.af_=new A.i(B.z3,[B.w5,B.w6,B.tM,B.u0,B.u1,B.up,B.uq,B.jQ,B.xz,B.d9,B.cS,B.cT,B.da,B.u2,B.vZ,B.w_,B.w0,B.xq,B.w1,B.w2,B.w3,B.w4,B.xr,B.xs,B.vA,B.vC,B.vB,B.bR,B.ue,B.uf,B.vS,B.vT,B.vU,B.vV,B.vW,B.vX,B.vY,B.xA,B.ug,B.xB,B.u3,B.hM,B.w7,B.w8,B.n5,B.vn,B.wf,B.ur,B.w9,B.wa,B.wb,B.wc,B.wd,B.we,B.us,B.u4,B.ut,B.tT,B.tU,B.tV,B.xd,B.bJ,B.wg,B.wh,B.uI,B.uh,B.eu,B.xC,B.jP,B.tW,B.hL,B.hL,B.tX,B.u5,B.wi,B.uS,B.v0,B.v1,B.v2,B.v3,B.v4,B.v5,B.v6,B.v7,B.v8,B.v9,B.uT,B.va,B.vb,B.vc,B.vd,B.ve,B.uU,B.uV,B.uW,B.uX,B.uY,B.uZ,B.v_,B.wj,B.wk,B.wl,B.wm,B.wn,B.wo,B.wp,B.wq,B.wr,B.ws,B.wt,B.wu,B.uu,B.u6,B.n4,B.tN,B.xD,B.xE,B.uv,B.uw,B.ux,B.uy,B.wv,B.ww,B.wx,B.uF,B.uG,B.uJ,B.xF,B.u7,B.um,B.uK,B.uL,B.ev,B.tO,B.wy,B.n6,B.wz,B.uH,B.uM,B.uN,B.uO,B.ya,B.yb,B.xG,B.vI,B.vD,B.vQ,B.vE,B.vO,B.vR,B.vF,B.vG,B.vH,B.vP,B.vJ,B.vK,B.vL,B.vM,B.vN,B.wA,B.wB,B.wC,B.wD,B.ui,B.vo,B.vp,B.vq,B.xI,B.wE,B.xe,B.xp,B.wF,B.wG,B.wH,B.wI,B.vr,B.wJ,B.wK,B.wL,B.xf,B.xg,B.xh,B.xi,B.vs,B.xj,B.vt,B.vu,B.xt,B.xu,B.xw,B.xv,B.uz,B.xk,B.xl,B.xm,B.xn,B.vv,B.uA,B.wM,B.wN,B.uB,B.xH,B.jR,B.wO,B.vw,B.hN,B.hO,B.xo,B.tY,B.u8,B.wP,B.wQ,B.wR,B.wS,B.u9,B.wT,B.wU,B.wV,B.uj,B.uk,B.uC,B.vx,B.ul,B.uD,B.ua,B.wW,B.wX,B.wY,B.tZ,B.wZ,B.uP,B.x3,B.x4,B.vy,B.x_,B.x0,B.jS,B.ub,B.x1,B.tS,B.uE,B.vf,B.vg,B.vh,B.vi,B.vj,B.vk,B.vl,B.vm,B.xx,B.xy,B.vz,B.x2,B.un,B.x5,B.tP,B.tQ,B.tR,B.x7,B.xK,B.xL,B.xM,B.xN,B.xO,B.xP,B.xQ,B.x8,B.xR,B.xS,B.xT,B.xU,B.xV,B.xW,B.xX,B.xY,B.xZ,B.y_,B.y0,B.y1,B.x9,B.y2,B.y3,B.y4,B.y5,B.y6,B.y7,B.y8,B.y9,B.jO,B.x6,B.u_,B.tL,B.xa,B.xJ,B.uo,B.xb,B.uQ,B.uR,B.uc,B.ud,B.xc],A.aQ("i<m,l>"))
+B.af_=new A.i(B.z3,[B.w5,B.w6,B.tM,B.u0,B.u1,B.up,B.uq,B.jQ,B.xz,B.d9,B.cS,B.cT,B.da,B.u2,B.vZ,B.w_,B.w0,B.xq,B.w1,B.w2,B.w3,B.w4,B.xr,B.xs,B.vA,B.vC,B.vB,B.bR,B.ue,B.uf,B.vS,B.vT,B.vU,B.vV,B.vW,B.vX,B.vY,B.xA,B.ug,B.xB,B.u3,B.hM,B.w7,B.w8,B.n4,B.vn,B.wf,B.ur,B.w9,B.wa,B.wb,B.wc,B.wd,B.we,B.us,B.u4,B.ut,B.tT,B.tU,B.tV,B.xd,B.bJ,B.wg,B.wh,B.uI,B.uh,B.eu,B.xC,B.jP,B.tW,B.hL,B.hL,B.tX,B.u5,B.wi,B.uS,B.v0,B.v1,B.v2,B.v3,B.v4,B.v5,B.v6,B.v7,B.v8,B.v9,B.uT,B.va,B.vb,B.vc,B.vd,B.ve,B.uU,B.uV,B.uW,B.uX,B.uY,B.uZ,B.v_,B.wj,B.wk,B.wl,B.wm,B.wn,B.wo,B.wp,B.wq,B.wr,B.ws,B.wt,B.wu,B.uu,B.u6,B.n3,B.tN,B.xD,B.xE,B.uv,B.uw,B.ux,B.uy,B.wv,B.ww,B.wx,B.uF,B.uG,B.uJ,B.xF,B.u7,B.um,B.uK,B.uL,B.ev,B.tO,B.wy,B.n5,B.wz,B.uH,B.uM,B.uN,B.uO,B.ya,B.yb,B.xG,B.vI,B.vD,B.vQ,B.vE,B.vO,B.vR,B.vF,B.vG,B.vH,B.vP,B.vJ,B.vK,B.vL,B.vM,B.vN,B.wA,B.wB,B.wC,B.wD,B.ui,B.vo,B.vp,B.vq,B.xI,B.wE,B.xe,B.xp,B.wF,B.wG,B.wH,B.wI,B.vr,B.wJ,B.wK,B.wL,B.xf,B.xg,B.xh,B.xi,B.vs,B.xj,B.vt,B.vu,B.xt,B.xu,B.xw,B.xv,B.uz,B.xk,B.xl,B.xm,B.xn,B.vv,B.uA,B.wM,B.wN,B.uB,B.xH,B.jR,B.wO,B.vw,B.hN,B.hO,B.xo,B.tY,B.u8,B.wP,B.wQ,B.wR,B.wS,B.u9,B.wT,B.wU,B.wV,B.uj,B.uk,B.uC,B.vx,B.ul,B.uD,B.ua,B.wW,B.wX,B.wY,B.tZ,B.wZ,B.uP,B.x3,B.x4,B.vy,B.x_,B.x0,B.jS,B.ub,B.x1,B.tS,B.uE,B.vf,B.vg,B.vh,B.vi,B.vj,B.vk,B.vl,B.vm,B.xx,B.xy,B.vz,B.x2,B.un,B.x5,B.tP,B.tQ,B.tR,B.x7,B.xK,B.xL,B.xM,B.xN,B.xO,B.xP,B.xQ,B.x8,B.xR,B.xS,B.xT,B.xU,B.xV,B.xW,B.xX,B.xY,B.xZ,B.y_,B.y0,B.y1,B.x9,B.y2,B.y3,B.y4,B.y5,B.y6,B.y7,B.y8,B.y9,B.jO,B.x6,B.u_,B.tL,B.xa,B.xJ,B.uo,B.xb,B.uQ,B.uR,B.uc,B.ud,B.xc],A.aQ("i<m,l>"))
 B.af0=new A.i(B.z3,[4294970632,4294970633,4294967553,4294968577,4294968578,4294969089,4294969090,4294967555,4294971393,4294968065,4294968066,4294968067,4294968068,4294968579,4294970625,4294970626,4294970627,4294970882,4294970628,4294970629,4294970630,4294970631,4294970884,4294970885,4294969871,4294969873,4294969872,4294967304,4294968833,4294968834,4294970369,4294970370,4294970371,4294970372,4294970373,4294970374,4294970375,4294971394,4294968835,4294971395,4294968580,4294967556,4294970634,4294970635,4294968321,4294969857,4294970642,4294969091,4294970636,4294970637,4294970638,4294970639,4294970640,4294970641,4294969092,4294968581,4294969093,4294968322,4294968323,4294968324,4294970703,4294967423,4294970643,4294970644,4294969108,4294968836,4294968069,4294971396,4294967309,4294968325,4294967323,4294967323,4294968326,4294968582,4294970645,4294969345,4294969354,4294969355,4294969356,4294969357,4294969358,4294969359,4294969360,4294969361,4294969362,4294969363,4294969346,4294969364,4294969365,4294969366,4294969367,4294969368,4294969347,4294969348,4294969349,4294969350,4294969351,4294969352,4294969353,4294970646,4294970647,4294970648,4294970649,4294970650,4294970651,4294970652,4294970653,4294970654,4294970655,4294970656,4294970657,4294969094,4294968583,4294967558,4294967559,4294971397,4294971398,4294969095,4294969096,4294969097,4294969098,4294970658,4294970659,4294970660,4294969105,4294969106,4294969109,4294971399,4294968584,4294968841,4294969110,4294969111,4294968070,4294967560,4294970661,4294968327,4294970662,4294969107,4294969112,4294969113,4294969114,4294971905,4294971906,4294971400,4294970118,4294970113,4294970126,4294970114,4294970124,4294970127,4294970115,4294970116,4294970117,4294970125,4294970119,4294970120,4294970121,4294970122,4294970123,4294970663,4294970664,4294970665,4294970666,4294968837,4294969858,4294969859,4294969860,4294971402,4294970667,4294970704,4294970715,4294970668,4294970669,4294970670,4294970671,4294969861,4294970672,4294970673,4294970674,4294970705,4294970706,4294970707,4294970708,4294969863,4294970709,4294969864,4294969865,4294970886,4294970887,4294970889,4294970888,4294969099,4294970710,4294970711,4294970712,4294970713,4294969866,4294969100,4294970675,4294970676,4294969101,4294971401,4294967562,4294970677,4294969867,4294968071,4294968072,4294970714,4294968328,4294968585,4294970678,4294970679,4294970680,4294970681,4294968586,4294970682,4294970683,4294970684,4294968838,4294968839,4294969102,4294969868,4294968840,4294969103,4294968587,4294970685,4294970686,4294970687,4294968329,4294970688,4294969115,4294970693,4294970694,4294969869,4294970689,4294970690,4294967564,4294968588,4294970691,4294967569,4294969104,4294969601,4294969602,4294969603,4294969604,4294969605,4294969606,4294969607,4294969608,4294971137,4294971138,4294969870,4294970692,4294968842,4294970695,4294967566,4294967567,4294967568,4294970697,4294971649,4294971650,4294971651,4294971652,4294971653,4294971654,4294971655,4294970698,4294971656,4294971657,4294971658,4294971659,4294971660,4294971661,4294971662,4294971663,4294971664,4294971665,4294971666,4294971667,4294970699,4294971668,4294971669,4294971670,4294971671,4294971672,4294971673,4294971674,4294971675,4294967305,4294970696,4294968330,4294967297,4294970700,4294971403,4294968843,4294970701,4294969116,4294969117,4294968589,4294968590,4294970702],t.eL)
 B.anx={alias:0,allScroll:1,basic:2,cell:3,click:4,contextMenu:5,copy:6,forbidden:7,grab:8,grabbing:9,help:10,move:11,none:12,noDrop:13,precise:14,progress:15,text:16,resizeColumn:17,resizeDown:18,resizeDownLeft:19,resizeDownRight:20,resizeLeft:21,resizeLeftRight:22,resizeRight:23,resizeRow:24,resizeUp:25,resizeUpDown:26,resizeUpLeft:27,resizeUpRight:28,resizeUpLeftDownRight:29,resizeUpRightDownLeft:30,verticalText:31,wait:32,zoomIn:33,zoomOut:34}
 B.af2=new A.i(B.anx,["alias","all-scroll","default","cell","pointer","context-menu","copy","not-allowed","grab","grabbing","help","move","none","no-drop","crosshair","progress","text","col-resize","s-resize","sw-resize","se-resize","w-resize","ew-resize","e-resize","row-resize","n-resize","ns-resize","nw-resize","ne-resize","nwse-resize","nesw-resize","vertical-text","wait","zoom-in","zoom-out"],t.w)
@@ -112337,10 +112337,10 @@ B.jY=new A.i(B.cj,[],A.aQ("i<xj,bo>"))
 B.alW=new A.i(B.cj,[],A.aQ("i<m,h(I)>"))
 B.yN=new A.i(B.cj,[],t.VJ)
 B.alV=new A.i(B.cj,[],A.aQ("i<m,aj<m,@>>"))
-B.nj=new A.i(B.cj,[],t.yf)
+B.ni=new A.i(B.cj,[],t.yf)
 B.yP=new A.i(B.cj,[],A.aQ("i<Fq,@>"))
 B.alU=new A.i(B.cj,[],A.aQ("i<iK,da>"))
-B.nk=new A.i(B.cj,[],A.aQ("i<iK,r_<da>>"))
+B.nj=new A.i(B.cj,[],A.aQ("i<iK,r_<da>>"))
 B.ang={panca:0,petto:1,pettorali:2,dorsale:3,rematore:4,tirate:5,tirata:6,trazioni:7,trazione:8,bicipite:9,tricipite:10,spalla:11,deltoidi:12,deltoide:13,squat:14,affondi:15,affondo:16,stacco:17,curl:18,croci:19,pressa:20,gambe:21,glutei:22,gluteo:23,addome:24,addominali:25,plank:26,polpaccio:27,polpacci:28,pull:29,push:30,dip:31,manubri:32,bilanciere:33,cavo:34,corda:35,kettlebell:36,alzate:37,alzata:38,lat:39,lombari:40,lombare:41,adduttori:42,abduttori:43,quadricipiti:44,quadricipite:45,femorali:46,femorale:47,inclinata:48,declinata:49,cardio:50}
 B.ab4=s(["bench"],t.s)
 B.aaM=s(["chest","pec","bench","fly","push"],t.s)
@@ -112427,12 +112427,12 @@ B.abH=s([B.yc,null,null,B.yr],t.L)
 B.a9W=s([B.yd,null,null,B.ys],t.L)
 B.aaF=s([B.ye,null,null,B.ex],t.L)
 B.a8g=s([B.yf,null,null,B.yt],t.L)
-B.acv=s([B.yg,null,null,B.nc],t.L)
+B.acv=s([B.yg,null,null,B.nb],t.L)
 B.ac0=s([B.yh,null,null,B.hS],t.L)
 B.a9h=s([B.yi,null,null,B.ey],t.L)
 B.acK=s([B.yj,null,null,B.hT],t.L)
 B.abZ=s([B.yk,null,null,B.ez],t.L)
-B.a9a=s([B.yl,null,null,B.nd],t.L)
+B.a9a=s([B.yl,null,null,B.nc],t.L)
 B.a8w=s([B.ym,null,null,B.eA],t.L)
 B.a9C=s([B.yn,null,null,B.hU],t.L)
 B.abK=s([B.yo,null,null,B.eB],t.L)
@@ -112443,13 +112443,13 @@ B.aa8=s([B.d9,null,null,B.ey],t.L)
 B.aa9=s([B.cS,null,null,B.ez],t.L)
 B.aaa=s([B.cT,null,null,B.eA],t.L)
 B.acD=s([B.da,null,null,B.eB],t.L)
-B.abW=s([B.n5,null,null,B.nd],t.L)
+B.abW=s([B.n4,null,null,B.nc],t.L)
 B.a9o=s([B.hP,B.hP,B.jT,null],t.L)
 B.ab2=s([B.bJ,null,null,B.ex],t.L)
 B.aab=s([B.eu,null,null,B.hS],t.L)
-B.a99=s([B.jP,null,null,B.nb],t.L)
+B.a99=s([B.jP,null,null,B.na],t.L)
 B.aac=s([B.ev,null,null,B.hU],t.L)
-B.abX=s([B.n6,null,null,B.nc],t.L)
+B.abX=s([B.n5,null,null,B.nb],t.L)
 B.a9p=s([B.hR,B.hR,B.jV,null],t.L)
 B.aad=s([B.hN,null,null,B.hT],t.L)
 B.abn=s([B.hO,null,null,B.hV],t.L)
@@ -112756,7 +112756,7 @@ B.agY=new A.i(B.i,["INIZIA","START","INICIAR","INICIAR","D\xc9MARRER","STARTEN",
 B.ahb=new A.i(B.i,["IN CORSO...","RUNNING...","EN CURSO...","EM CURSO...","EN COURS...","L\xc4UFT...","\u03a3\u0395 \u0395\u039e\u0395\u039b\u0399\u039e\u0397...","\u062c\u0627\u0631\u064d...","W TOKU...","\xceN CURS...","FOLYAMATBAN..."],t.w)
 B.amm=new A.i(B.anm,[B.ajn,B.ahS,B.ah8,B.afw,B.agl,B.age,B.agQ,B.afj,B.yB,B.aiA,B.af8,B.aiJ,B.afu,B.afO,B.agc,B.ajG,B.afR,B.ah7,B.aiK,B.afk,B.ahG,B.aiT,B.ag0,B.ah6,B.agR,B.aju,B.agV,B.ahi,B.agw,B.af6,B.ajw,B.aga,B.air,B.agW,B.ajq,B.ajv,B.agE,B.ahp,B.ag3,B.aj3,B.afb,B.ag_,B.aiW,B.afJ,B.ahR,B.agD,B.ajg,B.ahZ,B.aj4,B.aip,B.aiC,B.afC,B.agL,B.ah2,B.afH,B.ahh,B.aiN,B.aiE,B.aje,B.ait,B.ahq,B.afi,B.agF,B.aiM,B.ajJ,B.ah3,B.ag6,B.ajo,B.ajH,B.aiD,B.ajy,B.ahC,B.aic,B.aiR,B.aj5,B.ai8,B.aiw,B.aja,B.ahB,B.aie,B.ahX,B.ajI,B.aiq,B.aid,B.ahV,B.ajB,B.ag7,B.ai1,B.ah9,B.afv,B.aiX,B.afE,B.ajs,B.agB,B.aiQ,B.afM,B.afU,B.agX,B.afN,B.agy,B.aht,B.ajC,B.afd,B.aiy,B.agp,B.afG,B.ai6,B.ajr,B.agg,B.ajE,B.aj1,B.aiu,B.ahU,B.ah5,B.ail,B.aiV,B.aia,B.aio,B.ajc,B.ai0,B.ag5,B.yB,B.aim,B.ahO,B.agP,B.ai7,B.agN,B.aiO,B.agu,B.ai_,B.aif,B.ahy,B.ag4,B.aiz,B.afs,B.ahY,B.aiZ,B.ahe,B.ahg,B.ahE,B.ajD,B.agz,B.afo,B.ai2,B.aj9,B.ai3,B.ahu,B.agt,B.ahF,B.afS,B.afB,B.ahx,B.ah0,B.ajd,B.afV,B.afg,B.ain,B.agO,B.ago,B.ahd,B.afD,B.agf,B.ajj,B.agj,B.ah1,B.aiI,B.ag2,B.ahs,B.ahn,B.aiL,B.ag9,B.ahP,B.ahk,B.ahD,B.afX,B.afc,B.aj0,B.afq,B.agv,B.agr,B.ahc,B.afx,B.agh,B.agI,B.afW,B.afl,B.aiB,B.ahf,B.ags,B.ajF,B.aj_,B.ahQ,B.aik,B.afm,B.agx,B.ah4,B.afT,B.afA,B.afQ,B.ahW,B.ajm,B.aiG,B.ajx,B.afe,B.aho,B.ajp,B.agM,B.afP,B.ajz,B.agd,B.aiF,B.agb,B.afL,B.agk,B.ais,B.ajK,B.agU,B.agG,B.ajf,B.aiP,B.ahM,B.ahv,B.ai5,B.afF,B.ahj,B.ajt,B.aig,B.afn,B.aj6,B.ahN,B.ai4,B.aft,B.af5,B.ahr,B.aj7,B.afY,B.ahL,B.aj2,B.agi,B.ag1,B.ahl,B.afK,B.ah_,B.ahH,B.aiU,B.agC,B.aji,B.aix,B.afI,B.ahz,B.aiv,B.aij,B.agS,B.afz,B.agA,B.afr,B.aii,B.afa,B.afh,B.agq,B.ajl,B.aha,B.aff,B.yC,B.yC,B.aih,B.af7,B.ahT,B.ajh,B.aib,B.agK,B.ahI,B.aiY,B.ahK,B.aj8,B.ahm,B.ahw,B.agJ,B.af9,B.ag8,B.agT,B.aiS,B.afp,B.agZ,B.ahA,B.af4,B.ajk,B.agm,B.afy,B.ai9,B.ajb,B.ahJ,B.ajA,B.afZ,B.agn,B.agH,B.aiH,B.agY,B.ahb],t.vb)
 B.ano={KeyA:0,KeyB:1,KeyC:2,KeyD:3,KeyE:4,KeyF:5,KeyG:6,KeyH:7,KeyI:8,KeyJ:9,KeyK:10,KeyL:11,KeyM:12,KeyN:13,KeyO:14,KeyP:15,KeyQ:16,KeyR:17,KeyS:18,KeyT:19,KeyU:20,KeyV:21,KeyW:22,KeyX:23,KeyY:24,KeyZ:25,Digit1:26,Digit2:27,Digit3:28,Digit4:29,Digit5:30,Digit6:31,Digit7:32,Digit8:33,Digit9:34,Digit0:35,Minus:36,Equal:37,BracketLeft:38,BracketRight:39,Backslash:40,Semicolon:41,Quote:42,Backquote:43,Comma:44,Period:45,Slash:46}
-B.nl=new A.i(B.ano,["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","0","-","=","[","]","\\",";","'","`",",",".","/"],t.w)
+B.nk=new A.i(B.ano,["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6","7","8","9","0","-","=","[","]","\\",";","'","`",",",".","/"],t.w)
 B.anh={Abort:0,Again:1,AltLeft:2,AltRight:3,ArrowDown:4,ArrowLeft:5,ArrowRight:6,ArrowUp:7,AudioVolumeDown:8,AudioVolumeMute:9,AudioVolumeUp:10,Backquote:11,Backslash:12,Backspace:13,BracketLeft:14,BracketRight:15,BrightnessDown:16,BrightnessUp:17,BrowserBack:18,BrowserFavorites:19,BrowserForward:20,BrowserHome:21,BrowserRefresh:22,BrowserSearch:23,BrowserStop:24,CapsLock:25,Comma:26,ContextMenu:27,ControlLeft:28,ControlRight:29,Convert:30,Copy:31,Cut:32,Delete:33,Digit0:34,Digit1:35,Digit2:36,Digit3:37,Digit4:38,Digit5:39,Digit6:40,Digit7:41,Digit8:42,Digit9:43,DisplayToggleIntExt:44,Eject:45,End:46,Enter:47,Equal:48,Escape:49,Esc:50,F1:51,F10:52,F11:53,F12:54,F13:55,F14:56,F15:57,F16:58,F17:59,F18:60,F19:61,F2:62,F20:63,F21:64,F22:65,F23:66,F24:67,F3:68,F4:69,F5:70,F6:71,F7:72,F8:73,F9:74,Find:75,Fn:76,FnLock:77,GameButton1:78,GameButton10:79,GameButton11:80,GameButton12:81,GameButton13:82,GameButton14:83,GameButton15:84,GameButton16:85,GameButton2:86,GameButton3:87,GameButton4:88,GameButton5:89,GameButton6:90,GameButton7:91,GameButton8:92,GameButton9:93,GameButtonA:94,GameButtonB:95,GameButtonC:96,GameButtonLeft1:97,GameButtonLeft2:98,GameButtonMode:99,GameButtonRight1:100,GameButtonRight2:101,GameButtonSelect:102,GameButtonStart:103,GameButtonThumbLeft:104,GameButtonThumbRight:105,GameButtonX:106,GameButtonY:107,GameButtonZ:108,Help:109,Home:110,Hyper:111,Insert:112,IntlBackslash:113,IntlRo:114,IntlYen:115,KanaMode:116,KeyA:117,KeyB:118,KeyC:119,KeyD:120,KeyE:121,KeyF:122,KeyG:123,KeyH:124,KeyI:125,KeyJ:126,KeyK:127,KeyL:128,KeyM:129,KeyN:130,KeyO:131,KeyP:132,KeyQ:133,KeyR:134,KeyS:135,KeyT:136,KeyU:137,KeyV:138,KeyW:139,KeyX:140,KeyY:141,KeyZ:142,KeyboardLayoutSelect:143,Lang1:144,Lang2:145,Lang3:146,Lang4:147,Lang5:148,LaunchApp1:149,LaunchApp2:150,LaunchAssistant:151,LaunchControlPanel:152,LaunchMail:153,LaunchScreenSaver:154,MailForward:155,MailReply:156,MailSend:157,MediaFastForward:158,MediaPause:159,MediaPlay:160,MediaPlayPause:161,MediaRecord:162,MediaRewind:163,MediaSelect:164,MediaStop:165,MediaTrackNext:166,MediaTrackPrevious:167,MetaLeft:168,MetaRight:169,MicrophoneMuteToggle:170,Minus:171,NonConvert:172,NumLock:173,Numpad0:174,Numpad1:175,Numpad2:176,Numpad3:177,Numpad4:178,Numpad5:179,Numpad6:180,Numpad7:181,Numpad8:182,Numpad9:183,NumpadAdd:184,NumpadBackspace:185,NumpadClear:186,NumpadClearEntry:187,NumpadComma:188,NumpadDecimal:189,NumpadDivide:190,NumpadEnter:191,NumpadEqual:192,NumpadMemoryAdd:193,NumpadMemoryClear:194,NumpadMemoryRecall:195,NumpadMemoryStore:196,NumpadMemorySubtract:197,NumpadMultiply:198,NumpadParenLeft:199,NumpadParenRight:200,NumpadSubtract:201,Open:202,PageDown:203,PageUp:204,Paste:205,Pause:206,Period:207,Power:208,PrintScreen:209,PrivacyScreenToggle:210,Props:211,Quote:212,Resume:213,ScrollLock:214,Select:215,SelectTask:216,Semicolon:217,ShiftLeft:218,ShiftRight:219,ShowAllWindows:220,Slash:221,Sleep:222,Space:223,Super:224,Suspend:225,Tab:226,Turbo:227,Undo:228,WakeUp:229,ZoomToggle:230}
 B.BZ=new A.A(458907)
 B.BF=new A.A(458873)
@@ -112807,7 +112807,7 @@ B.Cn=new A.A(786616)
 B.B0=new A.A(458829)
 B.Au=new A.A(458792)
 B.Az=new A.A(458798)
-B.nz=new A.A(458793)
+B.ny=new A.A(458793)
 B.AJ=new A.A(458810)
 B.AS=new A.A(458819)
 B.AT=new A.A(458820)
@@ -112988,7 +112988,7 @@ B.zn=new A.A(22)
 B.BG=new A.A(458874)
 B.Cb=new A.A(65667)
 B.CE=new A.A(786994)
-B.yU=new A.i(B.anh,[B.BZ,B.BF,B.fA,B.fC,B.B4,B.B3,B.B2,B.B5,B.BN,B.BL,B.BM,B.AF,B.AC,B.Av,B.AA,B.AB,B.Ce,B.Cd,B.Cz,B.CD,B.CA,B.Cy,B.CC,B.Cx,B.CB,B.eH,B.AG,B.Bn,B.fy,B.i_,B.BS,B.BI,B.BH,B.B_,B.At,B.Ak,B.Al,B.Am,B.An,B.Ao,B.Ap,B.Aq,B.Ar,B.As,B.Cc,B.Cn,B.B0,B.Au,B.Az,B.nz,B.nz,B.AJ,B.AS,B.AT,B.AU,B.Bq,B.Br,B.Bs,B.Bt,B.Bu,B.Bv,B.Bw,B.AK,B.Bx,B.By,B.Bz,B.BA,B.BB,B.AL,B.AM,B.AN,B.AO,B.AP,B.AQ,B.AR,B.BK,B.hZ,B.zk,B.zq,B.zz,B.zA,B.zB,B.zC,B.zD,B.zE,B.zF,B.zr,B.zs,B.zt,B.zu,B.zv,B.zw,B.zx,B.zy,B.zG,B.zH,B.zI,B.zJ,B.zK,B.zL,B.zM,B.zN,B.zO,B.zP,B.zQ,B.zR,B.zS,B.zT,B.zU,B.BD,B.AY,B.zi,B.AX,B.Bm,B.BP,B.BR,B.BQ,B.zV,B.zW,B.zX,B.zY,B.zZ,B.A_,B.A0,B.A1,B.A2,B.A3,B.A4,B.A5,B.A6,B.A7,B.A8,B.A9,B.Aa,B.Ab,B.Ac,B.Ad,B.Ae,B.Af,B.Ag,B.Ah,B.Ai,B.Aj,B.CI,B.BU,B.BV,B.BW,B.BX,B.BY,B.Cs,B.Cr,B.Cw,B.Ct,B.Cq,B.Cv,B.CG,B.CF,B.CH,B.Ci,B.Cg,B.Cf,B.Co,B.Ch,B.Cj,B.Cp,B.Cm,B.Ck,B.Cl,B.fB,B.i1,B.zp,B.Ay,B.BT,B.k6,B.Bk,B.Bb,B.Bc,B.Bd,B.Be,B.Bf,B.Bg,B.Bh,B.Bi,B.Bj,B.B9,B.C2,B.C8,B.C9,B.BO,B.Bl,B.B6,B.Ba,B.Bp,B.C6,B.C5,B.C4,B.C3,B.C7,B.B7,B.C0,B.C1,B.B8,B.BC,B.B1,B.AZ,B.BJ,B.AW,B.AH,B.Bo,B.AV,B.zo,B.C_,B.AE,B.zm,B.k5,B.BE,B.Cu,B.AD,B.fz,B.i0,B.CJ,B.AI,B.Ca,B.Ax,B.zj,B.zl,B.Aw,B.zn,B.BG,B.Cb,B.CE],A.aQ("i<m,A>"))
+B.yU=new A.i(B.anh,[B.BZ,B.BF,B.fA,B.fC,B.B4,B.B3,B.B2,B.B5,B.BN,B.BL,B.BM,B.AF,B.AC,B.Av,B.AA,B.AB,B.Ce,B.Cd,B.Cz,B.CD,B.CA,B.Cy,B.CC,B.Cx,B.CB,B.eH,B.AG,B.Bn,B.fy,B.i_,B.BS,B.BI,B.BH,B.B_,B.At,B.Ak,B.Al,B.Am,B.An,B.Ao,B.Ap,B.Aq,B.Ar,B.As,B.Cc,B.Cn,B.B0,B.Au,B.Az,B.ny,B.ny,B.AJ,B.AS,B.AT,B.AU,B.Bq,B.Br,B.Bs,B.Bt,B.Bu,B.Bv,B.Bw,B.AK,B.Bx,B.By,B.Bz,B.BA,B.BB,B.AL,B.AM,B.AN,B.AO,B.AP,B.AQ,B.AR,B.BK,B.hZ,B.zk,B.zq,B.zz,B.zA,B.zB,B.zC,B.zD,B.zE,B.zF,B.zr,B.zs,B.zt,B.zu,B.zv,B.zw,B.zx,B.zy,B.zG,B.zH,B.zI,B.zJ,B.zK,B.zL,B.zM,B.zN,B.zO,B.zP,B.zQ,B.zR,B.zS,B.zT,B.zU,B.BD,B.AY,B.zi,B.AX,B.Bm,B.BP,B.BR,B.BQ,B.zV,B.zW,B.zX,B.zY,B.zZ,B.A_,B.A0,B.A1,B.A2,B.A3,B.A4,B.A5,B.A6,B.A7,B.A8,B.A9,B.Aa,B.Ab,B.Ac,B.Ad,B.Ae,B.Af,B.Ag,B.Ah,B.Ai,B.Aj,B.CI,B.BU,B.BV,B.BW,B.BX,B.BY,B.Cs,B.Cr,B.Cw,B.Ct,B.Cq,B.Cv,B.CG,B.CF,B.CH,B.Ci,B.Cg,B.Cf,B.Co,B.Ch,B.Cj,B.Cp,B.Cm,B.Ck,B.Cl,B.fB,B.i1,B.zp,B.Ay,B.BT,B.k6,B.Bk,B.Bb,B.Bc,B.Bd,B.Be,B.Bf,B.Bg,B.Bh,B.Bi,B.Bj,B.B9,B.C2,B.C8,B.C9,B.BO,B.Bl,B.B6,B.Ba,B.Bp,B.C6,B.C5,B.C4,B.C3,B.C7,B.B7,B.C0,B.C1,B.B8,B.BC,B.B1,B.AZ,B.BJ,B.AW,B.AH,B.Bo,B.AV,B.zo,B.C_,B.AE,B.zm,B.k5,B.BE,B.Cu,B.AD,B.fz,B.i0,B.CJ,B.AI,B.Ca,B.Ax,B.zj,B.zl,B.Aw,B.zn,B.BG,B.Cb,B.CE],A.aQ("i<m,A>"))
 B.ane={es:0,pt:1,fr:2,de:3,el:4,ar:5,pl:6,ro:7,hu:8}
 B.ann={[u.vv]:0,[u.y4]:1,[u.iY]:2,[u.iB]:3,[u.k3]:4,[u.CM]:5,[u.rO]:6,[u.uG]:7,[u.o3]:8,[u.i0]:9,[u.od]:10,[u.g6]:11,[u.aQ]:12,[u.Dx]:13,[u.qH]:14,"Lower slowly":15,"lower slowly":16,"Keep your core stable":17,"Breathe deeply":18,"Focus on the contraction":19,"Squeeze your glutes":20,"Use a full range of motion.":21,"Keep your feet shoulder-width apart.":22,[u.a7]:23,[u.xF]:24,[u.yd]:25,[u.cP]:26,[u.Eh]:27,[u.dJ]:28,[u.mn]:29,[u.nz]:30,[u.tc]:31,[u.sE]:32,[u.ew]:33,[u.sS]:34,[u.yX]:35,[u.gu]:36,[u.bT]:37,[u.wt]:38,[u.ti]:39,[u.j5]:40,[u.gK]:41,[u.aJ]:42,[u.aU]:43,[u.BM]:44,[u.ny]:45,[u.pt]:46,[u.nT]:47,[u.sy]:48,[u.ij]:49,[u.qh]:50,[u.uF]:51,[u.do]:52,[u.mW]:53,[u.cx]:54,[u.Cb]:55,[u.eM]:56,[u.wQ]:57,[u.if]:58,[u.mV]:59,[u.gn]:60,[u.o0]:61,[u.qO]:62,[u.rf]:63,[u.C2]:64,[u.jE]:65,[u.re]:66,[u.fN]:67,[u.om]:68,[u.ui]:69,[u.C7]:70,[u.hD]:71,[u.s5]:72,[u.E3]:73,[u.BQ]:74,[u.Ch]:75,[u.fh]:76,[u.As]:77,[u.jo]:78,[u.xy]:79,[u.kW]:80,[u.gz]:81,[u.vt]:82,[u.qp]:83,[u.cz]:84,[u.qU]:85,[u.Et]:86,[u.wR]:87,[u.tt]:88,[u.ci]:89,[u.ix]:90,[u.en]:91,[u.pp]:92,[u.xQ]:93,[u.d6]:94,[u.tR]:95,[u.kO]:96,[u.u6]:97,[u.DJ]:98,[u.kF]:99,[u.w_]:100,[u.f1]:101,[u.Bp]:102,[u.cq]:103,[u.Dt]:104,[u.fe]:105,[u.Dw]:106,[u.vo]:107,[u.wD]:108,[u.D3]:109,[u.hv]:110,[u.sl]:111,[u.h7]:112,[u.b9]:113,[u.Cq]:114,[u.sb]:115,[u.dn]:116,[u.FB]:117,[u.AN]:118,[u.ES]:119,[u.pr]:120,[u.CU]:121,[u.pL]:122,[u.E8]:123,[u.BE]:124,[u.lg]:125,[u.xc]:126,[u.xO]:127,[u.on]:128,[u.e7]:129,[u.ba]:130,[u.ao]:131,[u.aq]:132,[u.dd]:133,[u.g1]:134,[u.rP]:135,[u.k4]:136,[u.bO]:137,[u.qn]:138,[u.b4]:139,[u.ow]:140,[u.bt]:141,[u.g4]:142,[u.ja]:143,[u.mw]:144,[u.be]:145,[u.Fp]:146,[u.kH]:147,[u.iN]:148,[u.wz]:149,[u.in]:150,[u.q5]:151,[u.t7]:152,[u.vI]:153,[u.fw]:154,[u.wZ]:155,[u.pd]:156,[u.gf]:157,[u.g9]:158,[u.ze]:159,[u.lv]:160,[u.tq]:161,[u.oi]:162,[u.qe]:163,[u.uz]:164,[u.hn]:165,[u.uC]:166,[u.xe]:167,[u.bk]:168,[u.nc]:169,[u.ey]:170,[u.jV]:171,[u.cB]:172,[u.hc]:173,[u.hz]:174,[u.bg]:175,[u.jx]:176,[u.xh]:177,[u.tO]:178,[u.f9]:179,[u.di]:180,[u.gN]:181,[u.ux]:182,[u.p2]:183,[u.nF]:184,[u.zI]:185,[u.oq]:186,[u.mq]:187,[u.nJ]:188,[u.vm]:189,[u.rL]:190,[u.ad]:191,[u.gZ]:192,[u.qo]:193,[u.D6]:194,[u.iq]:195,[u.q_]:196,[u.qG]:197,[u.io]:198,[u.iQ]:199,[u.vT]:200,[u.CH]:201,[u.CR]:202,[u.p5]:203,[u.v3]:204,[u.cg]:205,[u.y1]:206,[u.r5]:207,[u.uZ]:208,[u.BT]:209,[u.j7]:210,[u.CN]:211,[u.sd]:212,[u.kS]:213,[u.Cj]:214,[u.fm]:215,[u.c8]:216,[u.EL]:217,[u.ju]:218,[u.hO]:219,[u.oy]:220,[u.A1]:221,[u.rb]:222,[u.vQ]:223,[u.dc]:224,[u.Dc]:225,[u.wy]:226,[u.Dd]:227,[u.gt]:228}
 B.alY=new A.i(B.ann,["Realiza el movimiento lentamente y con control. Mant\xe9n una postura correcta.","Comienza con un peso moderado para dominar la t\xe9cnica.","Respira profundamente. Nunca fuerces m\xe1s all\xe1 de tu rango natural.","Respira profundamente. No forces m\xe1s all\xe1 de tu l\xedmite.","Respira profundamente. No te fuerces m\xe1s all\xe1 de tu l\xedmite de confort.","No te fuerces m\xe1s all\xe1 de tu l\xedmite de confort. Respira profundamente.","No tires del cuello. Respira normalmente.","Mant\xe9n el core activado durante todo el ejercicio. Controla la fase exc\xe9ntrica.","Conc\xe9ntrate en contraer los gl\xfateos y mant\xe9n el core estable.","Controla tanto la fase exc\xe9ntrica como la conc\xe9ntrica del movimiento.","Realiza el movimiento con control y mant\xe9n el core estable.","Impulsa el movimiento explosivamente hacia arriba y controla la bajada.","Mant\xe9n el core estable durante todo el ejercicio.","Evita el balanceo. Controla las fases ascendente y descendente.","Mant\xe9n los hombros hacia atr\xe1s y el pecho abierto durante el movimiento.","Baja lentamente","baja lentamente","Mant\xe9n el core estable","Respira profundamente","Conc\xe9ntrate en la contracci\xf3n","Aprieta los gl\xfateos","Usa el rango completo de movimiento.","Mant\xe9n los pies a la anchura de los hombros.","Lleva los brazos a la posici\xf3n de estiramiento y mant\xe9n 20-30 segundos.","Lleva las piernas a la posici\xf3n de estiramiento y mant\xe9n 20-30 segundos.","Adopta la posici\xf3n de estiramiento y mant\xe9n 20-30 segundos.","Un agarre cercano aumenta el rango de movimiento. Empezar desde la retracci\xf3n.","Un agarre estrecho a\xedsla los tr\xedceps. Mantenga su cuerpo en l\xednea recta.","Un agarre en supinaci\xf3n aumenta el compromiso del b\xedceps. Evite utilizar el impulso.","Ajuste el asiento: las rodillas no deben sobreextenderse.","Aterriza siempre suavemente. No bloquees las rodillas.","Evite el impulso. Conc\xe9ntrate en levantar la pelvis.","Evite levantar los codos por encima de la altura de los hombros. Un agarre m\xe1s amplio reduce el riesgo de choque.","Evite rotar los hombros. Conc\xe9ntrate s\xf3lo en el movimiento vertical.","Evite balancear el torso. Controla ambas fases.","Barra en la parte delantera de los hombros con codos altos. Desciende manteniendo el torso lo m\xe1s vertical posible. Empuje hacia arriba.","Coloque la pierna en posici\xf3n de estiramiento manteniendo el torso erguido. Mantenga durante 20-30 segundos.","Coloque la pierna en posici\xf3n de estiramiento con la espalda recta. Mantenga durante 20-30 segundos respirando profundamente.","Lleva la pierna hacia afuera en abducci\xf3n controlando el movimiento. Regrese lentamente. Mantenga su n\xfacleo estable.","Lleva tu pierna hacia el centro en aducci\xf3n controlando el movimiento. Regrese lentamente. Mantenga su n\xfacleo estable.","Contrae tus abdominales durante todo el ejercicio. Controla la fase exc\xe9ntrica.","No extiendas demasiado los brazos durante la fase de apertura. Conc\xe9ntrate en la contracci\xf3n del pecho.","No dejes que tu espalda se arquee. Comience con implementaciones parciales.","No dejes que tus caderas se doblen hacia abajo. Retraiga los om\xf3platos.","No levantes las caderas. Mant\xe9n la contracci\xf3n en la parte superior por un segundo.","No bloquees las rodillas en extensi\xf3n. Los pies m\xe1s altos en la plataforma involucran m\xe1s los gl\xfateos.","No tires de tu cuello. Conc\xe9ntrate en la contracci\xf3n abdominal.","No levante los brazos por encima de la altura de los hombros. Gire las mu\xf1ecas ligeramente hacia abajo (como si echara agua) para aislar el deltoides lateral.","No levantes las caderas. Mantenga los hombros sobre las mu\xf1ecas.","No redondees la espalda en ning\xfan punto. Involucre su n\xfacleo antes de tirar.","No redondees tu espalda. Controla la fase exc\xe9ntrica.","No redondees tu espalda. Controla la fase de estiramiento.","No redondees tu espalda. Comience con un peso ligero.","No utilice el balanceo del cuerpo. Conc\xe9ntrate en aislar el gl\xfateo medio.","No uses el impulso. Conc\xe9ntrate en aislar los aductores.","No uses el impulso. Conc\xe9ntrate en la contracci\xf3n.","Las mancuernas permiten un mayor rango de movimiento. Mantenga los om\xf3platos retra\xeddos durante todo el movimiento.","Pies m\xe1s anchos que el ancho de los hombros con los dedos apuntando hacia afuera. Baje hacia abajo agarrando la barra con un agarre interno. Empuja con las piernas y extiende las caderas simult\xe1neamente manteniendo la espalda recta.","Flexiona los codos llevando el peso hacia los hombros. Baje lentamente.","Extiende completamente tus brazos en la fase conc\xe9ntrica. Regresa lentamente a la posici\xf3n inicial controlando el movimiento.","Agarre la barra con un agarre en pronaci\xf3n al ancho de los hombros. Comenzando con los brazos extendidos, levante el cuerpo hasta que la barbilla despeje la barra. Baje lentamente hasta la posici\xf3n inicial.","Agarre la barra con un agarre supinado (con las palmas hacia usted) al ancho de los hombros. Comenzando con los brazos extendidos, levante el cuerpo hasta que la barbilla despeje la barra. Baje lentamente.","Agarre las barras paralelas con los brazos extendidos. Baje el cuerpo inclin\xe1ndose ligeramente hacia adelante y doblando los codos. Empuja hacia arriba volviendo a la posici\xf3n inicial.","Colgado de la barra o tumbado, eleva las piernas hacia arriba controlando el movimiento. Baje lentamente.","Los codos altos evitan que la barra se deslice. Requiere una importante movilidad de mu\xf1eca y tobillo.","Mant\xe9n la contracci\xf3n en la parte superior por un segundo. Evite el impulso.","Mant\xe9n la contracci\xf3n en la parte superior por un segundo. Mantenga la barbilla hacia el pecho.","Mantenga la contracci\xf3n en la parte superior. Evite compensar con la espalda.","Sost\xe9n los extremos de la cuerda a tus costados. Gira la cuerda sobre tu cabeza y salta cuando pase bajo tus pies.","En dec\xfabito prono apoyado sobre los antebrazos y los dedos de los pies. Tu cuerpo forma una l\xednea recta desde la cabeza hasta los talones. Mant\xe9ngase contrayendo su n\xfacleo.","En dec\xfabito prono con las manos a la altura de los hombros. Baje el pecho hacia el suelo doblando los codos. Empuja hacia arriba volviendo a la posici\xf3n inicial manteniendo tu cuerpo en l\xednea recta.","En posici\xf3n de flexi\xf3n. Alternativamente, lleve las rodillas hacia el pecho r\xe1pidamente mientras mantiene las caderas bajas.","En posici\xf3n de postura dividida. Baje el cuerpo doblando la rodilla delantera. Empuja hacia arriba volviendo a la posici\xf3n inicial.","Mantenga el pie opuesto completamente en el suelo. Torso erguido.","Mantenga la parte superior del brazo paralela al suelo. Evite el impulso.","Mantenga los brazos rectos. Conc\xe9ntrate en la contracci\xf3n dorsal.","Mantenga la espalda plana y el n\xfacleo comprometido. Evite balancear el torso.","Mantenga la espalda en una posici\xf3n neutral. Tire hacia la cintura o el pecho. Contrae los m\xfasculos de la espalda al final del movimiento.","Mantenga la espalda paralela al suelo. Gira ligeramente el torso al final del movimiento.","Mantenga el pecho erguido y las rodillas alineadas con los dedos de los pies. No dejes que tus rodillas colapsen hacia adentro.","Mantenga su n\xfacleo comprometido y su espalda recta. Evite hiperextender la columna lumbar.","Mantenga su n\xfacleo comprometido para proteger su espalda. Evite hiperextender la columna lumbar.","Mant\xe9n tu n\xfacleo comprometido. Adapta la velocidad a tu nivel de condici\xf3n f\xedsica.","Mant\xe9n tu n\xfacleo comprometido. Evite hiperextender la columna.","Mantenga los codos a la altura de los hombros o ligeramente por encima. Esencial para la salud del manguito rotador.","Mantenga los codos cerca de su cuerpo. Evite ensanchar los codos.","Mantenga los codos fijos a los costados. El agarre neutral enfatiza el braquiorradial sobre el b\xedceps.","Mantenga los codos fijos apuntando hacia el techo. Controla el descenso.","Mant\xe9n los codos fijos durante todo el movimiento. Conc\xe9ntrate en la contracci\xf3n completa en la parte superior.","Mantenga los codos fijos. No uses el impulso.","Mantenga los codos fijos. Conc\xe9ntrate en la contracci\xf3n completa.","Mantenga los codos fijos. Conc\xe9ntrate en la extensi\xf3n completa.","Mantenga los codos apuntando hacia el techo y cerca de la cabeza. La cabeza larga se activa al m\xe1ximo en la posici\xf3n estirada.","Mantenga la rodilla delantera alineada con los dedos de los pies. Corrige los desequilibrios musculares entre las piernas.","Mant\xe9n el tal\xf3n en el suelo. Doble la rodilla para estirar el s\xf3leo.","Mant\xe9n tus caderas alineadas. Evite que se hunda hacia abajo.","Mant\xe9n tus saltos bajos. Usa tus mu\xf1ecas, no tus brazos, para girar la cuerda.","Mantenga la rodilla apuntando hacia el suelo. Evite hiperextender la espalda.","Mantenga las rodillas alineadas con los dedos de los pies. La posici\xf3n del pie cambia el m\xfasculo m\xe1s comprometido.","Mantenga las rodillas alineadas con los dedos de los pies. La postura de sumo reduce la trayectoria de la barra.","Mantenga la pelvis nivelada. Comience con un peso ligero.","Mantenga los om\xf3platos retra\xeddos. Controla el descenso durante al menos 2 segundos.","Mantenga los hombros relajados. Adapta el ritmo a la intensidad deseada.","Mantenga su torso estable evitando balancearse. Controla el descenso.","Mantenga el torso erguido y el n\xfacleo comprometido. Evite que la rodilla delantera pase los dedos de los pies.","Mantenga el torso vertical para aislar los tr\xedceps. Cuanto m\xe1s bajo vayas, mayor ser\xe1 el compromiso del pecho.","Mantenga sus mu\xf1ecas en una posici\xf3n neutral. El curl inverso fortalece los m\xfasculos del antebrazo.","De rodillas con el volante delante. Gire la rueda hacia adelante bajando su cuerpo hacia el piso. Tire de la rueda hacia las rodillas.","Inclinarse hacia adelante aumenta el compromiso del pecho. La posici\xf3n vertical a\xedsla los tr\xedceps.","Acu\xe9state con las rodillas dobladas. Lleva los hombros hacia las rodillas contrayendo los abdominales. Baje lentamente.","Acu\xe9state con las piernas levantadas. Lleva las rodillas hacia el pecho levantando la pelvis. Regrese lentamente.","Acu\xe9stese boca abajo sobre la m\xe1quina con almohadillas en los tobillos. Flexiona las rodillas llevando los talones hacia los gl\xfateos. Baje lentamente.","Acu\xe9state en el banco con una mancuerna en cada mano. Baje las mancuernas hacia su pecho manteniendo estables las mu\xf1ecas. Empuje hacia arriba con firmeza regresando a la posici\xf3n inicial.","Acu\xe9state en el banco con una mancuerna en cada mano. Baje los brazos lateralmente manteniendo una ligera flexi\xf3n del codo. Lleva las mancuernas hacia arriba formando un arco como si abrazaras un \xe1rbol. Regrese lentamente.","Acu\xe9stese en el banco con un agarre a la altura de los hombros. Baje la barra manteniendo los codos cerca del torso. Empuja hacia arriba apretando tus tr\xedceps.","Acu\xe9state en el banco con el implemento sobre tu pecho y los brazos extendidos. Flexiona los codos bajando el peso hacia la frente. Extender volviendo a la posici\xf3n.","Acu\xe9stese en el banco con el implemento sobre su pecho y los brazos casi extendidos. Baje el peso detr\xe1s de la cabeza manteniendo los codos ligeramente doblados. Regrese a la posici\xf3n inicial formando un arco.","Acu\xe9state en el banco con los pies en el suelo. Agarre la barra m\xe1s ancha que el ancho de los hombros. Baje la barra hasta el pecho manteniendo los codos a unos 45 grados. Empuje hacia arriba con firmeza.","Acu\xe9stese en el banco declinado con los pies asegurados. Agarre el implemento a una distancia mayor que el ancho de los hombros. Baje hasta la parte inferior del pecho. Empuja firmemente volviendo a la posici\xf3n inicial.","Acu\xe9state sobre el soporte inclinado con las pesas colgando. Tira hacia tu torso contrayendo tus dorsales. Baje lentamente.","Baje hasta ponerse en cuclillas y luego salte hacia arriba explosivamente. Aterriza suavemente doblando las rodillas.","Ponte en cuclillas, coloca las manos en el suelo y salta con los pies en posici\xf3n de flexi\xf3n. Realice una flexi\xf3n, salte con los pies hacia las manos y luego salte con los brazos por encima de la cabeza.","Mantenga un ritmo constante. Postura correcta durante todo el ejercicio.","Mantenga una postura erguida con una ligera inclinaci\xf3n hacia adelante. Pasos alternos a un ritmo constante. Aterriza con el pie a mitad del paso.","Mantenga la misma flexi\xf3n del codo durante todo el movimiento. Conc\xe9ntrate en la contracci\xf3n del pecho al final del movimiento.","Mantenga la misma flexi\xf3n del codo. Controla el descenso durante 2 segundos.","Mantenga la ligera flexi\xf3n del codo. El jersey es uno de los pocos ejercicios que estira el dorsal.","Tensi\xf3n moderada, nunca dolor. Exhala mientras te estiras.","Sobre manos y rodillas o de pie junto al cable. Extiende la pierna hacia atr\xe1s apretando el gl\xfateo. Regrese lentamente.","De lado apoyado sobre el antebrazo con el cuerpo en l\xednea recta. Levanta las caderas manteniendo la posici\xf3n.","Pedalea manteniendo un ritmo constante. Mantenga la espalda en una posici\xf3n neutral.","Realizar la fase de levantamiento con agarre supinado. Gire las mu\xf1ecas hasta la pronaci\xf3n en la parte superior. Baje con un agarre en pronaci\xf3n. Vuelva a estar en supinaci\xf3n en la parte inferior.","Realiza el movimiento controlando tanto la fase exc\xe9ntrica como la conc\xe9ntrica. Mant\xe9n tu n\xfacleo comprometido.","Realiza el movimiento controlando tanto la fase exc\xe9ntrica como la conc\xe9ntrica. Mantenga los om\xf3platos retra\xeddos.","Realiza el movimiento de forma explosiva hacia arriba o hacia adelante. Aterriza suavemente doblando las rodillas. Controla el aterrizaje.","Realiza el movimiento lentamente en ambas fases. La pausa en la parte inferior aumenta el estiramiento de la pantorrilla.","Realizar la rotaci\xf3n de forma fluida y continua. La prensa Arnold es uno de los pocos ejercicios que involucra todas las fibras musculares.","Coloque sus manos en forma de diamante debajo de su pecho. Baje el cuerpo manteniendo los codos cerca del torso. Empuja hacia arriba apretando tus tr\xedceps.","Col\xf3quese en la m\xe1quina de sentadillas con los hombros debajo de las almohadillas. Desciende doblando las rodillas a 90 grados y luego empuja hacia arriba.","Empuje principalmente con el pie sobre la superficie elevada. Mantenga su torso erguido.","Empuja con las piernas, luego inclina el torso hacia atr\xe1s, finalmente tira el remo hacia tu abdomen. Invierta el orden en la devoluci\xf3n.","Requiere excelente movilidad de hombros, cadera y tobillos. Empieza sin peso.","Retraiga los om\xf3platos y mant\xe9ngalos bloqueados. No hagas rebotar el peso en tu pecho.","Retraiga los om\xf3platos para estabilizar el hombro.","Gire desde la cintura, no solo desde los brazos.","Gire el torso llevando un codo hacia la rodilla opuesta. Repita desde el otro lado.","Gire la mu\xf1eca hacia afuera en la parte superior para maximizar el pico. Mant\xe9n tu torso estable.","Sentado con mancuernas a la altura de los hombros y las palmas hacia ti. Presione hacia arriba girando las mu\xf1ecas hacia afuera hasta que las palmas miren hacia adelante. Bajar volviendo a la posici\xf3n inicial.","Sentado con el codo apoyado en la parte interna del muslo. Flexiona el codo llevando la mancuerna hacia el hombro. Baje lentamente.","Sentado con los pies levantados y el torso a 45 grados. Gira tu torso de lado a lado llevando tus manos al suelo al lado de tus caderas.","Secuencia: piernas, luego torso y luego brazos durante el tir\xf3n.","Si\xe9ntese en la m\xe1quina de jalones laterales y agarre la barra con un agarre en pronaci\xf3n amplia. Tira de la barra hacia tu pecho inclinando el torso ligeramente hacia atr\xe1s. Controlar el regreso a la posici\xf3n inicial.","Si\xe9ntese en la m\xe1quina de jalones laterales con un agarre estrecho o neutral. Tire de la barra hacia su pecho manteniendo los codos cerca de su cuerpo. Controla la devoluci\xf3n.","Si\xe9ntate en el cable bajo con los pies sobre los soportes. Tire del asa hacia su cintura manteniendo la espalda recta. Contrae los m\xfasculos de la espalda y regresa lentamente.","Si\xe9ntate frente a la m\xe1quina con almohadillas en los tobillos. Extiende las piernas hacia arriba contrayendo los cu\xe1driceps. Baje lentamente.","Si\xe9ntate frente a la m\xe1quina con almohadillas en los tobillos. Flexiona las rodillas llevando los talones hacia los gl\xfateos. Baje lentamente.","Si\xe9ntese en el banco del predicador con los brazos apoyados en la plataforma. Flexiona los codos llevando el implemento hacia tus hombros. Baje lentamente casi hasta alcanzar la extensi\xf3n completa.","Si\xe9ntese en la m\xe1quina con la espalda apoyada contra la almohadilla. Coloque los codos sobre las almohadillas. Lleva tus brazos hacia el centro contrayendo tu pecho. Regrese lentamente a la posici\xf3n inicial.","Si\xe9ntese en la m\xe1quina con los pies sobre la plataforma al ancho de las caderas. Baje doblando las rodillas a 90 grados. Empuja extendiendo las piernas.","Si\xe9ntate en el banco inclinado con los pies en el suelo. Agarre el implemento a una distancia mayor que el ancho de los hombros. Baje hasta el nivel superior del pecho. Empuja firmemente volviendo a la posici\xf3n inicial.","Si\xe9ntate con los antebrazos sobre los muslos. Agarre el implemento con agarre supinado. Flexiona las mu\xf1ecas hacia arriba y hacia abajo lentamente.","Separe la cuerda en la parte inferior para maximizar la contracci\xf3n. Mantenga los codos fijos.","De pie en el centro del cable con un asa por mano. Mantenga los brazos ligeramente doblados. Lleva tus manos hacia el centro cruz\xe1ndolas. Regrese lentamente a la posici\xf3n inicial.","De pie junto al cable alto con la cuerda. Mantenga los codos fijos a los lados del torso. Empuja la cuerda hacia abajo separando los extremos. Regrese lentamente.","De pie en el cable alto. Mantenga los codos fijos a los lados del torso. Empuja hacia abajo extendiendo completamente los brazos. Regrese lentamente.","De pie frente al cable alto con los brazos casi extendidos. Lleva la barra hacia tus muslos formando un arco manteniendo los brazos rectos. Regrese lentamente a la posici\xf3n inicial.","De pie frente a un banco. Coloque un pie en la superficie elevada y empuje hacia arriba. Baja lentamente controlando el movimiento.","De pie sobre una pierna. Baja el torso hacia adelante manteniendo la espalda recta mientras la pierna libre se extiende hacia atr\xe1s. Vuelve a la posici\xf3n erguida apretando los gl\xfateos.","De pie o sentado con el implemento a la altura de los hombros. Empuja hacia arriba extendiendo completamente los brazos. Baja lentamente volviendo a la posici\xf3n inicial con el peso a la altura de los hombros.","De pie o sentado con el implemento a la altura de los hombros. Empuja hacia arriba extendiendo completamente los brazos. Baje lentamente.","De pie o sentado con el implemento por encima de la cabeza y los brazos extendidos. Flexiona los codos bajando el peso detr\xe1s de la cabeza. Extender volviendo hacia arriba.","De pie con una mancuerna en cada mano a los costados. Levanta los brazos lateralmente hasta la altura de los hombros manteniendo los codos ligeramente flexionados. Baje lentamente.","De pie con una pesa en cada mano a los costados. Levanta los hombros hacia las orejas apretando los trapecios. Mantenga la contracci\xf3n por un segundo y luego baje lentamente.","De pie con mancuernas a los lados con un agarre neutral (pulgares hacia arriba). Flexiona los codos llevando las mancuernas hacia los hombros. Baje lentamente.","De pie con los pies al ancho de las caderas. Gire las caderas balanceando el peso entre las piernas, luego impulse explosivamente las caderas hacia adelante balanceando el peso hasta la altura de los hombros.","De pie con los pies al ancho de las caderas. Baja la barra a lo largo de tus piernas manteniendo las rodillas ligeramente dobladas y la espalda recta. Desciende hasta sentir tensi\xf3n en los isquiotibiales y luego vuelve a subir.","De pie con los pies al ancho de las caderas. Baja con la espalda recta y el pecho hacia arriba. Empuja los pies contra el suelo y extiende las caderas y las rodillas simult\xe1neamente manteniendo la barra cerca de tus piernas.","De pie con los pies a la altura de los hombros, sostenga una mancuerna frente a su pecho. Desciende manteniendo el pecho en alto. Vuelve hacia arriba empujando los talones.","De pie con los pies al ancho de los hombros. Baje el cuerpo doblando las rodillas y las caderas como si estuviera sentado en una silla. Desciende hasta que tus muslos queden paralelos al suelo. Empuja tus talones.","De pie con los pies juntos. Da un paso lateral amplio manteniendo fijo el pie opuesto. Baje hacia ese lado doblando la rodilla.","De pie con la barra sobre los hombros. Inclina el torso hacia adelante manteniendo la espalda recta y las rodillas ligeramente flexionadas. Siente el estiramiento en tus isquiotibiales. Regrese a la posici\xf3n vertical.","De pie con el implemento delante de los muslos utilizando un agarre en pronaci\xf3n. Tire hacia la barbilla manteniendo los codos m\xe1s altos que las mu\xf1ecas. Baje lentamente.","De pie con el implemento delante de tus muslos. Levante los brazos frente a usted hasta la altura de los hombros manteniendo los codos ligeramente doblados. Baje lentamente.","De pie con el implemento utilizando un agarre en pronaci\xf3n (palmas hacia abajo). Flexiona los codos llevando el implemento hacia tus hombros. Baje lentamente.","De pie con el implemento mediante agarre supinado. Flexione los codos llevando el implemento hacia los hombros manteniendo los codos fijos a los lados del torso. Baja lentamente volviendo a la posici\xf3n inicial.","De pie con el torso inclinado a 45 grados. Agarre la barra con un agarre en pronaci\xf3n. Tire hacia el abdomen manteniendo la espalda neutra. Baje lentamente.","De pie con los talones fuera del borde de una plataforma. Ponte de puntillas apretando las pantorrillas. Baje lentamente permitiendo que los talones caigan por debajo del nivel de la plataforma.","Comience a un ritmo moderado y aumente gradualmente.","Empiece por la retracci\xf3n de los om\xf3platos. Controla la fase exc\xe9ntrica.","Empiece por la retracci\xf3n de los om\xf3platos. No incline el torso demasiado hacia atr\xe1s.","Inicia el movimiento desde la retracci\xf3n de los om\xf3platos. Evite utilizar el impulso.","Inicia el movimiento desde la retracci\xf3n de los om\xf3platos. Controlar la fase de alargamiento.","Da un paso hacia atr\xe1s bajando la rodilla trasera hacia el suelo. La rodilla delantera permanece alineada con el tobillo.","Da un paso adelante bajando la rodilla trasera hacia el suelo. La rodilla delantera permanece alineada con el tobillo. Empuje hacia arriba.","Da un paso adelante bajando la rodilla trasera. Contin\xfae dando pasos hacia adelante alternando piernas continuamente.","Entra en la barra trampa. Pies al ancho de las caderas. B\xe1jate agarrando las asas con la espalda recta. Empuja con los pies extendiendo las caderas y las rodillas simult\xe1neamente.","Da pasos largos para involucrar m\xe1s tus gl\xfateos.","El curl Zottman entrena tanto la flexi\xf3n como la extensi\xf3n del antebrazo.","La barra debe rozar tus piernas durante todo el movimiento. Conc\xe9ntrate en el estiramiento de los isquiotibiales durante el descenso.","Cuanto m\xe1s alta es la superficie, m\xe1s trabaja la parte superior del pecho.","El banco inclinado realza la parte superior del pecho. Mantenga los om\xf3platos retra\xeddos durante todo el movimiento.","La versi\xf3n inclinada es m\xe1s f\xe1cil y se adapta a la parte inferior del pecho.","Cuanto m\xe1s horizontal sea tu cuerpo, m\xe1s dif\xedcil ser\xe1. Mantenga siempre su n\xfacleo comprometido.","El movimiento proviene de las caderas, no de la espalda. Mantenga la espalda recta durante la fase de empuje.","El banco del predicador elimina el uso del impulso. No dejes que el peso caiga al fondo.","La estocada inversa es m\xe1s segura para las rodillas que la estocada hacia adelante.","La rotaci\xf3n proviene de la cintura, no de la cabeza.","La flexi\xf3n de piernas sentado aumenta el rango de movimiento. Evite levantar los gl\xfateos del asiento.","El soporte elimina el estr\xe9s lumbar. Centrarse en la retracci\xf3n.","La barra trampa reduce la tensi\xf3n en la columna. Mantenga los hombros alineados con las asas.","El peso al frente ayuda con la postura vertical. Mantenga las rodillas alineadas.","Utilice un peso ligero. Mantenga los antebrazos todav\xeda sobre los muslos.","Con una mano y una rodilla en el banco. Tire de la mancuerna hacia su costado manteniendo el codo cerca del cuerpo. Baje lentamente.","Con la barra sobre tu cabeza, desciende hasta ponerse en cuclillas manteniendo los brazos rectos y estables. Vuelve hacia arriba manteniendo la barra alineada.","Con los brazos al frente a la altura del cable o con mancuernas, tira del implemento hacia tu cara manteniendo los codos en alto. Separa las manos acercando los pu\xf1os a las orejas. Regrese lentamente.","Con el cuerpo inclinado debajo de una barra baja, agarre en pronaci\xf3n. Lleva tu pecho hacia la barra manteniendo tu cuerpo r\xedgido. Baje lentamente.","Con los pies sobre una superficie elevada, baje el pecho hacia el suelo. Empuja hacia arriba volviendo a la posici\xf3n inicial.","Con las manos sobre una superficie elevada, baje el pecho hacia las manos. Empuja hacia arriba volviendo a la posici\xf3n inicial.","Con las manos en el borde de un banco, da un paso adelante con los gl\xfateos hacia afuera. Baja el cuerpo doblando los codos a 90 grados. Hacer subir.","Con el torso inclinado y el codo doblado a 90 grados, extienda el brazo hacia atr\xe1s hasta alcanzar la extensi\xf3n completa. Vuelve lentamente.","Con la parte superior de la espalda sobre un banco y el peso sobre las caderas. Empuja tus caderas hacia arriba apretando tus gl\xfateos. Regrese lentamente.","Respire profundamente y mant\xe9ngase dentro de un rango c\xf3modo.","Mantenga un ritmo constante y mantenga una postura correcta durante todo el movimiento.","Mantenga su n\xfacleo comprometido y controle cada fase del movimiento.","Mant\xe9n los codos fijos y realiza cada repetici\xf3n con control.","Ajusta los hombros, controla el movimiento y evita utilizar el impulso.","Mant\xe9n las rodillas alineadas y controla tanto la fase de descenso como la de elevaci\xf3n.","Mantenga la espalda neutral, refuerce su n\xfacleo y controle el movimiento.","Realice el movimiento con control, postura adecuada y un rango completo de movimiento."],t.w)
@@ -112999,17 +112999,17 @@ B.amn=new A.i(B.z1,["Effectuez le mouvement lentement et avec contr\xf4le. Maint
 B.amo=new A.i(B.z1,["F\xfchre die Bewegung langsam und kontrolliert aus. Halte eine korrekte Haltung.","Beginne mit einem moderaten Gewicht, um die Technik zu meistern.","Atme tief. Zwinge dich nie \xfcber deinen nat\xfcrlichen Bereich hinaus.","Atme tief. Gehe nicht \xfcber deine Grenzen hinaus.","Halte den Rumpf w\xe4hrend der ganzen \xdcbung angespannt. Kontrolliere die exzentrische Phase.","Konzentriere dich auf die Ges\xe4\xdfmuskeln und halte den Rumpf stabil.","Kontrolliere sowohl die exzentrische als auch die konzentrische Phase.","F\xfchre die Bewegung kontrolliert aus und halte den Rumpf stabil.","Halte den Rumpf w\xe4hrend der gesamten \xdcbung stabil.","Vermeide Schwingen. Kontrolliere Auf- und Abw\xe4rtsphase.","Langsam senken","langsam senken","Tief atmen","Ges\xe4\xdf anspannen","Nutze den vollen Bewegungsumfang.","Halte die F\xfc\xdfe schulterbreit auseinander.","Bringe die Arme in die Dehnposition und halte 20-30 Sekunden.","Bringe die Beine in die Dehnposition und halte 20-30 Sekunden.","Ein fester Griff erh\xf6ht die Bewegungsfreiheit. Beginnen Sie mit dem Zur\xfcckziehen.","Ein enger Griff isoliert den Trizeps. Halten Sie Ihren K\xf6rper in einer geraden Linie.","Ein supinierter Griff erh\xf6ht den Einsatz des Bizeps. Vermeiden Sie Schwung.","Passen Sie den Sitz an: Ihre Knie sollten nicht \xfcberstreckt werden.","Landen Sie immer sanft. Blockieren Sie Ihre Knie nicht.","Vermeiden Sie Schwung. Konzentrieren Sie sich auf das Anheben des Beckens.","Vermeiden Sie es, Ihre Ellbogen \xfcber Schulterh\xf6he zu heben. Ein breiterer Griff verringert das Risiko eines Aufpralls.","Vermeiden Sie es, Ihre Schultern zu drehen. Konzentrieren Sie sich nur auf die vertikale Bewegung.","Vermeiden Sie es, Ihren Oberk\xf6rper zu schwingen. Kontrollieren Sie beide Phasen.","Hantel auf der Vorderseite der Schultern mit hohen Ellbogen. Beim Abstieg den Oberk\xf6rper m\xf6glichst senkrecht halten. Zur\xfcck nach oben dr\xfccken.","Bringen Sie Ihr Bein in eine gestreckte Position und halten Sie Ihren Oberk\xf6rper aufrecht. 20\u201330 Sekunden lang gedr\xfcckt halten.","Bringen Sie Ihr Bein mit geradem R\xfccken in eine Streckposition. Halten Sie die Position 20 bis 30 Sekunden lang und atmen Sie dabei tief ein.","Bringen Sie Ihr Bein in Abduktion nach au\xdfen und kontrollieren Sie die Bewegung. Kehren Sie langsam zur\xfcck. Halten Sie Ihren Rumpf stabil.","Bringen Sie Ihr Bein in Adduktion zur Mitte und kontrollieren Sie die Bewegung. Kehren Sie langsam zur\xfcck. Halten Sie Ihren Rumpf stabil.","Spannen Sie Ihre Bauchmuskeln w\xe4hrend der gesamten \xdcbung an. Kontrollieren Sie die exzentrische Phase.","\xdcberstrecken Sie Ihre Arme w\xe4hrend der \xd6ffnungsphase nicht. Konzentrieren Sie sich auf die Brustkontraktion.","Lassen Sie Ihren R\xfccken nicht durchw\xf6lben. Beginnen Sie mit Teil-Rollouts.","Lassen Sie Ihre H\xfcften nicht nach unten h\xe4ngen. Ziehen Sie Ihre Schulterbl\xe4tter zur\xfcck.","Heben Sie Ihre H\xfcften nicht an. Halten Sie die Kontraktion oben eine Sekunde lang gedr\xfcckt.","Blockieren Sie Ihre Knie nicht in Streckung. F\xfc\xdfe, die h\xf6her auf der Plattform stehen, beanspruchen die Ges\xe4\xdfmuskulatur st\xe4rker.","Ziehen Sie nicht am Hals. Konzentrieren Sie sich auf die Bauchkontraktion.","Heben Sie Ihre Arme nicht \xfcber Schulterh\xf6he. Drehen Sie Ihre Handgelenke leicht nach unten (als w\xfcrden Sie Wasser einschenken), um den seitlichen Deltamuskel zu isolieren.","Heben Sie Ihre H\xfcften nicht an. Halten Sie Ihre Schultern \xfcber Ihren Handgelenken.","Runden Sie Ihren R\xfccken zu keinem Zeitpunkt ab. Spannen Sie Ihren Rumpf an, bevor Sie ziehen.","Machen Sie Ihren R\xfccken nicht rund. Kontrollieren Sie die exzentrische Phase.","Machen Sie Ihren R\xfccken nicht rund. Kontrollieren Sie die Dehnungsphase.","Machen Sie Ihren R\xfccken nicht rund. Beginnen Sie mit einem leichten Gewicht.","Verwenden Sie keinen K\xf6rperschwung. Konzentrieren Sie sich auf die Isolierung des Gluteus medius.","Verwenden Sie keinen Schwung. Konzentrieren Sie sich auf die Isolierung der Adduktoren.","Verwenden Sie keinen Schwung. Konzentrieren Sie sich auf die Kontraktion.","Hanteln erm\xf6glichen eine gr\xf6\xdfere Bewegungsfreiheit. Halten Sie Ihre Schulterbl\xe4tter w\xe4hrend der gesamten Bewegung zur\xfcckgezogen.","F\xfc\xdfe breiter als schulterbreit, die Zehen zeigen nach au\xdfen. Senken Sie sich ab und greifen Sie die Hantel mit einem Innengriff. Dr\xfccken Sie mit den Beinen und strecken Sie die H\xfcften, w\xe4hrend Sie gleichzeitig den R\xfccken gerade halten.","Beuge deine Ellenbogen und verlagere das Gewicht auf deine Schultern. Langsam absenken.","Strecken Sie Ihre Arme in der konzentrischen Phase vollst\xe4ndig aus. Kehren Sie langsam in die Ausgangsposition zur\xfcck und kontrollieren Sie die Bewegung.","Fassen Sie die Stange mit einem pronierten Griff auf Schulterbreite. Beginnen Sie mit ausgestreckten Armen und ziehen Sie Ihren K\xf6rper nach oben, bis Ihr Kinn die Stange freigibt. Senken Sie sich langsam zur\xfcck in die Ausgangsposition.","Fassen Sie die Stange mit supiniertem Griff (Handfl\xe4chen zeigen zu Ihnen) auf Schulterbreite. Beginnen Sie mit ausgestreckten Armen und ziehen Sie Ihren K\xf6rper nach oben, bis Ihr Kinn die Stange freigibt. Langsam absenken.","Fassen Sie den Barren mit ausgestreckten Armen. Senken Sie Ihren K\xf6rper, indem Sie sich leicht nach vorne beugen und die Ellbogen beugen. Dr\xfccken Sie sich nach oben und kehren Sie in die Ausgangsposition zur\xfcck.","H\xe4ngen Sie sich an die Stange oder legen Sie sich hin. Heben Sie Ihre Beine nach oben und steuern Sie die Bewegung. Langsam absenken.","Hohe Ellenbogen verhindern ein Verrutschen der Hantel. Es erfordert eine erhebliche Beweglichkeit von Handgelenk und Kn\xf6chel.","Halten Sie die Kontraktion oben eine Sekunde lang gedr\xfcckt. Vermeiden Sie Schwung.","Halten Sie die Kontraktion oben eine Sekunde lang gedr\xfcckt. Halten Sie Ihr Kinn zur Brust.","Halten Sie die Kontraktion oben. Vermeiden Sie einen Ausgleich mit Ihrem R\xfccken.","Halten Sie die Enden des Seils an Ihren Seiten. Drehen Sie das Seil \xfcber Ihren Kopf und springen Sie, w\xe4hrend es unter Ihren F\xfc\xdfen hindurchl\xe4uft.","In Bauchlage auf Unterarmen und Zehen ruhend. Ihr K\xf6rper bildet vom Kopf bis zu den Fersen eine gerade Linie. Halten Sie, indem Sie Ihren Rumpf anspannen.","In Bauchlage mit schulterbreit auseinander liegenden H\xe4nden. Senken Sie Ihre Brust zum Boden, indem Sie Ihre Ellbogen beugen. Dr\xfccken Sie nach oben und kehren Sie in die Ausgangsposition zur\xfcck, wobei Sie Ihren K\xf6rper in einer geraden Linie halten.","In einer Liegest\xfctzposition. Bringen Sie abwechselnd Ihre Knie schnell zur Brust und halten Sie dabei Ihre H\xfcften niedrig.","In einer geteilten Haltung. Senken Sie Ihren K\xf6rper, indem Sie Ihr vorderes Knie beugen. Dr\xfccken Sie nach oben und kehren Sie in die Ausgangsposition zur\xfcck.","Lassen Sie den gegen\xfcberliegenden Fu\xdf vollst\xe4ndig auf dem Boden. Oberk\xf6rper aufrecht.","Halten Sie den Oberarm parallel zum Boden. Vermeiden Sie Schwung.","Halten Sie Ihre Arme gerade. Konzentrieren Sie sich auf die Lat-Kontraktion.","Halten Sie Ihren R\xfccken flach und Ihren Rumpf angespannt. Vermeiden Sie es, Ihren Oberk\xf6rper zu schwingen.","Halten Sie Ihren R\xfccken in einer neutralen Position. Ziehen Sie in Richtung Ihrer Taille oder Brust. Spannen Sie am Ende der Bewegung Ihre R\xfcckenmuskulatur an.","Halten Sie Ihren R\xfccken parallel zum Boden. Drehen Sie Ihren Oberk\xf6rper am Ende der Bewegung leicht.","Halten Sie Ihre Brust hoch und Ihre Knie auf einer Linie mit Ihren Zehen. Lassen Sie Ihre Knie nicht nach innen kollabieren.","Halten Sie Ihren Rumpf angespannt und Ihren R\xfccken gerade. Vermeiden Sie eine \xdcberdehnung Ihrer Lendenwirbels\xe4ule.","Halten Sie Ihren Rumpf angespannt, um Ihren R\xfccken zu sch\xfctzen. Vermeiden Sie eine \xdcberdehnung Ihrer Lendenwirbels\xe4ule.","Halten Sie Ihren Kern in Bewegung. Passen Sie die Geschwindigkeit an Ihr Fitnessniveau an.","Halten Sie Ihren Kern in Bewegung. Vermeiden Sie eine \xdcberstreckung Ihrer Wirbels\xe4ule.","Halten Sie Ihre Ellbogen auf Schulterh\xf6he oder leicht dar\xfcber. Unverzichtbar f\xfcr die Gesundheit der Rotatorenmanschette.","Halten Sie Ihre Ellenbogen nah am K\xf6rper. Vermeiden Sie es, Ihre Ellbogen zu strecken.","Halten Sie Ihre Ellbogen fest an Ihren Seiten. Der neutrale Griff betont den Brachioradialis \xfcber dem Bizeps.","Halten Sie Ihre Ellbogen fest und zeigen Sie zur Decke. Kontrollieren Sie den Abstieg.","Halten Sie Ihre Ellenbogen w\xe4hrend der gesamten Bewegung fixiert. Konzentrieren Sie sich auf die volle Kontraktion oben.","Halten Sie Ihre Ellenbogen fixiert. Verwenden Sie keinen Schwung.","Halten Sie Ihre Ellenbogen fixiert. Konzentrieren Sie sich auf die vollst\xe4ndige Kontraktion.","Halten Sie Ihre Ellenbogen fixiert. Konzentrieren Sie sich auf die Vollausdehnung.","Halten Sie Ihre Ellbogen zur Decke und nahe an Ihrem Kopf. Der lange Kopf wird in der gestreckten Position maximal aktiviert.","Halten Sie Ihr vorderes Knie in einer Linie mit Ihren Zehen. Es korrigiert Muskelungleichgewichte zwischen den Beinen.","Halten Sie Ihre Ferse auf dem Boden. Beugen Sie Ihr Knie, um den Soleus zu strecken.","Halten Sie Ihre H\xfcften ausgerichtet. Vermeiden Sie es, sie nach unten durchh\xe4ngen zu lassen.","Halten Sie Ihre Spr\xfcnge niedrig. Benutzen Sie Ihre Handgelenke, nicht Ihre Arme, um das Seil zu drehen.","Halten Sie Ihr Knie zum Boden zeigend. Vermeiden Sie eine \xdcberdehnung Ihres R\xfcckens.","Halten Sie Ihre Knie auf einer Linie mit Ihren Zehen. Die Fu\xdfposition ver\xe4ndert den am st\xe4rksten beanspruchten Muskel.","Halten Sie Ihre Knie auf einer Linie mit Ihren Zehen. Die Sumo-Haltung verk\xfcrzt den Langhantelweg.","Halten Sie Ihr Becken gerade. Beginnen Sie mit einem leichten Gewicht.","Halten Sie Ihre Schulterbl\xe4tter zur\xfcckgezogen. Kontrollieren Sie den Abstieg mindestens 2 Sekunden lang.","Halten Sie Ihre Schultern entspannt. Passen Sie das Tempo an die gew\xfcnschte Intensit\xe4t an.","Halten Sie Ihren Oberk\xf6rper stabil und vermeiden Sie Schwingungen. Kontrollieren Sie den Abstieg.","Halten Sie Ihren Oberk\xf6rper aufrecht und den Rumpf angespannt. Vermeiden Sie, dass Ihr vorderes Knie \xfcber Ihre Zehen hinausragt.","Halten Sie Ihren Oberk\xf6rper vertikal, um den Trizeps zu isolieren. Je tiefer Sie gehen, desto gr\xf6\xdfer ist der Eingriff in die Brust.","Halten Sie Ihre Handgelenke in einer neutralen Position. Der umgekehrte Curl st\xe4rkt die Unterarmmuskulatur.","Kniend mit dem Rad nach vorne. Rollen Sie das Rad nach vorne und senken Sie Ihren K\xf6rper in Richtung Boden. Ziehen Sie das Rad zur\xfcck in Richtung Ihrer Knie.","Wenn Sie sich nach vorne beugen, erh\xf6ht sich der Eingriff in die Brust. Die vertikale Position isoliert den Trizeps.","Legen Sie sich mit gebeugten Knien hin. Bringen Sie Ihre Schultern zu Ihren Knien und spannen Sie Ihre Bauchmuskeln an. Langsam absenken.","Legen Sie sich mit erhobenen Beinen hin. Bringen Sie Ihre Knie zur Brust und heben Sie Ihr Becken an. Kehren Sie langsam zur\xfcck.","Legen Sie sich mit Polstern an den Kn\xf6cheln mit dem Gesicht nach unten auf die Maschine. Beugen Sie Ihre Knie und bringen Sie Ihre Fersen in Richtung Ihrer Ges\xe4\xdfmuskulatur. Langsam absenken.","Legen Sie sich mit einer Hantel in jeder Hand auf die Bank. Senken Sie die Hanteln in Richtung Brust und halten Sie Ihre Handgelenke stabil. Dr\xfccken Sie fest nach oben und kehren Sie in die Ausgangsposition zur\xfcck.","Legen Sie sich mit einer Hantel in jeder Hand auf die Bank. Senken Sie Ihre Arme seitlich und behalten Sie dabei eine leichte Ellbogenbeugung bei. F\xfchren Sie die Hanteln in einem Bogen nach oben, als ob Sie einen Baum umarmen w\xfcrden. Kehren Sie langsam zur\xfcck.","Legen Sie sich mit schulterbreitem Griff auf die Bank. Senken Sie die Hantel ab und halten Sie Ihre Ellbogen nah am Oberk\xf6rper. Dr\xfccken Sie nach oben und spannen Sie dabei Ihren Trizeps an.","Legen Sie sich mit ausgestreckten Armen auf die Bank, das Ger\xe4t \xfcber der Brust. Beugen Sie Ihre Ellenbogen und senken Sie das Gewicht in Richtung Stirn. Verl\xe4ngern Sie die Position und kehren Sie in die Position zur\xfcck.","Legen Sie sich auf die Bank, das Ger\xe4t \xfcber der Brust und die Arme fast ausgestreckt. Senken Sie das Gewicht hinter Ihren Kopf und halten Sie die Ellbogen leicht gebeugt. Kehren Sie in einem Bogen in die Ausgangsposition zur\xfcck.","Legen Sie sich mit den F\xfc\xdfen auf den Boden auf die Bank. Greifen Sie die Hantel breiter als schulterbreit. Senken Sie die Hantel auf Ihre Brust und halten Sie Ihre Ellbogen in einem Winkel von etwa 45 Grad. Dr\xfccken Sie fest nach oben.","Legen Sie sich mit gesicherten F\xfc\xdfen auf die Absenkbank. Fassen Sie das Ger\xe4t breiter als schulterbreit an. Bis zur unteren Brust senken. Dr\xfccken Sie fest und kehren Sie in die Ausgangsposition zur\xfcck.","Legen Sie sich mit h\xe4ngenden Gewichten auf die geneigte Unterlage. Ziehen Sie sich in Richtung Ihres Oberk\xf6rpers und ziehen Sie Ihre Latissimusmuskeln zusammen. Langsam absenken.","Gehen Sie in die Hocke und springen Sie dann explosionsartig nach oben. Landen Sie sanft, indem Sie die Knie beugen.","Gehen Sie in die Hocke, legen Sie Ihre H\xe4nde auf den Boden und springen Sie mit den F\xfc\xdfen in eine Liegest\xfctzposition. Machen Sie einen Liegest\xfctz, springen Sie mit den F\xfc\xdfen zu den H\xe4nden und springen Sie dann mit den Armen \xfcber dem Kopf nach oben.","Behalten Sie ein gleichm\xe4\xdfiges Tempo bei. Korrekte K\xf6rperhaltung w\xe4hrend der gesamten \xdcbung.","Behalten Sie eine aufrechte Haltung mit einer leichten Vorw\xe4rtsneigung bei. Wechseln Sie die Schritte in gleichm\xe4\xdfigem Tempo ab. Landen Sie mit dem Fu\xdf in der Mitte des Schrittes.","Behalten Sie w\xe4hrend der gesamten Bewegung die gleiche Ellenbogenbeugung bei. Konzentrieren Sie sich auf die Brustkontraktion am Ende der Bewegung.","Behalten Sie die gleiche Ellenbogenbeuge bei. Kontrollieren Sie den Abstieg 2 Sekunden lang.","Behalten Sie die leichte Ellenbogenbeugung bei. Der Pullover ist eine der wenigen \xdcbungen, die den Latissimus streckt.","M\xe4\xdfige Spannung, nie Schmerzen. Atme aus, w\xe4hrend du dich dehnst.","Auf H\xe4nden und Knien oder stehend am Kabel. Strecken Sie Ihr Bein nach hinten und spannen Sie dabei den Ges\xe4\xdfmuskel an. Kehren Sie langsam zur\xfcck.","Auf der Seite auf dem Unterarm ruhend, der K\xf6rper in einer geraden Linie. Heben Sie Ihre H\xfcften an und behalten Sie die Position bei.","Treten Sie in gleichm\xe4\xdfigem Tempo in die Pedale. Halten Sie Ihren R\xfccken in einer neutralen Position.","F\xfchren Sie die Hebephase mit supiniertem Griff durch. Drehen Sie Ihre Handgelenke nach oben in die Pronation. Mit proniertem Griff absenken. Kehren Sie nach unten in die Supination zur\xfcck.","F\xfchren Sie die Bewegung aus und kontrollieren Sie sowohl die exzentrische als auch die konzentrische Phase. Halten Sie Ihren Kern in Bewegung.","F\xfchren Sie die Bewegung aus und kontrollieren Sie sowohl die exzentrische als auch die konzentrische Phase. Halten Sie Ihre Schulterbl\xe4tter zur\xfcckgezogen.","F\xfchren Sie die Bewegung explosionsartig nach oben oder nach vorne aus. Landen Sie sanft, indem Sie die Knie beugen. Kontrollieren Sie die Landung.","F\xfchren Sie die Bewegung in beiden Phasen langsam aus. Die Pause unten erh\xf6ht die Wadendehnung.","F\xfchren Sie die Rotation fl\xfcssig und kontinuierlich durch. Die Arnold-Presse ist eine der wenigen \xdcbungen, die alle Muskelfasern beansprucht.","Positionieren Sie Ihre H\xe4nde rautenf\xf6rmig unter Ihrer Brust. Senken Sie Ihren K\xf6rper und halten Sie die Ellbogen nah am Oberk\xf6rper. Dr\xfccken Sie nach oben und spannen Sie dabei Ihren Trizeps an.","Positionieren Sie sich in der Hack-Squat-Maschine mit den Schultern unter den Polstern. Beim Abstieg die Knie im 90-Grad-Winkel beugen und dann nach oben dr\xfccken.","Schieben Sie haupts\xe4chlich mit dem Fu\xdf auf der erh\xf6hten Fl\xe4che. Halten Sie Ihren Oberk\xf6rper aufrecht.","Dr\xfccken Sie mit den Beinen, lehnen Sie dann den Oberk\xf6rper nach hinten und ziehen Sie schlie\xdflich das Ruder in Richtung Bauch. Bei der R\xfccksendung die Reihenfolge umkehren.","Erfordert eine ausgezeichnete Beweglichkeit von Schulter, H\xfcfte und Kn\xf6chel. Beginnen Sie ohne Gewicht.","Ziehen Sie Ihre Schulterbl\xe4tter ein und halten Sie sie fest. Lassen Sie das Gewicht nicht von Ihrer Brust abprallen.","Ziehen Sie Ihre Schulterbl\xe4tter zur\xfcck, um die Schulter zu stabilisieren.","Drehen Sie von der Taille aus, nicht nur von den Armen.","Drehen Sie Ihren Oberk\xf6rper und bringen Sie einen Ellbogen zum gegen\xfcberliegenden Knie. Von der anderen Seite wiederholen.","Drehen Sie Ihr Handgelenk oben nach au\xdfen, um die Spitze zu maximieren. Halten Sie Ihren Oberk\xf6rper stabil.","Sitzen mit Hanteln auf Schulterh\xf6he und den Handfl\xe4chen zu Ihnen gerichtet. Dr\xfccken Sie nach oben und drehen Sie Ihre Handgelenke nach au\xdfen, bis Ihre Handfl\xe4chen nach vorne zeigen. Senken Sie die R\xfcckkehr in die Ausgangsposition.","Sitzen, der Ellenbogen ruht auf der Innenseite des Oberschenkels. Beugen Sie Ihren Ellbogen und bringen Sie die Hantel in Richtung Ihrer Schulter. Langsam absenken.","Sitzen Sie mit erhobenen F\xfc\xdfen und einem 45-Grad-Rumpf. Drehen Sie Ihren Oberk\xf6rper von einer Seite zur anderen und legen Sie Ihre H\xe4nde neben Ihren H\xfcften auf den Boden.","Reihenfolge: Beine, dann Rumpf, dann Arme beim Ziehen.","Setzen Sie sich an die Latzugmaschine und greifen Sie die Stange mit weitem Pronationsgriff. Ziehen Sie die Stange in Richtung Brust und neigen Sie Ihren Oberk\xf6rper leicht nach hinten. Kontrollieren Sie die R\xfcckkehr in die Ausgangsposition.","Setzen Sie sich mit engem oder neutralem Griff an die Latzugmaschine. Ziehen Sie die Stange in Richtung Brust und halten Sie die Ellbogen nah am K\xf6rper. Kontrollieren Sie die R\xfcckkehr.","Setzen Sie sich mit den F\xfc\xdfen auf die St\xfctzen an das niedrige Kabel. Ziehen Sie den Griff in Richtung Ihrer Taille und halten Sie Ihren R\xfccken gerade. Spannen Sie Ihre R\xfcckenmuskeln an und kehren Sie langsam zur\xfcck.","Setzen Sie sich mit Polstern an den Kn\xf6cheln an die Maschine. Strecken Sie Ihre Beine nach oben und kontrahieren Sie Ihren Quadrizeps. Langsam absenken.","Setzen Sie sich mit Polstern an den Kn\xf6cheln an die Maschine. Beugen Sie Ihre Knie und bringen Sie Ihre Fersen in Richtung Ihrer Ges\xe4\xdfmuskulatur. Langsam absenken.","Setzen Sie sich auf die Predigerbank und legen Sie Ihre Arme auf die Unterlage. Beugen Sie Ihre Ellbogen und bringen Sie das Ger\xe4t zu Ihren Schultern. Senken Sie sich langsam fast bis zur vollst\xe4ndigen Streckung ab.","Setzen Sie sich in die Maschine und st\xfctzen Sie Ihren R\xfccken auf dem Polster ab. Positionieren Sie Ihre Ellenbogen auf den Polstern. Bringen Sie Ihre Arme zur Mitte und ziehen Sie Ihre Brust zusammen. Kehren Sie langsam in die Ausgangsposition zur\xfcck.","Setzen Sie sich in die Maschine und stellen Sie Ihre F\xfc\xdfe h\xfcftbreit auf die Plattform. Senken Sie die Position, indem Sie die Knie um 90 Grad beugen. Dr\xfccken Sie, indem Sie Ihre Beine ausstrecken.","Setzen Sie sich mit den F\xfc\xdfen auf den Boden auf die Schr\xe4gbank. Fassen Sie das Ger\xe4t breiter als schulterbreit an. Bis zur oberen Brusth\xf6he absenken. Dr\xfccken Sie fest und kehren Sie in die Ausgangsposition zur\xfcck.","Setzen Sie sich mit den Unterarmen auf die Oberschenkel. Fassen Sie das Ger\xe4t mit supiniertem Griff. Beugen Sie Ihre Handgelenke langsam nach oben und unten.","Spreizen Sie das Seil unten auseinander, um die Kontraktion zu maximieren. Halten Sie Ihre Ellenbogen fixiert.","Mit einem Griff pro Hand in der Mitte des Kabels stehen. Halten Sie Ihre Arme leicht gebeugt. Bringen Sie Ihre H\xe4nde zur Mitte und kreuzen Sie sie. Kehren Sie langsam in die Ausgangsposition zur\xfcck.","Mit dem Seil am Hochseil stehen. Halten Sie Ihre Ellbogen an den Seiten Ihres Oberk\xf6rpers fixiert. Schieben Sie das Seil nach unten und trennen Sie die Enden. Kehren Sie langsam zur\xfcck.","Am Hochseil stehend. Halten Sie Ihre Ellbogen an den Seiten Ihres Oberk\xf6rpers fixiert. Dr\xfccken Sie die Arme vollst\xe4ndig nach unten. Kehren Sie langsam zur\xfcck.","Stehen Sie mit fast ausgestreckten Armen vor dem hohen Kabel. F\xfchren Sie die Stange in einem Bogen zu Ihren Oberschenkeln und halten Sie dabei Ihre Arme gerade. Kehren Sie langsam in die Ausgangsposition zur\xfcck.","Vor einer Bank stehen. Stellen Sie einen Fu\xdf auf die erh\xf6hte Fl\xe4che und dr\xfccken Sie ihn nach oben. Senken Sie sich langsam ab und kontrollieren Sie die Bewegung.","Auf einem Bein stehend. Senken Sie Ihren Oberk\xf6rper nach vorne und halten Sie Ihren R\xfccken gerade, w\xe4hrend Ihr freies Bein nach hinten gestreckt ist. Kehren Sie in die aufrechte Position zur\xfcck und spannen Sie dabei Ihre Ges\xe4\xdfmuskeln an.","Stehend oder sitzend mit dem Ger\xe4t auf Schulterh\xf6he. Dr\xfccken Sie die Arme nach oben und strecken Sie sie vollst\xe4ndig aus. Senken Sie sich langsam ab und kehren Sie mit dem Gewicht auf Schulterh\xf6he in die Ausgangsposition zur\xfcck.","Stehend oder sitzend mit dem Ger\xe4t auf Schulterh\xf6he. Dr\xfccken Sie die Arme nach oben und strecken Sie sie vollst\xe4ndig aus. Langsam absenken.","Stehend oder sitzend mit dem Ger\xe4t \xfcber dem Kopf und ausgestreckten Armen. Beugen Sie Ihre Ellenbogen und senken Sie das Gewicht hinter Ihrem Kopf. Verl\xe4ngern Sie die R\xfcckkehr nach oben.","Stehen Sie mit einer Hantel in jeder Hand an Ihrer Seite. Heben Sie Ihre Arme seitlich auf Schulterh\xf6he und halten Sie die Ellbogen leicht gebeugt. Langsam absenken.","Stehen Sie mit einem Gewicht in jeder Hand an Ihrer Seite. Heben Sie Ihre Schultern in Richtung Ihrer Ohren und dr\xfccken Sie Ihre Fallen zusammen. Halten Sie die Kontraktion eine Sekunde lang und senken Sie sie dann langsam ab.","Stehen Sie mit Hanteln an der Seite und neutralem Griff (Daumen nach oben). Beuge deine Ellenbogen und bringe die Hanteln zu deinen Schultern. Langsam absenken.","Stehend mit h\xfcftbreiten F\xfc\xdfen. Bewegen Sie sich an den H\xfcften und schwingen Sie das Gewicht zwischen Ihren Beinen. Bewegen Sie dann Ihre H\xfcften explosionsartig nach vorne und schwingen Sie das Gewicht bis auf Schulterh\xf6he.","Stehend mit h\xfcftbreiten F\xfc\xdfen. Senken Sie die Hantel entlang Ihrer Beine ab und halten Sie dabei die Knie leicht gebeugt und den R\xfccken gerade. Gehen Sie nach unten, bis Sie eine Spannung in den hinteren Oberschenkelmuskeln sp\xfcren, und kehren Sie dann nach oben zur\xfcck.","Stehend mit h\xfcftbreiten F\xfc\xdfen. Senken Sie sich mit geradem R\xfccken und nach oben gerichteter Brust. Dr\xfccken Sie Ihre F\xfc\xdfe in den Boden und strecken Sie H\xfcfte und Knie, w\xe4hrend Sie gleichzeitig die Stange nah an Ihren Beinen halten.","Stehen Sie mit schulterbreit auseinander stehenden F\xfc\xdfen und halten Sie eine Hantel vor Ihre Brust. Steigen Sie ab und halten Sie die Brust hoch. Kehren Sie nach oben zur\xfcck, indem Sie sich durch die Fersen dr\xfccken.","Stehend mit schulterbreit auseinander stehenden F\xfc\xdfen. Senken Sie Ihren K\xf6rper, indem Sie Ihre Knie und H\xfcften beugen, als w\xfcrden Sie auf einem Stuhl sitzen. Steigen Sie ab, bis Ihre Oberschenkel parallel zum Boden sind. Dr\xfccken Sie durch Ihre Fersen.","Stehend mit zusammengef\xfcgten F\xfc\xdfen. Machen Sie einen weiten Seitw\xe4rtsschritt und halten Sie dabei den gegen\xfcberliegenden Fu\xdf fest. Senken Sie sich zu dieser Seite ab, indem Sie Ihr Knie beugen.","Stehend mit der Hantel auf den Schultern. Lehnen Sie Ihren Oberk\xf6rper nach vorne, halten Sie den R\xfccken gerade und die Knie leicht gebeugt. Sp\xfcren Sie die Dehnung Ihrer Oberschenkelmuskulatur. Kehren Sie in die aufrechte Position zur\xfcck.","Stehen Sie mit dem Ger\xe4t vor Ihren Oberschenkeln und greifen Sie es pronativ. Ziehen Sie zum Kinn und halten Sie die Ellbogen h\xf6her als die Handgelenke. Langsam absenken.","Stehen Sie mit dem Ger\xe4t vor Ihren Oberschenkeln. Heben Sie Ihre Arme vor sich auf Schulterh\xf6he und halten Sie die Ellbogen leicht gebeugt. Langsam absenken.","Stehen mit dem Ger\xe4t mit proniertem Griff (Handfl\xe4chen nach unten). Beugen Sie Ihre Ellbogen und bringen Sie das Ger\xe4t zu Ihren Schultern. Langsam absenken.","Stehen mit dem Ger\xe4t im supinierten Griff. Beugen Sie Ihre Ellbogen, bringen Sie das Ger\xe4t zu Ihren Schultern und halten Sie Ihre Ellbogen an den Seiten Ihres Oberk\xf6rpers fixiert. Senken Sie sich langsam ab und kehren Sie in die Ausgangsposition zur\xfcck.","Stehend mit um 45 Grad geneigtem Oberk\xf6rper. Fassen Sie die Hantel mit einem pronierten Griff. Ziehen Sie in Richtung Ihres Bauches und halten Sie Ihren R\xfccken neutral. Langsam absenken.","Stehen Sie mit den Fersen \xfcber der Kante einer Plattform. Stellen Sie sich auf die Zehenspitzen und dr\xfccken Sie dabei Ihre Waden. Senken Sie sich langsam ab, sodass Ihre Fersen unter die Plattformebene fallen.","Beginnen Sie mit einem moderaten Tempo und steigern Sie es allm\xe4hlich.","Beginnen Sie mit dem Zur\xfcckziehen der Schulterbl\xe4tter. Kontrollieren Sie die exzentrische Phase.","Beginnen Sie mit dem Zur\xfcckziehen der Schulterbl\xe4tter. Lehnen Sie Ihren Oberk\xf6rper nicht zu weit nach hinten.","Beginnen Sie die Bewegung mit dem Zur\xfcckziehen der Schulterbl\xe4tter. Vermeiden Sie Schwung.","Beginnen Sie die Bewegung mit dem Zur\xfcckziehen der Schulterbl\xe4tter. Kontrollieren Sie die Verl\xe4ngerungsphase.","Machen Sie einen Schritt nach hinten und senken Sie Ihr hinteres Knie in Richtung Boden. Das vordere Knie bleibt auf einer Linie mit dem Kn\xf6chel.","Machen Sie einen Schritt nach vorne und senken Sie Ihr hinteres Knie in Richtung Boden. Das vordere Knie bleibt auf einer Linie mit dem Kn\xf6chel. Zur\xfcck nach oben dr\xfccken.","Machen Sie einen Schritt nach vorne und senken Sie Ihr hinteres Knie. Machen Sie weiterhin abwechselnde Schritte vorw\xe4rts und wechseln Sie die Beine ab.","Betreten Sie die Fallenleiste. F\xfc\xdfe h\xfcftbreit. Senken Sie sich ab und fassen Sie die Griffe mit geradem R\xfccken. Dr\xfccken Sie durch Ihre F\xfc\xdfe und strecken Sie gleichzeitig H\xfcfte und Knie.","Machen Sie lange Schritte, um Ihre Ges\xe4\xdfmuskulatur st\xe4rker zu beanspruchen.","Der Zottman-Curl trainiert sowohl die Beugung als auch die Streckung des Unterarms.","Die Stange sollte w\xe4hrend der gesamten Bewegung Ihre Beine ber\xfchren. Konzentrieren Sie sich beim Abstieg auf die Dehnung der Oberschenkelmuskulatur.","Je h\xf6her die Oberfl\xe4che, desto st\xe4rker arbeitet die obere Brust.","Die Schr\xe4gbank betont die obere Brust. Halten Sie Ihre Schulterbl\xe4tter w\xe4hrend der gesamten Bewegung zur\xfcckgezogen.","Die geneigte Version ist einfacher und greift in den unteren Brustbereich ein.","Je horizontaler Ihr K\xf6rper ist, desto schwieriger ist es. Halten Sie Ihren Kern immer in Bewegung.","Die Bewegung kommt von der H\xfcfte, nicht vom R\xfccken. Halten Sie Ihren R\xfccken w\xe4hrend der Schubphase gerade.","Die Predigerbank macht den Einsatz von Schwung \xfcberfl\xfcssig. Lassen Sie das Gewicht nicht nach unten fallen.","Der Ausfallschritt nach hinten ist sicherer f\xfcr die Knie als der Ausfallschritt nach vorne.","Die Drehung kommt von der Taille, nicht vom Kopf.","Der Beinbeuger im Sitzen erh\xf6ht die Bewegungsfreiheit. Vermeiden Sie es, Ihre Ges\xe4\xdfmuskulatur vom Sitz abzuheben.","Die Unterst\xfctzung beseitigt die Belastung der Lendenwirbels\xe4ule. Konzentrieren Sie sich auf den R\xfcckzug.","Die Fangstange reduziert die Belastung der Wirbels\xe4ule. Halten Sie Ihre Schultern in einer Linie mit den Griffen.","Das Gewicht vorne hilft bei der vertikalen Haltung. Halten Sie Ihre Knie gerade.","Verwenden Sie ein leichtes Gewicht. Halten Sie Ihre Unterarme ruhig auf Ihren Oberschenkeln.","Mit einer Hand und einem Knie auf der Bank. Ziehen Sie die Hantel zu Ihrer Seite und halten Sie Ihren Ellenbogen nah am K\xf6rper. Langsam absenken.","Gehen Sie mit der Langhantel \xfcber dem Kopf in die Hocke und halten Sie Ihre Arme gerade und stabil. Kehren Sie nach oben zur\xfcck und halten Sie die Hantel ausgerichtet.","Ziehen Sie das Ger\xe4t mit den Armen vor dem Kabel oder mit Hanteln in Richtung Ihres Gesichts und halten Sie die Ellbogen hoch. Trennen Sie Ihre H\xe4nde und bringen Sie Ihre F\xe4uste in die N\xe4he Ihrer Ohren. Kehren Sie langsam zur\xfcck.","Halten Sie Ihren K\xf6rper unter einer niedrigen Stange geneigt und greifen Sie mit einem pronierten Griff. Ziehen Sie Ihre Brust zur Stange und halten Sie Ihren K\xf6rper steif. Langsam absenken.","Stellen Sie Ihre F\xfc\xdfe auf eine erh\xf6hte Fl\xe4che und senken Sie Ihre Brust zum Boden. Dr\xfccken Sie sich nach oben und kehren Sie in die Ausgangsposition zur\xfcck.","Legen Sie Ihre H\xe4nde auf eine erh\xf6hte Fl\xe4che und senken Sie Ihre Brust in Richtung Ihrer H\xe4nde. Dr\xfccken Sie sich nach oben und kehren Sie in die Ausgangsposition zur\xfcck.","Legen Sie Ihre H\xe4nde auf die Kante einer Bank und machen Sie einen Schritt nach vorne, wobei Ihre Ges\xe4\xdfmuskulatur ausgestreckt ist. Senken Sie Ihren K\xf6rper und beugen Sie die Ellbogen um 90 Grad. Hochdr\xfccken.","Strecken Sie Ihren Arm mit geneigtem Oberk\xf6rper und im 90-Grad-Winkel gebeugtem Ellbogen nach hinten bis zur vollst\xe4ndigen Streckung aus. Kehren Sie langsam zur\xfcck.","Mit dem oberen R\xfccken auf einer Bank und dem Gewicht auf den H\xfcften. Dr\xfccken Sie Ihre H\xfcften nach oben und spannen Sie dabei Ihre Ges\xe4\xdfmuskeln an. Kehren Sie langsam zur\xfcck.","Gehen Sie in die Dehnposition und halten Sie diese 20\u201330 Sekunden lang.","Atmen Sie tief ein und bleiben Sie in einem angenehmen Bereich.","Halten Sie w\xe4hrend der gesamten Bewegung einen gleichm\xe4\xdfigen Rhythmus und die richtige Haltung ein.","Halten Sie Ihren Rumpf in Bewegung und kontrollieren Sie jede Phase der Bewegung.","Halten Sie Ihre Ellbogen fixiert und f\xfchren Sie jede Wiederholung kontrolliert aus.","Richten Sie Ihre Schultern aus, kontrollieren Sie die Bewegung und vermeiden Sie Schwung.","Halten Sie Ihre Knie gerade und kontrollieren Sie sowohl die Absenk- als auch die Hebephase.","Halten Sie Ihren R\xfccken neutral, st\xfctzen Sie Ihren Rumpf ab und kontrollieren Sie die Bewegung.","F\xfchren Sie die Bewegung kontrolliert, in der richtigen Haltung und mit vollem Bewegungsumfang aus."],t.w)
 B.ani={[u.vv]:0,[u.y4]:1,[u.iY]:2,[u.uG]:3,[u.o3]:4,[u.aQ]:5,"Lower slowly":6,"lower slowly":7,"Breathe deeply":8,"Use a full range of motion.":9,[u.cP]:10,[u.Eh]:11,[u.dJ]:12,[u.mn]:13,[u.nz]:14,[u.tc]:15,[u.sE]:16,[u.ew]:17,[u.sS]:18,[u.yX]:19,[u.gu]:20,[u.bT]:21,[u.wt]:22,[u.ti]:23,[u.j5]:24,[u.gK]:25,[u.aJ]:26,[u.aU]:27,[u.BM]:28,[u.ny]:29,[u.pt]:30,[u.nT]:31,[u.sy]:32,[u.ij]:33,[u.qh]:34,[u.uF]:35,[u.do]:36,[u.mW]:37,[u.cx]:38,[u.Cb]:39,[u.eM]:40,[u.wQ]:41,[u.if]:42,[u.mV]:43,[u.gn]:44,[u.o0]:45,[u.qO]:46,[u.rf]:47,[u.C2]:48,[u.jE]:49,[u.re]:50,[u.fN]:51,[u.om]:52,[u.ui]:53,[u.C7]:54,[u.hD]:55,[u.s5]:56,[u.E3]:57,[u.BQ]:58,[u.Ch]:59,[u.fh]:60,[u.As]:61,[u.jo]:62,[u.xy]:63,[u.kW]:64,[u.gz]:65,[u.vt]:66,[u.qp]:67,[u.cz]:68,[u.qU]:69,[u.Et]:70,[u.wR]:71,[u.tt]:72,[u.ci]:73,[u.ix]:74,[u.en]:75,[u.pp]:76,[u.xQ]:77,[u.d6]:78,[u.tR]:79,[u.kO]:80,[u.u6]:81,[u.DJ]:82,[u.kF]:83,[u.w_]:84,[u.f1]:85,[u.Bp]:86,[u.cq]:87,[u.Dt]:88,[u.fe]:89,[u.Dw]:90,[u.vo]:91,[u.wD]:92,[u.D3]:93,[u.hv]:94,[u.sl]:95,[u.h7]:96,[u.b9]:97,[u.Cq]:98,[u.sb]:99,[u.dn]:100,[u.FB]:101,[u.AN]:102,[u.ES]:103,[u.pr]:104,[u.CU]:105,[u.pL]:106,[u.E8]:107,[u.BE]:108,[u.lg]:109,[u.xc]:110,[u.xO]:111,[u.on]:112,[u.e7]:113,[u.ba]:114,[u.ao]:115,[u.aq]:116,[u.dd]:117,[u.g1]:118,[u.rP]:119,[u.k4]:120,[u.bO]:121,[u.qn]:122,[u.b4]:123,[u.ow]:124,[u.bt]:125,[u.g4]:126,[u.ja]:127,[u.mw]:128,[u.be]:129,[u.Fp]:130,[u.kH]:131,[u.iN]:132,[u.wz]:133,[u.in]:134,[u.q5]:135,[u.t7]:136,[u.vI]:137,[u.fw]:138,[u.wZ]:139,[u.pd]:140,[u.gf]:141,[u.g9]:142,[u.ze]:143,[u.lv]:144,[u.tq]:145,[u.oi]:146,[u.qe]:147,[u.uz]:148,[u.hn]:149,[u.uC]:150,[u.xe]:151,[u.bk]:152,[u.nc]:153,[u.ey]:154,[u.jV]:155,[u.cB]:156,[u.hc]:157,[u.hz]:158,[u.bg]:159,[u.jx]:160,[u.xh]:161,[u.tO]:162,[u.f9]:163,[u.di]:164,[u.gN]:165,[u.ux]:166,[u.p2]:167,[u.nF]:168,[u.zI]:169,[u.oq]:170,[u.mq]:171,[u.nJ]:172,[u.vm]:173,[u.rL]:174,[u.ad]:175,[u.gZ]:176,[u.qo]:177,[u.D6]:178,[u.iq]:179,[u.q_]:180,[u.qG]:181,[u.io]:182,[u.iQ]:183,[u.vT]:184,[u.CH]:185,[u.CR]:186,[u.p5]:187,[u.v3]:188,[u.cg]:189,[u.y1]:190,[u.r5]:191,[u.uZ]:192,[u.BT]:193,[u.j7]:194,[u.CN]:195,[u.sd]:196,[u.kS]:197,[u.Cj]:198,[u.fm]:199,[u.c8]:200,[u.EL]:201,[u.ju]:202,[u.hO]:203,[u.oy]:204,[u.yd]:205,[u.A1]:206,[u.rb]:207,[u.vQ]:208,[u.dc]:209,[u.Dc]:210,[u.wy]:211,[u.Dd]:212,[u.gt]:213}
 B.ajO=new A.i(B.ani,["\u0395\u03ba\u03c4\u03ad\u03bb\u03b5\u03c3\u03b5 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7 \u03b1\u03c1\u03b3\u03ac \u03ba\u03b1\u03b9 \u03b5\u03bb\u03b5\u03b3\u03c7\u03cc\u03bc\u03b5\u03bd\u03b1. \u0394\u03b9\u03b1\u03c4\u03ae\u03c1\u03b7\u03c3\u03b5 \u03c3\u03c9\u03c3\u03c4\u03ae \u03c3\u03c4\u03ac\u03c3\u03b7.","\u039e\u03b5\u03ba\u03af\u03bd\u03b1 \u03bc\u03b5 \u03bc\u03ad\u03c4\u03c1\u03b9\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03ba\u03b1\u03c4\u03b1\u03ba\u03c4\u03ae\u03c3\u03b5\u03b9\u03c2 \u03c4\u03b7\u03bd \u03c4\u03b5\u03c7\u03bd\u03b9\u03ba\u03ae.","\u0391\u03bd\u03ac\u03c0\u03bd\u03b5\u03b5 \u03b2\u03b1\u03b8\u03b9\u03ac. \u039c\u03b7\u03bd \u03c0\u03b9\u03ad\u03b6\u03b5\u03b9\u03c2 \u03c0\u03bf\u03c4\u03ad \u03c0\u03ad\u03c1\u03b1 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c6\u03c5\u03c3\u03b9\u03ba\u03cc \u03c3\u03bf\u03c5 \u03b5\u03cd\u03c1\u03bf\u03c2.","\u039a\u03c1\u03ac\u03c4\u03b1 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03c6\u03b9\u03b3\u03bc\u03ad\u03bd\u03bf \u03ba\u03b1\u03b8' \u03cc\u03bb\u03b7 \u03c4\u03b7\u03bd \u03ac\u03c3\u03ba\u03b7\u03c3\u03b7. \u0388\u03bb\u03b5\u03b3\u03be\u03b5 \u03c4\u03b7\u03bd \u03b5\u03ba\u03ba\u03b5\u03bd\u03c4\u03c1\u03b9\u03ba\u03ae \u03c6\u03ac\u03c3\u03b7.","\u0395\u03c0\u03b9\u03ba\u03b5\u03bd\u03c4\u03c1\u03ce\u03c3\u03bf\u03c5 \u03c3\u03c4\u03b7 \u03c3\u03cd\u03c3\u03c0\u03b1\u03c3\u03b7 \u03c4\u03c9\u03bd \u03b3\u03bb\u03bf\u03c5\u03c4\u03ce\u03bd \u03ba\u03b1\u03b9 \u03ba\u03c1\u03ac\u03c4\u03b1 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc.","\u039a\u03c1\u03ac\u03c4\u03b1 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc \u03ba\u03b1\u03b8' \u03cc\u03bb\u03b7 \u03c4\u03b7 \u03b4\u03b9\u03ac\u03c1\u03ba\u03b5\u03b9\u03b1 \u03c4\u03b7\u03c2 \u03ac\u03c3\u03ba\u03b7\u03c3\u03b7\u03c2.","\u039a\u03b1\u03c4\u03ad\u03b2\u03b1 \u03b1\u03c1\u03b3\u03ac","\u03ba\u03b1\u03c4\u03ad\u03b2\u03b1 \u03b1\u03c1\u03b3\u03ac","\u0391\u03bd\u03ac\u03c0\u03bd\u03b5\u03b5 \u03b2\u03b1\u03b8\u03b9\u03ac","\u03a7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03af\u03b7\u03c3\u03b5 \u03c0\u03bb\u03ae\u03c1\u03b5\u03c2 \u03b5\u03cd\u03c1\u03bf\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2.","\u039c\u03b9\u03b1 \u03c3\u03c4\u03b5\u03bd\u03ae \u03bb\u03b1\u03b2\u03ae \u03b1\u03c5\u03be\u03ac\u03bd\u03b5\u03b9 \u03c4\u03bf \u03b5\u03cd\u03c1\u03bf\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2. \u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03b1\u03bd\u03ac\u03ba\u03bb\u03b7\u03c3\u03b7.","\u039c\u03b9\u03b1 \u03c3\u03c4\u03b5\u03bd\u03ae \u03bb\u03b1\u03b2\u03ae \u03b1\u03c0\u03bf\u03bc\u03bf\u03bd\u03ce\u03bd\u03b5\u03b9 \u03c4\u03bf\u03c5\u03c2 \u03c4\u03c1\u03b9\u03ba\u03ad\u03c6\u03b1\u03bb\u03bf\u03c5\u03c2. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03b5\u03c5\u03b8\u03b5\u03af\u03b1 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae.","\u0397 \u03cd\u03c0\u03c4\u03b9\u03b1 \u03bb\u03b1\u03b2\u03ae \u03b1\u03c5\u03be\u03ac\u03bd\u03b5\u03b9 \u03c4\u03b7\u03bd \u03b5\u03bc\u03c0\u03bb\u03bf\u03ba\u03ae \u03c4\u03bf\u03c5 \u03b4\u03b9\u03ba\u03b5\u03c6\u03ac\u03bb\u03bf\u03c5. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7 \u03c7\u03c1\u03ae\u03c3\u03b7 \u03bf\u03c1\u03bc\u03ae\u03c2.","\u03a1\u03c5\u03b8\u03bc\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf \u03ba\u03ac\u03b8\u03b9\u03c3\u03bc\u03b1: \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03b4\u03b5\u03bd \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03c5\u03c0\u03b5\u03c1\u03b5\u03ba\u03c4\u03b5\u03af\u03bd\u03bf\u03bd\u03c4\u03b1\u03b9.","\u03a0\u03ac\u03bd\u03c4\u03b1 \u03bd\u03b1 \u03c0\u03c1\u03bf\u03c3\u03b3\u03b5\u03b9\u03ce\u03bd\u03b5\u03c3\u03c4\u03b5 \u03b1\u03c0\u03b1\u03bb\u03ac. \u039c\u03b7\u03bd \u03ba\u03bb\u03b5\u03b9\u03b4\u03ce\u03bd\u03b5\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2.","\u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03bf\u03c1\u03bc\u03ae. \u0395\u03c0\u03b9\u03ba\u03b5\u03bd\u03c4\u03c1\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03b1\u03bd\u03cd\u03c8\u03c9\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03bb\u03b5\u03ba\u03ac\u03bd\u03b7\u03c2.","\u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03bd\u03b1 \u03c3\u03b7\u03ba\u03ce\u03bd\u03b5\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03cd\u03c8\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u0388\u03bd\u03b1 \u03b5\u03c5\u03c1\u03cd\u03c4\u03b5\u03c1\u03bf \u03ba\u03c1\u03ac\u03c4\u03b7\u03bc\u03b1 \u03bc\u03b5\u03b9\u03ce\u03bd\u03b5\u03b9 \u03c4\u03bf\u03bd \u03ba\u03af\u03bd\u03b4\u03c5\u03bd\u03bf \u03c0\u03c1\u03cc\u03c3\u03ba\u03c1\u03bf\u03c5\u03c3\u03b7\u03c2.","\u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd \u03c3\u03b1\u03c2. \u0395\u03c3\u03c4\u03b9\u03ac\u03c3\u03c4\u03b5 \u03bc\u03cc\u03bd\u03bf \u03c3\u03c4\u03b7\u03bd \u03ba\u03ac\u03b8\u03b5\u03c4\u03b7 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7.","\u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03bd\u03b1 \u03c4\u03b1\u03bb\u03b1\u03bd\u03c4\u03b5\u03cd\u03b5\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03ba\u03b1\u03b9 \u03c4\u03b9\u03c2 \u03b4\u03cd\u03bf \u03c6\u03ac\u03c3\u03b5\u03b9\u03c2.","\u039c\u03c0\u03ac\u03c1\u03b1 \u03c3\u03c4\u03bf \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03b9\u03bd\u03cc \u03bc\u03ad\u03c1\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd \u03bc\u03b5 \u03c8\u03b7\u03bb\u03bf\u03cd\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2. \u039a\u03b1\u03c4\u03b5\u03b2\u03b5\u03af\u03c4\u03b5 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03cc\u03c3\u03bf \u03c0\u03b9\u03bf \u03ba\u03b1\u03c4\u03b1\u03ba\u03cc\u03c1\u03c5\u03c6\u03bf \u03b3\u03af\u03bd\u03b5\u03c4\u03b1\u03b9. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9.","\u03a6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03bf \u03c0\u03cc\u03b4\u03b9 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03b8\u03ad\u03c3\u03b7 \u03c4\u03ad\u03bd\u03c4\u03c9\u03bc\u03b1 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03cc\u03c1\u03b8\u03b9\u03bf. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03b3\u03b9\u03b1 20-30 \u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03cc\u03bb\u03b5\u03c0\u03c4\u03b1.","\u03a6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03bf \u03c0\u03cc\u03b4\u03b9 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03b8\u03ad\u03c3\u03b7 \u03c4\u03ad\u03bd\u03c4\u03c9\u03bc\u03b1 \u03bc\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03af\u03c3\u03b9\u03b1. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03b3\u03b9\u03b1 20-30 \u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03cc\u03bb\u03b5\u03c0\u03c4\u03b1 \u03b1\u03bd\u03b1\u03c0\u03bd\u03ad\u03bf\u03bd\u03c4\u03b1\u03c2 \u03b2\u03b1\u03b8\u03b9\u03ac.","\u03a6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03bf \u03c0\u03cc\u03b4\u03b9 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03ad\u03be\u03c9 \u03c3\u03b5 \u03b1\u03c0\u03b1\u03b3\u03c9\u03b3\u03ae \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc.","\u03a6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03bf \u03c0\u03cc\u03b4\u03b9 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03ba\u03ad\u03bd\u03c4\u03c1\u03bf \u03c3\u03c4\u03b7\u03bd \u03c0\u03c1\u03bf\u03c3\u03b1\u03b3\u03c9\u03b3\u03ae \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc.","\u03a3\u03c5\u03c3\u03c0\u03ac\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ba\u03bf\u03b9\u03bb\u03b9\u03b1\u03ba\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03b1\u03b8' \u03cc\u03bb\u03b7 \u03c4\u03b7 \u03b4\u03b9\u03ac\u03c1\u03ba\u03b5\u03b9\u03b1 \u03c4\u03b7\u03c2 \u03ac\u03c3\u03ba\u03b7\u03c3\u03b7\u03c2. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ad\u03ba\u03ba\u03b5\u03bd\u03c4\u03c1\u03b7 \u03c6\u03ac\u03c3\u03b7.","\u039c\u03b7\u03bd \u03c5\u03c0\u03b5\u03c1\u03c4\u03b5\u03af\u03bd\u03b5\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03ba\u03b1\u03c4\u03ac \u03c4\u03b7 \u03c6\u03ac\u03c3\u03b7 \u03b1\u03bd\u03bf\u03af\u03b3\u03bc\u03b1\u03c4\u03bf\u03c2. \u0395\u03c3\u03c4\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c3\u03c4\u03b7 \u03c3\u03cd\u03c3\u03c0\u03b1\u03c3\u03b7 \u03c4\u03bf\u03c5 \u03c3\u03c4\u03ae\u03b8\u03bf\u03c5\u03c2.","\u039c\u03b7\u03bd \u03b1\u03c6\u03ae\u03bd\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03bd\u03b1 \u03ba\u03ac\u03c8\u03b5\u03b9. \u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03bc\u03b5\u03c1\u03b9\u03ba\u03ae \u03b4\u03b9\u03ac\u03b8\u03b5\u03c3\u03b7.","\u039c\u03b7\u03bd \u03b1\u03c6\u03ae\u03bd\u03b5\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03bd\u03b1 \u03c0\u03ad\u03c6\u03c4\u03bf\u03c5\u03bd \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03ba\u03ac\u03c4\u03c9. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03b5\u03c2 \u03c3\u03b1\u03c2.","\u039c\u03b7\u03bd \u03c3\u03b7\u03ba\u03ce\u03bd\u03b5\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03c3\u03cd\u03c3\u03c0\u03b1\u03c3\u03b7 \u03c3\u03c4\u03b7\u03bd \u03ba\u03bf\u03c1\u03c5\u03c6\u03ae \u03b3\u03b9\u03b1 \u03ad\u03bd\u03b1 \u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03cc\u03bb\u03b5\u03c0\u03c4\u03bf.","\u039c\u03b7\u03bd \u03ba\u03bb\u03b5\u03b9\u03b4\u03ce\u03bd\u03b5\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03ad\u03ba\u03c4\u03b1\u03c3\u03b7. \u03a4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c8\u03b7\u03bb\u03cc\u03c4\u03b5\u03c1\u03b1 \u03c3\u03c4\u03b7\u03bd \u03c0\u03bb\u03b1\u03c4\u03c6\u03cc\u03c1\u03bc\u03b1 \u03b5\u03bc\u03c0\u03bb\u03ad\u03ba\u03bf\u03c5\u03bd \u03c0\u03b5\u03c1\u03b9\u03c3\u03c3\u03cc\u03c4\u03b5\u03c1\u03bf \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bb\u03bf\u03c5\u03c4\u03bf\u03cd\u03c2.","\u039c\u03b7\u03bd \u03c4\u03c1\u03b1\u03b2\u03ac\u03c4\u03b5 \u03c4\u03bf \u03bb\u03b1\u03b9\u03bc\u03cc \u03c3\u03b1\u03c2. \u0395\u03c0\u03b9\u03ba\u03b5\u03bd\u03c4\u03c1\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03ba\u03bf\u03b9\u03bb\u03b9\u03b1\u03ba\u03ae \u03c3\u03cd\u03c3\u03c0\u03b1\u03c3\u03b7.","\u039c\u03b7\u03bd \u03c3\u03b7\u03ba\u03ce\u03bd\u03b5\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03cd\u03c8\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u03a0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ba\u03b1\u03c1\u03c0\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03b5\u03bb\u03b1\u03c6\u03c1\u03ce\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03ba\u03ac\u03c4\u03c9 (\u03c3\u03b1\u03bd \u03bd\u03b1 \u03c1\u03af\u03c7\u03bd\u03b5\u03c4\u03b5 \u03bd\u03b5\u03c1\u03cc) \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03b1\u03c0\u03bf\u03bc\u03bf\u03bd\u03ce\u03c3\u03b5\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03bb\u03ac\u03b3\u03b9\u03bf \u03b4\u03b5\u03bb\u03c4\u03bf\u03b5\u03b9\u03b4\u03ae.","\u039c\u03b7\u03bd \u03c3\u03b7\u03ba\u03ce\u03bd\u03b5\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf\u03c5\u03c2 \u03ba\u03b1\u03c1\u03c0\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2.","\u039c\u03b7\u03bd \u03c3\u03c4\u03c1\u03bf\u03b3\u03b3\u03c5\u03bb\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03ba\u03b1\u03bd\u03ad\u03bd\u03b1 \u03c3\u03b7\u03bc\u03b5\u03af\u03bf. \u0395\u03bc\u03c0\u03bb\u03ad\u03be\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03b9\u03bd \u03c4\u03c1\u03b1\u03b2\u03ae\u03be\u03b5\u03c4\u03b5.","\u039c\u03b7\u03bd \u03c3\u03c4\u03c1\u03bf\u03b3\u03b3\u03c5\u03bb\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ad\u03ba\u03ba\u03b5\u03bd\u03c4\u03c1\u03b7 \u03c6\u03ac\u03c3\u03b7.","\u039c\u03b7\u03bd \u03c3\u03c4\u03c1\u03bf\u03b3\u03b3\u03c5\u03bb\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7 \u03c6\u03ac\u03c3\u03b7 \u03c4\u03bf\u03c5 \u03c4\u03b5\u03bd\u03c4\u03ce\u03bc\u03b1\u03c4\u03bf\u03c2.","\u039c\u03b7\u03bd \u03c3\u03c4\u03c1\u03bf\u03b3\u03b3\u03c5\u03bb\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2. \u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03ad\u03bd\u03b1 \u03bc\u03b9\u03ba\u03c1\u03cc \u03b2\u03ac\u03c1\u03bf\u03c2.","\u039c\u03b7\u03bd \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c4\u03b5 \u03b1\u03b9\u03ce\u03c1\u03b7\u03c3\u03b7 \u03c3\u03ce\u03bc\u03b1\u03c4\u03bf\u03c2. \u0395\u03c0\u03b9\u03ba\u03b5\u03bd\u03c4\u03c1\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c0\u03bf\u03bc\u03cc\u03bd\u03c9\u03c3\u03b7 \u03c4\u03bf\u03c5 \u03bc\u03ad\u03c3\u03bf\u03c5 \u03b3\u03bb\u03bf\u03c5\u03c4\u03b9\u03b1\u03af\u03bf\u03c5.","\u039c\u03b7\u03bd \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c4\u03b5 \u03bf\u03c1\u03bc\u03ae. \u0395\u03c0\u03b9\u03ba\u03b5\u03bd\u03c4\u03c1\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c0\u03bf\u03bc\u03cc\u03bd\u03c9\u03c3\u03b7 \u03c4\u03c9\u03bd \u03c0\u03c1\u03bf\u03c3\u03b1\u03b3\u03c9\u03b3\u03ce\u03bd.","\u039c\u03b7\u03bd \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c4\u03b5 \u03bf\u03c1\u03bc\u03ae. \u0395\u03c0\u03b9\u03ba\u03b5\u03bd\u03c4\u03c1\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03c3\u03c4\u03b7 \u03c3\u03c5\u03c3\u03c4\u03bf\u03bb\u03ae.","\u039f\u03b9 \u03b1\u03bb\u03c4\u03ae\u03c1\u03b5\u03c2 \u03b5\u03c0\u03b9\u03c4\u03c1\u03ad\u03c0\u03bf\u03c5\u03bd \u03bc\u03b5\u03b3\u03b1\u03bb\u03cd\u03c4\u03b5\u03c1\u03bf \u03b5\u03cd\u03c1\u03bf\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03b1\u03bd\u03b1\u03c3\u03c5\u03c1\u03bc\u03ad\u03bd\u03b5\u03c2 \u03ba\u03b1\u03b8' \u03cc\u03bb\u03b7 \u03c4\u03b7 \u03b4\u03b9\u03ac\u03c1\u03ba\u03b5\u03b9\u03b1 \u03c4\u03b7\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2.","\u03a0\u03cc\u03b4\u03b9\u03b1 \u03c6\u03b1\u03c1\u03b4\u03cd\u03c4\u03b5\u03c1\u03b1 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd \u03bc\u03b5 \u03c4\u03b1 \u03b4\u03ac\u03c7\u03c4\u03c5\u03bb\u03b1 \u03c3\u03c4\u03c1\u03b1\u03bc\u03bc\u03ad\u03bd\u03b1 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03ad\u03be\u03c9. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c0\u03b9\u03ac\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03bc\u03b5 \u03bc\u03b9\u03b1 \u03b5\u03c3\u03c9\u03c4\u03b5\u03c1\u03b9\u03ba\u03ae \u03bb\u03b1\u03b2\u03ae. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03c4\u03b5\u03bd\u03c4\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c4\u03b1\u03c5\u03c4\u03cc\u03c7\u03c1\u03bf\u03bd\u03b1 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03af\u03c3\u03b9\u03b1.","\u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u03a4\u03b5\u03bd\u03c4\u03ce\u03c3\u03c4\u03b5 \u03c0\u03bb\u03ae\u03c1\u03c9\u03c2 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03bf\u03bc\u03cc\u03ba\u03b5\u03bd\u03c4\u03c1\u03b7 \u03c6\u03ac\u03c3\u03b7. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7.","\u03a0\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03bc\u03b5 \u03bc\u03b9\u03b1 \u03c0\u03c1\u03b7\u03bd\u03b9\u03c3\u03bc\u03ad\u03bd\u03b7 \u03bb\u03b1\u03b2\u03ae \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u039e\u03b5\u03ba\u03b9\u03bd\u03ce\u03bd\u03c4\u03b1\u03c2 \u03bc\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c4\u03b5\u03bd\u03c4\u03c9\u03bc\u03ad\u03bd\u03b1, \u03c4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03bc\u03ad\u03c7\u03c1\u03b9 \u03c4\u03bf \u03c0\u03b7\u03b3\u03bf\u03cd\u03bd\u03b9 \u03c3\u03b1\u03c2 \u03bd\u03b1 \u03ba\u03b1\u03b8\u03b1\u03c1\u03af\u03c3\u03b5\u03b9 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac \u03c0\u03af\u03c3\u03c9 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u03a0\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03bc\u03b5 \u03bc\u03b9\u03b1 \u03cd\u03c0\u03c4\u03b9\u03b1 \u03bb\u03b1\u03b2\u03ae (\u03bf\u03b9 \u03c0\u03b1\u03bb\u03ac\u03bc\u03b5\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03bc\u03ad\u03c1\u03bf\u03c2 \u03c3\u03b1\u03c2) \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u039e\u03b5\u03ba\u03b9\u03bd\u03ce\u03bd\u03c4\u03b1\u03c2 \u03bc\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c4\u03b5\u03bd\u03c4\u03c9\u03bc\u03ad\u03bd\u03b1, \u03c4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03bc\u03ad\u03c7\u03c1\u03b9 \u03c4\u03bf \u03c0\u03b7\u03b3\u03bf\u03cd\u03bd\u03b9 \u03c3\u03b1\u03c2 \u03bd\u03b1 \u03ba\u03b1\u03b8\u03b1\u03c1\u03af\u03c3\u03b5\u03b9 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u03a0\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03c0\u03b1\u03c1\u03ac\u03bb\u03bb\u03b7\u03bb\u03b5\u03c2 \u03c1\u03ac\u03b2\u03b4\u03bf\u03c5\u03c2 \u03bc\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b2\u03c1\u03b1\u03c7\u03af\u03bf\u03bd\u03b5\u03c2 \u03c3\u03b5 \u03ad\u03ba\u03c4\u03b1\u03c3\u03b7. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03b3\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03b5\u03bb\u03b1\u03c6\u03c1\u03ce\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2 \u03ba\u03b1\u03b9 \u03bb\u03c5\u03b3\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u039a\u03c1\u03b5\u03bc\u03b1\u03c3\u03bc\u03ad\u03bd\u03bf\u03b9 \u03b1\u03c0\u03cc \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03ae \u03be\u03b1\u03c0\u03bb\u03c9\u03bc\u03ad\u03bd\u03bf\u03b9, \u03c3\u03b7\u03ba\u03ce\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039f\u03b9 \u03c8\u03b7\u03bb\u03bf\u03af \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03b5\u03bc\u03c0\u03bf\u03b4\u03af\u03b6\u03bf\u03c5\u03bd \u03c4\u03b7\u03bd \u03bf\u03bb\u03af\u03c3\u03b8\u03b7\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03bc\u03c0\u03ac\u03c1\u03b1\u03c2. \u0391\u03c0\u03b1\u03b9\u03c4\u03b5\u03af \u03c3\u03b7\u03bc\u03b1\u03bd\u03c4\u03b9\u03ba\u03ae \u03ba\u03b9\u03bd\u03b7\u03c4\u03b9\u03ba\u03cc\u03c4\u03b7\u03c4\u03b1 \u03c3\u03c4\u03bf\u03bd \u03ba\u03b1\u03c1\u03c0\u03cc \u03ba\u03b1\u03b9 \u03c3\u03c4\u03bf\u03bd \u03b1\u03c3\u03c4\u03c1\u03ac\u03b3\u03b1\u03bb\u03bf.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03c3\u03cd\u03c3\u03c0\u03b1\u03c3\u03b7 \u03c3\u03c4\u03b7\u03bd \u03ba\u03bf\u03c1\u03c5\u03c6\u03ae \u03b3\u03b9\u03b1 \u03ad\u03bd\u03b1 \u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03cc\u03bb\u03b5\u03c0\u03c4\u03bf. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03bf\u03c1\u03bc\u03ae.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03c3\u03cd\u03c3\u03c0\u03b1\u03c3\u03b7 \u03c3\u03c4\u03b7\u03bd \u03ba\u03bf\u03c1\u03c5\u03c6\u03ae \u03b3\u03b9\u03b1 \u03ad\u03bd\u03b1 \u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03cc\u03bb\u03b5\u03c0\u03c4\u03bf. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c0\u03b7\u03b3\u03bf\u03cd\u03bd\u03b9 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03c3\u03cd\u03c3\u03c0\u03b1\u03c3\u03b7 \u03c3\u03c4\u03b7\u03bd \u03ba\u03bf\u03c1\u03c5\u03c6\u03ae. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03b1\u03c0\u03bf\u03b6\u03b7\u03bc\u03af\u03c9\u03c3\u03b7 \u03bc\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03ac\u03ba\u03c1\u03b5\u03c2 \u03c4\u03bf\u03c5 \u03c3\u03c7\u03bf\u03b9\u03bd\u03b9\u03bf\u03cd \u03c3\u03c4\u03b1 \u03c0\u03bb\u03ac\u03b3\u03b9\u03b1 \u03c3\u03b1\u03c2. \u03a0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c7\u03bf\u03b9\u03bd\u03af \u03b1\u03c0\u03cc \u03c0\u03ac\u03bd\u03c9 \u03ba\u03b1\u03b9 \u03c0\u03b7\u03b4\u03ae\u03be\u03c4\u03b5 \u03ba\u03b1\u03b8\u03ce\u03c2 \u03c0\u03b5\u03c1\u03bd\u03ac \u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2.","\u03a3\u03b5 \u03c0\u03c1\u03b7\u03bd\u03ae \u03b8\u03ad\u03c3\u03b7 \u03c0\u03bf\u03c5 \u03c3\u03c4\u03b7\u03c1\u03af\u03b6\u03b5\u03c4\u03b1\u03b9 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03c0\u03ae\u03c7\u03b5\u03b9\u03c2 \u03ba\u03b1\u03b9 \u03c4\u03b1 \u03b4\u03ac\u03c7\u03c4\u03c5\u03bb\u03b1 \u03c4\u03c9\u03bd \u03c0\u03bf\u03b4\u03b9\u03ce\u03bd \u03c3\u03b1\u03c2. \u03a4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c7\u03b7\u03bc\u03b1\u03c4\u03af\u03b6\u03b5\u03b9 \u03bc\u03b9\u03b1 \u03b5\u03c5\u03b8\u03b5\u03af\u03b1 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae \u03b1\u03c0\u03cc \u03c4\u03bf \u03ba\u03b5\u03c6\u03ac\u03bb\u03b9 \u03bc\u03ad\u03c7\u03c1\u03b9 \u03c4\u03b9\u03c2 \u03c6\u03c4\u03ad\u03c1\u03bd\u03b5\u03c2. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c3\u03c5\u03c3\u03c4\u03ad\u03bb\u03bb\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2.","\u03a3\u03b5 \u03c0\u03c1\u03b7\u03bd\u03ae \u03b8\u03ad\u03c3\u03b7 \u03bc\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1 \u03bb\u03c5\u03b3\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03b5\u03c5\u03b8\u03b5\u03af\u03b1 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae.","\u03a3\u03b5 \u03b8\u03ad\u03c3\u03b7 \u03ce\u03b8\u03b7\u03c3\u03b7\u03c2. \u0395\u03bd\u03b1\u03bb\u03bb\u03b1\u03ba\u03c4\u03b9\u03ba\u03ac, \u03c6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2 \u03b3\u03c1\u03ae\u03b3\u03bf\u03c1\u03b1 \u03b5\u03bd\u03ce \u03ba\u03c1\u03b1\u03c4\u03ac\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ac.","\u03a3\u03b5 \u03b8\u03ad\u03c3\u03b7 \u03b4\u03b9\u03c7\u03b1\u03c3\u03bc\u03ad\u03bd\u03b7\u03c2 \u03c3\u03c4\u03ac\u03c3\u03b7\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03bb\u03c5\u03b3\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03b9\u03bd\u03cc \u03c3\u03b1\u03c2 \u03b3\u03cc\u03bd\u03b1\u03c4\u03bf. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03b1\u03bd\u03c4\u03af\u03b8\u03b5\u03c4\u03bf \u03c0\u03cc\u03b4\u03b9 \u03b5\u03bd\u03c4\u03b5\u03bb\u03ce\u03c2 \u03c3\u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u039a\u03bf\u03c1\u03bc\u03cc\u03c2 \u03cc\u03c1\u03b8\u03b9\u03bf\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03b2\u03c1\u03b1\u03c7\u03af\u03bf\u03bd\u03b1 \u03c0\u03b1\u03c1\u03ac\u03bb\u03bb\u03b7\u03bb\u03b1 \u03bc\u03b5 \u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03bf\u03c1\u03bc\u03ae.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03af\u03c3\u03b9\u03b1. \u0395\u03c0\u03b9\u03ba\u03b5\u03bd\u03c4\u03c1\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03c4\u03b5\u03bb\u03b9\u03ba\u03ae \u03c3\u03c5\u03c3\u03c4\u03bf\u03bb\u03ae.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03b5\u03c0\u03af\u03c0\u03b5\u03b4\u03b7 \u03ba\u03b1\u03b9 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03b4\u03b5\u03c3\u03bc\u03b5\u03c5\u03bc\u03ad\u03bd\u03bf. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03bd\u03b1 \u03c4\u03b1\u03bb\u03b1\u03bd\u03c4\u03b5\u03cd\u03b5\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03bf\u03c5\u03b4\u03ad\u03c4\u03b5\u03c1\u03b7 \u03b8\u03ad\u03c3\u03b7. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b7 \u03bc\u03ad\u03c3\u03b7 \u03ae \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2. \u03a3\u03c5\u03c3\u03c0\u03ac\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03bc\u03cd\u03b5\u03c2 \u03c4\u03b7\u03c2 \u03c0\u03bb\u03ac\u03c4\u03b7\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03c4\u03ad\u03bb\u03bf\u03c2 \u03c4\u03b7\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03c0\u03b1\u03c1\u03ac\u03bb\u03bb\u03b7\u03bb\u03b1 \u03bc\u03b5 \u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u03a0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b5\u03bb\u03b1\u03c6\u03c1\u03ac \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03c4\u03ad\u03bb\u03bf\u03c2 \u03c4\u03b7\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2 \u03c8\u03b7\u03bb\u03ac \u03ba\u03b1\u03b9 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1 \u03bc\u03b5 \u03c4\u03b1 \u03b4\u03ac\u03c7\u03c4\u03c5\u03bb\u03b1 \u03c4\u03c9\u03bd \u03c0\u03bf\u03b4\u03b9\u03ce\u03bd \u03c3\u03b1\u03c2. \u039c\u03b7\u03bd \u03b1\u03c6\u03ae\u03bd\u03b5\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03bd\u03b1 \u03c0\u03ad\u03c6\u03c4\u03bf\u03c5\u03bd \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03bc\u03ad\u03c3\u03b1.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03b4\u03b5\u03c3\u03bc\u03b5\u03c5\u03bc\u03ad\u03bd\u03bf \u03ba\u03b1\u03b9 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03af\u03c3\u03b9\u03b1. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c5\u03c0\u03b5\u03c1\u03ad\u03ba\u03c4\u03b1\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03bf\u03c3\u03c6\u03c5\u03ca\u03ba\u03ae\u03c2 \u03c3\u03b1\u03c2 \u03bc\u03bf\u03af\u03c1\u03b1\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03b4\u03b5\u03c3\u03bc\u03b5\u03c5\u03bc\u03ad\u03bd\u03bf \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03c0\u03c1\u03bf\u03c3\u03c4\u03b1\u03c4\u03b5\u03cd\u03c3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c5\u03c0\u03b5\u03c1\u03ad\u03ba\u03c4\u03b1\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03bf\u03c3\u03c6\u03c5\u03ca\u03ba\u03ae\u03c2 \u03c3\u03b1\u03c2 \u03bc\u03bf\u03af\u03c1\u03b1\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03b1\u03c0\u03b1\u03c3\u03c7\u03bf\u03bb\u03b7\u03bc\u03ad\u03bd\u03bf. \u03a0\u03c1\u03bf\u03c3\u03b1\u03c1\u03bc\u03cc\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c4\u03b1\u03c7\u03cd\u03c4\u03b7\u03c4\u03b1 \u03c3\u03c4\u03bf \u03b5\u03c0\u03af\u03c0\u03b5\u03b4\u03bf \u03c6\u03c5\u03c3\u03b9\u03ba\u03ae\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03b1\u03c4\u03ac\u03c3\u03c4\u03b1\u03c3\u03b7\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03b1\u03c0\u03b1\u03c3\u03c7\u03bf\u03bb\u03b7\u03bc\u03ad\u03bd\u03bf. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c5\u03c0\u03b5\u03c1\u03ad\u03ba\u03c4\u03b1\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03c3\u03c0\u03bf\u03bd\u03b4\u03c5\u03bb\u03b9\u03ba\u03ae\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03ae\u03bb\u03b7\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03cd\u03c8\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd \u03ae \u03bb\u03af\u03b3\u03bf \u03c0\u03b9\u03bf \u03c0\u03ac\u03bd\u03c9. \u0391\u03c0\u03b1\u03c1\u03b1\u03af\u03c4\u03b7\u03c4\u03bf \u03b3\u03b9\u03b1 \u03c4\u03b7\u03bd \u03c5\u03b3\u03b5\u03af\u03b1 \u03c4\u03bf\u03c5 \u03c0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03b9\u03ba\u03bf\u03cd \u03c0\u03b5\u03c4\u03ac\u03bb\u03bf\u03c5.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03bf\u03bd\u03c4\u03ac \u03c3\u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03bd\u03b1 \u03c6\u03bf\u03c5\u03bd\u03c4\u03ce\u03c3\u03b5\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2 \u03c3\u03c4\u03b1 \u03c0\u03bb\u03ac\u03b3\u03b9\u03b1 \u03c3\u03b1\u03c2. \u0397 \u03bf\u03c5\u03b4\u03ad\u03c4\u03b5\u03c1\u03b7 \u03bb\u03b1\u03b2\u03ae \u03c4\u03bf\u03bd\u03af\u03b6\u03b5\u03b9 \u03c4\u03bf brachioradialis \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf\u03bd \u03b4\u03b9\u03ba\u03ad\u03c6\u03b1\u03bb\u03bf.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2 \u03c3\u03c4\u03c1\u03b1\u03bc\u03bc\u03ad\u03bd\u03bf\u03c5\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c4\u03b1\u03b2\u03ac\u03bd\u03b9. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03b1\u03c4\u03ac\u03b2\u03b1\u03c3\u03b7.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2 \u03c3\u03b5 \u03cc\u03bb\u03b7 \u03c4\u03b7 \u03b4\u03b9\u03ac\u03c1\u03ba\u03b5\u03b9\u03b1 \u03c4\u03b7\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2. \u0395\u03c3\u03c4\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03c0\u03bb\u03ae\u03c1\u03b7 \u03c3\u03c5\u03c3\u03c4\u03bf\u03bb\u03ae \u03c3\u03c4\u03b7\u03bd \u03ba\u03bf\u03c1\u03c5\u03c6\u03ae.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2. \u039c\u03b7\u03bd \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c4\u03b5 \u03bf\u03c1\u03bc\u03ae.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2. \u0395\u03c0\u03b9\u03ba\u03b5\u03bd\u03c4\u03c1\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03c0\u03bb\u03ae\u03c1\u03b7 \u03c3\u03c5\u03c3\u03c4\u03bf\u03bb\u03ae.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2. \u0395\u03c3\u03c4\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03c0\u03bb\u03ae\u03c1\u03b7 \u03b5\u03c0\u03ad\u03ba\u03c4\u03b1\u03c3\u03b7.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03c1\u03b1\u03bc\u03bc\u03ad\u03bd\u03bf\u03c5\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c4\u03b1\u03b2\u03ac\u03bd\u03b9 \u03ba\u03b1\u03b9 \u03ba\u03bf\u03bd\u03c4\u03ac \u03c3\u03c4\u03bf \u03ba\u03b5\u03c6\u03ac\u03bb\u03b9 \u03c3\u03b1\u03c2. \u0397 \u03bc\u03b1\u03ba\u03c1\u03b9\u03ac \u03ba\u03b5\u03c6\u03b1\u03bb\u03ae \u03b5\u03bd\u03b5\u03c1\u03b3\u03bf\u03c0\u03bf\u03b9\u03b5\u03af\u03c4\u03b1\u03b9 \u03c3\u03c4\u03bf \u03bc\u03ad\u03b3\u03b9\u03c3\u03c4\u03bf \u03b2\u03b1\u03b8\u03bc\u03cc \u03c3\u03c4\u03b7 \u03b8\u03ad\u03c3\u03b7 \u03c4\u03b5\u03bd\u03c4\u03ce\u03bc\u03b1\u03c4\u03bf\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03b9\u03bd\u03cc \u03c3\u03b1\u03c2 \u03b3\u03cc\u03bd\u03b1\u03c4\u03bf \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf \u03bc\u03b5 \u03c4\u03b1 \u03b4\u03ac\u03c7\u03c4\u03c5\u03bb\u03b1 \u03c4\u03c9\u03bd \u03c0\u03bf\u03b4\u03b9\u03ce\u03bd \u03c3\u03b1\u03c2. \u0394\u03b9\u03bf\u03c1\u03b8\u03ce\u03bd\u03b5\u03b9 \u03c4\u03b9\u03c2 \u03bc\u03c5\u03ca\u03ba\u03ad\u03c2 \u03b1\u03bd\u03b9\u03c3\u03bf\u03c1\u03c1\u03bf\u03c0\u03af\u03b5\u03c2 \u03bc\u03b5\u03c4\u03b1\u03be\u03cd \u03c4\u03c9\u03bd \u03c0\u03bf\u03b4\u03b9\u03ce\u03bd.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03c6\u03c4\u03ad\u03c1\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf \u03b3\u03cc\u03bd\u03b1\u03c4\u03cc \u03c3\u03b1\u03c2 \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03c4\u03b5\u03bd\u03c4\u03ce\u03c3\u03b5\u03c4\u03b5 \u03c4\u03bf \u03c0\u03ad\u03bb\u03bc\u03b1.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf\u03c5\u03c2. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03bd\u03b1 \u03c4\u03b1 \u03b1\u03c6\u03ae\u03c3\u03b5\u03c4\u03b5 \u03bd\u03b1 \u03ba\u03c1\u03b5\u03bc\u03bf\u03cd\u03bd \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03ba\u03ac\u03c4\u03c9.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03ac\u03bb\u03bc\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ac. \u03a7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ba\u03b1\u03c1\u03c0\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2, \u03cc\u03c7\u03b9 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2, \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03c0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03b5\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c7\u03bf\u03b9\u03bd\u03af.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03b3\u03cc\u03bd\u03b1\u03c4\u03cc \u03c3\u03b1\u03c2 \u03c3\u03c4\u03c1\u03b1\u03bc\u03bc\u03ad\u03bd\u03bf \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c5\u03c0\u03b5\u03c1\u03ad\u03ba\u03c4\u03b1\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03c0\u03bb\u03ac\u03c4\u03b7\u03c2 \u03c3\u03b1\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1 \u03bc\u03b5 \u03c4\u03b1 \u03b4\u03ac\u03c7\u03c4\u03c5\u03bb\u03b1 \u03c4\u03c9\u03bd \u03c0\u03bf\u03b4\u03b9\u03ce\u03bd \u03c3\u03b1\u03c2. \u0397 \u03b8\u03ad\u03c3\u03b7 \u03c4\u03bf\u03c5 \u03c0\u03bf\u03b4\u03b9\u03bf\u03cd \u03b1\u03bb\u03bb\u03ac\u03b6\u03b5\u03b9 \u03c4\u03bf\u03bd \u03c0\u03b9\u03bf \u03b5\u03bc\u03c0\u03bb\u03b5\u03ba\u03cc\u03bc\u03b5\u03bd\u03bf \u03bc\u03c5.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1 \u03bc\u03b5 \u03c4\u03b1 \u03b4\u03ac\u03c7\u03c4\u03c5\u03bb\u03b1 \u03c4\u03c9\u03bd \u03c0\u03bf\u03b4\u03b9\u03ce\u03bd \u03c3\u03b1\u03c2. \u0397 \u03c3\u03c4\u03ac\u03c3\u03b7 \u03c4\u03bf\u03c5 \u03c3\u03bf\u03cd\u03bc\u03bf \u03bc\u03b5\u03b9\u03ce\u03bd\u03b5\u03b9 \u03c4\u03b7 \u03b4\u03b9\u03b1\u03b4\u03c1\u03bf\u03bc\u03ae \u03c4\u03b7\u03c2 \u03bc\u03c0\u03ac\u03c1\u03b1\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03bb\u03b5\u03ba\u03ac\u03bd\u03b7 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03b5\u03c0\u03af\u03c0\u03b5\u03b4\u03bf. \u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03ad\u03bd\u03b1 \u03bc\u03b9\u03ba\u03c1\u03cc \u03b2\u03ac\u03c1\u03bf\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03b1\u03bd\u03b1\u03c3\u03c5\u03c1\u03bc\u03ad\u03bd\u03b5\u03c2. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03ac\u03b8\u03bf\u03b4\u03bf \u03b3\u03b9\u03b1 \u03c4\u03bf\u03c5\u03bb\u03ac\u03c7\u03b9\u03c3\u03c4\u03bf\u03bd 2 \u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03cc\u03bb\u03b5\u03c0\u03c4\u03b1.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2 \u03c7\u03b1\u03bb\u03b1\u03c1\u03bf\u03cd\u03c2. \u03a0\u03c1\u03bf\u03c3\u03b1\u03c1\u03bc\u03cc\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c1\u03c5\u03b8\u03bc\u03cc \u03c3\u03c4\u03b7\u03bd \u03b5\u03c0\u03b9\u03b8\u03c5\u03bc\u03b7\u03c4\u03ae \u03ad\u03bd\u03c4\u03b1\u03c3\u03b7.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc \u03b1\u03c0\u03bf\u03c6\u03b5\u03cd\u03b3\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03b1\u03b9\u03ce\u03c1\u03b7\u03c3\u03b7. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03b1\u03c4\u03ac\u03b2\u03b1\u03c3\u03b7.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03cc\u03c1\u03b8\u03b9\u03bf \u03ba\u03b1\u03b9 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03b4\u03b5\u03bc\u03ad\u03bd\u03bf. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03bd\u03b1 \u03b1\u03c6\u03ae\u03c3\u03b5\u03c4\u03b5 \u03c4\u03bf \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03b9\u03bd\u03cc \u03c3\u03b1\u03c2 \u03b3\u03cc\u03bd\u03b1\u03c4\u03bf \u03bd\u03b1 \u03c0\u03b5\u03c1\u03ac\u03c3\u03b5\u03b9 \u03b1\u03c0\u03cc \u03c4\u03b1 \u03b4\u03ac\u03c7\u03c4\u03c5\u03bb\u03b1 \u03c4\u03c9\u03bd \u03c0\u03bf\u03b4\u03b9\u03ce\u03bd \u03c3\u03b1\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03ba\u03ac\u03b8\u03b5\u03c4\u03bf \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03b1\u03c0\u03bf\u03bc\u03bf\u03bd\u03ce\u03c3\u03b5\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03c4\u03c1\u03b9\u03ba\u03ad\u03c6\u03b1\u03bb\u03bf\u03c5\u03c2. \u038c\u03c3\u03bf \u03c0\u03b9\u03bf \u03c7\u03b1\u03bc\u03b7\u03bb\u03ac \u03c0\u03b7\u03b3\u03b1\u03af\u03bd\u03b5\u03c4\u03b5, \u03c4\u03cc\u03c3\u03bf \u03bc\u03b5\u03b3\u03b1\u03bb\u03cd\u03c4\u03b5\u03c1\u03b7 \u03b5\u03af\u03bd\u03b1\u03b9 \u03b7 \u03b5\u03bc\u03c0\u03bb\u03bf\u03ba\u03ae \u03c3\u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ba\u03b1\u03c1\u03c0\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03bf\u03c5\u03b4\u03ad\u03c4\u03b5\u03c1\u03b7 \u03b8\u03ad\u03c3\u03b7. \u0397 \u03b1\u03bd\u03ac\u03c3\u03c4\u03c1\u03bf\u03c6\u03b7 \u03bc\u03c0\u03bf\u03cd\u03ba\u03bb\u03b1 \u03b4\u03c5\u03bd\u03b1\u03bc\u03ce\u03bd\u03b5\u03b9 \u03c4\u03bf\u03c5\u03c2 \u03bc\u03cd\u03b5\u03c2 \u03c4\u03bf\u03c5 \u03b1\u03bd\u03c4\u03b9\u03b2\u03c1\u03b1\u03c7\u03af\u03bf\u03c5.","\u0393\u03bf\u03bd\u03b1\u03c4\u03b9\u03c3\u03c4\u03cc\u03c2 \u03bc\u03b5 \u03c4\u03bf\u03bd \u03c4\u03c1\u03bf\u03c7\u03cc \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03ac. \u039a\u03c5\u03bb\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c4\u03c1\u03bf\u03c7\u03cc \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c4\u03c1\u03bf\u03c7\u03cc \u03c0\u03af\u03c3\u03c9 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2.","\u0397 \u03ba\u03bb\u03af\u03c3\u03b7 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2 \u03b1\u03c5\u03be\u03ac\u03bd\u03b5\u03b9 \u03c4\u03b7\u03bd \u03b5\u03bc\u03c0\u03bb\u03bf\u03ba\u03ae \u03c4\u03bf\u03c5 \u03c3\u03c4\u03ae\u03b8\u03bf\u03c5\u03c2. \u0397 \u03ba\u03ac\u03b8\u03b5\u03c4\u03b7 \u03b8\u03ad\u03c3\u03b7 \u03b1\u03c0\u03bf\u03bc\u03bf\u03bd\u03ce\u03bd\u03b5\u03b9 \u03c4\u03bf\u03c5\u03c2 \u03c4\u03c1\u03b9\u03ba\u03ad\u03c6\u03b1\u03bb\u03bf\u03c5\u03c2.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03b1 \u03bb\u03c5\u03b3\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1. \u03a6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03c3\u03c5\u03c3\u03c4\u03ad\u03bb\u03bb\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03ba\u03bf\u03b9\u03bb\u03b9\u03b1\u03ba\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b7\u03ba\u03c9\u03bc\u03ad\u03bd\u03b1. \u03a6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03b7\u03ba\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7 \u03bb\u03b5\u03ba\u03ac\u03bd\u03b7 \u03c3\u03b1\u03c2. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03bc\u03c0\u03c1\u03bf\u03cd\u03bc\u03c5\u03c4\u03b1 \u03c3\u03c4\u03bf \u03bc\u03b7\u03c7\u03ac\u03bd\u03b7\u03bc\u03b1 \u03bc\u03b5 \u03b5\u03c0\u03b9\u03b8\u03ad\u03bc\u03b1\u03c4\u03b1 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03b1\u03c3\u03c4\u03c1\u03b1\u03b3\u03ac\u03bb\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2. \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b9\u03c2 \u03c6\u03c4\u03ad\u03c1\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bb\u03bf\u03c5\u03c4\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf\u03bd \u03c0\u03ac\u03b3\u03ba\u03bf \u03bc\u03b5 \u03ad\u03bd\u03b1\u03bd \u03b1\u03bb\u03c4\u03ae\u03c1\u03b1 \u03c3\u03b5 \u03ba\u03ac\u03b8\u03b5 \u03c7\u03ad\u03c1\u03b9. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03bb\u03c4\u03ae\u03c1\u03b5\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03ba\u03b1\u03c1\u03c0\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03ac \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf\u03bd \u03c0\u03ac\u03b3\u03ba\u03bf \u03bc\u03b5 \u03ad\u03bd\u03b1\u03bd \u03b1\u03bb\u03c4\u03ae\u03c1\u03b1 \u03c3\u03b5 \u03ba\u03ac\u03b8\u03b5 \u03c7\u03ad\u03c1\u03b9. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03bb\u03b5\u03c5\u03c1\u03b9\u03ba\u03ac \u03b4\u03b9\u03b1\u03c4\u03b7\u03c1\u03ce\u03bd\u03c4\u03b1\u03c2 \u03bc\u03b9\u03b1 \u03b5\u03bb\u03b1\u03c6\u03c1\u03b9\u03ac \u03ba\u03ac\u03bc\u03c8\u03b7 \u03c3\u03c4\u03bf\u03bd \u03b1\u03b3\u03ba\u03ce\u03bd\u03b1. \u03a6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03bb\u03c4\u03ae\u03c1\u03b5\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03c3\u03b5 \u03ad\u03bd\u03b1 \u03c4\u03cc\u03be\u03bf \u03c3\u03b1\u03bd \u03bd\u03b1 \u03b1\u03b3\u03ba\u03b1\u03bb\u03b9\u03ac\u03b6\u03b5\u03c4\u03b5 \u03ad\u03bd\u03b1 \u03b4\u03ad\u03bd\u03c4\u03c1\u03bf. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf\u03bd \u03c0\u03ac\u03b3\u03ba\u03bf \u03bc\u03b5 \u03bc\u03b9\u03b1 \u03bb\u03b1\u03b2\u03ae \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03bf\u03bd\u03c4\u03ac \u03c3\u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03c0\u03b9\u03ad\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03c4\u03c1\u03b9\u03ba\u03ad\u03c6\u03b1\u03bb\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf\u03bd \u03c0\u03ac\u03b3\u03ba\u03bf \u03bc\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2, \u03bc\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c4\u03b5\u03bd\u03c4\u03c9\u03bc\u03ad\u03bd\u03b1. \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03bc\u03ad\u03c4\u03c9\u03c0\u03cc \u03c3\u03b1\u03c2. \u0395\u03c0\u03ad\u03ba\u03c4\u03b1\u03c3\u03b7 \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7 \u03b8\u03ad\u03c3\u03b7.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf\u03bd \u03c0\u03ac\u03b3\u03ba\u03bf \u03bc\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2, \u03bc\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03c7\u03b5\u03b4\u03cc\u03bd \u03c4\u03b5\u03bd\u03c4\u03c9\u03bc\u03ad\u03bd\u03b1. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03c0\u03af\u03c3\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03ba\u03b5\u03c6\u03ac\u03bb\u03b9 \u03c3\u03b1\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03b5\u03bb\u03b1\u03c6\u03c1\u03ce\u03c2 \u03bb\u03c5\u03b3\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf\u03c5\u03c2. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7 \u03c3\u03b5 \u03ad\u03bd\u03b1 \u03c4\u03cc\u03be\u03bf.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf\u03bd \u03c0\u03ac\u03b3\u03ba\u03bf \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u03a0\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03b5\u03c5\u03c1\u03cd\u03c4\u03b5\u03c1\u03b1 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03c3\u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03b5\u03c1\u03af\u03c0\u03bf\u03c5 45 \u03bc\u03bf\u03af\u03c1\u03b5\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03ac \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf\u03bd \u03c0\u03ac\u03b3\u03ba\u03bf \u03c0\u03c4\u03ce\u03c3\u03b7\u03c2 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03b1\u03c3\u03c6\u03b1\u03bb\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1. \u03a0\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c0\u03b5\u03c1\u03b9\u03c3\u03c3\u03cc\u03c4\u03b5\u03c1\u03bf \u03b1\u03c0\u03cc \u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u03a7\u03b1\u03bc\u03b7\u03bb\u03cc\u03c4\u03b5\u03c1\u03b1 \u03c3\u03c4\u03bf \u03ba\u03ac\u03c4\u03c9 \u03bc\u03ad\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5 \u03b8\u03ce\u03c1\u03b1\u03ba\u03b1. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03ac \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u039e\u03b1\u03c0\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03ba\u03b5\u03ba\u03bb\u03b9\u03bc\u03ad\u03bd\u03bf \u03c3\u03c4\u03ae\u03c1\u03b9\u03b3\u03bc\u03b1 \u03bc\u03b5 \u03c4\u03b1 \u03b2\u03ac\u03c1\u03b7 \u03bd\u03b1 \u03ba\u03c1\u03ad\u03bc\u03bf\u03bd\u03c4\u03b1\u03b9. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03c3\u03c5\u03c3\u03c0\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 lats \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03b5 \u03ad\u03bd\u03b1 squat \u03ba\u03b1\u03b9 \u03bc\u03b5\u03c4\u03ac \u03c0\u03b7\u03b4\u03ae\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03b5\u03ba\u03c1\u03b7\u03ba\u03c4\u03b9\u03ba\u03ac. \u03a0\u03c1\u03bf\u03c3\u03b3\u03b5\u03b9\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03b1\u03c0\u03b1\u03bb\u03ac \u03bb\u03c5\u03b3\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2.","\u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03b5 \u03bf\u03ba\u03bb\u03b1\u03b4\u03cc\u03bd, \u03c4\u03bf\u03c0\u03bf\u03b8\u03b5\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1 \u03ba\u03b1\u03b9 \u03c0\u03b7\u03b4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03b8\u03ad\u03c3\u03b7 \u03ce\u03b8\u03b7\u03c3\u03b7\u03c2. \u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03ad\u03bd\u03b1 push-up, \u03c0\u03b7\u03b4\u03ae\u03be\u03c4\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03bc\u03b5\u03c4\u03ac \u03c0\u03b7\u03b4\u03ae\u03be\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03ac\u03bd\u03c9.","\u0394\u03b9\u03b1\u03c4\u03b7\u03c1\u03ae\u03c3\u03c4\u03b5 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc \u03c1\u03c5\u03b8\u03bc\u03cc. \u03a3\u03c9\u03c3\u03c4\u03ae \u03c3\u03c4\u03ac\u03c3\u03b7 \u03ba\u03b1\u03b8' \u03cc\u03bb\u03b7 \u03c4\u03b7 \u03b4\u03b9\u03ac\u03c1\u03ba\u03b5\u03b9\u03b1 \u03c4\u03b7\u03c2 \u03ac\u03c3\u03ba\u03b7\u03c3\u03b7\u03c2.","\u0394\u03b9\u03b1\u03c4\u03b7\u03c1\u03ae\u03c3\u03c4\u03b5 \u03bc\u03b9\u03b1 \u03cc\u03c1\u03b8\u03b9\u03b1 \u03c3\u03c4\u03ac\u03c3\u03b7 \u03bc\u03b5 \u03bc\u03b9\u03b1 \u03b5\u03bb\u03b1\u03c6\u03c1\u03b9\u03ac \u03ba\u03bb\u03af\u03c3\u03b7 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2. \u0395\u03bd\u03b1\u03bb\u03bb\u03b1\u03ba\u03c4\u03b9\u03ba\u03ac \u03b2\u03ae\u03bc\u03b1\u03c4\u03b1 \u03bc\u03b5 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc \u03c1\u03c5\u03b8\u03bc\u03cc. \u03a0\u03c1\u03bf\u03c3\u03b3\u03b5\u03b9\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03bf \u03c0\u03cc\u03b4\u03b9 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03bc\u03ad\u03c3\u03bf \u03c4\u03bf\u03c5 \u03b2\u03ae\u03bc\u03b1\u03c4\u03bf\u03c2.","\u0394\u03b9\u03b1\u03c4\u03b7\u03c1\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03af\u03b4\u03b9\u03b1 \u03ba\u03ac\u03bc\u03c8\u03b7 \u03c4\u03bf\u03c5 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b1 \u03c3\u03b5 \u03cc\u03bb\u03b7 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7. \u0395\u03c3\u03c4\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c3\u03c4\u03b7 \u03c3\u03cd\u03c3\u03c0\u03b1\u03c3\u03b7 \u03c4\u03bf\u03c5 \u03c3\u03c4\u03ae\u03b8\u03bf\u03c5\u03c2 \u03c3\u03c4\u03bf \u03c4\u03ad\u03bb\u03bf\u03c2 \u03c4\u03b7\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2.","\u0394\u03b9\u03b1\u03c4\u03b7\u03c1\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03af\u03b4\u03b9\u03b1 \u03ba\u03ac\u03bc\u03c8\u03b7 \u03c4\u03bf\u03c5 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b1. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03ac\u03b8\u03bf\u03b4\u03bf \u03b3\u03b9\u03b1 2 \u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03cc\u03bb\u03b5\u03c0\u03c4\u03b1.","\u0394\u03b9\u03b1\u03c4\u03b7\u03c1\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03b5\u03bb\u03b1\u03c6\u03c1\u03b9\u03ac \u03ba\u03ac\u03bc\u03c8\u03b7 \u03c4\u03bf\u03c5 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b1. \u03a4\u03bf \u03c0\u03bf\u03c5\u03bb\u03cc\u03b2\u03b5\u03c1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03bc\u03b9\u03b1 \u03b1\u03c0\u03cc \u03c4\u03b9\u03c2 \u03bb\u03af\u03b3\u03b5\u03c2 \u03b1\u03c3\u03ba\u03ae\u03c3\u03b5\u03b9\u03c2 \u03c0\u03bf\u03c5 \u03c4\u03b5\u03bd\u03c4\u03ce\u03bd\u03bf\u03c5\u03bd \u03c4\u03bf \u03bb\u03b1\u03c4.","\u039c\u03ad\u03c4\u03c1\u03b9\u03b1 \u03ad\u03bd\u03c4\u03b1\u03c3\u03b7, \u03c0\u03bf\u03c4\u03ad \u03c0\u03cc\u03bd\u03bf\u03c2. \u0395\u03ba\u03c0\u03bd\u03b5\u03cd\u03c3\u03c4\u03b5 \u03ba\u03b1\u03b8\u03ce\u03c2 \u03c4\u03b5\u03bd\u03c4\u03ce\u03bd\u03b5\u03c3\u03c4\u03b5.","\u03a3\u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03ba\u03b1\u03b9 \u03c3\u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03b1 \u03ae \u03c3\u03c4\u03ad\u03ba\u03b5\u03c4\u03b1\u03b9 \u03c3\u03c4\u03bf \u03ba\u03b1\u03bb\u03ce\u03b4\u03b9\u03bf. \u0395\u03c0\u03b5\u03ba\u03c4\u03b5\u03af\u03bd\u03b5\u03c4\u03b5 \u03c4\u03bf \u03c0\u03cc\u03b4\u03b9 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03af\u03c3\u03c9 \u03c0\u03b9\u03ad\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bb\u03bf\u03c5\u03c4\u03b9\u03b1\u03af\u03bf\u03c5\u03c2. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u03a3\u03c4\u03bf \u03c0\u03bb\u03ac\u03b9 \u03b1\u03ba\u03bf\u03c5\u03bc\u03c0\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03bf\u03bd \u03c0\u03ae\u03c7\u03b7 \u03c3\u03b1\u03c2 \u03bc\u03b5 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03b5\u03c5\u03b8\u03b5\u03af\u03b1 \u03b3\u03c1\u03b1\u03bc\u03bc\u03ae. \u03a3\u03b7\u03ba\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03b4\u03b9\u03b1\u03c4\u03b7\u03c1\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7 \u03b8\u03ad\u03c3\u03b7.","\u03a0\u03b5\u03bd\u03c4\u03ac\u03bb \u03b4\u03b9\u03b1\u03c4\u03b7\u03c1\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc \u03c1\u03c5\u03b8\u03bc\u03cc. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03bf\u03c5\u03b4\u03ad\u03c4\u03b5\u03c1\u03b7 \u03b8\u03ad\u03c3\u03b7.","\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03c6\u03ac\u03c3\u03b7 \u03b1\u03bd\u03cd\u03c8\u03c9\u03c3\u03b7\u03c2 \u03bc\u03b5 \u03cd\u03c0\u03c4\u03b9\u03b1 \u03bb\u03b1\u03b2\u03ae. \u03a0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ba\u03b1\u03c1\u03c0\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03c0\u03c1\u03b7\u03bd\u03b9\u03c3\u03bc\u03cc \u03c3\u03c4\u03b7\u03bd \u03ba\u03bf\u03c1\u03c5\u03c6\u03ae. \u03a7\u03b1\u03bc\u03b7\u03bb\u03cc\u03c4\u03b5\u03c1\u03bf \u03bc\u03b5 \u03c0\u03c1\u03b7\u03bd\u03ae \u03bb\u03b1\u03b2\u03ae. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c3\u03c4\u03bf \u03cd\u03c0\u03c4\u03b9\u03bf \u03c3\u03c4\u03bf \u03ba\u03ac\u03c4\u03c9 \u03bc\u03ad\u03c1\u03bf\u03c2.","\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03cc\u03c3\u03bf \u03c4\u03b9\u03c2 \u03ad\u03ba\u03ba\u03b5\u03bd\u03c4\u03c1\u03b5\u03c2 \u03cc\u03c3\u03bf \u03ba\u03b1\u03b9 \u03c4\u03b9\u03c2 \u03bf\u03bc\u03cc\u03ba\u03b5\u03bd\u03c4\u03c1\u03b5\u03c2 \u03c6\u03ac\u03c3\u03b5\u03b9\u03c2. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03b1\u03c0\u03b1\u03c3\u03c7\u03bf\u03bb\u03b7\u03bc\u03ad\u03bd\u03bf.","\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7 \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03cc\u03c3\u03bf \u03c4\u03b9\u03c2 \u03ad\u03ba\u03ba\u03b5\u03bd\u03c4\u03c1\u03b5\u03c2 \u03cc\u03c3\u03bf \u03ba\u03b1\u03b9 \u03c4\u03b9\u03c2 \u03bf\u03bc\u03cc\u03ba\u03b5\u03bd\u03c4\u03c1\u03b5\u03c2 \u03c6\u03ac\u03c3\u03b5\u03b9\u03c2. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03b1\u03bd\u03b1\u03c3\u03c5\u03c1\u03bc\u03ad\u03bd\u03b5\u03c2.","\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7 \u03b5\u03ba\u03c1\u03b7\u03ba\u03c4\u03b9\u03ba\u03ac \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03ae \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2. \u03a0\u03c1\u03bf\u03c3\u03b3\u03b5\u03b9\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03b1\u03c0\u03b1\u03bb\u03ac \u03bb\u03c5\u03b3\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03c1\u03bf\u03c3\u03b3\u03b5\u03af\u03c9\u03c3\u03b7.","\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7 \u03b1\u03c1\u03b3\u03ac \u03ba\u03b1\u03b9 \u03c3\u03c4\u03b9\u03c2 \u03b4\u03cd\u03bf \u03c6\u03ac\u03c3\u03b5\u03b9\u03c2. \u0397 \u03c0\u03b1\u03cd\u03c3\u03b7 \u03c3\u03c4\u03bf \u03ba\u03ac\u03c4\u03c9 \u03bc\u03ad\u03c1\u03bf\u03c2 \u03b1\u03c5\u03be\u03ac\u03bd\u03b5\u03b9 \u03c4\u03bf \u03c4\u03ad\u03bd\u03c4\u03c9\u03bc\u03b1 \u03c4\u03b7\u03c2 \u03b3\u03ac\u03bc\u03c0\u03b1\u03c2.","\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae \u03c1\u03b5\u03c5\u03c3\u03c4\u03ac \u03ba\u03b1\u03b9 \u03c3\u03c5\u03bd\u03b5\u03c7\u03ce\u03c2. \u0397 \u03c0\u03c1\u03ad\u03c3\u03b1 Arnold \u03b5\u03af\u03bd\u03b1\u03b9 \u03bc\u03b9\u03b1 \u03b1\u03c0\u03cc \u03c4\u03b9\u03c2 \u03bb\u03af\u03b3\u03b5\u03c2 \u03b1\u03c3\u03ba\u03ae\u03c3\u03b5\u03b9\u03c2 \u03c0\u03bf\u03c5 \u03b5\u03bc\u03c0\u03bb\u03ad\u03ba\u03bf\u03c5\u03bd \u03cc\u03bb\u03b5\u03c2 \u03c4\u03b9\u03c2 \u03bc\u03c5\u03ca\u03ba\u03ad\u03c2 \u03af\u03bd\u03b5\u03c2.","\u03a4\u03bf\u03c0\u03bf\u03b8\u03b5\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03c3\u03c7\u03ae\u03bc\u03b1 \u03b4\u03b9\u03b1\u03bc\u03b1\u03bd\u03c4\u03b9\u03bf\u03cd \u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03bf\u03bd\u03c4\u03ac \u03c3\u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03c0\u03b9\u03ad\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03c4\u03c1\u03b9\u03ba\u03ad\u03c6\u03b1\u03bb\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2.","\u03a4\u03bf\u03c0\u03bf\u03b8\u03b5\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03b5\u03b1\u03c5\u03c4\u03cc \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b7 \u03bc\u03b7\u03c7\u03b1\u03bd\u03ae hack squat \u03bc\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03c4\u03b1 \u03bc\u03b1\u03be\u03b9\u03bb\u03b1\u03c1\u03ac\u03ba\u03b9\u03b1. \u039a\u03b1\u03c4\u03b5\u03b2\u03b5\u03af\u03c4\u03b5 \u03bb\u03c5\u03b3\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b9\u03c2 90 \u03bc\u03bf\u03af\u03c1\u03b5\u03c2 \u03ba\u03b1\u03b9 \u03bc\u03b5\u03c4\u03ac \u03c3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9.","\u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03ba\u03c5\u03c1\u03af\u03c9\u03c2 \u03bc\u03b5 \u03c4\u03bf \u03c0\u03cc\u03b4\u03b9 \u03c3\u03c4\u03b7\u03bd \u03c5\u03c0\u03b5\u03c1\u03c5\u03c8\u03c9\u03bc\u03ad\u03bd\u03b7 \u03b5\u03c0\u03b9\u03c6\u03ac\u03bd\u03b5\u03b9\u03b1. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03cc\u03c1\u03b8\u03b9\u03bf.","\u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2, \u03c3\u03c4\u03b7 \u03c3\u03c5\u03bd\u03ad\u03c7\u03b5\u03b9\u03b1 \u03b3\u03b5\u03af\u03c1\u03b5\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03af\u03c3\u03c9 \u03ba\u03b1\u03b9 \u03c4\u03ad\u03bb\u03bf\u03c2 \u03c4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03bf \u03ba\u03bf\u03c5\u03c0\u03af \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b7\u03bd \u03ba\u03bf\u03b9\u03bb\u03b9\u03ac \u03c3\u03b1\u03c2. \u0391\u03bd\u03c4\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c4\u03b7 \u03c3\u03b5\u03b9\u03c1\u03ac \u03ba\u03b1\u03c4\u03ac \u03c4\u03b7\u03bd \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae.","\u0391\u03c0\u03b1\u03b9\u03c4\u03b5\u03af \u03b5\u03be\u03b1\u03b9\u03c1\u03b5\u03c4\u03b9\u03ba\u03ae \u03ba\u03b9\u03bd\u03b7\u03c4\u03b9\u03ba\u03cc\u03c4\u03b7\u03c4\u03b1 \u03ce\u03bc\u03bf\u03c5, \u03b9\u03c3\u03c7\u03af\u03bf\u03c5 \u03ba\u03b1\u03b9 \u03b1\u03c3\u03c4\u03c1\u03b1\u03b3\u03ac\u03bb\u03bf\u03c5. \u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03c7\u03c9\u03c1\u03af\u03c2 \u03b2\u03ac\u03c1\u03bf\u03c2.","\u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03ba\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03ba\u03bb\u03b5\u03b9\u03b4\u03c9\u03bc\u03ad\u03bd\u03b5\u03c2. \u039c\u03b7\u03bd \u03b1\u03bd\u03b1\u03c0\u03b7\u03b4\u03ac\u03c4\u03b5 \u03c4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03b1\u03c0\u03cc \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2.","\u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ce\u03bc\u03bf.","\u03a0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c0\u03cc \u03c4\u03b7 \u03bc\u03ad\u03c3\u03b7, \u03cc\u03c7\u03b9 \u03bc\u03cc\u03bd\u03bf \u03b1\u03c0\u03cc \u03c4\u03b1 \u03bc\u03c0\u03c1\u03ac\u03c4\u03c3\u03b1.","\u03a0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03bd \u03ad\u03bd\u03b1\u03bd \u03b1\u03b3\u03ba\u03ce\u03bd\u03b1 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03b1\u03bd\u03c4\u03af\u03b8\u03b5\u03c4\u03bf \u03b3\u03cc\u03bd\u03b1\u03c4\u03bf. \u0395\u03c0\u03b1\u03bd\u03b1\u03bb\u03ac\u03b2\u03b5\u03c4\u03b5 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03ac\u03bb\u03bb\u03b7 \u03c0\u03bb\u03b5\u03c5\u03c1\u03ac.","\u03a0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03b1\u03c1\u03c0\u03cc \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03ad\u03be\u03c9 \u03c3\u03c4\u03b7\u03bd \u03ba\u03bf\u03c1\u03c5\u03c6\u03ae \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03bc\u03b5\u03b3\u03b9\u03c3\u03c4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03bf\u03c1\u03c5\u03c6\u03ae. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc.","\u039a\u03b1\u03b8\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf\u03c2 \u03bc\u03b5 \u03b1\u03bb\u03c4\u03ae\u03c1\u03b5\u03c2 \u03c3\u03c4\u03bf \u03cd\u03c8\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd \u03ba\u03b1\u03b9 \u03c4\u03b9\u03c2 \u03c0\u03b1\u03bb\u03ac\u03bc\u03b5\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03bc\u03ad\u03c1\u03bf\u03c2 \u03c3\u03b1\u03c2. \u03a0\u03b9\u03ad\u03c3\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03c0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03ba\u03b1\u03c1\u03c0\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03ad\u03be\u03c9 \u03ad\u03c9\u03c2 \u03cc\u03c4\u03bf\u03c5 \u03bf\u03b9 \u03c0\u03b1\u03bb\u03ac\u03bc\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03bf\u03b9\u03c4\u03bf\u03cd\u03bd \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03bf\u03bd \u03b1\u03b3\u03ba\u03ce\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03bd\u03b1 \u03b1\u03ba\u03bf\u03c5\u03bc\u03c0\u03ac \u03c3\u03c4\u03bf \u03b5\u03c3\u03c9\u03c4\u03b5\u03c1\u03b9\u03ba\u03cc \u03c4\u03bf\u03c5 \u03bc\u03b7\u03c1\u03bf\u03cd \u03c3\u03b1\u03c2. \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03b1\u03b3\u03ba\u03ce\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03bd \u03b1\u03bb\u03c4\u03ae\u03c1\u03b1 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf\u03bd \u03ce\u03bc\u03bf \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03b1\u03bd\u03b1\u03c3\u03b7\u03ba\u03c9\u03bc\u03ad\u03bd\u03b1 \u03ba\u03b1\u03b9 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03c4\u03b9\u03c2 45 \u03bc\u03bf\u03af\u03c1\u03b5\u03c2. \u03a0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03b1\u03c0\u03cc \u03c4\u03b7 \u03bc\u03af\u03b1 \u03c0\u03bb\u03b5\u03c5\u03c1\u03ac \u03c3\u03c4\u03b7\u03bd \u03ac\u03bb\u03bb\u03b7 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1 \u03b4\u03af\u03c0\u03bb\u03b1 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2.","\u0391\u03ba\u03bf\u03bb\u03bf\u03c5\u03b8\u03af\u03b1: \u03c0\u03cc\u03b4\u03b9\u03b1, \u03bc\u03b5\u03c4\u03ac \u03ba\u03bf\u03c1\u03bc\u03cc\u03c2 \u03ba\u03b1\u03b9 \u03bc\u03b5\u03c4\u03ac \u03c7\u03ad\u03c1\u03b9\u03b1 \u03ba\u03b1\u03c4\u03ac \u03c4\u03b7 \u03b4\u03b9\u03ac\u03c1\u03ba\u03b5\u03b9\u03b1 \u03c4\u03bf\u03c5 \u03c4\u03c1\u03b1\u03b2\u03ae\u03b3\u03bc\u03b1\u03c4\u03bf\u03c2.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03c0\u03c4\u03c5\u03c3\u03c3\u03cc\u03bc\u03b5\u03bd\u03bf \u03bc\u03b7\u03c7\u03ac\u03bd\u03b7\u03bc\u03b1 lat \u03ba\u03b1\u03b9 \u03c0\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03bc\u03b5 \u03bc\u03b9\u03b1 \u03b5\u03c5\u03c1\u03b5\u03af\u03b1 \u03c0\u03c1\u03b7\u03bd\u03b9\u03c3\u03bc\u03ad\u03bd\u03b7 \u03bb\u03b1\u03b2\u03ae. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2, \u03b3\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03b5\u03bb\u03b1\u03c6\u03c1\u03ce\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03af\u03c3\u03c9. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03c0\u03c4\u03c5\u03c3\u03c3\u03cc\u03bc\u03b5\u03bd\u03bf \u03bc\u03b7\u03c7\u03ac\u03bd\u03b7\u03bc\u03b1 lat \u03bc\u03b5 \u03c3\u03c4\u03b5\u03bd\u03ae \u03ae \u03bf\u03c5\u03b4\u03ad\u03c4\u03b5\u03c1\u03b7 \u03bb\u03b1\u03b2\u03ae. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03bf\u03bd\u03c4\u03ac \u03c3\u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03c7\u03b1\u03bc\u03b7\u03bb\u03cc \u03ba\u03b1\u03bb\u03ce\u03b4\u03b9\u03bf \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1 \u03c3\u03c4\u03b7\u03c1\u03af\u03b3\u03bc\u03b1\u03c4\u03b1. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03b7 \u03bb\u03b1\u03b2\u03ae \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b7 \u03bc\u03ad\u03c3\u03b7 \u03c3\u03b1\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03af\u03c3\u03b9\u03b1. \u03a3\u03c5\u03c3\u03c0\u03ac\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03bc\u03cd\u03b5\u03c2 \u03c4\u03b7\u03c2 \u03c0\u03bb\u03ac\u03c4\u03b7\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03bc\u03b7\u03c7\u03ac\u03bd\u03b7\u03bc\u03b1 \u03bc\u03b5 \u03b5\u03c0\u03b9\u03b8\u03ad\u03bc\u03b1\u03c4\u03b1 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03b1\u03c3\u03c4\u03c1\u03b1\u03b3\u03ac\u03bb\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2. \u0395\u03ba\u03c4\u03b5\u03af\u03bd\u03b5\u03c4\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03c3\u03c5\u03c3\u03c4\u03ad\u03bb\u03bb\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03bd \u03c4\u03b5\u03c4\u03c1\u03b1\u03ba\u03ad\u03c6\u03b1\u03bb\u03bf \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03bc\u03b7\u03c7\u03ac\u03bd\u03b7\u03bc\u03b1 \u03bc\u03b5 \u03b5\u03c0\u03b9\u03b8\u03ad\u03bc\u03b1\u03c4\u03b1 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03b1\u03c3\u03c4\u03c1\u03b1\u03b3\u03ac\u03bb\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2. \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b9\u03c2 \u03c6\u03c4\u03ad\u03c1\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bb\u03bf\u03c5\u03c4\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf\u03bd \u03c0\u03ac\u03b3\u03ba\u03bf \u03c4\u03bf\u03c5 \u03b9\u03b5\u03c1\u03bf\u03ba\u03ae\u03c1\u03c5\u03ba\u03b1 \u03bc\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03b1\u03ba\u03bf\u03c5\u03bc\u03c0\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1 \u03c3\u03c4\u03bf \u03bc\u03b1\u03be\u03b9\u03bb\u03ac\u03c1\u03b9. \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac \u03c3\u03c7\u03b5\u03b4\u03cc\u03bd \u03c3\u03b5 \u03c0\u03bb\u03ae\u03c1\u03b7 \u03b5\u03c0\u03ad\u03ba\u03c4\u03b1\u03c3\u03b7.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03bc\u03b7\u03c7\u03ac\u03bd\u03b7\u03bc\u03b1 \u03bc\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03bd\u03b1 \u03b1\u03ba\u03bf\u03c5\u03bc\u03c0\u03ac\u03b5\u03b9 \u03c3\u03c4\u03bf \u03bc\u03b1\u03be\u03b9\u03bb\u03ac\u03c1\u03b9. \u03a4\u03bf\u03c0\u03bf\u03b8\u03b5\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1 \u03bc\u03b1\u03be\u03b9\u03bb\u03b1\u03c1\u03ac\u03ba\u03b9\u03b1. \u03a6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03ba\u03ad\u03bd\u03c4\u03c1\u03bf \u03c3\u03c5\u03c3\u03c0\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03bc\u03b7\u03c7\u03ac\u03bd\u03b7\u03bc\u03b1 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03c0\u03bb\u03b1\u03c4\u03c6\u03cc\u03c1\u03bc\u03b1 \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03b3\u03bf\u03c6\u03ce\u03bd. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03bb\u03c5\u03b3\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b9\u03c2 90 \u03bc\u03bf\u03af\u03c1\u03b5\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c4\u03b5\u03bd\u03c4\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf\u03bd \u03b5\u03c0\u03b9\u03ba\u03bb\u03b9\u03bd\u03ad\u03c2 \u03c0\u03ac\u03b3\u03ba\u03bf \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u03a0\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c0\u03b5\u03c1\u03b9\u03c3\u03c3\u03cc\u03c4\u03b5\u03c1\u03bf \u03b1\u03c0\u03cc \u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03b1\u03bd\u03ce\u03c4\u03b5\u03c1\u03bf \u03b5\u03c0\u03af\u03c0\u03b5\u03b4\u03bf \u03c4\u03bf\u03c5 \u03b8\u03ce\u03c1\u03b1\u03ba\u03b1. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03ac \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u039a\u03b1\u03b8\u03af\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03c0\u03ae\u03c7\u03b5\u03b9\u03c2 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03bc\u03b7\u03c1\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2. \u03a0\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03bc\u03b5 \u03bc\u03b9\u03b1 \u03cd\u03c0\u03c4\u03b9\u03b1 \u03bb\u03b1\u03b2\u03ae. \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ba\u03b1\u03c1\u03c0\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03ba\u03b1\u03b9 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u0394\u03b9\u03b1\u03b4\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c7\u03bf\u03b9\u03bd\u03af \u03c3\u03c4\u03bf \u03ba\u03ac\u03c4\u03c9 \u03bc\u03ad\u03c1\u03bf\u03c2 \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03bc\u03b5\u03b3\u03b9\u03c3\u03c4\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03b5\u03c4\u03b5 \u03c4\u03b7 \u03c3\u03c5\u03c3\u03c4\u03bf\u03bb\u03ae. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2.","\u03a3\u03c4\u03ad\u03ba\u03b5\u03c4\u03b1\u03b9 \u03c3\u03c4\u03bf \u03ba\u03ad\u03bd\u03c4\u03c1\u03bf \u03c4\u03bf\u03c5 \u03ba\u03b1\u03bb\u03c9\u03b4\u03af\u03bf\u03c5 \u03bc\u03b5 \u03bc\u03af\u03b1 \u03bb\u03b1\u03b2\u03ae \u03b1\u03bd\u03ac \u03c7\u03ad\u03c1\u03b9. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03b5\u03bb\u03b1\u03c6\u03c1\u03ce\u03c2 \u03bb\u03c5\u03b3\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1. \u03a6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03ba\u03ad\u03bd\u03c4\u03c1\u03bf \u03b4\u03b9\u03b1\u03c3\u03c7\u03af\u03b6\u03bf\u03bd\u03c4\u03ac\u03c2 \u03c4\u03b1. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u03a3\u03c4\u03ad\u03ba\u03b5\u03c4\u03b1\u03b9 \u03c3\u03c4\u03bf \u03c8\u03b7\u03bb\u03cc \u03ba\u03b1\u03bb\u03ce\u03b4\u03b9\u03bf \u03bc\u03b5 \u03c4\u03bf \u03c3\u03c7\u03bf\u03b9\u03bd\u03af. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2 \u03c3\u03c4\u03b1 \u03c0\u03bb\u03ac\u03b3\u03b9\u03b1 \u03c4\u03bf\u03c5 \u03ba\u03bf\u03c1\u03bc\u03bf\u03cd \u03c3\u03b1\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c7\u03bf\u03b9\u03bd\u03af \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03ba\u03ac\u03c4\u03c9 \u03c7\u03c9\u03c1\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03ac\u03ba\u03c1\u03b1. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u03a3\u03c4\u03ad\u03ba\u03b5\u03c4\u03b1\u03b9 \u03c3\u03c4\u03bf \u03c8\u03b7\u03bb\u03cc \u03ba\u03b1\u03bb\u03ce\u03b4\u03b9\u03bf. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2 \u03c3\u03c4\u03b1 \u03c0\u03bb\u03ac\u03b3\u03b9\u03b1 \u03c4\u03bf\u03c5 \u03ba\u03bf\u03c1\u03bc\u03bf\u03cd \u03c3\u03b1\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03ba\u03ac\u03c4\u03c9 \u03b5\u03ba\u03c4\u03b5\u03af\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c0\u03bb\u03ae\u03c1\u03c9\u03c2 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u03a3\u03c4\u03ad\u03ba\u03b5\u03c3\u03c4\u03b5 \u03ba\u03bf\u03b9\u03c4\u03ac\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03c8\u03b7\u03bb\u03cc \u03ba\u03b1\u03bb\u03ce\u03b4\u03b9\u03bf \u03bc\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c7\u03b5\u03b4\u03cc\u03bd \u03c4\u03b5\u03bd\u03c4\u03c9\u03bc\u03ad\u03bd\u03b1. \u03a6\u03ad\u03c1\u03c4\u03b5 \u03c4\u03b7 \u03c1\u03ac\u03b2\u03b4\u03bf \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03bc\u03b7\u03c1\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03ad\u03bd\u03b1 \u03c4\u03cc\u03be\u03bf \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03af\u03c3\u03b9\u03b1. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u03a3\u03c4\u03ad\u03ba\u03b5\u03c4\u03b1\u03b9 \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03ac \u03c3\u03b5 \u03ad\u03bd\u03b1 \u03c0\u03b1\u03b3\u03ba\u03ac\u03ba\u03b9. \u03a4\u03bf\u03c0\u03bf\u03b8\u03b5\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03ad\u03bd\u03b1 \u03c0\u03cc\u03b4\u03b9 \u03c3\u03c4\u03b7\u03bd \u03c5\u03c0\u03b5\u03c1\u03c5\u03c8\u03c9\u03bc\u03ad\u03bd\u03b7 \u03b5\u03c0\u03b9\u03c6\u03ac\u03bd\u03b5\u03b9\u03b1 \u03ba\u03b1\u03b9 \u03c3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac \u03b5\u03bb\u03ad\u03b3\u03c7\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7.","\u03a3\u03c4\u03ad\u03ba\u03b5\u03c4\u03b1\u03b9 \u03c3\u03c4\u03bf \u03ad\u03bd\u03b1 \u03c0\u03cc\u03b4\u03b9. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03af\u03c3\u03b9\u03b1 \u03b5\u03bd\u03ce \u03c4\u03bf \u03b5\u03bb\u03b5\u03cd\u03b8\u03b5\u03c1\u03bf \u03c0\u03cc\u03b4\u03b9 \u03c3\u03b1\u03c2 \u03b5\u03ba\u03c4\u03b5\u03af\u03bd\u03b5\u03c4\u03b1\u03b9 \u03c0\u03af\u03c3\u03c9. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03cc\u03c1\u03b8\u03b9\u03b1 \u03b8\u03ad\u03c3\u03b7 \u03c0\u03b9\u03ad\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bb\u03bf\u03c5\u03c4\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2.","\u038c\u03c1\u03b8\u03b9\u03b1 \u03ae \u03ba\u03b1\u03b8\u03b9\u03c3\u03c4\u03ae \u03bc\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c3\u03c4\u03bf \u03cd\u03c8\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03c4\u03b5\u03bd\u03c4\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c0\u03bb\u03ae\u03c1\u03c9\u03c2 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7 \u03bc\u03b5 \u03c4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03c3\u03c4\u03bf \u03cd\u03c8\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd.","\u038c\u03c1\u03b8\u03b9\u03b1 \u03ae \u03ba\u03b1\u03b8\u03b9\u03c3\u03c4\u03ae \u03bc\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c3\u03c4\u03bf \u03cd\u03c8\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03c4\u03b5\u03bd\u03c4\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c0\u03bb\u03ae\u03c1\u03c9\u03c2 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u038c\u03c1\u03b8\u03b9\u03bf\u03c2 \u03ae \u03ba\u03b1\u03b8\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf\u03c2 \u03bc\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c0\u03ac\u03bd\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03ba\u03b5\u03c6\u03ac\u03bb\u03b9, \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c4\u03b5\u03bd\u03c4\u03c9\u03bc\u03ad\u03bd\u03b1. \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03c0\u03af\u03c3\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03ba\u03b5\u03c6\u03ac\u03bb\u03b9 \u03c3\u03b1\u03c2. \u0395\u03c0\u03b5\u03ba\u03c4\u03b5\u03af\u03bd\u03b5\u03c4\u03b5 \u03c4\u03b7\u03bd \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae.","\u03a3\u03c4\u03ad\u03ba\u03b5\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03ad\u03bd\u03b1\u03bd \u03b1\u03bb\u03c4\u03ae\u03c1\u03b1 \u03c3\u03b5 \u03ba\u03ac\u03b8\u03b5 \u03c7\u03ad\u03c1\u03b9 \u03c3\u03c4\u03b1 \u03c0\u03bb\u03ac\u03b3\u03b9\u03b1 \u03c3\u03b1\u03c2. \u03a3\u03b7\u03ba\u03ce\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c0\u03bb\u03b5\u03c5\u03c1\u03b9\u03ba\u03ac \u03c3\u03c4\u03bf \u03cd\u03c8\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03b5\u03bb\u03b1\u03c6\u03c1\u03ce\u03c2 \u03bb\u03c5\u03b3\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf\u03c5\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u038c\u03c1\u03b8\u03b9\u03bf\u03c2 \u03bc\u03b5 \u03ad\u03bd\u03b1 \u03b2\u03ac\u03c1\u03bf\u03c2 \u03c3\u03b5 \u03ba\u03ac\u03b8\u03b5 \u03c7\u03ad\u03c1\u03b9 \u03c3\u03c4\u03b1 \u03c0\u03bb\u03ac\u03b3\u03b9\u03b1. \u03a3\u03b7\u03ba\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b1\u03c5\u03c4\u03b9\u03ac \u03c3\u03b1\u03c2 \u03c0\u03b9\u03ad\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b9\u03c2 \u03c0\u03b1\u03b3\u03af\u03b4\u03b5\u03c2 \u03c3\u03b1\u03c2. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03c3\u03cd\u03c3\u03c0\u03b1\u03c3\u03b7 \u03b3\u03b9\u03b1 \u03ad\u03bd\u03b1 \u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03cc\u03bb\u03b5\u03c0\u03c4\u03bf \u03ba\u03b1\u03b9 \u03c3\u03c4\u03b7 \u03c3\u03c5\u03bd\u03ad\u03c7\u03b5\u03b9\u03b1 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u038c\u03c1\u03b8\u03b9\u03bf\u03c2 \u03bc\u03b5 \u03b1\u03bb\u03c4\u03ae\u03c1\u03b5\u03c2 \u03c3\u03c4\u03b1 \u03c0\u03bb\u03ac\u03b3\u03b9\u03b1 \u03bc\u03b5 \u03bf\u03c5\u03b4\u03ad\u03c4\u03b5\u03c1\u03b7 \u03bb\u03b1\u03b2\u03ae (\u03b1\u03bd\u03c4\u03af\u03c7\u03b5\u03b9\u03c1\u03b5\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9). \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03bb\u03c4\u03ae\u03c1\u03b5\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u038c\u03c1\u03b8\u03b9\u03b1 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03b3\u03bf\u03c6\u03ce\u03bd. \u0391\u03c1\u03b8\u03c1\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c4\u03b1\u03bb\u03b1\u03bd\u03c4\u03b5\u03cd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03b1\u03bd\u03ac\u03bc\u03b5\u03c3\u03b1 \u03c3\u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03ba\u03b1\u03b9, \u03c3\u03c4\u03b7 \u03c3\u03c5\u03bd\u03ad\u03c7\u03b5\u03b9\u03b1, \u03bf\u03b4\u03b7\u03b3\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03b5\u03ba\u03c1\u03b7\u03ba\u03c4\u03b9\u03ba\u03ac \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2 \u03c4\u03b1\u03bb\u03b1\u03bd\u03c4\u03b5\u03cd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03bc\u03ad\u03c7\u03c1\u03b9 \u03c4\u03bf \u03cd\u03c8\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd.","\u038c\u03c1\u03b8\u03b9\u03b1 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03b3\u03bf\u03c6\u03ce\u03bd. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03ba\u03b1\u03c4\u03ac \u03bc\u03ae\u03ba\u03bf\u03c2 \u03c4\u03c9\u03bd \u03c0\u03bf\u03b4\u03b9\u03ce\u03bd \u03c3\u03b1\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03b5\u03bb\u03b1\u03c6\u03c1\u03ce\u03c2 \u03bb\u03c5\u03b3\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1 \u03ba\u03b1\u03b9 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03af\u03c3\u03b9\u03b1. \u039a\u03b1\u03c4\u03b5\u03b2\u03b5\u03af\u03c4\u03b5 \u03bc\u03ad\u03c7\u03c1\u03b9 \u03bd\u03b1 \u03bd\u03b9\u03ce\u03c3\u03b5\u03c4\u03b5 \u03ad\u03bd\u03c4\u03b1\u03c3\u03b7 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03bc\u03b7\u03c1\u03b9\u03b1\u03af\u03bf\u03c5\u03c2 \u03bc\u03b7\u03c1\u03b9\u03b1\u03af\u03bf\u03c5\u03c2 \u03ba\u03b1\u03b9 \u03bc\u03b5\u03c4\u03ac \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b5\u03c0\u03ac\u03bd\u03c9.","\u038c\u03c1\u03b8\u03b9\u03b1 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03b3\u03bf\u03c6\u03ce\u03bd. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03af\u03c3\u03b9\u03b1 \u03ba\u03b1\u03b9 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c8\u03b7\u03bb\u03ac. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03ad\u03b4\u03b1\u03c6\u03bf\u03c2 \u03ba\u03b1\u03b9 \u03c4\u03b5\u03bd\u03c4\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03ba\u03b1\u03b9 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03b1 \u03c4\u03b1\u03c5\u03c4\u03cc\u03c7\u03c1\u03bf\u03bd\u03b1 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03ba\u03bf\u03bd\u03c4\u03ac \u03c3\u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2.","\u038c\u03c1\u03b8\u03b9\u03bf\u03c2 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd, \u03ba\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03ad\u03bd\u03b1\u03bd \u03b1\u03bb\u03c4\u03ae\u03c1\u03b1 \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03ac \u03b1\u03c0\u03cc \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2. \u039a\u03b1\u03c4\u03b5\u03b2\u03b5\u03af\u03c4\u03b5 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2 \u03c8\u03b7\u03bb\u03ac. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c8\u03b7\u03bb\u03ac \u03c0\u03b9\u03ad\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b9\u03c2 \u03c6\u03c4\u03ad\u03c1\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2.","\u038c\u03c1\u03b8\u03b9\u03b1 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03bb\u03c5\u03b3\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03b1 \u03ba\u03b1\u03b9 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03b1\u03bd \u03bd\u03b1 \u03ba\u03ac\u03b8\u03b5\u03c3\u03c4\u03b5 \u03c3\u03b5 \u03bc\u03b9\u03b1 \u03ba\u03b1\u03c1\u03ad\u03ba\u03bb\u03b1. \u039a\u03b1\u03c4\u03b5\u03b2\u03b5\u03af\u03c4\u03b5 \u03bc\u03ad\u03c7\u03c1\u03b9 \u03bf\u03b9 \u03bc\u03b7\u03c1\u03bf\u03af \u03c3\u03b1\u03c2 \u03bd\u03b1 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c0\u03b1\u03c1\u03ac\u03bb\u03bb\u03b7\u03bb\u03bf\u03b9 \u03bc\u03b5 \u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03c6\u03c4\u03ad\u03c1\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2.","\u038c\u03c1\u03b8\u03b9\u03bf\u03c2 \u03bc\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03b5\u03bd\u03c9\u03bc\u03ad\u03bd\u03b1. \u039a\u03ac\u03bd\u03c4\u03b5 \u03ad\u03bd\u03b1 \u03c6\u03b1\u03c1\u03b4\u03cd \u03c0\u03bb\u03b5\u03c5\u03c1\u03b9\u03ba\u03cc \u03b2\u03ae\u03bc\u03b1 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03b1\u03bd\u03c4\u03af\u03b8\u03b5\u03c4\u03bf \u03c0\u03cc\u03b4\u03b9 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03b5\u03ba\u03b5\u03af\u03bd\u03b7 \u03c4\u03b7\u03bd \u03c0\u03bb\u03b5\u03c5\u03c1\u03ac \u03bb\u03c5\u03b3\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03b3\u03cc\u03bd\u03b1\u03c4\u03cc \u03c3\u03b1\u03c2.","\u038c\u03c1\u03b8\u03b9\u03bf\u03c2 \u03bc\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2. \u0393\u03b5\u03af\u03c1\u03b5\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03af\u03c3\u03b9\u03b1 \u03ba\u03b1\u03b9 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03b1 \u03b5\u03bb\u03b1\u03c6\u03c1\u03ce\u03c2 \u03bb\u03c5\u03b3\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1. \u039d\u03b9\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c4\u03ad\u03bd\u03c4\u03c9\u03bc\u03b1 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03bc\u03b7\u03c1\u03b9\u03b1\u03af\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c3\u03c4\u03b7\u03bd \u03cc\u03c1\u03b8\u03b9\u03b1 \u03b8\u03ad\u03c3\u03b7.","\u03a3\u03c4\u03b1\u03b8\u03b5\u03af\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03ac \u03b1\u03c0\u03cc \u03c4\u03bf\u03c5\u03c2 \u03bc\u03b7\u03c1\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ce\u03bd\u03c4\u03b1\u03c2 \u03bc\u03b9\u03b1 \u03c0\u03c1\u03b7\u03bd\u03b9\u03c3\u03bc\u03ad\u03bd\u03b7 \u03bb\u03b1\u03b2\u03ae. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c0\u03b7\u03b3\u03bf\u03cd\u03bd\u03b9 \u03c3\u03b1\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c8\u03b7\u03bb\u03cc\u03c4\u03b5\u03c1\u03b1 \u03b1\u03c0\u03cc \u03c4\u03bf\u03c5\u03c2 \u03ba\u03b1\u03c1\u03c0\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u03a3\u03c4\u03ad\u03ba\u03b5\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03ac \u03b1\u03c0\u03cc \u03c4\u03bf\u03c5\u03c2 \u03bc\u03b7\u03c1\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2. \u03a3\u03b7\u03ba\u03ce\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03ac \u03c3\u03b1\u03c2 \u03c3\u03c4\u03bf \u03cd\u03c8\u03bf\u03c2 \u03c4\u03c9\u03bd \u03ce\u03bc\u03c9\u03bd \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03b5\u03bb\u03b1\u03c6\u03c1\u03ce\u03c2 \u03bb\u03c5\u03b3\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf\u03c5\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u03a3\u03c4\u03ad\u03ba\u03b5\u03c4\u03b1\u03b9 \u03bc\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ce\u03bd\u03c4\u03b1\u03c2 \u03bc\u03b9\u03b1 \u03c0\u03c1\u03b7\u03bd\u03b9\u03c3\u03bc\u03ad\u03bd\u03b7 \u03bb\u03b1\u03b2\u03ae (\u03bf\u03b9 \u03c0\u03b1\u03bb\u03ac\u03bc\u03b5\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03ba\u03ac\u03c4\u03c9). \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u038c\u03c1\u03b8\u03b9\u03b1 \u03bc\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ce\u03bd\u03c4\u03b1\u03c2 \u03bc\u03b9\u03b1 \u03cd\u03c0\u03c4\u03b9\u03b1 \u03bb\u03b1\u03b2\u03ae. \u039b\u03c5\u03b3\u03af\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2, \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2 \u03c3\u03c4\u03b1 \u03c0\u03bb\u03ac\u03b3\u03b9\u03b1 \u03c4\u03bf\u03c5 \u03ba\u03bf\u03c1\u03bc\u03bf\u03cd \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u038c\u03c1\u03b8\u03b9\u03b1 \u03bc\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03bc\u03b5 \u03ba\u03bb\u03af\u03c3\u03b7 \u03c3\u03c4\u03b9\u03c2 45 \u03bc\u03bf\u03af\u03c1\u03b5\u03c2. \u03a0\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03bc\u03b5 \u03bc\u03b9\u03b1 \u03c0\u03c1\u03b7\u03bd\u03b9\u03c3\u03bc\u03ad\u03bd\u03b7 \u03bb\u03b1\u03b2\u03ae. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b7\u03bd \u03ba\u03bf\u03b9\u03bb\u03b9\u03ac \u03c3\u03b1\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03bf\u03c5\u03b4\u03ad\u03c4\u03b5\u03c1\u03b7. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u03a3\u03c4\u03ad\u03ba\u03b5\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03c4\u03b1 \u03c4\u03b1\u03ba\u03bf\u03cd\u03bd\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03ac\u03ba\u03c1\u03b7 \u03bc\u03b9\u03b1\u03c2 \u03c0\u03bb\u03b1\u03c4\u03c6\u03cc\u03c1\u03bc\u03b1\u03c2. \u03a3\u03b7\u03ba\u03c9\u03b8\u03b5\u03af\u03c4\u03b5 \u03c3\u03c4\u03b9\u03c2 \u03bc\u03cd\u03c4\u03b5\u03c2 \u03c4\u03c9\u03bd \u03c0\u03bf\u03b4\u03b9\u03ce\u03bd \u03c3\u03b1\u03c2 \u03c3\u03c6\u03af\u03b3\u03b3\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b9\u03c2 \u03b3\u03ac\u03bc\u03c0\u03b5\u03c2 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac \u03b5\u03c0\u03b9\u03c4\u03c1\u03ad\u03c0\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b9\u03c2 \u03c6\u03c4\u03ad\u03c1\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03bd\u03b1 \u03c0\u03ad\u03c6\u03c4\u03bf\u03c5\u03bd \u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03b5\u03c0\u03af\u03c0\u03b5\u03b4\u03bf \u03c4\u03b7\u03c2 \u03c0\u03bb\u03b1\u03c4\u03c6\u03cc\u03c1\u03bc\u03b1\u03c2.","\u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03bc\u03ad\u03c4\u03c1\u03b9\u03bf \u03c1\u03c5\u03b8\u03bc\u03cc \u03ba\u03b1\u03b9 \u03c3\u03c4\u03b1\u03b4\u03b9\u03b1\u03ba\u03ac \u03b1\u03c5\u03be\u03ae\u03c3\u03c4\u03b5.","\u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03b1\u03bd\u03ac\u03c3\u03c5\u03c1\u03c3\u03b7 \u03c4\u03c9\u03bd \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03c9\u03bd. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ad\u03ba\u03ba\u03b5\u03bd\u03c4\u03c1\u03b7 \u03c6\u03ac\u03c3\u03b7.","\u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03b1\u03bd\u03ac\u03c3\u03c5\u03c1\u03c3\u03b7 \u03c4\u03c9\u03bd \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03c9\u03bd. \u039c\u03b7\u03bd \u03b3\u03ad\u03c1\u03bd\u03b5\u03c4\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b1\u03c2 \u03c0\u03bf\u03bb\u03cd \u03c0\u03af\u03c3\u03c9.","\u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03b1\u03bd\u03ac\u03c3\u03c5\u03c1\u03c3\u03b7 \u03c4\u03c9\u03bd \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03c9\u03bd. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7 \u03c7\u03c1\u03ae\u03c3\u03b7 \u03bf\u03c1\u03bc\u03ae\u03c2.","\u039e\u03b5\u03ba\u03b9\u03bd\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03b1\u03bd\u03ac\u03c3\u03c5\u03c1\u03c3\u03b7 \u03c4\u03c9\u03bd \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03c9\u03bd. \u0395\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7 \u03c6\u03ac\u03c3\u03b7 \u03b5\u03c0\u03b9\u03bc\u03ae\u03ba\u03c5\u03bd\u03c3\u03b7\u03c2.","\u039a\u03ac\u03bd\u03c4\u03b5 \u03ad\u03bd\u03b1 \u03b2\u03ae\u03bc\u03b1 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03af\u03c3\u03c9 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03c0\u03af\u03c3\u03c9 \u03b3\u03cc\u03bd\u03b1\u03c4\u03cc \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u03a4\u03bf \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03b9\u03bd\u03cc \u03b3\u03cc\u03bd\u03b1\u03c4\u03bf \u03c0\u03b1\u03c1\u03b1\u03bc\u03ad\u03bd\u03b5\u03b9 \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf \u03bc\u03b5 \u03c4\u03bf\u03bd \u03b1\u03c3\u03c4\u03c1\u03ac\u03b3\u03b1\u03bb\u03bf.","\u03a0\u03c1\u03bf\u03c7\u03c9\u03c1\u03ae\u03c3\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03c0\u03af\u03c3\u03c9 \u03b3\u03cc\u03bd\u03b1\u03c4\u03cc \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u03a4\u03bf \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03b9\u03bd\u03cc \u03b3\u03cc\u03bd\u03b1\u03c4\u03bf \u03c0\u03b1\u03c1\u03b1\u03bc\u03ad\u03bd\u03b5\u03b9 \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf \u03bc\u03b5 \u03c4\u03bf\u03bd \u03b1\u03c3\u03c4\u03c1\u03ac\u03b3\u03b1\u03bb\u03bf. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9.","\u0392\u03ae\u03bc\u03b1 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03c0\u03af\u03c3\u03c9 \u03b3\u03cc\u03bd\u03b1\u03c4\u03cc \u03c3\u03b1\u03c2. \u03a3\u03c5\u03bd\u03b5\u03c7\u03af\u03c3\u03c4\u03b5 \u03bd\u03b1 \u03b2\u03b1\u03b4\u03af\u03b6\u03b5\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2 \u03b5\u03bd\u03b1\u03bb\u03bb\u03ac\u03c3\u03c3\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03c5\u03bd\u03b5\u03c7\u03ce\u03c2.","\u039c\u03c0\u03b5\u03af\u03c4\u03b5 \u03bc\u03ad\u03c3\u03b1 \u03c3\u03c4\u03b7 \u03c1\u03ac\u03b2\u03b4\u03bf \u03c0\u03b1\u03b3\u03af\u03b4\u03b1\u03c2. \u03a0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03c4\u03bf \u03c0\u03bb\u03ac\u03c4\u03bf\u03c2 \u03c4\u03c9\u03bd \u03b3\u03bf\u03c6\u03ce\u03bd. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c0\u03b9\u03ac\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b9\u03c2 \u03bb\u03b1\u03b2\u03ad\u03c2 \u03bc\u03b5 \u03af\u03c3\u03b9\u03b1 \u03c0\u03bb\u03ac\u03c4\u03b7. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03b5\u03ba\u03c4\u03b5\u03af\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03ba\u03b1\u03b9 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03b1 \u03c4\u03b1\u03c5\u03c4\u03cc\u03c7\u03c1\u03bf\u03bd\u03b1.","\u039a\u03ac\u03bd\u03c4\u03b5 \u03bc\u03b5\u03b3\u03ac\u03bb\u03b1 \u03b2\u03ae\u03bc\u03b1\u03c4\u03b1 \u03b3\u03b9\u03b1 \u03bd\u03b1 \u03b4\u03b5\u03c3\u03bc\u03b5\u03cd\u03c3\u03b5\u03c4\u03b5 \u03c0\u03b5\u03c1\u03b9\u03c3\u03c3\u03cc\u03c4\u03b5\u03c1\u03bf \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bb\u03bf\u03c5\u03c4\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2.","\u0397 \u03bc\u03c0\u03bf\u03cd\u03ba\u03bb\u03b1 Zottman \u03b5\u03ba\u03c0\u03b1\u03b9\u03b4\u03b5\u03cd\u03b5\u03b9 \u03c4\u03cc\u03c3\u03bf \u03c4\u03b7\u03bd \u03ba\u03ac\u03bc\u03c8\u03b7 \u03cc\u03c3\u03bf \u03ba\u03b1\u03b9 \u03c4\u03b7\u03bd \u03b5\u03c0\u03ad\u03ba\u03c4\u03b1\u03c3\u03b7 \u03c4\u03bf\u03c5 \u03b1\u03bd\u03c4\u03b9\u03b2\u03c1\u03b1\u03c7\u03af\u03bf\u03c5.","\u0397 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03c0\u03c1\u03ad\u03c0\u03b5\u03b9 \u03bd\u03b1 \u03b2\u03cc\u03c3\u03ba\u03b5\u03b9 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03cc\u03bb\u03b7 \u03c4\u03b7 \u03b4\u03b9\u03ac\u03c1\u03ba\u03b5\u03b9\u03b1 \u03c4\u03b7\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2. \u0395\u03c3\u03c4\u03b9\u03ac\u03c3\u03c4\u03b5 \u03c3\u03c4\u03bf \u03c4\u03ad\u03bd\u03c4\u03c9\u03bc\u03b1 \u03c4\u03c9\u03bd \u03bf\u03c0\u03af\u03c3\u03b8\u03b9\u03c9\u03bd \u03bc\u03b7\u03c1\u03b9\u03b1\u03af\u03c9\u03bd \u03ba\u03b1\u03c4\u03ac \u03c4\u03b7\u03bd \u03ba\u03ac\u03b8\u03bf\u03b4\u03bf.","\u038c\u03c3\u03bf \u03c5\u03c8\u03b7\u03bb\u03cc\u03c4\u03b5\u03c1\u03b7 \u03b5\u03af\u03bd\u03b1\u03b9 \u03b7 \u03b5\u03c0\u03b9\u03c6\u03ac\u03bd\u03b5\u03b9\u03b1, \u03c4\u03cc\u03c3\u03bf \u03c0\u03b5\u03c1\u03b9\u03c3\u03c3\u03cc\u03c4\u03b5\u03c1\u03bf \u03bb\u03b5\u03b9\u03c4\u03bf\u03c5\u03c1\u03b3\u03b5\u03af \u03c4\u03bf \u03c0\u03ac\u03bd\u03c9 \u03bc\u03ad\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5 \u03b8\u03ce\u03c1\u03b1\u03ba\u03b1.","\u039f \u03ba\u03b5\u03ba\u03bb\u03b9\u03bc\u03ad\u03bd\u03bf\u03c2 \u03c0\u03ac\u03b3\u03ba\u03bf\u03c2 \u03c4\u03bf\u03bd\u03af\u03b6\u03b5\u03b9 \u03c4\u03bf \u03c0\u03ac\u03bd\u03c9 \u03bc\u03ad\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5 \u03c3\u03c4\u03ae\u03b8\u03bf\u03c5\u03c2. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b9\u03c2 \u03c9\u03bc\u03bf\u03c0\u03bb\u03ac\u03c4\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03b1\u03bd\u03b1\u03c3\u03c5\u03c1\u03bc\u03ad\u03bd\u03b5\u03c2 \u03ba\u03b1\u03b8' \u03cc\u03bb\u03b7 \u03c4\u03b7 \u03b4\u03b9\u03ac\u03c1\u03ba\u03b5\u03b9\u03b1 \u03c4\u03b7\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2.","\u0397 \u03ba\u03b5\u03ba\u03bb\u03b9\u03bc\u03ad\u03bd\u03b7 \u03ad\u03ba\u03b4\u03bf\u03c3\u03b7 \u03b5\u03af\u03bd\u03b1\u03b9 \u03c0\u03b9\u03bf \u03b5\u03cd\u03ba\u03bf\u03bb\u03b7 \u03ba\u03b1\u03b9 \u03b4\u03b5\u03c3\u03bc\u03b5\u03cd\u03b5\u03b9 \u03c4\u03bf \u03ba\u03ac\u03c4\u03c9 \u03bc\u03ad\u03c1\u03bf\u03c2 \u03c4\u03bf\u03c5 \u03b8\u03ce\u03c1\u03b1\u03ba\u03b1.","\u038c\u03c3\u03bf \u03c0\u03b9\u03bf \u03bf\u03c1\u03b9\u03b6\u03cc\u03bd\u03c4\u03b9\u03bf \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2, \u03c4\u03cc\u03c3\u03bf \u03c0\u03b9\u03bf \u03b4\u03cd\u03c3\u03ba\u03bf\u03bb\u03bf \u03b5\u03af\u03bd\u03b1\u03b9. \u039d\u03b1 \u03b4\u03b9\u03b1\u03c4\u03b7\u03c1\u03b5\u03af\u03c4\u03b5 \u03c0\u03ac\u03bd\u03c4\u03b1 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03b1\u03c0\u03b1\u03c3\u03c7\u03bf\u03bb\u03b7\u03bc\u03ad\u03bd\u03bf.","\u0397 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7 \u03c0\u03c1\u03bf\u03ad\u03c1\u03c7\u03b5\u03c4\u03b1\u03b9 \u03b1\u03c0\u03cc \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2, \u03cc\u03c7\u03b9 \u03b1\u03c0\u03cc \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03af\u03c3\u03b9\u03b1 \u03ba\u03b1\u03c4\u03ac \u03c4\u03b7 \u03c6\u03ac\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03ce\u03b8\u03b7\u03c3\u03b7\u03c2.","\u039f \u03c0\u03ac\u03b3\u03ba\u03bf\u03c2 \u03c4\u03bf\u03c5 \u03b9\u03b5\u03c1\u03bf\u03ba\u03ae\u03c1\u03c5\u03ba\u03b1 \u03b5\u03be\u03b1\u03bb\u03b5\u03af\u03c6\u03b5\u03b9 \u03c4\u03b7 \u03c7\u03c1\u03ae\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03bf\u03c1\u03bc\u03ae\u03c2. \u039c\u03b7\u03bd \u03b1\u03c6\u03ae\u03bd\u03b5\u03c4\u03b5 \u03c4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03bd\u03b1 \u03c0\u03ad\u03c3\u03b5\u03b9 \u03c3\u03c4\u03bf \u03ba\u03ac\u03c4\u03c9 \u03bc\u03ad\u03c1\u03bf\u03c2.","\u03a4\u03bf \u03b1\u03bd\u03ac\u03c0\u03bf\u03b4\u03bf \u03b2\u03bf\u03bb\u03ac\u03bd \u03b5\u03af\u03bd\u03b1\u03b9 \u03c0\u03b9\u03bf \u03b1\u03c3\u03c6\u03b1\u03bb\u03ad\u03c2 \u03b3\u03b9\u03b1 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03b1 \u03b1\u03c0\u03cc \u03c4\u03bf \u03b5\u03bc\u03c0\u03c1\u03cc\u03c2.","\u0397 \u03c0\u03b5\u03c1\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae \u03c0\u03c1\u03bf\u03ad\u03c1\u03c7\u03b5\u03c4\u03b1\u03b9 \u03b1\u03c0\u03cc \u03c4\u03b7 \u03bc\u03ad\u03c3\u03b7, \u03cc\u03c7\u03b9 \u03b1\u03c0\u03cc \u03c4\u03bf \u03ba\u03b5\u03c6\u03ac\u03bb\u03b9.","\u0397 \u03bc\u03c0\u03bf\u03cd\u03ba\u03bb\u03b1 \u03c4\u03bf\u03c5 \u03ba\u03b1\u03b8\u03b9\u03c3\u03c4\u03bf\u03cd \u03c0\u03bf\u03b4\u03b9\u03bf\u03cd \u03b1\u03c5\u03be\u03ac\u03bd\u03b5\u03b9 \u03c4\u03bf \u03b5\u03cd\u03c1\u03bf\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2. \u0391\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03bd\u03b1 \u03c3\u03b7\u03ba\u03ce\u03bd\u03b5\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bb\u03bf\u03c5\u03c4\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03b1\u03c0\u03cc \u03c4\u03bf \u03ba\u03ac\u03b8\u03b9\u03c3\u03bc\u03b1.","\u0397 \u03c5\u03c0\u03bf\u03c3\u03c4\u03ae\u03c1\u03b9\u03be\u03b7 \u03b5\u03be\u03b1\u03bb\u03b5\u03af\u03c6\u03b5\u03b9 \u03c4\u03bf \u03bf\u03c3\u03c6\u03c5\u03ca\u03ba\u03cc \u03c3\u03c4\u03c1\u03b5\u03c2. \u0395\u03c3\u03c4\u03af\u03b1\u03c3\u03b7 \u03c3\u03c4\u03b7\u03bd \u03b1\u03bd\u03ac\u03ba\u03bb\u03b7\u03c3\u03b7.","\u0397 \u03c1\u03ac\u03b2\u03b4\u03bf\u03c2 \u03c0\u03b1\u03b3\u03af\u03b4\u03b1\u03c2 \u03bc\u03b5\u03b9\u03ce\u03bd\u03b5\u03b9 \u03c4\u03b7\u03bd \u03c0\u03af\u03b5\u03c3\u03b7 \u03c3\u03c4\u03b7 \u03c3\u03c0\u03bf\u03bd\u03b4\u03c5\u03bb\u03b9\u03ba\u03ae \u03c3\u03c4\u03ae\u03bb\u03b7. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03af\u03b4\u03b9\u03b1 \u03b5\u03c5\u03b8\u03b5\u03af\u03b1 \u03bc\u03b5 \u03c4\u03b9\u03c2 \u03bb\u03b1\u03b2\u03ad\u03c2.","\u03a4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03ac \u03b2\u03bf\u03b7\u03b8\u03ac \u03c3\u03c4\u03b7\u03bd \u03ba\u03ac\u03b8\u03b5\u03c4\u03b7 \u03c3\u03c4\u03ac\u03c3\u03b7. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1.","\u03a7\u03c1\u03b7\u03c3\u03b9\u03bc\u03bf\u03c0\u03bf\u03b9\u03ae\u03c3\u03c4\u03b5 \u03ad\u03bd\u03b1 \u03bc\u03b9\u03ba\u03c1\u03cc \u03b2\u03ac\u03c1\u03bf\u03c2. \u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03c0\u03ae\u03c7\u03b5\u03b9\u03c2 \u03c3\u03b1\u03c2 \u03b1\u03ba\u03af\u03bd\u03b7\u03c4\u03bf\u03c5\u03c2 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03bc\u03b7\u03c1\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2.","\u039c\u03b5 \u03ad\u03bd\u03b1 \u03c7\u03ad\u03c1\u03b9 \u03ba\u03b1\u03b9 \u03ad\u03bd\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03bf \u03c3\u03c4\u03bf\u03bd \u03c0\u03ac\u03b3\u03ba\u03bf. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03bf\u03bd \u03b1\u03bb\u03c4\u03ae\u03c1\u03b1 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c0\u03bb\u03ac\u03b9 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03bd \u03b1\u03b3\u03ba\u03ce\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03ba\u03bf\u03bd\u03c4\u03ac \u03c3\u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039c\u03b5 \u03c4\u03b7\u03bd \u03bc\u03c0\u03ac\u03c1\u03b1 \u03b1\u03c0\u03cc \u03c0\u03ac\u03bd\u03c9, \u03ba\u03b1\u03c4\u03b5\u03b2\u03b5\u03af\u03c4\u03b5 \u03c3\u03b5 \u03ad\u03bd\u03b1 squat \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03af\u03c3\u03b9\u03b1 \u03ba\u03b1\u03b9 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03ac. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b7\u03bd \u03bc\u03c0\u03ac\u03c1\u03b1 \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03b7.","\u039c\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03ac \u03c3\u03c4\u03bf \u03ba\u03b1\u03bb\u03ce\u03b4\u03b9\u03bf \u03ae \u03bc\u03b5 \u03b1\u03bb\u03c4\u03ae\u03c1\u03b5\u03c2, \u03c4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03bf \u03b5\u03c1\u03b3\u03b1\u03bb\u03b5\u03af\u03bf \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c0\u03c1\u03cc\u03c3\u03c9\u03c0\u03cc \u03c3\u03b1\u03c2 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c8\u03b7\u03bb\u03ac. \u039e\u03b5\u03c7\u03c9\u03c1\u03af\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c6\u03ad\u03c1\u03bd\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03b9\u03c2 \u03b3\u03c1\u03bf\u03b8\u03b9\u03ad\u03c2 \u03c3\u03b1\u03c2 \u03ba\u03bf\u03bd\u03c4\u03ac \u03c3\u03c4\u03b1 \u03b1\u03c5\u03c4\u03b9\u03ac \u03c3\u03b1\u03c2. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039c\u03b5 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03ba\u03b5\u03ba\u03bb\u03b9\u03bc\u03ad\u03bd\u03bf \u03ba\u03ac\u03c4\u03c9 \u03b1\u03c0\u03cc \u03bc\u03b9\u03b1 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ae \u03bc\u03c0\u03ac\u03c1\u03b1, \u03c0\u03b9\u03ac\u03c3\u03c4\u03b5 \u03bc\u03b5 \u03c0\u03c1\u03b7\u03bd\u03ae \u03bb\u03b1\u03b2\u03ae. \u03a4\u03c1\u03b1\u03b2\u03ae\u03be\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b7 \u03bc\u03c0\u03ac\u03c1\u03b1 \u03ba\u03c1\u03b1\u03c4\u03ce\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03ac\u03ba\u03b1\u03bc\u03c0\u03c4\u03bf. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039c\u03b5 \u03c4\u03b1 \u03c0\u03cc\u03b4\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03c5\u03c0\u03b5\u03c1\u03c5\u03c8\u03c9\u03bc\u03ad\u03bd\u03b7 \u03b5\u03c0\u03b9\u03c6\u03ac\u03bd\u03b5\u03b9\u03b1, \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03bf \u03c0\u03ac\u03c4\u03c9\u03bc\u03b1. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u039c\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03b5 \u03bc\u03b9\u03b1 \u03c5\u03c0\u03b5\u03c1\u03c5\u03c8\u03c9\u03bc\u03ad\u03bd\u03b7 \u03b5\u03c0\u03b9\u03c6\u03ac\u03bd\u03b5\u03b9\u03b1, \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03c4\u03ae\u03b8\u03bf\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03b5\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03b1\u03c1\u03c7\u03b9\u03ba\u03ae \u03b8\u03ad\u03c3\u03b7.","\u039c\u03b5 \u03c4\u03b1 \u03c7\u03ad\u03c1\u03b9\u03b1 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b7\u03bd \u03ac\u03ba\u03c1\u03b7 \u03b5\u03bd\u03cc\u03c2 \u03c0\u03ac\u03b3\u03ba\u03bf\u03c5, \u03ba\u03ac\u03bd\u03c4\u03b5 \u03ad\u03bd\u03b1 \u03b2\u03ae\u03bc\u03b1 \u03bc\u03c0\u03c1\u03bf\u03c3\u03c4\u03ac \u03bc\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bb\u03bf\u03c5\u03c4\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03ad\u03be\u03c9. \u03a7\u03b1\u03bc\u03b7\u03bb\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c3\u03ce\u03bc\u03b1 \u03c3\u03b1\u03c2 \u03bb\u03c5\u03b3\u03af\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b9\u03c2 90 \u03bc\u03bf\u03af\u03c1\u03b5\u03c2. \u0391\u03bd\u03b5\u03b2\u03ac\u03b6\u03c9.","\u039c\u03b5 \u03c4\u03bf\u03bd \u03ba\u03bf\u03c1\u03bc\u03cc \u03c3\u03b5 \u03ba\u03bb\u03af\u03c3\u03b7 \u03ba\u03b1\u03b9 \u03c4\u03bf\u03bd \u03b1\u03b3\u03ba\u03ce\u03bd\u03b1 \u03bb\u03c5\u03b3\u03b9\u03c3\u03bc\u03ad\u03bd\u03bf \u03c3\u03c4\u03b9\u03c2 90 \u03bc\u03bf\u03af\u03c1\u03b5\u03c2, \u03c4\u03b5\u03bd\u03c4\u03ce\u03c3\u03c4\u03b5 \u03c4\u03bf \u03c7\u03ad\u03c1\u03b9 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03af\u03c3\u03c9 \u03bc\u03ad\u03c7\u03c1\u03b9 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ae\u03c1\u03b7 \u03ad\u03ba\u03c4\u03b1\u03c3\u03b7. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03bf\u03c6\u03ae \u03c3\u03b9\u03b3\u03ac \u03c3\u03b9\u03b3\u03ac.","\u039c\u03b5 \u03c4\u03bf \u03c0\u03ac\u03bd\u03c9 \u03bc\u03ad\u03c1\u03bf\u03c2 \u03c4\u03b7\u03c2 \u03c0\u03bb\u03ac\u03c4\u03b7\u03c2 \u03c3\u03b5 \u03ad\u03bd\u03b1\u03bd \u03c0\u03ac\u03b3\u03ba\u03bf \u03ba\u03b1\u03b9 \u03c4\u03bf \u03b2\u03ac\u03c1\u03bf\u03c2 \u03c3\u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2. \u03a3\u03c0\u03c1\u03ce\u03be\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bf\u03c6\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2 \u03c0\u03c1\u03bf\u03c2 \u03c4\u03b1 \u03c0\u03ac\u03bd\u03c9 \u03c0\u03b9\u03ad\u03b6\u03bf\u03bd\u03c4\u03b1\u03c2 \u03c4\u03bf\u03c5\u03c2 \u03b3\u03bb\u03bf\u03c5\u03c4\u03bf\u03cd\u03c2 \u03c3\u03b1\u03c2. \u0395\u03c0\u03b9\u03c3\u03c4\u03c1\u03ad\u03c8\u03c4\u03b5 \u03b1\u03c1\u03b3\u03ac.","\u039c\u03b5\u03c4\u03b1\u03ba\u03b9\u03bd\u03b7\u03b8\u03b5\u03af\u03c4\u03b5 \u03c3\u03c4\u03b7 \u03b8\u03ad\u03c3\u03b7 \u03c4\u03ad\u03bd\u03c4\u03c9\u03bc\u03b1 \u03ba\u03b1\u03b9 \u03ba\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf \u03b3\u03b9\u03b1 20-30 \u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03cc\u03bb\u03b5\u03c0\u03c4\u03b1.","\u0391\u03bd\u03b1\u03c0\u03bd\u03b5\u03cd\u03c3\u03c4\u03b5 \u03b2\u03b1\u03b8\u03b9\u03ac \u03ba\u03b1\u03b9 \u03bc\u03b5\u03af\u03bd\u03b5\u03c4\u03b5 \u03c3\u03b5 \u03ad\u03bd\u03b1 \u03ac\u03bd\u03b5\u03c4\u03bf \u03b5\u03cd\u03c1\u03bf\u03c2.","\u0394\u03b9\u03b1\u03c4\u03b7\u03c1\u03ae\u03c3\u03c4\u03b5 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03cc \u03c1\u03c5\u03b8\u03bc\u03cc \u03ba\u03b1\u03b9 \u03b4\u03b9\u03b1\u03c4\u03b7\u03c1\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7 \u03c3\u03c9\u03c3\u03c4\u03ae \u03c3\u03c4\u03ac\u03c3\u03b7 \u03c3\u03b5 \u03cc\u03bb\u03b7 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03b1\u03c0\u03b1\u03c3\u03c7\u03bf\u03bb\u03b7\u03bc\u03ad\u03bd\u03bf \u03ba\u03b1\u03b9 \u03b5\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03ba\u03ac\u03b8\u03b5 \u03c6\u03ac\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03b1\u03b3\u03ba\u03ce\u03bd\u03b5\u03c2 \u03c3\u03b1\u03c2 \u03c3\u03c4\u03b1\u03b8\u03b5\u03c1\u03bf\u03cd\u03c2 \u03ba\u03b1\u03b9 \u03b5\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03ba\u03ac\u03b8\u03b5 \u03b5\u03c0\u03b1\u03bd\u03ac\u03bb\u03b7\u03c8\u03b7 \u03bc\u03b5 \u03ad\u03bb\u03b5\u03b3\u03c7\u03bf.","\u03a4\u03bf\u03c0\u03bf\u03b8\u03b5\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03bf\u03c5\u03c2 \u03ce\u03bc\u03bf\u03c5\u03c2 \u03c3\u03b1\u03c2, \u03b5\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7 \u03ba\u03b1\u03b9 \u03b1\u03c0\u03bf\u03c6\u03cd\u03b3\u03b5\u03c4\u03b5 \u03c4\u03b7 \u03c7\u03c1\u03ae\u03c3\u03b7 \u03c4\u03b7\u03c2 \u03bf\u03c1\u03bc\u03ae\u03c2.","\u0394\u03b9\u03b1\u03c4\u03b7\u03c1\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b1 \u03b3\u03cc\u03bd\u03b1\u03c4\u03ac \u03c3\u03b1\u03c2 \u03b5\u03c5\u03b8\u03c5\u03b3\u03c1\u03b1\u03bc\u03bc\u03b9\u03c3\u03bc\u03ad\u03bd\u03b1 \u03ba\u03b1\u03b9 \u03b5\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03ba\u03b1\u03b9 \u03c4\u03b9\u03c2 \u03b4\u03cd\u03bf \u03c6\u03ac\u03c3\u03b5\u03b9\u03c2 \u03c7\u03b1\u03bc\u03b7\u03bb\u03ce\u03bc\u03b1\u03c4\u03bf\u03c2 \u03ba\u03b1\u03b9 \u03b1\u03bd\u03cd\u03c8\u03c9\u03c3\u03b7\u03c2.","\u039a\u03c1\u03b1\u03c4\u03ae\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03c0\u03bb\u03ac\u03c4\u03b7 \u03c3\u03b1\u03c2 \u03bf\u03c5\u03b4\u03ad\u03c4\u03b5\u03c1\u03b7, \u03c3\u03c6\u03af\u03be\u03c4\u03b5 \u03c4\u03bf\u03bd \u03c0\u03c5\u03c1\u03ae\u03bd\u03b1 \u03c3\u03b1\u03c2 \u03ba\u03b1\u03b9 \u03b5\u03bb\u03ad\u03b3\u03be\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7.","\u0395\u03ba\u03c4\u03b5\u03bb\u03ad\u03c3\u03c4\u03b5 \u03c4\u03b7\u03bd \u03ba\u03af\u03bd\u03b7\u03c3\u03b7 \u03bc\u03b5 \u03ad\u03bb\u03b5\u03b3\u03c7\u03bf, \u03c3\u03c9\u03c3\u03c4\u03ae \u03c3\u03c4\u03ac\u03c3\u03b7 \u03ba\u03b1\u03b9 \u03c0\u03bb\u03ae\u03c1\u03b5\u03c2 \u03b5\u03cd\u03c1\u03bf\u03c2 \u03ba\u03af\u03bd\u03b7\u03c3\u03b7\u03c2."],t.w)
-B.ns={[u.vv]:0,[u.y4]:1,[u.iY]:2,[u.uG]:3,[u.aQ]:4,"Lower slowly":5,"lower slowly":6,"Breathe deeply":7,"Use a full range of motion.":8,[u.cP]:9,[u.Eh]:10,[u.dJ]:11,[u.mn]:12,[u.nz]:13,[u.tc]:14,[u.sE]:15,[u.ew]:16,[u.sS]:17,[u.yX]:18,[u.gu]:19,[u.bT]:20,[u.wt]:21,[u.ti]:22,[u.j5]:23,[u.gK]:24,[u.aJ]:25,[u.aU]:26,[u.BM]:27,[u.ny]:28,[u.pt]:29,[u.nT]:30,[u.sy]:31,[u.ij]:32,[u.qh]:33,[u.uF]:34,[u.do]:35,[u.mW]:36,[u.cx]:37,[u.Cb]:38,[u.eM]:39,[u.wQ]:40,[u.if]:41,[u.mV]:42,[u.gn]:43,[u.o0]:44,[u.qO]:45,[u.rf]:46,[u.C2]:47,[u.jE]:48,[u.re]:49,[u.fN]:50,[u.om]:51,[u.ui]:52,[u.C7]:53,[u.hD]:54,[u.s5]:55,[u.E3]:56,[u.BQ]:57,[u.Ch]:58,[u.fh]:59,[u.As]:60,[u.jo]:61,[u.xy]:62,[u.kW]:63,[u.gz]:64,[u.vt]:65,[u.qp]:66,[u.cz]:67,[u.qU]:68,[u.Et]:69,[u.wR]:70,[u.tt]:71,[u.ci]:72,[u.ix]:73,[u.en]:74,[u.pp]:75,[u.xQ]:76,[u.d6]:77,[u.tR]:78,[u.kO]:79,[u.u6]:80,[u.DJ]:81,[u.kF]:82,[u.w_]:83,[u.f1]:84,[u.Bp]:85,[u.cq]:86,[u.Dt]:87,[u.fe]:88,[u.Dw]:89,[u.vo]:90,[u.wD]:91,[u.D3]:92,[u.hv]:93,[u.sl]:94,[u.h7]:95,[u.b9]:96,[u.Cq]:97,[u.sb]:98,[u.dn]:99,[u.FB]:100,[u.AN]:101,[u.ES]:102,[u.pr]:103,[u.CU]:104,[u.pL]:105,[u.E8]:106,[u.BE]:107,[u.lg]:108,[u.xc]:109,[u.xO]:110,[u.on]:111,[u.e7]:112,[u.ba]:113,[u.ao]:114,[u.aq]:115,[u.dd]:116,[u.g1]:117,[u.rP]:118,[u.k4]:119,[u.bO]:120,[u.qn]:121,[u.b4]:122,[u.ow]:123,[u.bt]:124,[u.g4]:125,[u.ja]:126,[u.mw]:127,[u.be]:128,[u.Fp]:129,[u.kH]:130,[u.iN]:131,[u.wz]:132,[u.in]:133,[u.q5]:134,[u.t7]:135,[u.vI]:136,[u.fw]:137,[u.wZ]:138,[u.pd]:139,[u.gf]:140,[u.g9]:141,[u.ze]:142,[u.lv]:143,[u.tq]:144,[u.oi]:145,[u.qe]:146,[u.uz]:147,[u.hn]:148,[u.uC]:149,[u.xe]:150,[u.bk]:151,[u.nc]:152,[u.ey]:153,[u.jV]:154,[u.cB]:155,[u.hc]:156,[u.hz]:157,[u.bg]:158,[u.jx]:159,[u.xh]:160,[u.tO]:161,[u.f9]:162,[u.di]:163,[u.gN]:164,[u.ux]:165,[u.p2]:166,[u.nF]:167,[u.zI]:168,[u.oq]:169,[u.mq]:170,[u.nJ]:171,[u.vm]:172,[u.rL]:173,[u.ad]:174,[u.gZ]:175,[u.qo]:176,[u.D6]:177,[u.iq]:178,[u.q_]:179,[u.qG]:180,[u.io]:181,[u.iQ]:182,[u.vT]:183,[u.CH]:184,[u.CR]:185,[u.p5]:186,[u.v3]:187,[u.cg]:188,[u.y1]:189,[u.r5]:190,[u.uZ]:191,[u.BT]:192,[u.j7]:193,[u.CN]:194,[u.sd]:195,[u.kS]:196,[u.Cj]:197,[u.fm]:198,[u.c8]:199,[u.EL]:200,[u.ju]:201,[u.hO]:202,[u.oy]:203,[u.yd]:204,[u.A1]:205,[u.rb]:206,[u.vQ]:207,[u.dc]:208,[u.Dc]:209,[u.wy]:210,[u.Dd]:211,[u.gt]:212}
-B.ajL=new A.i(B.ns,["\u0646\u0641\u0650\u0651\u0630 \u0627\u0644\u062d\u0631\u0643\u0629 \u0628\u0628\u0637\u0621 \u0648\u062a\u062d\u0643\u0645. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0648\u0636\u0639\u064a\u0629 \u0635\u062d\u064a\u062d\u0629.","\u0627\u0628\u062f\u0623 \u0628\u0648\u0632\u0646 \u0645\u0639\u062a\u062f\u0644 \u0644\u0625\u062a\u0642\u0627\u0646 \u0627\u0644\u062a\u0642\u0646\u064a\u0629.","\u062a\u0646\u0641\u0633 \u0628\u0639\u0645\u0642. \u0644\u0627 \u062a\u062a\u062c\u0627\u0648\u0632 \u062d\u062f\u0648\u062f\u0643 \u0627\u0644\u0637\u0628\u064a\u0639\u064a\u0629 \u0623\u0628\u062f\u064b\u0627.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062a\u0648\u062a\u0631 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u062c\u0630\u0639 \u0637\u0648\u0627\u0644 \u0627\u0644\u062a\u0645\u0631\u064a\u0646. \u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u0644\u0627\u0645\u0631\u0643\u0632\u064a\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0631\u0627\u0631 \u0627\u0644\u062c\u0630\u0639 \u0637\u0648\u0627\u0644 \u0627\u0644\u062a\u0645\u0631\u064a\u0646.","\u0627\u0646\u0632\u0644 \u0628\u0628\u0637\u0621","\u0627\u0646\u0632\u0644 \u0628\u0628\u0637\u0621","\u062a\u0646\u0641\u0633 \u0628\u0639\u0645\u0642","\u0627\u0633\u062a\u062e\u062f\u0645 \u0646\u0637\u0627\u0642 \u0627\u0644\u062d\u0631\u0643\u0629 \u0627\u0644\u0643\u0627\u0645\u0644.","\u0642\u0628\u0636\u0629 \u0642\u0631\u064a\u0628\u0629 \u062a\u0632\u064a\u062f \u0645\u0646 \u0646\u0637\u0627\u0642 \u0627\u0644\u062d\u0631\u0643\u0629. \u0627\u0644\u0628\u062f\u0621 \u0645\u0646 \u0627\u0644\u062a\u0631\u0627\u062c\u0639.","\u0642\u0628\u0636\u0629 \u0648\u062b\u064a\u0642\u0629 \u062a\u0639\u0632\u0644 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633. \u0623\u0628\u0642\u0650 \u062c\u0633\u0645\u0643 \u0641\u064a \u062e\u0637 \u0645\u0633\u062a\u0642\u064a\u0645.","\u0642\u0628\u0636\u0629 \u0645\u0633\u062a\u0644\u0642\u064a\u0629 \u062a\u0632\u064a\u062f \u0645\u0646 \u0645\u0634\u0627\u0631\u0643\u0629 \u0627\u0644\u0639\u0636\u0644\u0629 \u0630\u0627\u062a \u0627\u0644\u0631\u0623\u0633\u064a\u0646. \u062a\u062c\u0646\u0628 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0632\u062e\u0645.","\u0627\u0636\u0628\u0637 \u0627\u0644\u0645\u0642\u0639\u062f: \u0644\u0627 \u064a\u0646\u0628\u063a\u064a \u0623\u0646 \u062a\u062a\u0645\u062f\u062f \u0631\u0643\u0628\u062a\u064a\u0643 \u0628\u0634\u0643\u0644 \u0645\u0641\u0631\u0637.","\u062f\u0627\u0626\u0645\u0627 \u062a\u0647\u0628\u0637 \u0628\u0647\u062f\u0648\u0621. \u0644\u0627 \u062a\u0642\u0641\u0644 \u0631\u0643\u0628\u062a\u064a\u0643.","\u062a\u062c\u0646\u0628 \u0627\u0644\u0632\u062e\u0645. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0631\u0641\u0639 \u0627\u0644\u062d\u0648\u0636.","\u062a\u062c\u0646\u0628 \u0631\u0641\u0639 \u0645\u0631\u0641\u0642\u064a\u0643 \u0623\u0639\u0644\u0649 \u0645\u0646 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0643\u062a\u0641. \u0627\u0644\u0642\u0628\u0636\u0629 \u0627\u0644\u0623\u0648\u0633\u0639 \u062a\u0642\u0644\u0644 \u0645\u0646 \u062e\u0637\u0631 \u0627\u0644\u0627\u0635\u0637\u062f\u0627\u0645.","\u062a\u062c\u0646\u0628 \u062a\u062f\u0648\u064a\u0631 \u0643\u062a\u0641\u064a\u0643. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0641\u0642\u0637 \u0639\u0644\u0649 \u0627\u0644\u062d\u0631\u0643\u0629 \u0627\u0644\u0639\u0645\u0648\u062f\u064a\u0629.","\u062a\u062c\u0646\u0628 \u062a\u0623\u0631\u062c\u062d \u0627\u0644\u062c\u0630\u0639 \u0627\u0644\u062e\u0627\u0635 \u0628\u0643. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0643\u0644\u0627 \u0627\u0644\u0645\u0631\u062d\u0644\u062a\u064a\u0646.","\u0627\u0644\u062d\u062f\u064a\u062f \u0639\u0644\u0649 \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0623\u0645\u0627\u0645\u064a \u0645\u0646 \u0627\u0644\u0643\u062a\u0641\u064a\u0646 \u0645\u0639 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0645\u0631\u0641\u0642\u064a\u0646. \u0627\u0644\u0646\u0632\u0648\u0644 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u062c\u0630\u0639 \u0639\u0645\u0648\u062f\u064a\u064b\u0627 \u0642\u062f\u0631 \u0627\u0644\u0625\u0645\u0643\u0627\u0646. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649.","\u0623\u062d\u0636\u0631 \u0633\u0627\u0642\u0643 \u0625\u0644\u0649 \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u062a\u0645\u062f\u062f \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u062c\u0630\u0639 \u0641\u064a \u0648\u0636\u0639 \u0645\u0633\u062a\u0642\u064a\u0645. \u0627\u0633\u062a\u0645\u0631 \u0644\u0645\u062f\u0629 20-30 \u062b\u0627\u0646\u064a\u0629.","\u0623\u062d\u0636\u0631 \u0633\u0627\u0642\u0643 \u0625\u0644\u0649 \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u062a\u0645\u062f\u062f \u0645\u0639 \u0627\u0633\u062a\u0642\u0627\u0645\u0629 \u0638\u0647\u0631\u0643. \u0627\u0633\u062a\u0645\u0631 \u0644\u0645\u062f\u0629 20-30 \u062b\u0627\u0646\u064a\u0629 \u0641\u064a \u0627\u0644\u062a\u0646\u0641\u0633 \u0628\u0639\u0645\u0642.","\u0623\u062d\u0636\u0631 \u0633\u0627\u0642\u0643 \u0625\u0644\u0649 \u0627\u0644\u062e\u0627\u0631\u062c \u0641\u064a \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0627\u062e\u062a\u0637\u0627\u0641 \u0627\u0644\u0645\u062a\u062d\u0643\u0645\u0629 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0631\u0627\u0631 \u0642\u0644\u0628\u0643.","\u0623\u062d\u0636\u0631 \u0633\u0627\u0642\u0643 \u0646\u062d\u0648 \u0627\u0644\u0645\u0631\u0643\u0632 \u0641\u064a \u0627\u0644\u062a\u0642\u0631\u064a\u0628 \u0644\u0644\u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0631\u0627\u0631 \u0642\u0644\u0628\u0643.","\u0639\u0642\u062f \u0627\u0644\u0642\u064a\u0645\u0629 \u0627\u0644\u0645\u0637\u0644\u0642\u0629 \u0627\u0644\u062e\u0627\u0635\u0629 \u0628\u0643 \u0637\u0648\u0627\u0644 \u0627\u0644\u062a\u0645\u0631\u064a\u0646. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u0631\u062d\u0644\u0629 \u063a\u0631\u064a\u0628 \u0627\u0644\u0623\u0637\u0648\u0627\u0631.","\u0644\u0627 \u062a\u0642\u0645 \u0628\u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0634\u0643\u0644 \u0645\u0641\u0631\u0637 \u062e\u0644\u0627\u0644 \u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u0627\u0641\u062a\u062a\u0627\u062d. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0646\u0642\u0628\u0627\u0636 \u0627\u0644\u0635\u062f\u0631.","\u0644\u0627 \u062a\u062f\u0639 \u0642\u0648\u0633 \u0638\u0647\u0631\u0643. \u0627\u0628\u062f\u0623 \u0628\u0627\u0644\u0637\u0631\u062d \u0627\u0644\u062c\u0632\u0626\u064a.","\u0644\u0627 \u062a\u062f\u0639 \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u064a\u062a\u062f\u0644\u0649 \u0625\u0644\u0649 \u0627\u0644\u0623\u0633\u0641\u0644. \u0627\u0633\u062d\u0628 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643.","\u0644\u0627 \u062a\u0631\u0641\u0639 \u0627\u0644\u0648\u0631\u0643\u064a\u0646. \u0639\u0642\u062f \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649 \u0644\u0645\u062f\u0629 \u062b\u0627\u0646\u064a\u0629.","\u0644\u0627 \u062a\u0642\u0641\u0644 \u0631\u0643\u0628\u062a\u064a\u0643 \u0641\u064a \u0627\u0644\u062a\u0645\u062f\u064a\u062f. \u0627\u0644\u0623\u0642\u062f\u0627\u0645 \u0627\u0644\u0623\u0639\u0644\u0649 \u0639\u0644\u0649 \u0627\u0644\u0645\u0646\u0635\u0629 \u062a\u0634\u063a\u0644 \u0627\u0644\u0623\u0631\u062f\u0627\u0641 \u0623\u0643\u062b\u0631.","\u0644\u0627 \u062a\u0633\u062d\u0628 \u0631\u0642\u0628\u062a\u0643. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0646\u0642\u0628\u0627\u0636 \u0627\u0644\u0628\u0637\u0646.","\u0644\u0627 \u062a\u0631\u0641\u0639 \u0630\u0631\u0627\u0639\u064a\u0643 \u0641\u0648\u0642 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641. \u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u0645\u0639\u0635\u0645\u064a\u0643 \u0646\u062d\u0648 \u0627\u0644\u0623\u0633\u0641\u0644 \u0642\u0644\u064a\u0644\u0627\u064b (\u0643\u0645\u0627 \u0644\u0648 \u0643\u0646\u062a \u062a\u0635\u0628 \u0627\u0644\u0645\u0627\u0621) \u0644\u0639\u0632\u0644 \u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u062f\u0627\u0644\u064a\u0629 \u0627\u0644\u062c\u0627\u0646\u0628\u064a\u0629.","\u0644\u0627 \u062a\u0631\u0641\u0639 \u0627\u0644\u0648\u0631\u0643\u064a\u0646. \u0623\u0628\u0642\u0650 \u0643\u062a\u0641\u064a\u0643 \u0641\u0648\u0642 \u0645\u0639\u0635\u0645\u064a\u0643.","\u0644\u0627 \u062a\u062f\u0648\u0631 \u0638\u0647\u0631\u0643 \u0641\u064a \u0623\u064a \u0648\u0642\u062a. \u0642\u0645 \u0628\u0625\u0634\u0631\u0627\u0643 \u0642\u0644\u0628\u0643 \u0642\u0628\u0644 \u0627\u0644\u0633\u062d\u0628.","\u0644\u0627 \u062a\u062f\u0648\u0631 \u0638\u0647\u0631\u0643. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u0631\u062d\u0644\u0629 \u063a\u0631\u064a\u0628 \u0627\u0644\u0623\u0637\u0648\u0627\u0631.","\u0644\u0627 \u062a\u062f\u0648\u0631 \u0638\u0647\u0631\u0643. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u062a\u0645\u062f\u062f.","\u0644\u0627 \u062a\u062f\u0648\u0631 \u0638\u0647\u0631\u0643. \u0627\u0628\u062f\u0623 \u0628\u0648\u0632\u0646 \u062e\u0641\u064a\u0641.","\u0644\u0627 \u062a\u0633\u062a\u062e\u062f\u0645 \u0623\u0631\u062c\u0648\u062d\u0629 \u0627\u0644\u062c\u0633\u0645. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0639\u0632\u0644 \u0627\u0644\u0623\u0644\u0648\u064a\u0629 \u0627\u0644\u0648\u0633\u0637\u0649.","\u0644\u0627 \u062a\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0632\u062e\u0645. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0639\u0632\u0644 \u0627\u0644\u0645\u0642\u0631\u0628\u064a\u0646.","\u0644\u0627 \u062a\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0632\u062e\u0645. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634.","\u062a\u0633\u0645\u062d \u0627\u0644\u062f\u0645\u0628\u0644 \u0628\u0646\u0637\u0627\u0642 \u0623\u0643\u0628\u0631 \u0645\u0646 \u0627\u0644\u062d\u0631\u0643\u0629. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062a\u0631\u0627\u062c\u0639 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629.","\u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0623\u0648\u0633\u0639 \u0645\u0646 \u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646 \u0645\u0639 \u062a\u0648\u062c\u064a\u0647 \u0623\u0635\u0627\u0628\u0639 \u0627\u0644\u0642\u062f\u0645 \u0625\u0644\u0649 \u0627\u0644\u062e\u0627\u0631\u062c. \u0642\u0645 \u0628\u0625\u0645\u0633\u0627\u0643 \u0627\u0644\u062d\u062f\u064a\u062f \u0628\u0627\u0644\u0623\u0633\u0641\u0644 \u0628\u0642\u0628\u0636\u0629 \u062f\u0627\u062e\u0644\u064a\u0629. \u0627\u062f\u0641\u0639 \u0628\u0633\u0627\u0642\u064a\u0643 \u0648\u0642\u0645 \u0628\u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0641\u064a \u0646\u0641\u0633 \u0627\u0644\u0648\u0642\u062a \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0627\u0645\u0629 \u0638\u0647\u0631\u0643.","\u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0628\u062d\u064a\u062b \u064a\u0635\u0628\u062d \u0627\u0644\u0648\u0632\u0646 \u0646\u062d\u0648 \u0643\u062a\u0641\u064a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0645\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0627\u0644\u0643\u0627\u0645\u0644 \u0641\u064a \u0645\u0631\u062d\u0644\u0629 \u0645\u062a\u062d\u062f\u0629 \u0627\u0644\u0645\u0631\u0643\u0632. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629 \u0648\u0627\u0644\u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629.","\u0623\u0645\u0633\u0643 \u0627\u0644\u0628\u0627\u0631 \u0628\u0642\u0628\u0636\u0629 \u0645\u0645\u062a\u062f\u0629 \u0628\u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0627\u0628\u062f\u0623 \u0628\u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643\u060c \u0648\u0627\u0633\u062d\u0628 \u062c\u0633\u0645\u0643 \u0644\u0644\u0623\u0639\u0644\u0649 \u062d\u062a\u0649 \u062a\u062a\u062c\u0627\u0648\u0632 \u0630\u0642\u0646\u0643 \u0627\u0644\u0628\u0627\u0631. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0623\u0645\u0633\u0643 \u0627\u0644\u0628\u0627\u0631 \u0628\u0642\u0628\u0636\u0629 \u0645\u0633\u062a\u0644\u0642\u064a\u0629 (\u0631\u0627\u062d\u0629 \u0627\u0644\u064a\u062f \u062a\u0648\u0627\u062c\u0647\u0643) \u0628\u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0627\u0628\u062f\u0623 \u0628\u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643\u060c \u0648\u0627\u0633\u062d\u0628 \u062c\u0633\u0645\u0643 \u0644\u0644\u0623\u0639\u0644\u0649 \u062d\u062a\u0649 \u062a\u062a\u062c\u0627\u0648\u0632 \u0630\u0642\u0646\u0643 \u0627\u0644\u0628\u0627\u0631. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0642\u0628\u0636 \u0639\u0644\u0649 \u0627\u0644\u0642\u0636\u0628\u0627\u0646 \u0627\u0644\u0645\u062a\u0648\u0627\u0632\u064a\u0629 \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0623\u0633\u0644\u062d\u0629. \u0627\u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0645\u0646 \u062e\u0644\u0627\u0644 \u0627\u0644\u0645\u064a\u0644 \u0642\u0644\u064a\u0644\u064b\u0627 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645 \u0648\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0645\u0639\u0644\u0642\u064b\u0627 \u0645\u0646 \u0627\u0644\u0628\u0627\u0631 \u0623\u0648 \u0645\u0633\u062a\u0644\u0642\u064a\u064b\u0627\u060c \u0627\u0631\u0641\u0639 \u0633\u0627\u0642\u064a\u0643 \u0644\u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0623\u0643\u0648\u0627\u0639 \u0627\u0644\u0639\u0627\u0644\u064a\u0629 \u062a\u0645\u0646\u0639 \u0627\u0644\u062d\u062f\u064a\u062f \u0645\u0646 \u0627\u0644\u0627\u0646\u0632\u0644\u0627\u0642. \u064a\u062a\u0637\u0644\u0628 \u062d\u0631\u0643\u0629 \u0643\u0628\u064a\u0631\u0629 \u0641\u064a \u0627\u0644\u0645\u0639\u0635\u0645 \u0648\u0627\u0644\u0643\u0627\u062d\u0644.","\u0639\u0642\u062f \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649 \u0644\u0645\u062f\u0629 \u062b\u0627\u0646\u064a\u0629. \u062a\u062c\u0646\u0628 \u0627\u0644\u0632\u062e\u0645.","\u0639\u0642\u062f \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649 \u0644\u0645\u062f\u0629 \u062b\u0627\u0646\u064a\u0629. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0630\u0642\u0646\u0643 \u062a\u062c\u0627\u0647 \u0635\u062f\u0631\u0643.","\u0639\u0642\u062f \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649. \u062a\u062c\u0646\u0628 \u0627\u0644\u062a\u0639\u0648\u064a\u0636 \u0628\u0638\u0647\u0631\u0643.","\u0623\u0645\u0633\u0643 \u0637\u0631\u0641\u064a \u0627\u0644\u062d\u0628\u0644 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a\u0643. \u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u0627\u0644\u062d\u0628\u0644 \u0641\u0648\u0642 \u0631\u0623\u0633\u0643 \u0648\u0627\u0642\u0641\u0632 \u0623\u062b\u0646\u0627\u0621 \u0645\u0631\u0648\u0631\u0647 \u062a\u062d\u062a \u0642\u062f\u0645\u064a\u0643.","\u0641\u064a \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0627\u0646\u0628\u0637\u0627\u062d\u060c \u0645\u0633\u062a\u0631\u064a\u062d\u064b\u0627 \u0639\u0644\u0649 \u0633\u0627\u0639\u062f\u064a\u0643 \u0648\u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643. \u064a\u0634\u0643\u0644 \u062c\u0633\u0645\u0643 \u062e\u0637\u064b\u0627 \u0645\u0633\u062a\u0642\u064a\u0645\u064b\u0627 \u0645\u0646 \u0627\u0644\u0631\u0623\u0633 \u0625\u0644\u0649 \u0627\u0644\u0643\u0639\u0628. \u0639\u0642\u062f \u0639\u0646 \u0637\u0631\u064a\u0642 \u0627\u0644\u062a\u0639\u0627\u0642\u062f \u0627\u0644\u0623\u0633\u0627\u0633\u064a\u0629 \u0627\u0644\u062e\u0627\u0635\u0629 \u0628\u0643.","\u0641\u064a \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0627\u0646\u0628\u0637\u0627\u062d \u0645\u0639 \u0648\u0636\u0639 \u0627\u0644\u064a\u062f\u064a\u0646 \u0639\u0644\u0649 \u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0627\u062e\u0641\u0636 \u0635\u062f\u0631\u0643 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0639\u0627\u0626\u062f\u0627\u064b \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u062c\u0633\u0645\u0643 \u0641\u064a \u062e\u0637 \u0645\u0633\u062a\u0642\u064a\u0645.","\u0641\u064a \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0636\u063a\u0637. \u0628\u0627\u0644\u062a\u0646\u0627\u0648\u0628\u060c \u0623\u062d\u0636\u0631 \u0631\u0643\u0628\u062a\u064a\u0643 \u0646\u062d\u0648 \u0635\u062f\u0631\u0643 \u0628\u0633\u0631\u0639\u0629 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0645\u0646\u062e\u0641\u0636\u064a\u0646.","\u0641\u064a \u0645\u0648\u0642\u0641 \u0645\u0648\u0642\u0641 \u0627\u0644\u0627\u0646\u0642\u0633\u0627\u0645. \u0627\u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u0623\u0645\u0627\u0645\u064a\u0629. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0623\u0628\u0642\u0650 \u0627\u0644\u0642\u062f\u0645 \u0627\u0644\u0645\u0642\u0627\u0628\u0644\u0629 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636 \u062a\u0645\u0627\u0645\u064b\u0627. \u0627\u0644\u062c\u0630\u0639 \u0641\u064a \u0648\u0636\u0639 \u0645\u0633\u062a\u0642\u064a\u0645.","\u0623\u0628\u0642\u0650 \u0627\u0644\u0630\u0631\u0627\u0639 \u0627\u0644\u0639\u0644\u0648\u064a \u0645\u0648\u0627\u0632\u064a\u064b\u0627 \u0644\u0644\u0623\u0631\u0636. \u062a\u062c\u0646\u0628 \u0627\u0644\u0632\u062e\u0645.","\u0623\u0628\u0642\u0650 \u0630\u0631\u0627\u0639\u064a\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u062a\u064a\u0646. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0627\u0644\u0644\u0627\u062a\u064a\u0646\u064a.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u0633\u0637\u062d\u064b\u0627 \u0648\u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a. \u062a\u062c\u0646\u0628 \u062a\u0623\u0631\u062c\u062d \u0627\u0644\u062c\u0630\u0639 \u0627\u0644\u062e\u0627\u0635 \u0628\u0643.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0641\u064a \u0648\u0636\u0639 \u0645\u062d\u0627\u064a\u062f. \u0627\u0633\u062d\u0628 \u0646\u062d\u0648 \u062e\u0635\u0631\u0643 \u0623\u0648 \u0635\u062f\u0631\u0643. \u0642\u0645 \u0628\u0642\u0628\u0636 \u0639\u0636\u0644\u0627\u062a \u0638\u0647\u0631\u0643 \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u062d\u0631\u0643\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u0648\u0627\u0632\u064a\u0627 \u0644\u0644\u0623\u0631\u0636. \u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u062c\u0630\u0639\u0643 \u0642\u0644\u064a\u0644\u0627\u064b \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u062d\u0631\u0643\u0629.","\u0623\u0628\u0642\u0650 \u0635\u062f\u0631\u0643 \u0645\u0631\u062a\u0641\u0639\u064b\u0627 \u0648\u0631\u0643\u0628\u062a\u064a\u0643 \u0645\u062a\u0648\u0627\u0632\u064a\u062a\u064a\u0646 \u0645\u0639 \u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643. \u0644\u0627 \u062a\u062f\u0639 \u0631\u0643\u0628\u062a\u064a\u0643 \u062a\u0646\u0647\u0627\u0631 \u0625\u0644\u0649 \u0627\u0644\u062f\u0627\u062e\u0644.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0642\u0644\u0628\u0643 \u0645\u0646\u0634\u063a\u0644\u064b\u0627 \u0648\u0638\u0647\u0631\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u064b\u0627. \u062a\u062c\u0646\u0628 \u0627\u0644\u0625\u0641\u0631\u0627\u0637 \u0641\u064a \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0639\u0645\u0648\u062f \u0627\u0644\u0641\u0642\u0631\u064a \u0627\u0644\u0642\u0637\u0646\u064a.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0642\u0644\u0628\u0643 \u0645\u0646\u0634\u063a\u0644\u064b\u0627 \u0644\u062d\u0645\u0627\u064a\u0629 \u0638\u0647\u0631\u0643. \u062a\u062c\u0646\u0628 \u0627\u0644\u0625\u0641\u0631\u0627\u0637 \u0641\u064a \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0639\u0645\u0648\u062f \u0627\u0644\u0641\u0642\u0631\u064a \u0627\u0644\u0642\u0637\u0646\u064a.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a. \u0642\u0645 \u0628\u062a\u0643\u064a\u064a\u0641 \u0627\u0644\u0633\u0631\u0639\u0629 \u0645\u0639 \u0645\u0633\u062a\u0648\u0649 \u0644\u064a\u0627\u0642\u062a\u0643 \u0627\u0644\u0628\u062f\u0646\u064a\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a. \u062a\u062c\u0646\u0628 \u0627\u0644\u0625\u0641\u0631\u0627\u0637 \u0641\u064a \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0639\u0645\u0648\u062f \u0627\u0644\u0641\u0642\u0631\u064a \u0627\u0644\u062e\u0627\u0635 \u0628\u0643.","\u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u0639\u0644\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641 \u0623\u0648 \u0623\u0639\u0644\u0649 \u0642\u0644\u064a\u0644\u0627\u064b. \u0636\u0631\u0648\u0631\u064a \u0644\u0635\u062d\u0629 \u0627\u0644\u0643\u0641\u0629 \u0627\u0644\u0645\u062f\u0648\u0631\u0629.","\u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u0642\u0631\u064a\u0628\u064a\u0646 \u0645\u0646 \u062c\u0633\u0645\u0643. \u062a\u062c\u0646\u0628 \u0625\u062d\u0631\u0627\u0642 \u0645\u0631\u0641\u0642\u064a\u0643.","\u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a\u0643. \u062a\u0624\u0643\u062f \u0627\u0644\u0642\u0628\u0636\u0629 \u0627\u0644\u0645\u062d\u0627\u064a\u062f\u0629 \u0639\u0644\u0649 \u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0639\u0636\u062f\u064a\u0629 \u0627\u0644\u0639\u0636\u062f\u064a\u0629 \u0641\u0648\u0642 \u0627\u0644\u0639\u0636\u0644\u0629 \u0630\u0627\u062a \u0627\u0644\u0631\u0623\u0633\u064a\u0646.","\u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0628\u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0633\u0642\u0641. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0628\u0648\u0637.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629. \u0631\u0643\u0632 \u0639\u0644\u0649 \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0627\u0644\u0643\u0627\u0645\u0644 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646. \u0644\u0627 \u062a\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0632\u062e\u0645.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0627\u0644\u0643\u0627\u0645\u0644.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0644\u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0643\u0627\u0645\u0644.","\u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u062a\u062c\u0647\u064a\u0646 \u0646\u062d\u0648 \u0627\u0644\u0633\u0642\u0641 \u0648\u0642\u0631\u064a\u0628\u064a\u0646 \u0645\u0646 \u0631\u0623\u0633\u0643. \u064a\u062a\u0645 \u062a\u0646\u0634\u064a\u0637 \u0627\u0644\u0631\u0623\u0633 \u0627\u0644\u0637\u0648\u064a\u0644 \u0625\u0644\u0649 \u0623\u0642\u0635\u0649 \u062d\u062f \u0641\u064a \u0627\u0644\u0648\u0636\u0639 \u0627\u0644\u0645\u0645\u062f\u0648\u062f.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u0623\u0645\u0627\u0645\u064a\u0629 \u0645\u062d\u0627\u0630\u064a\u0629 \u0644\u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643. \u064a\u0635\u062d\u062d \u0627\u062e\u062a\u0644\u0627\u0644 \u062a\u0648\u0627\u0632\u0646 \u0627\u0644\u0639\u0636\u0644\u0627\u062a \u0628\u064a\u0646 \u0627\u0644\u0633\u0627\u0642\u064a\u0646.","\u0623\u0628\u0642\u0650 \u0643\u0639\u0628\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636. \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u0643 \u0644\u062a\u0645\u062a\u062f \u0627\u0644\u0646\u0639\u0644.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u062d\u0627\u0630\u0627\u0629 \u0627\u0644\u0648\u0631\u0643\u064a\u0646. \u062a\u062c\u0646\u0628 \u062a\u0631\u0643\u0647\u0645 \u064a\u062a\u062f\u0644\u0649 \u0644\u0644\u0623\u0633\u0641\u0644.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0642\u0641\u0632\u0627\u062a\u0643 \u0645\u0646\u062e\u0641\u0636\u0629. \u0627\u0633\u062a\u062e\u062f\u0645 \u0645\u0639\u0635\u0645\u064a\u0643\u060c \u0648\u0644\u064a\u0633 \u0630\u0631\u0627\u0639\u064a\u0643\u060c \u0644\u062a\u062f\u0648\u064a\u0631 \u0627\u0644\u062d\u0628\u0644.","\u0623\u0628\u0642\u0650 \u0631\u0643\u0628\u062a\u0643 \u0645\u062a\u062c\u0647\u0629 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636. \u062a\u062c\u0646\u0628 \u0627\u0644\u0625\u0641\u0631\u0627\u0637 \u0641\u064a \u062a\u0645\u062f\u064a\u062f \u0638\u0647\u0631\u0643.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0631\u0643\u0628\u062a\u064a\u0643 \u0645\u062a\u0648\u0627\u0632\u064a\u062a\u064a\u0646 \u0645\u0639 \u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643. \u064a\u063a\u064a\u0631 \u0645\u0648\u0636\u0639 \u0627\u0644\u0642\u062f\u0645 \u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0623\u0643\u062b\u0631 \u0646\u0634\u0627\u0637\u064b\u0627.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0631\u0643\u0628\u062a\u064a\u0643 \u0645\u062a\u0648\u0627\u0632\u064a\u062a\u064a\u0646 \u0645\u0639 \u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643. \u0645\u0648\u0642\u0641 \u0627\u0644\u0633\u0648\u0645\u0648 \u064a\u0642\u0644\u0644 \u0645\u0646 \u0645\u0633\u0627\u0631 \u0627\u0644\u062d\u062f\u064a\u062f.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0633\u062a\u0648\u0649 \u062d\u0648\u0636\u0643. \u0627\u0628\u062f\u0623 \u0628\u0648\u0632\u0646 \u062e\u0641\u064a\u0641.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062a\u0631\u0627\u062c\u0639 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643. \u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u0647\u0628\u0648\u0637 \u0644\u0645\u062f\u0629 \u062b\u0627\u0646\u064a\u062a\u064a\u0646 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0631\u062e\u0627\u0621 \u0643\u062a\u0641\u064a\u0643. \u0627\u0644\u062a\u0643\u064a\u0641 \u0645\u0639 \u0648\u062a\u064a\u0631\u0629 \u0627\u0644\u0634\u062f\u0629 \u0627\u0644\u0645\u0637\u0644\u0648\u0628\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062b\u0628\u0627\u062a \u062c\u0630\u0639\u0643 \u0648\u062a\u062c\u0646\u0628 \u0627\u0644\u062a\u0623\u0631\u062c\u062d. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0628\u0648\u0637.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062c\u0630\u0639\u0643 \u0645\u0646\u062a\u0635\u0628\u064b\u0627 \u0648\u0646\u0634\u0637\u064b\u0627. \u062a\u062c\u0646\u0628 \u062a\u0631\u0643 \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u0623\u0645\u0627\u0645\u064a\u0629 \u062a\u062a\u062c\u0627\u0648\u0632 \u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643.","\u0623\u0628\u0642\u0650 \u062c\u0630\u0639\u0643 \u0639\u0645\u0648\u062f\u064a\u064b\u0627 \u0644\u0639\u0632\u0644 \u0627\u0644\u0639\u0636\u0644\u0629 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633. \u0643\u0644\u0645\u0627 \u0627\u0646\u062e\u0641\u0636\u062a\u060c \u0643\u0644\u0645\u0627 \u0632\u0627\u062f \u0627\u0631\u062a\u0628\u0627\u0637 \u0627\u0644\u0635\u062f\u0631.","\u0623\u0628\u0642\u0650 \u0645\u0639\u0635\u0645\u064a\u0643 \u0641\u064a \u0648\u0636\u0639 \u0645\u062d\u0627\u064a\u062f. \u0627\u0644\u0636\u0641\u064a\u0631\u0629 \u0627\u0644\u0639\u0643\u0633\u064a\u0629 \u062a\u0642\u0648\u064a \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0633\u0627\u0639\u062f.","\u0627\u0644\u0631\u0643\u0648\u0639 \u0645\u0639 \u0627\u0644\u0639\u062c\u0644\u0629 \u0641\u064a \u0627\u0644\u0623\u0645\u0627\u0645. \u0642\u0645 \u0628\u062a\u062d\u0631\u064a\u0643 \u0627\u0644\u0639\u062c\u0644\u0629 \u0644\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636. \u0627\u0633\u062d\u0628 \u0627\u0644\u0639\u062c\u0644\u0629 \u0644\u0644\u062e\u0644\u0641 \u0628\u0627\u062a\u062c\u0627\u0647 \u0631\u0643\u0628\u062a\u064a\u0643.","\u0627\u0644\u0645\u064a\u0644 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645 \u064a\u0632\u064a\u062f \u0645\u0646 \u0627\u0631\u062a\u0628\u0627\u0637 \u0627\u0644\u0635\u062f\u0631. \u0627\u0644\u0648\u0636\u0639 \u0627\u0644\u0639\u0645\u0648\u062f\u064a \u064a\u0639\u0632\u0644 \u0627\u0644\u0639\u0636\u0644\u0629 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633.","\u0627\u0644\u0627\u0633\u062a\u0644\u0642\u0627\u0621 \u0645\u0639 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643. \u0627\u062c\u0644\u0628 \u0643\u062a\u0641\u064a\u0643 \u0646\u062d\u0648 \u0631\u0643\u0628\u062a\u064a\u0643 \u0645\u0639 \u0642\u0628\u0636 \u0639\u0636\u0644\u0627\u062a \u0628\u0637\u0646\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0627\u0633\u062a\u0644\u0642\u0627\u0621 \u0645\u0639 \u0631\u0641\u0639 \u0633\u0627\u0642\u064a\u0643. \u0627\u062c\u0644\u0628 \u0631\u0643\u0628\u062a\u064a\u0643 \u0646\u062d\u0648 \u0635\u062f\u0631\u0643 \u0648\u0627\u0631\u0641\u0639 \u062d\u0648\u0636\u0643. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0648\u062c\u0647\u0643 \u0644\u0623\u0633\u0641\u0644 \u0639\u0644\u0649 \u0627\u0644\u062c\u0647\u0627\u0632 \u0645\u0639 \u0648\u0636\u0639 \u0648\u0633\u0627\u062f\u0627\u062a \u0639\u0644\u0649 \u0643\u0627\u062d\u0644\u064a\u0643. \u0642\u0645 \u0628\u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0628\u062d\u064a\u062b \u064a\u0643\u0648\u0646 \u0643\u0639\u0628\u0643 \u0646\u062d\u0648 \u0627\u0644\u0645\u0624\u062e\u0631\u0629. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0645\u0639 \u0627\u0644\u062f\u0645\u0628\u0644 \u0641\u064a \u0643\u0644 \u064a\u062f. \u0642\u0645 \u0628\u062e\u0641\u0636 \u0627\u0644\u062f\u0645\u0628\u0644 \u0646\u062d\u0648 \u0635\u062f\u0631\u0643 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u062b\u0628\u0627\u062a \u0645\u0639\u0635\u0645\u064a\u0643. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0628\u0642\u0648\u0629 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0645\u0639 \u0627\u0644\u062f\u0645\u0628\u0644 \u0641\u064a \u0643\u0644 \u064a\u062f. \u0627\u062e\u0641\u0636 \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0634\u0643\u0644 \u062c\u0627\u0646\u0628\u064a \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u062b\u0646\u064a \u0627\u0644\u0643\u0648\u0639 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u0631\u0641\u0639 \u0627\u0644\u062f\u0645\u0628\u0644\u0632 \u0644\u0644\u0623\u0639\u0644\u0649 \u0639\u0644\u0649 \u0634\u0643\u0644 \u0642\u0648\u0633 \u0643\u0645\u0627 \u0644\u0648 \u0643\u0646\u062a \u062a\u0639\u0627\u0646\u0642 \u0634\u062c\u0631\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0628\u0642\u0628\u0636\u0629 \u0628\u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0627\u062e\u0641\u0636 \u0627\u0644\u0628\u0627\u0631 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0642\u0631\u064a\u0628\u064a\u0646 \u0645\u0646 \u062c\u0630\u0639\u0643. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0645\u0639 \u0648\u0636\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0641\u0648\u0642 \u0635\u062f\u0631\u0643\u060c \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643. \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u0639 \u062e\u0641\u0636 \u0627\u0644\u0648\u0632\u0646 \u0628\u0627\u062a\u062c\u0627\u0647 \u062c\u0628\u0647\u062a\u0643. \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0645\u0648\u0642\u0641.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0645\u0639 \u0648\u0636\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0641\u0648\u0642 \u0635\u062f\u0631\u0643\u060c \u0648\u0630\u0631\u0627\u0639\u064a\u0643 \u0645\u0645\u062a\u062f\u062a\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u064b\u0627. \u0642\u0645 \u0628\u062e\u0641\u0636 \u0627\u0644\u0648\u0632\u0646 \u062e\u0644\u0641 \u0631\u0623\u0633\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u062b\u0646\u064a\u064a\u0646 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629 \u0641\u064a \u0627\u0644\u0642\u0648\u0633.","\u0627\u0633\u062a\u0644\u0642 \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0645\u0639 \u0648\u0636\u0639 \u0642\u062f\u0645\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636. \u0623\u0645\u0633\u0643 \u0628\u0627\u0644\u062d\u062f\u064a\u062f \u0639\u0644\u0649 \u0646\u0637\u0627\u0642 \u0623\u0648\u0633\u0639 \u0645\u0646 \u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0623\u0646\u0632\u0644 \u0627\u0644\u062d\u062f\u064a\u062f \u0625\u0644\u0649 \u0635\u062f\u0631\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0639\u0646\u062f \u062d\u0648\u0627\u0644\u064a 45 \u062f\u0631\u062c\u0629. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0628\u0642\u0648\u0629.","\u0627\u0633\u062a\u0644\u0642 \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0627\u0644\u0645\u0627\u0626\u0644 \u0645\u0639 \u062a\u0623\u0645\u064a\u0646 \u0642\u062f\u0645\u064a\u0643. \u0623\u0645\u0633\u0643 \u0627\u0644\u0623\u062f\u0627\u0629 \u0639\u0644\u0649 \u0646\u0637\u0627\u0642 \u0623\u0648\u0633\u0639 \u0645\u0646 \u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0623\u0633\u0641\u0644 \u0625\u0644\u0649 \u0623\u0633\u0641\u0644 \u0627\u0644\u0635\u062f\u0631. \u0627\u062f\u0641\u0639 \u0628\u0642\u0648\u0629 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u062f\u0639\u0645 \u0627\u0644\u0645\u0627\u0626\u0644 \u0645\u0639 \u062a\u0639\u0644\u064a\u0642 \u0627\u0644\u0623\u0648\u0632\u0627\u0646. \u0627\u0633\u062d\u0628 \u0646\u062d\u0648 \u0627\u0644\u062c\u0630\u0639 \u0627\u0644\u062e\u0627\u0635 \u0628\u0643 \u0644\u0644\u062a\u0639\u0627\u0642\u062f \u0645\u0639 \u0639\u0636\u0644\u0627\u062a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0646\u0632\u0644 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0642\u0631\u0641\u0635\u0627\u0621 \u062b\u0645 \u0627\u0642\u0641\u0632 \u0644\u0644\u0623\u0639\u0644\u0649 \u0628\u0634\u0643\u0644 \u0645\u062a\u0641\u062c\u0631. \u0627\u0647\u0628\u0637 \u0628\u0647\u062f\u0648\u0621 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643.","\u0627\u0646\u0632\u0644 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0642\u0631\u0641\u0635\u0627\u0621\u060c \u0636\u0639 \u064a\u062f\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636 \u0648\u0627\u0642\u0641\u0632 \u0628\u0642\u062f\u0645\u064a\u0643 \u0625\u0644\u0649 \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0636\u063a\u0637. \u0642\u0645 \u0628\u0625\u062c\u0631\u0627\u0621 \u062a\u0645\u0631\u064a\u0646 \u0627\u0644\u0636\u063a\u0637\u060c \u0648\u0627\u0642\u0641\u0632 \u0628\u0642\u062f\u0645\u064a\u0643 \u0646\u062d\u0648 \u064a\u062f\u064a\u0643\u060c \u062b\u0645 \u0627\u0642\u0641\u0632 \u0644\u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u0648\u0636\u0639 \u0630\u0631\u0627\u0639\u064a\u0643 \u0641\u0648\u0642 \u0631\u0623\u0633\u0643.","\u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0648\u062a\u064a\u0631\u0629 \u062b\u0627\u0628\u062a\u0629. \u0627\u0644\u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629 \u0637\u0648\u0627\u0644 \u0627\u0644\u062a\u0645\u0631\u064a\u0646.","\u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0648\u0636\u0639 \u0645\u0633\u062a\u0642\u064a\u0645 \u0645\u0639 \u0645\u064a\u0644 \u0637\u0641\u064a\u0641 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645. \u062e\u0637\u0648\u0627\u062a \u0628\u062f\u064a\u0644\u0629 \u0628\u0648\u062a\u064a\u0631\u0629 \u062b\u0627\u0628\u062a\u0629. \u0627\u0647\u0628\u0637 \u0628\u0642\u062f\u0645\u0643 \u0641\u064a \u0645\u0646\u062a\u0635\u0641 \u0627\u0644\u062e\u0637\u0648\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0646\u0641\u0633 \u0627\u0646\u062d\u0646\u0627\u0621 \u0627\u0644\u0643\u0648\u0639 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629. \u0631\u0643\u0632 \u0639\u0644\u0649 \u0627\u0646\u0642\u0628\u0627\u0636 \u0627\u0644\u0635\u062f\u0631 \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u062d\u0631\u0643\u0629.","\u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0646\u0641\u0633 \u062b\u0646\u064a \u0627\u0644\u0643\u0648\u0639. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0646\u0633\u0628 \u0644\u0645\u062f\u0629 2 \u062b\u0627\u0646\u064a\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0646\u062d\u0646\u0627\u0621 \u0627\u0644\u0643\u0648\u0639 \u0627\u0644\u0637\u0641\u064a\u0641. \u0627\u0644\u0633\u062a\u0631\u0629 \u0647\u064a \u0648\u0627\u062d\u062f\u0629 \u0645\u0646 \u0627\u0644\u062a\u0645\u0627\u0631\u064a\u0646 \u0627\u0644\u0642\u0644\u064a\u0644\u0629 \u0627\u0644\u062a\u064a \u062a\u0645\u062f \u062e\u0637\u0648\u0637 \u0627\u0644\u0637\u0648\u0644.","\u0627\u0644\u062a\u0648\u062a\u0631 \u0627\u0644\u0645\u0639\u062a\u062f\u0644\u060c \u0623\u0628\u062f\u0627 \u0627\u0644\u0623\u0644\u0645. \u0642\u0645 \u0628\u0627\u0644\u0632\u0641\u064a\u0631 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u062a\u0645\u062f\u062f.","\u0639\u0644\u0649 \u0627\u0644\u064a\u062f\u064a\u0646 \u0648\u0627\u0644\u0631\u0643\u0628\u062a\u064a\u0646 \u0623\u0648 \u0627\u0644\u0648\u0642\u0648\u0641 \u0639\u0646\u062f \u0627\u0644\u0643\u0627\u0628\u0644. \u0645\u062f \u0633\u0627\u0642\u0643 \u0625\u0644\u0649 \u0627\u0644\u062e\u0644\u0641 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0627\u0644\u0645\u0624\u062e\u0631\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u0643 \u0645\u0633\u062a\u0631\u064a\u062d\u064b\u0627 \u0639\u0644\u0649 \u0633\u0627\u0639\u062f\u0643 \u0648\u062c\u0633\u0645\u0643 \u0641\u064a \u062e\u0637 \u0645\u0633\u062a\u0642\u064a\u0645. \u0627\u0631\u0641\u0639\u064a \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0627\u0644\u0648\u0636\u0639\u064a\u0629.","\u062a\u062d\u0627\u0641\u0638 \u0627\u0644\u062f\u0648\u0627\u0633\u0629 \u0639\u0644\u0649 \u0648\u062a\u064a\u0631\u0629 \u062b\u0627\u0628\u062a\u0629. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0641\u064a \u0648\u0636\u0639 \u0645\u062d\u0627\u064a\u062f.","\u0623\u062f\u0627\u0621 \u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u0631\u0641\u0639 \u0628\u0642\u0628\u0636\u0629 \u0645\u0633\u062a\u0644\u0642\u064a\u0629. \u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u0645\u0639\u0635\u0645\u064a\u0643 \u0644\u0644\u0646\u0637\u0642 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649. \u0623\u0642\u0644 \u0645\u0639 \u0642\u0628\u0636\u0629 \u0645\u0646\u0637\u0648\u0642\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0645\u0633\u062a\u0644\u0642 \u0641\u064a \u0627\u0644\u0642\u0627\u0639.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062d\u0631\u0643\u0629 \u0627\u0644\u062a\u064a \u062a\u062a\u062d\u0643\u0645 \u0641\u064a \u0643\u0644 \u0645\u0646 \u0627\u0644\u0645\u0631\u062d\u0644\u062a\u064a\u0646 \u063a\u0631\u064a\u0628 \u0627\u0644\u0623\u0637\u0648\u0627\u0631 \u0648\u0645\u062a\u062d\u062f\u0629 \u0627\u0644\u0645\u0631\u0643\u0632. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062d\u0631\u0643\u0629 \u0627\u0644\u062a\u064a \u062a\u062a\u062d\u0643\u0645 \u0641\u064a \u0643\u0644 \u0645\u0646 \u0627\u0644\u0645\u0631\u062d\u0644\u062a\u064a\u0646 \u063a\u0631\u064a\u0628 \u0627\u0644\u0623\u0637\u0648\u0627\u0631 \u0648\u0645\u062a\u062d\u062f\u0629 \u0627\u0644\u0645\u0631\u0643\u0632. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062a\u0631\u0627\u062c\u0639 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062d\u0631\u0643\u0629 \u0628\u0634\u0643\u0644 \u0645\u062a\u0641\u062c\u0631 \u0644\u0644\u0623\u0639\u0644\u0649 \u0623\u0648 \u0644\u0644\u0623\u0645\u0627\u0645. \u0627\u0647\u0628\u0637 \u0628\u0647\u062f\u0648\u0621 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0628\u0648\u0637.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062d\u0631\u0643\u0629 \u0628\u0628\u0637\u0621 \u0641\u064a \u0643\u0644\u0627 \u0627\u0644\u0645\u0631\u062d\u0644\u062a\u064a\u0646. \u0627\u0644\u0625\u064a\u0642\u0627\u0641 \u0627\u0644\u0645\u0624\u0642\u062a \u0641\u064a \u0627\u0644\u0623\u0633\u0641\u0644 \u064a\u0632\u064a\u062f \u0645\u0646 \u062a\u0645\u062f\u062f \u0631\u0628\u0644\u0629 \u0627\u0644\u0633\u0627\u0642.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062a\u0646\u0627\u0648\u0628 \u0628\u0633\u0644\u0627\u0633\u0629 \u0648\u0628\u0634\u0643\u0644 \u0645\u0633\u062a\u0645\u0631. \u064a\u0639\u062f \u0636\u063a\u0637 \u0623\u0631\u0646\u0648\u0644\u062f \u0623\u062d\u062f \u0627\u0644\u062a\u0645\u0627\u0631\u064a\u0646 \u0627\u0644\u0642\u0644\u064a\u0644\u0629 \u0627\u0644\u062a\u064a \u062a\u0634\u063a\u0644 \u062c\u0645\u064a\u0639 \u0623\u0644\u064a\u0627\u0641 \u0627\u0644\u0639\u0636\u0644\u0627\u062a.","\u0636\u0639\u064a \u064a\u062f\u064a\u0643 \u0639\u0644\u0649 \u0634\u0643\u0644 \u0627\u0644\u0645\u0627\u0633\u0629 \u062a\u062d\u062a \u0635\u062f\u0631\u0643. \u0627\u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0642\u0631\u064a\u0628\u064a\u0646 \u0645\u0646 \u062c\u0630\u0639\u0643. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633.","\u0636\u0639 \u0646\u0641\u0633\u0643 \u0641\u064a \u0622\u0644\u0629 \u0627\u0644\u0642\u0631\u0641\u0635\u0627\u0621 \u0645\u0639 \u0648\u0636\u0639 \u0627\u0644\u0643\u062a\u0641\u064a\u0646 \u062a\u062d\u062a \u0627\u0644\u0648\u0633\u0627\u062f\u0627\u062a. \u0627\u0646\u0632\u0644 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0625\u0644\u0649 90 \u062f\u0631\u062c\u0629 \u062b\u0645 \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649.","\u0627\u062f\u0641\u0639 \u0628\u0634\u0643\u0644 \u0631\u0626\u064a\u0633\u064a \u0628\u0627\u0644\u0642\u062f\u0645 \u0639\u0644\u0649 \u0627\u0644\u0633\u0637\u062d \u0627\u0644\u0645\u0631\u062a\u0641\u0639. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062c\u0630\u0639\u0643 \u0641\u064a \u0648\u0636\u0639 \u0645\u0633\u062a\u0642\u064a\u0645.","\u0627\u062f\u0641\u0639 \u0628\u0633\u0627\u0642\u064a\u0643\u060c \u062b\u0645 \u0642\u0645 \u0628\u0625\u0645\u0627\u0644\u0629 \u062c\u0630\u0639\u0643 \u0625\u0644\u0649 \u0627\u0644\u062e\u0644\u0641\u060c \u0648\u0623\u062e\u064a\u0631\u064b\u0627 \u0627\u0633\u062d\u0628 \u0627\u0644\u0645\u062c\u0630\u0627\u0641 \u0646\u062d\u0648 \u0628\u0637\u0646\u0643. \u0639\u0643\u0633 \u0627\u0644\u062a\u0631\u062a\u064a\u0628 \u0639\u0646\u062f \u0627\u0644\u0639\u0648\u062f\u0629.","\u064a\u062a\u0637\u0644\u0628 \u062d\u0631\u0643\u0629 \u0645\u0645\u062a\u0627\u0632\u0629 \u0641\u064a \u0627\u0644\u0643\u062a\u0641 \u0648\u0627\u0644\u0648\u0631\u0643 \u0648\u0627\u0644\u0643\u0627\u062d\u0644. \u0627\u0628\u062f\u0623 \u0628\u062f\u0648\u0646 \u0648\u0632\u0646.","\u0627\u0633\u062d\u0628 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643 \u0648\u0627\u062d\u062a\u0641\u0638 \u0628\u0647\u0627 \u0645\u063a\u0644\u0642\u0629. \u0644\u0627 \u062a\u0631\u062a\u062f \u0627\u0644\u0648\u0632\u0646 \u0645\u0646 \u0635\u062f\u0631\u0643.","\u0627\u0633\u062d\u0628 \u0644\u0648\u062d\u064a \u0643\u062a\u0641\u0643 \u0644\u062a\u062b\u0628\u064a\u062a \u0627\u0644\u0643\u062a\u0641.","\u0642\u0645 \u0628\u0627\u0644\u062a\u062f\u0648\u064a\u0631 \u0645\u0646 \u0627\u0644\u062e\u0635\u0631\u060c \u0648\u0644\u064a\u0633 \u0641\u0642\u0637 \u0645\u0646 \u0627\u0644\u0630\u0631\u0627\u0639\u064a\u0646.","\u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u062c\u0630\u0639\u0643 \u0628\u062d\u064a\u062b \u064a\u0643\u0648\u0646 \u0623\u062d\u062f \u0645\u0631\u0641\u0642\u064a\u0643 \u0628\u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0631\u0643\u0628\u0629 \u0627\u0644\u0645\u0642\u0627\u0628\u0644\u0629. \u0643\u0631\u0631 \u0645\u0646 \u0627\u0644\u062c\u0627\u0646\u0628 \u0627\u0644\u0622\u062e\u0631.","\u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u0645\u0639\u0635\u0645\u0643 \u0644\u0644\u062e\u0627\u0631\u062c \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649 \u0644\u062a\u0639\u0638\u064a\u0645 \u0627\u0644\u0630\u0631\u0648\u0629. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0631\u0627\u0631 \u062c\u0630\u0639\u0643.","\u0627\u062c\u0644\u0633 \u0645\u0639 \u0627\u0644\u062f\u0645\u0628\u0644 \u0639\u0644\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641\u064a\u0646 \u0648\u0631\u0627\u062d\u062a\u064a \u0627\u0644\u064a\u062f \u0645\u0648\u0627\u062c\u0647\u062a\u064a\u0646 \u0644\u0643. \u0627\u0636\u063a\u0637 \u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u062a\u062f\u0648\u064a\u0631 \u0645\u0639\u0635\u0645\u064a\u0643 \u0644\u0644\u062e\u0627\u0631\u062c \u062d\u062a\u0649 \u062a\u0648\u0627\u062c\u0647 \u0631\u0627\u062d\u0629 \u064a\u062f\u0643 \u0644\u0644\u0623\u0645\u0627\u0645. \u0627\u0646\u062e\u0641\u0627\u0636 \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0645\u0648\u0642\u0641 \u0627\u0644\u0623\u0648\u0644\u064a.","\u0627\u062c\u0644\u0633 \u0645\u0639 \u0648\u0636\u0639 \u0645\u0631\u0641\u0642\u0643 \u0639\u0644\u0649 \u0641\u062e\u0630\u0643 \u0627\u0644\u062f\u0627\u062e\u0644\u064a. \u0642\u0645 \u0628\u062b\u0646\u064a \u0643\u0648\u0639\u0643 \u0628\u062d\u064a\u062b \u064a\u0643\u0648\u0646 \u0627\u0644\u062f\u0645\u0628\u0644 \u0628\u0627\u062a\u062c\u0627\u0647 \u0643\u062a\u0641\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u062c\u0644\u0633 \u0645\u0639 \u0631\u0641\u0639 \u0642\u062f\u0645\u064a\u0643 \u0648\u062c\u0630\u0639\u0643 \u0628\u0632\u0627\u0648\u064a\u0629 45 \u062f\u0631\u062c\u0629. \u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u062c\u0630\u0639\u0643 \u0645\u0646 \u062c\u0627\u0646\u0628 \u0625\u0644\u0649 \u0622\u062e\u0631 \u0645\u0639 \u0648\u0636\u0639 \u064a\u062f\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636 \u0628\u062c\u0627\u0646\u0628 \u0627\u0644\u0648\u0631\u0643\u064a\u0646.","\u0627\u0644\u062a\u0633\u0644\u0633\u0644: \u0627\u0644\u0633\u0627\u0642\u064a\u0646 \u062b\u0645 \u0627\u0644\u062c\u0630\u0639 \u062b\u0645 \u0627\u0644\u0630\u0631\u0627\u0639\u064a\u0646 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u0633\u062d\u0628.","\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0622\u0644\u0629 \u0627\u0644\u0633\u062d\u0628 \u0644\u0644\u0623\u0633\u0641\u0644 \u0648\u0623\u0645\u0633\u0643 \u0628\u0627\u0644\u0642\u0636\u064a\u0628 \u0628\u0642\u0628\u0636\u0629 \u0648\u0627\u0633\u0639\u0629. \u0627\u0633\u062d\u0628 \u0627\u0644\u0634\u0631\u064a\u0637 \u0646\u062d\u0648 \u0635\u062f\u0631\u0643 \u0645\u0639 \u0625\u0645\u0627\u0644\u0629 \u062c\u0630\u0639\u0643 \u0644\u0644\u062e\u0644\u0641 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0627\u0644\u0622\u0644\u0629 \u0627\u0644\u0645\u0646\u0633\u062f\u0644\u0629 \u0628\u0642\u0628\u0636\u0629 \u0642\u0631\u064a\u0628\u0629 \u0623\u0648 \u0645\u062d\u0627\u064a\u062f\u0629. \u0627\u0633\u062d\u0628 \u0627\u0644\u0634\u0631\u064a\u0637 \u0646\u062d\u0648 \u0635\u062f\u0631\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0642\u0631\u064a\u0628\u064a\u0646 \u0645\u0646 \u062c\u0633\u0645\u0643. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0639\u0648\u062f\u0629.","\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0627\u0644\u0643\u0627\u0628\u0644 \u0627\u0644\u0645\u0646\u062e\u0641\u0636 \u0645\u0639 \u0648\u0636\u0639 \u0642\u062f\u0645\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u062f\u0639\u0627\u0645\u0627\u062a. \u0627\u0633\u062d\u0628 \u0627\u0644\u0645\u0642\u0628\u0636 \u0646\u062d\u0648 \u062e\u0635\u0631\u0643 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0627\u0645\u0629 \u0638\u0647\u0631\u0643. \u0642\u0645 \u0628\u0642\u0628\u0636 \u0639\u0636\u0644\u0627\u062a \u0638\u0647\u0631\u0643 \u062b\u0645 \u0639\u062f \u0628\u0628\u0637\u0621.","\u0627\u062c\u0644\u0633 \u0623\u0645\u0627\u0645 \u0627\u0644\u0622\u0644\u0629 \u0645\u0639 \u0648\u0636\u0639 \u0648\u0633\u0627\u062f\u0627\u062a \u0639\u0644\u0649 \u0643\u0627\u062d\u0644\u064a\u0643. \u0645\u062f \u0633\u0627\u0642\u064a\u0643 \u0625\u0644\u0649 \u0623\u0639\u0644\u0649 \u0645\u0639 \u062a\u0642\u0644\u064a\u0635 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0641\u062e\u0630. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u062c\u0644\u0633 \u0623\u0645\u0627\u0645 \u0627\u0644\u0622\u0644\u0629 \u0645\u0639 \u0648\u0636\u0639 \u0648\u0633\u0627\u062f\u0627\u062a \u0639\u0644\u0649 \u0643\u0627\u062d\u0644\u064a\u0643. \u0642\u0645 \u0628\u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0628\u062d\u064a\u062b \u064a\u0643\u0648\u0646 \u0643\u0639\u0628\u0643 \u0646\u062d\u0648 \u0627\u0644\u0645\u0624\u062e\u0631\u0629. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0645\u0642\u0639\u062f \u0627\u0644\u0648\u0627\u0639\u0638 \u0648\u0627\u0636\u0639\u064b\u0627 \u0630\u0631\u0627\u0639\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0648\u0633\u0627\u062f\u0629. \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0628\u062d\u064a\u062b \u062a\u0648\u062c\u0647 \u0627\u0644\u0623\u062f\u0627\u0629 \u0646\u062d\u0648 \u0643\u062a\u0641\u064a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0627\u0644\u0627\u0645\u062a\u062f\u0627\u062f \u0627\u0644\u0643\u0627\u0645\u0644 \u062a\u0642\u0631\u064a\u0628\u064b\u0627.","\u0627\u062c\u0644\u0633 \u0641\u064a \u0627\u0644\u0622\u0644\u0629 \u0645\u0639 \u0648\u0636\u0639 \u0638\u0647\u0631\u0643 \u0639\u0644\u0649 \u0627\u0644\u0648\u0633\u0627\u062f\u0629. \u0636\u0639 \u0645\u0631\u0641\u0642\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0648\u0633\u0627\u062f\u0627\u062a. \u0623\u062d\u0636\u0631 \u0630\u0631\u0627\u0639\u064a\u0643 \u0646\u062d\u0648 \u0627\u0644\u0645\u0631\u0643\u0632 \u0645\u0639 \u062a\u0642\u0644\u064a\u0635 \u0635\u062f\u0631\u0643. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u062c\u0644\u0633 \u0641\u064a \u0627\u0644\u0622\u0644\u0629 \u0645\u0639 \u0648\u0636\u0639 \u0642\u062f\u0645\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0645\u0646\u0635\u0629 \u0628\u0639\u0631\u0636 \u0627\u0644\u0648\u0631\u0643. \u0627\u062e\u0641\u0636 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0625\u0644\u0649 90 \u062f\u0631\u062c\u0629. \u0627\u062f\u0641\u0639 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062a\u0645\u062f\u064a\u062f \u0633\u0627\u0642\u064a\u0643.","\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0627\u0644\u0645\u0627\u0626\u0644 \u0645\u0639 \u0648\u0636\u0639 \u0642\u062f\u0645\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636. \u0623\u0645\u0633\u0643 \u0627\u0644\u0623\u062f\u0627\u0629 \u0639\u0644\u0649 \u0646\u0637\u0627\u0642 \u0623\u0648\u0633\u0639 \u0645\u0646 \u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0623\u0642\u0644 \u0625\u0644\u0649 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0635\u062f\u0631 \u0627\u0644\u0639\u0644\u0648\u064a. \u0627\u062f\u0641\u0639 \u0628\u0642\u0648\u0629 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u062c\u0644\u0633 \u0645\u0639 \u0633\u0627\u0639\u062f\u064a\u0643 \u0639\u0644\u0649 \u0641\u062e\u0630\u064a\u0643. \u0623\u0645\u0633\u0643 \u0627\u0644\u0623\u062f\u0627\u0629 \u0628\u0642\u0628\u0636\u0629 \u0645\u0633\u062a\u0644\u0642\u064a\u0629. \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0639\u0635\u0645\u064a\u0643 \u0644\u0644\u0623\u0639\u0644\u0649 \u0648\u0644\u0644\u0623\u0633\u0641\u0644 \u0628\u0628\u0637\u0621.","\u0642\u0645 \u0628\u062a\u0648\u0632\u064a\u0639 \u0627\u0644\u062d\u0628\u0644 \u0641\u064a \u0627\u0644\u0623\u0633\u0641\u0644 \u0644\u062a\u062d\u0642\u064a\u0642 \u0623\u0642\u0635\u0649 \u0642\u062f\u0631 \u0645\u0646 \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0641\u064a \u0645\u0646\u062a\u0635\u0641 \u0627\u0644\u0643\u0627\u0628\u0644 \u0628\u0645\u0642\u0628\u0636 \u0648\u0627\u062d\u062f \u0644\u0643\u0644 \u064a\u062f. \u0623\u0628\u0642\u0650 \u0630\u0631\u0627\u0639\u064a\u0643 \u0645\u062b\u0646\u064a\u062a\u064a\u0646 \u0642\u0644\u064a\u0644\u0627\u064b. \u0623\u062d\u0636\u0631 \u064a\u062f\u064a\u0643 \u0646\u062d\u0648 \u0627\u0644\u0645\u0631\u0643\u0632 \u0645\u0639\u0628\u0631\u0627\u064b \u0625\u064a\u0627\u0647\u0645\u0627. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0639\u0646\u062f \u0627\u0644\u0643\u0627\u0628\u0644 \u0627\u0644\u0639\u0627\u0644\u064a \u0628\u0627\u0644\u062d\u0628\u0644. \u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a \u062c\u0630\u0639\u0643. \u0627\u062f\u0641\u0639 \u0627\u0644\u062d\u0628\u0644 \u0644\u0644\u0623\u0633\u0641\u0644 \u0645\u0639 \u0641\u0635\u0644 \u0627\u0644\u0623\u0637\u0631\u0627\u0641. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0639\u0646\u062f \u0627\u0644\u0643\u0627\u0628\u0644 \u0627\u0644\u0639\u0627\u0644\u064a. \u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a \u062c\u0630\u0639\u0643. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0633\u0641\u0644 \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0627\u0644\u0643\u0627\u0645\u0644. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0641\u064a \u0645\u0648\u0627\u062c\u0647\u0629 \u0627\u0644\u0643\u0627\u0628\u0644 \u0627\u0644\u0639\u0627\u0644\u064a \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u062a\u0642\u0631\u064a\u0628\u064b\u0627. \u0623\u062d\u0636\u0631 \u0627\u0644\u0628\u0627\u0631 \u0646\u062d\u0648 \u0641\u062e\u0630\u064a\u0643 \u0639\u0644\u0649 \u0634\u0643\u0644 \u0642\u0648\u0633 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0630\u0631\u0627\u0639\u064a\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u062a\u064a\u0646. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u064a\u0642\u0641 \u0623\u0645\u0627\u0645 \u0645\u0642\u0627\u0639\u062f \u0627\u0644\u0628\u062f\u0644\u0627\u0621. \u0636\u0639 \u0642\u062f\u0645\u064b\u0627 \u0648\u0627\u062d\u062f\u0629 \u0639\u0644\u0649 \u0627\u0644\u0633\u0637\u062d \u0627\u0644\u0645\u0631\u062a\u0641\u0639 \u0648\u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649. \u0627\u0646\u062e\u0641\u0627\u0636 \u0628\u0628\u0637\u0621 \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u062d\u0631\u0643\u0629.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0639\u0644\u0649 \u0633\u0627\u0642 \u0648\u0627\u062d\u062f\u0629. \u0627\u062e\u0641\u0636 \u062c\u0630\u0639\u0643 \u0644\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u064b\u0627 \u0628\u064a\u0646\u0645\u0627 \u062a\u0645\u062a\u062f \u0633\u0627\u0642\u0643 \u0627\u0644\u062d\u0631\u0629 \u0644\u0644\u062e\u0644\u0641. \u0627\u0631\u062c\u0639 \u0625\u0644\u0649 \u0627\u0644\u0648\u0636\u0639 \u0627\u0644\u0645\u0633\u062a\u0642\u064a\u0645 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0624\u062e\u0631\u0629.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0623\u0648 \u0627\u0644\u062c\u0644\u0648\u0633 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0639\u0644\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0627\u0644\u0643\u0627\u0645\u0644. \u0642\u0645 \u0628\u0627\u0644\u062e\u0641\u0636 \u0628\u0628\u0637\u0621 \u0648\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629 \u0645\u0639 \u0627\u0644\u0648\u0632\u0646 \u0639\u0646\u062f \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0623\u0648 \u0627\u0644\u062c\u0644\u0648\u0633 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0639\u0644\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0627\u0644\u0643\u0627\u0645\u0644. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0623\u0648 \u0627\u0644\u062c\u0644\u0648\u0633 \u0645\u0639 \u0648\u0636\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0641\u0648\u0642 \u0627\u0644\u0631\u0623\u0633\u060c \u0648\u0627\u0644\u0630\u0631\u0627\u0639\u064a\u0646 \u0645\u0645\u062f\u0648\u062f\u062a\u064a\u0646. \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0648\u062e\u0641\u0636 \u0627\u0644\u0648\u0632\u0646 \u062e\u0644\u0641 \u0631\u0623\u0633\u0643. \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0639\u0648\u062f\u0629 \u0644\u0623\u0639\u0644\u0649.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u062f\u0645\u0628\u0644 \u0641\u064a \u0643\u0644 \u064a\u062f \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a\u0643. \u0627\u0631\u0641\u0639 \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0634\u0643\u0644 \u062c\u0627\u0646\u0628\u064a \u0625\u0644\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u0645\u0631\u0641\u0642\u064a\u0646 \u0645\u062b\u0646\u064a\u064a\u0646 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u062b\u0642\u0644 \u0641\u064a \u0643\u0644 \u064a\u062f \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a\u0643. \u0627\u0631\u0641\u0639 \u0643\u062a\u0641\u064a\u0643 \u0646\u062d\u0648 \u0623\u0630\u0646\u064a\u0643 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0645\u0635\u0627\u0626\u062f\u0643. \u0627\u0633\u062a\u0645\u0631\u064a \u0641\u064a \u0627\u0644\u0627\u0646\u0642\u0628\u0627\u0636 \u0644\u0645\u062f\u0629 \u062b\u0627\u0646\u064a\u0629 \u062b\u0645 \u0627\u062e\u0641\u0636\u064a\u0647 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u062f\u0645\u0628\u0644 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a\u0643 \u0628\u0642\u0628\u0636\u0629 \u0645\u062d\u0627\u064a\u062f\u0629 (\u0627\u0644\u0625\u0628\u0647\u0627\u0645 \u0644\u0644\u0623\u0639\u0644\u0649). \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u0639 \u062c\u0644\u0628 \u0627\u0644\u062f\u0645\u0628\u0644 \u0646\u062d\u0648 \u0643\u062a\u0641\u064a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0641\u064a \u0639\u0631\u0636 \u0627\u0644\u0648\u0631\u0643. \u0642\u0645 \u0628\u0627\u0644\u0645\u0641\u0635\u0644\u0629 \u0639\u0646\u062f \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0648\u0623\u0631\u062c\u062d\u0629 \u0627\u0644\u0648\u0632\u0646 \u0628\u064a\u0646 \u0633\u0627\u0642\u064a\u0643\u060c \u062b\u0645 \u0627\u062f\u0641\u0639 \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645 \u0628\u0634\u0643\u0644 \u0645\u062a\u0641\u062c\u0631 \u0645\u0639 \u062a\u0623\u0631\u062c\u062d \u0627\u0644\u0648\u0632\u0646 \u062d\u062a\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0641\u064a \u0639\u0631\u0636 \u0627\u0644\u0648\u0631\u0643. \u0642\u0645 \u0628\u062e\u0641\u0636 \u0627\u0644\u062d\u062f\u064a\u062f \u0639\u0644\u0649 \u0637\u0648\u0644 \u0633\u0627\u0642\u064a\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0631\u0643\u0628\u062a\u064a\u0643 \u0645\u062b\u0646\u064a\u062a\u064a\u0646 \u0642\u0644\u064a\u0644\u0627\u064b \u0648\u0638\u0647\u0631\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u0627\u064b. \u0627\u0646\u0632\u0644 \u062d\u062a\u0649 \u062a\u0634\u0639\u0631 \u0628\u062a\u0648\u062a\u0631 \u0641\u064a \u0623\u0648\u062a\u0627\u0631 \u0627\u0644\u0631\u0643\u0628\u0629 \u062b\u0645 \u0627\u0631\u062c\u0639 \u0644\u0644\u0623\u0639\u0644\u0649.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0641\u064a \u0639\u0631\u0636 \u0627\u0644\u0648\u0631\u0643. \u0627\u062e\u0641\u0636 \u0638\u0647\u0631\u0643 \u0628\u0634\u0643\u0644 \u0645\u0633\u062a\u0642\u064a\u0645 \u0648\u0635\u062f\u0631\u0643 \u0644\u0623\u0639\u0644\u0649. \u0627\u062f\u0641\u0639 \u0642\u062f\u0645\u064a\u0643 \u0625\u0644\u0649 \u0627\u0644\u0623\u0631\u0636 \u0648\u0642\u0645 \u0628\u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0648\u0627\u0644\u0631\u0643\u0628\u062a\u064a\u0646 \u0641\u064a \u0646\u0641\u0633 \u0627\u0644\u0648\u0642\u062a \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u0634\u0631\u064a\u0637 \u0642\u0631\u064a\u0628\u064b\u0627 \u0645\u0646 \u0633\u0627\u0642\u064a\u0643.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0639\u0644\u0649 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0643\u062a\u0641\u060c \u0648\u0639\u0642\u062f \u0627\u0644\u062f\u0645\u0628\u0644 \u0623\u0645\u0627\u0645 \u0635\u062f\u0631\u0643. \u0627\u0646\u0632\u0644 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0635\u062f\u0631\u0643 \u0645\u0631\u062a\u0641\u0639\u064b\u0627. \u0627\u0631\u062c\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0639\u0646 \u0637\u0631\u064a\u0642 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0643\u0639\u0628\u064a\u0643.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0628\u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0627\u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0648\u0648\u0631\u0643\u064a\u0643 \u0643\u0645\u0627 \u0644\u0648 \u0643\u0646\u062a \u062a\u062c\u0644\u0633 \u0639\u0644\u0649 \u0643\u0631\u0633\u064a. \u0627\u0646\u0632\u0644 \u062d\u062a\u0649 \u064a\u0635\u0628\u062d \u0641\u062e\u0630\u064a\u0643 \u0645\u0648\u0627\u0632\u064a\u064a\u0646 \u0644\u0644\u0623\u0631\u0636. \u0627\u062f\u0641\u0639 \u0645\u0646 \u062e\u0644\u0627\u0644 \u0643\u0639\u0628\u0643.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0645\u0639\u064b\u0627. \u062e\u0630 \u062e\u0637\u0648\u0629 \u062c\u0627\u0646\u0628\u064a\u0629 \u0648\u0627\u0633\u0639\u0629 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0627\u0644\u0642\u062f\u0645 \u0627\u0644\u0645\u0642\u0627\u0628\u0644\u0629 \u062b\u0627\u0628\u062a\u0629. \u0627\u062e\u0641\u0636 \u0646\u062d\u0648 \u0647\u0630\u0627 \u0627\u0644\u062c\u0627\u0646\u0628 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u0643.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u062d\u062f\u064a\u062f \u0639\u0644\u0649 \u0643\u062a\u0641\u064a\u0643. \u0642\u0645 \u0628\u0625\u0645\u0627\u0644\u0629 \u062c\u0630\u0639\u0643 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u0627\u064b \u0648\u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u0634\u0639\u0631 \u0628\u0627\u0644\u062a\u0645\u062f\u062f \u0641\u064a \u0623\u0648\u062a\u0627\u0631 \u0627\u0644\u0631\u0643\u0628\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0648\u0636\u0639 \u0627\u0644\u0645\u0633\u062a\u0642\u064a\u0645.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0623\u0645\u0627\u0645 \u0641\u062e\u0630\u064a\u0643 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0642\u0628\u0636\u0629 \u0645\u0646\u0628\u062b\u0642\u0629. \u0627\u0633\u062d\u0628 \u0646\u062d\u0648 \u0630\u0642\u0646\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0623\u0639\u0644\u0649 \u0645\u0646 \u0645\u0639\u0635\u0645\u064a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0623\u0645\u0627\u0645 \u0641\u062e\u0630\u064a\u0643. \u0627\u0631\u0641\u0639\u064a \u0630\u0631\u0627\u0639\u064a\u0643 \u0623\u0645\u0627\u0645\u0643 \u0625\u0644\u0649 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0643\u062a\u0641\u064a\u0646 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u0645\u0631\u0641\u0642\u064a\u0646 \u0645\u062b\u0646\u064a\u064a\u0646 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0642\u0628\u0636\u0629 \u0645\u0646\u0628\u0633\u0637\u0629 (\u0631\u0627\u062d\u0629 \u0627\u0644\u064a\u062f \u0645\u062a\u062c\u0647\u0629 \u0644\u0644\u0623\u0633\u0641\u0644). \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0628\u062d\u064a\u062b \u062a\u0648\u062c\u0647 \u0627\u0644\u0623\u062f\u0627\u0629 \u0646\u062d\u0648 \u0643\u062a\u0641\u064a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0642\u0628\u0636\u0629 \u0645\u0633\u062a\u0644\u0642\u064a\u0629. \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u0639 \u0625\u062d\u0636\u0627\u0631 \u0627\u0644\u0623\u062f\u0627\u0629 \u0646\u062d\u0648 \u0643\u062a\u0641\u064a\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a \u062c\u0630\u0639\u0643. \u062e\u0641\u0636 \u0628\u0628\u0637\u0621 \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0645\u064a\u0644 \u0627\u0644\u062c\u0630\u0639 \u0628\u0632\u0627\u0648\u064a\u0629 45 \u062f\u0631\u062c\u0629. \u0623\u0645\u0633\u0643 \u0628\u0627\u0644\u062d\u062f\u064a\u062f \u0628\u0642\u0628\u0636\u0629 \u0645\u0646\u0628\u0633\u0637\u0629. \u0627\u0633\u062d\u0628 \u0646\u062d\u0648 \u0628\u0637\u0646\u0643 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u062d\u0627\u064a\u062f\u064b\u0627. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0643\u0639\u0628\u064a\u0643 \u0628\u0639\u064a\u062f\u064b\u0627 \u0639\u0646 \u062d\u0627\u0641\u0629 \u0627\u0644\u0645\u0646\u0635\u0629. \u0642\u0645 \u0628\u0627\u0644\u0648\u0642\u0648\u0641 \u0639\u0644\u0649 \u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0633\u0627\u0642\u064a\u0643. \u0627\u0646\u0632\u0644 \u0628\u0628\u0637\u0621 \u0645\u0639 \u0627\u0644\u0633\u0645\u0627\u062d \u0644\u0643\u0639\u0628\u0643 \u0628\u0627\u0644\u0647\u0628\u0648\u0637 \u0625\u0644\u0649 \u0645\u0627 \u062f\u0648\u0646 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0645\u0646\u0635\u0629.","\u0627\u0628\u062f\u0623 \u0628\u0648\u062a\u064a\u0631\u0629 \u0645\u0639\u062a\u062f\u0644\u0629 \u0648\u0642\u0645 \u0628\u0627\u0644\u0632\u064a\u0627\u062f\u0629 \u062a\u062f\u0631\u064a\u062c\u064a\u064b\u0627.","\u0627\u0628\u062f\u0623 \u0628\u062a\u0631\u0627\u062c\u0639 \u0644\u0648\u062d\u064a \u0627\u0644\u0643\u062a\u0641. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u0631\u062d\u0644\u0629 \u063a\u0631\u064a\u0628 \u0627\u0644\u0623\u0637\u0648\u0627\u0631.","\u0627\u0628\u062f\u0623 \u0628\u062a\u0631\u0627\u062c\u0639 \u0644\u0648\u062d\u064a \u0627\u0644\u0643\u062a\u0641. \u0644\u0627 \u062a\u0645\u064a\u0644 \u062c\u0630\u0639\u0643 \u0625\u0644\u0649 \u0627\u0644\u062e\u0644\u0641 \u0643\u062b\u064a\u0631\u064b\u0627.","\u0627\u0628\u062f\u0623 \u0627\u0644\u062d\u0631\u0643\u0629 \u0645\u0646 \u062a\u0631\u0627\u062c\u0639 \u0644\u0648\u062d\u064a \u0627\u0644\u0643\u062a\u0641. \u062a\u062c\u0646\u0628 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0632\u062e\u0645.","\u0627\u0628\u062f\u0623 \u0627\u0644\u062d\u0631\u0643\u0629 \u0645\u0646 \u062a\u0631\u0627\u062c\u0639 \u0644\u0648\u062d\u064a \u0627\u0644\u0643\u062a\u0641. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u0625\u0637\u0627\u0644\u0629.","\u062e\u0637\u0648\u0629 \u0644\u0644\u062e\u0644\u0641 \u0645\u0639 \u062e\u0641\u0636 \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u062e\u0644\u0641\u064a\u0629 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636. \u062a\u0628\u0642\u0649 \u0627\u0644\u0631\u0643\u0628\u0629 \u0627\u0644\u0623\u0645\u0627\u0645\u064a\u0629 \u0645\u062d\u0627\u0630\u064a\u0629 \u0644\u0644\u0643\u0627\u062d\u0644.","\u062e\u0637\u0648\u0629 \u0644\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u062e\u0641\u0636 \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u062e\u0644\u0641\u064a\u0629 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636. \u062a\u0628\u0642\u0649 \u0627\u0644\u0631\u0643\u0628\u0629 \u0627\u0644\u0623\u0645\u0627\u0645\u064a\u0629 \u0645\u062d\u0627\u0630\u064a\u0629 \u0644\u0644\u0643\u0627\u062d\u0644. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649.","\u062e\u0637\u0648\u0629 \u0644\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u062e\u0641\u0636 \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u062e\u0644\u0641\u064a\u0629. \u0627\u0633\u062a\u0645\u0631 \u0641\u064a \u0627\u0644\u062a\u0642\u062f\u0645 \u0644\u0644\u0623\u0645\u0627\u0645 \u0628\u0627\u0644\u062a\u0646\u0627\u0648\u0628 \u0628\u064a\u0646 \u0627\u0644\u0623\u0631\u062c\u0644 \u0628\u0634\u0643\u0644 \u0645\u0633\u062a\u0645\u0631.","\u062e\u0637\u0648\u0629 \u062f\u0627\u062e\u0644 \u0634\u0631\u064a\u0637 \u0641\u062e. \u0642\u062f\u0645 \u0641\u064a \u0639\u0631\u0636 \u0627\u0644\u0648\u0631\u0643. \u0627\u062e\u0641\u0636 \u0646\u0641\u0633\u0643 \u0645\u0645\u0633\u0643\u064b\u0627 \u0628\u0627\u0644\u0645\u0642\u0627\u0628\u0636 \u0628\u0638\u0647\u0631 \u0645\u0633\u062a\u0642\u064a\u0645. \u0627\u062f\u0641\u0639 \u0645\u0646 \u062e\u0644\u0627\u0644 \u0642\u062f\u0645\u064a\u0643 \u0644\u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0648\u0627\u0644\u0631\u0643\u0628\u062a\u064a\u0646 \u0641\u064a \u0648\u0642\u062a \u0648\u0627\u062d\u062f.","\u0627\u062a\u062e\u0630 \u062e\u0637\u0648\u0627\u062a \u0637\u0648\u064a\u0644\u0629 \u0644\u0625\u0634\u0631\u0627\u0643 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0624\u062e\u0631\u0629 \u0628\u0634\u0643\u0644 \u0623\u0643\u0628\u0631.","\u064a\u0642\u0648\u0645 \u062a\u0645\u0631\u064a\u0646 \u0632\u0648\u062a\u0645\u0627\u0646 \u0628\u062a\u062f\u0631\u064a\u0628 \u062b\u0646\u064a \u0648\u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0633\u0627\u0639\u062f.","\u064a\u062c\u0628 \u0623\u0646 \u064a\u0631\u0639\u0649 \u0627\u0644\u0634\u0631\u064a\u0637 \u0633\u0627\u0642\u064a\u0643 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629. \u0631\u0643\u0632 \u0639\u0644\u0649 \u062a\u0645\u062f\u062f \u0623\u0648\u062a\u0627\u0631 \u0627\u0644\u0631\u0643\u0628\u0629 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u0647\u0628\u0648\u0637.","\u0643\u0644\u0645\u0627 \u0627\u0631\u062a\u0641\u0639 \u0627\u0644\u0633\u0637\u062d\u060c \u0643\u0644\u0645\u0627 \u0632\u0627\u062f \u0639\u0645\u0644 \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0639\u0644\u0648\u064a \u0645\u0646 \u0627\u0644\u0635\u062f\u0631.","\u064a\u0624\u0643\u062f \u0627\u0644\u0645\u0642\u0639\u062f \u0627\u0644\u0645\u0627\u0626\u0644 \u0639\u0644\u0649 \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0639\u0644\u0648\u064a \u0645\u0646 \u0627\u0644\u0635\u062f\u0631. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062a\u0631\u0627\u062c\u0639 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629.","\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u0645\u0627\u0626\u0644\u0629 \u0623\u0633\u0647\u0644 \u0648\u062a\u0634\u063a\u0644 \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0633\u0641\u0644\u064a \u0645\u0646 \u0627\u0644\u0635\u062f\u0631.","\u0643\u0644\u0645\u0627 \u0643\u0627\u0646 \u062c\u0633\u0645\u0643 \u0623\u0641\u0642\u064a\u064b\u0627\u060c \u0643\u0644\u0645\u0627 \u0643\u0627\u0646 \u0627\u0644\u0623\u0645\u0631 \u0623\u0635\u0639\u0628. \u062d\u0627\u0641\u0638 \u062f\u0627\u0626\u0645\u064b\u0627 \u0639\u0644\u0649 \u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a.","\u0627\u0644\u062d\u0631\u0643\u0629 \u062a\u0623\u062a\u064a \u0645\u0646 \u0627\u0644\u0648\u0631\u0643\u064a\u0646\u060c \u0648\u0644\u064a\u0633 \u0627\u0644\u0638\u0647\u0631. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0627\u0645\u0629 \u0638\u0647\u0631\u0643 \u062e\u0644\u0627\u0644 \u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u062f\u0641\u0639.","\u0645\u0642\u0639\u062f \u0627\u0644\u0648\u0627\u0639\u0638 \u064a\u0644\u063a\u064a \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0632\u062e\u0645. \u0644\u0627 \u062a\u062f\u0639 \u0627\u0644\u0648\u0632\u0646 \u064a\u0646\u062e\u0641\u0636 \u200b\u200b\u0641\u064a \u0627\u0644\u0623\u0633\u0641\u0644.","\u064a\u0639\u062a\u0628\u0631 \u0627\u0644\u0627\u0646\u062f\u0641\u0627\u0639 \u0627\u0644\u0639\u0643\u0633\u064a \u0623\u0643\u062b\u0631 \u0623\u0645\u0627\u0646\u064b\u0627 \u0644\u0644\u0631\u0643\u0628\u062a\u064a\u0646 \u0645\u0646 \u0627\u0644\u0627\u0646\u062f\u0641\u0627\u0639 \u0627\u0644\u0623\u0645\u0627\u0645\u064a.","\u0627\u0644\u062f\u0648\u0631\u0627\u0646 \u064a\u0623\u062a\u064a \u0645\u0646 \u0627\u0644\u062e\u0635\u0631 \u0648\u0644\u064a\u0633 \u0627\u0644\u0631\u0623\u0633.","\u064a\u0632\u064a\u062f \u062a\u062c\u0639\u064a\u062f \u0627\u0644\u0633\u0627\u0642 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u062c\u0644\u0648\u0633 \u0645\u0646 \u0646\u0637\u0627\u0642 \u0627\u0644\u062d\u0631\u0643\u0629. \u062a\u062c\u0646\u0628 \u0631\u0641\u0639 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0624\u062e\u0631\u0629 \u0639\u0646 \u0627\u0644\u0645\u0642\u0639\u062f.","\u0627\u0644\u062f\u0639\u0645 \u064a\u0632\u064a\u0644 \u0627\u0644\u0636\u063a\u0637 \u0627\u0644\u0642\u0637\u0646\u064a. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0644\u062a\u0631\u0627\u062c\u0639.","\u064a\u0642\u0644\u0644 \u0634\u0631\u064a\u0637 \u0627\u0644\u0645\u0635\u064a\u062f\u0629 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0627\u0644\u0639\u0645\u0648\u062f \u0627\u0644\u0641\u0642\u0631\u064a. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0643\u062a\u0641\u064a\u0643 \u0645\u062a\u0645\u0627\u0634\u064a\u0627 \u0645\u0639 \u0627\u0644\u0645\u0642\u0627\u0628\u0636.","\u0627\u0644\u0648\u0632\u0646 \u0641\u064a \u0627\u0644\u0623\u0645\u0627\u0645 \u064a\u0633\u0627\u0639\u062f \u0641\u064a \u0627\u0644\u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0639\u0645\u0648\u062f\u064a\u0629. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u062d\u0627\u0630\u0627\u0629 \u0631\u0643\u0628\u062a\u064a\u0643.","\u0627\u0633\u062a\u062e\u062f\u0645 \u0648\u0632\u0646\u064b\u0627 \u062e\u0641\u064a\u0641\u064b\u0627. \u0623\u0628\u0642\u0650 \u0633\u0627\u0639\u062f\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0639\u0644\u0649 \u0641\u062e\u0630\u064a\u0643.","\u0628\u064a\u062f \u0648\u0627\u062d\u062f\u0629 \u0648\u0631\u0643\u0628\u0629 \u0648\u0627\u062d\u062f\u0629 \u0639\u0644\u0649 \u0645\u0642\u0627\u0639\u062f \u0627\u0644\u0628\u062f\u0644\u0627\u0621. \u0627\u0633\u062d\u0628 \u0627\u0644\u062f\u0645\u0628\u0644 \u0646\u062d\u0648 \u062c\u0627\u0646\u0628\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u0643 \u0642\u0631\u064a\u0628\u064b\u0627 \u0645\u0646 \u062c\u0633\u0645\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0645\u0639 \u0631\u0641\u0639 \u0627\u0644\u062d\u062f\u064a\u062f \u0641\u0648\u0642 \u0631\u0623\u0633\u0643\u060c \u0627\u0646\u0632\u0644 \u0625\u0644\u0649 \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0642\u0631\u0641\u0635\u0627\u0621 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0630\u0631\u0627\u0639\u064a\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u062a\u064a\u0646 \u0648\u0645\u0633\u062a\u0642\u0631\u062a\u064a\u0646. \u0627\u0631\u062c\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0645\u062d\u0627\u0630\u0627\u0629 \u0627\u0644\u062d\u062f\u064a\u062f.","\u0645\u0639 \u0648\u0636\u0639 \u0630\u0631\u0627\u0639\u064a\u0643 \u0623\u0645\u0627\u0645 \u0627\u0644\u0643\u0627\u0628\u0644 \u0623\u0648 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u062f\u0645\u0628\u0644\u060c \u0627\u0633\u062d\u0628 \u0627\u0644\u0623\u062f\u0627\u0629 \u0646\u062d\u0648 \u0648\u062c\u0647\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u0631\u062a\u0641\u0639\u064a\u0646. \u0627\u0641\u0635\u0644 \u0628\u064a\u0646 \u064a\u062f\u064a\u0643 \u0648\u0627\u062c\u0639\u0644 \u0642\u0628\u0636\u062a\u064a\u0643 \u0628\u0627\u0644\u0642\u0631\u0628 \u0645\u0646 \u0623\u0630\u0646\u064a\u0643. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0645\u0639 \u062c\u0633\u0645\u0643 \u0645\u0627\u0626\u0644 \u062a\u062d\u062a \u0634\u0631\u064a\u0637 \u0645\u0646\u062e\u0641\u0636\u060c \u0623\u0645\u0633\u0643 \u0628\u0642\u0628\u0636\u0629 \u0645\u0646\u0628\u0633\u0637\u0629. \u0627\u0633\u062d\u0628 \u0635\u062f\u0631\u0643 \u0625\u0644\u0649 \u0627\u0644\u0634\u0631\u064a\u0637 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u062c\u0633\u0645\u0643 \u062c\u0627\u0645\u062f\u064b\u0627. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0645\u0639 \u0648\u0636\u0639 \u0642\u062f\u0645\u064a\u0643 \u0639\u0644\u0649 \u0633\u0637\u062d \u0645\u0631\u062a\u0641\u0639\u060c \u0627\u062e\u0641\u0636 \u0635\u062f\u0631\u0643 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0645\u0639 \u0648\u0636\u0639 \u064a\u062f\u064a\u0643 \u0639\u0644\u0649 \u0633\u0637\u062d \u0645\u0631\u062a\u0641\u0639\u060c \u0642\u0645 \u0628\u062e\u0641\u0636 \u0635\u062f\u0631\u0643 \u0646\u062d\u0648 \u064a\u062f\u064a\u0643. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0645\u0639 \u0648\u0636\u0639 \u064a\u062f\u064a\u0643 \u0639\u0644\u0649 \u062d\u0627\u0641\u0629 \u0627\u0644\u0645\u0642\u0639\u062f\u060c \u062a\u0642\u062f\u0645 \u0644\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u0625\u062e\u0631\u0627\u062c \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0624\u062e\u0631\u0629. \u0642\u0645 \u0628\u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0645\u0639 \u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0625\u0644\u0649 90 \u062f\u0631\u062c\u0629. \u0631\u0641\u0639.","\u0645\u0639 \u0625\u0645\u0627\u0644\u0629 \u062c\u0630\u0639\u0643 \u0648\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u0643 \u0628\u0632\u0627\u0648\u064a\u0629 90 \u062f\u0631\u062c\u0629\u060c \u0642\u0645 \u0628\u0645\u062f \u0630\u0631\u0627\u0639\u0643 \u0644\u0644\u062e\u0644\u0641 \u0625\u0644\u0649 \u0627\u0644\u0627\u0645\u062a\u062f\u0627\u062f \u0627\u0644\u0643\u0627\u0645\u0644. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0645\u0639 \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0639\u0644\u0648\u064a \u0645\u0646 \u0638\u0647\u0631\u0643 \u0639\u0644\u0649 \u0645\u0642\u0627\u0639\u062f \u0627\u0644\u0628\u062f\u0644\u0627\u0621 \u0648\u0627\u0644\u0648\u0632\u0646 \u0639\u0644\u0649 \u0627\u0644\u0648\u0631\u0643\u064a\u0646. \u0627\u062f\u0641\u0639 \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0625\u0644\u0649 \u0627\u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0624\u062e\u0631\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0627\u0646\u062a\u0642\u0644 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u062a\u0645\u062f\u062f \u0648\u0627\u0633\u062a\u0645\u0631 \u0644\u0645\u062f\u0629 20-30 \u062b\u0627\u0646\u064a\u0629.","\u062a\u0646\u0641\u0633 \u0628\u0639\u0645\u0642 \u0648\u0627\u0628\u0642 \u0636\u0645\u0646 \u0646\u0637\u0627\u0642 \u0645\u0631\u064a\u062d.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0625\u064a\u0642\u0627\u0639 \u062b\u0627\u0628\u062a \u0648\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0644\u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a \u0648\u062a\u062d\u0643\u0645 \u0641\u064a \u0643\u0644 \u0645\u0631\u062d\u0644\u0629 \u0645\u0646 \u0645\u0631\u0627\u062d\u0644 \u0627\u0644\u062d\u0631\u0643\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0648\u0642\u0645 \u0628\u0623\u062f\u0627\u0621 \u0643\u0644 \u0639\u062f\u0629 \u0628\u062a\u062d\u0643\u0645.","\u0627\u0636\u0628\u0637 \u0643\u062a\u0641\u064a\u0643\u060c \u0648\u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629\u060c \u0648\u062a\u062c\u0646\u0628 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0632\u062e\u0645.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u062d\u0627\u0630\u0627\u0629 \u0631\u0643\u0628\u062a\u064a\u0643 \u0648\u062a\u062d\u0643\u0645 \u0641\u064a \u0645\u0631\u062d\u0644\u062a\u064a \u0627\u0644\u0631\u0641\u0639 \u0648\u0627\u0644\u062e\u0641\u0636.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u062d\u0627\u064a\u062f\u064b\u0627\u060c \u0648\u0627\u0633\u062a\u0639\u062f \u0644\u062c\u0630\u0639\u0643\u060c \u0648\u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062d\u0631\u0643\u0629 \u0645\u0639 \u0627\u0644\u062a\u062d\u0643\u0645\u060c \u0648\u0627\u0644\u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0645\u0646\u0627\u0633\u0628\u0629\u060c \u0648\u0645\u062c\u0645\u0648\u0639\u0629 \u0643\u0627\u0645\u0644\u0629 \u0645\u0646 \u0627\u0644\u062d\u0631\u0643\u0629."],t.w)
+B.nr={[u.vv]:0,[u.y4]:1,[u.iY]:2,[u.uG]:3,[u.aQ]:4,"Lower slowly":5,"lower slowly":6,"Breathe deeply":7,"Use a full range of motion.":8,[u.cP]:9,[u.Eh]:10,[u.dJ]:11,[u.mn]:12,[u.nz]:13,[u.tc]:14,[u.sE]:15,[u.ew]:16,[u.sS]:17,[u.yX]:18,[u.gu]:19,[u.bT]:20,[u.wt]:21,[u.ti]:22,[u.j5]:23,[u.gK]:24,[u.aJ]:25,[u.aU]:26,[u.BM]:27,[u.ny]:28,[u.pt]:29,[u.nT]:30,[u.sy]:31,[u.ij]:32,[u.qh]:33,[u.uF]:34,[u.do]:35,[u.mW]:36,[u.cx]:37,[u.Cb]:38,[u.eM]:39,[u.wQ]:40,[u.if]:41,[u.mV]:42,[u.gn]:43,[u.o0]:44,[u.qO]:45,[u.rf]:46,[u.C2]:47,[u.jE]:48,[u.re]:49,[u.fN]:50,[u.om]:51,[u.ui]:52,[u.C7]:53,[u.hD]:54,[u.s5]:55,[u.E3]:56,[u.BQ]:57,[u.Ch]:58,[u.fh]:59,[u.As]:60,[u.jo]:61,[u.xy]:62,[u.kW]:63,[u.gz]:64,[u.vt]:65,[u.qp]:66,[u.cz]:67,[u.qU]:68,[u.Et]:69,[u.wR]:70,[u.tt]:71,[u.ci]:72,[u.ix]:73,[u.en]:74,[u.pp]:75,[u.xQ]:76,[u.d6]:77,[u.tR]:78,[u.kO]:79,[u.u6]:80,[u.DJ]:81,[u.kF]:82,[u.w_]:83,[u.f1]:84,[u.Bp]:85,[u.cq]:86,[u.Dt]:87,[u.fe]:88,[u.Dw]:89,[u.vo]:90,[u.wD]:91,[u.D3]:92,[u.hv]:93,[u.sl]:94,[u.h7]:95,[u.b9]:96,[u.Cq]:97,[u.sb]:98,[u.dn]:99,[u.FB]:100,[u.AN]:101,[u.ES]:102,[u.pr]:103,[u.CU]:104,[u.pL]:105,[u.E8]:106,[u.BE]:107,[u.lg]:108,[u.xc]:109,[u.xO]:110,[u.on]:111,[u.e7]:112,[u.ba]:113,[u.ao]:114,[u.aq]:115,[u.dd]:116,[u.g1]:117,[u.rP]:118,[u.k4]:119,[u.bO]:120,[u.qn]:121,[u.b4]:122,[u.ow]:123,[u.bt]:124,[u.g4]:125,[u.ja]:126,[u.mw]:127,[u.be]:128,[u.Fp]:129,[u.kH]:130,[u.iN]:131,[u.wz]:132,[u.in]:133,[u.q5]:134,[u.t7]:135,[u.vI]:136,[u.fw]:137,[u.wZ]:138,[u.pd]:139,[u.gf]:140,[u.g9]:141,[u.ze]:142,[u.lv]:143,[u.tq]:144,[u.oi]:145,[u.qe]:146,[u.uz]:147,[u.hn]:148,[u.uC]:149,[u.xe]:150,[u.bk]:151,[u.nc]:152,[u.ey]:153,[u.jV]:154,[u.cB]:155,[u.hc]:156,[u.hz]:157,[u.bg]:158,[u.jx]:159,[u.xh]:160,[u.tO]:161,[u.f9]:162,[u.di]:163,[u.gN]:164,[u.ux]:165,[u.p2]:166,[u.nF]:167,[u.zI]:168,[u.oq]:169,[u.mq]:170,[u.nJ]:171,[u.vm]:172,[u.rL]:173,[u.ad]:174,[u.gZ]:175,[u.qo]:176,[u.D6]:177,[u.iq]:178,[u.q_]:179,[u.qG]:180,[u.io]:181,[u.iQ]:182,[u.vT]:183,[u.CH]:184,[u.CR]:185,[u.p5]:186,[u.v3]:187,[u.cg]:188,[u.y1]:189,[u.r5]:190,[u.uZ]:191,[u.BT]:192,[u.j7]:193,[u.CN]:194,[u.sd]:195,[u.kS]:196,[u.Cj]:197,[u.fm]:198,[u.c8]:199,[u.EL]:200,[u.ju]:201,[u.hO]:202,[u.oy]:203,[u.yd]:204,[u.A1]:205,[u.rb]:206,[u.vQ]:207,[u.dc]:208,[u.Dc]:209,[u.wy]:210,[u.Dd]:211,[u.gt]:212}
+B.ajL=new A.i(B.nr,["\u0646\u0641\u0650\u0651\u0630 \u0627\u0644\u062d\u0631\u0643\u0629 \u0628\u0628\u0637\u0621 \u0648\u062a\u062d\u0643\u0645. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0648\u0636\u0639\u064a\u0629 \u0635\u062d\u064a\u062d\u0629.","\u0627\u0628\u062f\u0623 \u0628\u0648\u0632\u0646 \u0645\u0639\u062a\u062f\u0644 \u0644\u0625\u062a\u0642\u0627\u0646 \u0627\u0644\u062a\u0642\u0646\u064a\u0629.","\u062a\u0646\u0641\u0633 \u0628\u0639\u0645\u0642. \u0644\u0627 \u062a\u062a\u062c\u0627\u0648\u0632 \u062d\u062f\u0648\u062f\u0643 \u0627\u0644\u0637\u0628\u064a\u0639\u064a\u0629 \u0623\u0628\u062f\u064b\u0627.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062a\u0648\u062a\u0631 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u062c\u0630\u0639 \u0637\u0648\u0627\u0644 \u0627\u0644\u062a\u0645\u0631\u064a\u0646. \u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u0644\u0627\u0645\u0631\u0643\u0632\u064a\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0631\u0627\u0631 \u0627\u0644\u062c\u0630\u0639 \u0637\u0648\u0627\u0644 \u0627\u0644\u062a\u0645\u0631\u064a\u0646.","\u0627\u0646\u0632\u0644 \u0628\u0628\u0637\u0621","\u0627\u0646\u0632\u0644 \u0628\u0628\u0637\u0621","\u062a\u0646\u0641\u0633 \u0628\u0639\u0645\u0642","\u0627\u0633\u062a\u062e\u062f\u0645 \u0646\u0637\u0627\u0642 \u0627\u0644\u062d\u0631\u0643\u0629 \u0627\u0644\u0643\u0627\u0645\u0644.","\u0642\u0628\u0636\u0629 \u0642\u0631\u064a\u0628\u0629 \u062a\u0632\u064a\u062f \u0645\u0646 \u0646\u0637\u0627\u0642 \u0627\u0644\u062d\u0631\u0643\u0629. \u0627\u0644\u0628\u062f\u0621 \u0645\u0646 \u0627\u0644\u062a\u0631\u0627\u062c\u0639.","\u0642\u0628\u0636\u0629 \u0648\u062b\u064a\u0642\u0629 \u062a\u0639\u0632\u0644 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633. \u0623\u0628\u0642\u0650 \u062c\u0633\u0645\u0643 \u0641\u064a \u062e\u0637 \u0645\u0633\u062a\u0642\u064a\u0645.","\u0642\u0628\u0636\u0629 \u0645\u0633\u062a\u0644\u0642\u064a\u0629 \u062a\u0632\u064a\u062f \u0645\u0646 \u0645\u0634\u0627\u0631\u0643\u0629 \u0627\u0644\u0639\u0636\u0644\u0629 \u0630\u0627\u062a \u0627\u0644\u0631\u0623\u0633\u064a\u0646. \u062a\u062c\u0646\u0628 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0632\u062e\u0645.","\u0627\u0636\u0628\u0637 \u0627\u0644\u0645\u0642\u0639\u062f: \u0644\u0627 \u064a\u0646\u0628\u063a\u064a \u0623\u0646 \u062a\u062a\u0645\u062f\u062f \u0631\u0643\u0628\u062a\u064a\u0643 \u0628\u0634\u0643\u0644 \u0645\u0641\u0631\u0637.","\u062f\u0627\u0626\u0645\u0627 \u062a\u0647\u0628\u0637 \u0628\u0647\u062f\u0648\u0621. \u0644\u0627 \u062a\u0642\u0641\u0644 \u0631\u0643\u0628\u062a\u064a\u0643.","\u062a\u062c\u0646\u0628 \u0627\u0644\u0632\u062e\u0645. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0631\u0641\u0639 \u0627\u0644\u062d\u0648\u0636.","\u062a\u062c\u0646\u0628 \u0631\u0641\u0639 \u0645\u0631\u0641\u0642\u064a\u0643 \u0623\u0639\u0644\u0649 \u0645\u0646 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0643\u062a\u0641. \u0627\u0644\u0642\u0628\u0636\u0629 \u0627\u0644\u0623\u0648\u0633\u0639 \u062a\u0642\u0644\u0644 \u0645\u0646 \u062e\u0637\u0631 \u0627\u0644\u0627\u0635\u0637\u062f\u0627\u0645.","\u062a\u062c\u0646\u0628 \u062a\u062f\u0648\u064a\u0631 \u0643\u062a\u0641\u064a\u0643. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0641\u0642\u0637 \u0639\u0644\u0649 \u0627\u0644\u062d\u0631\u0643\u0629 \u0627\u0644\u0639\u0645\u0648\u062f\u064a\u0629.","\u062a\u062c\u0646\u0628 \u062a\u0623\u0631\u062c\u062d \u0627\u0644\u062c\u0630\u0639 \u0627\u0644\u062e\u0627\u0635 \u0628\u0643. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0643\u0644\u0627 \u0627\u0644\u0645\u0631\u062d\u0644\u062a\u064a\u0646.","\u0627\u0644\u062d\u062f\u064a\u062f \u0639\u0644\u0649 \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0623\u0645\u0627\u0645\u064a \u0645\u0646 \u0627\u0644\u0643\u062a\u0641\u064a\u0646 \u0645\u0639 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0645\u0631\u0641\u0642\u064a\u0646. \u0627\u0644\u0646\u0632\u0648\u0644 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u062c\u0630\u0639 \u0639\u0645\u0648\u062f\u064a\u064b\u0627 \u0642\u062f\u0631 \u0627\u0644\u0625\u0645\u0643\u0627\u0646. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649.","\u0623\u062d\u0636\u0631 \u0633\u0627\u0642\u0643 \u0625\u0644\u0649 \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u062a\u0645\u062f\u062f \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u062c\u0630\u0639 \u0641\u064a \u0648\u0636\u0639 \u0645\u0633\u062a\u0642\u064a\u0645. \u0627\u0633\u062a\u0645\u0631 \u0644\u0645\u062f\u0629 20-30 \u062b\u0627\u0646\u064a\u0629.","\u0623\u062d\u0636\u0631 \u0633\u0627\u0642\u0643 \u0625\u0644\u0649 \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u062a\u0645\u062f\u062f \u0645\u0639 \u0627\u0633\u062a\u0642\u0627\u0645\u0629 \u0638\u0647\u0631\u0643. \u0627\u0633\u062a\u0645\u0631 \u0644\u0645\u062f\u0629 20-30 \u062b\u0627\u0646\u064a\u0629 \u0641\u064a \u0627\u0644\u062a\u0646\u0641\u0633 \u0628\u0639\u0645\u0642.","\u0623\u062d\u0636\u0631 \u0633\u0627\u0642\u0643 \u0625\u0644\u0649 \u0627\u0644\u062e\u0627\u0631\u062c \u0641\u064a \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0627\u062e\u062a\u0637\u0627\u0641 \u0627\u0644\u0645\u062a\u062d\u0643\u0645\u0629 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0631\u0627\u0631 \u0642\u0644\u0628\u0643.","\u0623\u062d\u0636\u0631 \u0633\u0627\u0642\u0643 \u0646\u062d\u0648 \u0627\u0644\u0645\u0631\u0643\u0632 \u0641\u064a \u0627\u0644\u062a\u0642\u0631\u064a\u0628 \u0644\u0644\u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0631\u0627\u0631 \u0642\u0644\u0628\u0643.","\u0639\u0642\u062f \u0627\u0644\u0642\u064a\u0645\u0629 \u0627\u0644\u0645\u0637\u0644\u0642\u0629 \u0627\u0644\u062e\u0627\u0635\u0629 \u0628\u0643 \u0637\u0648\u0627\u0644 \u0627\u0644\u062a\u0645\u0631\u064a\u0646. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u0631\u062d\u0644\u0629 \u063a\u0631\u064a\u0628 \u0627\u0644\u0623\u0637\u0648\u0627\u0631.","\u0644\u0627 \u062a\u0642\u0645 \u0628\u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0634\u0643\u0644 \u0645\u0641\u0631\u0637 \u062e\u0644\u0627\u0644 \u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u0627\u0641\u062a\u062a\u0627\u062d. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0646\u0642\u0628\u0627\u0636 \u0627\u0644\u0635\u062f\u0631.","\u0644\u0627 \u062a\u062f\u0639 \u0642\u0648\u0633 \u0638\u0647\u0631\u0643. \u0627\u0628\u062f\u0623 \u0628\u0627\u0644\u0637\u0631\u062d \u0627\u0644\u062c\u0632\u0626\u064a.","\u0644\u0627 \u062a\u062f\u0639 \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u064a\u062a\u062f\u0644\u0649 \u0625\u0644\u0649 \u0627\u0644\u0623\u0633\u0641\u0644. \u0627\u0633\u062d\u0628 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643.","\u0644\u0627 \u062a\u0631\u0641\u0639 \u0627\u0644\u0648\u0631\u0643\u064a\u0646. \u0639\u0642\u062f \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649 \u0644\u0645\u062f\u0629 \u062b\u0627\u0646\u064a\u0629.","\u0644\u0627 \u062a\u0642\u0641\u0644 \u0631\u0643\u0628\u062a\u064a\u0643 \u0641\u064a \u0627\u0644\u062a\u0645\u062f\u064a\u062f. \u0627\u0644\u0623\u0642\u062f\u0627\u0645 \u0627\u0644\u0623\u0639\u0644\u0649 \u0639\u0644\u0649 \u0627\u0644\u0645\u0646\u0635\u0629 \u062a\u0634\u063a\u0644 \u0627\u0644\u0623\u0631\u062f\u0627\u0641 \u0623\u0643\u062b\u0631.","\u0644\u0627 \u062a\u0633\u062d\u0628 \u0631\u0642\u0628\u062a\u0643. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0646\u0642\u0628\u0627\u0636 \u0627\u0644\u0628\u0637\u0646.","\u0644\u0627 \u062a\u0631\u0641\u0639 \u0630\u0631\u0627\u0639\u064a\u0643 \u0641\u0648\u0642 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641. \u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u0645\u0639\u0635\u0645\u064a\u0643 \u0646\u062d\u0648 \u0627\u0644\u0623\u0633\u0641\u0644 \u0642\u0644\u064a\u0644\u0627\u064b (\u0643\u0645\u0627 \u0644\u0648 \u0643\u0646\u062a \u062a\u0635\u0628 \u0627\u0644\u0645\u0627\u0621) \u0644\u0639\u0632\u0644 \u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u062f\u0627\u0644\u064a\u0629 \u0627\u0644\u062c\u0627\u0646\u0628\u064a\u0629.","\u0644\u0627 \u062a\u0631\u0641\u0639 \u0627\u0644\u0648\u0631\u0643\u064a\u0646. \u0623\u0628\u0642\u0650 \u0643\u062a\u0641\u064a\u0643 \u0641\u0648\u0642 \u0645\u0639\u0635\u0645\u064a\u0643.","\u0644\u0627 \u062a\u062f\u0648\u0631 \u0638\u0647\u0631\u0643 \u0641\u064a \u0623\u064a \u0648\u0642\u062a. \u0642\u0645 \u0628\u0625\u0634\u0631\u0627\u0643 \u0642\u0644\u0628\u0643 \u0642\u0628\u0644 \u0627\u0644\u0633\u062d\u0628.","\u0644\u0627 \u062a\u062f\u0648\u0631 \u0638\u0647\u0631\u0643. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u0631\u062d\u0644\u0629 \u063a\u0631\u064a\u0628 \u0627\u0644\u0623\u0637\u0648\u0627\u0631.","\u0644\u0627 \u062a\u062f\u0648\u0631 \u0638\u0647\u0631\u0643. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u062a\u0645\u062f\u062f.","\u0644\u0627 \u062a\u062f\u0648\u0631 \u0638\u0647\u0631\u0643. \u0627\u0628\u062f\u0623 \u0628\u0648\u0632\u0646 \u062e\u0641\u064a\u0641.","\u0644\u0627 \u062a\u0633\u062a\u062e\u062f\u0645 \u0623\u0631\u062c\u0648\u062d\u0629 \u0627\u0644\u062c\u0633\u0645. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0639\u0632\u0644 \u0627\u0644\u0623\u0644\u0648\u064a\u0629 \u0627\u0644\u0648\u0633\u0637\u0649.","\u0644\u0627 \u062a\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0632\u062e\u0645. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0639\u0632\u0644 \u0627\u0644\u0645\u0642\u0631\u0628\u064a\u0646.","\u0644\u0627 \u062a\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0632\u062e\u0645. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634.","\u062a\u0633\u0645\u062d \u0627\u0644\u062f\u0645\u0628\u0644 \u0628\u0646\u0637\u0627\u0642 \u0623\u0643\u0628\u0631 \u0645\u0646 \u0627\u0644\u062d\u0631\u0643\u0629. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062a\u0631\u0627\u062c\u0639 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629.","\u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0623\u0648\u0633\u0639 \u0645\u0646 \u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646 \u0645\u0639 \u062a\u0648\u062c\u064a\u0647 \u0623\u0635\u0627\u0628\u0639 \u0627\u0644\u0642\u062f\u0645 \u0625\u0644\u0649 \u0627\u0644\u062e\u0627\u0631\u062c. \u0642\u0645 \u0628\u0625\u0645\u0633\u0627\u0643 \u0627\u0644\u062d\u062f\u064a\u062f \u0628\u0627\u0644\u0623\u0633\u0641\u0644 \u0628\u0642\u0628\u0636\u0629 \u062f\u0627\u062e\u0644\u064a\u0629. \u0627\u062f\u0641\u0639 \u0628\u0633\u0627\u0642\u064a\u0643 \u0648\u0642\u0645 \u0628\u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0641\u064a \u0646\u0641\u0633 \u0627\u0644\u0648\u0642\u062a \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0627\u0645\u0629 \u0638\u0647\u0631\u0643.","\u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0628\u062d\u064a\u062b \u064a\u0635\u0628\u062d \u0627\u0644\u0648\u0632\u0646 \u0646\u062d\u0648 \u0643\u062a\u0641\u064a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0645\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0627\u0644\u0643\u0627\u0645\u0644 \u0641\u064a \u0645\u0631\u062d\u0644\u0629 \u0645\u062a\u062d\u062f\u0629 \u0627\u0644\u0645\u0631\u0643\u0632. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629 \u0648\u0627\u0644\u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629.","\u0623\u0645\u0633\u0643 \u0627\u0644\u0628\u0627\u0631 \u0628\u0642\u0628\u0636\u0629 \u0645\u0645\u062a\u062f\u0629 \u0628\u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0627\u0628\u062f\u0623 \u0628\u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643\u060c \u0648\u0627\u0633\u062d\u0628 \u062c\u0633\u0645\u0643 \u0644\u0644\u0623\u0639\u0644\u0649 \u062d\u062a\u0649 \u062a\u062a\u062c\u0627\u0648\u0632 \u0630\u0642\u0646\u0643 \u0627\u0644\u0628\u0627\u0631. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0623\u0645\u0633\u0643 \u0627\u0644\u0628\u0627\u0631 \u0628\u0642\u0628\u0636\u0629 \u0645\u0633\u062a\u0644\u0642\u064a\u0629 (\u0631\u0627\u062d\u0629 \u0627\u0644\u064a\u062f \u062a\u0648\u0627\u062c\u0647\u0643) \u0628\u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0627\u0628\u062f\u0623 \u0628\u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643\u060c \u0648\u0627\u0633\u062d\u0628 \u062c\u0633\u0645\u0643 \u0644\u0644\u0623\u0639\u0644\u0649 \u062d\u062a\u0649 \u062a\u062a\u062c\u0627\u0648\u0632 \u0630\u0642\u0646\u0643 \u0627\u0644\u0628\u0627\u0631. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0642\u0628\u0636 \u0639\u0644\u0649 \u0627\u0644\u0642\u0636\u0628\u0627\u0646 \u0627\u0644\u0645\u062a\u0648\u0627\u0632\u064a\u0629 \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0623\u0633\u0644\u062d\u0629. \u0627\u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0645\u0646 \u062e\u0644\u0627\u0644 \u0627\u0644\u0645\u064a\u0644 \u0642\u0644\u064a\u0644\u064b\u0627 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645 \u0648\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0645\u0639\u0644\u0642\u064b\u0627 \u0645\u0646 \u0627\u0644\u0628\u0627\u0631 \u0623\u0648 \u0645\u0633\u062a\u0644\u0642\u064a\u064b\u0627\u060c \u0627\u0631\u0641\u0639 \u0633\u0627\u0642\u064a\u0643 \u0644\u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0623\u0643\u0648\u0627\u0639 \u0627\u0644\u0639\u0627\u0644\u064a\u0629 \u062a\u0645\u0646\u0639 \u0627\u0644\u062d\u062f\u064a\u062f \u0645\u0646 \u0627\u0644\u0627\u0646\u0632\u0644\u0627\u0642. \u064a\u062a\u0637\u0644\u0628 \u062d\u0631\u0643\u0629 \u0643\u0628\u064a\u0631\u0629 \u0641\u064a \u0627\u0644\u0645\u0639\u0635\u0645 \u0648\u0627\u0644\u0643\u0627\u062d\u0644.","\u0639\u0642\u062f \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649 \u0644\u0645\u062f\u0629 \u062b\u0627\u0646\u064a\u0629. \u062a\u062c\u0646\u0628 \u0627\u0644\u0632\u062e\u0645.","\u0639\u0642\u062f \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649 \u0644\u0645\u062f\u0629 \u062b\u0627\u0646\u064a\u0629. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0630\u0642\u0646\u0643 \u062a\u062c\u0627\u0647 \u0635\u062f\u0631\u0643.","\u0639\u0642\u062f \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649. \u062a\u062c\u0646\u0628 \u0627\u0644\u062a\u0639\u0648\u064a\u0636 \u0628\u0638\u0647\u0631\u0643.","\u0623\u0645\u0633\u0643 \u0637\u0631\u0641\u064a \u0627\u0644\u062d\u0628\u0644 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a\u0643. \u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u0627\u0644\u062d\u0628\u0644 \u0641\u0648\u0642 \u0631\u0623\u0633\u0643 \u0648\u0627\u0642\u0641\u0632 \u0623\u062b\u0646\u0627\u0621 \u0645\u0631\u0648\u0631\u0647 \u062a\u062d\u062a \u0642\u062f\u0645\u064a\u0643.","\u0641\u064a \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0627\u0646\u0628\u0637\u0627\u062d\u060c \u0645\u0633\u062a\u0631\u064a\u062d\u064b\u0627 \u0639\u0644\u0649 \u0633\u0627\u0639\u062f\u064a\u0643 \u0648\u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643. \u064a\u0634\u0643\u0644 \u062c\u0633\u0645\u0643 \u062e\u0637\u064b\u0627 \u0645\u0633\u062a\u0642\u064a\u0645\u064b\u0627 \u0645\u0646 \u0627\u0644\u0631\u0623\u0633 \u0625\u0644\u0649 \u0627\u0644\u0643\u0639\u0628. \u0639\u0642\u062f \u0639\u0646 \u0637\u0631\u064a\u0642 \u0627\u0644\u062a\u0639\u0627\u0642\u062f \u0627\u0644\u0623\u0633\u0627\u0633\u064a\u0629 \u0627\u0644\u062e\u0627\u0635\u0629 \u0628\u0643.","\u0641\u064a \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0627\u0646\u0628\u0637\u0627\u062d \u0645\u0639 \u0648\u0636\u0639 \u0627\u0644\u064a\u062f\u064a\u0646 \u0639\u0644\u0649 \u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0627\u062e\u0641\u0636 \u0635\u062f\u0631\u0643 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0639\u0627\u0626\u062f\u0627\u064b \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u062c\u0633\u0645\u0643 \u0641\u064a \u062e\u0637 \u0645\u0633\u062a\u0642\u064a\u0645.","\u0641\u064a \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0636\u063a\u0637. \u0628\u0627\u0644\u062a\u0646\u0627\u0648\u0628\u060c \u0623\u062d\u0636\u0631 \u0631\u0643\u0628\u062a\u064a\u0643 \u0646\u062d\u0648 \u0635\u062f\u0631\u0643 \u0628\u0633\u0631\u0639\u0629 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0645\u0646\u062e\u0641\u0636\u064a\u0646.","\u0641\u064a \u0645\u0648\u0642\u0641 \u0645\u0648\u0642\u0641 \u0627\u0644\u0627\u0646\u0642\u0633\u0627\u0645. \u0627\u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u0623\u0645\u0627\u0645\u064a\u0629. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0623\u0628\u0642\u0650 \u0627\u0644\u0642\u062f\u0645 \u0627\u0644\u0645\u0642\u0627\u0628\u0644\u0629 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636 \u062a\u0645\u0627\u0645\u064b\u0627. \u0627\u0644\u062c\u0630\u0639 \u0641\u064a \u0648\u0636\u0639 \u0645\u0633\u062a\u0642\u064a\u0645.","\u0623\u0628\u0642\u0650 \u0627\u0644\u0630\u0631\u0627\u0639 \u0627\u0644\u0639\u0644\u0648\u064a \u0645\u0648\u0627\u0632\u064a\u064b\u0627 \u0644\u0644\u0623\u0631\u0636. \u062a\u062c\u0646\u0628 \u0627\u0644\u0632\u062e\u0645.","\u0623\u0628\u0642\u0650 \u0630\u0631\u0627\u0639\u064a\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u062a\u064a\u0646. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0627\u0644\u0644\u0627\u062a\u064a\u0646\u064a.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u0633\u0637\u062d\u064b\u0627 \u0648\u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a. \u062a\u062c\u0646\u0628 \u062a\u0623\u0631\u062c\u062d \u0627\u0644\u062c\u0630\u0639 \u0627\u0644\u062e\u0627\u0635 \u0628\u0643.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0641\u064a \u0648\u0636\u0639 \u0645\u062d\u0627\u064a\u062f. \u0627\u0633\u062d\u0628 \u0646\u062d\u0648 \u062e\u0635\u0631\u0643 \u0623\u0648 \u0635\u062f\u0631\u0643. \u0642\u0645 \u0628\u0642\u0628\u0636 \u0639\u0636\u0644\u0627\u062a \u0638\u0647\u0631\u0643 \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u062d\u0631\u0643\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u0648\u0627\u0632\u064a\u0627 \u0644\u0644\u0623\u0631\u0636. \u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u062c\u0630\u0639\u0643 \u0642\u0644\u064a\u0644\u0627\u064b \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u062d\u0631\u0643\u0629.","\u0623\u0628\u0642\u0650 \u0635\u062f\u0631\u0643 \u0645\u0631\u062a\u0641\u0639\u064b\u0627 \u0648\u0631\u0643\u0628\u062a\u064a\u0643 \u0645\u062a\u0648\u0627\u0632\u064a\u062a\u064a\u0646 \u0645\u0639 \u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643. \u0644\u0627 \u062a\u062f\u0639 \u0631\u0643\u0628\u062a\u064a\u0643 \u062a\u0646\u0647\u0627\u0631 \u0625\u0644\u0649 \u0627\u0644\u062f\u0627\u062e\u0644.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0642\u0644\u0628\u0643 \u0645\u0646\u0634\u063a\u0644\u064b\u0627 \u0648\u0638\u0647\u0631\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u064b\u0627. \u062a\u062c\u0646\u0628 \u0627\u0644\u0625\u0641\u0631\u0627\u0637 \u0641\u064a \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0639\u0645\u0648\u062f \u0627\u0644\u0641\u0642\u0631\u064a \u0627\u0644\u0642\u0637\u0646\u064a.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0642\u0644\u0628\u0643 \u0645\u0646\u0634\u063a\u0644\u064b\u0627 \u0644\u062d\u0645\u0627\u064a\u0629 \u0638\u0647\u0631\u0643. \u062a\u062c\u0646\u0628 \u0627\u0644\u0625\u0641\u0631\u0627\u0637 \u0641\u064a \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0639\u0645\u0648\u062f \u0627\u0644\u0641\u0642\u0631\u064a \u0627\u0644\u0642\u0637\u0646\u064a.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a. \u0642\u0645 \u0628\u062a\u0643\u064a\u064a\u0641 \u0627\u0644\u0633\u0631\u0639\u0629 \u0645\u0639 \u0645\u0633\u062a\u0648\u0649 \u0644\u064a\u0627\u0642\u062a\u0643 \u0627\u0644\u0628\u062f\u0646\u064a\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a. \u062a\u062c\u0646\u0628 \u0627\u0644\u0625\u0641\u0631\u0627\u0637 \u0641\u064a \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0639\u0645\u0648\u062f \u0627\u0644\u0641\u0642\u0631\u064a \u0627\u0644\u062e\u0627\u0635 \u0628\u0643.","\u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u0639\u0644\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641 \u0623\u0648 \u0623\u0639\u0644\u0649 \u0642\u0644\u064a\u0644\u0627\u064b. \u0636\u0631\u0648\u0631\u064a \u0644\u0635\u062d\u0629 \u0627\u0644\u0643\u0641\u0629 \u0627\u0644\u0645\u062f\u0648\u0631\u0629.","\u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u0642\u0631\u064a\u0628\u064a\u0646 \u0645\u0646 \u062c\u0633\u0645\u0643. \u062a\u062c\u0646\u0628 \u0625\u062d\u0631\u0627\u0642 \u0645\u0631\u0641\u0642\u064a\u0643.","\u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a\u0643. \u062a\u0624\u0643\u062f \u0627\u0644\u0642\u0628\u0636\u0629 \u0627\u0644\u0645\u062d\u0627\u064a\u062f\u0629 \u0639\u0644\u0649 \u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0639\u0636\u062f\u064a\u0629 \u0627\u0644\u0639\u0636\u062f\u064a\u0629 \u0641\u0648\u0642 \u0627\u0644\u0639\u0636\u0644\u0629 \u0630\u0627\u062a \u0627\u0644\u0631\u0623\u0633\u064a\u0646.","\u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0628\u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0633\u0642\u0641. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0628\u0648\u0637.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629. \u0631\u0643\u0632 \u0639\u0644\u0649 \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0627\u0644\u0643\u0627\u0645\u0644 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646. \u0644\u0627 \u062a\u0633\u062a\u062e\u062f\u0645 \u0627\u0644\u0632\u062e\u0645.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634 \u0627\u0644\u0643\u0627\u0645\u0644.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0644\u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0643\u0627\u0645\u0644.","\u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u062a\u062c\u0647\u064a\u0646 \u0646\u062d\u0648 \u0627\u0644\u0633\u0642\u0641 \u0648\u0642\u0631\u064a\u0628\u064a\u0646 \u0645\u0646 \u0631\u0623\u0633\u0643. \u064a\u062a\u0645 \u062a\u0646\u0634\u064a\u0637 \u0627\u0644\u0631\u0623\u0633 \u0627\u0644\u0637\u0648\u064a\u0644 \u0625\u0644\u0649 \u0623\u0642\u0635\u0649 \u062d\u062f \u0641\u064a \u0627\u0644\u0648\u0636\u0639 \u0627\u0644\u0645\u0645\u062f\u0648\u062f.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u0623\u0645\u0627\u0645\u064a\u0629 \u0645\u062d\u0627\u0630\u064a\u0629 \u0644\u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643. \u064a\u0635\u062d\u062d \u0627\u062e\u062a\u0644\u0627\u0644 \u062a\u0648\u0627\u0632\u0646 \u0627\u0644\u0639\u0636\u0644\u0627\u062a \u0628\u064a\u0646 \u0627\u0644\u0633\u0627\u0642\u064a\u0646.","\u0623\u0628\u0642\u0650 \u0643\u0639\u0628\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636. \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u0643 \u0644\u062a\u0645\u062a\u062f \u0627\u0644\u0646\u0639\u0644.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u062d\u0627\u0630\u0627\u0629 \u0627\u0644\u0648\u0631\u0643\u064a\u0646. \u062a\u062c\u0646\u0628 \u062a\u0631\u0643\u0647\u0645 \u064a\u062a\u062f\u0644\u0649 \u0644\u0644\u0623\u0633\u0641\u0644.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0642\u0641\u0632\u0627\u062a\u0643 \u0645\u0646\u062e\u0641\u0636\u0629. \u0627\u0633\u062a\u062e\u062f\u0645 \u0645\u0639\u0635\u0645\u064a\u0643\u060c \u0648\u0644\u064a\u0633 \u0630\u0631\u0627\u0639\u064a\u0643\u060c \u0644\u062a\u062f\u0648\u064a\u0631 \u0627\u0644\u062d\u0628\u0644.","\u0623\u0628\u0642\u0650 \u0631\u0643\u0628\u062a\u0643 \u0645\u062a\u062c\u0647\u0629 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636. \u062a\u062c\u0646\u0628 \u0627\u0644\u0625\u0641\u0631\u0627\u0637 \u0641\u064a \u062a\u0645\u062f\u064a\u062f \u0638\u0647\u0631\u0643.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0631\u0643\u0628\u062a\u064a\u0643 \u0645\u062a\u0648\u0627\u0632\u064a\u062a\u064a\u0646 \u0645\u0639 \u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643. \u064a\u063a\u064a\u0631 \u0645\u0648\u0636\u0639 \u0627\u0644\u0642\u062f\u0645 \u0627\u0644\u0639\u0636\u0644\u0629 \u0627\u0644\u0623\u0643\u062b\u0631 \u0646\u0634\u0627\u0637\u064b\u0627.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0631\u0643\u0628\u062a\u064a\u0643 \u0645\u062a\u0648\u0627\u0632\u064a\u062a\u064a\u0646 \u0645\u0639 \u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643. \u0645\u0648\u0642\u0641 \u0627\u0644\u0633\u0648\u0645\u0648 \u064a\u0642\u0644\u0644 \u0645\u0646 \u0645\u0633\u0627\u0631 \u0627\u0644\u062d\u062f\u064a\u062f.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0633\u062a\u0648\u0649 \u062d\u0648\u0636\u0643. \u0627\u0628\u062f\u0623 \u0628\u0648\u0632\u0646 \u062e\u0641\u064a\u0641.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062a\u0631\u0627\u062c\u0639 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643. \u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u0647\u0628\u0648\u0637 \u0644\u0645\u062f\u0629 \u062b\u0627\u0646\u064a\u062a\u064a\u0646 \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0631\u062e\u0627\u0621 \u0643\u062a\u0641\u064a\u0643. \u0627\u0644\u062a\u0643\u064a\u0641 \u0645\u0639 \u0648\u062a\u064a\u0631\u0629 \u0627\u0644\u0634\u062f\u0629 \u0627\u0644\u0645\u0637\u0644\u0648\u0628\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062b\u0628\u0627\u062a \u062c\u0630\u0639\u0643 \u0648\u062a\u062c\u0646\u0628 \u0627\u0644\u062a\u0623\u0631\u062c\u062d. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0628\u0648\u0637.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062c\u0630\u0639\u0643 \u0645\u0646\u062a\u0635\u0628\u064b\u0627 \u0648\u0646\u0634\u0637\u064b\u0627. \u062a\u062c\u0646\u0628 \u062a\u0631\u0643 \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u0623\u0645\u0627\u0645\u064a\u0629 \u062a\u062a\u062c\u0627\u0648\u0632 \u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643.","\u0623\u0628\u0642\u0650 \u062c\u0630\u0639\u0643 \u0639\u0645\u0648\u062f\u064a\u064b\u0627 \u0644\u0639\u0632\u0644 \u0627\u0644\u0639\u0636\u0644\u0629 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633. \u0643\u0644\u0645\u0627 \u0627\u0646\u062e\u0641\u0636\u062a\u060c \u0643\u0644\u0645\u0627 \u0632\u0627\u062f \u0627\u0631\u062a\u0628\u0627\u0637 \u0627\u0644\u0635\u062f\u0631.","\u0623\u0628\u0642\u0650 \u0645\u0639\u0635\u0645\u064a\u0643 \u0641\u064a \u0648\u0636\u0639 \u0645\u062d\u0627\u064a\u062f. \u0627\u0644\u0636\u0641\u064a\u0631\u0629 \u0627\u0644\u0639\u0643\u0633\u064a\u0629 \u062a\u0642\u0648\u064a \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0633\u0627\u0639\u062f.","\u0627\u0644\u0631\u0643\u0648\u0639 \u0645\u0639 \u0627\u0644\u0639\u062c\u0644\u0629 \u0641\u064a \u0627\u0644\u0623\u0645\u0627\u0645. \u0642\u0645 \u0628\u062a\u062d\u0631\u064a\u0643 \u0627\u0644\u0639\u062c\u0644\u0629 \u0644\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636. \u0627\u0633\u062d\u0628 \u0627\u0644\u0639\u062c\u0644\u0629 \u0644\u0644\u062e\u0644\u0641 \u0628\u0627\u062a\u062c\u0627\u0647 \u0631\u0643\u0628\u062a\u064a\u0643.","\u0627\u0644\u0645\u064a\u0644 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645 \u064a\u0632\u064a\u062f \u0645\u0646 \u0627\u0631\u062a\u0628\u0627\u0637 \u0627\u0644\u0635\u062f\u0631. \u0627\u0644\u0648\u0636\u0639 \u0627\u0644\u0639\u0645\u0648\u062f\u064a \u064a\u0639\u0632\u0644 \u0627\u0644\u0639\u0636\u0644\u0629 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633.","\u0627\u0644\u0627\u0633\u062a\u0644\u0642\u0627\u0621 \u0645\u0639 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643. \u0627\u062c\u0644\u0628 \u0643\u062a\u0641\u064a\u0643 \u0646\u062d\u0648 \u0631\u0643\u0628\u062a\u064a\u0643 \u0645\u0639 \u0642\u0628\u0636 \u0639\u0636\u0644\u0627\u062a \u0628\u0637\u0646\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0627\u0633\u062a\u0644\u0642\u0627\u0621 \u0645\u0639 \u0631\u0641\u0639 \u0633\u0627\u0642\u064a\u0643. \u0627\u062c\u0644\u0628 \u0631\u0643\u0628\u062a\u064a\u0643 \u0646\u062d\u0648 \u0635\u062f\u0631\u0643 \u0648\u0627\u0631\u0641\u0639 \u062d\u0648\u0636\u0643. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0648\u062c\u0647\u0643 \u0644\u0623\u0633\u0641\u0644 \u0639\u0644\u0649 \u0627\u0644\u062c\u0647\u0627\u0632 \u0645\u0639 \u0648\u0636\u0639 \u0648\u0633\u0627\u062f\u0627\u062a \u0639\u0644\u0649 \u0643\u0627\u062d\u0644\u064a\u0643. \u0642\u0645 \u0628\u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0628\u062d\u064a\u062b \u064a\u0643\u0648\u0646 \u0643\u0639\u0628\u0643 \u0646\u062d\u0648 \u0627\u0644\u0645\u0624\u062e\u0631\u0629. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0645\u0639 \u0627\u0644\u062f\u0645\u0628\u0644 \u0641\u064a \u0643\u0644 \u064a\u062f. \u0642\u0645 \u0628\u062e\u0641\u0636 \u0627\u0644\u062f\u0645\u0628\u0644 \u0646\u062d\u0648 \u0635\u062f\u0631\u0643 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u062b\u0628\u0627\u062a \u0645\u0639\u0635\u0645\u064a\u0643. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0628\u0642\u0648\u0629 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0645\u0639 \u0627\u0644\u062f\u0645\u0628\u0644 \u0641\u064a \u0643\u0644 \u064a\u062f. \u0627\u062e\u0641\u0636 \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0634\u0643\u0644 \u062c\u0627\u0646\u0628\u064a \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u062b\u0646\u064a \u0627\u0644\u0643\u0648\u0639 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u0631\u0641\u0639 \u0627\u0644\u062f\u0645\u0628\u0644\u0632 \u0644\u0644\u0623\u0639\u0644\u0649 \u0639\u0644\u0649 \u0634\u0643\u0644 \u0642\u0648\u0633 \u0643\u0645\u0627 \u0644\u0648 \u0643\u0646\u062a \u062a\u0639\u0627\u0646\u0642 \u0634\u062c\u0631\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0628\u0642\u0628\u0636\u0629 \u0628\u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0627\u062e\u0641\u0636 \u0627\u0644\u0628\u0627\u0631 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0642\u0631\u064a\u0628\u064a\u0646 \u0645\u0646 \u062c\u0630\u0639\u0643. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0645\u0639 \u0648\u0636\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0641\u0648\u0642 \u0635\u062f\u0631\u0643\u060c \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643. \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u0639 \u062e\u0641\u0636 \u0627\u0644\u0648\u0632\u0646 \u0628\u0627\u062a\u062c\u0627\u0647 \u062c\u0628\u0647\u062a\u0643. \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0645\u0648\u0642\u0641.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0645\u0639 \u0648\u0636\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0641\u0648\u0642 \u0635\u062f\u0631\u0643\u060c \u0648\u0630\u0631\u0627\u0639\u064a\u0643 \u0645\u0645\u062a\u062f\u062a\u064a\u0646 \u062a\u0642\u0631\u064a\u0628\u064b\u0627. \u0642\u0645 \u0628\u062e\u0641\u0636 \u0627\u0644\u0648\u0632\u0646 \u062e\u0644\u0641 \u0631\u0623\u0633\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u062b\u0646\u064a\u064a\u0646 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629 \u0641\u064a \u0627\u0644\u0642\u0648\u0633.","\u0627\u0633\u062a\u0644\u0642 \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0645\u0639 \u0648\u0636\u0639 \u0642\u062f\u0645\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636. \u0623\u0645\u0633\u0643 \u0628\u0627\u0644\u062d\u062f\u064a\u062f \u0639\u0644\u0649 \u0646\u0637\u0627\u0642 \u0623\u0648\u0633\u0639 \u0645\u0646 \u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0623\u0646\u0632\u0644 \u0627\u0644\u062d\u062f\u064a\u062f \u0625\u0644\u0649 \u0635\u062f\u0631\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0639\u0646\u062f \u062d\u0648\u0627\u0644\u064a 45 \u062f\u0631\u062c\u0629. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0628\u0642\u0648\u0629.","\u0627\u0633\u062a\u0644\u0642 \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0627\u0644\u0645\u0627\u0626\u0644 \u0645\u0639 \u062a\u0623\u0645\u064a\u0646 \u0642\u062f\u0645\u064a\u0643. \u0623\u0645\u0633\u0643 \u0627\u0644\u0623\u062f\u0627\u0629 \u0639\u0644\u0649 \u0646\u0637\u0627\u0642 \u0623\u0648\u0633\u0639 \u0645\u0646 \u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0623\u0633\u0641\u0644 \u0625\u0644\u0649 \u0623\u0633\u0641\u0644 \u0627\u0644\u0635\u062f\u0631. \u0627\u062f\u0641\u0639 \u0628\u0642\u0648\u0629 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u0633\u062a\u0644\u0642\u064a \u0639\u0644\u0649 \u0627\u0644\u062f\u0639\u0645 \u0627\u0644\u0645\u0627\u0626\u0644 \u0645\u0639 \u062a\u0639\u0644\u064a\u0642 \u0627\u0644\u0623\u0648\u0632\u0627\u0646. \u0627\u0633\u062d\u0628 \u0646\u062d\u0648 \u0627\u0644\u062c\u0630\u0639 \u0627\u0644\u062e\u0627\u0635 \u0628\u0643 \u0644\u0644\u062a\u0639\u0627\u0642\u062f \u0645\u0639 \u0639\u0636\u0644\u0627\u062a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0646\u0632\u0644 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0642\u0631\u0641\u0635\u0627\u0621 \u062b\u0645 \u0627\u0642\u0641\u0632 \u0644\u0644\u0623\u0639\u0644\u0649 \u0628\u0634\u0643\u0644 \u0645\u062a\u0641\u062c\u0631. \u0627\u0647\u0628\u0637 \u0628\u0647\u062f\u0648\u0621 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643.","\u0627\u0646\u0632\u0644 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0642\u0631\u0641\u0635\u0627\u0621\u060c \u0636\u0639 \u064a\u062f\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636 \u0648\u0627\u0642\u0641\u0632 \u0628\u0642\u062f\u0645\u064a\u0643 \u0625\u0644\u0649 \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0636\u063a\u0637. \u0642\u0645 \u0628\u0625\u062c\u0631\u0627\u0621 \u062a\u0645\u0631\u064a\u0646 \u0627\u0644\u0636\u063a\u0637\u060c \u0648\u0627\u0642\u0641\u0632 \u0628\u0642\u062f\u0645\u064a\u0643 \u0646\u062d\u0648 \u064a\u062f\u064a\u0643\u060c \u062b\u0645 \u0627\u0642\u0641\u0632 \u0644\u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u0648\u0636\u0639 \u0630\u0631\u0627\u0639\u064a\u0643 \u0641\u0648\u0642 \u0631\u0623\u0633\u0643.","\u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0648\u062a\u064a\u0631\u0629 \u062b\u0627\u0628\u062a\u0629. \u0627\u0644\u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629 \u0637\u0648\u0627\u0644 \u0627\u0644\u062a\u0645\u0631\u064a\u0646.","\u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0648\u0636\u0639 \u0645\u0633\u062a\u0642\u064a\u0645 \u0645\u0639 \u0645\u064a\u0644 \u0637\u0641\u064a\u0641 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645. \u062e\u0637\u0648\u0627\u062a \u0628\u062f\u064a\u0644\u0629 \u0628\u0648\u062a\u064a\u0631\u0629 \u062b\u0627\u0628\u062a\u0629. \u0627\u0647\u0628\u0637 \u0628\u0642\u062f\u0645\u0643 \u0641\u064a \u0645\u0646\u062a\u0635\u0641 \u0627\u0644\u062e\u0637\u0648\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0646\u0641\u0633 \u0627\u0646\u062d\u0646\u0627\u0621 \u0627\u0644\u0643\u0648\u0639 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629. \u0631\u0643\u0632 \u0639\u0644\u0649 \u0627\u0646\u0642\u0628\u0627\u0636 \u0627\u0644\u0635\u062f\u0631 \u0641\u064a \u0646\u0647\u0627\u064a\u0629 \u0627\u0644\u062d\u0631\u0643\u0629.","\u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0646\u0641\u0633 \u062b\u0646\u064a \u0627\u0644\u0643\u0648\u0639. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0646\u0633\u0628 \u0644\u0645\u062f\u0629 2 \u062b\u0627\u0646\u064a\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0646\u062d\u0646\u0627\u0621 \u0627\u0644\u0643\u0648\u0639 \u0627\u0644\u0637\u0641\u064a\u0641. \u0627\u0644\u0633\u062a\u0631\u0629 \u0647\u064a \u0648\u0627\u062d\u062f\u0629 \u0645\u0646 \u0627\u0644\u062a\u0645\u0627\u0631\u064a\u0646 \u0627\u0644\u0642\u0644\u064a\u0644\u0629 \u0627\u0644\u062a\u064a \u062a\u0645\u062f \u062e\u0637\u0648\u0637 \u0627\u0644\u0637\u0648\u0644.","\u0627\u0644\u062a\u0648\u062a\u0631 \u0627\u0644\u0645\u0639\u062a\u062f\u0644\u060c \u0623\u0628\u062f\u0627 \u0627\u0644\u0623\u0644\u0645. \u0642\u0645 \u0628\u0627\u0644\u0632\u0641\u064a\u0631 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u062a\u0645\u062f\u062f.","\u0639\u0644\u0649 \u0627\u0644\u064a\u062f\u064a\u0646 \u0648\u0627\u0644\u0631\u0643\u0628\u062a\u064a\u0646 \u0623\u0648 \u0627\u0644\u0648\u0642\u0648\u0641 \u0639\u0646\u062f \u0627\u0644\u0643\u0627\u0628\u0644. \u0645\u062f \u0633\u0627\u0642\u0643 \u0625\u0644\u0649 \u0627\u0644\u062e\u0644\u0641 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0627\u0644\u0645\u0624\u062e\u0631\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u0643 \u0645\u0633\u062a\u0631\u064a\u062d\u064b\u0627 \u0639\u0644\u0649 \u0633\u0627\u0639\u062f\u0643 \u0648\u062c\u0633\u0645\u0643 \u0641\u064a \u062e\u0637 \u0645\u0633\u062a\u0642\u064a\u0645. \u0627\u0631\u0641\u0639\u064a \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0627\u0644\u0648\u0636\u0639\u064a\u0629.","\u062a\u062d\u0627\u0641\u0638 \u0627\u0644\u062f\u0648\u0627\u0633\u0629 \u0639\u0644\u0649 \u0648\u062a\u064a\u0631\u0629 \u062b\u0627\u0628\u062a\u0629. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0641\u064a \u0648\u0636\u0639 \u0645\u062d\u0627\u064a\u062f.","\u0623\u062f\u0627\u0621 \u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u0631\u0641\u0639 \u0628\u0642\u0628\u0636\u0629 \u0645\u0633\u062a\u0644\u0642\u064a\u0629. \u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u0645\u0639\u0635\u0645\u064a\u0643 \u0644\u0644\u0646\u0637\u0642 \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649. \u0623\u0642\u0644 \u0645\u0639 \u0642\u0628\u0636\u0629 \u0645\u0646\u0637\u0648\u0642\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0645\u0633\u062a\u0644\u0642 \u0641\u064a \u0627\u0644\u0642\u0627\u0639.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062d\u0631\u0643\u0629 \u0627\u0644\u062a\u064a \u062a\u062a\u062d\u0643\u0645 \u0641\u064a \u0643\u0644 \u0645\u0646 \u0627\u0644\u0645\u0631\u062d\u0644\u062a\u064a\u0646 \u063a\u0631\u064a\u0628 \u0627\u0644\u0623\u0637\u0648\u0627\u0631 \u0648\u0645\u062a\u062d\u062f\u0629 \u0627\u0644\u0645\u0631\u0643\u0632. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062d\u0631\u0643\u0629 \u0627\u0644\u062a\u064a \u062a\u062a\u062d\u0643\u0645 \u0641\u064a \u0643\u0644 \u0645\u0646 \u0627\u0644\u0645\u0631\u062d\u0644\u062a\u064a\u0646 \u063a\u0631\u064a\u0628 \u0627\u0644\u0623\u0637\u0648\u0627\u0631 \u0648\u0645\u062a\u062d\u062f\u0629 \u0627\u0644\u0645\u0631\u0643\u0632. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062a\u0631\u0627\u062c\u0639 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062d\u0631\u0643\u0629 \u0628\u0634\u0643\u0644 \u0645\u062a\u0641\u062c\u0631 \u0644\u0644\u0623\u0639\u0644\u0649 \u0623\u0648 \u0644\u0644\u0623\u0645\u0627\u0645. \u0627\u0647\u0628\u0637 \u0628\u0647\u062f\u0648\u0621 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0647\u0628\u0648\u0637.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062d\u0631\u0643\u0629 \u0628\u0628\u0637\u0621 \u0641\u064a \u0643\u0644\u0627 \u0627\u0644\u0645\u0631\u062d\u0644\u062a\u064a\u0646. \u0627\u0644\u0625\u064a\u0642\u0627\u0641 \u0627\u0644\u0645\u0624\u0642\u062a \u0641\u064a \u0627\u0644\u0623\u0633\u0641\u0644 \u064a\u0632\u064a\u062f \u0645\u0646 \u062a\u0645\u062f\u062f \u0631\u0628\u0644\u0629 \u0627\u0644\u0633\u0627\u0642.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062a\u0646\u0627\u0648\u0628 \u0628\u0633\u0644\u0627\u0633\u0629 \u0648\u0628\u0634\u0643\u0644 \u0645\u0633\u062a\u0645\u0631. \u064a\u0639\u062f \u0636\u063a\u0637 \u0623\u0631\u0646\u0648\u0644\u062f \u0623\u062d\u062f \u0627\u0644\u062a\u0645\u0627\u0631\u064a\u0646 \u0627\u0644\u0642\u0644\u064a\u0644\u0629 \u0627\u0644\u062a\u064a \u062a\u0634\u063a\u0644 \u062c\u0645\u064a\u0639 \u0623\u0644\u064a\u0627\u0641 \u0627\u0644\u0639\u0636\u0644\u0627\u062a.","\u0636\u0639\u064a \u064a\u062f\u064a\u0643 \u0639\u0644\u0649 \u0634\u0643\u0644 \u0627\u0644\u0645\u0627\u0633\u0629 \u062a\u062d\u062a \u0635\u062f\u0631\u0643. \u0627\u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0642\u0631\u064a\u0628\u064a\u0646 \u0645\u0646 \u062c\u0630\u0639\u0643. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u062b\u0644\u0627\u062b\u064a\u0629 \u0627\u0644\u0631\u0624\u0648\u0633.","\u0636\u0639 \u0646\u0641\u0633\u0643 \u0641\u064a \u0622\u0644\u0629 \u0627\u0644\u0642\u0631\u0641\u0635\u0627\u0621 \u0645\u0639 \u0648\u0636\u0639 \u0627\u0644\u0643\u062a\u0641\u064a\u0646 \u062a\u062d\u062a \u0627\u0644\u0648\u0633\u0627\u062f\u0627\u062a. \u0627\u0646\u0632\u0644 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0625\u0644\u0649 90 \u062f\u0631\u062c\u0629 \u062b\u0645 \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649.","\u0627\u062f\u0641\u0639 \u0628\u0634\u0643\u0644 \u0631\u0626\u064a\u0633\u064a \u0628\u0627\u0644\u0642\u062f\u0645 \u0639\u0644\u0649 \u0627\u0644\u0633\u0637\u062d \u0627\u0644\u0645\u0631\u062a\u0641\u0639. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062c\u0630\u0639\u0643 \u0641\u064a \u0648\u0636\u0639 \u0645\u0633\u062a\u0642\u064a\u0645.","\u0627\u062f\u0641\u0639 \u0628\u0633\u0627\u0642\u064a\u0643\u060c \u062b\u0645 \u0642\u0645 \u0628\u0625\u0645\u0627\u0644\u0629 \u062c\u0630\u0639\u0643 \u0625\u0644\u0649 \u0627\u0644\u062e\u0644\u0641\u060c \u0648\u0623\u062e\u064a\u0631\u064b\u0627 \u0627\u0633\u062d\u0628 \u0627\u0644\u0645\u062c\u0630\u0627\u0641 \u0646\u062d\u0648 \u0628\u0637\u0646\u0643. \u0639\u0643\u0633 \u0627\u0644\u062a\u0631\u062a\u064a\u0628 \u0639\u0646\u062f \u0627\u0644\u0639\u0648\u062f\u0629.","\u064a\u062a\u0637\u0644\u0628 \u062d\u0631\u0643\u0629 \u0645\u0645\u062a\u0627\u0632\u0629 \u0641\u064a \u0627\u0644\u0643\u062a\u0641 \u0648\u0627\u0644\u0648\u0631\u0643 \u0648\u0627\u0644\u0643\u0627\u062d\u0644. \u0627\u0628\u062f\u0623 \u0628\u062f\u0648\u0646 \u0648\u0632\u0646.","\u0627\u0633\u062d\u0628 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643 \u0648\u0627\u062d\u062a\u0641\u0638 \u0628\u0647\u0627 \u0645\u063a\u0644\u0642\u0629. \u0644\u0627 \u062a\u0631\u062a\u062f \u0627\u0644\u0648\u0632\u0646 \u0645\u0646 \u0635\u062f\u0631\u0643.","\u0627\u0633\u062d\u0628 \u0644\u0648\u062d\u064a \u0643\u062a\u0641\u0643 \u0644\u062a\u062b\u0628\u064a\u062a \u0627\u0644\u0643\u062a\u0641.","\u0642\u0645 \u0628\u0627\u0644\u062a\u062f\u0648\u064a\u0631 \u0645\u0646 \u0627\u0644\u062e\u0635\u0631\u060c \u0648\u0644\u064a\u0633 \u0641\u0642\u0637 \u0645\u0646 \u0627\u0644\u0630\u0631\u0627\u0639\u064a\u0646.","\u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u062c\u0630\u0639\u0643 \u0628\u062d\u064a\u062b \u064a\u0643\u0648\u0646 \u0623\u062d\u062f \u0645\u0631\u0641\u0642\u064a\u0643 \u0628\u0627\u062a\u062c\u0627\u0647 \u0627\u0644\u0631\u0643\u0628\u0629 \u0627\u0644\u0645\u0642\u0627\u0628\u0644\u0629. \u0643\u0631\u0631 \u0645\u0646 \u0627\u0644\u062c\u0627\u0646\u0628 \u0627\u0644\u0622\u062e\u0631.","\u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u0645\u0639\u0635\u0645\u0643 \u0644\u0644\u062e\u0627\u0631\u062c \u0641\u064a \u0627\u0644\u0623\u0639\u0644\u0649 \u0644\u062a\u0639\u0638\u064a\u0645 \u0627\u0644\u0630\u0631\u0648\u0629. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0631\u0627\u0631 \u062c\u0630\u0639\u0643.","\u0627\u062c\u0644\u0633 \u0645\u0639 \u0627\u0644\u062f\u0645\u0628\u0644 \u0639\u0644\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641\u064a\u0646 \u0648\u0631\u0627\u062d\u062a\u064a \u0627\u0644\u064a\u062f \u0645\u0648\u0627\u062c\u0647\u062a\u064a\u0646 \u0644\u0643. \u0627\u0636\u063a\u0637 \u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u062a\u062f\u0648\u064a\u0631 \u0645\u0639\u0635\u0645\u064a\u0643 \u0644\u0644\u062e\u0627\u0631\u062c \u062d\u062a\u0649 \u062a\u0648\u0627\u062c\u0647 \u0631\u0627\u062d\u0629 \u064a\u062f\u0643 \u0644\u0644\u0623\u0645\u0627\u0645. \u0627\u0646\u062e\u0641\u0627\u0636 \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0645\u0648\u0642\u0641 \u0627\u0644\u0623\u0648\u0644\u064a.","\u0627\u062c\u0644\u0633 \u0645\u0639 \u0648\u0636\u0639 \u0645\u0631\u0641\u0642\u0643 \u0639\u0644\u0649 \u0641\u062e\u0630\u0643 \u0627\u0644\u062f\u0627\u062e\u0644\u064a. \u0642\u0645 \u0628\u062b\u0646\u064a \u0643\u0648\u0639\u0643 \u0628\u062d\u064a\u062b \u064a\u0643\u0648\u0646 \u0627\u0644\u062f\u0645\u0628\u0644 \u0628\u0627\u062a\u062c\u0627\u0647 \u0643\u062a\u0641\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u062c\u0644\u0633 \u0645\u0639 \u0631\u0641\u0639 \u0642\u062f\u0645\u064a\u0643 \u0648\u062c\u0630\u0639\u0643 \u0628\u0632\u0627\u0648\u064a\u0629 45 \u062f\u0631\u062c\u0629. \u0642\u0645 \u0628\u062a\u062f\u0648\u064a\u0631 \u062c\u0630\u0639\u0643 \u0645\u0646 \u062c\u0627\u0646\u0628 \u0625\u0644\u0649 \u0622\u062e\u0631 \u0645\u0639 \u0648\u0636\u0639 \u064a\u062f\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636 \u0628\u062c\u0627\u0646\u0628 \u0627\u0644\u0648\u0631\u0643\u064a\u0646.","\u0627\u0644\u062a\u0633\u0644\u0633\u0644: \u0627\u0644\u0633\u0627\u0642\u064a\u0646 \u062b\u0645 \u0627\u0644\u062c\u0630\u0639 \u062b\u0645 \u0627\u0644\u0630\u0631\u0627\u0639\u064a\u0646 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u0633\u062d\u0628.","\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0622\u0644\u0629 \u0627\u0644\u0633\u062d\u0628 \u0644\u0644\u0623\u0633\u0641\u0644 \u0648\u0623\u0645\u0633\u0643 \u0628\u0627\u0644\u0642\u0636\u064a\u0628 \u0628\u0642\u0628\u0636\u0629 \u0648\u0627\u0633\u0639\u0629. \u0627\u0633\u062d\u0628 \u0627\u0644\u0634\u0631\u064a\u0637 \u0646\u062d\u0648 \u0635\u062f\u0631\u0643 \u0645\u0639 \u0625\u0645\u0627\u0644\u0629 \u062c\u0630\u0639\u0643 \u0644\u0644\u062e\u0644\u0641 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0627\u0644\u0622\u0644\u0629 \u0627\u0644\u0645\u0646\u0633\u062f\u0644\u0629 \u0628\u0642\u0628\u0636\u0629 \u0642\u0631\u064a\u0628\u0629 \u0623\u0648 \u0645\u062d\u0627\u064a\u062f\u0629. \u0627\u0633\u062d\u0628 \u0627\u0644\u0634\u0631\u064a\u0637 \u0646\u062d\u0648 \u0635\u062f\u0631\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0642\u0631\u064a\u0628\u064a\u0646 \u0645\u0646 \u062c\u0633\u0645\u0643. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u0639\u0648\u062f\u0629.","\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0627\u0644\u0643\u0627\u0628\u0644 \u0627\u0644\u0645\u0646\u062e\u0641\u0636 \u0645\u0639 \u0648\u0636\u0639 \u0642\u062f\u0645\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u062f\u0639\u0627\u0645\u0627\u062a. \u0627\u0633\u062d\u0628 \u0627\u0644\u0645\u0642\u0628\u0636 \u0646\u062d\u0648 \u062e\u0635\u0631\u0643 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0627\u0645\u0629 \u0638\u0647\u0631\u0643. \u0642\u0645 \u0628\u0642\u0628\u0636 \u0639\u0636\u0644\u0627\u062a \u0638\u0647\u0631\u0643 \u062b\u0645 \u0639\u062f \u0628\u0628\u0637\u0621.","\u0627\u062c\u0644\u0633 \u0623\u0645\u0627\u0645 \u0627\u0644\u0622\u0644\u0629 \u0645\u0639 \u0648\u0636\u0639 \u0648\u0633\u0627\u062f\u0627\u062a \u0639\u0644\u0649 \u0643\u0627\u062d\u0644\u064a\u0643. \u0645\u062f \u0633\u0627\u0642\u064a\u0643 \u0625\u0644\u0649 \u0623\u0639\u0644\u0649 \u0645\u0639 \u062a\u0642\u0644\u064a\u0635 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0641\u062e\u0630. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u062c\u0644\u0633 \u0623\u0645\u0627\u0645 \u0627\u0644\u0622\u0644\u0629 \u0645\u0639 \u0648\u0636\u0639 \u0648\u0633\u0627\u062f\u0627\u062a \u0639\u0644\u0649 \u0643\u0627\u062d\u0644\u064a\u0643. \u0642\u0645 \u0628\u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0628\u062d\u064a\u062b \u064a\u0643\u0648\u0646 \u0643\u0639\u0628\u0643 \u0646\u062d\u0648 \u0627\u0644\u0645\u0624\u062e\u0631\u0629. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0645\u0642\u0639\u062f \u0627\u0644\u0648\u0627\u0639\u0638 \u0648\u0627\u0636\u0639\u064b\u0627 \u0630\u0631\u0627\u0639\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0648\u0633\u0627\u062f\u0629. \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0628\u062d\u064a\u062b \u062a\u0648\u062c\u0647 \u0627\u0644\u0623\u062f\u0627\u0629 \u0646\u062d\u0648 \u0643\u062a\u0641\u064a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0627\u0644\u0627\u0645\u062a\u062f\u0627\u062f \u0627\u0644\u0643\u0627\u0645\u0644 \u062a\u0642\u0631\u064a\u0628\u064b\u0627.","\u0627\u062c\u0644\u0633 \u0641\u064a \u0627\u0644\u0622\u0644\u0629 \u0645\u0639 \u0648\u0636\u0639 \u0638\u0647\u0631\u0643 \u0639\u0644\u0649 \u0627\u0644\u0648\u0633\u0627\u062f\u0629. \u0636\u0639 \u0645\u0631\u0641\u0642\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0648\u0633\u0627\u062f\u0627\u062a. \u0623\u062d\u0636\u0631 \u0630\u0631\u0627\u0639\u064a\u0643 \u0646\u062d\u0648 \u0627\u0644\u0645\u0631\u0643\u0632 \u0645\u0639 \u062a\u0642\u0644\u064a\u0635 \u0635\u062f\u0631\u0643. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u062c\u0644\u0633 \u0641\u064a \u0627\u0644\u0622\u0644\u0629 \u0645\u0639 \u0648\u0636\u0639 \u0642\u062f\u0645\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0645\u0646\u0635\u0629 \u0628\u0639\u0631\u0636 \u0627\u0644\u0648\u0631\u0643. \u0627\u062e\u0641\u0636 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0625\u0644\u0649 90 \u062f\u0631\u062c\u0629. \u0627\u062f\u0641\u0639 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062a\u0645\u062f\u064a\u062f \u0633\u0627\u0642\u064a\u0643.","\u0627\u062c\u0644\u0633 \u0639\u0644\u0649 \u0627\u0644\u0645\u0642\u0639\u062f \u0627\u0644\u0645\u0627\u0626\u0644 \u0645\u0639 \u0648\u0636\u0639 \u0642\u062f\u0645\u064a\u0643 \u0639\u0644\u0649 \u0627\u0644\u0623\u0631\u0636. \u0623\u0645\u0633\u0643 \u0627\u0644\u0623\u062f\u0627\u0629 \u0639\u0644\u0649 \u0646\u0637\u0627\u0642 \u0623\u0648\u0633\u0639 \u0645\u0646 \u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0623\u0642\u0644 \u0625\u0644\u0649 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0635\u062f\u0631 \u0627\u0644\u0639\u0644\u0648\u064a. \u0627\u062f\u0641\u0639 \u0628\u0642\u0648\u0629 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u062c\u0644\u0633 \u0645\u0639 \u0633\u0627\u0639\u062f\u064a\u0643 \u0639\u0644\u0649 \u0641\u062e\u0630\u064a\u0643. \u0623\u0645\u0633\u0643 \u0627\u0644\u0623\u062f\u0627\u0629 \u0628\u0642\u0628\u0636\u0629 \u0645\u0633\u062a\u0644\u0642\u064a\u0629. \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0639\u0635\u0645\u064a\u0643 \u0644\u0644\u0623\u0639\u0644\u0649 \u0648\u0644\u0644\u0623\u0633\u0641\u0644 \u0628\u0628\u0637\u0621.","\u0642\u0645 \u0628\u062a\u0648\u0632\u064a\u0639 \u0627\u0644\u062d\u0628\u0644 \u0641\u064a \u0627\u0644\u0623\u0633\u0641\u0644 \u0644\u062a\u062d\u0642\u064a\u0642 \u0623\u0642\u0635\u0649 \u0642\u062f\u0631 \u0645\u0646 \u0627\u0644\u0627\u0646\u0643\u0645\u0627\u0634. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0641\u064a \u0645\u0646\u062a\u0635\u0641 \u0627\u0644\u0643\u0627\u0628\u0644 \u0628\u0645\u0642\u0628\u0636 \u0648\u0627\u062d\u062f \u0644\u0643\u0644 \u064a\u062f. \u0623\u0628\u0642\u0650 \u0630\u0631\u0627\u0639\u064a\u0643 \u0645\u062b\u0646\u064a\u062a\u064a\u0646 \u0642\u0644\u064a\u0644\u0627\u064b. \u0623\u062d\u0636\u0631 \u064a\u062f\u064a\u0643 \u0646\u062d\u0648 \u0627\u0644\u0645\u0631\u0643\u0632 \u0645\u0639\u0628\u0631\u0627\u064b \u0625\u064a\u0627\u0647\u0645\u0627. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0639\u0646\u062f \u0627\u0644\u0643\u0627\u0628\u0644 \u0627\u0644\u0639\u0627\u0644\u064a \u0628\u0627\u0644\u062d\u0628\u0644. \u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a \u062c\u0630\u0639\u0643. \u0627\u062f\u0641\u0639 \u0627\u0644\u062d\u0628\u0644 \u0644\u0644\u0623\u0633\u0641\u0644 \u0645\u0639 \u0641\u0635\u0644 \u0627\u0644\u0623\u0637\u0631\u0627\u0641. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0639\u0646\u062f \u0627\u0644\u0643\u0627\u0628\u0644 \u0627\u0644\u0639\u0627\u0644\u064a. \u0623\u0628\u0642\u0650 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a \u062c\u0630\u0639\u0643. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0633\u0641\u0644 \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0627\u0644\u0643\u0627\u0645\u0644. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0641\u064a \u0645\u0648\u0627\u062c\u0647\u0629 \u0627\u0644\u0643\u0627\u0628\u0644 \u0627\u0644\u0639\u0627\u0644\u064a \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u062a\u0642\u0631\u064a\u0628\u064b\u0627. \u0623\u062d\u0636\u0631 \u0627\u0644\u0628\u0627\u0631 \u0646\u062d\u0648 \u0641\u062e\u0630\u064a\u0643 \u0639\u0644\u0649 \u0634\u0643\u0644 \u0642\u0648\u0633 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0630\u0631\u0627\u0639\u064a\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u062a\u064a\u0646. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u064a\u0642\u0641 \u0623\u0645\u0627\u0645 \u0645\u0642\u0627\u0639\u062f \u0627\u0644\u0628\u062f\u0644\u0627\u0621. \u0636\u0639 \u0642\u062f\u0645\u064b\u0627 \u0648\u0627\u062d\u062f\u0629 \u0639\u0644\u0649 \u0627\u0644\u0633\u0637\u062d \u0627\u0644\u0645\u0631\u062a\u0641\u0639 \u0648\u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649. \u0627\u0646\u062e\u0641\u0627\u0636 \u0628\u0628\u0637\u0621 \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0627\u0644\u062d\u0631\u0643\u0629.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0639\u0644\u0649 \u0633\u0627\u0642 \u0648\u0627\u062d\u062f\u0629. \u0627\u062e\u0641\u0636 \u062c\u0630\u0639\u0643 \u0644\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u064b\u0627 \u0628\u064a\u0646\u0645\u0627 \u062a\u0645\u062a\u062f \u0633\u0627\u0642\u0643 \u0627\u0644\u062d\u0631\u0629 \u0644\u0644\u062e\u0644\u0641. \u0627\u0631\u062c\u0639 \u0625\u0644\u0649 \u0627\u0644\u0648\u0636\u0639 \u0627\u0644\u0645\u0633\u062a\u0642\u064a\u0645 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0624\u062e\u0631\u0629.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0623\u0648 \u0627\u0644\u062c\u0644\u0648\u0633 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0639\u0644\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0627\u0644\u0643\u0627\u0645\u0644. \u0642\u0645 \u0628\u0627\u0644\u062e\u0641\u0636 \u0628\u0628\u0637\u0621 \u0648\u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629 \u0645\u0639 \u0627\u0644\u0648\u0632\u0646 \u0639\u0646\u062f \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0623\u0648 \u0627\u0644\u062c\u0644\u0648\u0633 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0639\u0644\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u062a\u0645\u062f\u064a\u062f \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0627\u0644\u0643\u0627\u0645\u0644. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0623\u0648 \u0627\u0644\u062c\u0644\u0648\u0633 \u0645\u0639 \u0648\u0636\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0641\u0648\u0642 \u0627\u0644\u0631\u0623\u0633\u060c \u0648\u0627\u0644\u0630\u0631\u0627\u0639\u064a\u0646 \u0645\u0645\u062f\u0648\u062f\u062a\u064a\u0646. \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0648\u062e\u0641\u0636 \u0627\u0644\u0648\u0632\u0646 \u062e\u0644\u0641 \u0631\u0623\u0633\u0643. \u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0639\u0648\u062f\u0629 \u0644\u0623\u0639\u0644\u0649.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u062f\u0645\u0628\u0644 \u0641\u064a \u0643\u0644 \u064a\u062f \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a\u0643. \u0627\u0631\u0641\u0639 \u0630\u0631\u0627\u0639\u064a\u0643 \u0628\u0634\u0643\u0644 \u062c\u0627\u0646\u0628\u064a \u0625\u0644\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u0645\u0631\u0641\u0642\u064a\u0646 \u0645\u062b\u0646\u064a\u064a\u0646 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u062b\u0642\u0644 \u0641\u064a \u0643\u0644 \u064a\u062f \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a\u0643. \u0627\u0631\u0641\u0639 \u0643\u062a\u0641\u064a\u0643 \u0646\u062d\u0648 \u0623\u0630\u0646\u064a\u0643 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0645\u0635\u0627\u0626\u062f\u0643. \u0627\u0633\u062a\u0645\u0631\u064a \u0641\u064a \u0627\u0644\u0627\u0646\u0642\u0628\u0627\u0636 \u0644\u0645\u062f\u0629 \u062b\u0627\u0646\u064a\u0629 \u062b\u0645 \u0627\u062e\u0641\u0636\u064a\u0647 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u062f\u0645\u0628\u0644 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a\u0643 \u0628\u0642\u0628\u0636\u0629 \u0645\u062d\u0627\u064a\u062f\u0629 (\u0627\u0644\u0625\u0628\u0647\u0627\u0645 \u0644\u0644\u0623\u0639\u0644\u0649). \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u0639 \u062c\u0644\u0628 \u0627\u0644\u062f\u0645\u0628\u0644 \u0646\u062d\u0648 \u0643\u062a\u0641\u064a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0641\u064a \u0639\u0631\u0636 \u0627\u0644\u0648\u0631\u0643. \u0642\u0645 \u0628\u0627\u0644\u0645\u0641\u0635\u0644\u0629 \u0639\u0646\u062f \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0648\u0623\u0631\u062c\u062d\u0629 \u0627\u0644\u0648\u0632\u0646 \u0628\u064a\u0646 \u0633\u0627\u0642\u064a\u0643\u060c \u062b\u0645 \u0627\u062f\u0641\u0639 \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645 \u0628\u0634\u0643\u0644 \u0645\u062a\u0641\u062c\u0631 \u0645\u0639 \u062a\u0623\u0631\u062c\u062d \u0627\u0644\u0648\u0632\u0646 \u062d\u062a\u0649 \u0627\u0631\u062a\u0641\u0627\u0639 \u0627\u0644\u0643\u062a\u0641.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0641\u064a \u0639\u0631\u0636 \u0627\u0644\u0648\u0631\u0643. \u0642\u0645 \u0628\u062e\u0641\u0636 \u0627\u0644\u062d\u062f\u064a\u062f \u0639\u0644\u0649 \u0637\u0648\u0644 \u0633\u0627\u0642\u064a\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0631\u0643\u0628\u062a\u064a\u0643 \u0645\u062b\u0646\u064a\u062a\u064a\u0646 \u0642\u0644\u064a\u0644\u0627\u064b \u0648\u0638\u0647\u0631\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u0627\u064b. \u0627\u0646\u0632\u0644 \u062d\u062a\u0649 \u062a\u0634\u0639\u0631 \u0628\u062a\u0648\u062a\u0631 \u0641\u064a \u0623\u0648\u062a\u0627\u0631 \u0627\u0644\u0631\u0643\u0628\u0629 \u062b\u0645 \u0627\u0631\u062c\u0639 \u0644\u0644\u0623\u0639\u0644\u0649.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0641\u064a \u0639\u0631\u0636 \u0627\u0644\u0648\u0631\u0643. \u0627\u062e\u0641\u0636 \u0638\u0647\u0631\u0643 \u0628\u0634\u0643\u0644 \u0645\u0633\u062a\u0642\u064a\u0645 \u0648\u0635\u062f\u0631\u0643 \u0644\u0623\u0639\u0644\u0649. \u0627\u062f\u0641\u0639 \u0642\u062f\u0645\u064a\u0643 \u0625\u0644\u0649 \u0627\u0644\u0623\u0631\u0636 \u0648\u0642\u0645 \u0628\u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0648\u0627\u0644\u0631\u0643\u0628\u062a\u064a\u0646 \u0641\u064a \u0646\u0641\u0633 \u0627\u0644\u0648\u0642\u062a \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u0634\u0631\u064a\u0637 \u0642\u0631\u064a\u0628\u064b\u0627 \u0645\u0646 \u0633\u0627\u0642\u064a\u0643.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0639\u0644\u0649 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0643\u062a\u0641\u060c \u0648\u0639\u0642\u062f \u0627\u0644\u062f\u0645\u0628\u0644 \u0623\u0645\u0627\u0645 \u0635\u062f\u0631\u0643. \u0627\u0646\u0632\u0644 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0635\u062f\u0631\u0643 \u0645\u0631\u062a\u0641\u0639\u064b\u0627. \u0627\u0631\u062c\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0639\u0646 \u0637\u0631\u064a\u0642 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0643\u0639\u0628\u064a\u0643.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0628\u0639\u0631\u0636 \u0627\u0644\u0643\u062a\u0641\u064a\u0646. \u0627\u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0648\u0648\u0631\u0643\u064a\u0643 \u0643\u0645\u0627 \u0644\u0648 \u0643\u0646\u062a \u062a\u062c\u0644\u0633 \u0639\u0644\u0649 \u0643\u0631\u0633\u064a. \u0627\u0646\u0632\u0644 \u062d\u062a\u0649 \u064a\u0635\u0628\u062d \u0641\u062e\u0630\u064a\u0643 \u0645\u0648\u0627\u0632\u064a\u064a\u0646 \u0644\u0644\u0623\u0631\u0636. \u0627\u062f\u0641\u0639 \u0645\u0646 \u062e\u0644\u0627\u0644 \u0643\u0639\u0628\u0643.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0642\u062f\u0645\u064a\u0646 \u0645\u0639\u064b\u0627. \u062e\u0630 \u062e\u0637\u0648\u0629 \u062c\u0627\u0646\u0628\u064a\u0629 \u0648\u0627\u0633\u0639\u0629 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0627\u0644\u0642\u062f\u0645 \u0627\u0644\u0645\u0642\u0627\u0628\u0644\u0629 \u062b\u0627\u0628\u062a\u0629. \u0627\u062e\u0641\u0636 \u0646\u062d\u0648 \u0647\u0630\u0627 \u0627\u0644\u062c\u0627\u0646\u0628 \u0639\u0646 \u0637\u0631\u064a\u0642 \u062b\u0646\u064a \u0631\u0643\u0628\u062a\u0643.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u062d\u062f\u064a\u062f \u0639\u0644\u0649 \u0643\u062a\u0641\u064a\u0643. \u0642\u0645 \u0628\u0625\u0645\u0627\u0644\u0629 \u062c\u0630\u0639\u0643 \u0625\u0644\u0649 \u0627\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u0627\u064b \u0648\u062b\u0646\u064a \u0631\u0643\u0628\u062a\u064a\u0643 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u0634\u0639\u0631 \u0628\u0627\u0644\u062a\u0645\u062f\u062f \u0641\u064a \u0623\u0648\u062a\u0627\u0631 \u0627\u0644\u0631\u0643\u0628\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0627\u0644\u0648\u0636\u0639 \u0627\u0644\u0645\u0633\u062a\u0642\u064a\u0645.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0623\u0645\u0627\u0645 \u0641\u062e\u0630\u064a\u0643 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0642\u0628\u0636\u0629 \u0645\u0646\u0628\u062b\u0642\u0629. \u0627\u0633\u062d\u0628 \u0646\u062d\u0648 \u0630\u0642\u0646\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0623\u0639\u0644\u0649 \u0645\u0646 \u0645\u0639\u0635\u0645\u064a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0623\u0645\u0627\u0645 \u0641\u062e\u0630\u064a\u0643. \u0627\u0631\u0641\u0639\u064a \u0630\u0631\u0627\u0639\u064a\u0643 \u0623\u0645\u0627\u0645\u0643 \u0625\u0644\u0649 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0643\u062a\u0641\u064a\u0646 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0627\u0644\u0645\u0631\u0641\u0642\u064a\u0646 \u0645\u062b\u0646\u064a\u064a\u0646 \u0642\u0644\u064a\u0644\u0627\u064b. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0642\u0628\u0636\u0629 \u0645\u0646\u0628\u0633\u0637\u0629 (\u0631\u0627\u062d\u0629 \u0627\u0644\u064a\u062f \u0645\u062a\u062c\u0647\u0629 \u0644\u0644\u0623\u0633\u0641\u0644). \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0628\u062d\u064a\u062b \u062a\u0648\u062c\u0647 \u0627\u0644\u0623\u062f\u0627\u0629 \u0646\u062d\u0648 \u0643\u062a\u0641\u064a\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0627\u0644\u0623\u062f\u0627\u0629 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0642\u0628\u0636\u0629 \u0645\u0633\u062a\u0644\u0642\u064a\u0629. \u0642\u0645 \u0628\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u0639 \u0625\u062d\u0636\u0627\u0631 \u0627\u0644\u0623\u062f\u0627\u0629 \u0646\u062d\u0648 \u0643\u062a\u0641\u064a\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0639\u0644\u0649 \u062c\u0627\u0646\u0628\u064a \u062c\u0630\u0639\u0643. \u062e\u0641\u0636 \u0628\u0628\u0637\u0621 \u0627\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0645\u064a\u0644 \u0627\u0644\u062c\u0630\u0639 \u0628\u0632\u0627\u0648\u064a\u0629 45 \u062f\u0631\u062c\u0629. \u0623\u0645\u0633\u0643 \u0628\u0627\u0644\u062d\u062f\u064a\u062f \u0628\u0642\u0628\u0636\u0629 \u0645\u0646\u0628\u0633\u0637\u0629. \u0627\u0633\u062d\u0628 \u0646\u062d\u0648 \u0628\u0637\u0646\u0643 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u062d\u0627\u064a\u062f\u064b\u0627. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0627\u0644\u0648\u0642\u0648\u0641 \u0645\u0639 \u0643\u0639\u0628\u064a\u0643 \u0628\u0639\u064a\u062f\u064b\u0627 \u0639\u0646 \u062d\u0627\u0641\u0629 \u0627\u0644\u0645\u0646\u0635\u0629. \u0642\u0645 \u0628\u0627\u0644\u0648\u0642\u0648\u0641 \u0639\u0644\u0649 \u0623\u0635\u0627\u0628\u0639 \u0642\u062f\u0645\u064a\u0643 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0633\u0627\u0642\u064a\u0643. \u0627\u0646\u0632\u0644 \u0628\u0628\u0637\u0621 \u0645\u0639 \u0627\u0644\u0633\u0645\u0627\u062d \u0644\u0643\u0639\u0628\u0643 \u0628\u0627\u0644\u0647\u0628\u0648\u0637 \u0625\u0644\u0649 \u0645\u0627 \u062f\u0648\u0646 \u0645\u0633\u062a\u0648\u0649 \u0627\u0644\u0645\u0646\u0635\u0629.","\u0627\u0628\u062f\u0623 \u0628\u0648\u062a\u064a\u0631\u0629 \u0645\u0639\u062a\u062f\u0644\u0629 \u0648\u0642\u0645 \u0628\u0627\u0644\u0632\u064a\u0627\u062f\u0629 \u062a\u062f\u0631\u064a\u062c\u064a\u064b\u0627.","\u0627\u0628\u062f\u0623 \u0628\u062a\u0631\u0627\u062c\u0639 \u0644\u0648\u062d\u064a \u0627\u0644\u0643\u062a\u0641. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u0631\u062d\u0644\u0629 \u063a\u0631\u064a\u0628 \u0627\u0644\u0623\u0637\u0648\u0627\u0631.","\u0627\u0628\u062f\u0623 \u0628\u062a\u0631\u0627\u062c\u0639 \u0644\u0648\u062d\u064a \u0627\u0644\u0643\u062a\u0641. \u0644\u0627 \u062a\u0645\u064a\u0644 \u062c\u0630\u0639\u0643 \u0625\u0644\u0649 \u0627\u0644\u062e\u0644\u0641 \u0643\u062b\u064a\u0631\u064b\u0627.","\u0627\u0628\u062f\u0623 \u0627\u0644\u062d\u0631\u0643\u0629 \u0645\u0646 \u062a\u0631\u0627\u062c\u0639 \u0644\u0648\u062d\u064a \u0627\u0644\u0643\u062a\u0641. \u062a\u062c\u0646\u0628 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0632\u062e\u0645.","\u0627\u0628\u062f\u0623 \u0627\u0644\u062d\u0631\u0643\u0629 \u0645\u0646 \u062a\u0631\u0627\u062c\u0639 \u0644\u0648\u062d\u064a \u0627\u0644\u0643\u062a\u0641. \u0627\u0644\u0633\u064a\u0637\u0631\u0629 \u0639\u0644\u0649 \u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u0625\u0637\u0627\u0644\u0629.","\u062e\u0637\u0648\u0629 \u0644\u0644\u062e\u0644\u0641 \u0645\u0639 \u062e\u0641\u0636 \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u062e\u0644\u0641\u064a\u0629 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636. \u062a\u0628\u0642\u0649 \u0627\u0644\u0631\u0643\u0628\u0629 \u0627\u0644\u0623\u0645\u0627\u0645\u064a\u0629 \u0645\u062d\u0627\u0630\u064a\u0629 \u0644\u0644\u0643\u0627\u062d\u0644.","\u062e\u0637\u0648\u0629 \u0644\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u062e\u0641\u0636 \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u062e\u0644\u0641\u064a\u0629 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636. \u062a\u0628\u0642\u0649 \u0627\u0644\u0631\u0643\u0628\u0629 \u0627\u0644\u0623\u0645\u0627\u0645\u064a\u0629 \u0645\u062d\u0627\u0630\u064a\u0629 \u0644\u0644\u0643\u0627\u062d\u0644. \u0627\u062f\u0641\u0639 \u0644\u0644\u0623\u0639\u0644\u0649.","\u062e\u0637\u0648\u0629 \u0644\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u062e\u0641\u0636 \u0631\u0643\u0628\u062a\u0643 \u0627\u0644\u062e\u0644\u0641\u064a\u0629. \u0627\u0633\u062a\u0645\u0631 \u0641\u064a \u0627\u0644\u062a\u0642\u062f\u0645 \u0644\u0644\u0623\u0645\u0627\u0645 \u0628\u0627\u0644\u062a\u0646\u0627\u0648\u0628 \u0628\u064a\u0646 \u0627\u0644\u0623\u0631\u062c\u0644 \u0628\u0634\u0643\u0644 \u0645\u0633\u062a\u0645\u0631.","\u062e\u0637\u0648\u0629 \u062f\u0627\u062e\u0644 \u0634\u0631\u064a\u0637 \u0641\u062e. \u0642\u062f\u0645 \u0641\u064a \u0639\u0631\u0636 \u0627\u0644\u0648\u0631\u0643. \u0627\u062e\u0641\u0636 \u0646\u0641\u0633\u0643 \u0645\u0645\u0633\u0643\u064b\u0627 \u0628\u0627\u0644\u0645\u0642\u0627\u0628\u0636 \u0628\u0638\u0647\u0631 \u0645\u0633\u062a\u0642\u064a\u0645. \u0627\u062f\u0641\u0639 \u0645\u0646 \u062e\u0644\u0627\u0644 \u0642\u062f\u0645\u064a\u0643 \u0644\u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0648\u0627\u0644\u0631\u0643\u0628\u062a\u064a\u0646 \u0641\u064a \u0648\u0642\u062a \u0648\u0627\u062d\u062f.","\u0627\u062a\u062e\u0630 \u062e\u0637\u0648\u0627\u062a \u0637\u0648\u064a\u0644\u0629 \u0644\u0625\u0634\u0631\u0627\u0643 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0624\u062e\u0631\u0629 \u0628\u0634\u0643\u0644 \u0623\u0643\u0628\u0631.","\u064a\u0642\u0648\u0645 \u062a\u0645\u0631\u064a\u0646 \u0632\u0648\u062a\u0645\u0627\u0646 \u0628\u062a\u062f\u0631\u064a\u0628 \u062b\u0646\u064a \u0648\u062a\u0645\u062f\u064a\u062f \u0627\u0644\u0633\u0627\u0639\u062f.","\u064a\u062c\u0628 \u0623\u0646 \u064a\u0631\u0639\u0649 \u0627\u0644\u0634\u0631\u064a\u0637 \u0633\u0627\u0642\u064a\u0643 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629. \u0631\u0643\u0632 \u0639\u0644\u0649 \u062a\u0645\u062f\u062f \u0623\u0648\u062a\u0627\u0631 \u0627\u0644\u0631\u0643\u0628\u0629 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u0647\u0628\u0648\u0637.","\u0643\u0644\u0645\u0627 \u0627\u0631\u062a\u0641\u0639 \u0627\u0644\u0633\u0637\u062d\u060c \u0643\u0644\u0645\u0627 \u0632\u0627\u062f \u0639\u0645\u0644 \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0639\u0644\u0648\u064a \u0645\u0646 \u0627\u0644\u0635\u062f\u0631.","\u064a\u0624\u0643\u062f \u0627\u0644\u0645\u0642\u0639\u062f \u0627\u0644\u0645\u0627\u0626\u0644 \u0639\u0644\u0649 \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0639\u0644\u0648\u064a \u0645\u0646 \u0627\u0644\u0635\u062f\u0631. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u062a\u0631\u0627\u062c\u0639 \u0634\u0641\u0631\u0627\u062a \u0643\u062a\u0641\u0643 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629.","\u0627\u0644\u0646\u0633\u062e\u0629 \u0627\u0644\u0645\u0627\u0626\u0644\u0629 \u0623\u0633\u0647\u0644 \u0648\u062a\u0634\u063a\u0644 \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0633\u0641\u0644\u064a \u0645\u0646 \u0627\u0644\u0635\u062f\u0631.","\u0643\u0644\u0645\u0627 \u0643\u0627\u0646 \u062c\u0633\u0645\u0643 \u0623\u0641\u0642\u064a\u064b\u0627\u060c \u0643\u0644\u0645\u0627 \u0643\u0627\u0646 \u0627\u0644\u0623\u0645\u0631 \u0623\u0635\u0639\u0628. \u062d\u0627\u0641\u0638 \u062f\u0627\u0626\u0645\u064b\u0627 \u0639\u0644\u0649 \u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a.","\u0627\u0644\u062d\u0631\u0643\u0629 \u062a\u0623\u062a\u064a \u0645\u0646 \u0627\u0644\u0648\u0631\u0643\u064a\u0646\u060c \u0648\u0644\u064a\u0633 \u0627\u0644\u0638\u0647\u0631. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0633\u062a\u0642\u0627\u0645\u0629 \u0638\u0647\u0631\u0643 \u062e\u0644\u0627\u0644 \u0645\u0631\u062d\u0644\u0629 \u0627\u0644\u062f\u0641\u0639.","\u0645\u0642\u0639\u062f \u0627\u0644\u0648\u0627\u0639\u0638 \u064a\u0644\u063a\u064a \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0632\u062e\u0645. \u0644\u0627 \u062a\u062f\u0639 \u0627\u0644\u0648\u0632\u0646 \u064a\u0646\u062e\u0641\u0636 \u200b\u200b\u0641\u064a \u0627\u0644\u0623\u0633\u0641\u0644.","\u064a\u0639\u062a\u0628\u0631 \u0627\u0644\u0627\u0646\u062f\u0641\u0627\u0639 \u0627\u0644\u0639\u0643\u0633\u064a \u0623\u0643\u062b\u0631 \u0623\u0645\u0627\u0646\u064b\u0627 \u0644\u0644\u0631\u0643\u0628\u062a\u064a\u0646 \u0645\u0646 \u0627\u0644\u0627\u0646\u062f\u0641\u0627\u0639 \u0627\u0644\u0623\u0645\u0627\u0645\u064a.","\u0627\u0644\u062f\u0648\u0631\u0627\u0646 \u064a\u0623\u062a\u064a \u0645\u0646 \u0627\u0644\u062e\u0635\u0631 \u0648\u0644\u064a\u0633 \u0627\u0644\u0631\u0623\u0633.","\u064a\u0632\u064a\u062f \u062a\u062c\u0639\u064a\u062f \u0627\u0644\u0633\u0627\u0642 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u062c\u0644\u0648\u0633 \u0645\u0646 \u0646\u0637\u0627\u0642 \u0627\u0644\u062d\u0631\u0643\u0629. \u062a\u062c\u0646\u0628 \u0631\u0641\u0639 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0624\u062e\u0631\u0629 \u0639\u0646 \u0627\u0644\u0645\u0642\u0639\u062f.","\u0627\u0644\u062f\u0639\u0645 \u064a\u0632\u064a\u0644 \u0627\u0644\u0636\u063a\u0637 \u0627\u0644\u0642\u0637\u0646\u064a. \u0627\u0644\u062a\u0631\u0643\u064a\u0632 \u0639\u0644\u0649 \u0627\u0644\u062a\u0631\u0627\u062c\u0639.","\u064a\u0642\u0644\u0644 \u0634\u0631\u064a\u0637 \u0627\u0644\u0645\u0635\u064a\u062f\u0629 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0627\u0644\u0639\u0645\u0648\u062f \u0627\u0644\u0641\u0642\u0631\u064a. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0643\u062a\u0641\u064a\u0643 \u0645\u062a\u0645\u0627\u0634\u064a\u0627 \u0645\u0639 \u0627\u0644\u0645\u0642\u0627\u0628\u0636.","\u0627\u0644\u0648\u0632\u0646 \u0641\u064a \u0627\u0644\u0623\u0645\u0627\u0645 \u064a\u0633\u0627\u0639\u062f \u0641\u064a \u0627\u0644\u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0639\u0645\u0648\u062f\u064a\u0629. \u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u062d\u0627\u0630\u0627\u0629 \u0631\u0643\u0628\u062a\u064a\u0643.","\u0627\u0633\u062a\u062e\u062f\u0645 \u0648\u0632\u0646\u064b\u0627 \u062e\u0641\u064a\u0641\u064b\u0627. \u0623\u0628\u0642\u0650 \u0633\u0627\u0639\u062f\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0639\u0644\u0649 \u0641\u062e\u0630\u064a\u0643.","\u0628\u064a\u062f \u0648\u0627\u062d\u062f\u0629 \u0648\u0631\u0643\u0628\u0629 \u0648\u0627\u062d\u062f\u0629 \u0639\u0644\u0649 \u0645\u0642\u0627\u0639\u062f \u0627\u0644\u0628\u062f\u0644\u0627\u0621. \u0627\u0633\u062d\u0628 \u0627\u0644\u062f\u0645\u0628\u0644 \u0646\u062d\u0648 \u062c\u0627\u0646\u0628\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u0643 \u0642\u0631\u064a\u0628\u064b\u0627 \u0645\u0646 \u062c\u0633\u0645\u0643. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0645\u0639 \u0631\u0641\u0639 \u0627\u0644\u062d\u062f\u064a\u062f \u0641\u0648\u0642 \u0631\u0623\u0633\u0643\u060c \u0627\u0646\u0632\u0644 \u0625\u0644\u0649 \u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0642\u0631\u0641\u0635\u0627\u0621 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0630\u0631\u0627\u0639\u064a\u0643 \u0645\u0633\u062a\u0642\u064a\u0645\u062a\u064a\u0646 \u0648\u0645\u0633\u062a\u0642\u0631\u062a\u064a\u0646. \u0627\u0631\u062c\u0639 \u0644\u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u0627\u0644\u062d\u0641\u0627\u0638 \u0639\u0644\u0649 \u0645\u062d\u0627\u0630\u0627\u0629 \u0627\u0644\u062d\u062f\u064a\u062f.","\u0645\u0639 \u0648\u0636\u0639 \u0630\u0631\u0627\u0639\u064a\u0643 \u0623\u0645\u0627\u0645 \u0627\u0644\u0643\u0627\u0628\u0644 \u0623\u0648 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u062f\u0645\u0628\u0644\u060c \u0627\u0633\u062d\u0628 \u0627\u0644\u0623\u062f\u0627\u0629 \u0646\u062d\u0648 \u0648\u062c\u0647\u0643 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u0645\u0631\u0641\u0642\u064a\u0643 \u0645\u0631\u062a\u0641\u0639\u064a\u0646. \u0627\u0641\u0635\u0644 \u0628\u064a\u0646 \u064a\u062f\u064a\u0643 \u0648\u0627\u062c\u0639\u0644 \u0642\u0628\u0636\u062a\u064a\u0643 \u0628\u0627\u0644\u0642\u0631\u0628 \u0645\u0646 \u0623\u0630\u0646\u064a\u0643. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0645\u0639 \u062c\u0633\u0645\u0643 \u0645\u0627\u0626\u0644 \u062a\u062d\u062a \u0634\u0631\u064a\u0637 \u0645\u0646\u062e\u0641\u0636\u060c \u0623\u0645\u0633\u0643 \u0628\u0642\u0628\u0636\u0629 \u0645\u0646\u0628\u0633\u0637\u0629. \u0627\u0633\u062d\u0628 \u0635\u062f\u0631\u0643 \u0625\u0644\u0649 \u0627\u0644\u0634\u0631\u064a\u0637 \u0645\u0639 \u0625\u0628\u0642\u0627\u0621 \u062c\u0633\u0645\u0643 \u062c\u0627\u0645\u062f\u064b\u0627. \u0627\u062e\u0641\u0636 \u0628\u0628\u0637\u0621.","\u0645\u0639 \u0648\u0636\u0639 \u0642\u062f\u0645\u064a\u0643 \u0639\u0644\u0649 \u0633\u0637\u062d \u0645\u0631\u062a\u0641\u0639\u060c \u0627\u062e\u0641\u0636 \u0635\u062f\u0631\u0643 \u0646\u062d\u0648 \u0627\u0644\u0623\u0631\u0636. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0645\u0639 \u0648\u0636\u0639 \u064a\u062f\u064a\u0643 \u0639\u0644\u0649 \u0633\u0637\u062d \u0645\u0631\u062a\u0641\u0639\u060c \u0642\u0645 \u0628\u062e\u0641\u0636 \u0635\u062f\u0631\u0643 \u0646\u062d\u0648 \u064a\u062f\u064a\u0643. \u0627\u062f\u0641\u0639 \u0644\u0623\u0639\u0644\u0649 \u0644\u0644\u0639\u0648\u062f\u0629 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u0628\u062f\u0627\u064a\u0629.","\u0645\u0639 \u0648\u0636\u0639 \u064a\u062f\u064a\u0643 \u0639\u0644\u0649 \u062d\u0627\u0641\u0629 \u0627\u0644\u0645\u0642\u0639\u062f\u060c \u062a\u0642\u062f\u0645 \u0644\u0644\u0623\u0645\u0627\u0645 \u0645\u0639 \u0625\u062e\u0631\u0627\u062c \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0624\u062e\u0631\u0629. \u0642\u0645 \u0628\u062e\u0641\u0636 \u062c\u0633\u0645\u0643 \u0645\u0639 \u062b\u0646\u064a \u0645\u0631\u0641\u0642\u064a\u0643 \u0625\u0644\u0649 90 \u062f\u0631\u062c\u0629. \u0631\u0641\u0639.","\u0645\u0639 \u0625\u0645\u0627\u0644\u0629 \u062c\u0630\u0639\u0643 \u0648\u062b\u0646\u064a \u0645\u0631\u0641\u0642\u0643 \u0628\u0632\u0627\u0648\u064a\u0629 90 \u062f\u0631\u062c\u0629\u060c \u0642\u0645 \u0628\u0645\u062f \u0630\u0631\u0627\u0639\u0643 \u0644\u0644\u062e\u0644\u0641 \u0625\u0644\u0649 \u0627\u0644\u0627\u0645\u062a\u062f\u0627\u062f \u0627\u0644\u0643\u0627\u0645\u0644. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0645\u0639 \u0627\u0644\u062c\u0632\u0621 \u0627\u0644\u0639\u0644\u0648\u064a \u0645\u0646 \u0638\u0647\u0631\u0643 \u0639\u0644\u0649 \u0645\u0642\u0627\u0639\u062f \u0627\u0644\u0628\u062f\u0644\u0627\u0621 \u0648\u0627\u0644\u0648\u0632\u0646 \u0639\u0644\u0649 \u0627\u0644\u0648\u0631\u0643\u064a\u0646. \u0627\u062f\u0641\u0639 \u0627\u0644\u0648\u0631\u0643\u064a\u0646 \u0625\u0644\u0649 \u0627\u0644\u0623\u0639\u0644\u0649 \u0645\u0639 \u0627\u0644\u0636\u063a\u0637 \u0639\u0644\u0649 \u0639\u0636\u0644\u0627\u062a \u0627\u0644\u0645\u0624\u062e\u0631\u0629. \u0627\u0644\u0639\u0648\u062f\u0629 \u0628\u0628\u0637\u0621.","\u0627\u0646\u062a\u0642\u0644 \u0625\u0644\u0649 \u0648\u0636\u0639 \u0627\u0644\u062a\u0645\u062f\u062f \u0648\u0627\u0633\u062a\u0645\u0631 \u0644\u0645\u062f\u0629 20-30 \u062b\u0627\u0646\u064a\u0629.","\u062a\u0646\u0641\u0633 \u0628\u0639\u0645\u0642 \u0648\u0627\u0628\u0642 \u0636\u0645\u0646 \u0646\u0637\u0627\u0642 \u0645\u0631\u064a\u062d.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0625\u064a\u0642\u0627\u0639 \u062b\u0627\u0628\u062a \u0648\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0627\u0644\u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629 \u0637\u0648\u0627\u0644 \u0627\u0644\u062d\u0631\u0643\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0646\u0634\u0627\u0637\u0643 \u0627\u0644\u0623\u0633\u0627\u0633\u064a \u0648\u062a\u062d\u0643\u0645 \u0641\u064a \u0643\u0644 \u0645\u0631\u062d\u0644\u0629 \u0645\u0646 \u0645\u0631\u0627\u062d\u0644 \u0627\u0644\u062d\u0631\u0643\u0629.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u0631\u0641\u0642\u064a\u0643 \u062b\u0627\u0628\u062a\u064a\u0646 \u0648\u0642\u0645 \u0628\u0623\u062f\u0627\u0621 \u0643\u0644 \u0639\u062f\u0629 \u0628\u062a\u062d\u0643\u0645.","\u0627\u0636\u0628\u0637 \u0643\u062a\u0641\u064a\u0643\u060c \u0648\u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629\u060c \u0648\u062a\u062c\u0646\u0628 \u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0627\u0644\u0632\u062e\u0645.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0645\u062d\u0627\u0630\u0627\u0629 \u0631\u0643\u0628\u062a\u064a\u0643 \u0648\u062a\u062d\u0643\u0645 \u0641\u064a \u0645\u0631\u062d\u0644\u062a\u064a \u0627\u0644\u0631\u0641\u0639 \u0648\u0627\u0644\u062e\u0641\u0636.","\u062d\u0627\u0641\u0638 \u0639\u0644\u0649 \u0638\u0647\u0631\u0643 \u0645\u062d\u0627\u064a\u062f\u064b\u0627\u060c \u0648\u0627\u0633\u062a\u0639\u062f \u0644\u062c\u0630\u0639\u0643\u060c \u0648\u062a\u062d\u0643\u0645 \u0641\u064a \u0627\u0644\u062d\u0631\u0643\u0629.","\u0623\u062f\u0627\u0621 \u0627\u0644\u062d\u0631\u0643\u0629 \u0645\u0639 \u0627\u0644\u062a\u062d\u0643\u0645\u060c \u0648\u0627\u0644\u0648\u0636\u0639\u064a\u0629 \u0627\u0644\u0645\u0646\u0627\u0633\u0628\u0629\u060c \u0648\u0645\u062c\u0645\u0648\u0639\u0629 \u0643\u0627\u0645\u0644\u0629 \u0645\u0646 \u0627\u0644\u062d\u0631\u0643\u0629."],t.w)
 B.anr={[u.vv]:0,[u.y4]:1,[u.iY]:2,[u.uG]:3,[u.aQ]:4,"Lower slowly":5,"lower slowly":6,"Breathe deeply":7,"Use a full range of motion.":8,"Keep your feet shoulder-width apart.":9,[u.cP]:10,[u.Eh]:11,[u.dJ]:12,[u.mn]:13,[u.nz]:14,[u.tc]:15,[u.sE]:16,[u.ew]:17,[u.sS]:18,[u.yX]:19,[u.gu]:20,[u.bT]:21,[u.wt]:22,[u.ti]:23,[u.j5]:24,[u.gK]:25,[u.aJ]:26,[u.aU]:27,[u.BM]:28,[u.ny]:29,[u.pt]:30,[u.nT]:31,[u.sy]:32,[u.ij]:33,[u.qh]:34,[u.uF]:35,[u.do]:36,[u.mW]:37,[u.cx]:38,[u.Cb]:39,[u.eM]:40,[u.wQ]:41,[u.if]:42,[u.mV]:43,[u.gn]:44,[u.o0]:45,[u.qO]:46,[u.rf]:47,[u.C2]:48,[u.jE]:49,[u.re]:50,[u.fN]:51,[u.om]:52,[u.ui]:53,[u.C7]:54,[u.hD]:55,[u.s5]:56,[u.E3]:57,[u.BQ]:58,[u.Ch]:59,[u.fh]:60,[u.As]:61,[u.jo]:62,[u.xy]:63,[u.kW]:64,[u.gz]:65,[u.vt]:66,[u.qp]:67,[u.cz]:68,[u.qU]:69,[u.Et]:70,[u.wR]:71,[u.tt]:72,[u.ci]:73,[u.ix]:74,[u.en]:75,[u.pp]:76,[u.xQ]:77,[u.d6]:78,[u.tR]:79,[u.kO]:80,[u.u6]:81,[u.DJ]:82,[u.kF]:83,[u.w_]:84,[u.f1]:85,[u.Bp]:86,[u.cq]:87,[u.Dt]:88,[u.fe]:89,[u.Dw]:90,[u.vo]:91,[u.wD]:92,[u.D3]:93,[u.hv]:94,[u.sl]:95,[u.h7]:96,[u.b9]:97,[u.Cq]:98,[u.sb]:99,[u.dn]:100,[u.FB]:101,[u.AN]:102,[u.ES]:103,[u.pr]:104,[u.CU]:105,[u.pL]:106,[u.E8]:107,[u.BE]:108,[u.lg]:109,[u.xc]:110,[u.xO]:111,[u.on]:112,[u.e7]:113,[u.ba]:114,[u.ao]:115,[u.aq]:116,[u.dd]:117,[u.g1]:118,[u.rP]:119,[u.k4]:120,[u.bO]:121,[u.qn]:122,[u.b4]:123,[u.ow]:124,[u.bt]:125,[u.g4]:126,[u.ja]:127,[u.mw]:128,[u.be]:129,[u.Fp]:130,[u.kH]:131,[u.iN]:132,[u.wz]:133,[u.in]:134,[u.q5]:135,[u.t7]:136,[u.vI]:137,[u.fw]:138,[u.wZ]:139,[u.pd]:140,[u.gf]:141,[u.g9]:142,[u.ze]:143,[u.lv]:144,[u.tq]:145,[u.oi]:146,[u.qe]:147,[u.uz]:148,[u.hn]:149,[u.uC]:150,[u.xe]:151,[u.bk]:152,[u.nc]:153,[u.ey]:154,[u.jV]:155,[u.cB]:156,[u.hc]:157,[u.hz]:158,[u.bg]:159,[u.jx]:160,[u.xh]:161,[u.tO]:162,[u.f9]:163,[u.di]:164,[u.gN]:165,[u.ux]:166,[u.p2]:167,[u.nF]:168,[u.zI]:169,[u.oq]:170,[u.mq]:171,[u.nJ]:172,[u.vm]:173,[u.rL]:174,[u.ad]:175,[u.gZ]:176,[u.qo]:177,[u.D6]:178,[u.iq]:179,[u.q_]:180,[u.qG]:181,[u.io]:182,[u.iQ]:183,[u.vT]:184,[u.CH]:185,[u.CR]:186,[u.p5]:187,[u.v3]:188,[u.cg]:189,[u.y1]:190,[u.r5]:191,[u.uZ]:192,[u.BT]:193,[u.j7]:194,[u.CN]:195,[u.sd]:196,[u.kS]:197,[u.Cj]:198,[u.fm]:199,[u.c8]:200,[u.EL]:201,[u.ju]:202,[u.hO]:203,[u.oy]:204,[u.yd]:205,[u.A1]:206,[u.rb]:207,[u.vQ]:208,[u.dc]:209,[u.Dc]:210,[u.wy]:211,[u.Dd]:212,[u.gt]:213}
 B.amt=new A.i(B.anr,["Wykonaj ruch powoli i pod kontrol\u0105. Utrzymaj prawid\u0142ow\u0105 postaw\u0119.","Zacznij od umiarkowanego ci\u0119\u017caru, aby opanowa\u0107 technik\u0119.","Oddychaj g\u0142\u0119boko. Nigdy nie forsuj si\u0119 ponad naturalny zakres.","Utrzymaj zaanga\u017cowanie mi\u0119\u015bni core przez ca\u0142y czas. Kontroluj faz\u0119 ekscentryczn\u0105.","Utrzymaj stabilno\u015b\u0107 mi\u0119\u015bni core przez ca\u0142e \u0107wiczenie.","Opuszczaj powoli","opuszczaj powoli","Oddychaj g\u0142\u0119boko","U\u017cywaj pe\u0142nego zakresu ruchu.","Ustaw stopy na szeroko\u015b\u0107 bark\xf3w.","\u015acis\u0142y chwyt zwi\u0119ksza zakres ruchu. Zacznij od wycofania.","Bliski chwyt izoluje triceps. Utrzymuj cia\u0142o w linii prostej.","Chwyt supinowany zwi\u0119ksza zaanga\u017cowanie bicepsa. Unikaj u\u017cywania p\u0119du.","Wyreguluj siedzisko: kolana nie powinny by\u0107 nadmiernie wyprostowane.","Zawsze l\u0105duj mi\u0119kko. Nie blokuj kolan.","Unikaj p\u0119du. Skoncentruj si\u0119 na unoszeniu miednicy.","Unikaj podnoszenia \u0142okci powy\u017cej wysoko\u015bci ramion. Szerszy chwyt zmniejsza ryzyko uderzenia.","Unikaj rotacji ramion. Skup si\u0119 wy\u0142\u0105cznie na ruchu pionowym.","Unikaj ko\u0142ysania tu\u0142owia. Kontroluj obie fazy.","Sztanga z przodu bark\xf3w z wysokimi \u0142okciami. Zejd\u017a na d\xf3\u0142, utrzymuj\u0105c tu\u0142\xf3w jak najbardziej pionowo. Popchnij z powrotem do g\xf3ry.","Ustaw nog\u0119 w pozycji rozci\u0105gni\u0119tej, utrzymuj\u0105c tu\u0142\xf3w w pozycji pionowej. Przytrzymaj przez 20-30 sekund.","Ustaw nog\u0119 w pozycji rozci\u0105gni\u0119tej, plecy proste. Wytrzymaj 20-30 sekund, oddychaj\u0105c g\u0142\u0119boko.","Wyci\u0105gnij nog\u0119 na zewn\u0105trz w odwiedzeniu, kontroluj\u0105c ruch. Wracaj powoli. Utrzymuj stabilno\u015b\u0107 rdzenia.","Przesu\u0144 nog\u0119 w kierunku \u015brodka w przywiedzeniu, kontroluj\u0105c ruch. Wracaj powoli. Utrzymuj stabilno\u015b\u0107 rdzenia.","Napnij mi\u0119\u015bnie brzucha przez ca\u0142e \u0107wiczenie. Kontroluj faz\u0119 ekscentryczn\u0105.","Nie przeprostuj ramion w fazie otwierania. Skoncentruj si\u0119 na skurczu klatki piersiowej.","Nie pozw\xf3l, aby Twoje plecy si\u0119 wygi\u0119\u0142y. Zacznij od cz\u0119\u015bciowych wdro\u017ce\u0144.","Nie pozw\xf3l, aby biodra opada\u0142y w d\xf3\u0142. \u015aci\u0105gnij \u0142opatki.","Nie uno\u015b bioder. Przytrzymaj skurcz u g\xf3ry przez sekund\u0119.","Nie blokuj kolan w wyprostowaniu. Stopy znajduj\u0105ce si\u0119 wy\u017cej na platformie bardziej anga\u017cuj\u0105 po\u015bladki.","Nie ci\u0105gnij za szyj\u0119. Skoncentruj si\u0119 na skurczu brzucha.","Nie podno\u015b ramion powy\u017cej wysoko\u015bci ramion. Obr\xf3\u0107 nadgarstki lekko w d\xf3\u0142 (jakby\u015b nalewa\u0142 wod\u0119), aby odizolowa\u0107 boczn\u0105 cz\u0119\u015b\u0107 mi\u0119\u015bnia naramiennego.","Nie uno\u015b bioder. Trzymaj ramiona nad nadgarstkami.","Nie zaokr\u0105glaj plec\xf3w w \u017cadnym miejscu. Zaanga\u017cuj rdze\u0144 przed poci\u0105gni\u0119ciem.","Nie zaokr\u0105glaj plec\xf3w. Kontroluj faz\u0119 ekscentryczn\u0105.","Nie zaokr\u0105glaj plec\xf3w. Kontroluj faz\u0119 rozci\u0105gania.","Nie zaokr\u0105glaj plec\xf3w. Zacznij od lekkiego ci\u0119\u017caru.","Nie u\u017cywaj ko\u0142ysania cia\u0142em. Skoncentruj si\u0119 na izolowaniu mi\u0119\u015bnia po\u015bladkowego \u015bredniego.","Nie u\u017cywaj p\u0119du. Skoncentruj si\u0119 na izolowaniu przywodzicieli.","Nie u\u017cywaj p\u0119du. Skoncentruj si\u0119 na skurczu.","Hantle pozwalaj\u0105 na wi\u0119kszy zakres ruchu. Przez ca\u0142y ruch trzymaj \u0142opatki \u015bci\u0105gni\u0119te.","Stopy szersze ni\u017c szeroko\u015b\u0107 ramion, z palcami skierowanymi na zewn\u0105trz. Opu\u015b\u0107 si\u0119 w d\xf3\u0142, chwytaj\u0105c sztang\u0119 chwytem wewn\u0119trznym. Naciskaj nogami i jednocze\u015bnie rozci\u0105gaj biodra, utrzymuj\u0105c proste plecy.","Zegnij \u0142okcie, przenosz\u0105c ci\u0119\u017car w stron\u0119 ramion. Obni\u017c si\u0119 powoli.","Ca\u0142kowicie wyprostuj ramiona w fazie koncentrycznej. Wr\xf3\u0107 powoli do pozycji wyj\u015bciowej, kontroluj\u0105c ruch.","Chwy\u0107 dr\u0105\u017cek nachwytem pronowanym na szeroko\u015b\u0107 bark\xf3w. Zaczynaj\u0105c od wyprostowanych ramion, podci\u0105gnij cia\u0142o do g\xf3ry, a\u017c broda odsunie si\u0119 od dr\u0105\u017cka. Opu\u015b\u0107 si\u0119 powoli z powrotem do pozycji wyj\u015bciowej.","Chwy\u0107 dr\u0105\u017cek nachwytem supinacyjnym (d\u0142onie skierowane do siebie) na szeroko\u015b\u0107 bark\xf3w. Zaczynaj\u0105c od wyprostowanych ramion, podci\u0105gnij cia\u0142o do g\xf3ry, a\u017c broda odsunie si\u0119 od dr\u0105\u017cka. Obni\u017c si\u0119 powoli.","Chwy\u0107 por\u0119cze z wyprostowanymi ramionami. Opu\u015b\u0107 cia\u0142o, pochylaj\u0105c si\u0119 lekko do przodu i zginaj\u0105c \u0142okcie. Wykonaj pompki w g\xf3r\u0119, wracaj\u0105c do pozycji wyj\u015bciowej.","Wisz\u0105c na dr\u0105\u017cku lub le\u017c\u0105c, unie\u015b nogi do g\xf3ry, kontroluj\u0105c ruch. Obni\u017c si\u0119 powoli.","Wysokie \u0142okcie zapobiegaj\u0105 przesuwaniu si\u0119 sztangi. Wymaga du\u017cej mobilno\u015bci nadgarstk\xf3w i kostek.","Przytrzymaj skurcz u g\xf3ry przez sekund\u0119. Unikaj p\u0119du.","Przytrzymaj skurcz u g\xf3ry przez sekund\u0119. Trzymaj brod\u0119 w kierunku klatki piersiowej.","Utrzymuj skurcz u g\xf3ry. Unikaj kompensacji plecami.","Trzymaj ko\u0144ce liny po bokach. Obracaj lin\u0119 nad g\u0142ow\u0105 i skacz, gdy przechodzi ona pod twoimi stopami.","W pozycji le\u017c\u0105cej, opieraj\u0105c si\u0119 na przedramionach i palcach st\xf3p. Twoje cia\u0142o tworzy lini\u0119 prost\u0105 od g\u0142owy do pi\u0119t. Przytrzymaj, napinaj\u0105c rdze\u0144.","W pozycji le\u017c\u0105cej z r\u0119kami na szeroko\u015bci bark\xf3w. Opu\u015b\u0107 klatk\u0119 piersiow\u0105 w kierunku pod\u0142ogi, zginaj\u0105c \u0142okcie. Wypchnij si\u0119 w g\xf3r\u0119, wracaj\u0105c do pozycji wyj\u015bciowej, utrzymuj\u0105c cia\u0142o w linii prostej.","W pozycji push-up. Na zmian\u0119 szybko przyci\u0105gnij kolana do klatki piersiowej, utrzymuj\u0105c biodra nisko.","W pozycji rozdzielonej. Opu\u015b\u0107 cia\u0142o, zginaj\u0105c przednie kolano. Wypchnij si\u0119 w g\xf3r\u0119, wracaj\u0105c do pozycji wyj\u015bciowej.","Trzymaj przeciwn\u0105 stop\u0119 ca\u0142kowicie na pod\u0142odze. Tu\u0142\xf3w wyprostowany.","Trzymaj rami\u0119 r\xf3wnolegle do pod\u0142ogi. Unikaj p\u0119du.","Trzymaj ramiona prosto. Skoncentruj si\u0119 na skurczu mi\u0119\u015bni najszerszych.","Trzymaj plecy p\u0142asko, a rdze\u0144 zaanga\u017cowany. Unikaj ko\u0142ysania tu\u0142owia.","Trzymaj plecy w pozycji neutralnej. Poci\u0105gnij w stron\u0119 talii lub klatki piersiowej. Pod koniec ruchu napnij mi\u0119\u015bnie plec\xf3w.","Trzymaj plecy r\xf3wnolegle do pod\u0142ogi. Pod koniec ruchu lekko obr\xf3\u0107 tu\u0142\xf3w.","Trzymaj klatk\u0119 piersiow\u0105 uniesion\u0105, a kolana w jednej linii z palcami st\xf3p. Nie pozw\xf3l, aby kolana zapad\u0142y si\u0119 do wewn\u0105trz.","Trzymaj rdze\u0144 napi\u0119ty i proste plecy. Unikaj nadmiernego prostowania kr\u0119gos\u0142upa l\u0119d\u017awiowego.","Trzymaj rdze\u0144 zaanga\u017cowany, aby chroni\u0107 plecy. Unikaj nadmiernego prostowania kr\u0119gos\u0142upa l\u0119d\u017awiowego.","Utrzymuj sw\xf3j rdze\u0144 zaanga\u017cowany. Dostosuj pr\u0119dko\u015b\u0107 do swojego poziomu sprawno\u015bci.","Utrzymuj sw\xf3j rdze\u0144 zaanga\u017cowany. Unikaj nadmiernego prostowania kr\u0119gos\u0142upa.","Trzymaj \u0142okcie na wysoko\u015bci ramion lub nieco powy\u017cej. Niezb\u0119dny dla zdrowia sto\u017cka rotator\xf3w.","Trzymaj \u0142okcie blisko cia\u0142a. Unikaj rozszerzania \u0142okci.","Trzymaj \u0142okcie unieruchomione po bokach. Chwyt neutralny podkre\u015bla mi\u0119sie\u0144 ramienno-promieniowy nad bicepsem.","Trzymaj \u0142okcie nieruchomo, skierowane w stron\u0119 sufitu. Kontroluj zej\u015bcie.","Trzymaj \u0142okcie nieruchomo podczas ca\u0142ego ruchu. Skoncentruj si\u0119 na pe\u0142nym skurczu u g\xf3ry.","Trzymaj \u0142okcie nieruchomo. Nie u\u017cywaj p\u0119du.","Trzymaj \u0142okcie nieruchomo. Skoncentruj si\u0119 na pe\u0142nym skurczu.","Trzymaj \u0142okcie nieruchomo. Skoncentruj si\u0119 na pe\u0142nym wypro\u015bcie.","Trzymaj \u0142okcie skierowane w stron\u0119 sufitu i blisko g\u0142owy. G\u0142owa d\u0142uga jest maksymalnie aktywowana w pozycji rozci\u0105gni\u0119tej.","Trzymaj przednie kolano w jednej linii z palcami st\xf3p. Koryguje nier\xf3wnowag\u0119 mi\u0119\u015bniow\u0105 pomi\u0119dzy nogami.","Trzymaj pi\u0119t\u0119 na pod\u0142odze. Zegnij kolano, aby rozci\u0105gn\u0105\u0107 mi\u0119sie\u0144 p\u0142aszczkowaty.","Trzymaj biodra w jednej linii. Nie pozw\xf3l, aby opad\u0142y w d\xf3\u0142.","Staraj si\u0119 skaka\u0107 nisko. Do obracania liny u\u017cywaj nadgarstk\xf3w, a nie ramion.","Trzymaj kolano skierowane w stron\u0119 pod\u0142ogi. Unikaj nadmiernego prostowania plec\xf3w.","Trzymaj kolana w jednej linii z palcami st\xf3p. Pozycja stopy zmienia najbardziej zaanga\u017cowany mi\u0119sie\u0144.","Trzymaj kolana w jednej linii z palcami st\xf3p. Pozycja sumo zmniejsza \u015bcie\u017ck\u0119 sztangi.","Utrzymuj poziom miednicy. Zacznij od lekkiego ci\u0119\u017caru.","Trzymaj \u0142opatki \u015bci\u0105gni\u0119te. Kontroluj opadanie przez co najmniej 2 sekundy.","Trzymaj ramiona zrelaksowane. Dostosuj tempo do po\u017c\u0105danej intensywno\u015bci.","Utrzymuj tu\u0142\xf3w stabilnie, unikaj\u0105c ko\u0142ysania. Kontroluj zej\u015bcie.","Utrzymuj tu\u0142\xf3w w pozycji pionowej i napi\u0119ty rdze\u0144. Unikaj sytuacji, w kt\xf3rej przednie kolano wychodzi poza palce st\xf3p.","Trzymaj tu\u0142\xf3w w pozycji pionowej, aby odizolowa\u0107 triceps. Im ni\u017cej zejdziesz, tym wi\u0119ksze zaanga\u017cowanie klatki piersiowej.","Trzymaj nadgarstki w pozycji neutralnej. Odwrotne ugi\u0119cie wzmacnia mi\u0119\u015bnie przedramienia.","Kl\u0119kanie z ko\u0142em z przodu. Obr\xf3\u0107 ko\u0142o do przodu, opuszczaj\u0105c cia\u0142o w kierunku pod\u0142ogi. Poci\u0105gnij ko\u0142o z powrotem w stron\u0119 kolan.","Pochylenie si\u0119 do przodu zwi\u0119ksza zaanga\u017cowanie klatki piersiowej. Pozycja pionowa izoluje triceps.","Po\u0142\xf3\u017c si\u0119 z ugi\u0119tymi kolanami. Przyci\u0105gnij ramiona do kolan, napinaj\u0105c mi\u0119\u015bnie brzucha. Obni\u017c si\u0119 powoli.","Po\u0142\xf3\u017c si\u0119 z uniesionymi nogami. Przyci\u0105gnij kolana do klatki piersiowej, unosz\u0105c miednic\u0119. Wracaj powoli.","Po\u0142\xf3\u017c si\u0119 twarz\u0105 w d\xf3\u0142 na maszynie z podk\u0142adkami na kostkach. Zegnij kolana, zbli\u017caj\u0105c pi\u0119ty do po\u015bladk\xf3w. Obni\u017c si\u0119 powoli.","Po\u0142\xf3\u017c si\u0119 na \u0142awce z hantlami w ka\u017cdej r\u0119ce. Opu\u015b\u0107 hantle w stron\u0119 klatki piersiowej, utrzymuj\u0105c nadgarstki stabilnie. Popchnij mocno w g\xf3r\u0119, wracaj\u0105c do pozycji wyj\u015bciowej.","Po\u0142\xf3\u017c si\u0119 na \u0142awce z hantlami w ka\u017cdej r\u0119ce. Opu\u015b\u0107 ramiona na boki, utrzymuj\u0105c lekkie zgi\u0119cie \u0142okcia. Unie\u015b hantle w g\xf3r\u0119 po \u0142uku, jakby\u015b przytula\u0142 drzewo. Wracaj powoli.","Po\u0142\xf3\u017c si\u0119 na \u0142awce z uchwytem na szeroko\u015b\u0107 bark\xf3w. Opu\u015b\u0107 sztang\u0119, trzymaj\u0105c \u0142okcie blisko tu\u0142owia. Wypchnij si\u0119 w g\xf3r\u0119, napinaj\u0105c triceps.","Po\u0142\xf3\u017c si\u0119 na \u0142awce z narz\u0119dziem nad klatk\u0105 piersiow\u0105 i wyci\u0105gnij r\u0119ce. Zegnij \u0142okcie, opuszczaj\u0105c ci\u0119\u017car w stron\u0119 czo\u0142a. Przed\u0142u\u017c powr\xf3t do pozycji.","Po\u0142\xf3\u017c si\u0119 na \u0142awce z narz\u0119dziem nad klatk\u0105 piersiow\u0105, ramiona prawie wyci\u0105gni\u0119te. Opu\u015b\u0107 ci\u0119\u017car za g\u0142ow\u0119, utrzymuj\u0105c lekko ugi\u0119te \u0142okcie. Wr\xf3\u0107 do pozycji wyj\u015bciowej po \u0142uku.","Po\u0142\xf3\u017c si\u0119 na \u0142awce ze stopami na pod\u0142odze. Chwy\u0107 sztang\u0119 szerzej ni\u017c szeroko\u015b\u0107 bark\xf3w. Opu\u015b\u0107 sztang\u0119 do klatki piersiowej, utrzymuj\u0105c \u0142okcie pod k\u0105tem oko\u0142o 45 stopni. Mocno pchnij do g\xf3ry.","Po\u0142\xf3\u017c si\u0119 na \u0142awce opadaj\u0105cej z zabezpieczonymi stopami. Chwy\u0107 narz\u0119dzie szerzej ni\u017c szeroko\u015b\u0107 ramion. Opu\u015b\u0107 do dolnej cz\u0119\u015bci klatki piersiowej. Naci\u015bnij mocno, wracaj\u0105c do pozycji wyj\u015bciowej.","Po\u0142\xf3\u017c si\u0119 na pochy\u0142ej podporze ze zwisaj\u0105cymi ci\u0119\u017carkami. Poci\u0105gnij w kierunku tu\u0142owia, napinaj\u0105c mi\u0119\u015bnie grzbietu. Obni\u017c si\u0119 powoli.","Opu\u015b\u0107 si\u0119 do przysiadu, a nast\u0119pnie energicznie podskocz w g\xf3r\u0119. Wyl\u0105duj mi\u0119kko, uginaj\u0105c kolana.","Opu\u015b\u0107 si\u0119 do przysiadu, po\u0142\xf3\u017c r\u0119ce na pod\u0142odze i przeskocz stopy do pozycji pompki. Wykonaj pompk\u0119, podskocz stopami w stron\u0119 d\u0142oni, a nast\u0119pnie podskocz z r\u0119kami nad g\u0142ow\u0105.","Utrzymuj sta\u0142e tempo. Prawid\u0142owa postawa podczas ca\u0142ego \u0107wiczenia.","Utrzymuj wyprostowan\u0105 postaw\u0119 z lekkim pochyleniem do przodu. Wykonuj naprzemienne kroki w sta\u0142ym tempie. Wyl\u0105duj ze stop\u0105 w po\u0142owie kroku.","Utrzymuj to samo zgi\u0119cie \u0142okcia podczas ca\u0142ego ruchu. Skoncentruj si\u0119 na skurczu klatki piersiowej pod koniec ruchu.","Utrzymuj to samo zgi\u0119cie \u0142okcia. Kontroluj opadanie przez 2 sekundy.","Utrzymuj lekkie zgi\u0119cie \u0142okcia. Pulower jest jednym z niewielu \u0107wicze\u0144 rozci\u0105gaj\u0105cych mi\u0119\u015bnie grzbietu.","Umiarkowane napi\u0119cie, nigdy b\xf3l. Wydech podczas rozci\u0105gania.","Na r\u0119kach i kolanach lub stoj\u0105c przy kablu. Wyci\u0105gnij nog\u0119 do ty\u0142u, \u015bciskaj\u0105c po\u015bladek. Wracaj powoli.","Le\u017c\u0105c na boku, oprzyj si\u0119 na przedramieniu, cia\u0142o w linii prostej. Unie\u015b biodra, utrzymuj\u0105c t\u0119 \u200b\u200bpozycj\u0119.","Peda\u0142uj utrzymuj\u0105c sta\u0142e tempo. Trzymaj plecy w pozycji neutralnej.","Faz\u0119 podnoszenia wykonaj z supinacj\u0105. Obr\xf3\u0107 nadgarstki do pronacji u g\xf3ry. Dolny z pronowanym uchwytem. Wr\xf3\u0107 do supinacji na dole.","Wykonuj ruch kontroluj\u0105c zar\xf3wno faz\u0119 ekscentryczn\u0105, jak i koncentryczn\u0105. Utrzymuj sw\xf3j rdze\u0144 zaanga\u017cowany.","Wykonuj ruch kontroluj\u0105c zar\xf3wno faz\u0119 ekscentryczn\u0105, jak i koncentryczn\u0105. Trzymaj \u0142opatki \u015bci\u0105gni\u0119te.","Wykonuj ruch eksplozywnie w g\xf3r\u0119 lub do przodu. Wyl\u0105duj mi\u0119kko, uginaj\u0105c kolana. Kontroluj l\u0105dowanie.","Wykonuj ruch powoli w obu fazach. Pauza na dole zwi\u0119ksza rozci\u0105gni\u0119cie \u0142ydki.","Wykonuj rotacj\u0119 p\u0142ynnie i w spos\xf3b ci\u0105g\u0142y. Wyciskanie Arnolda to jedno z niewielu \u0107wicze\u0144 anga\u017cuj\u0105cych wszystkie w\u0142\xf3kna mi\u0119\u015bniowe.","U\u0142\xf3\u017c d\u0142onie w kszta\u0142cie rombu pod klatk\u0105 piersiow\u0105. Opu\u015b\u0107 cia\u0142o, trzymaj\u0105c \u0142okcie blisko tu\u0142owia. Wypchnij si\u0119 w g\xf3r\u0119, napinaj\u0105c triceps.","Ustaw si\u0119 w maszynie do hack squat\xf3w z ramionami pod poduszkami. Zejd\u017a, uginaj\u0105c kolana pod k\u0105tem 90 stopni, a nast\u0119pnie wypchnij si\u0119 w g\xf3r\u0119.","Naciskaj g\u0142\xf3wnie stop\u0105 na podniesion\u0105 powierzchni\u0119. Trzymaj tu\u0142\xf3w w pozycji pionowej.","Naciskaj nogami, nast\u0119pnie odchyl tu\u0142\xf3w do ty\u0142u i na koniec przyci\u0105gnij wios\u0142o do brzucha. Odwr\xf3\u0107 kolejno\u015b\u0107 w drodze powrotnej.","Wymaga doskona\u0142ej mobilno\u015bci ramion, bioder i kostek. Zacznij bez ci\u0119\u017caru.","\u015aci\u0105gnij \u0142opatki i trzymaj je zablokowane. Nie odbijaj ci\u0119\u017caru od klatki piersiowej.","\u015aci\u0105gnij \u0142opatki, aby ustabilizowa\u0107 bark.","Obr\xf3\u0107 si\u0119 od talii, a nie tylko od ramion.","Obr\xf3\u0107 tu\u0142\xf3w, przyci\u0105gaj\u0105c jeden \u0142okie\u0107 do przeciwnego kolana. Powt\xf3rz z drugiej strony.","Obr\xf3\u0107 nadgarstek na zewn\u0105trz u g\xf3ry, aby zmaksymalizowa\u0107 szczyt. Utrzymuj stabilny tu\u0142\xf3w.","Sied\u017a z hantlami na wysoko\u015bci ramion i d\u0142o\u0144mi skierowanymi do siebie. Naci\u015bnij w g\xf3r\u0119, obracaj\u0105c nadgarstki na zewn\u0105trz, a\u017c d\u0142onie b\u0119d\u0105 skierowane do przodu. Opu\u015b\u0107 wracaj\u0105c do pozycji wyj\u015bciowej.","Sied\u017a z \u0142okciem opartym na wewn\u0119trznej stronie uda. Zegnij \u0142okie\u0107, przybli\u017caj\u0105c hantle do ramienia. Obni\u017c si\u0119 powoli.","Sied\u017a z podniesionymi stopami i tu\u0142owiem pod k\u0105tem 45 stopni. Obracaj tu\u0142\xf3w z boku na bok, opieraj\u0105c d\u0142onie na pod\u0142odze obok bioder.","Sekwencja: nogi, potem tu\u0142\xf3w i ramiona podczas ci\u0105gni\u0119cia.","Usi\u0105d\u017a przy maszynie do \u015bci\u0105gania najszerszego odcinka cia\u0142a i chwy\u0107 dr\u0105\u017cek szerokim, pronowanym chwytem. Przyci\u0105gnij dr\u0105\u017cek do klatki piersiowej, odchylaj\u0105c tu\u0142\xf3w lekko do ty\u0142u. Kontroluj powr\xf3t do pozycji wyj\u015bciowej.","Usi\u0105d\u017a na maszynie do \u015bci\u0105gania najszerszego odcinka cia\u0142a z chwytem bliskim lub neutralnym. Przyci\u0105gnij dr\u0105\u017cek do klatki piersiowej, trzymaj\u0105c \u0142okcie blisko cia\u0142a. Kontroluj powr\xf3t.","Usi\u0105d\u017a przy niskim kablu, opieraj\u0105c stopy na wspornikach. Poci\u0105gnij uchwyt w stron\u0119 talii, utrzymuj\u0105c proste plecy. Napnij mi\u0119\u015bnie plec\xf3w i powoli wr\xf3\u0107.","Usi\u0105d\u017a przy maszynie z podk\u0142adkami na kostkach. Wyci\u0105gnij nogi w g\xf3r\u0119, napinaj\u0105c mi\u0119\u015bnie czworog\u0142owe. Obni\u017c si\u0119 powoli.","Usi\u0105d\u017a przy maszynie z podk\u0142adkami na kostkach. Zegnij kolana, zbli\u017caj\u0105c pi\u0119ty do po\u015bladk\xf3w. Obni\u017c si\u0119 powoli.","Usi\u0105d\u017a na \u0142awce kaznodziei z r\u0119kami opartymi na podk\u0142adce. Zegnij \u0142okcie, przybli\u017caj\u0105c narz\u0119dzie do ramion. Opuszczaj powoli, prawie do pe\u0142nego wyprostu.","Usi\u0105d\u017a na maszynie, opieraj\u0105c plecy o podk\u0142adk\u0119. U\u0142\xf3\u017c \u0142okcie na poduszkach. Przesu\u0144 ramiona w stron\u0119 \u015brodka, napinaj\u0105c klatk\u0119 piersiow\u0105. Wr\xf3\u0107 powoli do pozycji wyj\u015bciowej.","Usi\u0105d\u017a na maszynie ze stopami na platformie na szeroko\u015bci bioder. Opu\u015b\u0107 si\u0119, zginaj\u0105c kolana do 90 stopni. Naciskaj, prostuj\u0105c nogi.","Usi\u0105d\u017a na \u0142awce sko\u015bnej ze stopami opartymi na pod\u0142odze. Chwy\u0107 narz\u0119dzie szerzej ni\u017c szeroko\u015b\u0107 ramion. Opu\u015b\u0107 do g\xf3rnego poziomu klatki piersiowej. Naci\u015bnij mocno, wracaj\u0105c do pozycji wyj\u015bciowej.","Usi\u0105d\u017a z przedramionami na udach. Chwy\u0107 narz\u0119dzie chwytem supinacyjnym. Zegnij nadgarstki w g\xf3r\u0119 i powoli opu\u015b\u0107.","Rozsu\u0144 lin\u0119 u do\u0142u, aby zmaksymalizowa\u0107 skurcz. Trzymaj \u0142okcie nieruchomo.","Stoj\u0105c na \u015brodku kabla, z jednym uchwytem na r\u0119k\u0119. Trzymaj ramiona lekko ugi\u0119te. Przesu\u0144 r\u0119ce w stron\u0119 \u015brodka, krzy\u017cuj\u0105c je. Wr\xf3\u0107 powoli do pozycji wyj\u015bciowej.","Stoj\u0105c przy wysokim kablu z lin\u0105. \u0141okcie trzymaj po bokach tu\u0142owia. Popchnij lin\u0119 w d\xf3\u0142, oddzielaj\u0105c jej ko\u0144ce. Wracaj powoli.","Stoj\u0105c przy wysokim kablu. \u0141okcie trzymaj po bokach tu\u0142owia. Naci\u015bnij w d\xf3\u0142, ca\u0142kowicie rozci\u0105gaj\u0105c ramiona. Wracaj powoli.","Stoj\u0105c twarz\u0105 do wysokiego kabla z prawie wyci\u0105gni\u0119tymi ramionami. Przyci\u0105gnij sztang\u0119 do ud, tworz\u0105c \u0142uk, trzymaj\u0105c ramiona prosto. Wr\xf3\u0107 powoli do pozycji wyj\u015bciowej.","Stoj\u0105c przed \u0142awk\u0105. Po\u0142\xf3\u017c jedn\u0105 stop\u0119 na podwy\u017cszonej powierzchni i popchnij j\u0105 w g\xf3r\u0119. Opuszczaj powoli, kontroluj\u0105c ruch.","Stoj\u0105c na jednej nodze. Opu\u015b\u0107 tu\u0142\xf3w do przodu, utrzymuj\u0105c plecy proste, podczas gdy wolna noga rozci\u0105ga si\u0119 do ty\u0142u. Wr\xf3\u0107 do pozycji pionowej, napinaj\u0105c po\u015bladki.","Stoj\u0105c lub siedz\u0105c z narz\u0119dziem na wysoko\u015bci ramion. Wypchnij si\u0119 w g\xf3r\u0119, ca\u0142kowicie rozci\u0105gaj\u0105c ramiona. Opuszczaj powoli wracaj\u0105c do pozycji wyj\u015bciowej z ci\u0119\u017carem na wysoko\u015bci ramion.","Stoj\u0105c lub siedz\u0105c z narz\u0119dziem na wysoko\u015bci ramion. Wypchnij si\u0119 w g\xf3r\u0119, ca\u0142kowicie rozci\u0105gaj\u0105c ramiona. Obni\u017c si\u0119 powoli.","Stoj\u0105c lub siedz\u0105c z narz\u0119dziem nad g\u0142ow\u0105, z wyci\u0105gni\u0119tymi ramionami. Zegnij \u0142okcie, opuszczaj\u0105c ci\u0119\u017car za g\u0142ow\u0119. Przed\u0142u\u017c powr\xf3t do g\xf3ry.","Stoj\u0105c z hantlami w ka\u017cdej r\u0119ce po bokach. Unie\u015b ramiona w bok na wysoko\u015b\u0107 bark\xf3w, \u0142okcie lekko ugi\u0119te. Obni\u017c si\u0119 powoli.","Stoj\u0105c z ci\u0119\u017carkami w ka\u017cdej r\u0119ce po bokach. Podnie\u015b ramiona w kierunku uszu, \u015bciskaj\u0105c pu\u0142apki. Przytrzymaj skurcz przez sekund\u0119, a nast\u0119pnie powoli opu\u015b\u0107.","Stoj\u0105c z hantlami po bokach, z neutralnym chwytem (kciuki do g\xf3ry). Zegnij \u0142okcie, przyci\u0105gaj\u0105c hantle do ramion. Obni\u017c si\u0119 powoli.","Stanie ze stopami na szeroko\u015b\u0107 bioder. Zawias w biodrach, przesuwaj\u0105c ci\u0119\u017car mi\u0119dzy nogami, a nast\u0119pnie gwa\u0142townie popchnij biodra do przodu, przesuwaj\u0105c ci\u0119\u017car do wysoko\u015bci ramion.","Stanie ze stopami na szeroko\u015b\u0107 bioder. Opu\u015b\u0107 sztang\u0119 wzd\u0142u\u017c n\xf3g, utrzymuj\u0105c lekko ugi\u0119te kolana i proste plecy. Opu\u015b\u0107 si\u0119, a\u017c poczujesz napi\u0119cie w \u015bci\u0119gnach podkolanowych, a nast\u0119pnie wr\xf3\u0107 do g\xf3ry.","Stanie ze stopami na szeroko\u015b\u0107 bioder. Opu\u015b\u0107 si\u0119 z wyprostowanymi plecami i klatk\u0105 piersiow\u0105 do g\xf3ry. Wci\u015bnij stopy w ziemi\u0119 i jednocze\u015bnie wyprostuj biodra i kolana, trzymaj\u0105c sztang\u0119 blisko n\xf3g.","Stoj\u0105c ze stopami na szeroko\u015b\u0107 ramion, trzymaj hantle przed klatk\u0105 piersiow\u0105. Zejd\u017a na d\xf3\u0142, trzymaj\u0105c klatk\u0119 piersiow\u0105 uniesion\u0105 do g\xf3ry. Wr\xf3\u0107 do g\xf3ry, naciskaj\u0105c pi\u0119ty.","Stanie ze stopami na szeroko\u015b\u0107 ramion. Opu\u015b\u0107 cia\u0142o, uginaj\u0105c kolana i biodra, jakby\u015b siedzia\u0142 na krze\u015ble. Opu\u015b\u0107 si\u0119, a\u017c uda znajd\u0105 si\u0119 r\xf3wnolegle do pod\u0142ogi. Przebij si\u0119 przez pi\u0119ty.","Stoj\u0105c ze z\u0142\u0105czonymi stopami. Wykonaj szeroki krok w bok, trzymaj\u0105c przeciwn\u0105 stop\u0119 nieruchomo. Opu\u015b\u0107 si\u0119 w t\u0119 stron\u0119, zginaj\u0105c kolano.","Stoj\u0105c ze sztang\u0105 na ramionach. Pochyl tu\u0142\xf3w do przodu, utrzymuj\u0105c proste plecy i lekko ugi\u0119te kolana. Poczuj napi\u0119cie w \u015bci\u0119gnach podkolanowych. Wr\xf3\u0107 do pozycji pionowej.","Sta\u0144 z narz\u0119dziem przed udami, u\u017cywaj\u0105c pronowanego chwytu. Poci\u0105gnij w stron\u0119 podbr\xf3dka, trzymaj\u0105c \u0142okcie wy\u017cej ni\u017c nadgarstki. Obni\u017c si\u0119 powoli.","Sta\u0144 z narz\u0119dziem przed udami. Unie\u015b r\u0119ce przed siebie na wysoko\u015b\u0107 bark\xf3w, \u0142okcie lekko ugi\u0119te. Obni\u017c si\u0119 powoli.","Stanie z narz\u0119dziem z pronowanym chwytem (d\u0142onie skierowane w d\xf3\u0142). Zegnij \u0142okcie, przybli\u017caj\u0105c narz\u0119dzie do ramion. Obni\u017c si\u0119 powoli.","Stanie z narz\u0119dziem przy u\u017cyciu chwytu supinacyjnego. Zegnij \u0142okcie, przybli\u017caj\u0105c narz\u0119dzie do ramion, utrzymuj\u0105c \u0142okcie unieruchomione po bokach tu\u0142owia. Opu\u015b\u0107 si\u0119 powoli wracaj\u0105c do pozycji wyj\u015bciowej.","Stoj\u0105c z tu\u0142owiem nachylonym pod k\u0105tem 45 stopni. Chwy\u0107 sztang\u0119 nachwytem pronowanym. Poci\u0105gnij w stron\u0119 brzucha, utrzymuj\u0105c plecy w pozycji neutralnej. Obni\u017c si\u0119 powoli.","Sta\u0144 z pi\u0119tami nad kraw\u0119dzi\u0105 platformy. Podnie\u015b si\u0119 na palcach, \u015bciskaj\u0105c \u0142ydki. Opu\u015b\u0107 si\u0119 powoli, pozwalaj\u0105c pi\u0119tom opa\u015b\u0107 poni\u017cej poziomu platformy.","Zacznij od umiarkowanego tempa i stopniowo je zwi\u0119kszaj.","Zacznij od \u015bci\u0105gni\u0119cia \u0142opatek. Kontroluj faz\u0119 ekscentryczn\u0105.","Zacznij od \u015bci\u0105gni\u0119cia \u0142opatek. Nie odchylaj tu\u0142owia zbyt daleko do ty\u0142u.","Rozpocznij ruch od \u015bci\u0105gni\u0119cia \u0142opatek. Unikaj u\u017cywania p\u0119du.","Rozpocznij ruch od \u015bci\u0105gni\u0119cia \u0142opatek. Kontroluj faz\u0119 wyd\u0142u\u017cania.","Wykonaj krok do ty\u0142u, opuszczaj\u0105c tylne kolano w kierunku pod\u0142ogi. Przednie kolano pozostaje w jednej linii z kostk\u0105.","Wykonaj krok do przodu, opuszczaj\u0105c tylne kolano w kierunku pod\u0142ogi. Przednie kolano pozostaje w jednej linii z kostk\u0105. Popchnij z powrotem do g\xf3ry.","Wykonaj krok do przodu, opuszczaj\u0105c tylne kolano. Kontynuuj krok do przodu, ci\u0105gle naprzemiennie nogami.","Wejd\u017a do \u015brodka pu\u0142apki. Stopy na szeroko\u015b\u0107 bioder. Opu\u015b\u0107 si\u0119, chwytaj\u0105c uchwyty z prostymi plecami. Przepychaj stopy, jednocze\u015bnie rozci\u0105gaj\u0105c biodra i kolana.","Wykonuj d\u0142ugie kroki, aby bardziej zaanga\u017cowa\u0107 po\u015bladki.","Uginanie Zottmana \u0107wiczy zar\xf3wno zgi\u0119cie, jak i wyprost przedramienia.","Sztanga powinna dotyka\u0107 n\xf3g podczas ca\u0142ego ruchu. Podczas schodzenia skup si\u0119 na rozci\u0105gni\u0119ciu \u015bci\u0119gna podkolanowego.","Im wy\u017csza powierzchnia, tym bardziej pracuje g\xf3rna klatka piersiowa.","\u0141awka sko\u015bna podkre\u015bla g\xf3rn\u0105 cz\u0119\u015b\u0107 klatki piersiowej. Przez ca\u0142y ruch trzymaj \u0142opatki \u015bci\u0105gni\u0119te.","Wersja pochylona jest \u0142atwiejsza i anga\u017cuje doln\u0105 cz\u0119\u015b\u0107 klatki piersiowej.","Im bardziej poziome jest twoje cia\u0142o, tym jest to trudniejsze. Zawsze utrzymuj zaanga\u017cowanie rdzenia.","Ruch pochodzi z bioder, a nie z plec\xf3w. Podczas fazy pchania trzymaj plecy prosto.","\u0141awka kaznodziei eliminuje u\u017cycie p\u0119du. Nie pozw\xf3l, aby ci\u0119\u017car spad\u0142 na d\xf3\u0142.","Wykrok w ty\u0142 jest bezpieczniejszy dla kolan ni\u017c wypad w prz\xf3d.","Rotacja pochodzi z talii, a nie g\u0142owy.","Uginanie n\xf3g w pozycji siedz\u0105cej zwi\u0119ksza zakres ruchu. Unikaj podnoszenia po\u015bladk\xf3w z siedzenia.","Podparcie eliminuje obci\u0105\u017cenie l\u0119d\u017awiowe. Skup si\u0119 na cofaniu.","Dr\u0105\u017cek pu\u0142apkowy zmniejsza obci\u0105\u017cenie kr\u0119gos\u0142upa. Trzymaj ramiona w jednej linii z uchwytami.","Ci\u0119\u017car z przodu pomaga w utrzymaniu pionowej postawy. Trzymaj kolana w jednej linii.","U\u017cyj lekkiego ci\u0119\u017caru. Trzymaj przedramiona nieruchomo na udach.","Z jedn\u0105 r\u0119k\u0105 i jednym kolanem na \u0142awce. Poci\u0105gnij hantle w swoj\u0105 stron\u0119, trzymaj\u0105c \u0142okie\u0107 blisko cia\u0142a. Obni\u017c si\u0119 powoli.","Trzymaj\u0105c sztang\u0119 nad g\u0142ow\u0105, zejd\u017a do przysiadu, utrzymuj\u0105c ramiona proste i stabilne. Wr\xf3\u0107 do g\xf3ry, trzymaj\u0105c sztang\u0119 w jednej linii.","Trzymaj\u0105c r\u0119ce z przodu na linie lub z hantlami, poci\u0105gnij przyrz\u0105d w stron\u0119 twarzy, utrzymuj\u0105c \u0142okcie wysoko. Rozdziel r\u0119ce, zbli\u017caj\u0105c pi\u0119\u015bci do uszu. Wracaj powoli.","Trzymaj\u0105c cia\u0142o pochylone pod nisk\u0105 dr\u0105\u017ckiem, chwy\u0107 nachwytem pronowanym. Przyci\u0105gnij klatk\u0119 piersiow\u0105 do dr\u0105\u017cka, utrzymuj\u0105c cia\u0142o w sztywno\u015bci. Obni\u017c si\u0119 powoli.","Trzymaj\u0105c stopy na podwy\u017cszonej powierzchni, opu\u015b\u0107 klatk\u0119 piersiow\u0105 w kierunku pod\u0142ogi. Wykonaj pompki w g\xf3r\u0119, wracaj\u0105c do pozycji wyj\u015bciowej.","Trzymaj\u0105c d\u0142onie na podwy\u017cszonej powierzchni, opu\u015b\u0107 klatk\u0119 piersiow\u0105 w stron\u0119 d\u0142oni. Wykonaj pompki w g\xf3r\u0119, wracaj\u0105c do pozycji wyj\u015bciowej.","Opieraj\u0105c r\u0119ce na kraw\u0119dzi \u0142awki, wykonaj krok do przodu z wyci\u0105gni\u0119tymi po\u015bladkami. Opu\u015b\u0107 cia\u0142o, zginaj\u0105c \u0142okcie do 90 stopni. Podnie\u015b.","Z tu\u0142owiem nachylonym i \u0142okciem zgi\u0119tym pod k\u0105tem 90 stopni, wyci\u0105gnij rami\u0119 do ty\u0142u, a\u017c do pe\u0142nego wyprostu. Powoli wr\xf3\u0107.","Z g\xf3rn\u0105 cz\u0119\u015bci\u0105 plec\xf3w na \u0142awce i ci\u0119\u017carem na biodrach. Wypchnij biodra w g\xf3r\u0119, napinaj\u0105c po\u015bladki. Wracaj powoli.","Przejd\u017a do pozycji rozci\u0105gaj\u0105cej i przytrzymaj przez 20-30 sekund.","Oddychaj g\u0142\u0119boko i pozosta\u0144 w komfortowym zakresie.","Utrzymuj sta\u0142y rytm i prawid\u0142ow\u0105 postaw\u0119 podczas ca\u0142ego ruchu.","Utrzymuj zaanga\u017cowanie rdzenia i kontroluj ka\u017cd\u0105 faz\u0119 ruchu.","Trzymaj \u0142okcie nieruchomo i wykonuj ka\u017cde powt\xf3rzenie z kontrol\u0105.","Ustaw ramiona, kontroluj ruch i unikaj p\u0119du.","Utrzymuj kolana w jednej linii i kontroluj zar\xf3wno faz\u0119 opuszczania, jak i podnoszenia.","Trzymaj plecy w pozycji neutralnej, usztywnij mi\u0119\u015bnie tu\u0142owia i kontroluj ruch.","Wykonuj ruch z kontrol\u0105, prawid\u0142ow\u0105 postaw\u0105 i pe\u0142nym zakresem ruchu."],t.w)
-B.ajN=new A.i(B.ns,["Execut\u0103 mi\u0219carea lent \u0219i controlat. Men\u021bine o postur\u0103 corect\u0103.","\xcencepe cu o greutate moderat\u0103 pentru a st\u0103p\xe2ni tehnica.","Respir\u0103 ad\xe2nc. Nu for\u021ba niciodat\u0103 peste limita ta natural\u0103.","Men\u021bine mu\u0219chii core angaja\u021bi pe tot parcursul exerci\u021biului. Controleaz\u0103 faza excentric\u0103.","Men\u021bine core-ul stabil pe tot parcursul exerci\u021biului.","Coboar\u0103 lent","coboar\u0103 lent","Respir\u0103 ad\xe2nc","Folose\u0219te amplitudinea complet\u0103 de mi\u0219care.","O prindere str\xe2ns\u0103 m\u0103re\u0219te aria de mi\u0219care. \xcencepe\u021bi de la retragere.","O prindere str\xe2ns\u0103 izoleaz\u0103 tricepsul. \u021aine-\u021bi corpul \xeen linie dreapt\u0103.","O prindere \xeen supina\u021bie cre\u0219te angajarea bicepsului. Evita\u021bi utilizarea impulsului.","Regla\u021bi scaunul: genunchii nu ar trebui s\u0103 se hiperextend\u0103.","Ateriza\u021bi \xeentotdeauna \xeencet. Nu v\u0103 bloca\u021bi genunchii.","Evita\u021bi impulsul. Concentra\u021bi-v\u0103 pe ridicarea pelvisului.","Evita\u021bi s\u0103 ridica\u021bi coatele peste \xeen\u0103l\u021bimea umerilor. O prindere mai larg\u0103 reduce riscul de impact.","Evita\u021bi s\u0103 v\u0103 roti\u021bi umerii. Concentra\u021bi-v\u0103 doar pe mi\u0219carea vertical\u0103.","Evita\u021bi s\u0103 v\u0103 balansa\u021bi trunchiul. Controla\u021bi ambele faze.","Mrean\u0103 pe partea din fa\u021b\u0103 a umerilor cu coatele \xeenalte. Cobor\xe2\u021bi \u021bin\xe2nd trunchiul c\xe2t mai vertical posibil. \xcempinge \xeenapoi \xeen sus.","Aduce\u021bi piciorul \xeentr-o pozi\u021bie de \xeentindere, \u021bin\xe2nd trunchiul drept. \u021aine\u021bi 20-30 de secunde.","Aduce\u021bi piciorul \xeentr-o pozi\u021bie de \xeentindere cu spatele drept. \u021aine\u021bi 20-30 de secunde, respir\xe2nd profund.","Aduce\u021bi piciorul \xeen exterior \xeen abduc\u021bie control\xe2nd mi\u0219carea. \xcentoarce-te \xeencet. P\u0103streaz\u0103-\u021bi miezul stabil.","Aduce\u021bi piciorul spre centru \xeen aduc\u021bie control\xe2nd mi\u0219carea. \xcentoarce-te \xeencet. P\u0103streaz\u0103-\u021bi miezul stabil.","Contracta\u021bi-v\u0103 abdomenul pe tot parcursul exerci\u021biului. Controla\u021bi faza excentric\u0103.","Nu v\u0103 hiperextinde\u021bi bra\u021bele \xeen timpul fazei de deschidere. Concentra\u021bi-v\u0103 pe contrac\u021bia pieptului.","Nu l\u0103sa\u021bi spatele s\u0103 se arcuiasc\u0103. \xcencepe\u021bi cu lans\u0103ri par\u021biale.","Nu l\u0103sa\u021bi \u0219oldurile s\u0103 se \xeencline \xeen jos. Retrage\u021bi omopla\u021bii.","Nu ridica\u021bi \u0219oldurile. \u021aine\u021bi contrac\u021bia \xeen partea de sus pentru o secund\u0103.","Nu bloca\u021bi genunchii \xeen extensie. Picioarele mai sus pe platform\u0103 angajeaz\u0103 mai mult fesierii.","Nu v\u0103 trage\u021bi de g\xe2t. Concentra\u021bi-v\u0103 pe contrac\u021bia abdominal\u0103.","Nu ridica\u021bi bra\u021bele peste \xeen\u0103l\u021bimea umerilor. Roti\u021bi \xeencheieturile u\u0219or \xeen jos (ca \u0219i c\xe2nd turna\u021bi ap\u0103) pentru a izola deltoidul lateral.","Nu ridica\u021bi \u0219oldurile. \u021aine-\u021bi umerii peste \xeencheieturile m\xe2inii.","Nu v\u0103 rotunji\u021bi spatele \xeen niciun moment. Angaja\u021bi-v\u0103 miezul \xeenainte de a trage.","Nu v\u0103 rotunji\u021bi spatele. Controla\u021bi faza excentric\u0103.","Nu v\u0103 rotunji\u021bi spatele. Controla\u021bi faza de \xeentindere.","Nu v\u0103 rotunji\u021bi spatele. \xcencepe\u021bi cu o greutate mic\u0103.","Nu utiliza\u021bi balansul corporal. Concentra\u021bi-v\u0103 pe izolarea gluteus medius.","Nu folosi impulsul. Concentra\u021bi-v\u0103 pe izolarea adductorilor.","Nu folosi impulsul. Concentra\u021bi-v\u0103 pe contrac\u021bie.","Ganterele permit o gam\u0103 mai mare de mi\u0219care. \u021aine\u021bi omopla\u021bii retracta\u021bi pe tot parcursul mi\u0219c\u0103rii.","Picioarele sunt mai late dec\xe2t l\u0103\u021bimea umerilor, cu degetele \xeendreptate spre exterior. \xcen jos, \u021bin\xe2nd mreana cu o prindere interioar\u0103. \xcempinge\u021bi cu picioarele \u0219i extinde\u021bi \u0219oldurile simultan, \u021bin\xe2nd spatele drept.","Flexeaz\u0103-\u021bi coatele aduc\xe2nd greutatea c\u0103tre umeri. Cobor\xe2\u021bi \xeencet.","\xcentinde\u021bi-v\u0103 complet bra\u021bele \xeen faza concentric\u0103. Reveni\u021bi \xeencet la pozi\u021bia de pornire control\xe2nd mi\u0219carea.","Prinde\u021bi bara cu o prindere pronat\u0103 la l\u0103\u021bimea umerilor. \xcencep\xe2nd cu bra\u021bele \xeentinse, trage\u021bi corpul \xeen sus p\xe2n\u0103 c\xe2nd b\u0103rbia elibereaz\u0103 bara. Cobor\xe2\u021bi \xeencet \xeenapoi la pozi\u021bia de pornire.","Prinde\u021bi bara cu o prindere supinat\u0103 (palmele \xeendreptate spre dvs.) la l\u0103\u021bimea umerilor. \xcencep\xe2nd cu bra\u021bele \xeentinse, trage\u021bi corpul \xeen sus p\xe2n\u0103 c\xe2nd b\u0103rbia elibereaz\u0103 bara. Cobor\xe2\u021bi \xeencet.","Prinde\u021bi barele paralele cu bra\u021bele \xeentinse. Cobor\xe2\u021bi corpul aplec\xe2ndu-v\u0103 u\u0219or \xeenainte \u0219i \xeendoind coatele. \xcempinge\u021bi \xeen sus revenind la pozi\u021bia de pornire.","At\xe2rnat de bar\u0103 sau culcat, ridic\u0103 picioarele \xeen sus control\xe2nd mi\u0219carea. Cobor\xe2\u021bi \xeencet.","Coatele \xeenalte \xeempiedic\u0103 mreana s\u0103 alunece. Necesit\u0103 o mobilitate semnificativ\u0103 a \xeencheieturii \u0219i gleznelor.","\u021aine\u021bi contrac\u021bia \xeen partea de sus pentru o secund\u0103. Evita\u021bi impulsul.","\u021aine\u021bi contrac\u021bia \xeen partea de sus pentru o secund\u0103. \u021aine-\u021bi b\u0103rbia spre piept.","\u021aine\u021bi contrac\u021bia \xeen partea de sus. Evita\u021bi s\u0103 compensa\u021bi cu spatele.","\u021aine\u021bi capetele fr\xe2nghiei \xeen lateral. Roti\u021bi fr\xe2nghia deasupra capului \u0219i s\u0103ri\u021bi c\xe2nd trece pe sub picioare.","\xcen pozi\u021bie culcat, sprijinindu-v\u0103 pe antebra\u021be \u0219i degetele de la picioare. Corpul t\u0103u formeaz\u0103 o linie dreapt\u0103 de la cap la c\u0103lc\xe2i. \u021aine\u021bi prin contractarea miezului dvs.","\xcen pozi\u021bie culcat cu m\xe2inile la l\u0103\u021bimea umerilor. Cobor\xe2\u021bi pieptul spre podea \xeendoind coatele. \xcempinge\u021bi \xeen sus revenind la pozi\u021bia ini\u021bial\u0103 \u021bin\xe2nd corpul \xeen linie dreapt\u0103.","\xcen pozi\u021bie de push-up. Alternativ, aduce\u021bi rapid genunchii spre piept, men\u021bin\xe2nd \u0219oldurile jos.","\xcentr-o pozi\u021bie divizat\u0103. Cobor\xe2\u021bi corpul \xeendoind genunchiul din fa\u021b\u0103. \xcempinge\u021bi \xeen sus revenind la pozi\u021bia de pornire.","\u021aine\u021bi piciorul opus complet pe podea. Trunchiul drept.","P\u0103stra\u021bi bra\u021bul superior paralel cu podeaua. Evita\u021bi impulsul.","\u021aine-\u021bi bra\u021bele drepte. Concentra\u021bi-v\u0103 pe contrac\u021bia lateral\u0103.","\u021aine-\u021bi spatele plat \u0219i miezul angajat. Evita\u021bi s\u0103 v\u0103 balansa\u021bi trunchiul.","\u021aine-\u021bi spatele \xeentr-o pozi\u021bie neutr\u0103. Trage\u021bi spre talie sau piept. Contracta\u021bi mu\u0219chii spatelui la sf\xe2r\u0219itul mi\u0219c\u0103rii.","\u021aine spatele paralel cu podeaua. Roti\u021bi-v\u0103 u\u0219or trunchiul la sf\xe2r\u0219itul mi\u0219c\u0103rii.","\u021aine-\u021bi pieptul sus \u0219i genunchii alinia\u021bi cu degetele de la picioare. Nu l\u0103sa\u021bi genunchii s\u0103 se pr\u0103bu\u0219easc\u0103 spre interior.","\u021aine-\u021bi miezul angajat \u0219i spatele drept. Evita\u021bi hiperextensia coloanei vertebrale lombare.","P\u0103stra\u021bi-v\u0103 miezul angajat pentru a v\u0103 proteja spatele. Evita\u021bi hiperextensia coloanei vertebrale lombare.","P\u0103streaz\u0103-\u021bi nucleul angajat. Adapteaz\u0103 viteza la nivelul t\u0103u de fitness.","P\u0103streaz\u0103-\u021bi nucleul angajat. Evita\u021bi hiperextinderea coloanei vertebrale.","\u021aine\u021bi coatele la \xeen\u0103l\u021bimea umerilor sau pu\u021bin deasupra. Esen\u021bial pentru s\u0103n\u0103tatea man\u0219etei rotatorilor.","\u021aine-\u021bi coatele aproape de corp. Evita\u021bi s\u0103 v\u0103 evaza\u021bi coatele.","\u021aine-\u021bi coatele fixate \xeen lateral. Prindere neutr\u0103 subliniaz\u0103 brahioradialul peste biceps.","\u021aine-\u021bi coatele fixate \xeendreptate spre tavan. Controleaz\u0103 cobor\xe2rea.","\u021aine-\u021bi coatele fixate pe tot parcursul mi\u0219c\u0103rii. Concentra\u021bi-v\u0103 pe contrac\u021bia complet\u0103 \xeen partea de sus.","\u021aine-\u021bi coatele fixate. Nu folosi impulsul.","\u021aine-\u021bi coatele fixate. Concentra\u021bi-v\u0103 pe contrac\u021bia complet\u0103.","\u021aine-\u021bi coatele fixate. Concentra\u021bi-v\u0103 pe extensia complet\u0103.","\u021aine\u021bi coatele \xeendreptate spre tavan \u0219i aproape de cap. Capul lung este activat maxim \xeen pozi\u021bia \xeentins\u0103.","\u021aine\u021bi genunchiul din fa\u021b\u0103 aliniat cu degetele de la picioare. Corecteaz\u0103 dezechilibrele musculare dintre picioare.","\u021aine c\u0103lc\xe2iul pe podea. \xcendoi\u021bi genunchiul pentru a \xeentinde soleul.","\u021aine-\u021bi \u0219oldurile aliniate. Evita\u021bi s\u0103 le l\u0103sa\u021bi s\u0103 cad\u0103 \xeen jos.","\u021aine-\u021bi s\u0103riturile sc\u0103zute. Folose\u0219te-\u021bi \xeencheieturile, nu bra\u021bele, pentru a roti fr\xe2nghia.","\u021aine\u021bi genunchiul \xeendreptat spre podea. Evita\u021bi hiperextinderea spatelui.","\u021aine-\u021bi genunchii alinia\u021bi cu degetele de la picioare. Pozi\u021bia piciorului schimb\u0103 cel mai antrenat mu\u0219chi.","\u021aine-\u021bi genunchii alinia\u021bi cu degetele de la picioare. Pozi\u021bia de sumo reduce traseul mrenei.","P\u0103streaz\u0103-\u021bi pelvisul la nivel. \xcencepe\u021bi cu o greutate mic\u0103.","\u021aine\u021bi omopla\u021bii retracta\u021bi. Controla\u021bi cobor\xe2rea timp de cel pu\u021bin 2 secunde.","\u021aine-\u021bi umerii relaxa\u021bi. Adapta\u021bi ritmul la intensitatea dorit\u0103.","P\u0103stra\u021bi-v\u0103 trunchiul stabil evit\xe2nd balansarea. Controleaz\u0103 cobor\xe2rea.","\u021aine-\u021bi trunchiul drept \u0219i miezul angajat. Evita\u021bi s\u0103 v\u0103 l\u0103sa\u021bi genunchiul din fa\u021b\u0103 s\u0103 treac\u0103 pe l\xe2ng\u0103 degetele de la picioare.","\u021aine-\u021bi trunchiul vertical pentru a izola tricepsul. Cu c\xe2t cobori mai jos, cu at\xe2t este mai mare angajarea pieptului.","\u021aine-\u021bi \xeencheieturile \xeentr-o pozi\u021bie neutr\u0103. Curla invers\u0103 \xeent\u0103re\u0219te mu\u0219chii antebra\u021bului.","\xcengenuncheat cu roata \xeen fa\u021b\u0103. Roti\u021bi roata \xeenainte cobor\xe2nd corpul spre podea. Trage\u021bi roata \xeenapoi spre genunchi.","Aplecarea \xeen fa\u021b\u0103 cre\u0219te implicarea \xeen piept. Pozi\u021bia vertical\u0103 izoleaz\u0103 tricepsul.","\xcentinde-te cu genunchii \xeendoi\u021bi. Adu umerii spre genunchi contract\xe2nd abdomenul. Cobor\xe2\u021bi \xeencet.","\xcentinde-te cu picioarele ridicate. Adu-\u021bi genunchii spre piept ridic\xe2nd pelvisul. \xcentoarce-te \xeencet.","\xcentinde\u021bi-v\u0103 cu fa\u021ba \xeen jos pe aparat cu tampoane pe glezne. Flecheaz\u0103-\u021bi genunchii aduc\xe2nd c\u0103lc\xe2iele spre fesieri. Cobor\xe2\u021bi \xeencet.","\xcentinde\u021bi-v\u0103 pe banc\u0103 cu o ganter\u0103 \xeen fiecare m\xe2n\u0103. Cobor\xe2\u021bi ganterele spre piept, p\u0103str\xe2nd \xeencheieturile stabile. \xcempinge\u021bi ferm \xeen sus, revenind la pozi\u021bia de pornire.","\xcentinde\u021bi-v\u0103 pe banc\u0103 cu o ganter\u0103 \xeen fiecare m\xe2n\u0103. Lower your arms laterally maintaining a slight elbow bend. Bring the dumbbells upward in an arc as if hugging a tree. \xcentoarce-te \xeencet.","\xcentinde\u021bi-v\u0103 pe banc\u0103 cu o prindere la l\u0103\u021bimea umerilor. Cobor\xe2\u021bi mreana \u021bin\xe2nd coatele aproape de trunchi. \xcempinge\u021bi \xeen sus str\xe2ng\xe2nd tricepsul.","\xcentinde\u021bi-v\u0103 pe banc\u0103 cu instrumentul deasupra pieptului, cu bra\u021bele \xeentinse. Flecheaz\u0103 coatele, cobor\xe2nd greutatea spre frunte. Extinde\u021bi revenirea la pozi\u021bie.","\xcentinde\u021bi-v\u0103 pe banc\u0103 cu instrumentul deasupra pieptului, cu bra\u021bele aproape \xeentinse. Cobor\xe2\u021bi greutatea \xeen spatele capului, \u021bin\xe2nd coatele u\u0219or \xeendoite. Reveni\u021bi la pozi\u021bia ini\u021bial\u0103 \xeentr-un arc.","\xcentinde-te pe banc\u0103 cu picioarele pe podea. Prinde\u021bi mreana mai lat dec\xe2t l\u0103\u021bimea umerilor. Cobor\xe2\u021bi mreana la piept, \u021bin\xe2nd coatele la aproximativ 45 de grade. \xcempinge\u021bi ferm \xeen sus.","\xcentinde\u021bi-v\u0103 pe banca de declin cu picioarele asigurate. Prinde\u021bi instrumentul mai lat dec\xe2t l\u0103\u021bimea umerilor. Mai jos spre pieptul inferior. \xcempinge\u021bi ferm revenind la pozi\u021bia de pornire.","\xcentinde\u021bi-v\u0103 pe suportul \xeenclinat cu greut\u0103\u021bile at\xe2rn\xe2nd. Trage\u021bi spre trunchi contract\xe2nd dorsalul. Cobor\xe2\u021bi \xeencet.","Cobor\xe2\u021bi \xeentr-o ghemuit, apoi s\u0103ri\u021bi \xeen sus exploziv. Aterizeaz\u0103 u\u0219or \xeendoind genunchii.","Cobor\xe2\u021bi-v\u0103 \xeentr-o ghemuial\u0103, pune\u021bi m\xe2inile pe podea \u0219i s\u0103ri\u021bi cu picioarele \xeentr-o pozi\u021bie de push-up. Efectua\u021bi o \xeempingere, s\u0103ri\u021bi picioarele spre m\xe2ini, apoi s\u0103ri\u021bi cu bra\u021bele deasupra capului.","Men\u021bine un ritm constant. Pozi\u021bia corect\u0103 pe tot parcursul exerci\u021biului.","Mentineti o pozitie verticala cu o usoara aplecare inainte. Alterneaz\u0103 pa\u0219ii \xeentr-un ritm constant. Aterizeaz\u0103 cu piciorul la mijlocul pasului.","Men\u021bine\u021bi aceea\u0219i \xeendoire a cotului pe tot parcursul mi\u0219c\u0103rii. Concentra\u021bi-v\u0103 pe contrac\u021bia pieptului la sf\xe2r\u0219itul mi\u0219c\u0103rii.","Men\u021bine\u021bi aceea\u0219i \xeendoire a cotului. Controla\u021bi cobor\xe2rea timp de 2 secunde.","Men\u021bine\u021bi u\u0219oar\u0103 \xeendoire a cotului. Puloverul este unul dintre pu\u021binele exerci\u021bii care \xeentinde lat.","Tensiune moderat\u0103, niciodat\u0103 durere. Expir\u0103 \xeen timp ce te \xeentinzi.","Pe m\xe2ini \u0219i genunchi sau st\xe2nd la cablu. \xcentinde-\u021bi piciorul \xeenapoi str\xe2ng\xe2nd fesierii. \xcentoarce-te \xeencet.","Pe partea ta sprijinindu-te pe antebra\u021b cu corpul \xeen linie dreapt\u0103. Ridica\u021bi \u0219oldurile men\u021bin\xe2nd pozi\u021bia.","Pedale men\u021bin\xe2nd un ritm constant. \u021aine-\u021bi spatele \xeentr-o pozi\u021bie neutr\u0103.","Efectua\u021bi faza de ridicare cu o prindere supinat\u0103. Roti\u021bi \xeencheieturile la prona\u021bie \xeen partea de sus. Jos cu o prindere pronat\u0103. Reveni\u021bi la supinat \xeen partea de jos.","Efectua\u021bi mi\u0219carea control\xe2nd at\xe2t fazele excentrice, c\xe2t \u0219i cele concentrice. P\u0103streaz\u0103-\u021bi nucleul angajat.","Efectua\u021bi mi\u0219carea control\xe2nd at\xe2t fazele excentrice, c\xe2t \u0219i cele concentrice. \u021aine\u021bi omopla\u021bii retracta\u021bi.","Efectua\u021bi mi\u0219carea exploziv \xeen sus sau \xeenainte. Aterizeaz\u0103 u\u0219or \xeendoind genunchii. Controla\u021bi aterizarea.","Efectua\u021bi mi\u0219carea \xeencet \xeen ambele faze. Pauza de jos cre\u0219te \xeentinderea gambei.","Efectua\u021bi rota\u021bia fluid \u0219i continuu. Presa Arnold este unul dintre pu\u021binele exerci\u021bii care angajeaz\u0103 toate fibrele musculare.","Pozi\u021biona\u021bi m\xe2inile \xeen form\u0103 de diamant sub piept. Cobor\xe2\u021bi corpul \u021bin\xe2nd coatele aproape de trunchi. \xcempinge\u021bi \xeen sus str\xe2ng\xe2nd tricepsul.","Pozi\u021biona\u021bi-v\u0103 \xeen ma\u0219ina de ghemuit cu umerii sub tampoane. Cobor\xe2\u021bi \xeendoind genunchii la 90 de grade, apoi \xeempinge\u021bi \xeen sus.","\xcempinge\u021bi \xeen principal cu piciorul pe suprafa\u021ba ridicat\u0103. \u021aine-\u021bi trunchiul drept.","\xcempinge\u021bi cu picioarele, apoi l\u0103sa\u021bi-v\u0103 trunchiul \xeenapoi, \xeen cele din urm\u0103 trage\u021bi v\xe2sla spre abdomen. Inversa\u021bi ordinea la retur.","Necesit\u0103 o mobilitate excelent\u0103 a umerilor, \u0219oldurilor \u0219i gleznelor. \xcencepe\u021bi f\u0103r\u0103 greutate.","Retrage\u021bi omopla\u021bii \u0219i \u021bine\u021bi-i bloca\u021bi. Nu arunca\u021bi greutatea pe piept.","Retrage\u021bi omopla\u021bii pentru a stabiliza um\u0103rul.","Roti\u021bi de la talie, nu doar de la bra\u021be.","Roti\u021bi-v\u0103 trunchiul aduc\xe2nd un cot spre genunchiul opus. Repeta\u021bi din cealalt\u0103 parte.","Roti\u021bi \xeencheietura m\xe2inii spre exterior \xeen partea de sus pentru a maximiza v\xe2rful. P\u0103streaz\u0103-\u021bi trunchiul stabil.","Asezat cu gantere la inaltimea umerilor si palmele indreptate spre tine. Ap\u0103sa\u021bi \xeen sus, rotindu-v\u0103 \xeencheieturile spre exterior, p\xe2n\u0103 c\xe2nd palmele sunt \xeendreptate \xeenainte. Cobor\xe2\u021bi revenirea la pozi\u021bia ini\u021bial\u0103.","Asezat cu cotul sprijinit pe interiorul coapsei. Flexeaz\u0103-\u021bi cotul aduc\xe2nd haltera spre um\u0103r. Cobor\xe2\u021bi \xeencet.","Asezat cu picioarele ridicate si trunchiul la 45 de grade. Roti\u021bi-v\u0103 trunchiul dintr-o parte \xeen alta, aduc\xe2nd m\xe2inile pe podea, l\xe2ng\u0103 \u0219olduri.","Secven\u021b\u0103: picioare, apoi trunchi \u0219i bra\u021be \xeen timpul tragerii.","A\u0219eza\u021bi-v\u0103 la ma\u0219ina de tragere lat \u0219i prinde\u021bi bara cu o prindere pronat\u0103 larg\u0103. Trage\u021bi bara spre piept, aplec\xe2ndu-v\u0103 trunchiul u\u0219or \xeenapoi. Controla\u021bi revenirea la pozi\u021bia de pornire.","Sta\u021bi la ma\u0219ina de tragere lat cu o prindere apropiat\u0103 sau neutr\u0103. Trage\u021bi bara spre piept, \u021bin\xe2nd coatele aproape de corp. Controla\u021bi returul.","Stai la cablul jos cu picioarele pe suporturi. Trage\u021bi m\xe2nerul spre talie, \u021bin\xe2nd spatele drept. Contracta\u021bi mu\u0219chii spatelui \u0219i reveni\u021bi \xeencet.","Stai la aparat cu tampoane pe glezne. Intinde-ti picioarele in sus contractand cvadricepsul. Cobor\xe2\u021bi \xeencet.","Stai la aparat cu tampoane pe glezne. Flecheaz\u0103-\u021bi genunchii aduc\xe2nd c\u0103lc\xe2iele spre fesieri. Cobor\xe2\u021bi \xeencet.","Stai la banca predicatorului cu bra\u021bele sprijinite pe suport. Flecheaz\u0103 coatele aduc\xe2nd instrumentul spre umeri. Cobor\xe2\u021bi \xeencet aproape p\xe2n\u0103 la extinderea complet\u0103.","Sta\u021bi \xeen ma\u0219in\u0103 cu spatele sprijinit de suport. Pozi\u021biona\u021bi coatele pe pl\u0103cu\u021be. Adu-\u021bi bra\u021bele spre centru contract\xe2nd pieptul. Reveni\u021bi \xeencet la pozi\u021bia de pornire.","Sta\u021bi \xeen ma\u0219in\u0103 cu picioarele pe platform\u0103 la l\u0103\u021bimea \u0219oldurilor. Cobor\xe2\u021bi \xeendoind genunchii la 90 de grade. \xcempinge\u021bi prin extinderea picioarelor.","Sta\u021bi pe banca \xeenclinat\u0103 cu picioarele pe podea. Prinde\u021bi instrumentul mai lat dec\xe2t l\u0103\u021bimea umerilor. Cobor\xe2\u021bi p\xe2n\u0103 la nivelul superior al pieptului. \xcempinge\u021bi ferm revenind la pozi\u021bia de pornire.","Stai cu antebra\u021bele pe coapse. Prinde\u021bi instrumentul cu o prindere supinat\u0103. Flexi\u021bi \xeencheieturile \xeen sus \u0219i cobor\xe2\u021bi \xeencet.","\xcentinde\u021bi fr\xe2nghia \xeen partea de jos pentru a maximiza contrac\u021bia. \u021aine-\u021bi coatele fixate.","St\xe2nd \xeen centrul cablului cu un m\xe2ner pe m\xe2n\u0103. \u021aine-\u021bi bra\u021bele u\u0219or \xeendoite. Adu-\u021bi m\xe2inile spre centru travers\xe2ndu-le. Reveni\u021bi \xeencet la pozi\u021bia de pornire.","St\xe2nd la cablul \xeenalt cu fr\xe2nghia. \u021aine-\u021bi coatele fixate pe p\u0103r\u021bile laterale ale trunchiului. \xcempinge\u021bi fr\xe2nghia \xeen jos, separ\xe2nd capetele. \xcentoarce-te \xeencet.","St\xe2nd la cablul \xeenalt. \u021aine-\u021bi coatele fixate pe p\u0103r\u021bile laterale ale trunchiului. \xcempinge\u021bi \xeen jos, extinz\xe2nd complet bra\u021bele. \xcentoarce-te \xeencet.","St\xe2nd cu fa\u021ba la cablul \xeenalt, cu bra\u021bele aproape \xeentinse. Aduce\u021bi bara spre coapse \xeentr-un arc \u021bin\xe2nd bra\u021bele drepte. Reveni\u021bi \xeencet la pozi\u021bia de pornire.","St\xe2nd \xeen fa\u021ba unei b\u0103nci. A\u0219eza\u021bi un picior pe suprafa\u021ba ridicat\u0103 \u0219i \xeempinge\u021bi \xeen sus. Cobor\xe2\u021bi \xeencet control\xe2nd mi\u0219carea.","St\xe2nd pe un picior. Cobor\xe2\u021bi trunchiul \xeenainte, \u021bin\xe2nd spatele drept \xeen timp ce piciorul liber se extinde \xeen spate. Reveni\u021bi \xeen pozi\u021bia vertical\u0103 str\xe2ng\xe2nd fesierii.","\xcen picioare sau a\u0219ezat cu instrumentul la \xeen\u0103l\u021bimea umerilor. \xcempinge\u021bi \xeen sus, extinz\xe2ndu-v\u0103 complet bra\u021bele. Cobor\xe2\u021bi, revenind \xeencet la pozi\u021bia ini\u021bial\u0103, cu greutatea la \xeen\u0103l\u021bimea umerilor.","\xcen picioare sau a\u0219ezat cu instrumentul la \xeen\u0103l\u021bimea umerilor. \xcempinge\u021bi \xeen sus, extinz\xe2ndu-v\u0103 complet bra\u021bele. Cobor\xe2\u021bi \xeencet.","\xcen picioare sau a\u0219ezat cu ma\u0219ina deasupra capului, bra\u021bele \xeentinse. Flecheaz\u0103 coatele sc\u0103z\xe2nd greutatea din spatele capului. Extinde\u021bi revenirea \xeen sus.","Sta\u021bi \xeen picioare cu o ganter\u0103 \xeen fiecare m\xe2n\u0103, pe partea lateral\u0103. Ridica\u021bi bra\u021bele lateral p\xe2n\u0103 la \xeen\u0103l\u021bimea umerilor, \u021bin\xe2nd coatele u\u0219or \xeendoite. Cobor\xe2\u021bi \xeencet.","St\xe2nd cu o greutate \xeen fiecare m\xe2n\u0103, de l\xe2ng\u0103 tine. Ridic\u0103 umerii spre urechi str\xe2ng\xe2nd capcanele. \u021aine\u021bi contrac\u021bia pentru o secund\u0103, apoi cobor\xe2\u021bi \xeencet.","Sta\u021bi \xeen picioare cu gantere \xeen lateral, cu o prindere neutr\u0103 (degetul mare \xeen sus). Flexeaz\u0103-\u021bi coatele aduc\xe2nd ganterele spre umerii t\u0103i. Cobor\xe2\u021bi \xeencet.","St\xe2nd cu picioarele la l\u0103\u021bimea \u0219oldurilor. Balamal\u0103 la \u0219olduri balans\xe2nd greutatea dintre picioare, apoi conduce\u021bi exploziv \u0219oldurile \xeenainte, balans\xe2nd greutatea p\xe2n\u0103 la \xeen\u0103l\u021bimea umerilor.","St\xe2nd cu picioarele la l\u0103\u021bimea \u0219oldurilor. Cobor\xe2\u021bi mreana de-a lungul picioarelor, \u021bin\xe2nd genunchii u\u0219or \xeendoi\u021bi \u0219i spatele drept. Cobor\xe2\u021bi p\xe2n\u0103 c\xe2nd sim\u021bi\u021bi tensiune \xeen ischiochimbilari apoi \xeentoarce\u021bi-v\u0103 \xeen sus.","St\xe2nd cu picioarele la l\u0103\u021bimea \u0219oldurilor. Cobor\xe2\u021bi cu spatele drept \u0219i cu pieptul \xeen sus. \xcempinge\u021bi picioarele \xeen p\u0103m\xe2nt \u0219i extinde\u021bi \u0219oldurile \u0219i genunchii simultan, \u021bin\xe2nd bara aproape de picioare.","St\xe2nd cu picioarele la l\u0103\u021bimea umerilor, \u021bine\u021bi o gantere \xeen fa\u021ba pieptului. Coboar\u0103 \u021bin\xe2nd pieptul sus. Reveni\u021bi sus \xeemping\xe2ndu-v\u0103 prin c\u0103lc\xe2ie.","St\xe2nd cu picioarele la l\u0103\u021bimea umerilor. Cobor\xe2\u021bi corpul \xeendoind genunchii \u0219i \u0219oldurile ca \u0219i cum a\u021bi fi a\u0219ezat pe un scaun. Cobor\xe2\u021bi p\xe2n\u0103 c\xe2nd coapsele sunt paralele cu podeaua. \xcempinge\u021bi-v\u0103 prin c\u0103lc\xe2ie.","St\xe2nd cu picioarele \xeempreun\u0103. Face\u021bi un pas lateral larg \u021bin\xe2nd fix piciorul opus. Cobor\xe2\u021bi spre acea parte \xeendoind genunchiul.","St\xe2nd cu mreana pe umeri. \xcenclina\u021bi-v\u0103 trunchiul \xeenainte \u021bin\xe2nd spatele drept \u0219i genunchii u\u0219or \xeendoi\u021bi. Sim\u021bi\u021bi \xeentinderea ischiochimbilor. Reveni\u021bi \xeen pozi\u021bia vertical\u0103.","Sta\u021bi cu instrumentul \xeen fa\u021ba coapselor folosind o prindere pronat\u0103. Trage\u021bi spre b\u0103rbie \u021bin\xe2nd coatele mai sus dec\xe2t \xeencheieturile. Cobor\xe2\u021bi \xeencet.","St\xe2nd cu instrumentul \xeen fa\u021ba coapselor. Ridic\u0103-\u021bi bra\u021bele \xeen fa\u021ba ta la \xeen\u0103l\u021bimea umerilor, \u021bin\xe2nd coatele u\u0219or \xeendoite. Cobor\xe2\u021bi \xeencet.","\xcen picioare cu instrumentul folosind o prindere pronat\u0103 (palmele cu fa\u021ba \xeen jos). Flecheaz\u0103 coatele aduc\xe2nd instrumentul spre umeri. Cobor\xe2\u021bi \xeencet.","St\xe2nd cu instrumentul folosind o prindere \xeen supina\u021bie. Flexeaz\u0103-\u021bi coatele aduc\xe2nd instrumentul spre umeri, \u021bin\xe2nd coatele fixate pe p\u0103r\u021bile laterale ale trunchiului. Cobor\xe2\u021bi \xeencet revenind la pozi\u021bia de pornire.","St\xe2nd cu trunchiul \xeenclinat la 45 de grade. Prinde mreana cu o prindere pronat\u0103. Trage\u021bi spre abdomen p\u0103str\xe2nd spatele neutru. Cobor\xe2\u021bi \xeencet.","Sta\u021bi cu c\u0103lc\xe2iele de pe marginea unei platforme. Ridic\u0103-te pe degetele de la picioare str\xe2ng\xe2ndu-\u021bi gambele. Cobor\xe2\u021bi \xeencet, permi\u021b\xe2nd c\u0103lc\xe2ielor s\u0103 scad\u0103 sub nivelul platformei.","\xcencepe\u021bi \xeentr-un ritm moderat \u0219i cre\u0219te\u021bi treptat.","\xcencepe\u021bi de la retragerea omopla\u021bilor. Controla\u021bi faza excentric\u0103.","\xcencepe\u021bi de la retragerea omopla\u021bilor. Nu v\u0103 apleca\u021bi trunchiul prea mult \xeenapoi.","\xcencepe\u021bi mi\u0219carea de la retragerea omopla\u021bilor. Evita\u021bi utilizarea impulsului.","\xcencepe\u021bi mi\u0219carea de la retragerea omopla\u021bilor. Controla\u021bi faza de prelungire.","Face\u021bi un pas \xeenapoi cobor\xe2nd genunchiul din spate spre podea. Genunchiul din fa\u021b\u0103 r\u0103m\xe2ne aliniat cu glezna.","Face\u021bi un pas \xeenainte cobor\xe2nd genunchiul din spate spre podea. Genunchiul din fa\u021b\u0103 r\u0103m\xe2ne aliniat cu glezna. \xcempinge \xeenapoi \xeen sus.","Face\u021bi un pas \xeenainte cobor\xe2nd genunchiul din spate. Continua\u021bi s\u0103 face\u021bi un pas \xeenainte, altern\xe2nd picioarele continuu.","Intr\u0103 \xeen bara capcan\u0103. Picioare la l\u0103\u021bimea \u0219oldurilor. Cobor\xe2\u021bi-v\u0103 prinz\xe2nd m\xe2nerele cu spatele drept. \xcempinge\u021bi prin picioare extinz\xe2nd \u0219oldurile \u0219i genunchii simultan.","F\u0103 pa\u0219i lungi pentru a-\u021bi antrena mai mult fesierii.","Curl Zottman antreneaz\u0103 at\xe2t flexia, c\xe2t \u0219i extensia antebra\u021bului.","Bara ar trebui s\u0103-\u021bi p\u0103\u0219easc\u0103 picioarele pe tot parcursul mi\u0219c\u0103rii. Concentreaz\u0103-te pe \xeentinderea ischio-coarbei \xeen timpul cobor\xe2rii.","Cu c\xe2t suprafa\u021ba este mai mare, cu at\xe2t mai mult func\u021bioneaz\u0103 pieptul superior.","Banca \xeenclinat\u0103 accentueaz\u0103 partea superioar\u0103 a pieptului. \u021aine\u021bi omopla\u021bii retracta\u021bi pe tot parcursul mi\u0219c\u0103rii.","Versiunea \xeenclinat\u0103 este mai u\u0219oar\u0103 \u0219i cupleaz\u0103 pieptul inferior.","Cu c\xe2t corpul t\u0103u este mai orizontal, cu at\xe2t este mai greu. \u021aine-\u021bi mereu nucleul angajat.","Mi\u0219carea vine din \u0219olduri, nu din spate. \u021aine-\u021bi spatele drept \xeen timpul fazei de \xeempingere.","Banca predicatorului elimin\u0103 utilizarea impulsului. Nu l\u0103sa\u021bi greutatea s\u0103 scad\u0103 \xeen partea de jos.","Fanterea invers\u0103 este mai sigur\u0103 pentru genunchi dec\xe2t atacul \xeenainte.","Rota\u021bia vine din talie, nu din cap.","Curl piciorului a\u0219ezat m\u0103re\u0219te aria de mi\u0219care. Evita\u021bi s\u0103 v\u0103 ridica\u021bi fesierii de pe scaun.","Suportul elimin\u0103 stresul lombar. Concentra\u021bi-v\u0103 pe retragere.","Bara de capcan\u0103 reduce stresul asupra coloanei vertebrale. P\u0103stra\u021bi umerii alinia\u021bi cu m\xe2nerele.","Greutatea din fa\u021b\u0103 ajut\u0103 la postura vertical\u0103. \u021aine-\u021bi genunchii alinia\u021bi.","Utiliza\u021bi o greutate mic\u0103. \u021aine\u021bi antebra\u021bele nemi\u0219cate pe coapse.","Cu o m\xe2n\u0103 \u0219i un genunchi pe banc\u0103. Trage\u021bi gantera spre o parte, \u021bin\xe2nd cotul aproape de corp. Cobor\xe2\u021bi \xeencet.","Cu mreana deasupra capului, coboar\u0103 \xeentr-o ghemuial\u0103 \u021bin\xe2nd bra\u021bele drepte \u0219i stabile. Reveni\u021bi sus \u021bin\xe2nd mreana aliniat\u0103.","Cu bra\u021bele \xeen fa\u021b\u0103 la cablu sau cu gantere, trage\u021bi instrumentul spre fa\u021b\u0103 \u021bin\xe2nd coatele sus. Separa\u021bi-v\u0103 m\xe2inile aduc\xe2nd pumnii l\xe2ng\u0103 urechi. \xcentoarce-te \xeencet.","Cu corpul \xeenclinat sub o bar\u0103 joas\u0103, prinde\u021bi cu o prindere pronat\u0103. Trage-\u021bi pieptul spre bar\u0103, \u021bin\xe2ndu-\u021bi corpul rigid. Cobor\xe2\u021bi \xeencet.","Cu picioarele pe o suprafa\u021b\u0103 ridicat\u0103, coboar\u0103 pieptul spre podea. \xcempinge\u021bi \xeen sus revenind la pozi\u021bia de pornire.","Cu m\xe2inile pe o suprafa\u021b\u0103 ridicat\u0103, coboar\u0103 pieptul spre m\xe2ini. \xcempinge\u021bi \xeen sus revenind la pozi\u021bia de pornire.","Cu m\xe2inile pe marginea unei b\u0103nci, face\u021bi un pas \xeenainte cu fesierii afar\u0103. Cobor\xe2\u021bi corpul \xeendoind coatele la 90 de grade. \xcempinge\u021bi \xeen sus.","Cu trunchiul \xeenclinat \u0219i cotul \xeendoit la 90 de grade, \xeentinde\u021bi bra\u021bul \xeenapoi p\xe2n\u0103 la extensie complet\u0103. \xcentoarce-te \xeencet.","Cu partea superioar\u0103 a spatelui pe o banc\u0103 \u0219i cu greutatea pe \u0219olduri. \xcempinge\u021bi \u0219oldurile \xeen sus, str\xe2ng\xe2nd fesele. \xcentoarce-te \xeencet.","Trece\u021bi \xeen pozi\u021bia de \xeentindere \u0219i \u021bine\u021bi ap\u0103sat timp de 20-30 de secunde.","Respira\u021bi ad\xe2nc \u0219i r\u0103m\xe2ne\u021bi \xeentr-un interval confortabil.","P\u0103stra\u021bi un ritm constant \u0219i men\u021bine\u021bi o postur\u0103 corect\u0103 pe tot parcursul mi\u0219c\u0103rii.","P\u0103stra\u021bi-v\u0103 nucleul angajat \u0219i controla\u021bi fiecare faz\u0103 a mi\u0219c\u0103rii.","\u021aine-\u021bi coatele fixe \u0219i efectueaz\u0103 fiecare repetare cu control.","Pune\u021bi-v\u0103 umerii, controla\u021bi mi\u0219carea \u0219i evita\u021bi utilizarea impulsului.","\u021aine\u021bi genunchii alinia\u021bi \u0219i controla\u021bi at\xe2t faza de cobor\xe2re, c\xe2t \u0219i faza de ridicare.","P\u0103stra\u021bi-v\u0103 spatele neutru, \xeent\u0103ri\u021bi-v\u0103 miezul \u0219i controla\u021bi mi\u0219carea.","Efectua\u021bi mi\u0219carea cu control, postur\u0103 adecvat\u0103 \u0219i o gam\u0103 complet\u0103 de mi\u0219care."],t.w)
-B.ajM=new A.i(B.ns,["V\xe9gezd el a mozg\xe1st lassan \xe9s kontroll\xe1ltan. Tartsd meg a helyes testtart\xe1st.","Kezdj m\xe9rs\xe9kelt s\xfallyal a technika elsaj\xe1t\xedt\xe1s\xe1hoz.","L\xe9legezz m\xe9lyen. Soha ne er\u0151ltesd term\xe9szetes tartom\xe1nyodon t\xfal.","Tartsd a t\xf6rzsizmokat fesz\xedtve az eg\xe9sz gyakorlat alatt. Ellen\u0151rizd az excentrikus f\xe1zist.","Tartsd stabil a t\xf6rzset az eg\xe9sz gyakorlat alatt.","Lassan ereszd le","lassan ereszd le","L\xe9legezz m\xe9lyen","Haszn\xe1ld a teljes mozg\xe1startom\xe1nyt.","A szoros markolat n\xf6veli a mozg\xe1si tartom\xe1nyt. Kezdje a visszah\xfaz\xe1ssal.","A szoros markolat elszigeteli a tricepszt. Tartsa a test\xe9t egyenes vonalban.","A h\xe1trad\u0151lt markolat n\xf6veli a bicepsz kapcsolat\xe1t. Ker\xfclje a lend\xfclet haszn\xe1lat\xe1t.","\xc1ll\xedtsa be az \xfcl\xe9st: a t\xe9rd\xe9nek nem szabad t\xfalny\xfalnia.","Mindig l\xe1gyan sz\xe1lljon le. Ne z\xe1rja be a t\xe9rd\xe9t.","Ker\xfclje a lend\xfcletet. Koncentr\xe1lj a medence felemel\xe9s\xe9re.","Ker\xfclje a k\xf6ny\xf6k\xf6k v\xe1llmagass\xe1g f\xf6l\xe9 emel\xe9s\xe9t. A sz\xe9lesebb markolat cs\xf6kkenti az \xfctk\xf6z\xe9s kock\xe1zat\xe1t.","Ker\xfclje a v\xe1llak forgat\xe1s\xe1t. Csak a f\xfcgg\u0151leges mozg\xe1sra koncentr\xe1ljon.","Ker\xfclje a t\xf6rzs kileng\xe9s\xe9t. Ir\xe1ny\xedtsd mindk\xe9t f\xe1zist.","S\xfaly a v\xe1llak el\xfcls\u0151 r\xe9sz\xe9n, magas k\xf6ny\xf6k\xf6kkel. Emelkedj\xfcnk le \xfagy, hogy a t\xf6rzset a lehet\u0151 legf\xfcgg\u0151legesebben tartsuk. Nyomja vissza felfel\xe9.","Hozd a l\xe1badat ny\xfajt\xf3 helyzetbe \xfagy, hogy a t\xf6rzsed egyenesen maradjon. Tartsa 20-30 m\xe1sodpercig.","Hozd a l\xe1badat ny\xfajt\xf3 helyzetbe egyenes h\xe1ttal. Tartsa 20-30 m\xe1sodpercig m\xe9ly l\xe9legzetet.","H\xfazza kifel\xe9 a l\xe1b\xe1t az emberrabl\xe1s sor\xe1n, \xe9s ir\xe1ny\xedtsa a mozg\xe1st. Lassan t\xe9rjen vissza. Tartsa a magj\xe1t stabilan.","H\xfazza a l\xe1b\xe1t a k\xf6z\xe9ppont fel\xe9 az addukci\xf3ban, \xe9s ir\xe1ny\xedtsa a mozg\xe1st. Lassan t\xe9rjen vissza. Tartsa a magj\xe1t stabilan.","\xd6sszeh\xfazza a has\xe1t a gyakorlat sor\xe1n. Az excentrikus f\xe1zis szab\xe1lyoz\xe1sa.","Ne ny\xfajtsa t\xfal a karj\xe1t a nyit\xe1si szakaszban. \xd6sszpontos\xedtson a mellkas \xf6sszeh\xfaz\xf3d\xe1s\xe1ra.","Ne hagyja, hogy a h\xe1ta \xedvben \xedveljen. Kezdje r\xe9szleges k\xf6zz\xe9t\xe9tellel.","Ne hagyja, hogy a cs\xedp\u0151je leereszkedjen. H\xfazza vissza a lapock\xe1it.","Ne emelje fel a cs\xedp\u0151j\xe9t. Tartsa az \xf6sszeh\xfaz\xf3d\xe1st a tetej\xe9n egy m\xe1sodpercig.","Ne z\xe1rja ki a t\xe9rd\xe9t. A platformon magasabban l\xe9v\u0151 l\xe1bak jobban \xe9rintik a farizmokat.","Ne h\xfazza a nyak\xe1t. F\xf3kusz\xe1ljon a hasi \xf6sszeh\xfaz\xf3d\xe1sra.","Ne emelje a karj\xe1t v\xe1llmagass\xe1g f\xf6l\xe9. Forgassa kiss\xe9 lefel\xe9 a csukl\xf3j\xe1t (mintha vizet \xf6nt\xf6tt volna), hogy elszigetelje az oldals\xf3 deltoidot.","Ne emelje fel a cs\xedp\u0151j\xe9t. Tartsa a v\xe1ll\xe1t a csukl\xf3j\xe1n.","Soha ne kerek\xedtse a h\xe1t\xe1t. H\xfaz\xe1s el\u0151tt kapcsolja be a magot.","Ne kerek\xedtse a h\xe1t\xe1t. Az excentrikus f\xe1zis szab\xe1lyoz\xe1sa.","Ne kerek\xedtse a h\xe1t\xe1t. Ir\xe1ny\xedtsd a ny\xfajt\xe1si f\xe1zist.","Ne kerek\xedtse a h\xe1t\xe1t. Kezdje egy k\xf6nny\u0171 s\xfallyal.","Ne haszn\xe1ljon testleng\xe9st. F\xf3kusz\xe1ljon a gluteus medius izol\xe1l\xe1s\xe1ra.","Ne haszn\xe1ljon lend\xfcletet. Koncentr\xe1ljon az adduktorok izol\xe1l\xe1s\xe1ra.","Ne haszn\xe1ljon lend\xfcletet. \xd6sszpontos\xedtson az \xf6sszeh\xfaz\xf3d\xe1sra.","A s\xfalyz\xf3k nagyobb mozg\xe1startom\xe1nyt tesznek lehet\u0151v\xe9. Tartsa a lapock\xe1it beh\xfazva a mozg\xe1s sor\xe1n.","A l\xe1b sz\xe9lesebb, mint a v\xe1ll sz\xe9less\xe9ge, a l\xe1bujjak kifel\xe9 mutatnak. Engedje le a s\xfalyz\xf3t bels\u0151 markolattal megfogva. Nyomja meg a l\xe1b\xe1val \xe9s ny\xfajtsa ki a cs\xedp\u0151j\xe9t, mik\xf6zben a h\xe1t\xe1t egyenesen tartja.","Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, hogy a s\xfalyt a v\xe1llai fel\xe9 vigye. Lassan engedje le.","Teljesen ny\xfajtsd ki a karjaidat a koncentrikus f\xe1zisban. Lassan t\xe9rjen vissza a kiindul\xf3 helyzetbe a mozg\xe1s ir\xe1ny\xedt\xe1s\xe1val.","Fogja meg a rudat pron\xe1lt markolattal a v\xe1ll sz\xe9less\xe9g\xe9ben. Kiny\xfajtott karokkal kezdve h\xfazza felfel\xe9 a test\xe9t, am\xedg az \xe1lla meg nem engedi a rudat. Lassan ereszkedj vissza a kiindul\xe1si helyzetbe.","Fogja meg a rudat szupin\xe1lt markolattal (teny\xe9rrel maga fel\xe9) a v\xe1ll sz\xe9less\xe9g\xe9ben. Kiny\xfajtott karokkal kezdve h\xfazza felfel\xe9 a test\xe9t, am\xedg az \xe1lla meg nem engedi a rudat. Lassan engedje le.","Fogja meg a p\xe1rhuzamos rudakat ny\xfajtott karokkal. Enyh\xe9n el\u0151re d\u0151lve \xe9s a k\xf6ny\xf6k\xe9t hajl\xedtva engedje le test\xe9t. Nyomja felfel\xe9, visszat\xe9rve a kiindul\xe1si helyzetbe.","A r\xfadr\xf3l l\xf3gva vagy fekve emelje fel a l\xe1b\xe1t a mozg\xe1s ir\xe1ny\xedt\xe1s\xe1val. Lassan engedje le.","A magas k\xf6ny\xf6k\xf6k megakad\xe1lyozz\xe1k a s\xfalyz\xf3 elcs\xfasz\xe1s\xe1t. Jelent\u0151s csukl\xf3- \xe9s bokamozg\xe1st ig\xe9nyel.","Tartsa az \xf6sszeh\xfaz\xf3d\xe1st a tetej\xe9n egy m\xe1sodpercig. Ker\xfclje a lend\xfcletet.","Tartsa az \xf6sszeh\xfaz\xf3d\xe1st a tetej\xe9n egy m\xe1sodpercig. Tartsa az \xe1ll\xe1t a mellkasa fel\xe9.","Tartsa az \xf6sszeh\xfaz\xf3d\xe1st a tetej\xe9n. Ker\xfclje a h\xe1ttal val\xf3 kompenz\xe1l\xe1st.","Fogja meg a k\xf6t\xe9l v\xe9geit az oldalain. Forgassa el a k\xf6telet a feje f\xf6l\xf6tt, \xe9s ugorjon, ahogy elhalad a l\xe1ba alatt.","Hanyatt fekv\u0151 helyzetben az alkaron \xe9s a l\xe1bujjakon t\xe1maszkodva. A tested egyenes vonalat alkot a fejt\u0151l a sark\xe1ig. Tartsa \xf6ssze a mag \xf6sszeh\xfaz\xe1s\xe1val.","Hanyatt fekv\xe9sben, kezekkel v\xe1llsz\xe9less\xe9gben. Engedje le a mellkas\xe1t a padl\xf3 fel\xe9 a k\xf6ny\xf6k\xf6k hajl\xedt\xe1s\xe1val. Nyomja felfel\xe9, visszat\xe9rve a kiindul\xe1si helyzetbe, mik\xf6zben a test\xe9t egyenes vonalban tartja.","Push-up helyzetben. Felv\xe1ltva h\xfazza gyorsan a t\xe9rd\xe9t a mellkasa fel\xe9, mik\xf6zben a cs\xedp\u0151j\xe9t alacsonyan tartja.","Osztott \xe1ll\xe1sban. Engedje le test\xe9t az el\xfcls\u0151 t\xe9rd hajl\xedt\xe1s\xe1val. Nyomja felfel\xe9, visszat\xe9rve a kiindul\xe1si helyzetbe.","Tartsa az ellenkez\u0151 l\xe1bfejet teljesen a padl\xf3n. A t\xf6rzs f\xfcgg\u0151legesen.","Tartsa a felkarj\xe1t p\xe1rhuzamosan a padl\xf3val. Ker\xfclje a lend\xfcletet.","Tartsa egyenesen a karj\xe1t. Koncentr\xe1lj a lat kontrakci\xf3ra.","Tartsa laposan a h\xe1t\xe1t, \xe9s r\xf6gz\xedtse a magj\xe1t. Ker\xfclje a t\xf6rzs kileng\xe9s\xe9t.","Tartsa a h\xe1t\xe1t semleges helyzetben. H\xfazza a dereka vagy a mellkasa fel\xe9. A mozg\xe1s v\xe9g\xe9n h\xfazza \xf6ssze a h\xe1tizmokat.","Tartsa a h\xe1t\xe1t p\xe1rhuzamosan a padl\xf3val. A mozg\xe1s v\xe9g\xe9n forgassa el kiss\xe9 a t\xf6rzs\xe9t.","Tartsa a mellkas\xe1t felfel\xe9, a t\xe9rd\xe9t pedig a l\xe1bujjakkal egy vonalban. Ne hagyja, hogy a t\xe9rd befel\xe9 omoljon.","Tartsa a magj\xe1t r\xf6gz\xedtve, a h\xe1t\xe1t pedig egyenesen. Ker\xfclje az \xe1gy\xe9ki gerinc t\xfalny\xfal\xe1s\xe1t.","Tartsa r\xf6gz\xedtve a magj\xe1t, hogy megv\xe9dje a h\xe1t\xe1t. Ker\xfclje az \xe1gy\xe9ki gerinc t\xfalny\xfal\xe1s\xe1t.","Tartsa lek\xf6tve a magj\xe1t. A sebess\xe9get edzetts\xe9gi szintj\xe9hez igaz\xedtsa.","Tartsa lek\xf6tve a magj\xe1t. Ker\xfclje a gerinc t\xfalny\xfal\xe1s\xe1t.","Tartsa a k\xf6ny\xf6k\xe9t v\xe1llmagass\xe1gban vagy kiss\xe9 magasabban. Elengedhetetlen a rot\xe1tor mandzsetta eg\xe9szs\xe9g\xe9hez.","Tartsa a k\xf6ny\xf6k\xe9t k\xf6zel a test\xe9hez. Ker\xfclje a k\xf6ny\xf6k\xf6k kisz\xe9lesed\xe9s\xe9t.","K\xf6ny\xf6k\xe9t tartsa r\xf6gz\xedtve az oldalain. A semleges markolat kiemeli a brachioradialis a bicepsz felett.","A k\xf6ny\xf6k\xe9t tartsa r\xf6gz\xedtve a mennyezet fel\xe9. Ir\xe1ny\xedtsd a s\xfcllyed\xe9st.","K\xf6ny\xf6k\xe9t tartsa r\xf6gz\xedtve a mozg\xe1s sor\xe1n. \xd6sszpontos\xedtson a teljes \xf6sszeh\xfaz\xf3d\xe1sra a tetej\xe9n.","Tartsa r\xf6gz\xedtve a k\xf6ny\xf6k\xe9t. Ne haszn\xe1ljon lend\xfcletet.","Tartsa r\xf6gz\xedtve a k\xf6ny\xf6k\xe9t. \xd6sszpontos\xedtson a teljes \xf6sszeh\xfaz\xf3d\xe1sra.","Tartsa r\xf6gz\xedtve a k\xf6ny\xf6k\xe9t. \xd6sszpontos\xedtson a teljes kiterjeszt\xe9sre.","Tartsa a k\xf6ny\xf6k\xe9t a mennyezet fel\xe9, \xe9s k\xf6zel a fej\xe9hez. A hossz\xfa fej maxim\xe1lisan aktiv\xe1l\xf3dik ny\xfajtott helyzetben.","Tartsa az el\xfcls\u0151 t\xe9rd\xe9t egy vonalban a l\xe1bujjaival. Kijav\xedtja a l\xe1bak k\xf6z\xf6tti izmok egyens\xfalyhi\xe1ny\xe1t.","Tartsa a sark\xe1t a padl\xf3n. Hajl\xedtsa be a t\xe9rd\xe9t a talp ny\xfajt\xe1s\xe1hoz.","Tartsa a cs\xedp\u0151j\xe9t egy vonalban. Ker\xfclje el, hogy leereszkedjenek.","Tartsa alacsonyan az ugr\xe1sait. A k\xf6t\xe9l forgat\xe1s\xe1hoz haszn\xe1lja a csukl\xf3j\xe1t, ne a karj\xe1t.","Tartsa a t\xe9rd\xe9t a padl\xf3 fel\xe9. Ker\xfclje a h\xe1t t\xfalzott megny\xfajt\xe1s\xe1t.","Tartsa a t\xe9rd\xe9t a l\xe1bujjakkal egy vonalban. A l\xe1b helyzete megv\xe1ltoztatja a legink\xe1bb \xe9rintett izmot.","Tartsa a t\xe9rd\xe9t a l\xe1bujjakkal egy vonalban. A szum\xf3\xe1ll\xe1s cs\xf6kkenti a s\xfalyz\xf3 \xfatj\xe1t.","Tartsa v\xedzszintesen a medenc\xe9j\xe9t. Kezdje egy k\xf6nny\u0171 s\xfallyal.","Tartsa a lapock\xe1it beh\xfazva. Ir\xe1ny\xedtsa az ereszked\xe9st legal\xe1bb 2 m\xe1sodpercig.","Tartsa nyugodtan a v\xe1ll\xe1t. Igaz\xedtsa a temp\xf3t a k\xedv\xe1nt intenzit\xe1shoz.","Tartsa a t\xf6rzs\xe9t stabilan, elker\xfclve a kileng\xe9st. Ir\xe1ny\xedtsd a s\xfcllyed\xe9st.","Tartsa a t\xf6rzs\xe9t f\xfcgg\u0151legesen, \xe9s a t\xf6rzset r\xf6gz\xedtse. Ker\xfclje el, hogy az el\xfcls\u0151 t\xe9rd t\xfall\xe9pjen a l\xe1bujjain.","Tartsa f\xfcgg\u0151legesen a t\xf6rzs\xe9t a tricepsz izol\xe1l\xe1s\xe1hoz. Min\xe9l lejjebb m\xe9sz, ann\xe1l nagyobb a mellkasi k\xf6t\u0151d\xe9s.","Tartsa a csukl\xf3it semleges helyzetben. A ford\xedtott g\xf6nd\xf6r\xedt\xe9s er\u0151s\xedti az alkar izmait.","T\xe9rdel\xe9s a ker\xe9kkel el\xf6l. Forgassa el\u0151re a kereket, \xe9s engedje le test\xe9t a padl\xf3 fel\xe9. H\xfazza vissza a kereket a t\xe9rd\xe9hez.","Az el\u0151rehajl\xe1s n\xf6veli a mellkasi terhel\xe9st. A f\xfcgg\u0151leges helyzet elszigeteli a tricepszt.","Fek\xfcdj le hajl\xedtott t\xe9rddel. H\xfazza a v\xe1ll\xe1t a t\xe9rd fel\xe9, \xf6sszeh\xfazva a has\xe1t. Lassan engedje le.","Fek\xfcdj fel emelt l\xe1bakkal. H\xfazza a t\xe9rd\xe9t a mellkasa fel\xe9, \xe9s emelje fel a medenc\xe9j\xe9t. Lassan t\xe9rjen vissza.","Fek\xfcdj\xf6n arccal lefel\xe9 a g\xe9pen, p\xe1rn\xe1kkal a bok\xe1n. Hajl\xedtsa meg a t\xe9rd\xe9t, hogy a sark\xe1t a fen\xe9k fel\xe9 ford\xedtsa. Lassan engedje le.","Fek\xfcdj a padon, mindk\xe9t kez\xe9ben egy-egy s\xfalyz\xf3val. Engedje le a s\xfalyz\xf3kat a mellkasa fel\xe9, \xe9s tartsa stabilan a csukl\xf3j\xe1t. Er\u0151sen nyomja felfel\xe9, \xe9s t\xe9rjen vissza a kiindul\xe1si helyzetbe.","Fek\xfcdj a padon, mindk\xe9t kez\xe9ben egy-egy s\xfalyz\xf3val. Enyhe k\xf6ny\xf6khajl\xedt\xe1ssal engedje le a karj\xe1t oldalir\xe1nyban. H\xfazza felfel\xe9 a s\xfalyz\xf3kat \xedvben, mintha egy f\xe1t \xf6lelne \xe1t. Lassan t\xe9rjen vissza.","Fek\xfcdj a padon v\xe1llsz\xe9less\xe9g\u0171 markolattal. Engedje le a s\xfalyz\xf3t \xfagy, hogy k\xf6ny\xf6ke k\xf6zel legyen a t\xf6rzs\xe9hez. Nyomd felfel\xe9 a tricepszedet.","Fek\xfcdj a padon \xfagy, hogy a munkaeszk\xf6z a mellkasa felett legyen, kiny\xfajtott karokkal. Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, \xe9s cs\xf6kkentse a s\xfalyt a homloka fel\xe9. Hosszabb\xedtsa meg a poz\xedci\xf3ba val\xf3 visszat\xe9r\xe9st.","Fek\xfcdj a padon \xfagy, hogy a munkaeszk\xf6z a mellkasa felett legyen, a karokat majdnem kiny\xfajtva. Engedje le a s\xfalyt a feje m\xf6g\xe9, mik\xf6zben k\xf6ny\xf6k\xe9t kiss\xe9 behajl\xedtotta. Egy \xedvben t\xe9rj\xfcnk vissza a kiindul\xf3 helyzetbe.","Fek\xfcdj a padon \xfagy, hogy a l\xe1bad a padl\xf3n legyen. Fogja meg a s\xfalyz\xf3t a v\xe1llsz\xe9less\xe9gn\xe9l sz\xe9lesebben. Engedje le a s\xfalyz\xf3t a mellkas\xe1hoz, k\xf6ny\xf6k\xe9t k\xf6r\xfclbel\xfcl 45 fokos sz\xf6gben tartva. Er\u0151sen nyomja felfel\xe9.","Fek\xfcdj a zuhan\xf3padon r\xf6gz\xedtett l\xe1bbal. Fogja meg a munkag\xe9pet a v\xe1llsz\xe9less\xe9gn\xe9l sz\xe9lesebben. Lejjebb a mellkas als\xf3 r\xe9sz\xe9ig. Er\u0151sen nyomja vissza a kiindul\xe1si helyzetbe.","Fek\xfcdj a ferde t\xe1maszt\xe9kra \xfagy, hogy a s\xfalyok l\xf3gnak. H\xfazza a t\xf6rzse fel\xe9, \xf6sszeh\xfazza a latt. Lassan engedje le.","Engedj le guggol\xe1sba, majd robban\xe1sszer\u0171en ugorj felfel\xe9. T\xe9rd hajl\xedt\xe1s\xe1val l\xe1gyan landolj.","Engedjen le guggol\xe1sba, tegye a kez\xe9t a padl\xf3ra, \xe9s ugorja a l\xe1b\xe1t fekv\u0151t\xe1masz helyzetbe. V\xe9gezzen fekv\u0151t\xe1maszt, ugorja a l\xe1b\xe1t a kezeihez, majd ugorjon fel karokkal a feje f\xf6l\xf6tt.","Tartson \xe1lland\xf3 temp\xf3t. Helyes testtart\xe1s a gyakorlat sor\xe1n.","Tartson egyenes testtart\xe1st, enyh\xe9n el\u0151re d\u0151lve. V\xe1ltott l\xe9p\xe9sek egyenletes \xfctemben. L\xe9p\xe9s k\xf6zep\xe9n sz\xe1lljon le a l\xe1b\xe1val.","Tartsa ugyanazt a k\xf6ny\xf6khajl\xedt\xe1st a mozg\xe1s sor\xe1n. \xd6sszpontos\xedtson a mellkas \xf6sszeh\xfaz\xf3d\xe1s\xe1ra a mozg\xe1s v\xe9g\xe9n.","Tartsa ugyanazt a k\xf6ny\xf6khajl\xedt\xe1st. Ir\xe1ny\xedtsd az ereszked\xe9st 2 m\xe1sodpercig.","Tartsa meg az enyhe k\xf6ny\xf6khajl\xedt\xe1st. A pul\xf3ver azon kev\xe9s gyakorlatok egyike, amelyek ny\xfajtj\xe1k a latot.","M\xe9rs\xe9kelt fesz\xfclts\xe9g, soha nem f\xe1j. Ny\xfajt\xe1s k\xf6zben l\xe9legezzen ki.","K\xe9zen \xe9s t\xe9rden, vagy a k\xe1beln\xe9l \xe1llva. Ny\xfajtsa ki a l\xe1b\xe1t h\xe1trafel\xe9 a farizmot szor\xedtva. Lassan t\xe9rjen vissza.","Az oldaladon az alkarodra t\xe1maszkodva, a tested egyenes vonalban. Emelje fel a cs\xedp\u0151j\xe9t a poz\xedci\xf3 megtart\xe1s\xe1val.","A ped\xe1l egyenletes temp\xf3t tart fenn. Tartsa a h\xe1t\xe1t semleges helyzetben.","Hajtsa v\xe9gre az emel\xe9si f\xe1zist szupin\xe1lt markolattal. Forgassa a csukl\xf3it pron\xe1ci\xf3ig a tetej\xe9n. Lejjebb pron\xe1lt markolattal. T\xe9rjen vissza a supin\xe1lt alj\xe1ra.","V\xe9gezze el a mozg\xe1st mind az excentrikus, mind a koncentrikus f\xe1zis vez\xe9rl\xe9s\xe9vel. Tartsa lek\xf6tve a magj\xe1t.","V\xe9gezze el a mozg\xe1st mind az excentrikus, mind a koncentrikus f\xe1zis vez\xe9rl\xe9s\xe9vel. Tartsa a lapock\xe1it beh\xfazva.","Hajtsa v\xe9gre a mozg\xe1st robban\xe1sszer\u0171en felfel\xe9 vagy el\u0151re. T\xe9rd hajl\xedt\xe1s\xe1val l\xe1gyan landolj. Ir\xe1ny\xedtsd a lesz\xe1ll\xe1st.","Lassan hajtsa v\xe9gre a mozg\xe1st mindk\xe9t f\xe1zisban. Az alj\xe1n l\xe9v\u0151 sz\xfcnet n\xf6veli a v\xe1dli ny\xfajt\xe1s\xe1t.","Foly\xe9konyan \xe9s folyamatosan v\xe9gezze a forgat\xe1st. Az Arnold press egyike azon kev\xe9s gyakorlatoknak, amelyek az \xf6sszes izomrostot lek\xf6tik.","Helyezze a kez\xe9t gy\xe9m\xe1nt alakban a mellkasa al\xe1. Engedje le a test\xe9t \xfagy, hogy a k\xf6ny\xf6ke k\xf6zel legyen a t\xf6rzs\xe9hez. Nyomd felfel\xe9 a tricepszedet.","Helyezze mag\xe1t a hack guggol\xf3 g\xe9pbe \xfagy, hogy v\xe1llai a p\xe1rn\xe1k alatt legyenek. T\xe9rd 90 fokos behajl\xedt\xe1s\xe1val ereszkedj le, majd nyomd felfel\xe9.","F\u0151leg l\xe1bbal nyomja a megemelt fel\xfcleten. Tartsa f\xfcgg\u0151legesen a t\xf6rzs\xe9t.","L\xe1baival nyomd, majd d\xf6ntsd h\xe1tra a t\xf6rzsed, v\xe9g\xfcl h\xfazd a hasad fel\xe9 az evez\u0151t. Ford\xedtsa meg a sorrendet a visszak\xfcld\xe9skor.","Kiv\xe1l\xf3 v\xe1ll-, cs\xedp\u0151- \xe9s bokamozg\xe1st ig\xe9nyel. Kezdje s\xfaly n\xe9lk\xfcl.","H\xfazza vissza a lapock\xe1it, \xe9s tartsa z\xe1rva. Ne verje le a s\xfalyt a mellkas\xe1r\xf3l.","H\xfazza vissza a lapock\xe1it, hogy stabiliz\xe1lja a v\xe1ll\xe1t.","Forgasd a der\xe9kt\xf3l, ne csak a karokt\xf3l.","Forgassa el a t\xf6rzs\xe9t \xfagy, hogy az egyik k\xf6ny\xf6k\xe9t az ellenkez\u0151 t\xe9rd fel\xe9 tolja. Ism\xe9telje meg a m\xe1sik oldalr\xf3l.","Forgassa kifel\xe9 a csukl\xf3j\xe1t a tetej\xe9n, hogy maximaliz\xe1lja a cs\xfacsot. Tartsa stabilan t\xf6rzs\xe9t.","S\xfalyz\xf3kkal \xfclve v\xe1llmagass\xe1gban, teny\xe9rrel \xd6n fel\xe9. Nyomja felfel\xe9 a csukl\xf3j\xe1t kifel\xe9 forgatva, am\xedg a tenyere el\u0151re n\xe9z. Engedje vissza a kiindul\xe1si helyzetbe.","\xdclj\xf6n \xfagy, hogy a k\xf6ny\xf6ke a bels\u0151 combj\xe1n nyugszik. Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, \xe9s h\xfazza a s\xfalyz\xf3t a v\xe1ll\xe1hoz. Lassan engedje le.","\xdclj\xf6n felemelt l\xe1bbal, a t\xf6rzs pedig 45 fokban legyen. Forgassa el a t\xf6rzs\xe9t egyik oldalr\xf3l a m\xe1sikra \xfagy, hogy a kez\xe9t a cs\xedp\u0151je mellett a padl\xf3ra helyezze.","Sorrend: h\xfaz\xe1s k\xf6zben l\xe1bak, majd t\xf6rzs, majd karok.","\xdclj\xf6n a lat leh\xfaz\xf3 g\xe9phez, \xe9s sz\xe9les pron\xe1s markolattal fogja meg a rudat. H\xfazza a rudat a mellkasa fel\xe9, enyh\xe9n h\xe1trad\xf6ntve a t\xf6rzs\xe9t. Ir\xe1ny\xedtsd a kiindul\xf3 helyzetbe val\xf3 visszat\xe9r\xe9st.","\xdclj\xf6n a lat leh\xfaz\xf3 g\xe9phez szoros vagy semleges markolattal. H\xfazza a rudat a mellkasa fel\xe9 \xfagy, hogy k\xf6ny\xf6k\xe9t a test\xe9hez k\xf6zel tartva. Ir\xe1ny\xedtsd a visszat\xe9r\xe9st.","\xdclj\xf6n az alacsony k\xe1beln\xe9l \xfagy, hogy a l\xe1ba a t\xe1maszt\xe9kokon legyen. H\xfazza a foganty\xfat a dereka fel\xe9, \xe9s tartsa egyenesen a h\xe1t\xe1t. H\xfazza \xf6ssze a h\xe1tizmokat, \xe9s lassan t\xe9rjen vissza.","\xdclj\xf6n a g\xe9phez p\xe1rn\xe1kkal a bok\xe1n. Ny\xfajtsa ki a l\xe1b\xe1t felfel\xe9, \xf6sszeh\xfazva a n\xe9gyfej\u0171 izm\xe1t. Lassan engedje le.","\xdclj\xf6n a g\xe9phez p\xe1rn\xe1kkal a bok\xe1n. Hajl\xedtsa meg a t\xe9rd\xe9t, hogy a sark\xe1t a fen\xe9k fel\xe9 ford\xedtsa. Lassan engedje le.","\xdclj le a pr\xe9dik\xe1torpadra, \xe9s tedd a karjaidat a p\xe1rn\xe1n. Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, hogy a munkaeszk\xf6zt a v\xe1llai fel\xe9 tolja. Lassan engedje le majdnem teljes kiny\xfal\xe1sig.","\xdclj\xf6n be a g\xe9pbe \xfagy, hogy a h\xe1t\xe1t a p\xe1rn\xe1nak t\xe1masztja. Helyezze a k\xf6ny\xf6k\xe9t a p\xe1rn\xe1kra. Hozd a karjaidat a k\xf6z\xe9ppont fel\xe9, \xf6sszeh\xfazva a mellkasodat. Lassan t\xe9rjen vissza a kiindul\xf3 helyzetbe.","\xdclj\xf6n be a g\xe9pbe \xfagy, hogy a l\xe1ba a platformon cs\xedp\u0151 sz\xe9less\xe9gben legyen. Engedje le t\xe9rd\xe9nek 90 fokos hajl\xedt\xe1s\xe1val. L\xe1baid kiny\xfajt\xe1s\xe1val nyomd.","\xdclj\xf6n le a lejt\u0151s padra \xfagy, hogy a l\xe1ba a padl\xf3n legyen. Fogja meg a munkag\xe9pet a v\xe1llsz\xe9less\xe9gn\xe9l sz\xe9lesebben. Lejjebb a mellkas fels\u0151 szintj\xe9re. Er\u0151sen nyomja vissza a kiindul\xe1si helyzetbe.","\xdclj\xf6n az alkarj\xe1val a combj\xe1n. Fogja meg a munkaeszk\xf6zt szupin\xe1lt markolattal. Hajl\xedtsa fel a csukl\xf3j\xe1t, \xe9s lassan engedje le.","Fesz\xedtse sz\xe9t a k\xf6telet alul, hogy maximaliz\xe1lja az \xf6sszeh\xfaz\xf3d\xe1st. Tartsa r\xf6gz\xedtve a k\xf6ny\xf6k\xe9t.","\xc1lljon a k\xe1bel k\xf6zep\xe9n, k\xe9zenk\xe9nt egy foganty\xfaval. Tartsa a karj\xe1t kiss\xe9 behajl\xedtva. Vidd a kezeid a k\xf6z\xe9ppont fel\xe9, keresztezve \u0151ket. Lassan t\xe9rjen vissza a kiindul\xf3 helyzetbe.","A magas k\xe1beln\xe9l \xe1llva a k\xf6t\xe9llel. A k\xf6ny\xf6k\xe9t tartsa r\xf6gz\xedtve a t\xf6rzs oldal\xe1n. Nyomja le a k\xf6telet a v\xe9geit elv\xe1lasztva. Lassan t\xe9rjen vissza.","A magas k\xe1beln\xe9l \xe1llva. A k\xf6ny\xf6k\xe9t tartsa r\xf6gz\xedtve a t\xf6rzs oldal\xe1n. Nyomja lefel\xe9 teljesen kiny\xfajtva a karj\xe1t. Lassan t\xe9rjen vissza.","Szinte kiny\xfajtott karokkal \xe1llva a magas k\xe1bellel szemben. H\xfazza a rudat a combja fel\xe9 \xedvben, \xe9s tartsa egyenesen a karj\xe1t. Lassan t\xe9rjen vissza a kiindul\xf3 helyzetbe.","Egy pad el\u0151tt \xe1llva. Helyezze az egyik l\xe1b\xe1t a megemelt fel\xfcletre, \xe9s nyomja felfel\xe9. Lassan engedje le a mozg\xe1st ir\xe1ny\xedtva.","Egy l\xe1bon \xe1llva. Engedje le a t\xf6rzs\xe9t el\u0151re \xfagy, hogy a h\xe1ta egyenes maradjon, mik\xf6zben a szabad l\xe1b h\xe1trany\xfalik. T\xe9rjen vissza f\xfcgg\u0151leges helyzetbe, \xe9s szor\xedtsa \xf6ssze a fen\xe9kj\xe9t.","\xc1llva vagy \xfclve a munkaeszk\xf6zzel v\xe1llmagass\xe1gban. Nyomja felfel\xe9 teljesen kiny\xfajtva a karj\xe1t. Lassan ereszkedjen le, \xe9s t\xe9rjen vissza a kiindul\xe1si helyzetbe, a s\xfaly v\xe1llmagass\xe1gban legyen.","\xc1llva vagy \xfclve a munkaeszk\xf6zzel v\xe1llmagass\xe1gban. Nyomja felfel\xe9 teljesen kiny\xfajtva a karj\xe1t. Lassan engedje le.","\xc1llva vagy \xfclve a munkaeszk\xf6z feje f\xf6l\xf6tt, kiny\xfajtott karokkal. Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, cs\xf6kkentve a s\xfalyt a feje m\xf6g\xf6tt. Hosszabb\xedtsa meg a visszat\xe9r\xe9st.","\xc1llj egy-egy s\xfalyz\xf3val mindk\xe9t kezedben az oldaladon. Emelje fel karjait oldalir\xe1nyban v\xe1llmagass\xe1gig, k\xf6ny\xf6k\xe9t enyh\xe9n behajl\xedtva. Lassan engedje le.","\xc1llj s\xfallyal mindk\xe9t kezedben az oldaladon. Emelje fel a v\xe1ll\xe1t a f\xfcle fel\xe9, \xe9s szor\xedtsa \xf6ssze a csapd\xe1it. Tartsa az \xf6sszeh\xfaz\xf3d\xe1st egy m\xe1sodpercig, majd lassan engedje le.","S\xfalyz\xf3kkal az oldaladon \xe1llva, semleges markolattal (h\xfcvelykujj felfel\xe9). Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t \xfagy, hogy a s\xfalyz\xf3kat a v\xe1llad fel\xe9 vigye. Lassan engedje le.","\xc1ll\xf3 l\xe1bbal cs\xedp\u0151 sz\xe9less\xe9gben. A cs\xedp\u0151n\xe9l csukd \xf6ssze a s\xfalyt a l\xe1baid k\xf6z\xf6tt, majd robban\xe1sszer\u0171en hajtsd el\u0151re a cs\xedp\u0151det, lend\xedtsd a s\xfalyt v\xe1llmagass\xe1gig.","\xc1ll\xf3 l\xe1bbal cs\xedp\u0151 sz\xe9less\xe9gben. Engedje le a s\xfalyz\xf3t a l\xe1bai ment\xe9n \xfagy, hogy a t\xe9rd\xe9t enyh\xe9n behajl\xedtva \xe9s a h\xe1t\xe1t egyenesen tartva. Emelkedj le, am\xedg fesz\xfclts\xe9get nem \xe9rzel a combhajl\xedt\xf3 izomzatban, majd t\xe9rj vissza.","\xc1ll\xf3 l\xe1bbal cs\xedp\u0151 sz\xe9less\xe9gben. Engedje le egyenes h\xe1ttal \xe9s felfel\xe9 mellkassal. Nyomja a l\xe1b\xe1t a talajba, \xe9s egyszerre ny\xfajtsa ki a cs\xedp\u0151t \xe9s a t\xe9rd\xe9t \xfagy, hogy a rudat k\xf6zel tartsa a l\xe1b\xe1hoz.","\xc1llva v\xe1ll sz\xe9less\xe9gben l\xe1bbal, tartson egy s\xfalyz\xf3t a mellkasa el\u0151tt. A mellkas\xe1t felfel\xe9 tartva ereszkedjen le. T\xe9rj vissza a sarkadon kereszt\xfcl.","\xc1ll\xf3 l\xe1bbal v\xe1llsz\xe9less\xe9gben. Engedje le test\xe9t t\xe9rd\xe9nek \xe9s cs\xedp\u0151j\xe9nek hajl\xedt\xe1s\xe1val, mintha egy sz\xe9ken \xfclne. Emelkedj le, am\xedg a combod p\xe1rhuzamos nem lesz a padl\xf3val. Push through your heels.","Egy\xfctt l\xe1bbal \xe1llva. Tegyen egy sz\xe9les oldals\xf3 l\xe9p\xe9st az ellenkez\u0151 l\xe1bfej r\xf6gz\xedt\xe9s\xe9vel. Engedje le az oldal fel\xe9 a t\xe9rd hajl\xedt\xe1s\xe1val.","\xc1lljon a s\xfalyz\xf3val a v\xe1ll\xe1n. D\xf6ntse el\u0151re a t\xf6rzs\xe9t, tartsa egyenesen a h\xe1t\xe1t \xe9s enyh\xe9n hajl\xedtva a t\xe9rd\xe9t. \xc9rezd a fesz\xedt\xe9st a combhajl\xedt\xf3idban. T\xe9rjen vissza f\xfcgg\u0151leges helyzetbe.","\xc1lljon a munkaeszk\xf6zzel a combja el\u0151tt, pron\xe1lt markolat seg\xedts\xe9g\xe9vel. H\xfazza az \xe1lla fel\xe9 \xfagy, hogy a k\xf6ny\xf6k\xe9t magasabban tartsa, mint a csukl\xf3j\xe1t. Lassan engedje le.","\xc1lljon a munkaeszk\xf6zzel a combja el\u0151tt. Emelje fel a karj\xe1t maga el\xe9 v\xe1llmagass\xe1gig, k\xf6ny\xf6k\xe9t enyh\xe9n behajl\xedtva. Lassan engedje le.","\xc1lljon a munkaeszk\xf6zzel egy kiny\xfajtott markolat seg\xedts\xe9g\xe9vel (teny\xe9r lefel\xe9 n\xe9z). Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, hogy a munkaeszk\xf6zt a v\xe1llai fel\xe9 tolja. Lassan engedje le.","\xc1ll\xe1s a munkaeszk\xf6zzel, h\xe1trad\u0151lt markolat seg\xedts\xe9g\xe9vel. Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, hogy a munkaeszk\xf6zt a v\xe1llai fel\xe9 mozd\xedtsa, mik\xf6zben k\xf6ny\xf6k\xe9t a t\xf6rzs oldalain r\xf6gz\xedtse. Lassan ereszkedjen le, visszat\xe9rve a kiindul\xe1si helyzetbe.","\xc1llva 45 fokos ferde t\xf6rzstel. Fogja meg a s\xfalyz\xf3t pron\xe1lt markolattal. H\xfazza a hasa fel\xe9 \xfagy, hogy a h\xe1ta semleges legyen. Lassan engedje le.","\xc1lljon \xfagy, hogy a sarka lev\xe1lt az emelv\xe9ny sz\xe9l\xe9r\u0151l. Emelkedj fel a l\xe1bujjaidra, \xe9s szor\xedtsd \xf6ssze a v\xe1dlit. Lassan engedje le, hogy a sarka a platform szintje al\xe1 s\xfcllyedjen.","Kezdje m\xe9rs\xe9kelt \xfctemben, \xe9s fokozatosan n\xf6velje.","Kezdje a lapock\xe1k visszah\xfaz\xe1s\xe1val. Az excentrikus f\xe1zis szab\xe1lyoz\xe1sa.","Kezdje a lapock\xe1k visszah\xfaz\xe1s\xe1val. Ne d\xf6ntse t\xfals\xe1gosan h\xe1tra a t\xf6rzs\xe9t.","Kezdje a mozg\xe1st a lapock\xe1k visszah\xfaz\xf3d\xe1s\xe1t\xf3l. Ker\xfclje a lend\xfclet haszn\xe1lat\xe1t.","Kezdje a mozg\xe1st a lapock\xe1k visszah\xfaz\xf3d\xe1s\xe1t\xf3l. Ir\xe1ny\xedtsd a hosszabb\xedt\xe1si f\xe1zist.","L\xe9pjen h\xe1tra, \xe9s engedje le a h\xe1ts\xf3 t\xe9rd\xe9t a padl\xf3 fel\xe9. Az el\xfcls\u0151 t\xe9rd egy vonalban marad a bok\xe1val.","L\xe9pjen el\u0151re, \xe9s engedje le a h\xe1ts\xf3 t\xe9rd\xe9t a padl\xf3 fel\xe9. Az el\xfcls\u0151 t\xe9rd egy vonalban marad a bok\xe1val. Nyomja vissza felfel\xe9.","L\xe9pjen el\u0151re, leengedve a h\xe1ts\xf3 t\xe9rd\xe9t. Folyamatosan l\xe9pkedjen el\u0151re v\xe1ltakoz\xf3 l\xe1bakkal.","L\xe9pjen be a csap\xf3r\xfadba. L\xe1bak cs\xedp\u0151 sz\xe9less\xe9gben. Egyenes h\xe1ttal ereszkedjen le a foganty\xfakn\xe1l fogva. Nyomd \xe1t a l\xe1baidat \xfagy, hogy egyszerre ny\xfajtsd ki a cs\xedp\u0151t \xe9s a t\xe9rdedet.","Tegyen hossz\xfa l\xe9p\xe9seket, hogy jobban lek\xf6sse a farizmokat.","A Zottman curl edzi az alkar hajl\xedt\xe1s\xe1t \xe9s ny\xfajt\xe1s\xe1t.","A r\xfadnak a mozg\xe1s sor\xe1n v\xe9gig kell legelnie a l\xe1b\xe1t. Az ereszked\xe9s sor\xe1n \xf6sszpontos\xedtson a combhajl\xedt\xf3 ny\xfajt\xe1sra.","Min\xe9l magasabb a fel\xfclet, ann\xe1l jobban m\u0171k\xf6dik a mellkas fels\u0151 r\xe9sze.","A lejt\u0151s pad kiemeli a mellkas fels\u0151 r\xe9sz\xe9t. Tartsa a lapock\xe1it beh\xfazva a mozg\xe1s sor\xe1n.","A ferde v\xe1ltozat k\xf6nnyebb, \xe9s a mellkas als\xf3 r\xe9sz\xe9t \xe9rinti.","Min\xe9l v\xedzszintesebb a tested, ann\xe1l kem\xe9nyebb. Mindig tartsa lek\xf6tve a magj\xe1t.","A mozg\xe1s a cs\xedp\u0151b\u0151l j\xf6n, nem a h\xe1tb\xf3l. Tartsa egyenesen a h\xe1t\xe1t a tol\xf3f\xe1zisban.","A pr\xe9dik\xe1tor pad kik\xfcsz\xf6b\xf6li a lend\xfclet haszn\xe1lat\xe1t. Ne hagyja, hogy a s\xfaly leessen az alj\xe1n.","A ford\xedtott kit\xf6r\xe9s biztons\xe1gosabb a t\xe9rd sz\xe1m\xe1ra, mint az el\u0151refel\xe9 t\xf6rt\xe9n\u0151 kit\xf6r\xe9s.","A forg\xe1s a der\xe9kb\xf3l j\xf6n, nem a fejb\u0151l.","Az \xfcl\u0151 l\xe1bhajl\xedt\xe1s n\xf6veli a mozg\xe1si tartom\xe1nyt. Ker\xfclje a farizmok felemel\xe9s\xe9t az \xfcl\xe9sr\u0151l.","A t\xe1mogat\xe1s megsz\xfcnteti az \xe1gy\xe9ki stresszt. Koncentr\xe1lj a visszah\xfaz\xe1sra.","A csap\xf3r\xfad cs\xf6kkenti a gerinc terhel\xe9s\xe9t. Tartsa a v\xe1ll\xe1t egy vonalban a foganty\xfakkal.","Az el\xfcls\u0151 s\xfaly seg\xedti a f\xfcgg\u0151leges testtart\xe1st. Tartsa a t\xe9rd\xe9t egy vonalban.","Haszn\xe1ljon k\xf6nny\u0171 s\xfalyt. Tartsa az alkarj\xe1t tov\xe1bbra is a combj\xe1n.","Egy k\xe9zzel \xe9s egy t\xe9rddel a padon. H\xfazza a s\xfalyz\xf3t az oldala fel\xe9 \xfagy, hogy a k\xf6ny\xf6k\xe9t k\xf6zel tartsa a test\xe9hez. Lassan engedje le.","A s\xfalyz\xf3val a feje f\xf6l\xf6tt ereszkedjen le egy guggol\xe1sba, \xe9s tartsa egyenesen \xe9s stabilan a karj\xe1t. T\xe9rjen vissza \xfagy, hogy a s\xfalyz\xf3t egyenesen tartsa.","Karjait el\u0151re a k\xe1beln\xe9l vagy s\xfalyz\xf3kkal h\xfazza az arca fel\xe9 a munkaeszk\xf6zt \xfagy, hogy k\xf6ny\xf6k\xe9t magasan tartsa. V\xe1lasszuk sz\xe9t a kez\xfcnket \xfagy, hogy az \xf6kl\xfcnket a f\xfcl\xfcnkh\xf6z k\xf6zel\xedts\xfck. Lassan t\xe9rjen vissza.","Ha a testet egy alacsony r\xfad al\xe1 d\xf6nti, akkor a markolatot pron\xe1lt markolattal. H\xfazza a mellkas\xe1t a r\xfadhoz, mik\xf6zben test\xe9t mereven tartja. Lassan engedje le.","L\xe1bait emelt fel\xfcletre helyezve engedje le a mellkas\xe1t a padl\xf3 fel\xe9. Nyomja felfel\xe9, visszat\xe9rve a kiindul\xe1si helyzetbe.","Kez\xe9vel emelt fel\xfcleten engedje le a mellkas\xe1t a kezei fel\xe9. Nyomja felfel\xe9, visszat\xe9rve a kiindul\xe1si helyzetbe.","Tartsa a kez\xe9t a pad sz\xe9l\xe9n, \xe9s l\xe9pjen el\u0151re fen\xe9kkel. Engedje le test\xe9t a k\xf6ny\xf6k\xe9t hajl\xedtva 90 fokra. Nyomja felfel\xe9.","D\xf6nt\xf6tt t\xf6rzs \xe9s 90 fokban hajl\xedtott k\xf6ny\xf6k mellett ny\xfajtsa ki a karj\xe1t h\xe1trafel\xe9 a teljes kiny\xfajt\xe1sig. Lassan t\xe9rjen vissza.","Fels\u0151 h\xe1t\xe1val egy padon, s\xfaly\xe1val a cs\xedp\u0151j\xe9n. Tolja felfel\xe9 a cs\xedp\u0151j\xe9t, \xe9s szor\xedtsa \xf6ssze a farizmokat. Lassan t\xe9rjen vissza.","Menjen a ny\xfajt\xf3 helyzetbe, \xe9s tartsa 20-30 m\xe1sodpercig.","L\xe9legezz m\xe9lyeket, \xe9s maradj k\xe9nyelmes tartom\xe1nyon bel\xfcl.","Tartson egyenletes ritmust \xe9s tartsa meg a helyes testtart\xe1st a mozg\xe1s sor\xe1n.","Tartsa akt\xedvan a magj\xe1t, \xe9s ir\xe1ny\xedtsa a mozg\xe1s minden f\xe1zis\xe1t.","Tartsa r\xf6gz\xedtve a k\xf6ny\xf6k\xe9t, \xe9s ir\xe1ny\xedtson minden ism\xe9tl\xe9st.","\xc1ll\xedtsa be a v\xe1ll\xe1t, ir\xe1ny\xedtsa a mozg\xe1st, \xe9s ker\xfclje a lend\xfclet haszn\xe1lat\xe1t.","Tartsa a t\xe9rd\xe9t egy vonalban, \xe9s ir\xe1ny\xedtsa mind a s\xfcllyeszt\xe9si, mind az emel\xe9si f\xe1zist.","Tartsa semleges h\xe1t\xe1t, r\xf6gz\xedtse a magj\xe1t, \xe9s ir\xe1ny\xedtsa a mozg\xe1st.","V\xe9gezze el a mozdulatot kontroll\xe1ltan, megfelel\u0151 testtart\xe1ssal \xe9s teljes mozg\xe1startom\xe1nyban."],t.w)
+B.ajN=new A.i(B.nr,["Execut\u0103 mi\u0219carea lent \u0219i controlat. Men\u021bine o postur\u0103 corect\u0103.","\xcencepe cu o greutate moderat\u0103 pentru a st\u0103p\xe2ni tehnica.","Respir\u0103 ad\xe2nc. Nu for\u021ba niciodat\u0103 peste limita ta natural\u0103.","Men\u021bine mu\u0219chii core angaja\u021bi pe tot parcursul exerci\u021biului. Controleaz\u0103 faza excentric\u0103.","Men\u021bine core-ul stabil pe tot parcursul exerci\u021biului.","Coboar\u0103 lent","coboar\u0103 lent","Respir\u0103 ad\xe2nc","Folose\u0219te amplitudinea complet\u0103 de mi\u0219care.","O prindere str\xe2ns\u0103 m\u0103re\u0219te aria de mi\u0219care. \xcencepe\u021bi de la retragere.","O prindere str\xe2ns\u0103 izoleaz\u0103 tricepsul. \u021aine-\u021bi corpul \xeen linie dreapt\u0103.","O prindere \xeen supina\u021bie cre\u0219te angajarea bicepsului. Evita\u021bi utilizarea impulsului.","Regla\u021bi scaunul: genunchii nu ar trebui s\u0103 se hiperextend\u0103.","Ateriza\u021bi \xeentotdeauna \xeencet. Nu v\u0103 bloca\u021bi genunchii.","Evita\u021bi impulsul. Concentra\u021bi-v\u0103 pe ridicarea pelvisului.","Evita\u021bi s\u0103 ridica\u021bi coatele peste \xeen\u0103l\u021bimea umerilor. O prindere mai larg\u0103 reduce riscul de impact.","Evita\u021bi s\u0103 v\u0103 roti\u021bi umerii. Concentra\u021bi-v\u0103 doar pe mi\u0219carea vertical\u0103.","Evita\u021bi s\u0103 v\u0103 balansa\u021bi trunchiul. Controla\u021bi ambele faze.","Mrean\u0103 pe partea din fa\u021b\u0103 a umerilor cu coatele \xeenalte. Cobor\xe2\u021bi \u021bin\xe2nd trunchiul c\xe2t mai vertical posibil. \xcempinge \xeenapoi \xeen sus.","Aduce\u021bi piciorul \xeentr-o pozi\u021bie de \xeentindere, \u021bin\xe2nd trunchiul drept. \u021aine\u021bi 20-30 de secunde.","Aduce\u021bi piciorul \xeentr-o pozi\u021bie de \xeentindere cu spatele drept. \u021aine\u021bi 20-30 de secunde, respir\xe2nd profund.","Aduce\u021bi piciorul \xeen exterior \xeen abduc\u021bie control\xe2nd mi\u0219carea. \xcentoarce-te \xeencet. P\u0103streaz\u0103-\u021bi miezul stabil.","Aduce\u021bi piciorul spre centru \xeen aduc\u021bie control\xe2nd mi\u0219carea. \xcentoarce-te \xeencet. P\u0103streaz\u0103-\u021bi miezul stabil.","Contracta\u021bi-v\u0103 abdomenul pe tot parcursul exerci\u021biului. Controla\u021bi faza excentric\u0103.","Nu v\u0103 hiperextinde\u021bi bra\u021bele \xeen timpul fazei de deschidere. Concentra\u021bi-v\u0103 pe contrac\u021bia pieptului.","Nu l\u0103sa\u021bi spatele s\u0103 se arcuiasc\u0103. \xcencepe\u021bi cu lans\u0103ri par\u021biale.","Nu l\u0103sa\u021bi \u0219oldurile s\u0103 se \xeencline \xeen jos. Retrage\u021bi omopla\u021bii.","Nu ridica\u021bi \u0219oldurile. \u021aine\u021bi contrac\u021bia \xeen partea de sus pentru o secund\u0103.","Nu bloca\u021bi genunchii \xeen extensie. Picioarele mai sus pe platform\u0103 angajeaz\u0103 mai mult fesierii.","Nu v\u0103 trage\u021bi de g\xe2t. Concentra\u021bi-v\u0103 pe contrac\u021bia abdominal\u0103.","Nu ridica\u021bi bra\u021bele peste \xeen\u0103l\u021bimea umerilor. Roti\u021bi \xeencheieturile u\u0219or \xeen jos (ca \u0219i c\xe2nd turna\u021bi ap\u0103) pentru a izola deltoidul lateral.","Nu ridica\u021bi \u0219oldurile. \u021aine-\u021bi umerii peste \xeencheieturile m\xe2inii.","Nu v\u0103 rotunji\u021bi spatele \xeen niciun moment. Angaja\u021bi-v\u0103 miezul \xeenainte de a trage.","Nu v\u0103 rotunji\u021bi spatele. Controla\u021bi faza excentric\u0103.","Nu v\u0103 rotunji\u021bi spatele. Controla\u021bi faza de \xeentindere.","Nu v\u0103 rotunji\u021bi spatele. \xcencepe\u021bi cu o greutate mic\u0103.","Nu utiliza\u021bi balansul corporal. Concentra\u021bi-v\u0103 pe izolarea gluteus medius.","Nu folosi impulsul. Concentra\u021bi-v\u0103 pe izolarea adductorilor.","Nu folosi impulsul. Concentra\u021bi-v\u0103 pe contrac\u021bie.","Ganterele permit o gam\u0103 mai mare de mi\u0219care. \u021aine\u021bi omopla\u021bii retracta\u021bi pe tot parcursul mi\u0219c\u0103rii.","Picioarele sunt mai late dec\xe2t l\u0103\u021bimea umerilor, cu degetele \xeendreptate spre exterior. \xcen jos, \u021bin\xe2nd mreana cu o prindere interioar\u0103. \xcempinge\u021bi cu picioarele \u0219i extinde\u021bi \u0219oldurile simultan, \u021bin\xe2nd spatele drept.","Flexeaz\u0103-\u021bi coatele aduc\xe2nd greutatea c\u0103tre umeri. Cobor\xe2\u021bi \xeencet.","\xcentinde\u021bi-v\u0103 complet bra\u021bele \xeen faza concentric\u0103. Reveni\u021bi \xeencet la pozi\u021bia de pornire control\xe2nd mi\u0219carea.","Prinde\u021bi bara cu o prindere pronat\u0103 la l\u0103\u021bimea umerilor. \xcencep\xe2nd cu bra\u021bele \xeentinse, trage\u021bi corpul \xeen sus p\xe2n\u0103 c\xe2nd b\u0103rbia elibereaz\u0103 bara. Cobor\xe2\u021bi \xeencet \xeenapoi la pozi\u021bia de pornire.","Prinde\u021bi bara cu o prindere supinat\u0103 (palmele \xeendreptate spre dvs.) la l\u0103\u021bimea umerilor. \xcencep\xe2nd cu bra\u021bele \xeentinse, trage\u021bi corpul \xeen sus p\xe2n\u0103 c\xe2nd b\u0103rbia elibereaz\u0103 bara. Cobor\xe2\u021bi \xeencet.","Prinde\u021bi barele paralele cu bra\u021bele \xeentinse. Cobor\xe2\u021bi corpul aplec\xe2ndu-v\u0103 u\u0219or \xeenainte \u0219i \xeendoind coatele. \xcempinge\u021bi \xeen sus revenind la pozi\u021bia de pornire.","At\xe2rnat de bar\u0103 sau culcat, ridic\u0103 picioarele \xeen sus control\xe2nd mi\u0219carea. Cobor\xe2\u021bi \xeencet.","Coatele \xeenalte \xeempiedic\u0103 mreana s\u0103 alunece. Necesit\u0103 o mobilitate semnificativ\u0103 a \xeencheieturii \u0219i gleznelor.","\u021aine\u021bi contrac\u021bia \xeen partea de sus pentru o secund\u0103. Evita\u021bi impulsul.","\u021aine\u021bi contrac\u021bia \xeen partea de sus pentru o secund\u0103. \u021aine-\u021bi b\u0103rbia spre piept.","\u021aine\u021bi contrac\u021bia \xeen partea de sus. Evita\u021bi s\u0103 compensa\u021bi cu spatele.","\u021aine\u021bi capetele fr\xe2nghiei \xeen lateral. Roti\u021bi fr\xe2nghia deasupra capului \u0219i s\u0103ri\u021bi c\xe2nd trece pe sub picioare.","\xcen pozi\u021bie culcat, sprijinindu-v\u0103 pe antebra\u021be \u0219i degetele de la picioare. Corpul t\u0103u formeaz\u0103 o linie dreapt\u0103 de la cap la c\u0103lc\xe2i. \u021aine\u021bi prin contractarea miezului dvs.","\xcen pozi\u021bie culcat cu m\xe2inile la l\u0103\u021bimea umerilor. Cobor\xe2\u021bi pieptul spre podea \xeendoind coatele. \xcempinge\u021bi \xeen sus revenind la pozi\u021bia ini\u021bial\u0103 \u021bin\xe2nd corpul \xeen linie dreapt\u0103.","\xcen pozi\u021bie de push-up. Alternativ, aduce\u021bi rapid genunchii spre piept, men\u021bin\xe2nd \u0219oldurile jos.","\xcentr-o pozi\u021bie divizat\u0103. Cobor\xe2\u021bi corpul \xeendoind genunchiul din fa\u021b\u0103. \xcempinge\u021bi \xeen sus revenind la pozi\u021bia de pornire.","\u021aine\u021bi piciorul opus complet pe podea. Trunchiul drept.","P\u0103stra\u021bi bra\u021bul superior paralel cu podeaua. Evita\u021bi impulsul.","\u021aine-\u021bi bra\u021bele drepte. Concentra\u021bi-v\u0103 pe contrac\u021bia lateral\u0103.","\u021aine-\u021bi spatele plat \u0219i miezul angajat. Evita\u021bi s\u0103 v\u0103 balansa\u021bi trunchiul.","\u021aine-\u021bi spatele \xeentr-o pozi\u021bie neutr\u0103. Trage\u021bi spre talie sau piept. Contracta\u021bi mu\u0219chii spatelui la sf\xe2r\u0219itul mi\u0219c\u0103rii.","\u021aine spatele paralel cu podeaua. Roti\u021bi-v\u0103 u\u0219or trunchiul la sf\xe2r\u0219itul mi\u0219c\u0103rii.","\u021aine-\u021bi pieptul sus \u0219i genunchii alinia\u021bi cu degetele de la picioare. Nu l\u0103sa\u021bi genunchii s\u0103 se pr\u0103bu\u0219easc\u0103 spre interior.","\u021aine-\u021bi miezul angajat \u0219i spatele drept. Evita\u021bi hiperextensia coloanei vertebrale lombare.","P\u0103stra\u021bi-v\u0103 miezul angajat pentru a v\u0103 proteja spatele. Evita\u021bi hiperextensia coloanei vertebrale lombare.","P\u0103streaz\u0103-\u021bi nucleul angajat. Adapteaz\u0103 viteza la nivelul t\u0103u de fitness.","P\u0103streaz\u0103-\u021bi nucleul angajat. Evita\u021bi hiperextinderea coloanei vertebrale.","\u021aine\u021bi coatele la \xeen\u0103l\u021bimea umerilor sau pu\u021bin deasupra. Esen\u021bial pentru s\u0103n\u0103tatea man\u0219etei rotatorilor.","\u021aine-\u021bi coatele aproape de corp. Evita\u021bi s\u0103 v\u0103 evaza\u021bi coatele.","\u021aine-\u021bi coatele fixate \xeen lateral. Prindere neutr\u0103 subliniaz\u0103 brahioradialul peste biceps.","\u021aine-\u021bi coatele fixate \xeendreptate spre tavan. Controleaz\u0103 cobor\xe2rea.","\u021aine-\u021bi coatele fixate pe tot parcursul mi\u0219c\u0103rii. Concentra\u021bi-v\u0103 pe contrac\u021bia complet\u0103 \xeen partea de sus.","\u021aine-\u021bi coatele fixate. Nu folosi impulsul.","\u021aine-\u021bi coatele fixate. Concentra\u021bi-v\u0103 pe contrac\u021bia complet\u0103.","\u021aine-\u021bi coatele fixate. Concentra\u021bi-v\u0103 pe extensia complet\u0103.","\u021aine\u021bi coatele \xeendreptate spre tavan \u0219i aproape de cap. Capul lung este activat maxim \xeen pozi\u021bia \xeentins\u0103.","\u021aine\u021bi genunchiul din fa\u021b\u0103 aliniat cu degetele de la picioare. Corecteaz\u0103 dezechilibrele musculare dintre picioare.","\u021aine c\u0103lc\xe2iul pe podea. \xcendoi\u021bi genunchiul pentru a \xeentinde soleul.","\u021aine-\u021bi \u0219oldurile aliniate. Evita\u021bi s\u0103 le l\u0103sa\u021bi s\u0103 cad\u0103 \xeen jos.","\u021aine-\u021bi s\u0103riturile sc\u0103zute. Folose\u0219te-\u021bi \xeencheieturile, nu bra\u021bele, pentru a roti fr\xe2nghia.","\u021aine\u021bi genunchiul \xeendreptat spre podea. Evita\u021bi hiperextinderea spatelui.","\u021aine-\u021bi genunchii alinia\u021bi cu degetele de la picioare. Pozi\u021bia piciorului schimb\u0103 cel mai antrenat mu\u0219chi.","\u021aine-\u021bi genunchii alinia\u021bi cu degetele de la picioare. Pozi\u021bia de sumo reduce traseul mrenei.","P\u0103streaz\u0103-\u021bi pelvisul la nivel. \xcencepe\u021bi cu o greutate mic\u0103.","\u021aine\u021bi omopla\u021bii retracta\u021bi. Controla\u021bi cobor\xe2rea timp de cel pu\u021bin 2 secunde.","\u021aine-\u021bi umerii relaxa\u021bi. Adapta\u021bi ritmul la intensitatea dorit\u0103.","P\u0103stra\u021bi-v\u0103 trunchiul stabil evit\xe2nd balansarea. Controleaz\u0103 cobor\xe2rea.","\u021aine-\u021bi trunchiul drept \u0219i miezul angajat. Evita\u021bi s\u0103 v\u0103 l\u0103sa\u021bi genunchiul din fa\u021b\u0103 s\u0103 treac\u0103 pe l\xe2ng\u0103 degetele de la picioare.","\u021aine-\u021bi trunchiul vertical pentru a izola tricepsul. Cu c\xe2t cobori mai jos, cu at\xe2t este mai mare angajarea pieptului.","\u021aine-\u021bi \xeencheieturile \xeentr-o pozi\u021bie neutr\u0103. Curla invers\u0103 \xeent\u0103re\u0219te mu\u0219chii antebra\u021bului.","\xcengenuncheat cu roata \xeen fa\u021b\u0103. Roti\u021bi roata \xeenainte cobor\xe2nd corpul spre podea. Trage\u021bi roata \xeenapoi spre genunchi.","Aplecarea \xeen fa\u021b\u0103 cre\u0219te implicarea \xeen piept. Pozi\u021bia vertical\u0103 izoleaz\u0103 tricepsul.","\xcentinde-te cu genunchii \xeendoi\u021bi. Adu umerii spre genunchi contract\xe2nd abdomenul. Cobor\xe2\u021bi \xeencet.","\xcentinde-te cu picioarele ridicate. Adu-\u021bi genunchii spre piept ridic\xe2nd pelvisul. \xcentoarce-te \xeencet.","\xcentinde\u021bi-v\u0103 cu fa\u021ba \xeen jos pe aparat cu tampoane pe glezne. Flecheaz\u0103-\u021bi genunchii aduc\xe2nd c\u0103lc\xe2iele spre fesieri. Cobor\xe2\u021bi \xeencet.","\xcentinde\u021bi-v\u0103 pe banc\u0103 cu o ganter\u0103 \xeen fiecare m\xe2n\u0103. Cobor\xe2\u021bi ganterele spre piept, p\u0103str\xe2nd \xeencheieturile stabile. \xcempinge\u021bi ferm \xeen sus, revenind la pozi\u021bia de pornire.","\xcentinde\u021bi-v\u0103 pe banc\u0103 cu o ganter\u0103 \xeen fiecare m\xe2n\u0103. Lower your arms laterally maintaining a slight elbow bend. Bring the dumbbells upward in an arc as if hugging a tree. \xcentoarce-te \xeencet.","\xcentinde\u021bi-v\u0103 pe banc\u0103 cu o prindere la l\u0103\u021bimea umerilor. Cobor\xe2\u021bi mreana \u021bin\xe2nd coatele aproape de trunchi. \xcempinge\u021bi \xeen sus str\xe2ng\xe2nd tricepsul.","\xcentinde\u021bi-v\u0103 pe banc\u0103 cu instrumentul deasupra pieptului, cu bra\u021bele \xeentinse. Flecheaz\u0103 coatele, cobor\xe2nd greutatea spre frunte. Extinde\u021bi revenirea la pozi\u021bie.","\xcentinde\u021bi-v\u0103 pe banc\u0103 cu instrumentul deasupra pieptului, cu bra\u021bele aproape \xeentinse. Cobor\xe2\u021bi greutatea \xeen spatele capului, \u021bin\xe2nd coatele u\u0219or \xeendoite. Reveni\u021bi la pozi\u021bia ini\u021bial\u0103 \xeentr-un arc.","\xcentinde-te pe banc\u0103 cu picioarele pe podea. Prinde\u021bi mreana mai lat dec\xe2t l\u0103\u021bimea umerilor. Cobor\xe2\u021bi mreana la piept, \u021bin\xe2nd coatele la aproximativ 45 de grade. \xcempinge\u021bi ferm \xeen sus.","\xcentinde\u021bi-v\u0103 pe banca de declin cu picioarele asigurate. Prinde\u021bi instrumentul mai lat dec\xe2t l\u0103\u021bimea umerilor. Mai jos spre pieptul inferior. \xcempinge\u021bi ferm revenind la pozi\u021bia de pornire.","\xcentinde\u021bi-v\u0103 pe suportul \xeenclinat cu greut\u0103\u021bile at\xe2rn\xe2nd. Trage\u021bi spre trunchi contract\xe2nd dorsalul. Cobor\xe2\u021bi \xeencet.","Cobor\xe2\u021bi \xeentr-o ghemuit, apoi s\u0103ri\u021bi \xeen sus exploziv. Aterizeaz\u0103 u\u0219or \xeendoind genunchii.","Cobor\xe2\u021bi-v\u0103 \xeentr-o ghemuial\u0103, pune\u021bi m\xe2inile pe podea \u0219i s\u0103ri\u021bi cu picioarele \xeentr-o pozi\u021bie de push-up. Efectua\u021bi o \xeempingere, s\u0103ri\u021bi picioarele spre m\xe2ini, apoi s\u0103ri\u021bi cu bra\u021bele deasupra capului.","Men\u021bine un ritm constant. Pozi\u021bia corect\u0103 pe tot parcursul exerci\u021biului.","Mentineti o pozitie verticala cu o usoara aplecare inainte. Alterneaz\u0103 pa\u0219ii \xeentr-un ritm constant. Aterizeaz\u0103 cu piciorul la mijlocul pasului.","Men\u021bine\u021bi aceea\u0219i \xeendoire a cotului pe tot parcursul mi\u0219c\u0103rii. Concentra\u021bi-v\u0103 pe contrac\u021bia pieptului la sf\xe2r\u0219itul mi\u0219c\u0103rii.","Men\u021bine\u021bi aceea\u0219i \xeendoire a cotului. Controla\u021bi cobor\xe2rea timp de 2 secunde.","Men\u021bine\u021bi u\u0219oar\u0103 \xeendoire a cotului. Puloverul este unul dintre pu\u021binele exerci\u021bii care \xeentinde lat.","Tensiune moderat\u0103, niciodat\u0103 durere. Expir\u0103 \xeen timp ce te \xeentinzi.","Pe m\xe2ini \u0219i genunchi sau st\xe2nd la cablu. \xcentinde-\u021bi piciorul \xeenapoi str\xe2ng\xe2nd fesierii. \xcentoarce-te \xeencet.","Pe partea ta sprijinindu-te pe antebra\u021b cu corpul \xeen linie dreapt\u0103. Ridica\u021bi \u0219oldurile men\u021bin\xe2nd pozi\u021bia.","Pedale men\u021bin\xe2nd un ritm constant. \u021aine-\u021bi spatele \xeentr-o pozi\u021bie neutr\u0103.","Efectua\u021bi faza de ridicare cu o prindere supinat\u0103. Roti\u021bi \xeencheieturile la prona\u021bie \xeen partea de sus. Jos cu o prindere pronat\u0103. Reveni\u021bi la supinat \xeen partea de jos.","Efectua\u021bi mi\u0219carea control\xe2nd at\xe2t fazele excentrice, c\xe2t \u0219i cele concentrice. P\u0103streaz\u0103-\u021bi nucleul angajat.","Efectua\u021bi mi\u0219carea control\xe2nd at\xe2t fazele excentrice, c\xe2t \u0219i cele concentrice. \u021aine\u021bi omopla\u021bii retracta\u021bi.","Efectua\u021bi mi\u0219carea exploziv \xeen sus sau \xeenainte. Aterizeaz\u0103 u\u0219or \xeendoind genunchii. Controla\u021bi aterizarea.","Efectua\u021bi mi\u0219carea \xeencet \xeen ambele faze. Pauza de jos cre\u0219te \xeentinderea gambei.","Efectua\u021bi rota\u021bia fluid \u0219i continuu. Presa Arnold este unul dintre pu\u021binele exerci\u021bii care angajeaz\u0103 toate fibrele musculare.","Pozi\u021biona\u021bi m\xe2inile \xeen form\u0103 de diamant sub piept. Cobor\xe2\u021bi corpul \u021bin\xe2nd coatele aproape de trunchi. \xcempinge\u021bi \xeen sus str\xe2ng\xe2nd tricepsul.","Pozi\u021biona\u021bi-v\u0103 \xeen ma\u0219ina de ghemuit cu umerii sub tampoane. Cobor\xe2\u021bi \xeendoind genunchii la 90 de grade, apoi \xeempinge\u021bi \xeen sus.","\xcempinge\u021bi \xeen principal cu piciorul pe suprafa\u021ba ridicat\u0103. \u021aine-\u021bi trunchiul drept.","\xcempinge\u021bi cu picioarele, apoi l\u0103sa\u021bi-v\u0103 trunchiul \xeenapoi, \xeen cele din urm\u0103 trage\u021bi v\xe2sla spre abdomen. Inversa\u021bi ordinea la retur.","Necesit\u0103 o mobilitate excelent\u0103 a umerilor, \u0219oldurilor \u0219i gleznelor. \xcencepe\u021bi f\u0103r\u0103 greutate.","Retrage\u021bi omopla\u021bii \u0219i \u021bine\u021bi-i bloca\u021bi. Nu arunca\u021bi greutatea pe piept.","Retrage\u021bi omopla\u021bii pentru a stabiliza um\u0103rul.","Roti\u021bi de la talie, nu doar de la bra\u021be.","Roti\u021bi-v\u0103 trunchiul aduc\xe2nd un cot spre genunchiul opus. Repeta\u021bi din cealalt\u0103 parte.","Roti\u021bi \xeencheietura m\xe2inii spre exterior \xeen partea de sus pentru a maximiza v\xe2rful. P\u0103streaz\u0103-\u021bi trunchiul stabil.","Asezat cu gantere la inaltimea umerilor si palmele indreptate spre tine. Ap\u0103sa\u021bi \xeen sus, rotindu-v\u0103 \xeencheieturile spre exterior, p\xe2n\u0103 c\xe2nd palmele sunt \xeendreptate \xeenainte. Cobor\xe2\u021bi revenirea la pozi\u021bia ini\u021bial\u0103.","Asezat cu cotul sprijinit pe interiorul coapsei. Flexeaz\u0103-\u021bi cotul aduc\xe2nd haltera spre um\u0103r. Cobor\xe2\u021bi \xeencet.","Asezat cu picioarele ridicate si trunchiul la 45 de grade. Roti\u021bi-v\u0103 trunchiul dintr-o parte \xeen alta, aduc\xe2nd m\xe2inile pe podea, l\xe2ng\u0103 \u0219olduri.","Secven\u021b\u0103: picioare, apoi trunchi \u0219i bra\u021be \xeen timpul tragerii.","A\u0219eza\u021bi-v\u0103 la ma\u0219ina de tragere lat \u0219i prinde\u021bi bara cu o prindere pronat\u0103 larg\u0103. Trage\u021bi bara spre piept, aplec\xe2ndu-v\u0103 trunchiul u\u0219or \xeenapoi. Controla\u021bi revenirea la pozi\u021bia de pornire.","Sta\u021bi la ma\u0219ina de tragere lat cu o prindere apropiat\u0103 sau neutr\u0103. Trage\u021bi bara spre piept, \u021bin\xe2nd coatele aproape de corp. Controla\u021bi returul.","Stai la cablul jos cu picioarele pe suporturi. Trage\u021bi m\xe2nerul spre talie, \u021bin\xe2nd spatele drept. Contracta\u021bi mu\u0219chii spatelui \u0219i reveni\u021bi \xeencet.","Stai la aparat cu tampoane pe glezne. Intinde-ti picioarele in sus contractand cvadricepsul. Cobor\xe2\u021bi \xeencet.","Stai la aparat cu tampoane pe glezne. Flecheaz\u0103-\u021bi genunchii aduc\xe2nd c\u0103lc\xe2iele spre fesieri. Cobor\xe2\u021bi \xeencet.","Stai la banca predicatorului cu bra\u021bele sprijinite pe suport. Flecheaz\u0103 coatele aduc\xe2nd instrumentul spre umeri. Cobor\xe2\u021bi \xeencet aproape p\xe2n\u0103 la extinderea complet\u0103.","Sta\u021bi \xeen ma\u0219in\u0103 cu spatele sprijinit de suport. Pozi\u021biona\u021bi coatele pe pl\u0103cu\u021be. Adu-\u021bi bra\u021bele spre centru contract\xe2nd pieptul. Reveni\u021bi \xeencet la pozi\u021bia de pornire.","Sta\u021bi \xeen ma\u0219in\u0103 cu picioarele pe platform\u0103 la l\u0103\u021bimea \u0219oldurilor. Cobor\xe2\u021bi \xeendoind genunchii la 90 de grade. \xcempinge\u021bi prin extinderea picioarelor.","Sta\u021bi pe banca \xeenclinat\u0103 cu picioarele pe podea. Prinde\u021bi instrumentul mai lat dec\xe2t l\u0103\u021bimea umerilor. Cobor\xe2\u021bi p\xe2n\u0103 la nivelul superior al pieptului. \xcempinge\u021bi ferm revenind la pozi\u021bia de pornire.","Stai cu antebra\u021bele pe coapse. Prinde\u021bi instrumentul cu o prindere supinat\u0103. Flexi\u021bi \xeencheieturile \xeen sus \u0219i cobor\xe2\u021bi \xeencet.","\xcentinde\u021bi fr\xe2nghia \xeen partea de jos pentru a maximiza contrac\u021bia. \u021aine-\u021bi coatele fixate.","St\xe2nd \xeen centrul cablului cu un m\xe2ner pe m\xe2n\u0103. \u021aine-\u021bi bra\u021bele u\u0219or \xeendoite. Adu-\u021bi m\xe2inile spre centru travers\xe2ndu-le. Reveni\u021bi \xeencet la pozi\u021bia de pornire.","St\xe2nd la cablul \xeenalt cu fr\xe2nghia. \u021aine-\u021bi coatele fixate pe p\u0103r\u021bile laterale ale trunchiului. \xcempinge\u021bi fr\xe2nghia \xeen jos, separ\xe2nd capetele. \xcentoarce-te \xeencet.","St\xe2nd la cablul \xeenalt. \u021aine-\u021bi coatele fixate pe p\u0103r\u021bile laterale ale trunchiului. \xcempinge\u021bi \xeen jos, extinz\xe2nd complet bra\u021bele. \xcentoarce-te \xeencet.","St\xe2nd cu fa\u021ba la cablul \xeenalt, cu bra\u021bele aproape \xeentinse. Aduce\u021bi bara spre coapse \xeentr-un arc \u021bin\xe2nd bra\u021bele drepte. Reveni\u021bi \xeencet la pozi\u021bia de pornire.","St\xe2nd \xeen fa\u021ba unei b\u0103nci. A\u0219eza\u021bi un picior pe suprafa\u021ba ridicat\u0103 \u0219i \xeempinge\u021bi \xeen sus. Cobor\xe2\u021bi \xeencet control\xe2nd mi\u0219carea.","St\xe2nd pe un picior. Cobor\xe2\u021bi trunchiul \xeenainte, \u021bin\xe2nd spatele drept \xeen timp ce piciorul liber se extinde \xeen spate. Reveni\u021bi \xeen pozi\u021bia vertical\u0103 str\xe2ng\xe2nd fesierii.","\xcen picioare sau a\u0219ezat cu instrumentul la \xeen\u0103l\u021bimea umerilor. \xcempinge\u021bi \xeen sus, extinz\xe2ndu-v\u0103 complet bra\u021bele. Cobor\xe2\u021bi, revenind \xeencet la pozi\u021bia ini\u021bial\u0103, cu greutatea la \xeen\u0103l\u021bimea umerilor.","\xcen picioare sau a\u0219ezat cu instrumentul la \xeen\u0103l\u021bimea umerilor. \xcempinge\u021bi \xeen sus, extinz\xe2ndu-v\u0103 complet bra\u021bele. Cobor\xe2\u021bi \xeencet.","\xcen picioare sau a\u0219ezat cu ma\u0219ina deasupra capului, bra\u021bele \xeentinse. Flecheaz\u0103 coatele sc\u0103z\xe2nd greutatea din spatele capului. Extinde\u021bi revenirea \xeen sus.","Sta\u021bi \xeen picioare cu o ganter\u0103 \xeen fiecare m\xe2n\u0103, pe partea lateral\u0103. Ridica\u021bi bra\u021bele lateral p\xe2n\u0103 la \xeen\u0103l\u021bimea umerilor, \u021bin\xe2nd coatele u\u0219or \xeendoite. Cobor\xe2\u021bi \xeencet.","St\xe2nd cu o greutate \xeen fiecare m\xe2n\u0103, de l\xe2ng\u0103 tine. Ridic\u0103 umerii spre urechi str\xe2ng\xe2nd capcanele. \u021aine\u021bi contrac\u021bia pentru o secund\u0103, apoi cobor\xe2\u021bi \xeencet.","Sta\u021bi \xeen picioare cu gantere \xeen lateral, cu o prindere neutr\u0103 (degetul mare \xeen sus). Flexeaz\u0103-\u021bi coatele aduc\xe2nd ganterele spre umerii t\u0103i. Cobor\xe2\u021bi \xeencet.","St\xe2nd cu picioarele la l\u0103\u021bimea \u0219oldurilor. Balamal\u0103 la \u0219olduri balans\xe2nd greutatea dintre picioare, apoi conduce\u021bi exploziv \u0219oldurile \xeenainte, balans\xe2nd greutatea p\xe2n\u0103 la \xeen\u0103l\u021bimea umerilor.","St\xe2nd cu picioarele la l\u0103\u021bimea \u0219oldurilor. Cobor\xe2\u021bi mreana de-a lungul picioarelor, \u021bin\xe2nd genunchii u\u0219or \xeendoi\u021bi \u0219i spatele drept. Cobor\xe2\u021bi p\xe2n\u0103 c\xe2nd sim\u021bi\u021bi tensiune \xeen ischiochimbilari apoi \xeentoarce\u021bi-v\u0103 \xeen sus.","St\xe2nd cu picioarele la l\u0103\u021bimea \u0219oldurilor. Cobor\xe2\u021bi cu spatele drept \u0219i cu pieptul \xeen sus. \xcempinge\u021bi picioarele \xeen p\u0103m\xe2nt \u0219i extinde\u021bi \u0219oldurile \u0219i genunchii simultan, \u021bin\xe2nd bara aproape de picioare.","St\xe2nd cu picioarele la l\u0103\u021bimea umerilor, \u021bine\u021bi o gantere \xeen fa\u021ba pieptului. Coboar\u0103 \u021bin\xe2nd pieptul sus. Reveni\u021bi sus \xeemping\xe2ndu-v\u0103 prin c\u0103lc\xe2ie.","St\xe2nd cu picioarele la l\u0103\u021bimea umerilor. Cobor\xe2\u021bi corpul \xeendoind genunchii \u0219i \u0219oldurile ca \u0219i cum a\u021bi fi a\u0219ezat pe un scaun. Cobor\xe2\u021bi p\xe2n\u0103 c\xe2nd coapsele sunt paralele cu podeaua. \xcempinge\u021bi-v\u0103 prin c\u0103lc\xe2ie.","St\xe2nd cu picioarele \xeempreun\u0103. Face\u021bi un pas lateral larg \u021bin\xe2nd fix piciorul opus. Cobor\xe2\u021bi spre acea parte \xeendoind genunchiul.","St\xe2nd cu mreana pe umeri. \xcenclina\u021bi-v\u0103 trunchiul \xeenainte \u021bin\xe2nd spatele drept \u0219i genunchii u\u0219or \xeendoi\u021bi. Sim\u021bi\u021bi \xeentinderea ischiochimbilor. Reveni\u021bi \xeen pozi\u021bia vertical\u0103.","Sta\u021bi cu instrumentul \xeen fa\u021ba coapselor folosind o prindere pronat\u0103. Trage\u021bi spre b\u0103rbie \u021bin\xe2nd coatele mai sus dec\xe2t \xeencheieturile. Cobor\xe2\u021bi \xeencet.","St\xe2nd cu instrumentul \xeen fa\u021ba coapselor. Ridic\u0103-\u021bi bra\u021bele \xeen fa\u021ba ta la \xeen\u0103l\u021bimea umerilor, \u021bin\xe2nd coatele u\u0219or \xeendoite. Cobor\xe2\u021bi \xeencet.","\xcen picioare cu instrumentul folosind o prindere pronat\u0103 (palmele cu fa\u021ba \xeen jos). Flecheaz\u0103 coatele aduc\xe2nd instrumentul spre umeri. Cobor\xe2\u021bi \xeencet.","St\xe2nd cu instrumentul folosind o prindere \xeen supina\u021bie. Flexeaz\u0103-\u021bi coatele aduc\xe2nd instrumentul spre umeri, \u021bin\xe2nd coatele fixate pe p\u0103r\u021bile laterale ale trunchiului. Cobor\xe2\u021bi \xeencet revenind la pozi\u021bia de pornire.","St\xe2nd cu trunchiul \xeenclinat la 45 de grade. Prinde mreana cu o prindere pronat\u0103. Trage\u021bi spre abdomen p\u0103str\xe2nd spatele neutru. Cobor\xe2\u021bi \xeencet.","Sta\u021bi cu c\u0103lc\xe2iele de pe marginea unei platforme. Ridic\u0103-te pe degetele de la picioare str\xe2ng\xe2ndu-\u021bi gambele. Cobor\xe2\u021bi \xeencet, permi\u021b\xe2nd c\u0103lc\xe2ielor s\u0103 scad\u0103 sub nivelul platformei.","\xcencepe\u021bi \xeentr-un ritm moderat \u0219i cre\u0219te\u021bi treptat.","\xcencepe\u021bi de la retragerea omopla\u021bilor. Controla\u021bi faza excentric\u0103.","\xcencepe\u021bi de la retragerea omopla\u021bilor. Nu v\u0103 apleca\u021bi trunchiul prea mult \xeenapoi.","\xcencepe\u021bi mi\u0219carea de la retragerea omopla\u021bilor. Evita\u021bi utilizarea impulsului.","\xcencepe\u021bi mi\u0219carea de la retragerea omopla\u021bilor. Controla\u021bi faza de prelungire.","Face\u021bi un pas \xeenapoi cobor\xe2nd genunchiul din spate spre podea. Genunchiul din fa\u021b\u0103 r\u0103m\xe2ne aliniat cu glezna.","Face\u021bi un pas \xeenainte cobor\xe2nd genunchiul din spate spre podea. Genunchiul din fa\u021b\u0103 r\u0103m\xe2ne aliniat cu glezna. \xcempinge \xeenapoi \xeen sus.","Face\u021bi un pas \xeenainte cobor\xe2nd genunchiul din spate. Continua\u021bi s\u0103 face\u021bi un pas \xeenainte, altern\xe2nd picioarele continuu.","Intr\u0103 \xeen bara capcan\u0103. Picioare la l\u0103\u021bimea \u0219oldurilor. Cobor\xe2\u021bi-v\u0103 prinz\xe2nd m\xe2nerele cu spatele drept. \xcempinge\u021bi prin picioare extinz\xe2nd \u0219oldurile \u0219i genunchii simultan.","F\u0103 pa\u0219i lungi pentru a-\u021bi antrena mai mult fesierii.","Curl Zottman antreneaz\u0103 at\xe2t flexia, c\xe2t \u0219i extensia antebra\u021bului.","Bara ar trebui s\u0103-\u021bi p\u0103\u0219easc\u0103 picioarele pe tot parcursul mi\u0219c\u0103rii. Concentreaz\u0103-te pe \xeentinderea ischio-coarbei \xeen timpul cobor\xe2rii.","Cu c\xe2t suprafa\u021ba este mai mare, cu at\xe2t mai mult func\u021bioneaz\u0103 pieptul superior.","Banca \xeenclinat\u0103 accentueaz\u0103 partea superioar\u0103 a pieptului. \u021aine\u021bi omopla\u021bii retracta\u021bi pe tot parcursul mi\u0219c\u0103rii.","Versiunea \xeenclinat\u0103 este mai u\u0219oar\u0103 \u0219i cupleaz\u0103 pieptul inferior.","Cu c\xe2t corpul t\u0103u este mai orizontal, cu at\xe2t este mai greu. \u021aine-\u021bi mereu nucleul angajat.","Mi\u0219carea vine din \u0219olduri, nu din spate. \u021aine-\u021bi spatele drept \xeen timpul fazei de \xeempingere.","Banca predicatorului elimin\u0103 utilizarea impulsului. Nu l\u0103sa\u021bi greutatea s\u0103 scad\u0103 \xeen partea de jos.","Fanterea invers\u0103 este mai sigur\u0103 pentru genunchi dec\xe2t atacul \xeenainte.","Rota\u021bia vine din talie, nu din cap.","Curl piciorului a\u0219ezat m\u0103re\u0219te aria de mi\u0219care. Evita\u021bi s\u0103 v\u0103 ridica\u021bi fesierii de pe scaun.","Suportul elimin\u0103 stresul lombar. Concentra\u021bi-v\u0103 pe retragere.","Bara de capcan\u0103 reduce stresul asupra coloanei vertebrale. P\u0103stra\u021bi umerii alinia\u021bi cu m\xe2nerele.","Greutatea din fa\u021b\u0103 ajut\u0103 la postura vertical\u0103. \u021aine-\u021bi genunchii alinia\u021bi.","Utiliza\u021bi o greutate mic\u0103. \u021aine\u021bi antebra\u021bele nemi\u0219cate pe coapse.","Cu o m\xe2n\u0103 \u0219i un genunchi pe banc\u0103. Trage\u021bi gantera spre o parte, \u021bin\xe2nd cotul aproape de corp. Cobor\xe2\u021bi \xeencet.","Cu mreana deasupra capului, coboar\u0103 \xeentr-o ghemuial\u0103 \u021bin\xe2nd bra\u021bele drepte \u0219i stabile. Reveni\u021bi sus \u021bin\xe2nd mreana aliniat\u0103.","Cu bra\u021bele \xeen fa\u021b\u0103 la cablu sau cu gantere, trage\u021bi instrumentul spre fa\u021b\u0103 \u021bin\xe2nd coatele sus. Separa\u021bi-v\u0103 m\xe2inile aduc\xe2nd pumnii l\xe2ng\u0103 urechi. \xcentoarce-te \xeencet.","Cu corpul \xeenclinat sub o bar\u0103 joas\u0103, prinde\u021bi cu o prindere pronat\u0103. Trage-\u021bi pieptul spre bar\u0103, \u021bin\xe2ndu-\u021bi corpul rigid. Cobor\xe2\u021bi \xeencet.","Cu picioarele pe o suprafa\u021b\u0103 ridicat\u0103, coboar\u0103 pieptul spre podea. \xcempinge\u021bi \xeen sus revenind la pozi\u021bia de pornire.","Cu m\xe2inile pe o suprafa\u021b\u0103 ridicat\u0103, coboar\u0103 pieptul spre m\xe2ini. \xcempinge\u021bi \xeen sus revenind la pozi\u021bia de pornire.","Cu m\xe2inile pe marginea unei b\u0103nci, face\u021bi un pas \xeenainte cu fesierii afar\u0103. Cobor\xe2\u021bi corpul \xeendoind coatele la 90 de grade. \xcempinge\u021bi \xeen sus.","Cu trunchiul \xeenclinat \u0219i cotul \xeendoit la 90 de grade, \xeentinde\u021bi bra\u021bul \xeenapoi p\xe2n\u0103 la extensie complet\u0103. \xcentoarce-te \xeencet.","Cu partea superioar\u0103 a spatelui pe o banc\u0103 \u0219i cu greutatea pe \u0219olduri. \xcempinge\u021bi \u0219oldurile \xeen sus, str\xe2ng\xe2nd fesele. \xcentoarce-te \xeencet.","Trece\u021bi \xeen pozi\u021bia de \xeentindere \u0219i \u021bine\u021bi ap\u0103sat timp de 20-30 de secunde.","Respira\u021bi ad\xe2nc \u0219i r\u0103m\xe2ne\u021bi \xeentr-un interval confortabil.","P\u0103stra\u021bi un ritm constant \u0219i men\u021bine\u021bi o postur\u0103 corect\u0103 pe tot parcursul mi\u0219c\u0103rii.","P\u0103stra\u021bi-v\u0103 nucleul angajat \u0219i controla\u021bi fiecare faz\u0103 a mi\u0219c\u0103rii.","\u021aine-\u021bi coatele fixe \u0219i efectueaz\u0103 fiecare repetare cu control.","Pune\u021bi-v\u0103 umerii, controla\u021bi mi\u0219carea \u0219i evita\u021bi utilizarea impulsului.","\u021aine\u021bi genunchii alinia\u021bi \u0219i controla\u021bi at\xe2t faza de cobor\xe2re, c\xe2t \u0219i faza de ridicare.","P\u0103stra\u021bi-v\u0103 spatele neutru, \xeent\u0103ri\u021bi-v\u0103 miezul \u0219i controla\u021bi mi\u0219carea.","Efectua\u021bi mi\u0219carea cu control, postur\u0103 adecvat\u0103 \u0219i o gam\u0103 complet\u0103 de mi\u0219care."],t.w)
+B.ajM=new A.i(B.nr,["V\xe9gezd el a mozg\xe1st lassan \xe9s kontroll\xe1ltan. Tartsd meg a helyes testtart\xe1st.","Kezdj m\xe9rs\xe9kelt s\xfallyal a technika elsaj\xe1t\xedt\xe1s\xe1hoz.","L\xe9legezz m\xe9lyen. Soha ne er\u0151ltesd term\xe9szetes tartom\xe1nyodon t\xfal.","Tartsd a t\xf6rzsizmokat fesz\xedtve az eg\xe9sz gyakorlat alatt. Ellen\u0151rizd az excentrikus f\xe1zist.","Tartsd stabil a t\xf6rzset az eg\xe9sz gyakorlat alatt.","Lassan ereszd le","lassan ereszd le","L\xe9legezz m\xe9lyen","Haszn\xe1ld a teljes mozg\xe1startom\xe1nyt.","A szoros markolat n\xf6veli a mozg\xe1si tartom\xe1nyt. Kezdje a visszah\xfaz\xe1ssal.","A szoros markolat elszigeteli a tricepszt. Tartsa a test\xe9t egyenes vonalban.","A h\xe1trad\u0151lt markolat n\xf6veli a bicepsz kapcsolat\xe1t. Ker\xfclje a lend\xfclet haszn\xe1lat\xe1t.","\xc1ll\xedtsa be az \xfcl\xe9st: a t\xe9rd\xe9nek nem szabad t\xfalny\xfalnia.","Mindig l\xe1gyan sz\xe1lljon le. Ne z\xe1rja be a t\xe9rd\xe9t.","Ker\xfclje a lend\xfcletet. Koncentr\xe1lj a medence felemel\xe9s\xe9re.","Ker\xfclje a k\xf6ny\xf6k\xf6k v\xe1llmagass\xe1g f\xf6l\xe9 emel\xe9s\xe9t. A sz\xe9lesebb markolat cs\xf6kkenti az \xfctk\xf6z\xe9s kock\xe1zat\xe1t.","Ker\xfclje a v\xe1llak forgat\xe1s\xe1t. Csak a f\xfcgg\u0151leges mozg\xe1sra koncentr\xe1ljon.","Ker\xfclje a t\xf6rzs kileng\xe9s\xe9t. Ir\xe1ny\xedtsd mindk\xe9t f\xe1zist.","S\xfaly a v\xe1llak el\xfcls\u0151 r\xe9sz\xe9n, magas k\xf6ny\xf6k\xf6kkel. Emelkedj\xfcnk le \xfagy, hogy a t\xf6rzset a lehet\u0151 legf\xfcgg\u0151legesebben tartsuk. Nyomja vissza felfel\xe9.","Hozd a l\xe1badat ny\xfajt\xf3 helyzetbe \xfagy, hogy a t\xf6rzsed egyenesen maradjon. Tartsa 20-30 m\xe1sodpercig.","Hozd a l\xe1badat ny\xfajt\xf3 helyzetbe egyenes h\xe1ttal. Tartsa 20-30 m\xe1sodpercig m\xe9ly l\xe9legzetet.","H\xfazza kifel\xe9 a l\xe1b\xe1t az emberrabl\xe1s sor\xe1n, \xe9s ir\xe1ny\xedtsa a mozg\xe1st. Lassan t\xe9rjen vissza. Tartsa a magj\xe1t stabilan.","H\xfazza a l\xe1b\xe1t a k\xf6z\xe9ppont fel\xe9 az addukci\xf3ban, \xe9s ir\xe1ny\xedtsa a mozg\xe1st. Lassan t\xe9rjen vissza. Tartsa a magj\xe1t stabilan.","\xd6sszeh\xfazza a has\xe1t a gyakorlat sor\xe1n. Az excentrikus f\xe1zis szab\xe1lyoz\xe1sa.","Ne ny\xfajtsa t\xfal a karj\xe1t a nyit\xe1si szakaszban. \xd6sszpontos\xedtson a mellkas \xf6sszeh\xfaz\xf3d\xe1s\xe1ra.","Ne hagyja, hogy a h\xe1ta \xedvben \xedveljen. Kezdje r\xe9szleges k\xf6zz\xe9t\xe9tellel.","Ne hagyja, hogy a cs\xedp\u0151je leereszkedjen. H\xfazza vissza a lapock\xe1it.","Ne emelje fel a cs\xedp\u0151j\xe9t. Tartsa az \xf6sszeh\xfaz\xf3d\xe1st a tetej\xe9n egy m\xe1sodpercig.","Ne z\xe1rja ki a t\xe9rd\xe9t. A platformon magasabban l\xe9v\u0151 l\xe1bak jobban \xe9rintik a farizmokat.","Ne h\xfazza a nyak\xe1t. F\xf3kusz\xe1ljon a hasi \xf6sszeh\xfaz\xf3d\xe1sra.","Ne emelje a karj\xe1t v\xe1llmagass\xe1g f\xf6l\xe9. Forgassa kiss\xe9 lefel\xe9 a csukl\xf3j\xe1t (mintha vizet \xf6nt\xf6tt volna), hogy elszigetelje az oldals\xf3 deltoidot.","Ne emelje fel a cs\xedp\u0151j\xe9t. Tartsa a v\xe1ll\xe1t a csukl\xf3j\xe1n.","Soha ne kerek\xedtse a h\xe1t\xe1t. H\xfaz\xe1s el\u0151tt kapcsolja be a magot.","Ne kerek\xedtse a h\xe1t\xe1t. Az excentrikus f\xe1zis szab\xe1lyoz\xe1sa.","Ne kerek\xedtse a h\xe1t\xe1t. Ir\xe1ny\xedtsd a ny\xfajt\xe1si f\xe1zist.","Ne kerek\xedtse a h\xe1t\xe1t. Kezdje egy k\xf6nny\u0171 s\xfallyal.","Ne haszn\xe1ljon testleng\xe9st. F\xf3kusz\xe1ljon a gluteus medius izol\xe1l\xe1s\xe1ra.","Ne haszn\xe1ljon lend\xfcletet. Koncentr\xe1ljon az adduktorok izol\xe1l\xe1s\xe1ra.","Ne haszn\xe1ljon lend\xfcletet. \xd6sszpontos\xedtson az \xf6sszeh\xfaz\xf3d\xe1sra.","A s\xfalyz\xf3k nagyobb mozg\xe1startom\xe1nyt tesznek lehet\u0151v\xe9. Tartsa a lapock\xe1it beh\xfazva a mozg\xe1s sor\xe1n.","A l\xe1b sz\xe9lesebb, mint a v\xe1ll sz\xe9less\xe9ge, a l\xe1bujjak kifel\xe9 mutatnak. Engedje le a s\xfalyz\xf3t bels\u0151 markolattal megfogva. Nyomja meg a l\xe1b\xe1val \xe9s ny\xfajtsa ki a cs\xedp\u0151j\xe9t, mik\xf6zben a h\xe1t\xe1t egyenesen tartja.","Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, hogy a s\xfalyt a v\xe1llai fel\xe9 vigye. Lassan engedje le.","Teljesen ny\xfajtsd ki a karjaidat a koncentrikus f\xe1zisban. Lassan t\xe9rjen vissza a kiindul\xf3 helyzetbe a mozg\xe1s ir\xe1ny\xedt\xe1s\xe1val.","Fogja meg a rudat pron\xe1lt markolattal a v\xe1ll sz\xe9less\xe9g\xe9ben. Kiny\xfajtott karokkal kezdve h\xfazza felfel\xe9 a test\xe9t, am\xedg az \xe1lla meg nem engedi a rudat. Lassan ereszkedj vissza a kiindul\xe1si helyzetbe.","Fogja meg a rudat szupin\xe1lt markolattal (teny\xe9rrel maga fel\xe9) a v\xe1ll sz\xe9less\xe9g\xe9ben. Kiny\xfajtott karokkal kezdve h\xfazza felfel\xe9 a test\xe9t, am\xedg az \xe1lla meg nem engedi a rudat. Lassan engedje le.","Fogja meg a p\xe1rhuzamos rudakat ny\xfajtott karokkal. Enyh\xe9n el\u0151re d\u0151lve \xe9s a k\xf6ny\xf6k\xe9t hajl\xedtva engedje le test\xe9t. Nyomja felfel\xe9, visszat\xe9rve a kiindul\xe1si helyzetbe.","A r\xfadr\xf3l l\xf3gva vagy fekve emelje fel a l\xe1b\xe1t a mozg\xe1s ir\xe1ny\xedt\xe1s\xe1val. Lassan engedje le.","A magas k\xf6ny\xf6k\xf6k megakad\xe1lyozz\xe1k a s\xfalyz\xf3 elcs\xfasz\xe1s\xe1t. Jelent\u0151s csukl\xf3- \xe9s bokamozg\xe1st ig\xe9nyel.","Tartsa az \xf6sszeh\xfaz\xf3d\xe1st a tetej\xe9n egy m\xe1sodpercig. Ker\xfclje a lend\xfcletet.","Tartsa az \xf6sszeh\xfaz\xf3d\xe1st a tetej\xe9n egy m\xe1sodpercig. Tartsa az \xe1ll\xe1t a mellkasa fel\xe9.","Tartsa az \xf6sszeh\xfaz\xf3d\xe1st a tetej\xe9n. Ker\xfclje a h\xe1ttal val\xf3 kompenz\xe1l\xe1st.","Fogja meg a k\xf6t\xe9l v\xe9geit az oldalain. Forgassa el a k\xf6telet a feje f\xf6l\xf6tt, \xe9s ugorjon, ahogy elhalad a l\xe1ba alatt.","Hanyatt fekv\u0151 helyzetben az alkaron \xe9s a l\xe1bujjakon t\xe1maszkodva. A tested egyenes vonalat alkot a fejt\u0151l a sark\xe1ig. Tartsa \xf6ssze a mag \xf6sszeh\xfaz\xe1s\xe1val.","Hanyatt fekv\xe9sben, kezekkel v\xe1llsz\xe9less\xe9gben. Engedje le a mellkas\xe1t a padl\xf3 fel\xe9 a k\xf6ny\xf6k\xf6k hajl\xedt\xe1s\xe1val. Nyomja felfel\xe9, visszat\xe9rve a kiindul\xe1si helyzetbe, mik\xf6zben a test\xe9t egyenes vonalban tartja.","Push-up helyzetben. Felv\xe1ltva h\xfazza gyorsan a t\xe9rd\xe9t a mellkasa fel\xe9, mik\xf6zben a cs\xedp\u0151j\xe9t alacsonyan tartja.","Osztott \xe1ll\xe1sban. Engedje le test\xe9t az el\xfcls\u0151 t\xe9rd hajl\xedt\xe1s\xe1val. Nyomja felfel\xe9, visszat\xe9rve a kiindul\xe1si helyzetbe.","Tartsa az ellenkez\u0151 l\xe1bfejet teljesen a padl\xf3n. A t\xf6rzs f\xfcgg\u0151legesen.","Tartsa a felkarj\xe1t p\xe1rhuzamosan a padl\xf3val. Ker\xfclje a lend\xfcletet.","Tartsa egyenesen a karj\xe1t. Koncentr\xe1lj a lat kontrakci\xf3ra.","Tartsa laposan a h\xe1t\xe1t, \xe9s r\xf6gz\xedtse a magj\xe1t. Ker\xfclje a t\xf6rzs kileng\xe9s\xe9t.","Tartsa a h\xe1t\xe1t semleges helyzetben. H\xfazza a dereka vagy a mellkasa fel\xe9. A mozg\xe1s v\xe9g\xe9n h\xfazza \xf6ssze a h\xe1tizmokat.","Tartsa a h\xe1t\xe1t p\xe1rhuzamosan a padl\xf3val. A mozg\xe1s v\xe9g\xe9n forgassa el kiss\xe9 a t\xf6rzs\xe9t.","Tartsa a mellkas\xe1t felfel\xe9, a t\xe9rd\xe9t pedig a l\xe1bujjakkal egy vonalban. Ne hagyja, hogy a t\xe9rd befel\xe9 omoljon.","Tartsa a magj\xe1t r\xf6gz\xedtve, a h\xe1t\xe1t pedig egyenesen. Ker\xfclje az \xe1gy\xe9ki gerinc t\xfalny\xfal\xe1s\xe1t.","Tartsa r\xf6gz\xedtve a magj\xe1t, hogy megv\xe9dje a h\xe1t\xe1t. Ker\xfclje az \xe1gy\xe9ki gerinc t\xfalny\xfal\xe1s\xe1t.","Tartsa lek\xf6tve a magj\xe1t. A sebess\xe9get edzetts\xe9gi szintj\xe9hez igaz\xedtsa.","Tartsa lek\xf6tve a magj\xe1t. Ker\xfclje a gerinc t\xfalny\xfal\xe1s\xe1t.","Tartsa a k\xf6ny\xf6k\xe9t v\xe1llmagass\xe1gban vagy kiss\xe9 magasabban. Elengedhetetlen a rot\xe1tor mandzsetta eg\xe9szs\xe9g\xe9hez.","Tartsa a k\xf6ny\xf6k\xe9t k\xf6zel a test\xe9hez. Ker\xfclje a k\xf6ny\xf6k\xf6k kisz\xe9lesed\xe9s\xe9t.","K\xf6ny\xf6k\xe9t tartsa r\xf6gz\xedtve az oldalain. A semleges markolat kiemeli a brachioradialis a bicepsz felett.","A k\xf6ny\xf6k\xe9t tartsa r\xf6gz\xedtve a mennyezet fel\xe9. Ir\xe1ny\xedtsd a s\xfcllyed\xe9st.","K\xf6ny\xf6k\xe9t tartsa r\xf6gz\xedtve a mozg\xe1s sor\xe1n. \xd6sszpontos\xedtson a teljes \xf6sszeh\xfaz\xf3d\xe1sra a tetej\xe9n.","Tartsa r\xf6gz\xedtve a k\xf6ny\xf6k\xe9t. Ne haszn\xe1ljon lend\xfcletet.","Tartsa r\xf6gz\xedtve a k\xf6ny\xf6k\xe9t. \xd6sszpontos\xedtson a teljes \xf6sszeh\xfaz\xf3d\xe1sra.","Tartsa r\xf6gz\xedtve a k\xf6ny\xf6k\xe9t. \xd6sszpontos\xedtson a teljes kiterjeszt\xe9sre.","Tartsa a k\xf6ny\xf6k\xe9t a mennyezet fel\xe9, \xe9s k\xf6zel a fej\xe9hez. A hossz\xfa fej maxim\xe1lisan aktiv\xe1l\xf3dik ny\xfajtott helyzetben.","Tartsa az el\xfcls\u0151 t\xe9rd\xe9t egy vonalban a l\xe1bujjaival. Kijav\xedtja a l\xe1bak k\xf6z\xf6tti izmok egyens\xfalyhi\xe1ny\xe1t.","Tartsa a sark\xe1t a padl\xf3n. Hajl\xedtsa be a t\xe9rd\xe9t a talp ny\xfajt\xe1s\xe1hoz.","Tartsa a cs\xedp\u0151j\xe9t egy vonalban. Ker\xfclje el, hogy leereszkedjenek.","Tartsa alacsonyan az ugr\xe1sait. A k\xf6t\xe9l forgat\xe1s\xe1hoz haszn\xe1lja a csukl\xf3j\xe1t, ne a karj\xe1t.","Tartsa a t\xe9rd\xe9t a padl\xf3 fel\xe9. Ker\xfclje a h\xe1t t\xfalzott megny\xfajt\xe1s\xe1t.","Tartsa a t\xe9rd\xe9t a l\xe1bujjakkal egy vonalban. A l\xe1b helyzete megv\xe1ltoztatja a legink\xe1bb \xe9rintett izmot.","Tartsa a t\xe9rd\xe9t a l\xe1bujjakkal egy vonalban. A szum\xf3\xe1ll\xe1s cs\xf6kkenti a s\xfalyz\xf3 \xfatj\xe1t.","Tartsa v\xedzszintesen a medenc\xe9j\xe9t. Kezdje egy k\xf6nny\u0171 s\xfallyal.","Tartsa a lapock\xe1it beh\xfazva. Ir\xe1ny\xedtsa az ereszked\xe9st legal\xe1bb 2 m\xe1sodpercig.","Tartsa nyugodtan a v\xe1ll\xe1t. Igaz\xedtsa a temp\xf3t a k\xedv\xe1nt intenzit\xe1shoz.","Tartsa a t\xf6rzs\xe9t stabilan, elker\xfclve a kileng\xe9st. Ir\xe1ny\xedtsd a s\xfcllyed\xe9st.","Tartsa a t\xf6rzs\xe9t f\xfcgg\u0151legesen, \xe9s a t\xf6rzset r\xf6gz\xedtse. Ker\xfclje el, hogy az el\xfcls\u0151 t\xe9rd t\xfall\xe9pjen a l\xe1bujjain.","Tartsa f\xfcgg\u0151legesen a t\xf6rzs\xe9t a tricepsz izol\xe1l\xe1s\xe1hoz. Min\xe9l lejjebb m\xe9sz, ann\xe1l nagyobb a mellkasi k\xf6t\u0151d\xe9s.","Tartsa a csukl\xf3it semleges helyzetben. A ford\xedtott g\xf6nd\xf6r\xedt\xe9s er\u0151s\xedti az alkar izmait.","T\xe9rdel\xe9s a ker\xe9kkel el\xf6l. Forgassa el\u0151re a kereket, \xe9s engedje le test\xe9t a padl\xf3 fel\xe9. H\xfazza vissza a kereket a t\xe9rd\xe9hez.","Az el\u0151rehajl\xe1s n\xf6veli a mellkasi terhel\xe9st. A f\xfcgg\u0151leges helyzet elszigeteli a tricepszt.","Fek\xfcdj le hajl\xedtott t\xe9rddel. H\xfazza a v\xe1ll\xe1t a t\xe9rd fel\xe9, \xf6sszeh\xfazva a has\xe1t. Lassan engedje le.","Fek\xfcdj fel emelt l\xe1bakkal. H\xfazza a t\xe9rd\xe9t a mellkasa fel\xe9, \xe9s emelje fel a medenc\xe9j\xe9t. Lassan t\xe9rjen vissza.","Fek\xfcdj\xf6n arccal lefel\xe9 a g\xe9pen, p\xe1rn\xe1kkal a bok\xe1n. Hajl\xedtsa meg a t\xe9rd\xe9t, hogy a sark\xe1t a fen\xe9k fel\xe9 ford\xedtsa. Lassan engedje le.","Fek\xfcdj a padon, mindk\xe9t kez\xe9ben egy-egy s\xfalyz\xf3val. Engedje le a s\xfalyz\xf3kat a mellkasa fel\xe9, \xe9s tartsa stabilan a csukl\xf3j\xe1t. Er\u0151sen nyomja felfel\xe9, \xe9s t\xe9rjen vissza a kiindul\xe1si helyzetbe.","Fek\xfcdj a padon, mindk\xe9t kez\xe9ben egy-egy s\xfalyz\xf3val. Enyhe k\xf6ny\xf6khajl\xedt\xe1ssal engedje le a karj\xe1t oldalir\xe1nyban. H\xfazza felfel\xe9 a s\xfalyz\xf3kat \xedvben, mintha egy f\xe1t \xf6lelne \xe1t. Lassan t\xe9rjen vissza.","Fek\xfcdj a padon v\xe1llsz\xe9less\xe9g\u0171 markolattal. Engedje le a s\xfalyz\xf3t \xfagy, hogy k\xf6ny\xf6ke k\xf6zel legyen a t\xf6rzs\xe9hez. Nyomd felfel\xe9 a tricepszedet.","Fek\xfcdj a padon \xfagy, hogy a munkaeszk\xf6z a mellkasa felett legyen, kiny\xfajtott karokkal. Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, \xe9s cs\xf6kkentse a s\xfalyt a homloka fel\xe9. Hosszabb\xedtsa meg a poz\xedci\xf3ba val\xf3 visszat\xe9r\xe9st.","Fek\xfcdj a padon \xfagy, hogy a munkaeszk\xf6z a mellkasa felett legyen, a karokat majdnem kiny\xfajtva. Engedje le a s\xfalyt a feje m\xf6g\xe9, mik\xf6zben k\xf6ny\xf6k\xe9t kiss\xe9 behajl\xedtotta. Egy \xedvben t\xe9rj\xfcnk vissza a kiindul\xf3 helyzetbe.","Fek\xfcdj a padon \xfagy, hogy a l\xe1bad a padl\xf3n legyen. Fogja meg a s\xfalyz\xf3t a v\xe1llsz\xe9less\xe9gn\xe9l sz\xe9lesebben. Engedje le a s\xfalyz\xf3t a mellkas\xe1hoz, k\xf6ny\xf6k\xe9t k\xf6r\xfclbel\xfcl 45 fokos sz\xf6gben tartva. Er\u0151sen nyomja felfel\xe9.","Fek\xfcdj a zuhan\xf3padon r\xf6gz\xedtett l\xe1bbal. Fogja meg a munkag\xe9pet a v\xe1llsz\xe9less\xe9gn\xe9l sz\xe9lesebben. Lejjebb a mellkas als\xf3 r\xe9sz\xe9ig. Er\u0151sen nyomja vissza a kiindul\xe1si helyzetbe.","Fek\xfcdj a ferde t\xe1maszt\xe9kra \xfagy, hogy a s\xfalyok l\xf3gnak. H\xfazza a t\xf6rzse fel\xe9, \xf6sszeh\xfazza a latt. Lassan engedje le.","Engedj le guggol\xe1sba, majd robban\xe1sszer\u0171en ugorj felfel\xe9. T\xe9rd hajl\xedt\xe1s\xe1val l\xe1gyan landolj.","Engedjen le guggol\xe1sba, tegye a kez\xe9t a padl\xf3ra, \xe9s ugorja a l\xe1b\xe1t fekv\u0151t\xe1masz helyzetbe. V\xe9gezzen fekv\u0151t\xe1maszt, ugorja a l\xe1b\xe1t a kezeihez, majd ugorjon fel karokkal a feje f\xf6l\xf6tt.","Tartson \xe1lland\xf3 temp\xf3t. Helyes testtart\xe1s a gyakorlat sor\xe1n.","Tartson egyenes testtart\xe1st, enyh\xe9n el\u0151re d\u0151lve. V\xe1ltott l\xe9p\xe9sek egyenletes \xfctemben. L\xe9p\xe9s k\xf6zep\xe9n sz\xe1lljon le a l\xe1b\xe1val.","Tartsa ugyanazt a k\xf6ny\xf6khajl\xedt\xe1st a mozg\xe1s sor\xe1n. \xd6sszpontos\xedtson a mellkas \xf6sszeh\xfaz\xf3d\xe1s\xe1ra a mozg\xe1s v\xe9g\xe9n.","Tartsa ugyanazt a k\xf6ny\xf6khajl\xedt\xe1st. Ir\xe1ny\xedtsd az ereszked\xe9st 2 m\xe1sodpercig.","Tartsa meg az enyhe k\xf6ny\xf6khajl\xedt\xe1st. A pul\xf3ver azon kev\xe9s gyakorlatok egyike, amelyek ny\xfajtj\xe1k a latot.","M\xe9rs\xe9kelt fesz\xfclts\xe9g, soha nem f\xe1j. Ny\xfajt\xe1s k\xf6zben l\xe9legezzen ki.","K\xe9zen \xe9s t\xe9rden, vagy a k\xe1beln\xe9l \xe1llva. Ny\xfajtsa ki a l\xe1b\xe1t h\xe1trafel\xe9 a farizmot szor\xedtva. Lassan t\xe9rjen vissza.","Az oldaladon az alkarodra t\xe1maszkodva, a tested egyenes vonalban. Emelje fel a cs\xedp\u0151j\xe9t a poz\xedci\xf3 megtart\xe1s\xe1val.","A ped\xe1l egyenletes temp\xf3t tart fenn. Tartsa a h\xe1t\xe1t semleges helyzetben.","Hajtsa v\xe9gre az emel\xe9si f\xe1zist szupin\xe1lt markolattal. Forgassa a csukl\xf3it pron\xe1ci\xf3ig a tetej\xe9n. Lejjebb pron\xe1lt markolattal. T\xe9rjen vissza a supin\xe1lt alj\xe1ra.","V\xe9gezze el a mozg\xe1st mind az excentrikus, mind a koncentrikus f\xe1zis vez\xe9rl\xe9s\xe9vel. Tartsa lek\xf6tve a magj\xe1t.","V\xe9gezze el a mozg\xe1st mind az excentrikus, mind a koncentrikus f\xe1zis vez\xe9rl\xe9s\xe9vel. Tartsa a lapock\xe1it beh\xfazva.","Hajtsa v\xe9gre a mozg\xe1st robban\xe1sszer\u0171en felfel\xe9 vagy el\u0151re. T\xe9rd hajl\xedt\xe1s\xe1val l\xe1gyan landolj. Ir\xe1ny\xedtsd a lesz\xe1ll\xe1st.","Lassan hajtsa v\xe9gre a mozg\xe1st mindk\xe9t f\xe1zisban. Az alj\xe1n l\xe9v\u0151 sz\xfcnet n\xf6veli a v\xe1dli ny\xfajt\xe1s\xe1t.","Foly\xe9konyan \xe9s folyamatosan v\xe9gezze a forgat\xe1st. Az Arnold press egyike azon kev\xe9s gyakorlatoknak, amelyek az \xf6sszes izomrostot lek\xf6tik.","Helyezze a kez\xe9t gy\xe9m\xe1nt alakban a mellkasa al\xe1. Engedje le a test\xe9t \xfagy, hogy a k\xf6ny\xf6ke k\xf6zel legyen a t\xf6rzs\xe9hez. Nyomd felfel\xe9 a tricepszedet.","Helyezze mag\xe1t a hack guggol\xf3 g\xe9pbe \xfagy, hogy v\xe1llai a p\xe1rn\xe1k alatt legyenek. T\xe9rd 90 fokos behajl\xedt\xe1s\xe1val ereszkedj le, majd nyomd felfel\xe9.","F\u0151leg l\xe1bbal nyomja a megemelt fel\xfcleten. Tartsa f\xfcgg\u0151legesen a t\xf6rzs\xe9t.","L\xe1baival nyomd, majd d\xf6ntsd h\xe1tra a t\xf6rzsed, v\xe9g\xfcl h\xfazd a hasad fel\xe9 az evez\u0151t. Ford\xedtsa meg a sorrendet a visszak\xfcld\xe9skor.","Kiv\xe1l\xf3 v\xe1ll-, cs\xedp\u0151- \xe9s bokamozg\xe1st ig\xe9nyel. Kezdje s\xfaly n\xe9lk\xfcl.","H\xfazza vissza a lapock\xe1it, \xe9s tartsa z\xe1rva. Ne verje le a s\xfalyt a mellkas\xe1r\xf3l.","H\xfazza vissza a lapock\xe1it, hogy stabiliz\xe1lja a v\xe1ll\xe1t.","Forgasd a der\xe9kt\xf3l, ne csak a karokt\xf3l.","Forgassa el a t\xf6rzs\xe9t \xfagy, hogy az egyik k\xf6ny\xf6k\xe9t az ellenkez\u0151 t\xe9rd fel\xe9 tolja. Ism\xe9telje meg a m\xe1sik oldalr\xf3l.","Forgassa kifel\xe9 a csukl\xf3j\xe1t a tetej\xe9n, hogy maximaliz\xe1lja a cs\xfacsot. Tartsa stabilan t\xf6rzs\xe9t.","S\xfalyz\xf3kkal \xfclve v\xe1llmagass\xe1gban, teny\xe9rrel \xd6n fel\xe9. Nyomja felfel\xe9 a csukl\xf3j\xe1t kifel\xe9 forgatva, am\xedg a tenyere el\u0151re n\xe9z. Engedje vissza a kiindul\xe1si helyzetbe.","\xdclj\xf6n \xfagy, hogy a k\xf6ny\xf6ke a bels\u0151 combj\xe1n nyugszik. Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, \xe9s h\xfazza a s\xfalyz\xf3t a v\xe1ll\xe1hoz. Lassan engedje le.","\xdclj\xf6n felemelt l\xe1bbal, a t\xf6rzs pedig 45 fokban legyen. Forgassa el a t\xf6rzs\xe9t egyik oldalr\xf3l a m\xe1sikra \xfagy, hogy a kez\xe9t a cs\xedp\u0151je mellett a padl\xf3ra helyezze.","Sorrend: h\xfaz\xe1s k\xf6zben l\xe1bak, majd t\xf6rzs, majd karok.","\xdclj\xf6n a lat leh\xfaz\xf3 g\xe9phez, \xe9s sz\xe9les pron\xe1s markolattal fogja meg a rudat. H\xfazza a rudat a mellkasa fel\xe9, enyh\xe9n h\xe1trad\xf6ntve a t\xf6rzs\xe9t. Ir\xe1ny\xedtsd a kiindul\xf3 helyzetbe val\xf3 visszat\xe9r\xe9st.","\xdclj\xf6n a lat leh\xfaz\xf3 g\xe9phez szoros vagy semleges markolattal. H\xfazza a rudat a mellkasa fel\xe9 \xfagy, hogy k\xf6ny\xf6k\xe9t a test\xe9hez k\xf6zel tartva. Ir\xe1ny\xedtsd a visszat\xe9r\xe9st.","\xdclj\xf6n az alacsony k\xe1beln\xe9l \xfagy, hogy a l\xe1ba a t\xe1maszt\xe9kokon legyen. H\xfazza a foganty\xfat a dereka fel\xe9, \xe9s tartsa egyenesen a h\xe1t\xe1t. H\xfazza \xf6ssze a h\xe1tizmokat, \xe9s lassan t\xe9rjen vissza.","\xdclj\xf6n a g\xe9phez p\xe1rn\xe1kkal a bok\xe1n. Ny\xfajtsa ki a l\xe1b\xe1t felfel\xe9, \xf6sszeh\xfazva a n\xe9gyfej\u0171 izm\xe1t. Lassan engedje le.","\xdclj\xf6n a g\xe9phez p\xe1rn\xe1kkal a bok\xe1n. Hajl\xedtsa meg a t\xe9rd\xe9t, hogy a sark\xe1t a fen\xe9k fel\xe9 ford\xedtsa. Lassan engedje le.","\xdclj le a pr\xe9dik\xe1torpadra, \xe9s tedd a karjaidat a p\xe1rn\xe1n. Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, hogy a munkaeszk\xf6zt a v\xe1llai fel\xe9 tolja. Lassan engedje le majdnem teljes kiny\xfal\xe1sig.","\xdclj\xf6n be a g\xe9pbe \xfagy, hogy a h\xe1t\xe1t a p\xe1rn\xe1nak t\xe1masztja. Helyezze a k\xf6ny\xf6k\xe9t a p\xe1rn\xe1kra. Hozd a karjaidat a k\xf6z\xe9ppont fel\xe9, \xf6sszeh\xfazva a mellkasodat. Lassan t\xe9rjen vissza a kiindul\xf3 helyzetbe.","\xdclj\xf6n be a g\xe9pbe \xfagy, hogy a l\xe1ba a platformon cs\xedp\u0151 sz\xe9less\xe9gben legyen. Engedje le t\xe9rd\xe9nek 90 fokos hajl\xedt\xe1s\xe1val. L\xe1baid kiny\xfajt\xe1s\xe1val nyomd.","\xdclj\xf6n le a lejt\u0151s padra \xfagy, hogy a l\xe1ba a padl\xf3n legyen. Fogja meg a munkag\xe9pet a v\xe1llsz\xe9less\xe9gn\xe9l sz\xe9lesebben. Lejjebb a mellkas fels\u0151 szintj\xe9re. Er\u0151sen nyomja vissza a kiindul\xe1si helyzetbe.","\xdclj\xf6n az alkarj\xe1val a combj\xe1n. Fogja meg a munkaeszk\xf6zt szupin\xe1lt markolattal. Hajl\xedtsa fel a csukl\xf3j\xe1t, \xe9s lassan engedje le.","Fesz\xedtse sz\xe9t a k\xf6telet alul, hogy maximaliz\xe1lja az \xf6sszeh\xfaz\xf3d\xe1st. Tartsa r\xf6gz\xedtve a k\xf6ny\xf6k\xe9t.","\xc1lljon a k\xe1bel k\xf6zep\xe9n, k\xe9zenk\xe9nt egy foganty\xfaval. Tartsa a karj\xe1t kiss\xe9 behajl\xedtva. Vidd a kezeid a k\xf6z\xe9ppont fel\xe9, keresztezve \u0151ket. Lassan t\xe9rjen vissza a kiindul\xf3 helyzetbe.","A magas k\xe1beln\xe9l \xe1llva a k\xf6t\xe9llel. A k\xf6ny\xf6k\xe9t tartsa r\xf6gz\xedtve a t\xf6rzs oldal\xe1n. Nyomja le a k\xf6telet a v\xe9geit elv\xe1lasztva. Lassan t\xe9rjen vissza.","A magas k\xe1beln\xe9l \xe1llva. A k\xf6ny\xf6k\xe9t tartsa r\xf6gz\xedtve a t\xf6rzs oldal\xe1n. Nyomja lefel\xe9 teljesen kiny\xfajtva a karj\xe1t. Lassan t\xe9rjen vissza.","Szinte kiny\xfajtott karokkal \xe1llva a magas k\xe1bellel szemben. H\xfazza a rudat a combja fel\xe9 \xedvben, \xe9s tartsa egyenesen a karj\xe1t. Lassan t\xe9rjen vissza a kiindul\xf3 helyzetbe.","Egy pad el\u0151tt \xe1llva. Helyezze az egyik l\xe1b\xe1t a megemelt fel\xfcletre, \xe9s nyomja felfel\xe9. Lassan engedje le a mozg\xe1st ir\xe1ny\xedtva.","Egy l\xe1bon \xe1llva. Engedje le a t\xf6rzs\xe9t el\u0151re \xfagy, hogy a h\xe1ta egyenes maradjon, mik\xf6zben a szabad l\xe1b h\xe1trany\xfalik. T\xe9rjen vissza f\xfcgg\u0151leges helyzetbe, \xe9s szor\xedtsa \xf6ssze a fen\xe9kj\xe9t.","\xc1llva vagy \xfclve a munkaeszk\xf6zzel v\xe1llmagass\xe1gban. Nyomja felfel\xe9 teljesen kiny\xfajtva a karj\xe1t. Lassan ereszkedjen le, \xe9s t\xe9rjen vissza a kiindul\xe1si helyzetbe, a s\xfaly v\xe1llmagass\xe1gban legyen.","\xc1llva vagy \xfclve a munkaeszk\xf6zzel v\xe1llmagass\xe1gban. Nyomja felfel\xe9 teljesen kiny\xfajtva a karj\xe1t. Lassan engedje le.","\xc1llva vagy \xfclve a munkaeszk\xf6z feje f\xf6l\xf6tt, kiny\xfajtott karokkal. Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, cs\xf6kkentve a s\xfalyt a feje m\xf6g\xf6tt. Hosszabb\xedtsa meg a visszat\xe9r\xe9st.","\xc1llj egy-egy s\xfalyz\xf3val mindk\xe9t kezedben az oldaladon. Emelje fel karjait oldalir\xe1nyban v\xe1llmagass\xe1gig, k\xf6ny\xf6k\xe9t enyh\xe9n behajl\xedtva. Lassan engedje le.","\xc1llj s\xfallyal mindk\xe9t kezedben az oldaladon. Emelje fel a v\xe1ll\xe1t a f\xfcle fel\xe9, \xe9s szor\xedtsa \xf6ssze a csapd\xe1it. Tartsa az \xf6sszeh\xfaz\xf3d\xe1st egy m\xe1sodpercig, majd lassan engedje le.","S\xfalyz\xf3kkal az oldaladon \xe1llva, semleges markolattal (h\xfcvelykujj felfel\xe9). Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t \xfagy, hogy a s\xfalyz\xf3kat a v\xe1llad fel\xe9 vigye. Lassan engedje le.","\xc1ll\xf3 l\xe1bbal cs\xedp\u0151 sz\xe9less\xe9gben. A cs\xedp\u0151n\xe9l csukd \xf6ssze a s\xfalyt a l\xe1baid k\xf6z\xf6tt, majd robban\xe1sszer\u0171en hajtsd el\u0151re a cs\xedp\u0151det, lend\xedtsd a s\xfalyt v\xe1llmagass\xe1gig.","\xc1ll\xf3 l\xe1bbal cs\xedp\u0151 sz\xe9less\xe9gben. Engedje le a s\xfalyz\xf3t a l\xe1bai ment\xe9n \xfagy, hogy a t\xe9rd\xe9t enyh\xe9n behajl\xedtva \xe9s a h\xe1t\xe1t egyenesen tartva. Emelkedj le, am\xedg fesz\xfclts\xe9get nem \xe9rzel a combhajl\xedt\xf3 izomzatban, majd t\xe9rj vissza.","\xc1ll\xf3 l\xe1bbal cs\xedp\u0151 sz\xe9less\xe9gben. Engedje le egyenes h\xe1ttal \xe9s felfel\xe9 mellkassal. Nyomja a l\xe1b\xe1t a talajba, \xe9s egyszerre ny\xfajtsa ki a cs\xedp\u0151t \xe9s a t\xe9rd\xe9t \xfagy, hogy a rudat k\xf6zel tartsa a l\xe1b\xe1hoz.","\xc1llva v\xe1ll sz\xe9less\xe9gben l\xe1bbal, tartson egy s\xfalyz\xf3t a mellkasa el\u0151tt. A mellkas\xe1t felfel\xe9 tartva ereszkedjen le. T\xe9rj vissza a sarkadon kereszt\xfcl.","\xc1ll\xf3 l\xe1bbal v\xe1llsz\xe9less\xe9gben. Engedje le test\xe9t t\xe9rd\xe9nek \xe9s cs\xedp\u0151j\xe9nek hajl\xedt\xe1s\xe1val, mintha egy sz\xe9ken \xfclne. Emelkedj le, am\xedg a combod p\xe1rhuzamos nem lesz a padl\xf3val. Push through your heels.","Egy\xfctt l\xe1bbal \xe1llva. Tegyen egy sz\xe9les oldals\xf3 l\xe9p\xe9st az ellenkez\u0151 l\xe1bfej r\xf6gz\xedt\xe9s\xe9vel. Engedje le az oldal fel\xe9 a t\xe9rd hajl\xedt\xe1s\xe1val.","\xc1lljon a s\xfalyz\xf3val a v\xe1ll\xe1n. D\xf6ntse el\u0151re a t\xf6rzs\xe9t, tartsa egyenesen a h\xe1t\xe1t \xe9s enyh\xe9n hajl\xedtva a t\xe9rd\xe9t. \xc9rezd a fesz\xedt\xe9st a combhajl\xedt\xf3idban. T\xe9rjen vissza f\xfcgg\u0151leges helyzetbe.","\xc1lljon a munkaeszk\xf6zzel a combja el\u0151tt, pron\xe1lt markolat seg\xedts\xe9g\xe9vel. H\xfazza az \xe1lla fel\xe9 \xfagy, hogy a k\xf6ny\xf6k\xe9t magasabban tartsa, mint a csukl\xf3j\xe1t. Lassan engedje le.","\xc1lljon a munkaeszk\xf6zzel a combja el\u0151tt. Emelje fel a karj\xe1t maga el\xe9 v\xe1llmagass\xe1gig, k\xf6ny\xf6k\xe9t enyh\xe9n behajl\xedtva. Lassan engedje le.","\xc1lljon a munkaeszk\xf6zzel egy kiny\xfajtott markolat seg\xedts\xe9g\xe9vel (teny\xe9r lefel\xe9 n\xe9z). Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, hogy a munkaeszk\xf6zt a v\xe1llai fel\xe9 tolja. Lassan engedje le.","\xc1ll\xe1s a munkaeszk\xf6zzel, h\xe1trad\u0151lt markolat seg\xedts\xe9g\xe9vel. Hajl\xedtsa meg a k\xf6ny\xf6k\xe9t, hogy a munkaeszk\xf6zt a v\xe1llai fel\xe9 mozd\xedtsa, mik\xf6zben k\xf6ny\xf6k\xe9t a t\xf6rzs oldalain r\xf6gz\xedtse. Lassan ereszkedjen le, visszat\xe9rve a kiindul\xe1si helyzetbe.","\xc1llva 45 fokos ferde t\xf6rzstel. Fogja meg a s\xfalyz\xf3t pron\xe1lt markolattal. H\xfazza a hasa fel\xe9 \xfagy, hogy a h\xe1ta semleges legyen. Lassan engedje le.","\xc1lljon \xfagy, hogy a sarka lev\xe1lt az emelv\xe9ny sz\xe9l\xe9r\u0151l. Emelkedj fel a l\xe1bujjaidra, \xe9s szor\xedtsd \xf6ssze a v\xe1dlit. Lassan engedje le, hogy a sarka a platform szintje al\xe1 s\xfcllyedjen.","Kezdje m\xe9rs\xe9kelt \xfctemben, \xe9s fokozatosan n\xf6velje.","Kezdje a lapock\xe1k visszah\xfaz\xe1s\xe1val. Az excentrikus f\xe1zis szab\xe1lyoz\xe1sa.","Kezdje a lapock\xe1k visszah\xfaz\xe1s\xe1val. Ne d\xf6ntse t\xfals\xe1gosan h\xe1tra a t\xf6rzs\xe9t.","Kezdje a mozg\xe1st a lapock\xe1k visszah\xfaz\xf3d\xe1s\xe1t\xf3l. Ker\xfclje a lend\xfclet haszn\xe1lat\xe1t.","Kezdje a mozg\xe1st a lapock\xe1k visszah\xfaz\xf3d\xe1s\xe1t\xf3l. Ir\xe1ny\xedtsd a hosszabb\xedt\xe1si f\xe1zist.","L\xe9pjen h\xe1tra, \xe9s engedje le a h\xe1ts\xf3 t\xe9rd\xe9t a padl\xf3 fel\xe9. Az el\xfcls\u0151 t\xe9rd egy vonalban marad a bok\xe1val.","L\xe9pjen el\u0151re, \xe9s engedje le a h\xe1ts\xf3 t\xe9rd\xe9t a padl\xf3 fel\xe9. Az el\xfcls\u0151 t\xe9rd egy vonalban marad a bok\xe1val. Nyomja vissza felfel\xe9.","L\xe9pjen el\u0151re, leengedve a h\xe1ts\xf3 t\xe9rd\xe9t. Folyamatosan l\xe9pkedjen el\u0151re v\xe1ltakoz\xf3 l\xe1bakkal.","L\xe9pjen be a csap\xf3r\xfadba. L\xe1bak cs\xedp\u0151 sz\xe9less\xe9gben. Egyenes h\xe1ttal ereszkedjen le a foganty\xfakn\xe1l fogva. Nyomd \xe1t a l\xe1baidat \xfagy, hogy egyszerre ny\xfajtsd ki a cs\xedp\u0151t \xe9s a t\xe9rdedet.","Tegyen hossz\xfa l\xe9p\xe9seket, hogy jobban lek\xf6sse a farizmokat.","A Zottman curl edzi az alkar hajl\xedt\xe1s\xe1t \xe9s ny\xfajt\xe1s\xe1t.","A r\xfadnak a mozg\xe1s sor\xe1n v\xe9gig kell legelnie a l\xe1b\xe1t. Az ereszked\xe9s sor\xe1n \xf6sszpontos\xedtson a combhajl\xedt\xf3 ny\xfajt\xe1sra.","Min\xe9l magasabb a fel\xfclet, ann\xe1l jobban m\u0171k\xf6dik a mellkas fels\u0151 r\xe9sze.","A lejt\u0151s pad kiemeli a mellkas fels\u0151 r\xe9sz\xe9t. Tartsa a lapock\xe1it beh\xfazva a mozg\xe1s sor\xe1n.","A ferde v\xe1ltozat k\xf6nnyebb, \xe9s a mellkas als\xf3 r\xe9sz\xe9t \xe9rinti.","Min\xe9l v\xedzszintesebb a tested, ann\xe1l kem\xe9nyebb. Mindig tartsa lek\xf6tve a magj\xe1t.","A mozg\xe1s a cs\xedp\u0151b\u0151l j\xf6n, nem a h\xe1tb\xf3l. Tartsa egyenesen a h\xe1t\xe1t a tol\xf3f\xe1zisban.","A pr\xe9dik\xe1tor pad kik\xfcsz\xf6b\xf6li a lend\xfclet haszn\xe1lat\xe1t. Ne hagyja, hogy a s\xfaly leessen az alj\xe1n.","A ford\xedtott kit\xf6r\xe9s biztons\xe1gosabb a t\xe9rd sz\xe1m\xe1ra, mint az el\u0151refel\xe9 t\xf6rt\xe9n\u0151 kit\xf6r\xe9s.","A forg\xe1s a der\xe9kb\xf3l j\xf6n, nem a fejb\u0151l.","Az \xfcl\u0151 l\xe1bhajl\xedt\xe1s n\xf6veli a mozg\xe1si tartom\xe1nyt. Ker\xfclje a farizmok felemel\xe9s\xe9t az \xfcl\xe9sr\u0151l.","A t\xe1mogat\xe1s megsz\xfcnteti az \xe1gy\xe9ki stresszt. Koncentr\xe1lj a visszah\xfaz\xe1sra.","A csap\xf3r\xfad cs\xf6kkenti a gerinc terhel\xe9s\xe9t. Tartsa a v\xe1ll\xe1t egy vonalban a foganty\xfakkal.","Az el\xfcls\u0151 s\xfaly seg\xedti a f\xfcgg\u0151leges testtart\xe1st. Tartsa a t\xe9rd\xe9t egy vonalban.","Haszn\xe1ljon k\xf6nny\u0171 s\xfalyt. Tartsa az alkarj\xe1t tov\xe1bbra is a combj\xe1n.","Egy k\xe9zzel \xe9s egy t\xe9rddel a padon. H\xfazza a s\xfalyz\xf3t az oldala fel\xe9 \xfagy, hogy a k\xf6ny\xf6k\xe9t k\xf6zel tartsa a test\xe9hez. Lassan engedje le.","A s\xfalyz\xf3val a feje f\xf6l\xf6tt ereszkedjen le egy guggol\xe1sba, \xe9s tartsa egyenesen \xe9s stabilan a karj\xe1t. T\xe9rjen vissza \xfagy, hogy a s\xfalyz\xf3t egyenesen tartsa.","Karjait el\u0151re a k\xe1beln\xe9l vagy s\xfalyz\xf3kkal h\xfazza az arca fel\xe9 a munkaeszk\xf6zt \xfagy, hogy k\xf6ny\xf6k\xe9t magasan tartsa. V\xe1lasszuk sz\xe9t a kez\xfcnket \xfagy, hogy az \xf6kl\xfcnket a f\xfcl\xfcnkh\xf6z k\xf6zel\xedts\xfck. Lassan t\xe9rjen vissza.","Ha a testet egy alacsony r\xfad al\xe1 d\xf6nti, akkor a markolatot pron\xe1lt markolattal. H\xfazza a mellkas\xe1t a r\xfadhoz, mik\xf6zben test\xe9t mereven tartja. Lassan engedje le.","L\xe1bait emelt fel\xfcletre helyezve engedje le a mellkas\xe1t a padl\xf3 fel\xe9. Nyomja felfel\xe9, visszat\xe9rve a kiindul\xe1si helyzetbe.","Kez\xe9vel emelt fel\xfcleten engedje le a mellkas\xe1t a kezei fel\xe9. Nyomja felfel\xe9, visszat\xe9rve a kiindul\xe1si helyzetbe.","Tartsa a kez\xe9t a pad sz\xe9l\xe9n, \xe9s l\xe9pjen el\u0151re fen\xe9kkel. Engedje le test\xe9t a k\xf6ny\xf6k\xe9t hajl\xedtva 90 fokra. Nyomja felfel\xe9.","D\xf6nt\xf6tt t\xf6rzs \xe9s 90 fokban hajl\xedtott k\xf6ny\xf6k mellett ny\xfajtsa ki a karj\xe1t h\xe1trafel\xe9 a teljes kiny\xfajt\xe1sig. Lassan t\xe9rjen vissza.","Fels\u0151 h\xe1t\xe1val egy padon, s\xfaly\xe1val a cs\xedp\u0151j\xe9n. Tolja felfel\xe9 a cs\xedp\u0151j\xe9t, \xe9s szor\xedtsa \xf6ssze a farizmokat. Lassan t\xe9rjen vissza.","Menjen a ny\xfajt\xf3 helyzetbe, \xe9s tartsa 20-30 m\xe1sodpercig.","L\xe9legezz m\xe9lyeket, \xe9s maradj k\xe9nyelmes tartom\xe1nyon bel\xfcl.","Tartson egyenletes ritmust \xe9s tartsa meg a helyes testtart\xe1st a mozg\xe1s sor\xe1n.","Tartsa akt\xedvan a magj\xe1t, \xe9s ir\xe1ny\xedtsa a mozg\xe1s minden f\xe1zis\xe1t.","Tartsa r\xf6gz\xedtve a k\xf6ny\xf6k\xe9t, \xe9s ir\xe1ny\xedtson minden ism\xe9tl\xe9st.","\xc1ll\xedtsa be a v\xe1ll\xe1t, ir\xe1ny\xedtsa a mozg\xe1st, \xe9s ker\xfclje a lend\xfclet haszn\xe1lat\xe1t.","Tartsa a t\xe9rd\xe9t egy vonalban, \xe9s ir\xe1ny\xedtsa mind a s\xfcllyeszt\xe9si, mind az emel\xe9si f\xe1zist.","Tartsa semleges h\xe1t\xe1t, r\xf6gz\xedtse a magj\xe1t, \xe9s ir\xe1ny\xedtsa a mozg\xe1st.","V\xe9gezze el a mozdulatot kontroll\xe1ltan, megfelel\u0151 testtart\xe1ssal \xe9s teljes mozg\xe1startom\xe1nyban."],t.w)
 B.amC=new A.i(B.ane,[B.alY,B.alR,B.amn,B.amo,B.ajO,B.ajL,B.amt,B.ajN,B.ajM],t.vb)
 B.anB={"deleteBackward:":0,"deleteWordBackward:":1,"deleteToBeginningOfLine:":2,"deleteForward:":3,"deleteWordForward:":4,"deleteToEndOfLine:":5,"moveLeft:":6,"moveRight:":7,"moveForward:":8,"moveBackward:":9,"moveUp:":10,"moveDown:":11,"moveLeftAndModifySelection:":12,"moveRightAndModifySelection:":13,"moveUpAndModifySelection:":14,"moveDownAndModifySelection:":15,"moveWordLeft:":16,"moveWordRight:":17,"moveToBeginningOfParagraph:":18,"moveToEndOfParagraph:":19,"moveWordLeftAndModifySelection:":20,"moveWordRightAndModifySelection:":21,"moveParagraphBackwardAndModifySelection:":22,"moveParagraphForwardAndModifySelection:":23,"moveToLeftEndOfLine:":24,"moveToRightEndOfLine:":25,"moveToBeginningOfDocument:":26,"moveToEndOfDocument:":27,"moveToLeftEndOfLineAndModifySelection:":28,"moveToRightEndOfLineAndModifySelection:":29,"moveToBeginningOfDocumentAndModifySelection:":30,"moveToEndOfDocumentAndModifySelection:":31,"transpose:":32,"scrollToBeginningOfDocument:":33,"scrollToEndOfDocument:":34,"scrollPageUp:":35,"scrollPageDown:":36,"pageUpAndModifySelection:":37,"pageDownAndModifySelection:":38,"cancelOperation:":39,"insertTab:":40,"insertBacktab:":41}
 B.D9=new A.n8(!1)
 B.Da=new A.n8(!0)
-B.amD=new A.i(B.anB,[B.lV,B.lY,B.lW,B.hg,B.hh,B.lX,B.fc,B.fd,B.fd,B.fc,B.fg,B.fh,B.ji,B.jj,B.hv,B.hw,B.jm,B.jn,B.ep,B.eq,B.ro,B.rp,B.rk,B.rl,B.ep,B.eq,B.fe,B.ff,B.ra,B.rb,B.mH,B.mI,B.pp,B.D9,B.Da,B.nK,B.kf,B.jo,B.jp,B.pc,B.pj,B.pm],A.aQ("i<m,bo>"))
+B.amD=new A.i(B.anB,[B.lU,B.lX,B.lV,B.hg,B.hh,B.lW,B.fc,B.fd,B.fd,B.fc,B.fg,B.fh,B.ji,B.jj,B.hv,B.hw,B.jm,B.jn,B.ep,B.eq,B.ro,B.rp,B.rk,B.rl,B.ep,B.eq,B.fe,B.ff,B.ra,B.rb,B.mG,B.mH,B.pp,B.D9,B.Da,B.nJ,B.kf,B.jo,B.jp,B.pc,B.pj,B.pm],A.aQ("i<m,bo>"))
 B.anq={BU:0,DD:1,FX:2,TP:3,YD:4,ZR:5}
 B.dA=new A.i(B.anq,["MM","DE","FR","TL","YE","CD"],t.w)
 B.aoA=new A.A(458752)
@@ -113051,7 +113051,7 @@ B.ap8=new A.A(786952)
 B.ap9=new A.A(786989)
 B.apa=new A.A(786990)
 B.apb=new A.A(787065)
-B.amE=new A.cW([16,B.zi,17,B.zj,18,B.hZ,19,B.zk,20,B.zl,21,B.zm,22,B.zn,23,B.zo,24,B.zp,65666,B.Ca,65667,B.Cb,65717,B.Cc,392961,B.zq,392962,B.zr,392963,B.zs,392964,B.zt,392965,B.zu,392966,B.zv,392967,B.zw,392968,B.zx,392969,B.zy,392970,B.zz,392971,B.zA,392972,B.zB,392973,B.zC,392974,B.zD,392975,B.zE,392976,B.zF,392977,B.zG,392978,B.zH,392979,B.zI,392980,B.zJ,392981,B.zK,392982,B.zL,392983,B.zM,392984,B.zN,392985,B.zO,392986,B.zP,392987,B.zQ,392988,B.zR,392989,B.zS,392990,B.zT,392991,B.zU,458752,B.aoA,458753,B.aoB,458754,B.aoC,458755,B.aoD,458756,B.zV,458757,B.zW,458758,B.zX,458759,B.zY,458760,B.zZ,458761,B.A_,458762,B.A0,458763,B.A1,458764,B.A2,458765,B.A3,458766,B.A4,458767,B.A5,458768,B.A6,458769,B.A7,458770,B.A8,458771,B.A9,458772,B.Aa,458773,B.Ab,458774,B.Ac,458775,B.Ad,458776,B.Ae,458777,B.Af,458778,B.Ag,458779,B.Ah,458780,B.Ai,458781,B.Aj,458782,B.Ak,458783,B.Al,458784,B.Am,458785,B.An,458786,B.Ao,458787,B.Ap,458788,B.Aq,458789,B.Ar,458790,B.As,458791,B.At,458792,B.Au,458793,B.nz,458794,B.Av,458795,B.Aw,458796,B.Ax,458797,B.Ay,458798,B.Az,458799,B.AA,458800,B.AB,458801,B.AC,458803,B.AD,458804,B.AE,458805,B.AF,458806,B.AG,458807,B.AH,458808,B.AI,458809,B.eH,458810,B.AJ,458811,B.AK,458812,B.AL,458813,B.AM,458814,B.AN,458815,B.AO,458816,B.AP,458817,B.AQ,458818,B.AR,458819,B.AS,458820,B.AT,458821,B.AU,458822,B.AV,458823,B.k5,458824,B.AW,458825,B.AX,458826,B.AY,458827,B.AZ,458828,B.B_,458829,B.B0,458830,B.B1,458831,B.B2,458832,B.B3,458833,B.B4,458834,B.B5,458835,B.k6,458836,B.B6,458837,B.B7,458838,B.B8,458839,B.B9,458840,B.Ba,458841,B.Bb,458842,B.Bc,458843,B.Bd,458844,B.Be,458845,B.Bf,458846,B.Bg,458847,B.Bh,458848,B.Bi,458849,B.Bj,458850,B.Bk,458851,B.Bl,458852,B.Bm,458853,B.Bn,458854,B.Bo,458855,B.Bp,458856,B.Bq,458857,B.Br,458858,B.Bs,458859,B.Bt,458860,B.Bu,458861,B.Bv,458862,B.Bw,458863,B.Bx,458864,B.By,458865,B.Bz,458866,B.BA,458867,B.BB,458868,B.BC,458869,B.BD,458871,B.BE,458873,B.BF,458874,B.BG,458875,B.BH,458876,B.BI,458877,B.BJ,458878,B.BK,458879,B.BL,458880,B.BM,458881,B.BN,458885,B.BO,458887,B.BP,458888,B.BQ,458889,B.BR,458890,B.BS,458891,B.BT,458896,B.BU,458897,B.BV,458898,B.BW,458899,B.BX,458900,B.BY,458907,B.BZ,458915,B.C_,458934,B.C0,458935,B.C1,458939,B.C2,458960,B.C3,458961,B.C4,458962,B.C5,458963,B.C6,458964,B.C7,458967,B.aoE,458968,B.C8,458969,B.C9,458976,B.fy,458977,B.fz,458978,B.fA,458979,B.fB,458980,B.i_,458981,B.i0,458982,B.fC,458983,B.i1,786528,B.aoF,786529,B.aoG,786543,B.Cd,786544,B.Ce,786546,B.aoH,786547,B.aoI,786548,B.aoJ,786549,B.aoK,786553,B.aoL,786554,B.aoM,786563,B.aoN,786572,B.aoO,786573,B.aoP,786580,B.aoQ,786588,B.aoR,786589,B.aoS,786608,B.Cf,786609,B.Cg,786610,B.Ch,786611,B.Ci,786612,B.Cj,786613,B.Ck,786614,B.Cl,786615,B.Cm,786616,B.Cn,786637,B.Co,786639,B.aoT,786661,B.aoU,786819,B.Cp,786820,B.aoV,786822,B.aoW,786826,B.Cq,786829,B.aoX,786830,B.aoY,786834,B.Cr,786836,B.Cs,786838,B.aoZ,786844,B.ap_,786846,B.ap0,786847,B.Ct,786850,B.Cu,786855,B.ap1,786859,B.ap2,786862,B.ap3,786865,B.Cv,786871,B.ap4,786891,B.Cw,786945,B.ap5,786947,B.ap6,786951,B.ap7,786952,B.ap8,786977,B.Cx,786979,B.Cy,786980,B.Cz,786981,B.CA,786982,B.CB,786983,B.CC,786986,B.CD,786989,B.ap9,786990,B.apa,786994,B.CE,787065,B.apb,787081,B.CF,787083,B.CG,787084,B.CH,787101,B.CI,787103,B.CJ],A.aQ("cW<o,A>"))
+B.amE=new A.cW([16,B.zi,17,B.zj,18,B.hZ,19,B.zk,20,B.zl,21,B.zm,22,B.zn,23,B.zo,24,B.zp,65666,B.Ca,65667,B.Cb,65717,B.Cc,392961,B.zq,392962,B.zr,392963,B.zs,392964,B.zt,392965,B.zu,392966,B.zv,392967,B.zw,392968,B.zx,392969,B.zy,392970,B.zz,392971,B.zA,392972,B.zB,392973,B.zC,392974,B.zD,392975,B.zE,392976,B.zF,392977,B.zG,392978,B.zH,392979,B.zI,392980,B.zJ,392981,B.zK,392982,B.zL,392983,B.zM,392984,B.zN,392985,B.zO,392986,B.zP,392987,B.zQ,392988,B.zR,392989,B.zS,392990,B.zT,392991,B.zU,458752,B.aoA,458753,B.aoB,458754,B.aoC,458755,B.aoD,458756,B.zV,458757,B.zW,458758,B.zX,458759,B.zY,458760,B.zZ,458761,B.A_,458762,B.A0,458763,B.A1,458764,B.A2,458765,B.A3,458766,B.A4,458767,B.A5,458768,B.A6,458769,B.A7,458770,B.A8,458771,B.A9,458772,B.Aa,458773,B.Ab,458774,B.Ac,458775,B.Ad,458776,B.Ae,458777,B.Af,458778,B.Ag,458779,B.Ah,458780,B.Ai,458781,B.Aj,458782,B.Ak,458783,B.Al,458784,B.Am,458785,B.An,458786,B.Ao,458787,B.Ap,458788,B.Aq,458789,B.Ar,458790,B.As,458791,B.At,458792,B.Au,458793,B.ny,458794,B.Av,458795,B.Aw,458796,B.Ax,458797,B.Ay,458798,B.Az,458799,B.AA,458800,B.AB,458801,B.AC,458803,B.AD,458804,B.AE,458805,B.AF,458806,B.AG,458807,B.AH,458808,B.AI,458809,B.eH,458810,B.AJ,458811,B.AK,458812,B.AL,458813,B.AM,458814,B.AN,458815,B.AO,458816,B.AP,458817,B.AQ,458818,B.AR,458819,B.AS,458820,B.AT,458821,B.AU,458822,B.AV,458823,B.k5,458824,B.AW,458825,B.AX,458826,B.AY,458827,B.AZ,458828,B.B_,458829,B.B0,458830,B.B1,458831,B.B2,458832,B.B3,458833,B.B4,458834,B.B5,458835,B.k6,458836,B.B6,458837,B.B7,458838,B.B8,458839,B.B9,458840,B.Ba,458841,B.Bb,458842,B.Bc,458843,B.Bd,458844,B.Be,458845,B.Bf,458846,B.Bg,458847,B.Bh,458848,B.Bi,458849,B.Bj,458850,B.Bk,458851,B.Bl,458852,B.Bm,458853,B.Bn,458854,B.Bo,458855,B.Bp,458856,B.Bq,458857,B.Br,458858,B.Bs,458859,B.Bt,458860,B.Bu,458861,B.Bv,458862,B.Bw,458863,B.Bx,458864,B.By,458865,B.Bz,458866,B.BA,458867,B.BB,458868,B.BC,458869,B.BD,458871,B.BE,458873,B.BF,458874,B.BG,458875,B.BH,458876,B.BI,458877,B.BJ,458878,B.BK,458879,B.BL,458880,B.BM,458881,B.BN,458885,B.BO,458887,B.BP,458888,B.BQ,458889,B.BR,458890,B.BS,458891,B.BT,458896,B.BU,458897,B.BV,458898,B.BW,458899,B.BX,458900,B.BY,458907,B.BZ,458915,B.C_,458934,B.C0,458935,B.C1,458939,B.C2,458960,B.C3,458961,B.C4,458962,B.C5,458963,B.C6,458964,B.C7,458967,B.aoE,458968,B.C8,458969,B.C9,458976,B.fy,458977,B.fz,458978,B.fA,458979,B.fB,458980,B.i_,458981,B.i0,458982,B.fC,458983,B.i1,786528,B.aoF,786529,B.aoG,786543,B.Cd,786544,B.Ce,786546,B.aoH,786547,B.aoI,786548,B.aoJ,786549,B.aoK,786553,B.aoL,786554,B.aoM,786563,B.aoN,786572,B.aoO,786573,B.aoP,786580,B.aoQ,786588,B.aoR,786589,B.aoS,786608,B.Cf,786609,B.Cg,786610,B.Ch,786611,B.Ci,786612,B.Cj,786613,B.Ck,786614,B.Cl,786615,B.Cm,786616,B.Cn,786637,B.Co,786639,B.aoT,786661,B.aoU,786819,B.Cp,786820,B.aoV,786822,B.aoW,786826,B.Cq,786829,B.aoX,786830,B.aoY,786834,B.Cr,786836,B.Cs,786838,B.aoZ,786844,B.ap_,786846,B.ap0,786847,B.Ct,786850,B.Cu,786855,B.ap1,786859,B.ap2,786862,B.ap3,786865,B.Cv,786871,B.ap4,786891,B.Cw,786945,B.ap5,786947,B.ap6,786951,B.ap7,786952,B.ap8,786977,B.Cx,786979,B.Cy,786980,B.Cz,786981,B.CA,786982,B.CB,786983,B.CC,786986,B.CD,786989,B.ap9,786990,B.apa,786994,B.CE,787065,B.apb,787081,B.CF,787083,B.CG,787084,B.CH,787101,B.CI,787103,B.CJ],A.aQ("cW<o,A>"))
 B.amF=new A.ry(B.a7,10)
 B.JI=new A.q(1,0.7254901960784313,0.9647058823529412,0.792156862745098,B.j)
 B.Jy=new A.q(1,0.4117647058823529,0.9411764705882353,0.6823529411764706,B.j)
@@ -113128,10 +113128,10 @@ B.amT=new A.jh("popRoute",null)
 B.dg=new A.Ta(B.f4)
 B.amU=new A.mN("flutter/service_worker",B.dg)
 B.yY=new A.mN("plugins.flutter.io/url_launcher",B.dg)
-B.nm=new A.mN("gym_file_reader",B.dg)
+B.nl=new A.mN("gym_file_reader",B.dg)
 B.k0=new A.mN("plugins.flutter.io/shared_preferences",B.dg)
 B.fu=new A.Qi(0,"latestPointer")
-B.nr=new A.Qi(1,"averageBoundaryPointers")
+B.nq=new A.Qi(1,"averageBoundaryPointers")
 B.amV=new A.rN(0,"clipRect")
 B.amW=new A.rN(1,"clipRRect")
 B.amX=new A.rN(2,"clipPath")
@@ -113178,7 +113178,7 @@ B.zc=new A.rT(null)
 B.c2=new A.mQ(0,"iOs")
 B.hX=new A.mQ(1,"android")
 B.k3=new A.mQ(2,"linux")
-B.nw=new A.mQ(3,"windows")
+B.nv=new A.mQ(3,"windows")
 B.dc=new A.mQ(4,"macOs")
 B.zd=new A.mQ(5,"unknown")
 B.fZ=new A.acd()
@@ -113189,8 +113189,8 @@ B.aom=new A.iB("flutter/backgesture",B.dg)
 B.bv=new A.iB("flutter/platform",B.fZ)
 B.aon=new A.iB("flutter/mousecursor",B.dg)
 B.zg=new A.iB("flutter/menu",B.dg)
-B.nx=new A.iB("flutter/restoration",B.dg)
-B.ny=new A.iB("flutter/navigation",B.fZ)
+B.nw=new A.iB("flutter/restoration",B.dg)
+B.nx=new A.iB("flutter/navigation",B.fZ)
 B.aoo=new A.iB("flutter/undomanager",B.fZ)
 B.aop=new A.iB("flutter/keyboard",B.dg)
 B.aoq=new A.rU(0,null)
@@ -113217,7 +113217,7 @@ B.fD=new A.oS(4,"bottom")
 B.CO=new A.oS(5,"middle")
 B.apc=new A.wI(B.a2,B.fD,null,null)
 B.CQ=new A.mW(0,"cancel")
-B.nA=new A.mW(1,"add")
+B.nz=new A.mW(1,"add")
 B.apd=new A.mW(2,"remove")
 B.eI=new A.mW(3,"hover")
 B.ape=new A.mW(4,"down")
@@ -113238,7 +113238,7 @@ B.CS=new A.wM(0,"unknown")
 B.apj=new A.wM(1,"estimated")
 B.apk=new A.wM(2,"publisherProvided")
 B.apl=new A.wM(3,"precise")
-B.nB=new A.ta(0,"platformDefault")
+B.nA=new A.ta(0,"platformDefault")
 B.CT=new A.ta(1,"inAppWebView")
 B.CU=new A.ta(2,"inAppBrowserView")
 B.apm=new A.ta(3,"externalApplication")
@@ -113275,13 +113275,13 @@ B.apV=new A.au(B.kD,B.kC)
 B.aq6=new A.E(-1/0,-1/0,1/0,1/0)
 B.eL=new A.E(-1e9,-1e9,1e9,1e9)
 B.CZ=new A.wY(0,"start")
-B.nD=new A.wY(1,"stable")
+B.nC=new A.wY(1,"stable")
 B.aq7=new A.wY(2,"changed")
 B.aq8=new A.wY(3,"unstable")
 B.dB=new A.DY(0,"identical")
 B.aq9=new A.DY(2,"paint")
 B.ck=new A.DY(3,"layout")
-B.nE=new A.bk(B.lr,B.q)
+B.nD=new A.bk(B.lr,B.q)
 B.fF=new A.aS(28,28)
 B.FI=new A.ch(B.fF,B.fF,B.O,B.O)
 B.aqa=new A.bk(B.FI,B.q)
@@ -113296,7 +113296,7 @@ B.D1=new A.bk(B.FG,B.q)
 B.CY=new A.aS(24,24)
 B.FH=new A.ch(B.CY,B.CY,B.O,B.O)
 B.fH=new A.bk(B.FH,B.q)
-B.nF=new A.bk(B.oU,B.q)
+B.nE=new A.bk(B.oT,B.q)
 B.D2=new A.bk(B.dM,B.q)
 B.CX=new A.aS(20,20)
 B.FA=new A.ch(B.CX,B.CX,B.O,B.O)
@@ -113307,18 +113307,18 @@ B.fJ=new A.x5(1,"doNotPop")
 B.D4=new A.x5(2,"bubble")
 B.i3=new A.kk(null,null)
 B.aqd=new A.Eu(1333)
-B.nG=new A.Eu(2222)
+B.nF=new A.Eu(2222)
 B.aqe=new A.S4(null,null)
 B.aqf=new A.to(null)
 B.eM=new A.tp(0,"idle")
 B.D5=new A.tp(1,"transientCallbacks")
 B.D6=new A.tp(2,"midFrameMicrotasks")
 B.eN=new A.tp(3,"persistentCallbacks")
-B.nH=new A.tp(4,"postFrameCallbacks")
+B.nG=new A.tp(4,"postFrameCallbacks")
 B.D7=new A.akg(0,"englishLike")
 B.eO=new A.EF(0,"idle")
-B.nI=new A.EF(1,"forward")
-B.nJ=new A.EF(2,"reverse")
+B.nH=new A.EF(1,"forward")
+B.nI=new A.EF(2,"reverse")
 B.aC2=new A.ts(0,"explicit")
 B.dC=new A.ts(1,"keepVisibleAtEnd")
 B.dD=new A.ts(2,"keepVisibleAtStart")
@@ -113343,19 +113343,19 @@ B.aqq=new A.tw(0,"startEdgeUpdate")
 B.dY=new A.tw(1,"endEdgeUpdate")
 B.aqs=new A.tw(4,"selectWord")
 B.aqt=new A.tw(5,"selectParagraph")
-B.nL=new A.xe(0,"previousLine")
-B.nM=new A.xe(1,"nextLine")
+B.nK=new A.xe(0,"previousLine")
+B.nL=new A.xe(1,"nextLine")
 B.kg=new A.xe(2,"forward")
 B.kh=new A.xe(3,"backward")
 B.dZ=new A.EN(2,"none")
-B.Dh=new A.p6(null,null,B.dZ,B.mZ,!0)
-B.Di=new A.p6(null,null,B.dZ,B.mZ,!1)
+B.Dh=new A.p6(null,null,B.dZ,B.mY,!0)
+B.Di=new A.p6(null,null,B.dZ,B.mY,!1)
 B.ab=new A.p7(0,"next")
 B.aj=new A.p7(1,"previous")
 B.ap=new A.p7(2,"end")
-B.nN=new A.p7(3,"pending")
+B.nM=new A.p7(3,"pending")
 B.i7=new A.p7(4,"none")
-B.nO=new A.EN(0,"uncollapsed")
+B.nN=new A.EN(0,"uncollapsed")
 B.aqu=new A.EN(1,"collapsed")
 B.aqv=new A.dc(1048576,"moveCursorBackwardByWord")
 B.Dj=new A.dc(128,"decrease")
@@ -113381,14 +113381,14 @@ B.aqK=new A.dc(8192,"cut")
 B.Dm=new A.dc(8388608,"scrollToOffset")
 B.ah=new A.G_(0,"none")
 B.kn=new A.ES(B.f6,B.ah,B.ah,B.ah,B.ah,B.ah,B.ah,!1,!1,!1,!1,!1,!1,!1,!1,!1,!1,!1,!1,!1,!1,!1,!1)
-B.nP=new A.tA(0,"none")
+B.nO=new A.tA(0,"none")
 B.Dn=new A.tA(1,"text")
 B.aqL=new A.tA(2,"url")
 B.aqM=new A.tA(3,"phone")
 B.aqN=new A.tA(5,"email")
 B.ko=new A.ko(0,"none")
 B.aqP=new A.ko(14,"menu")
-B.nQ=new A.ko(15,"menuItem")
+B.nP=new A.ko(15,"menuItem")
 B.Do=new A.ko(16,"menuItemCheckbox")
 B.Dp=new A.ko(17,"menuItemRadio")
 B.aqQ=new A.ko(5,"alertDialog")
@@ -113403,7 +113403,7 @@ B.Dt=new A.EV(1,"valid")
 B.Du=new A.EV(2,"invalid")
 B.anl={mailto:0,tel:1,sms:2}
 B.Dv=new A.fD(B.anl,3,t.fF)
-B.Dw=new A.fo([B.dc,B.k3,B.nw],A.aQ("fo<mQ>"))
+B.Dw=new A.fo([B.dc,B.k3,B.nv],A.aQ("fo<mQ>"))
 B.aqV=new A.fo([10,11,12,13,133,8232,8233],t.Ih)
 B.anc={serif:0,"sans-serif":1,monospace:2,cursive:3,fantasy:4,"system-ui":5,math:6,emoji:7,fangsong:8}
 B.aqW=new A.fD(B.anc,9,t.fF)
@@ -113430,21 +113430,21 @@ B.aqO=new A.ko(1,"tab")
 B.ar6=new A.fo([B.aqR,B.aqO],A.aQ("fo<ko>"))
 B.Dx=new A.fo([B.b4,B.bS,B.dd,B.bT,B.cv],t.Lu)
 B.JA=new A.q(0.23529411764705882,0,0,0,B.j)
-B.GF=new A.bD(0.5,B.a7,B.JA,B.nt,10)
+B.GF=new A.bD(0.5,B.a7,B.JA,B.ns,10)
 B.ab5=s([B.GF],t.V)
 B.aqc=new A.lp(B.lr,B.q)
 B.ar8=new A.hv(null,null,null,B.ab5,B.aqc)
-B.Dy=new A.ay(B.n3,!1,!1,!1,!0,B.E)
+B.Dy=new A.ay(B.n2,!1,!1,!1,!0,B.E)
 B.ar9=new A.ay(B.tF,!0,!1,!1,!1,B.E)
 B.ch=new A.CL(1,"locked")
 B.arb=new A.ay(B.eB,!1,!0,!1,!1,B.ch)
 B.arc=new A.ay(B.hV,!1,!0,!1,!1,B.ch)
-B.Dz=new A.ay(B.n2,!1,!1,!1,!0,B.E)
+B.Dz=new A.ay(B.n1,!1,!1,!1,!0,B.E)
 B.ard=new A.ay(B.yu,!0,!1,!1,!1,B.E)
-B.DA=new A.ay(B.nf,!0,!1,!1,!1,B.E)
-B.DB=new A.ay(B.n3,!0,!1,!1,!1,B.E)
+B.DA=new A.ay(B.ne,!0,!1,!1,!1,B.E)
+B.DB=new A.ay(B.n2,!0,!1,!1,!1,B.E)
 B.are=new A.ay(B.ex,!0,!0,!1,!1,B.ch)
-B.DC=new A.ay(B.nf,!1,!1,!1,!0,B.E)
+B.DC=new A.ay(B.ne,!1,!1,!1,!0,B.E)
 B.ci=new A.CL(2,"unlocked")
 B.ark=new A.ay(B.hS,!1,!1,!1,!1,B.ci)
 B.arh=new A.ay(B.ey,!1,!1,!1,!1,B.ci)
@@ -113452,7 +113452,7 @@ B.ari=new A.ay(B.hT,!1,!1,!1,!1,B.ci)
 B.arg=new A.ay(B.ez,!1,!1,!1,!1,B.ci)
 B.arf=new A.ay(B.eA,!1,!1,!1,!1,B.ci)
 B.arj=new A.ay(B.hU,!1,!1,!1,!1,B.ci)
-B.DE=new A.ay(B.n2,!0,!1,!1,!1,B.E)
+B.DE=new A.ay(B.n1,!0,!1,!1,!1,B.E)
 B.ars=new A.ay(B.hS,!1,!0,!1,!1,B.ch)
 B.arp=new A.ay(B.ey,!1,!0,!1,!1,B.ch)
 B.arq=new A.ay(B.hT,!1,!0,!1,!1,B.ch)
@@ -113481,28 +113481,28 @@ B.arL=new A.ay(B.ex,!1,!0,!1,!1,B.ch)
 B.arM=new A.ay(B.hK,!0,!0,!1,!1,B.E)
 B.arO=new A.ay(B.d9,!0,!0,!1,!1,B.E)
 B.arN=new A.ay(B.da,!0,!0,!1,!1,B.E)
-B.nW=new A.ay(B.eu,!0,!0,!1,!1,B.E)
-B.nV=new A.ay(B.ev,!0,!0,!1,!1,B.E)
-B.nX=new A.ay(B.ne,!0,!1,!1,!1,B.E)
+B.nV=new A.ay(B.eu,!0,!0,!1,!1,B.E)
+B.nU=new A.ay(B.ev,!0,!0,!1,!1,B.E)
+B.nW=new A.ay(B.nd,!0,!1,!1,!1,B.E)
 B.arQ=new A.ay(B.tE,!0,!1,!1,!1,B.E)
 B.arT=new A.ay(B.ey,!0,!0,!1,!1,B.ch)
 B.arS=new A.ay(B.ez,!0,!0,!1,!1,B.ch)
 B.arR=new A.ay(B.eA,!0,!0,!1,!1,B.ch)
 B.DS=new A.ay(B.d9,!1,!0,!1,!1,B.E)
-B.nY=new A.ay(B.cS,!1,!0,!1,!1,B.E)
-B.nZ=new A.ay(B.cT,!1,!0,!1,!1,B.E)
+B.nX=new A.ay(B.cS,!1,!0,!1,!1,B.E)
+B.nY=new A.ay(B.cT,!1,!0,!1,!1,B.E)
 B.DR=new A.ay(B.da,!1,!0,!1,!1,B.E)
 B.ib=new A.ay(B.eu,!1,!0,!1,!1,B.E)
 B.ia=new A.ay(B.ev,!1,!0,!1,!1,B.E)
-B.o_=new A.ay(B.hN,!1,!0,!1,!1,B.E)
-B.DT=new A.ay(B.ne,!1,!1,!1,!0,B.E)
+B.nZ=new A.ay(B.hN,!1,!0,!1,!1,B.E)
+B.DT=new A.ay(B.nd,!1,!1,!1,!0,B.E)
 B.ie=new A.ay(B.eu,!1,!1,!1,!1,B.E)
 B.id=new A.ay(B.ev,!1,!1,!1,!1,B.E)
-B.o3=new A.ay(B.d9,!1,!0,!0,!1,B.E)
-B.o0=new A.ay(B.cS,!1,!0,!0,!1,B.E)
-B.o1=new A.ay(B.cT,!1,!0,!0,!1,B.E)
-B.o2=new A.ay(B.da,!1,!0,!0,!1,B.E)
-B.o4=new A.ay(B.hO,!1,!0,!1,!1,B.E)
+B.o2=new A.ay(B.d9,!1,!0,!0,!1,B.E)
+B.o_=new A.ay(B.cS,!1,!0,!0,!1,B.E)
+B.o0=new A.ay(B.cT,!1,!0,!0,!1,B.E)
+B.o1=new A.ay(B.da,!1,!0,!0,!1,B.E)
+B.o3=new A.ay(B.hO,!1,!0,!1,!1,B.E)
 B.arV=new A.ay(B.eB,!0,!0,!1,!1,B.ch)
 B.arW=new A.ay(B.hK,!1,!1,!1,!0,B.E)
 B.arX=new A.ay(B.ex,!0,!1,!1,!1,B.ci)
@@ -113534,7 +113534,7 @@ B.dE=new A.c9(4,null,null,null)
 B.asb=new A.c9(5,null,null,null)
 B.df=new A.c9(6,null,null,null)
 B.cW=new A.c9(8,null,null,null)
-B.E0=new A.c9(64,64,B.mR,null)
+B.E0=new A.c9(64,64,B.mQ,null)
 B.cy=new A.c9(null,10,null,null)
 B.aO=new A.c9(null,12,null,null)
 B.fL=new A.c9(null,14,null,null)
@@ -113555,7 +113555,7 @@ B.aC=new A.c9(null,8,null,null)
 B.asi=new A.c9(null,96,null,null)
 B.E1=new A.c9(null,null,null,null)
 B.asj=new A.F6(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.o5=new A.SU(0,0,0,0,0,0,!1,!1,null,0)
+B.o4=new A.SU(0,0,0,0,0,0,!1,!1,null,0)
 B.ask=new A.SW(2,0.85)
 B.asl=new A.SW(3,0.75)
 B.fN=new A.amw(0,"firstIsTop")
@@ -113582,7 +113582,7 @@ B.asA=new A.Fg(1,"expand")
 B.asB=new A.Fg(2,"passthrough")
 B.asC=new A.kq("<asynchronous suspension>",-1,"","","",-1,-1,"","asynchronous suspension")
 B.asD=new A.kq("...",-1,"","","",-1,-1,"","...")
-B.o6=new A.hz(B.q)
+B.o5=new A.hz(B.q)
 B.asF=new A.tD(2,"moreButton")
 B.asG=new A.tD(3,"drawerButton")
 B.dF=new A.fP("")
@@ -113617,28 +113617,28 @@ B.asX=new A.iG(null,null,B.aK,null,null,B.d,B.aK,null)
 B.asY=new A.iG(null,null,null,null,null,null,B.aK,null)
 B.asZ=new A.iG(null,null,B.d,null,null,B.aK,B.d,null)
 B.at_=new A.Ft(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.o7=new A.ank("tap")
+B.o6=new A.ank("tap")
 B.Eb=new A.Tr(0)
 B.Ec=new A.Tr(-1)
 B.G=new A.ph(0,"alphabetic")
 B.ay=new A.ph(1,"ideographic")
 B.at2=new A.FB(null)
-B.o8=new A.xF(3,"none")
-B.Ed=new A.FC(B.o8)
+B.o7=new A.xF(3,"none")
+B.Ed=new A.FC(B.o7)
 B.Ee=new A.xF(0,"words")
 B.Ef=new A.xF(1,"sentences")
 B.Eg=new A.xF(2,"characters")
 B.at3=new A.Ts(2,"characters")
 B.aM=new A.Ts(3,"none")
-B.oc=new A.hB(0,0,B.x,!1,0,0)
-B.at5=new A.bO("",B.oc,B.ai)
-B.o9=new A.tH(0,"character")
+B.ob=new A.hB(0,0,B.x,!1,0,0)
+B.at5=new A.bO("",B.ob,B.ai)
+B.o8=new A.tH(0,"character")
 B.at6=new A.tH(1,"word")
 B.Ei=new A.tH(2,"paragraph")
 B.at7=new A.tH(3,"line")
 B.at8=new A.tH(4,"document")
-B.ob=new A.Tz(0,"proportional")
-B.Ej=new A.FG(B.ob)
+B.oa=new A.Tz(0,"proportional")
+B.Ej=new A.FG(B.oa)
 B.at9=new A.hA(0,"none")
 B.ata=new A.hA(1,"unspecified")
 B.atb=new A.hA(10,"route")
@@ -113654,7 +113654,7 @@ B.ati=new A.hA(8,"continueAction")
 B.atj=new A.hA(9,"join")
 B.atk=new A.kt(0,null,null)
 B.atl=new A.kt(10,null,null)
-B.oa=new A.kt(1,null,null)
+B.o9=new A.kt(1,null,null)
 B.bL=new A.kt(2,!1,!1)
 B.Em=new A.kt(2,!1,!0)
 B.atm=new A.kt(3,null,null)
@@ -114021,7 +114021,7 @@ B.kI=new A.FP(0)
 B.ayK=new A.FP(0.5)
 B.ayL=new A.FQ(null)
 B.EB=new A.FR(2,"mirror")
-B.od=new A.FR(3,"decal")
+B.oc=new A.FR(3,"decal")
 B.ayM=new A.FS(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.ayN=new A.xN(0,!1,"UTC")
 B.ayO=new A.FT(null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
@@ -114037,7 +114037,7 @@ B.ED=new A.FY(0,"identity")
 B.EE=new A.FY(1,"transform2d")
 B.EF=new A.FY(2,"complex")
 B.EG=new A.po(1,"right")
-B.of=new A.po(3,"left")
+B.oe=new A.po(3,"left")
 B.EH=new A.FZ(0,"closedLoop")
 B.ayT=new A.FZ(1,"leaveFlutterView")
 B.EI=new A.FZ(3,"stop")
@@ -114060,7 +114060,7 @@ B.az4=A.b3("B_")
 B.az5=A.b3("qz")
 B.az6=A.b3("qA")
 B.EK=A.b3("od")
-B.og=A.b3("hM")
+B.of=A.b3("hM")
 B.az7=A.b3("b_M")
 B.az8=A.b3("k0")
 B.az9=A.b3("kV")
@@ -114076,7 +114076,7 @@ B.azh=A.b3("mr")
 B.azi=A.b3("a6")
 B.azj=A.b3("bI<a9<a3>>")
 B.azk=A.b3("wl")
-B.oh=A.b3("kb")
+B.og=A.b3("kb")
 B.azl=A.b3("aQM")
 B.bn=A.b3("rC")
 B.azm=A.b3("rP")
@@ -114092,7 +114092,7 @@ B.azu=A.b3("p0")
 B.azv=A.b3("ki")
 B.azw=A.b3("aLT")
 B.azx=A.b3("km")
-B.oi=A.b3("fd")
+B.oh=A.b3("fd")
 B.azy=A.b3("na")
 B.azz=A.b3("pc")
 B.azA=A.b3("tC")
@@ -114117,7 +114117,7 @@ B.azQ=A.b3("lP")
 B.azR=A.b3("qB")
 B.azT=A.b3("ms")
 B.azS=A.b3("mu")
-B.oj=A.b3("ip")
+B.oi=A.b3("ip")
 B.azU=A.b3("mV")
 B.azV=A.b3("n8")
 B.azW=A.b3("pB")
@@ -114132,7 +114132,7 @@ B.aA1=new A.TT(0,"undo")
 B.aA2=new A.TT(1,"redo")
 B.aA3=new A.xZ(!1,!1)
 B.aA4=new A.TV(0,"scope")
-B.ok=new A.TV(1,"previouslyFocusedChild")
+B.oj=new A.TV(1,"previouslyFocusedChild")
 B.eT=new A.U3(!1)
 B.bf=new A.kv(0,"monochrome")
 B.aA5=new A.kv(1,"neutral")
@@ -114144,18 +114144,18 @@ B.eV=new A.kv(6,"fidelity")
 B.aA9=new A.kv(7,"rainbow")
 B.aAa=new A.kv(8,"fruitSalad")
 B.EL=new A.pq(B.m,0,B.a6,B.m)
-B.om=new A.pq(B.m,1,B.a6,B.m)
+B.ol=new A.pq(B.m,1,B.a6,B.m)
 B.dh=new A.hE(B.m)
 B.e1=new A.aoB(1,"down")
 B.aAb=new A.G8(0,"undefined")
 B.EM=new A.G8(1,"forward")
 B.aAc=new A.G8(2,"backward")
 B.aAd=new A.U7(0,"unfocused")
-B.on=new A.U7(1,"focused")
+B.om=new A.U7(1,"focused")
 B.eW=new A.np(0,0)
 B.aAe=new A.np(-2,-2)
 B.fR=new A.bm(0,t.XR)
-B.oo=new A.bm(18,t.XR)
+B.on=new A.bm(18,t.XR)
 B.aAf=new A.bm(2,t.XR)
 B.kP=new A.bm(24,t.XR)
 B.bW=new A.bm(B.F,t.De)
@@ -114165,11 +114165,11 @@ B.kQ=new A.bm(B.jg,t.mD)
 B.aAh=new A.bm(B.h,t.De)
 B.kR=new A.bm(B.DX,t.W7)
 B.as4=new A.F(64,40)
-B.op=new A.bm(B.as4,t.W7)
-B.eY=new A.bm(B.o6,t.li)
+B.oo=new A.bm(B.as4,t.W7)
+B.eY=new A.bm(B.o5,t.li)
 B.kS=new A.cA(3,"dragged")
 B.Z=new A.cA(4,"selected")
-B.oq=new A.cA(5,"scrolledUnder")
+B.op=new A.cA(5,"scrolledUnder")
 B.C=new A.cA(6,"disabled")
 B.cM=new A.cA(7,"error")
 B.cn=new A.pr(0,"start")
@@ -114178,7 +114178,7 @@ B.kT=new A.pr(2,"center")
 B.aAj=new A.pr(3,"spaceBetween")
 B.aAk=new A.pr(4,"spaceAround")
 B.aAl=new A.pr(5,"spaceEvenly")
-B.or=new A.Gd(0,"start")
+B.oq=new A.Gd(0,"start")
 B.aAm=new A.Gd(1,"end")
 B.aAn=new A.Gd(2,"center")
 B.bE=new A.y7(0,"forward")
@@ -114195,14 +114195,14 @@ B.K0=new A.q(0.01568627450980392,0,0,0,B.j)
 B.a8h=s([B.K0,B.F],t.F)
 B.aAr=new A.kz(B.a8h)
 B.aAs=new A.kz(null)
-B.os=new A.u4(0,"backButton")
-B.ot=new A.u4(1,"nextButton")
+B.or=new A.u4(0,"backButton")
+B.os=new A.u4(1,"nextButton")
 B.fS=new A.Wx(0,"horizontal")
 B.fT=new A.Wx(1,"vertical")
 B.dK=new A.H1(0,"ready")
 B.is=new A.H2(0,"ready")
 B.ER=new A.H1(1,"possible")
-B.ov=new A.H2(1,"possible")
+B.ou=new A.H2(1,"possible")
 B.it=new A.H1(2,"accepted")
 B.fU=new A.H2(2,"accepted")
 B.aQ=new A.ua(0,"initial")
@@ -114210,11 +114210,11 @@ B.iu=new A.ua(1,"active")
 B.ES=new A.ua(2,"inactive")
 B.aAy=new A.ua(3,"failed")
 B.ET=new A.ua(4,"defunct")
-B.ow=new A.Ho(0,"none")
+B.ov=new A.Ho(0,"none")
 B.aAF=new A.Ho(1,"forward")
 B.aAG=new A.Ho(2,"reverse")
 B.EU=new A.awz(3,"extended")
-B.ox=new A.uc(0,"ready")
+B.ow=new A.uc(0,"ready")
 B.kU=new A.uc(1,"possible")
 B.EV=new A.uc(2,"accepted")
 B.kV=new A.uc(3,"started")
@@ -114235,14 +114235,14 @@ B.b9=new A.ug(2,"minHeight")
 B.bg=new A.ug(3,"maxHeight")
 B.aY=new A.jF(1)
 B.kZ=new A.ei(0,"size")
-B.oy=new A.ei(1,"width")
+B.ox=new A.ei(1,"width")
 B.EY=new A.ei(11,"viewPadding")
-B.oz=new A.ei(13,"accessibleNavigation")
+B.oy=new A.ei(13,"accessibleNavigation")
 B.aAW=new A.ei(14,"invertColors")
 B.EZ=new A.ei(15,"highContrast")
-B.oA=new A.ei(18,"boldText")
+B.oz=new A.ei(18,"boldText")
 B.aAX=new A.ei(19,"supportsAnnounce")
-B.oB=new A.ei(2,"height")
+B.oA=new A.ei(2,"height")
 B.iw=new A.ei(20,"navigationMode")
 B.l_=new A.ei(21,"gestureSettings")
 B.aAY=new A.ei(23,"supportsShowingSystemContextMenu")
@@ -114252,7 +114252,7 @@ B.bx=new A.ei(6,"textScaler")
 B.l1=new A.ei(7,"platformBrightness")
 B.bZ=new A.ei(8,"padding")
 B.l2=new A.ei(9,"viewInsets")
-B.oC=new A.pF(1/0,1/0,1/0,1/0,1/0,1/0)
+B.oB=new A.pF(1/0,1/0,1/0,1/0,1/0,1/0)
 B.aAZ=new A.pG(0,"isCurrent")
 B.aB_=new A.pG(5,"opaque")
 B.aB0=new A.dO(B.fq,B.fk)
@@ -114273,12 +114273,12 @@ B.aBc=new A.dO(B.ft,B.fk)
 B.aBd=new A.dO(B.ft,B.jE)
 B.aBe=new A.dO(B.ft,B.jF)
 B.aBf=new A.dO(B.ft,B.dw)
-B.aBg=new A.dO(B.nn,B.dw)
-B.aBh=new A.dO(B.no,B.dw)
-B.aBi=new A.dO(B.np,B.dw)
-B.aBj=new A.dO(B.nq,B.dw)
+B.aBg=new A.dO(B.nm,B.dw)
+B.aBh=new A.dO(B.nn,B.dw)
+B.aBi=new A.dO(B.no,B.dw)
+B.aBj=new A.dO(B.np,B.dw)
 B.aBk=new A.YJ(null)
-B.oD=new A.YK(B.q)
+B.oC=new A.YK(B.q)
 B.aBm=new A.YO(null)
 B.aBl=new A.YQ(null)
 B.F_=new A.nz(0,"idle")
@@ -114286,7 +114286,7 @@ B.aBp=new A.nz(1,"start")
 B.aBq=new A.nz(2,"update")
 B.f_=new A.nz(3,"commit")
 B.aBr=new A.nz(4,"cancel")
-B.oE=new A.fT(1,"add")
+B.oD=new A.fT(1,"add")
 B.aBs=new A.fT(10,"remove")
 B.aBt=new A.fT(11,"popping")
 B.aBu=new A.fT(12,"removing")
@@ -114295,7 +114295,7 @@ B.aBv=new A.fT(14,"disposing")
 B.l4=new A.fT(15,"disposed")
 B.aBw=new A.fT(2,"adding")
 B.F0=new A.fT(3,"push")
-B.oF=new A.fT(4,"pushReplace")
+B.oE=new A.fT(4,"pushReplace")
 B.F1=new A.fT(5,"pushing")
 B.aBx=new A.fT(6,"replace")
 B.ix=new A.fT(7,"idle")
@@ -114309,10 +114309,10 @@ B.l9=new A.i9(2,"bodyScrim")
 B.la=new A.i9(3,"bottomSheet")
 B.fX=new A.i9(4,"snackBar")
 B.lb=new A.i9(5,"materialBanner")
-B.oH=new A.i9(6,"persistentFooter")
+B.oG=new A.i9(6,"persistentFooter")
 B.lc=new A.i9(7,"bottomNavigationBar")
 B.ld=new A.i9(8,"floatingActionButton")
-B.oI=new A.i9(9,"drawer")
+B.oH=new A.i9(9,"drawer")
 B.iy=new A.z7(0,"ready")
 B.iz=new A.z7(1,"possible")
 B.F4=new A.z7(2,"accepted")
@@ -114322,15 +114322,15 @@ B.aBz=new A.nA(B.arZ,B.aq,B.fD,null,null)
 B.aBA=new A.nA(B.a2,B.aq,B.fD,null,null)
 B.lf=new A.a0T(0,"trailing")
 B.F5=new A.a0T(1,"leading")
-B.oJ=new A.zb(0,"idle")
+B.oI=new A.zb(0,"idle")
 B.aBB=new A.zb(1,"absorb")
-B.oK=new A.zb(2,"pull")
-B.oL=new A.zb(3,"recede")
+B.oJ=new A.zb(2,"pull")
+B.oK=new A.zb(3,"recede")
 B.aBC=new A.aEH(0,"material")
 B.F6=new A.ze(0,"first")
 B.aBD=new A.ze(1,"middle")
 B.F7=new A.ze(2,"last")
-B.oM=new A.ze(3,"only")
+B.oL=new A.ze(3,"only")
 B.aBE=new A.K2(B.jb,B.hf)
 B.lg=new A.K7(0,"leading")
 B.lh=new A.K7(1,"middle")
@@ -114674,9 +114674,9 @@ s($,"bb0","aVT",()=>A.eW(B.m,B.za,t.o).fl(A.eo(B.fP)))
 s($,"bb1","aVU",()=>A.eW(B.za,B.m,t.o).fl(A.eo(B.fP)))
 s($,"baZ","aNQ",()=>A.eW(0,1,t.i).fl(A.eo(B.a7N)))
 s($,"bb_","aNR",()=>A.eW(1,0,t.i).fl(A.eo(B.t3)))
-s($,"bdn","aXc",()=>A.eo(B.a7S).fl(A.eo(B.nG)))
-s($,"bdo","aXd",()=>A.eo(B.a7Q).fl(A.eo(B.nG)))
-s($,"bdl","aXa",()=>A.eo(B.nG))
+s($,"bdn","aXc",()=>A.eo(B.a7S).fl(A.eo(B.nF)))
+s($,"bdo","aXd",()=>A.eo(B.a7Q).fl(A.eo(B.nF)))
+s($,"bdl","aXa",()=>A.eo(B.nF))
 s($,"bdm","aXb",()=>A.eo(B.aqd))
 s($,"bdI","aXn",()=>A.eW(0.875,1,t.i).fl(A.eo(B.d5)))
 s($,"bfN","aYJ",()=>new A.Q7())
@@ -114702,15 +114702,15 @@ s($,"bcF","aWM",()=>A.b1w().a)
 s($,"bfS","a4B",()=>{var q=t.N,p=t.L0
 return new A.ahw(A.z(q,A.aQ("aC<m>")),A.z(q,p),A.z(q,p))})
 s($,"ban","a4m",()=>new A.a5S())
-s($,"bbg","aW2",()=>A.aA([4294967562,B.mT,4294967564,B.a82,4294967556,B.a83],t.S,t.SQ))
+s($,"bbg","aW2",()=>A.aA([4294967562,B.mS,4294967564,B.a82,4294967556,B.a83],t.S,t.SQ))
 s($,"bbl","aW4",()=>{var q=t.bd
-return A.aA([B.n8,A.cs([B.dW,B.ew],q),B.na,A.cs([B.hR,B.jV],q),B.n9,A.cs([B.hQ,B.jU],q),B.n7,A.cs([B.hP,B.jT],q)],q,A.aQ("bJ<l>"))})
+return A.aA([B.n7,A.cs([B.dW,B.ew],q),B.n9,A.cs([B.hR,B.jV],q),B.n8,A.cs([B.hQ,B.jU],q),B.n6,A.cs([B.hP,B.jT],q)],q,A.aQ("bJ<l>"))})
 s($,"bcs","aNV",()=>new A.ai6(A.c([],A.aQ("Q<~(n3)>")),A.z(t.v3,t.bd)))
 s($,"bcr","aWE",()=>{var q=t.v3
 return A.aA([B.aB9,A.cs([B.fA],q),B.aBa,A.cs([B.fC],q),B.aBb,A.cs([B.fA,B.fC],q),B.aB8,A.cs([B.fA],q),B.aB5,A.cs([B.fz],q),B.aB6,A.cs([B.i0],q),B.aB7,A.cs([B.fz,B.i0],q),B.aB4,A.cs([B.fz],q),B.aB1,A.cs([B.fy],q),B.aB2,A.cs([B.i_],q),B.aB3,A.cs([B.fy,B.i_],q),B.aB0,A.cs([B.fy],q),B.aBd,A.cs([B.fB],q),B.aBe,A.cs([B.i1],q),B.aBf,A.cs([B.fB,B.i1],q),B.aBc,A.cs([B.fB],q),B.aBg,A.cs([B.eH],q),B.aBh,A.cs([B.k6],q),B.aBi,A.cs([B.k5],q),B.aBj,A.cs([B.hZ],q)],A.aQ("dO"),A.aQ("bJ<A>"))})
 s($,"bcq","aNU",()=>A.aA([B.fA,B.hQ,B.fC,B.jU,B.fz,B.dW,B.i0,B.ew,B.fy,B.hP,B.i_,B.jT,B.fB,B.hR,B.i1,B.jV,B.eH,B.hM,B.k6,B.jR,B.k5,B.jS],t.v3,t.bd))
 s($,"bcp","aWD",()=>{var q=A.z(t.v3,t.bd)
-q.n(0,B.hZ,B.n4)
+q.n(0,B.hZ,B.n3)
 q.M(0,$.aNU())
 return q})
 s($,"bb3","aVW",()=>new A.Oq("\n",!1,""))
@@ -114725,39 +114725,39 @@ q.a=B.aoo
 q.gapj().mC(q.gaie())
 return q})
 r($,"bdc","aX6",()=>{var q=A.aQ("~(by<bo>)")
-return A.aA([B.az7,A.aPz(!0),B.ayU,A.aPz(!1),B.azw,new A.RU(A.Dk(q)),B.azm,new A.Qp(A.Dk(q)),B.azr,new A.R3(A.Dk(q)),B.EK,new A.Bf(!1,A.Dk(q)),B.oi,A.b36(),B.azs,new A.R5(A.Dk(q)),B.azN,new A.Ub(A.Dk(q))],t.u,t.od)})
+return A.aA([B.az7,A.aPz(!0),B.ayU,A.aPz(!1),B.azw,new A.RU(A.Dk(q)),B.azm,new A.Qp(A.Dk(q)),B.azr,new A.R3(A.Dk(q)),B.EK,new A.Bf(!1,A.Dk(q)),B.oh,A.b36(),B.azs,new A.R5(A.Dk(q)),B.azN,new A.Ub(A.Dk(q))],t.u,t.od)})
 s($,"baF","aK2",()=>{var q,p,o,n=t.vz,m=A.z(t.Vz,n)
-for(q=A.aQ("ay"),p=0;p<2;++p){o=B.n1[p]
-m.M(0,A.aA([A.ff(B.bR,!1,!1,!1,o),B.lV,A.ff(B.bR,!1,!0,!1,o),B.lY,A.ff(B.bR,!0,!1,!1,o),B.lW,A.ff(B.bJ,!1,!1,!1,o),B.hg,A.ff(B.bJ,!1,!0,!1,o),B.hh,A.ff(B.bJ,!0,!1,!1,o),B.lX],q,n))}m.n(0,B.kt,B.fc)
+for(q=A.aQ("ay"),p=0;p<2;++p){o=B.n0[p]
+m.M(0,A.aA([A.ff(B.bR,!1,!1,!1,o),B.lU,A.ff(B.bR,!1,!0,!1,o),B.lX,A.ff(B.bR,!0,!1,!1,o),B.lV,A.ff(B.bJ,!1,!1,!1,o),B.hg,A.ff(B.bJ,!1,!0,!1,o),B.hh,A.ff(B.bJ,!0,!1,!1,o),B.lW],q,n))}m.n(0,B.kt,B.fc)
 m.n(0,B.ku,B.fd)
 m.n(0,B.ig,B.fg)
 m.n(0,B.ih,B.fh)
-m.n(0,B.nY,B.ji)
-m.n(0,B.nZ,B.jj)
+m.n(0,B.nX,B.ji)
+m.n(0,B.nY,B.jj)
 m.n(0,B.DR,B.hv)
 m.n(0,B.DS,B.hw)
-m.n(0,B.nR,B.ep)
-m.n(0,B.nS,B.eq)
-m.n(0,B.nT,B.fe)
-m.n(0,B.nU,B.ff)
-m.n(0,B.o0,B.rc)
-m.n(0,B.o1,B.rd)
-m.n(0,B.o2,B.jk)
-m.n(0,B.o3,B.jl)
+m.n(0,B.nQ,B.ep)
+m.n(0,B.nR,B.eq)
+m.n(0,B.nS,B.fe)
+m.n(0,B.nT,B.ff)
+m.n(0,B.o_,B.rc)
+m.n(0,B.o0,B.rd)
+m.n(0,B.o1,B.jk)
+m.n(0,B.o2,B.jl)
 m.n(0,B.DJ,B.jm)
 m.n(0,B.DK,B.jn)
 m.n(0,B.DN,B.rm)
 m.n(0,B.DO,B.rn)
 m.n(0,B.arN,B.ri)
 m.n(0,B.arO,B.rj)
-m.n(0,B.i9,B.mJ)
-m.n(0,B.ic,B.mK)
-m.n(0,B.o4,B.jo)
-m.n(0,B.o_,B.jp)
+m.n(0,B.i9,B.mI)
+m.n(0,B.ic,B.mJ)
+m.n(0,B.o3,B.jo)
+m.n(0,B.nZ,B.jp)
 m.n(0,B.DB,B.qp)
 m.n(0,B.DA,B.qo)
 m.n(0,B.DE,B.pl)
-m.n(0,B.nX,B.po)
+m.n(0,B.nW,B.po)
 m.n(0,B.arB,B.pq)
 m.n(0,B.arM,B.pn)
 m.n(0,B.kp,B.H)
@@ -114770,11 +114770,11 @@ q.n(0,B.ia,B.re)
 q.n(0,B.ib,B.rf)
 q.n(0,B.kq,B.fe)
 q.n(0,B.kr,B.ff)
-q.n(0,B.nV,B.jk)
-q.n(0,B.nW,B.jl)
+q.n(0,B.nU,B.jk)
+q.n(0,B.nV,B.jl)
 return q})
 s($,"baG","aVM",()=>$.aNM())
-s($,"baI","aNN",()=>A.aA([B.arn,B.jj,B.aro,B.ji,B.arb,B.hv,B.arp,B.hw,B.arR,B.rn,B.arS,B.rm,B.arV,B.ri,B.arT,B.rj,B.arc,B.jo,B.arq,B.jp,B.arr,B.hv,B.ars,B.hw,B.arL,B.hg,B.are,B.hh,B.arf,B.fd,B.arg,B.fc,B.arH,B.fg,B.arh,B.fh,B.aru,B.jn,B.arv,B.jm,B.arF,B.a5R,B.arw,B.a5S,B.arI,B.mJ,B.ari,B.mK,B.arj,B.fg,B.ark,B.fh,B.art,B.hg,B.arX,B.hh],t.Vz,t.vz))
+s($,"baI","aNN",()=>A.aA([B.arn,B.jj,B.aro,B.ji,B.arb,B.hv,B.arp,B.hw,B.arR,B.rn,B.arS,B.rm,B.arV,B.ri,B.arT,B.rj,B.arc,B.jo,B.arq,B.jp,B.arr,B.hv,B.ars,B.hw,B.arL,B.hg,B.are,B.hh,B.arf,B.fd,B.arg,B.fc,B.arH,B.fg,B.arh,B.fh,B.aru,B.jn,B.arv,B.jm,B.arF,B.a5R,B.arw,B.a5S,B.arI,B.mI,B.ari,B.mJ,B.arj,B.fg,B.ark,B.fh,B.art,B.hg,B.arX,B.hh],t.Vz,t.vz))
 s($,"baJ","aVO",()=>{var q=A.mF($.aK2(),t.Vz,t.vz)
 q.M(0,$.aNN())
 q.n(0,B.id,B.ep)
@@ -114783,44 +114783,44 @@ q.n(0,B.ia,B.rc)
 q.n(0,B.ib,B.rd)
 q.n(0,B.kq,B.fe)
 q.n(0,B.kr,B.ff)
-q.n(0,B.nV,B.jk)
-q.n(0,B.nW,B.jl)
+q.n(0,B.nU,B.jk)
+q.n(0,B.nV,B.jl)
 return q})
 s($,"baL","aNO",()=>{var q,p,o,n=t.vz,m=A.z(t.Vz,n)
-for(q=A.aQ("ay"),p=0;p<2;++p){o=B.n1[p]
-m.M(0,A.aA([A.ff(B.bR,!1,!1,!1,o),B.lV,A.ff(B.bR,!0,!1,!1,o),B.lY,A.ff(B.bR,!1,!1,!0,o),B.lW,A.ff(B.bJ,!1,!1,!1,o),B.hg,A.ff(B.bJ,!0,!1,!1,o),B.hh,A.ff(B.bJ,!1,!1,!0,o),B.lX],q,n))}m.n(0,B.kt,B.fc)
+for(q=A.aQ("ay"),p=0;p<2;++p){o=B.n0[p]
+m.M(0,A.aA([A.ff(B.bR,!1,!1,!1,o),B.lU,A.ff(B.bR,!0,!1,!1,o),B.lX,A.ff(B.bR,!1,!1,!0,o),B.lV,A.ff(B.bJ,!1,!1,!1,o),B.hg,A.ff(B.bJ,!0,!1,!1,o),B.hh,A.ff(B.bJ,!1,!1,!0,o),B.lW],q,n))}m.n(0,B.kt,B.fc)
 m.n(0,B.ku,B.fd)
 m.n(0,B.ig,B.fg)
 m.n(0,B.ih,B.fh)
-m.n(0,B.nY,B.ji)
-m.n(0,B.nZ,B.jj)
+m.n(0,B.nX,B.ji)
+m.n(0,B.nY,B.jj)
 m.n(0,B.DR,B.hv)
 m.n(0,B.DS,B.hw)
-m.n(0,B.nR,B.jm)
-m.n(0,B.nS,B.jn)
-m.n(0,B.nT,B.ep)
-m.n(0,B.nU,B.eq)
-m.n(0,B.o0,B.ro)
-m.n(0,B.o1,B.rp)
-m.n(0,B.o2,B.rk)
-m.n(0,B.o3,B.rl)
+m.n(0,B.nQ,B.jm)
+m.n(0,B.nR,B.jn)
+m.n(0,B.nS,B.ep)
+m.n(0,B.nT,B.eq)
+m.n(0,B.o_,B.ro)
+m.n(0,B.o0,B.rp)
+m.n(0,B.o1,B.rk)
+m.n(0,B.o2,B.rl)
 m.n(0,B.DF,B.ep)
 m.n(0,B.DG,B.eq)
 m.n(0,B.DH,B.fe)
 m.n(0,B.DI,B.ff)
 m.n(0,B.DL,B.ra)
 m.n(0,B.DM,B.rb)
-m.n(0,B.arD,B.mH)
-m.n(0,B.arE,B.mI)
+m.n(0,B.arD,B.mG)
+m.n(0,B.arE,B.mH)
 m.n(0,B.arz,B.pp)
 m.n(0,B.id,B.D9)
 m.n(0,B.ie,B.Da)
-m.n(0,B.ia,B.mH)
-m.n(0,B.ib,B.mI)
-m.n(0,B.i9,B.nK)
+m.n(0,B.ia,B.mG)
+m.n(0,B.ib,B.mH)
+m.n(0,B.i9,B.nJ)
 m.n(0,B.ic,B.kf)
-m.n(0,B.o4,B.jo)
-m.n(0,B.o_,B.jp)
+m.n(0,B.o3,B.jo)
+m.n(0,B.nZ,B.jp)
 m.n(0,B.Dy,B.qp)
 m.n(0,B.DC,B.qo)
 m.n(0,B.Dz,B.pl)
@@ -114828,7 +114828,7 @@ m.n(0,B.DT,B.po)
 m.n(0,B.arW,B.pq)
 m.n(0,B.arC,B.pn)
 m.n(0,B.arQ,B.eq)
-m.n(0,B.nX,B.ep)
+m.n(0,B.nW,B.ep)
 m.n(0,B.ar9,B.fd)
 m.n(0,B.ard,B.fc)
 m.n(0,B.ary,B.fh)
@@ -114838,19 +114838,19 @@ m.n(0,B.ks,B.H)
 return m})
 s($,"baH","aVN",()=>$.aNO())
 s($,"baN","aVQ",()=>{var q=A.mF($.aK2(),t.Vz,t.vz)
-q.n(0,B.i9,B.mJ)
-q.n(0,B.ic,B.mK)
+q.n(0,B.i9,B.mI)
+q.n(0,B.ic,B.mJ)
 q.n(0,B.id,B.rg)
 q.n(0,B.ie,B.rh)
 q.n(0,B.ia,B.re)
 q.n(0,B.ib,B.rf)
 q.n(0,B.kq,B.fe)
 q.n(0,B.kr,B.ff)
-q.n(0,B.nV,B.jk)
-q.n(0,B.nW,B.jl)
+q.n(0,B.nU,B.jk)
+q.n(0,B.nV,B.jl)
 return q})
 s($,"baM","aNP",()=>{var q,p,o,n=t.vz,m=A.z(t.Vz,n)
-for(q=A.aQ("ay"),p=0;p<2;++p){o=B.n1[p]
+for(q=A.aQ("ay"),p=0;p<2;++p){o=B.n0[p]
 m.M(0,A.aA([A.ff(B.bR,!1,!1,!1,o),B.H,A.ff(B.bJ,!1,!1,!1,o),B.H,A.ff(B.bR,!0,!1,!1,o),B.H,A.ff(B.bJ,!0,!1,!1,o),B.H,A.ff(B.bR,!1,!0,!1,o),B.H,A.ff(B.bJ,!1,!0,!1,o),B.H,A.ff(B.bR,!1,!1,!0,o),B.H,A.ff(B.bJ,!1,!1,!0,o),B.H],q,n))}m.M(0,B.yw)
 m.n(0,B.DB,B.H)
 m.n(0,B.Dy,B.H)
@@ -114858,7 +114858,7 @@ m.n(0,B.DA,B.H)
 m.n(0,B.DC,B.H)
 m.n(0,B.DE,B.H)
 m.n(0,B.Dz,B.H)
-m.n(0,B.nX,B.H)
+m.n(0,B.nW,B.H)
 m.n(0,B.DT,B.H)
 return m})
 s($,"baK","aVP",()=>{var q=A.mF(B.yw,t.Vz,t.vz)
@@ -114866,20 +114866,20 @@ q.M(0,B.yA)
 q.n(0,B.DP,B.H)
 q.n(0,B.DQ,B.H)
 q.n(0,B.DD,B.H)
-q.n(0,B.o3,B.H)
 q.n(0,B.o2,B.H)
-q.n(0,B.nY,B.H)
-q.n(0,B.nZ,B.H)
-q.n(0,B.o0,B.H)
 q.n(0,B.o1,B.H)
+q.n(0,B.nX,B.H)
+q.n(0,B.nY,B.H)
+q.n(0,B.o_,B.H)
+q.n(0,B.o0,B.H)
 q.n(0,B.DL,B.H)
 q.n(0,B.DM,B.H)
 q.n(0,B.i9,B.H)
 q.n(0,B.ic,B.H)
 q.n(0,B.ie,B.H)
 q.n(0,B.id,B.H)
-q.n(0,B.o4,B.H)
-q.n(0,B.o_,B.H)
+q.n(0,B.o3,B.H)
+q.n(0,B.nZ,B.H)
 q.n(0,B.ib,B.H)
 q.n(0,B.ia,B.H)
 q.n(0,B.kr,B.H)
@@ -114891,10 +114891,10 @@ s($,"bcc","kH",()=>A.aPL())
 s($,"bdJ","aXo",()=>A.dp(0,16667,0,0))
 s($,"bcy","aWJ",()=>A.aM1(0.5,1.1,100))
 s($,"bas","aK1",()=>A.aVn(0.78)/A.aVn(0.9))
-s($,"bei","aXP",()=>A.ad6(A.cs([B.n7],t.bd)))
-s($,"bf2","aYh",()=>A.ad6(A.cs([B.n8],t.bd)))
-s($,"bec","aXL",()=>A.ad6(A.cs([B.n9],t.bd)))
-s($,"beX","aYf",()=>A.ad6(A.cs([B.na],t.bd)))
+s($,"bei","aXP",()=>A.ad6(A.cs([B.n6],t.bd)))
+s($,"bf2","aYh",()=>A.ad6(A.cs([B.n7],t.bd)))
+s($,"bec","aXL",()=>A.ad6(A.cs([B.n8],t.bd)))
+s($,"beX","aYf",()=>A.ad6(A.cs([B.n9],t.bd)))
 s($,"bb5","aVX",()=>{var q=new A.aaf()
 q.a8E()
 return q})
