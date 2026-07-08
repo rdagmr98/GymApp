@@ -239,7 +239,6 @@ void main() async {
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
     ),
   );
@@ -307,7 +306,11 @@ class _ClientGymAppState extends State<ClientGymApp> {
           fontWeight: FontWeight.w600,
           letterSpacing: -0.5,
         ),
-        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.dark,
+          statusBarBrightness: Brightness.light,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: Colors.white,
@@ -355,6 +358,11 @@ class _ClientGymAppState extends State<ClientGymApp> {
           fontSize: 17,
           fontWeight: FontWeight.w600,
           letterSpacing: -0.5,
+        ),
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarIconBrightness: Brightness.light,
+          statusBarBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.light,
         ),
       ),
     );
