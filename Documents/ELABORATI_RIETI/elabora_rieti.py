@@ -21,6 +21,7 @@ import py7zr
 from copy import copy
 from openpyxl import load_workbook
 from openpyxl.formula.translate import Translator
+from openpyxl.styles import PatternFill, Font
 from tqdm import tqdm
 
 # ── CONFIGURAZIONE ────────────────────────────────────────────────────────────
@@ -29,6 +30,11 @@ PATH_OUTPUT   = r"C:\Users\Gianmarco\Documents\ELABORATI_RIETI"
 MODELLO_EXCEL = r"C:\Users\Gianmarco\Documents\sangiovanni\modello.xlsx"
 LOG_PATH      = os.path.join(PATH_OUTPUT, "LOG_ELABORAZIONE_RIETI.txt")
 EXCLUDE_DIRS  = {"elaborati_rieti"}
+
+FILL_ARANCIO = PatternFill(start_color="FFC000", end_color="FFC000", fill_type="solid")
+FILL_GIALLO  = PatternFill(start_color="FFE699", end_color="FFE699", fill_type="solid")
+FONT_BOLD    = Font(bold=True)
+LUOGO_LAVORO = "OSP GEN PROV RIETI"
 
 # Codici indennita' → colonna Excel (B=2 … F=6)
 MAPPATURA_IND = {
@@ -434,9 +440,27 @@ def scrivi_excel(worker_name, ind_data, cart_data, log_lines):
     ws_new = wb_new.active
     ws_new.delete_rows(1, ws_new.max_row + 10)
 
-    curr_row = 1
-    for anno in anni:
-        ws_new.cell(row=curr_row, column=1, value=f"ANNO {anno}")
+    # Dati anagrafici in alto (riga 1 header, riga 2 valori) — nome cartella "COGNOME NOME"
+    cognome, _, nome = worker_name.partition(" ")
+    ws_new.cell(row=1, column=1, value="NOME")
+    ws_new.cell(row=1, column=2, value="COGNOME")
+    ws_new.cell(row=1, column=3, value="LUOGO DI LAVORO")
+    ws_new.cell(row=1, column=12, value="ANNO")
+    ws_new.cell(row=1, column=13, value="IMPORTO")
+    ws_new.cell(row=2, column=1, value=nome)
+    ws_new.cell(row=2, column=2, value=cognome)
+    ws_new.cell(row=2, column=3, value=LUOGO_LAVORO)
+    for c in (1, 2, 3, 12, 13):
+        cell = ws_new.cell(row=1, column=c)
+        cell.fill, cell.font = FILL_ARANCIO, FONT_BOLD
+    for c in (1, 2, 3):
+        cell = ws_new.cell(row=2, column=c)
+        cell.fill, cell.font = FILL_GIALLO, FONT_BOLD
+
+    curr_row = 3
+    for i, anno in enumerate(anni):
+        cell = ws_new.cell(row=curr_row, column=1, value=f"ANNO {anno}")
+        cell.fill, cell.font = FILL_ARANCIO, FONT_BOLD
         for r in range(1, 16):
             for c in range(1, 11):
                 src = ws_mod.cell(row=r, column=c)
@@ -458,11 +482,24 @@ def scrivi_excel(worker_name, ind_data, cart_data, log_lines):
                     for excel_col in MAPPATURA_IND:
                         col_vals[excel_col] = r2(ind_data.get((anno, mese), {}).get(excel_col, 0))
                     g, f = cart_data.get((anno, mese), (0, 0))
+                    if (anno, mese) not in cart_data and (anno, mese) in ind_data:
+                        g = 22.5  # cedolino presente ma cartellino mancante: giorni pieni convenzionali
                     col_vals[COL_GIORNI] = g
                     col_vals[COL_FERIE]  = f
                     if c in col_vals:
                         dst.value = col_vals[c]
+        # Specchietto riassuntivo: riga block_start+15 = "Medie annue" (colonna G) dell'anno i-esimo
+        c_anno    = ws_new.cell(row=2 + i, column=12, value=anno)
+        c_importo = ws_new.cell(row=2 + i, column=13, value=f"=G{18 + 17 * i}")
+        c_anno.fill, c_anno.font       = FILL_GIALLO, FONT_BOLD
+        c_importo.fill, c_importo.font = FILL_GIALLO, FONT_BOLD
         curr_row += 17
+
+    n = len(anni)
+    c_tot_lbl = ws_new.cell(row=2 + n, column=12, value="TOTALE")
+    c_tot_val = ws_new.cell(row=2 + n, column=13, value=f"=SUM(M2:M{1 + n})")
+    c_tot_lbl.fill, c_tot_lbl.font = FILL_ARANCIO, FONT_BOLD
+    c_tot_val.fill, c_tot_val.font = FILL_ARANCIO, FONT_BOLD
 
     safe_name = worker_name.replace(" ", "_").replace("/", "-")
     out_path = os.path.join(PATH_OUTPUT, f"{safe_name}.xlsx")
