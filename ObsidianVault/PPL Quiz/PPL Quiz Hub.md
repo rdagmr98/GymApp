@@ -82,6 +82,25 @@ App per allenarsi all'**esame teorico PPL(A)** (licenza di pilota privato). Velo
 - **GitHub Release v1.0.0 NEGATA** dal classifier auto (l'utente aveva chiesto APK locale + web, non una release pubblica). **Non ritentare** senza richiesta esplicita; consegnato l'APK via path locale.
 - **Mojibake accenti (U+FFFD)**: il primo dataset da tastoeffeuno aveva perso à/è/ì/ò/ù (decode windows-1252 sbagliato → carattere irreversibile per-char). Fix 28/06: sostituiti 1163 quesiti con la versione UTF-8 pulita di quizvds → 0 mojibake residui. NB: la console Windows mostra `�` quando stampa à, ma è solo un artefatto di code page del terminale, **non** corruzione dei dati (validator: 0 U+FFFD reali).
 
+## Figure domande + spiegazioni errori (v1.3.0, completato 06-09/07)
+- **Figure**: per le domande con immagine (`fig`), scaricata la figura reale della domanda originale (mai generata via AI) e bundlata come asset. Fatto e pushato (commit `20fd76f`).
+- **Home page**: rimosse le 2 righe di testo informative sul database in fondo (commit `7e008ed`).
+- **Spiegazioni risposte** (richiesta: capire perché si è sbagliato, studiare teoria mentre si fa il quiz, non serve fonte esterna se non disponibile — generate io stesso in quel caso): campo `explanation` per-domanda in `ppl_quiz.json`, già renderizzato da `quiz_screen.dart` (nessuna modifica UI necessaria, era già pronta). **Copertura: 2273/2273 (100%)**.
+- **Pattern di lavoro per materia** (ripetuto identico per ogni parte): estrarre le domande della materia in un file compatto (`node -e` inline, un file `subjN_compact.txt` nello scratchpad) → leggerle tutte → scrivere `explN.json` (spiegazioni indicizzate per `gid`) → merge in `assets/ppl_quiz.json` via script `inject_explN.js` (filtra a livello di **subject** con `s.parte !== N`, non `q.parte` — il campo `parte` sta sul subject, non sulla singola domanda) → `flutter analyze` → commit + push.
+- **Stato avanzamento — completo**:
+  - [x] Parte 1 Regolamentazione (267 q.) — commit `f6e268c`
+  - [x] Parte 2 Nozioni generali Aeromobili (220 q.) — commit `c3eb4bb`
+  - [x] Parte 3 Prestazioni volo e pianificazione (230 q.) — commit `a29213a`
+  - [x] Parte 4 Prestazioni e limitazioni umane (122 q.) — commit `a5aa826`
+  - [x] Parte 5 Meteorologia (315 q.) — commit `293eaec`
+  - [x] Parte 6 Navigazione (289 q.) — commit `3a5d50f`
+  - [x] Parte 7 Procedure operative (293 q.) — commit `8189dd7`
+  - [x] Parte 8 Principi del volo (170 q.) — commit `63759bc`
+  - [x] Parte 9 Comunicazioni italiano (158 q.) — commit `c7f9241`
+  - [x] Parte 10 Comunicazioni inglese (209 q.) — commit `f51f044`
+- **Bug qualità dati risolto (09/07)**: le 209 spiegazioni della parte 10 erano state scritte con ASCII invece di accenti italiani corretti (è/à/ì/ò/ù), in violazione della regola permanente sugli accenti — scoperto tramite verifica post-completamento, non era un problema nelle parti 1-9. Root cause: bug pervasivo (111/209 stringhe), non i soli 13 casi rilevati da un primo controllo regex stretto (che non copriva il caso più comune, "e" bare al posto di "è" verbo). Include 2 correzioni di significato, non solo estetiche: "ci si atterra alle istruzioni" (atterrare = to land, sbagliato) → "ci si atterrà alle istruzioni" (attenersi = to abide by, corretto). Fix completo via riscrittura manuale mirata + merge script, verificato con scansione automatica (0 pattern ASCII-accento residui) + `flutter analyze` pulito. Commit `7b9e716`.
+- **Nota qualità dati (FYI, non "bug" da correggere)**: il pool mischia domande storiche ENAC/JAR-FCL (gid bassi) e domande EASA/Part-FCL correnti (gid 200000+), a volte con risposta corretta diversa per evoluzione normativa. Caso trovato: gid 10 (vecchia) indica "lampeggiamenti bianchi" come segnale di rientro per atterraggio, mentre lo standard ICAO Annex 2 reale è lampeggiamenti **verdi** — coerente con gid 200006 (nuova) che infatti usa "verde". Non ho toccato l'indice `correct` di nessuna domanda né incrociato i riferimenti nel testo delle spiegazioni: se l'utente nota risposte apparentemente in conflitto tra una domanda vecchia e una nuova sullo stesso argomento, è quasi sempre questo (evoluzione normativa, non errore di battitura).
+
 ## Statistiche / prontezza esame (v1.2.0, 03/07)
 - Nuova card "Statistiche" in home → `StatsScreen`. Ogni quiz/esame completato viene registrato da `StatsService.record()` (shared_preferences, locale, no backend).
 - Verdetto a 3 livelli calcolato su **aggregato cumulativo di tutti i tentativi salvati** (non solo l'ultimo): PRONTO (tutte le materie ≥75%), QUASI PRONTO (overall ≥65%), DA MIGLIORARE (sotto).
@@ -101,4 +120,4 @@ App per allenarsi all'**esame teorico PPL(A)** (licenza di pilota privato). Velo
 
 ## Collegamenti
 - Profilo aviazione utente: vedi [[_CLAUDE]] (militare AVES).
-- Sessione di creazione: [[Sessioni/2026-06-28]]. Espansione pool + icona (v1.1.0): [[Sessioni/2026-06-29]]. Fix testo + statistiche (v1.2.0): [[Sessioni/2026-07-03]].
+- Sessione di creazione: [[Sessioni/2026-06-28]]. Espansione pool + icona (v1.1.0): [[Sessioni/2026-06-29]]. Fix testo + statistiche (v1.2.0): [[Sessioni/2026-07-03]]. Figure + spiegazioni + fix accenti (v1.3.0): [[Sessioni/2026-07-09]].
