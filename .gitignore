@@ -45,3 +45,13 @@ app.*.map.json
 /android/app/release
 
 releases/
+
+# SIEL (gestionale AVES) — dati operativi reali + python embedded: MAI nel repo pubblico
+Documents/SIEL_Portable/
+Documents/siel_app/
+# Cloni dei repo web SIEL (privati, dati reali AVES) — fuori dal repo pubblico home
+/siel/
+/siel-data/
+
+# Vault Obsidian (dati personali/PII reali) — migrato in repo privato rdagmr98/ObsidianVault
+/ObsidianVault/
