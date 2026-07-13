@@ -12020,6 +12020,16 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   onChanged: (v) => setA(() => searchQuery = v),
                 ),
                 const SizedBox(height: 10),
+                Text(
+                  'GRUPPO MUSCOLARE',
+                  style: TextStyle(
+                    color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+                const SizedBox(height: 4),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -12042,7 +12052,17 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     ],
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 10),
+                Text(
+                  'ATTREZZO',
+                  style: TextStyle(
+                    color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+                const SizedBox(height: 4),
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
