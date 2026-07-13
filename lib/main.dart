@@ -11931,6 +11931,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     Function(ExerciseInfo) onSelect,
   ) {
     String? selectedCategory;
+    String? selectedEquipment;
     String searchQuery = '';
 
     final Map<String, ExerciseInfo> archiveByName = {};
@@ -11963,6 +11964,12 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     )
                     .toList()
               : archiveAll;
+
+          if (selectedEquipment != null) {
+            filtered = filtered
+                .where((e) => exerciseEquipment(e) == selectedEquipment)
+                .toList();
+          }
 
           if (searchQuery.isNotEmpty) {
             final q = searchQuery.toLowerCase();
@@ -12031,6 +12038,41 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           onTap: () => setA(() => selectedCategory = cat),
                           accent: appAccentNotifier.value,
                         ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 8),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      _archiveChip(
+                        label: '🤸 Corpo libero',
+                        selected: selectedEquipment == 'corpo_libero',
+                        onTap: () => setA(
+                          () => selectedEquipment =
+                              selectedEquipment == 'corpo_libero' ? null : 'corpo_libero',
+                        ),
+                        accent: appAccentNotifier.value,
+                      ),
+                      _archiveChip(
+                        label: '🏋️ Manubri',
+                        selected: selectedEquipment == 'manubri',
+                        onTap: () => setA(
+                          () => selectedEquipment =
+                              selectedEquipment == 'manubri' ? null : 'manubri',
+                        ),
+                        accent: appAccentNotifier.value,
+                      ),
+                      _archiveChip(
+                        label: '🏋️‍♂️ Bilanciere',
+                        selected: selectedEquipment == 'bilanciere',
+                        onTap: () => setA(
+                          () => selectedEquipment =
+                              selectedEquipment == 'bilanciere' ? null : 'bilanciere',
+                        ),
+                        accent: appAccentNotifier.value,
                       ),
                     ],
                   ),
