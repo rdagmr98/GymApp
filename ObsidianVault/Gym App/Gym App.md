@@ -10,8 +10,11 @@ Hub per le tre app dell'ecosistema palestra. Leggi questo file all'inizio di ogn
 | App | Repo | Path locale | Ruolo |
 |-----|------|-------------|-------|
 | [[gym_app]] | `rdagmr98/GymApp` | `C:\Users\Gianmarco` (root) | Trainer/Admin |
-| [[app_coach]] | `rdagmr98/gymapp-coach` | — | Personal Trainer |
+| [[app_coach]] | `rdagmr98/gymapp-coach` | `C:\Users\Gianmarco\app\miadiariogym\app_pt` | Personal Trainer |
 | [[app_cliente]] | `rdagmr98/gymapplogbook` | `C:\Users\Gianmarco\fix-ads` | Cliente finale |
+
+> **Scoperto 13 lug 2026**: `C:\Users\Gianmarco\app\miadiariogym\` è una working dir con **tre repo git annidati**: `app_pt/` (= app_coach sopra, remote `gymapp-coach`), `app_cliente/` (un **secondo clone locale**, non documentato prima, dello stesso `rdagmr98/gymapplogbook` già clonato in `fix-ads` — commit recenti lì citano feature UI mai menzionate altrove, es. "flame/heat overlay"), più cartelle stale non esplorate (`gym_app/`, `GymApp/`, `gymapplogbook/`). Il clone duplicato in `app_cliente/` è **fuori scope finché l'utente non lo richiede esplicitamente** — non toccare/riconciliare autonomamente.
+> `app_pt` ha deploy automatico: push su `main` → GitHub Actions `web-deploy.yml` → build web + `gh-pages` (`https://rdagmr98.github.io/gymapp-coach/`). Nessuna build manuale richiesta per questo repo.
 
 ---
 
@@ -36,8 +39,8 @@ flutter build web --release --base-href "/GymApp/"   # Web → commit build/web/
 > Un branch `gh-pages` esiste ancora sul remote (vecchio, orfano) ma **non è la sorgente usata da Pages** — non confonderlo con il deploy reale. Riferimento storico SUPERATO: il worktree `C:\temp\gymapp-gh-pages` descritto in passato in questa nota non è il workflow attuale.
 
 **Releases locali**: `C:\Users\Gianmarco\Documents\releases\gym_app\`
-- `gym_app-1.0.2+30-arm64-v8a.apk` / `-armeabi-v7a.apk` / `-x86_64.apk`
-- `gym_app-1.0.2+30.aab`
+- `gym_app-1.0.2+31-arm64-v8a.apk` / `-armeabi-v7a.apk`
+- `gym_app-1.0.2+31.aab`
 
 > ⚠️ **REGOLA OBBLIGATORIA — NON SALTARE MAI**: dopo ogni modifica al codice di qualsiasi app gym:
 > 1. bump versione in `pubspec.yaml` (+1 build number)
@@ -129,7 +132,6 @@ Dati condivisi tra le tre app via Firebase Firestore.
 
 ## STATO SESSIONE
 _Aggiornare ad ogni push significativo. Solo ultime voci recenti: storico completo nella cronologia git di questa nota + `Sessioni/YYYY-MM-DD.md`._
-- **Fix Play Console: API edge-to-edge deprecate + BitmapFactory downsampling** (08 lug 2026, v1.0.2+29): Play Console segnalava `Window.setStatusBarColor/setNavigationBarColor/setNavigationBarDividerColor` deprecate (Android 15 target SDK 35). Causa reale: `lib/main.dart` passava colori espliciti a `SystemUiOverlayStyle` in 3 punti (avvio, tema chiaro col preset `.dark` che forza `systemNavigationBarColor` nero anche a tema chiaro, tema scuro senza override esplicito). Fix: rimossi tutti i colori, mantenuto solo `*IconBrightness` (percorso non deprecato, verificato in Flutter SDK source). Bonus: risolto anche bug nav bar nera forzata in tema chiaro. Warning BitmapFactory downsampling: NON è in codice app (verificato tutto Kotlin+Dart), probabile causa interna a `google_mobile_ads` (4 major indietro, 5.3.1→9.0.0) — bump non eseguito senza retest reale su device, rischio breaking change. Commit `572174a` (fix) + `0910d27` (deploy web), APK×3+AAB+web+GitHub Release pubblicati.
-- **Pulsante "Salva serie" invisibile S23 — saga chiusa 08 lug 2026, floor 64px era overcorrection**: dopo 2 tentativi falliti (fix layout strutturale Row fuori scroll v27, poi MediaQuery dinamico), il 07 lug era stata "confermata" come causa reale l'inaffidabilità di `MediaQuery.of(ctx).padding.bottom` su Samsung One UI → fix floor 64px hardcoded (v1.0.2+28, commit `214bef5`, applicato anche ad app_cliente commit `5050ab4`). **L'utente ha poi verificato sul device reale che v27 posizionava già il pulsante correttamente**: il floor 64px era un overcorrection, alzava il pulsante troppo in alto. Revertito in gym_app v1.0.2+30 (commit `86e1bd4`): tornato al calcolo semplice `scala.max(padding.bottom, viewPadding.bottom)` senza floor, mantenendo la fix strutturale v27 (Row fissa fuori da Flexible/ScrollView, quella corretta). **App_cliente NON ancora corretto** — ha lo stesso floor 64px (commit `5050ab4`) e quasi certamente lo stesso overcorrection, ma non è stato toccato perché l'utente ha menzionato solo gym_app; da verificare/allineare se conferma lo stesso problema lì. Lezione generale: una "causa reale trovata" auto-dichiarata in sessione non è confermata finché l'utente non la verifica sul device reale.
-- **App Coach**: sviluppo (nessuna modifica recente)
+- **Filtri corpo libero/manubri/bilanciere + fix archivio app_pt** (13 lug 2026, gym_app v1.0.2+31 commit `e82be80`, app_pt commit `f1afab3`): aggiunta `exerciseEquipment()` (euristica su nome esercizio, nessun campo equipment nei dati sorgente) in entrambi i cataloghi + 3 chip filtro in `_apriArchivioEsercizi`/`_apriArchivioEserciziPT`. Trovato e corretto **bug confermato in app_pt**: `category != 'altro'` escludeva permanentemente 362/1213 esercizi (nessuna chip 'altro', nessuna via per vederli anche in "Tutti") + l'archivio PT non includeva mai i 63 esercizi di `kExerciseCatalog` (solo `kGifCatalog`) — gym_app non aveva questo bug. Entrambi fix, ora entrambe le app mostrano l'universo completo ~1275 esercizi. Test `exerciseEquipment` in `test/` di entrambi i repo. Release gym_app v1.0.2+31 completata: APK×2 split-per-abi + AAB in `Documents\releases\gym_app\`, `gh release create v1.0.2+31` (rdagmr98/GymApp) con i 3 artefatti, web deploy su `main` (commit `6e807ec`) verificato `"status":"built"` su Pages. app_pt: nessuna azione manuale richiesta (deploy automatico via `web-deploy.yml`).
+- **Fix Play Console + saga "Salva serie" S23 chiuse** (08 lug 2026, v1.0.2+29→+30): edge-to-edge deprecato risolto rimuovendo colori espliciti da `SystemUiOverlayStyle`; floor 64px del pulsante "Salva serie" era overcorrection, revertito dopo verifica utente su device reale — app_cliente ha probabilmente lo stesso overcorrection (commit `5050ab4`), non ancora verificato/allineato. Dettagli: `Sessioni/2026-07-08.md`.
 - **versionCode installato**: 3003 (fix-ads) — aggiorna sempre sopra questo

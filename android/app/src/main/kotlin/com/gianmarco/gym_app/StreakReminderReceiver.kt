@@ -12,6 +12,24 @@ import androidx.core.app.NotificationCompat
 
 class StreakReminderReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        // L'allarme è schedulato in anticipo e può sopravvivere a un allenamento nel frattempo
+        // (cancel mancato per engine non attivo, Doze, race al risveglio): verifica qui, alla
+        // sorgente unica della notifica, se l'utente si è davvero allenato da meno di 2 giorni.
+        val prefs = context.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
+        val lastWorkoutStr = prefs.getString("flutter.last_workout_date", null)
+        if (lastWorkoutStr != null) {
+            val lastWorkoutMillis = try {
+                java.time.Instant.parse(lastWorkoutStr).toEpochMilli()
+            } catch (e: Exception) {
+                null
+            }
+            if (lastWorkoutMillis != null &&
+                System.currentTimeMillis() - lastWorkoutMillis < 2 * AlarmManager.INTERVAL_DAY) {
+                rescheduleAt(context, lastWorkoutMillis + 2 * AlarmManager.INTERVAL_DAY, null, null)
+                return
+            }
+        }
+
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val channelId = "streak_reminder"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -44,6 +62,10 @@ class StreakReminderReceiver : BroadcastReceiver() {
 
         nm.notify(9901, builder.build())
 
+        rescheduleAt(context, System.currentTimeMillis() + AlarmManager.INTERVAL_DAY, title, body)
+    }
+
+    private fun rescheduleAt(context: Context, triggerAt: Long, title: String?, body: String?) {
         val nextIntent = Intent(context, StreakReminderReceiver::class.java).apply {
             putExtra("title", title)
             putExtra("body", body)
@@ -55,15 +77,14 @@ class StreakReminderReceiver : BroadcastReceiver() {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val nextTriggerAt = System.currentTimeMillis() + AlarmManager.INTERVAL_DAY
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, nextTriggerAt, pendingIntent)
+            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
         } else {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, nextTriggerAt, pendingIntent)
+            alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
         }
         context.getSharedPreferences("FlutterSharedPreferences", Context.MODE_PRIVATE)
             .edit()
-            .putString("flutter.streak_reminder_next_fire", nextTriggerAt.toString())
+            .putString("flutter.streak_reminder_next_fire", triggerAt.toString())
             .apply()
     }
 }
