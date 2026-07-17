@@ -65,3 +65,4 @@ Se una nota ha solo titolo + 1 riga (creata per il Graph View), e durante il lav
 | stonks | `C:\Users\Gianmarco\stonks` | `stonks/CLAUDE.md` |
 | SIEL desktop | `C:\Users\Gianmarco\Documents\SIEL_Portable` (+ `siel_app`) | — |
 | SIEL web app | `rdagmr98/siel` + dati `rdagmr98/siel-data` (privati) | `SIEL/SIEL.md` (Obsidian) |
+| Gestione Manutenzione (scadenze parti eli) | `C:\Users\Gianmarco\Documents\Gestione_Manutenzione` (gitignored, dati reali) | `Gestione Manutenzione/Gestione Manutenzione.md` (Obsidian) |
