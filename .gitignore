@@ -49,6 +49,7 @@ releases/
 # SIEL (gestionale AVES) — dati operativi reali + python embedded: MAI nel repo pubblico
 Documents/SIEL_Portable/
 Documents/siel_app/
+Documents/Gestione_Manutenzione/
 # Cloni dei repo web SIEL (privati, dati reali AVES) — fuori dal repo pubblico home
 /siel/
 /siel-data/
