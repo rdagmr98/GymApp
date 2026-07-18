@@ -44,6 +44,13 @@ Non aspettare la fine della sessione per non perdere il contesto se la sessione 
 3. Aggiornare `_CLAUDE.md` → sezione "Ultime sessioni"
 4. **Rolling window (anti-bloat, OBBLIGATORIO)**: `_CLAUDE.md` → "Ultime sessioni" tiene SOLO le ultime 3 giornate — quando si aggiunge la voce nuova, comprimere o rimuovere quelle più vecchie della finestra. Ogni hub progetto → sezione "STATO SESSIONE" tiene SOLO le ultime 1-2 voci, stesso criterio. Non è perdita di dati: lo storico completo resta sempre recuperabile da `Sessioni/YYYY-MM-DD.md` e dalla cronologia git della nota (il vault è nello stesso repo). Verificato il 2026-07-06: senza questa regola le sezioni crescono senza limite e vengono rilette per intero ad ogni sessione, indipendentemente dalla rilevanza per il task corrente — è il costo reale in token, non le note atomiche del vault (quelle restano piccole per natura).
 
+## Note atomiche nel vault (OBBLIGATORIO, anti-bloat strutturale)
+Non solo "Ultime sessioni"/"STATO SESSIONE" (regola sopra): anche gli **hub di progetto standalone** (es. `CAAE/Materiale Didattico.md`) possono gonfiarsi in changelog monolitici se si continua ad aggiungere narrativa dettagliata invece di linkare. Regola:
+- Un hub è un **MOC** (Map of Content): elenco di link + una riga di pointer per argomento/fase, **mai** paragrafi lunghi di narrativa/bugfix/decisioni.
+- Quando si scrive il resoconto dettagliato di un bugfix, di una fase di lavoro o di un argomento specifico e la sezione supererebbe ~15-20 righe → scriverlo direttamente in una **nota atomica separata** (un argomento per nota, titolo descrittivo, link `[[...]]` all'hub), non nell'hub.
+- Se si scopre un hub già cresciuto in questo modo, va **diviso subito** (non rimandato): creare le note atomiche e **tagliare** il testo duplicato dall'hub nella stessa sessione — altrimenti il vault cresce invece di ridursi. Esempio fatto il 2026-07-18 su `CAAE/Materiale Didattico.md` (da 225 a ~130 righe, contenuto spostato in `Fase 2 - Sottomoduli DT-024.md`, `Fase 3 - Modulo 1 Mathematics.md`, `Fase 3 - Modulo 2 Physics.md`, `Bug e Lezioni Trasversali.md`).
+- Dettaglio/esempi ulteriori: `ObsidianVault/_CLAUDE.md` → sezione "Note atomiche".
+
 ## Note vuote/stub nel vault
 Se una nota ha solo titolo + 1 riga (creata per il Graph View), e durante il lavoro si scopre il contenuto reale (da codice, script, hub), arricchirla subito invece di lasciarla stub. Non creare nuove note-stub senza poi riempirle nella stessa sessione.
 
