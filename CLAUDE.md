@@ -70,3 +70,4 @@ Se una nota ha solo titolo + 1 riga (creata per il Graph View), e durante il lav
 | SIEL desktop | `C:\Users\Gianmarco\Documents\SIEL_Portable` (+ `siel_app`) | — |
 | SIEL web app | `rdagmr98/siel` + dati `rdagmr98/siel-data` (privati) | `SIEL/SIEL.md` (Obsidian) |
 | Gestione Flotta (flotta elicotteri completa) | `C:\Users\Gianmarco\Documents\gestione_flotta` → GitHub `rdagmr98/gestione_flotta` (privato, solo codice — dati locali via `.gitignore`) | `Gestione Manutenzione/Gestione Flotta.md` (Obsidian) |
+| Materiale Didattico CAAE (PDF corsi Part-66/147) | `C:\Users\Gianmarco\Materiale Didattico\_engine` → GitHub `rdagmr98/caae-materiale-didattico` (privato, solo codice — PDF output locali, non pushati) | `CAAE/Materiale Didattico.md` (Obsidian) |
