@@ -232,8 +232,13 @@ def estrai_giorni_ferie(text):
 
 # ── PROCESSO PDF SINGOLO (bytes o path) ────────────────────────────────────
 
-def _processa_pdf(fname, pdf_bytes_or_path, folder_hint, ind_data, cart_data, avvisi):
+def _processa_pdf(fname, pdf_bytes_or_path, folder_hint, ind_data, cart_data, avvisi, seen=None):
     """Legge e processa un PDF (da bytes in memoria o da percorso file)."""
+    if seen is not None:
+        if fname in seen:
+            return
+        seen.add(fname)
+
     fn_anno_ced,  fn_mese_ced  = parse_cedolino_filename(fname)
     fn_anno_cart, fn_mese_cart = parse_cartellino_filename(fname)
 
@@ -332,7 +337,7 @@ def _hint_da_nome(name, default_hint):
     return default_hint
 
 
-def _processa_zip(fpath, fname, folder_hint, ind_data, cart_data, avvisi, depth=0):
+def _processa_zip(fpath, fname, folder_hint, ind_data, cart_data, avvisi, depth=0, seen=None):
     """Apre un file ZIP (da percorso o file-like) ed elabora il contenuto, ricorsivo su zip/7z annidati."""
     if depth > 3:
         return
@@ -346,22 +351,22 @@ def _processa_zip(fpath, fname, folder_hint, ind_data, cart_data, avvisi, depth=
                 bname = os.path.basename(entry)
                 data  = zf.read(entry)
                 if low.endswith('.pdf'):
-                    _processa_pdf(bname, data, hint, ind_data, cart_data, avvisi)
+                    _processa_pdf(bname, data, hint, ind_data, cart_data, avvisi, seen)
                 elif low.endswith('.zip'):
-                    _processa_zip(io.BytesIO(data), bname, hint, ind_data, cart_data, avvisi, depth + 1)
+                    _processa_zip(io.BytesIO(data), bname, hint, ind_data, cart_data, avvisi, depth + 1, seen)
                 else:  # .7z
                     with tempfile.NamedTemporaryFile(suffix='.7z', delete=False) as tmp:
                         tmp.write(data)
                         tmp_path = tmp.name
                     try:
-                        _processa_7z(tmp_path, bname, hint, ind_data, cart_data, avvisi, depth + 1)
+                        _processa_7z(tmp_path, bname, hint, ind_data, cart_data, avvisi, depth + 1, seen)
                     finally:
                         os.unlink(tmp_path)
     except Exception as e:
         avvisi.append(f"  ERRORE ZIP {fname}: {e}")
 
 
-def _processa_7z(fpath, fname, folder_hint, ind_data, cart_data, avvisi, depth=0):
+def _processa_7z(fpath, fname, folder_hint, ind_data, cart_data, avvisi, depth=0, seen=None):
     """Estrae un 7z in cartella temporanea ed elabora il contenuto ricorsivamente."""
     if depth > 3:
         return
@@ -377,11 +382,11 @@ def _processa_7z(fpath, fname, folder_hint, ind_data, cart_data, avvisi, depth=0
                     fp2  = os.path.join(root2, fn2)
                     ext2 = fn2.lower()
                     if ext2.endswith('.pdf'):
-                        _processa_pdf(fn2, fp2, h2, ind_data, cart_data, avvisi)
+                        _processa_pdf(fn2, fp2, h2, ind_data, cart_data, avvisi, seen)
                     elif ext2.endswith('.zip'):
-                        _processa_zip(fp2, fn2, h2, ind_data, cart_data, avvisi, depth + 1)
+                        _processa_zip(fp2, fn2, h2, ind_data, cart_data, avvisi, depth + 1, seen)
                     elif ext2.endswith('.7z'):
-                        _processa_7z(fp2, fn2, h2, ind_data, cart_data, avvisi, depth + 1)
+                        _processa_7z(fp2, fn2, h2, ind_data, cart_data, avvisi, depth + 1, seen)
     except Exception as e:
         avvisi.append(f"  ERRORE 7z {fname}: {e}")
 
@@ -390,6 +395,9 @@ def processa_lavoratore(worker_path, worker_name, log_lines):
     ind_data  = defaultdict(lambda: defaultdict(float))
     cart_data = {}
     avvisi    = []
+    # stessa PDF (per basename) raggiungibile da più percorsi ridondanti
+    # (zip annidato + copia già estratta su disco): processarla una sola volta.
+    seen = set()
 
     for root, dirs, files in os.walk(worker_path):
         folder_name = os.path.basename(root).upper()
@@ -405,17 +413,17 @@ def processa_lavoratore(worker_path, worker_name, log_lines):
             ext   = fname.lower()
 
             if ext.endswith('.pdf'):
-                _processa_pdf(fname, fpath, folder_hint, ind_data, cart_data, avvisi)
+                _processa_pdf(fname, fpath, folder_hint, ind_data, cart_data, avvisi, seen)
 
             elif ext.endswith('.zip'):
-                _processa_zip(fpath, fname, folder_hint, ind_data, cart_data, avvisi)
+                _processa_zip(fpath, fname, folder_hint, ind_data, cart_data, avvisi, seen=seen)
 
             elif ext.endswith('.7z'):
                 # Salta il 7z se esiste già una cartella con lo stesso nome (già estratto)
                 stem = os.path.splitext(fname)[0]
                 if os.path.isdir(os.path.join(root, stem)):
                     continue
-                _processa_7z(fpath, fname, folder_hint, ind_data, cart_data, avvisi)
+                _processa_7z(fpath, fname, folder_hint, ind_data, cart_data, avvisi, seen=seen)
 
     if avvisi:
         log_lines.append(f"\n[ {worker_name} ]")
