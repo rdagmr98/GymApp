@@ -233,7 +233,17 @@ void main() async {
 
   // Inizializza MobileAds PRIMA di runApp — stesso pattern di app_cliente (evita crash ads)
   try {
-    if (!kIsWeb) await MobileAds.instance.initialize();
+    if (!kIsWeb) {
+      await MobileAds.instance.initialize();
+      // Registra il telefono di sviluppo come test device AdMob: gli annunci
+      // mostrati qui diventano test ads, i click accidentali non contano
+      // come invalid traffic e non rischiano il ban dell'account.
+      await MobileAds.instance.updateRequestConfiguration(
+        RequestConfiguration(
+          testDeviceIds: ['AB9A963A409B8CE72B2204636633BD87'],
+        ),
+      );
+    }
   } catch (_) {}
 
   await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
