@@ -3,7 +3,8 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "391763e626895d0cf08b09a921235c70",
+const RESOURCES = {"ads.txt": "5826c18f51a746e3f3a71e9c21cc0b9b",
+"assets/AssetManifest.bin": "391763e626895d0cf08b09a921235c70",
 "assets/AssetManifest.bin.json": "bc695b8f160b4da22350a72b7865be86",
 "assets/assets/gif/1-2-stick-drill.webp": "491c44df296fa2ad7cc557132d6465c8",
 "assets/assets/gif/4-point-tummy-vacuum-exercise.webp": "02be16e52776cb03287159ed1d4a2f49",
@@ -1314,7 +1315,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "391763e626895d0cf08b09a921235c70
 "canvaskit/skwasm_heavy.wasm": "b0be7910760d205ea4e011458df6ee01",
 "favicon.png": "bab703d825dafa066624127b80b9b949",
 "flutter.js": "24bc71911b75b5f8135c949e27a2984e",
-"flutter_bootstrap.js": "be4d605b88ea0d2d94a52c72f5bee764",
+"flutter_bootstrap.js": "926b7e492cf6f99f7273c1a492cab1c6",
 "gymapp-favicon.png": "bab703d825dafa066624127b80b9b949",
 "icons/gymapp-home-180.png": "ffc859c4461c480f31bd4af23ccc2555",
 "icons/gymapp-icon-192.png": "c102f13ce1671fe76013435cb654409a",
@@ -1329,7 +1330,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "391763e626895d0cf08b09a921235c70
 "/": "2f14d0358069fc508647e089673c0455",
 "main.dart.js": "9be729bb20eb8c7f842ac0d04074452e",
 "manifest.json": "c58b590ae81d6fe7fea194a1eba19ee7",
-"version.json": "d093c5ef225f1b0077be604749479e43"};
+"version.json": "f67b89d12d6b8454f483b287f92ac180"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
