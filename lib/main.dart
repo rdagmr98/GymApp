@@ -440,6 +440,10 @@ const String _webIosInstallHintSeenKey = 'web_ios_install_hint_seen';
 const String _webDonationBannerDismissedAtKey = 'web_donation_banner_dismissed_at';
 const Duration _webDonationGracePeriod = Duration(days: 30);
 const Duration _webDonationBannerHideDuration = Duration(days: 7);
+// ponytail: blocco donazione disattivato, riattivare mettendo true per ripristinare l'app che si blocca
+const bool kWebDonationLockEnabled = false;
+const String _webDonationVoluntaryLastShownKey = 'web_donation_voluntary_last_shown_at';
+const Duration _webDonationVoluntaryInterval = Duration(days: 30);
 
 Future<void> openPaypalDonationPage() async {
   final uri = Uri.parse('https://paypal.me/gianmarcosare');
@@ -486,7 +490,7 @@ Future<bool> _isWebDonationLocked() async {
 
 Future<({bool locked, bool acknowledged, int daysLeft})>
 getWebDonationGateState() async {
-  if (!kIsWeb) {
+  if (!kIsWeb || !kWebDonationLockEnabled) {
     return (locked: false, acknowledged: true, daysLeft: 999);
   }
   final prefs = await SharedPreferences.getInstance();
@@ -511,6 +515,51 @@ getWebDonationGateState() async {
         : false,
     acknowledged: acknowledgedAt != null && receiptId.isNotEmpty,
     daysLeft: daysLeft,
+  );
+}
+
+Future<void> maybeShowVoluntaryDonationReminder(BuildContext context) async {
+  if (!kIsWeb || kWebDonationLockEnabled) return;
+  final prefs = await SharedPreferences.getInstance();
+  final lastShownRaw = prefs.getString(_webDonationVoluntaryLastShownKey);
+  final lastShown = DateTime.tryParse(lastShownRaw ?? '');
+  if (lastShown != null &&
+      DateTime.now().difference(lastShown) < _webDonationVoluntaryInterval) {
+    return;
+  }
+  await prefs.setString(_webDonationVoluntaryLastShownKey, DateTime.now().toIso8601String());
+  if (!context.mounted) return;
+  final isDark = Theme.of(context).brightness == Brightness.dark;
+  await showDialog<void>(
+    context: context,
+    builder: (c) => AlertDialog(
+      backgroundColor: isDark ? const Color(0xFF1C1C1E) : Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      title: Text(
+        AppL.lang == 'en' ? 'Support GymApp Web' : 'Sostieni GymApp Web',
+        textAlign: TextAlign.center,
+      ),
+      content: Text(
+        AppL.lang == 'en'
+            ? 'If GymApp Web is useful to you, consider a small voluntary donation to help fund development. It is completely optional, the app keeps working either way.'
+            : 'Se GymApp Web ti è utile, valuta una piccola donazione volontaria per sostenere lo sviluppo. È del tutto facoltativa, l\'app continua a funzionare comunque.',
+        textAlign: TextAlign.center,
+        style: TextStyle(color: isDark ? Colors.white70 : Colors.black87, height: 1.4),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(c),
+          child: Text(AppL.lang == 'en' ? 'Maybe later' : 'Magari più tardi'),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(c);
+            openPaypalDonationPage();
+          },
+          child: Text(AppL.openPayPal),
+        ),
+      ],
+    ),
   );
 }
 
@@ -9335,7 +9384,7 @@ class _ClientMainPageState extends State<ClientMainPage>
   }
 
   Widget _buildWebDonationBanner() {
-    if (!kIsWeb) return const SizedBox.shrink();
+    if (!kIsWeb || !kWebDonationLockEnabled) return const SizedBox.shrink();
     if (_webDonationBannerHidden && !_webDonationLocked) return const SizedBox.shrink();
     final accent = Theme.of(context).colorScheme.primary;
     final dueLabel = _webDonationAcknowledged
@@ -9433,7 +9482,7 @@ class _ClientMainPageState extends State<ClientMainPage>
   }
 
   Widget _buildWebDonationOverlay() {
-    if (!kIsWeb || !_webDonationLocked) return const SizedBox.shrink();
+    if (!kIsWeb || !kWebDonationLockEnabled || !_webDonationLocked) return const SizedBox.shrink();
     final accent = Theme.of(context).colorScheme.primary;
     return Positioned.fill(
       child: Container(
@@ -13899,7 +13948,11 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       (ex) => _previousResults.containsKey(ex['exercise']),
     );
     if (kIsWeb) {
-      _recordWebDonationPromptIfNeeded();
+      if (kWebDonationLockEnabled) {
+        _recordWebDonationPromptIfNeeded();
+      } else {
+        maybeShowVoluntaryDonationReminder(context);
+      }
     }
 
     showDialog(
@@ -14123,7 +14176,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     ),
                   ),
                 ],
-                if (kIsWeb) ...[
+                if (kIsWeb && kWebDonationLockEnabled) ...[
                   const SizedBox(height: 12),
                   Container(
                     width: double.infinity,
