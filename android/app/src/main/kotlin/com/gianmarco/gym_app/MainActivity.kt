@@ -24,6 +24,22 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
 
+fun clearCountdownNotification(context: Context) {
+    val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    fun clearNow() {
+        nm.cancel(1)
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            nm.activeNotifications
+                .filter {
+                    it.id == 1 || it.notification.channelId == "timer_gym_cd"
+                }
+                .forEach { active -> nm.cancel(active.id) }
+        }
+    }
+    clearNow()
+    Handler(Looper.getMainLooper()).postDelayed({ clearNow() }, 180)
+}
+
 class MainActivity : FlutterActivity() {
     private var workoutNativeAdFactory: WorkoutNativeAdFactory? = null
     private var timerNotificationToken: Long = 0
@@ -146,19 +162,7 @@ class MainActivity : FlutterActivity() {
 
     private fun cancelCountdownNotification() {
         timerNotificationToken += 1
-        val nm = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        fun clearNow() {
-            nm.cancel(1)
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                nm.activeNotifications
-                    .filter {
-                        it.id == 1 || it.notification.channelId == "timer_gym_cd"
-                    }
-                    .forEach { active -> nm.cancel(active.id) }
-            }
-        }
-        clearNow()
-        Handler(Looper.getMainLooper()).postDelayed({ clearNow() }, 180)
+        clearCountdownNotification(this)
     }
 
     private fun cancelTimerNotifications() {

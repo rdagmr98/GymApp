@@ -10,6 +10,12 @@ import androidx.core.app.NotificationCompat
 
 class TimerFinishedReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        // Il countdown nella notifica persistente (Chronometer nativo) non si ferma da solo allo
+        // zero: su MIUI il Timer Dart che dovrebbe cancellarlo può essere ritardato in background,
+        // e il countdown scorre in negativo. Questo receiver è schedulato via AlarmManager sullo
+        // stesso istante di scadenza e sopravvive alla sospensione, quindi cancella qui la notifica
+        // di countdown indipendentemente da Dart.
+        clearCountdownNotification(context)
         val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
