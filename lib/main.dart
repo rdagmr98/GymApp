@@ -7109,6 +7109,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                 (v) {
                   setState(() => _stWakelock = v);
                   _saveMainSettings();
+                  _applyWakelock(v);
                 },
               ),
               Divider(color: divColor),
@@ -7747,6 +7748,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       _stTimerSound = prefs.getBool('timer_sound_enabled') ?? true;
       _stVibration = prefs.getBool('vibration_enabled') ?? true;
       _stWakelock = prefs.getBool('wakelock_enabled') ?? true;
+      _applyWakelock(_stWakelock);
       _stAutoTimer = prefs.getBool('auto_start_timer') ?? true;
       _stConfirmSeries = prefs.getBool('confirm_series_enabled') ?? true;
       _stWeightHint = prefs.getBool('show_weight_suggestion') ?? true;
@@ -7772,6 +7774,19 @@ class _ClientMainPageState extends State<ClientMainPage>
     await prefs.setBool('dark_mode', _stDarkMode);
     await prefs.setString('alarm_sound_type', _stAlarmType);
     await prefs.setString('alarm_sound_path', _stAlarmPath);
+  }
+
+  // Schermo acceso per tutta la sessione app (non solo durante il countdown
+  // del timer di recupero): altrimenti si spegne proprio mentre si inseriscono
+  // le serie tra un timer e l'altro.
+  void _applyWakelock(bool enabled) {
+    try {
+      if (enabled) {
+        WakelockPlus.enable();
+      } else {
+        WakelockPlus.disable();
+      }
+    } catch (_) {}
   }
 
   Future<void> _loadData() async {
@@ -13071,7 +13086,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   // Suono fine timer
   bool _timerSoundEnabled = true;
   bool _vibrationEnabled = true;
-  bool _wakelockEnabled = true;
   // Alarm sound customization
   String _alarmSoundType = 'beep';
   String _alarmSoundPath = '';
@@ -13176,7 +13190,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       setState(() {
         _timerSoundEnabled = prefs.getBool('timer_sound_enabled') ?? true;
         _vibrationEnabled = prefs.getBool('vibration_enabled') ?? true;
-        _wakelockEnabled = prefs.getBool('wakelock_enabled') ?? true;
         _autoStartTimer = prefs.getBool('auto_start_timer') ?? true;
         _confirmSeriesEnabled = prefs.getBool('confirm_series_enabled') ?? true;
         _showWeightSuggestion = prefs.getBool('show_weight_suggestion') ?? true;
@@ -14797,10 +14810,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     if (!_autoStartTimer && !force) return;
     _prepareWebTimerFeedback();
 
-    if (_wakelockEnabled)
-      try {
-        WakelockPlus.enable();
-      } catch (_) {}
     _bgTimer?.cancel();
     _stopCardioTimer();
 
@@ -14847,10 +14856,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             _endTime = null;
           });
         }
-        try {
-          WakelockPlus.disable();
-        } catch (_) {}
-
       } else {
         if (mounted) {
           setState(() {
@@ -14908,7 +14913,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       _cardioCountdownRemaining = secs;
       _cardioTimerRunning = true;
     });
-    if (_wakelockEnabled) try { WakelockPlus.enable(); } catch (_) {}
     _cardioCountdownTimer = Timer.periodic(const Duration(seconds: 1), (t) {
       if (!mounted) { t.cancel(); return; }
       setState(() {
@@ -15531,9 +15535,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       _endTime = null;
     });
     await _clearTimerNotifications();
-    try {
-      WakelockPlus.disable();
-    } catch (_) {}
   }
 
   @override
