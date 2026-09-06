@@ -515,6 +515,46 @@ final List<Map<String, dynamic>> kWorkoutTemplates = [
       _ex('Plank', 'plank', 3, [45, 40, 40], rest: 45),
     ]),
   ]),
+  // —— Scheda personale Gianmarco (import .workout) ——
+  _tpl(
+    'Scheda Gianmarco',
+    '5 giorni · split personale petto / dorso / gambe / spalle / braccia',
+    '🏋️',
+    [
+    _day('Petto', ['petto'], 'petto.png', [
+      _ex('Smith Machine Bench Press', 'smith-machine-bench-press', 4, [8, 8, 8, 8], note: 'Utilizzare Multipower'),
+      _ex('High Cable Crossover', 'high-cable-crossover', 4, [8, 8, 8, 8]),
+      _ex('Distensioni manubri', 'dumbbell-press', 4, [8, 8, 8, 8]),
+      _ex('Pectoral machine', 'pec-deck-fly', 4, [8, 8, 8, 8]),
+    ]),
+    _day('Dorso', ['dorso'], 'dorso.png', [
+      _ex('Lat machine convergente', 'lat-pulldown', 4, [8, 8, 8, 8]),
+      _ex('Row machine', 'seated-row-machine', 4, [8, 8, 8, 8]),
+      _ex('Pulley', 'seated-cable-row', 4, [8, 8, 8, 8]),
+      _ex('Cable Straight Arm Pulldown', 'cable-straight-arm-pulldown', 4, [10, 10, 10, 10]),
+    ]),
+    _day('Gambe', ['gambe'], 'gambe.png', [
+      _ex('Belt squat', 'belt-squat', 8, [8, 8, 8, 8, 8, 8, 8, 8]),
+      _ex('Leg extension', 'leg-extension', 3, [15, 12, 10]),
+      _ex('Leg Curl Seduto', 'seated-leg-curl', 4, [8, 8, 8, 8]),
+      _ex('Leg Curl', 'leg-curl', 4, [8, 8, 8, 8]),
+    ]),
+    _day('Spalle', ['spalle'], 'spalle.png', [
+      _ex('Shoulder Press Macchina', 'lever-shoulder-press', 4, [8, 8, 8, 8]),
+      _ex('Alzate frontali', 'dumbbell-front-raise', 3, [10, 10, 10], rest: 60),
+      _ex('Lateral Raise Machine', 'lateral-raise-machine', 8, [12, 10, 12, 10, 12, 10, 12, 10], rest: 60),
+      _ex('Alzate laterali', 'dumbbell-lateral-raise', 4, [10, 8, 12, 10], rest: 60),
+      _ex('Alzate Posteriori', 'bent-over-lateral-raise', 4, [12, 10, 10, 8], rest: 60),
+    ]),
+    _day('Braccia', ['braccia'], 'braccia.png', [
+      _ex('Biceps machine', 'lever-preacher-curl', 5, [8, 8, 8, 8, 8], rest: 60),
+      _ex('Curl cavi dal basso', 'cable-two-arm-curl-on-incline-bench', 5, [8, 8, 8, 8, 8], rest: 60),
+      _ex('Curl hammer', 'cable-rope-hammer-curl', 5, [8, 8, 8, 8, 8], rest: 60),
+      _ex('Push down cavo', 'one-arm-reverse-push-down', 5, [8, 8, 8, 8, 8], rest: 60),
+      _ex('Push down corda', 'rope-pushdown', 5, [8, 8, 8, 8, 8], rest: 60),
+      _ex('Spaccacranio', 'seated-one-arm-dumbbell-triceps-extension', 5, [8, 8, 8, 8, 8], rest: 60),
+    ]),
+  ]),
 ];
 
 const List<Map<String, dynamic>> kCuratedWorkoutTemplates = [];
