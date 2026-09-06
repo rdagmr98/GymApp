@@ -193,7 +193,7 @@ final List<Map<String, dynamic>> kWorkoutTemplates = [
     ]),
     _day('Push', ['petto', 'spalle', 'braccia'], 'push.png', [
       _ex('Panca Piana', 'bench-press', 4, [8, 8, 6, 6], rest: 120),
-      _ex('Distensioni Incline', 'incline-barbell-bench-press', 3, [10, 8, 8]),
+      _ex('Panca Inclinata', 'incline-barbell-bench-press', 3, [10, 8, 8]),
       _ex('Peck Deck', 'pec-deck-fly', 3, [12, 10, 10], rest: 60),
       _ex('Lento Avanti', 'barbell-shoulder-press', 3, [8, 8, 8]),
       _ex('Alzate Laterali', 'dumbbell-lateral-raise', 3, [12, 12, 10], rest: 60),
@@ -226,7 +226,7 @@ final List<Map<String, dynamic>> kWorkoutTemplates = [
     ]),
     _day('Upper B', ['petto', 'dorso', 'braccia'], 'pull.png', [
       _ex('Distensioni con Manubri', 'alternate-dumbbell-bench-press', 4, [10, 8, 8, 8]),
-      _ex('T Bar Row', 'barbell-bent-over-row', 4, [8, 8, 8, 6]),
+      _ex('T Bar Row', 't-bar-row', 4, [8, 8, 8, 6]),
       _ex('High Cable Crossover', 'high-cable-crossover', 3, [12, 10, 10], rest: 60),
       _ex('Curl con Bilanciere', 'barbell-curl', 3, [10, 8, 8], rest: 60),
       _ex('French Press', 'seated-ez-bar-overhead-triceps-extension', 3, [10, 8, 8], rest: 60),
@@ -243,7 +243,7 @@ final List<Map<String, dynamic>> kWorkoutTemplates = [
   _tpl('Intermedio 5gg', '5 giorni · PPL + upper/lower', '⚡', [
     _day('Push', ['petto', 'spalle', 'braccia'], 'push.png', [
       _ex('Panca Piana', 'bench-press', 4, [8, 8, 6, 6], rest: 120),
-      _ex('Incline Dumbbell Press', 'incline-barbell-bench-press', 3, [10, 8, 8]),
+      _ex('Incline Dumbbell Press', 'incline-dumbbell-press', 3, [10, 8, 8]),
       _ex('Lento Avanti', 'barbell-shoulder-press', 3, [8, 8, 8]),
       _ex('Alzate Laterali', 'dumbbell-lateral-raise', 3, [12, 12, 10], rest: 60),
       _ex('Rope Pushdown', 'rope-pushdown', 3, [12, 10, 8], rest: 60),
@@ -285,7 +285,7 @@ final List<Map<String, dynamic>> kWorkoutTemplates = [
       _ex('Rematore Bilanciere', 'barbell-bent-over-row', 4, [6, 6, 6, 6], rest: 150),
       _ex('Lento Avanti', 'barbell-shoulder-press', 4, [6, 6, 6, 6], rest: 120),
       _ex('Lat Machine', 'lat-pulldown', 3, [8, 8, 8]),
-      _ex('Weighted Dip', 'triceps-dips', 3, [8, 8, 6], rest: 90),
+      _ex('Dip', 'triceps-dips', 3, [8, 8, 6], rest: 90),
       _ex('Curl con Bilanciere', 'barbell-curl', 3, [8, 8, 6], rest: 60),
       _ex('Alzate Laterali', 'dumbbell-lateral-raise', 4, [12, 10, 10, 10], rest: 60),
     ]),
@@ -293,7 +293,7 @@ final List<Map<String, dynamic>> kWorkoutTemplates = [
       _ex('Squat con Bilanciere', 'squat', 5, [5, 5, 5, 5, 5], rest: 180),
       _ex('Stacco Rumeno', 'romanian-deadlift', 4, [6, 6, 6, 6], rest: 150),
       _ex('Leg Press', 'leg-press', 4, [10, 8, 8, 8], rest: 120),
-      _ex('Walking Lunge', 'bodyweight-lunge', 3, [8, 8, 8]),
+      _ex('Bodyweight Walking Lunge', 'bodyweight-walking-lunge', 3, [8, 8, 8]),
       _ex('Leg Curl', 'leg-curl', 3, [10, 8, 8]),
       _ex('Calf Raise', 'calf-raise', 4, [12, 12, 10, 10], rest: 60),
     ]),
@@ -310,7 +310,7 @@ final List<Map<String, dynamic>> kWorkoutTemplates = [
     ]),
     _day('Push', ['petto', 'spalle', 'braccia'], 'push.png', [
       _ex('Panca Piana', 'bench-press', 5, [5, 5, 5, 3, 3], rest: 180),
-      _ex('Incline Press', 'incline-barbell-bench-press', 4, [8, 8, 6, 6], rest: 120),
+      _ex('Panca Inclinata', 'incline-barbell-bench-press', 4, [8, 8, 6, 6], rest: 120),
       _ex('High Cable Crossover', 'high-cable-crossover', 3, [12, 10, 10], rest: 60),
       _ex('Lento Avanti', 'barbell-shoulder-press', 4, [6, 6, 6, 6], rest: 120),
       _ex('Alzate Laterali', 'dumbbell-lateral-raise', 4, [12, 10, 10, 10], rest: 60),
@@ -364,7 +364,7 @@ final List<Map<String, dynamic>> kWorkoutTemplates = [
   _tpl('Avanzato 5gg', '5 giorni · split classico', '🔥', [
     _day('Petto', ['petto'], 'petto.png', [
       _ex('Panca Piana', 'bench-press', 5, [6, 6, 5, 5, 5], rest: 150),
-      _ex('Incline Press', 'incline-barbell-bench-press', 4, [8, 8, 6, 6], rest: 120),
+      _ex('Panca Inclinata', 'incline-barbell-bench-press', 4, [8, 8, 6, 6], rest: 120),
       _ex('Distensioni con Manubri', 'alternate-dumbbell-bench-press', 3, [10, 8, 8]),
       _ex('High Cable Crossover', 'high-cable-crossover', 3, [12, 10, 10], rest: 60),
       _ex('Peck Deck', 'pec-deck-fly', 3, [12, 12, 10], rest: 60),
