@@ -34,6 +34,16 @@ import 'app_l.dart';
 bool _isDarkCtx(BuildContext context) =>
     Theme.of(context).brightness == Brightness.dark;
 
+/// Bottom inset for edge-to-edge Android nav bar (floor 64 for One UI / inset-0 devices).
+double _bottomNavInset(BuildContext context) {
+  final mq = MediaQuery.of(context);
+  return [
+    mq.padding.bottom,
+    mq.viewPadding.bottom,
+    64.0,
+  ].reduce(scala.max);
+}
+
 final ValueNotifier<Color> appAccentNotifier = ValueNotifier<Color>(
   const Color(0xFF00F2FF),
 );
@@ -6325,6 +6335,7 @@ class _ClientMainPageState extends State<ClientMainPage>
   void _showWorkoutProgress(WorkoutDay day) {
     final accent = Theme.of(context).colorScheme.primary;
     showModalBottomSheet(
+      useSafeArea: true,
       context: context,
       backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
       isScrollControlled: true,
@@ -6427,7 +6438,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             ),
             Expanded(
               child: ListView(
-                padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+                padding: EdgeInsets.fromLTRB(24, 16, 24, _bottomNavInset(c) + 24),
                 children: [
                   Row(
                     children: [
@@ -7231,7 +7242,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     return Column(children: items);
   }
 
-  String _lastTrainedLabel(WorkoutDay day) {
+  DateTime? _lastTrainedDate(WorkoutDay day) {
     DateTime? latest;
     for (final ex in day.exercises) {
       for (final h in history) {
@@ -7243,6 +7254,27 @@ class _ClientMainPageState extends State<ClientMainPage>
         }
       }
     }
+    return latest;
+  }
+
+  /// Workout completed furthest in the past (never done = oldest).
+  String? _suggestedWorkoutName() {
+    if (myRoutine.isEmpty) return null;
+    String? pick;
+    DateTime? oldest;
+    for (final d in myRoutine) {
+      final last =
+          _lastTrainedDate(d) ?? DateTime.fromMillisecondsSinceEpoch(0);
+      if (oldest == null || last.isBefore(oldest)) {
+        oldest = last;
+        pick = d.dayName;
+      }
+    }
+    return pick;
+  }
+
+  String _lastTrainedLabel(WorkoutDay day) {
+    final latest = _lastTrainedDate(day);
     if (latest == null) return AppL.neverTrained;
     final diff = DateTime.now().difference(latest).inDays;
     if (diff == 0) return AppL.today;
@@ -7867,6 +7899,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     const months = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
     final todayLabel = '${now.day} ${months[now.month - 1]}';
     showModalBottomSheet(
+      useSafeArea: true,
       context: ctx,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -7885,6 +7918,7 @@ class _ClientMainPageState extends State<ClientMainPage>
   void _shareStreakFromHome(BuildContext ctx, List<dynamic> routine) {
     final allNames = routine.map<String>((d) => d.dayName as String).toList();
     showModalBottomSheet(
+      useSafeArea: true,
       context: ctx,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -8043,6 +8077,7 @@ class _ClientMainPageState extends State<ClientMainPage>
         ),
       );
     }
+    final suggestedName = _suggestedWorkoutName();
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
@@ -8300,6 +8335,7 @@ class _ClientMainPageState extends State<ClientMainPage>
               final d = myRoutine[i];
               final label = _lastTrainedLabel(d);
               final isToday = label == AppL.today;
+              final isSuggested = d.dayName == suggestedName;
               return GestureDetector(
                 onTap: () => _mostraAdEAvviaAllenamento(d),
                 child: Container(
@@ -8308,12 +8344,12 @@ class _ClientMainPageState extends State<ClientMainPage>
                     color: _isDarkCtx(context) ? const Color(0xFF111113) : Colors.white,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: isToday
+                      color: isSuggested
                           ? accent.withAlpha(120)
                           : (_isDarkCtx(context) ? Colors.white.withAlpha(15) : Colors.black12),
-                      width: isToday ? 1.5 : 1,
+                      width: isSuggested ? 1.5 : 1,
                     ),
-                    boxShadow: isToday
+                    boxShadow: isSuggested
                         ? [
                             BoxShadow(
                               color: accent.withAlpha(40),
@@ -8349,7 +8385,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                     style: TextStyle(
-                                      color: isToday ? accent : (_isDarkCtx(context) ? Colors.white : Colors.black87),
+                                      color: isSuggested ? accent : (_isDarkCtx(context) ? Colors.white : Colors.black87),
                                       fontSize: 18,
                                       fontWeight: FontWeight.w900,
                                       letterSpacing: 1,
@@ -9484,9 +9520,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
       builder: (c) {
-        final bottomPad = MediaQuery.of(c).padding.bottom;
         return Container(
-          padding: EdgeInsets.fromLTRB(24, 24, 24, 12 + bottomPad),
+          padding: EdgeInsets.fromLTRB(24, 24, 24, 12 + _bottomNavInset(c)),
           constraints: BoxConstraints(
             maxHeight: MediaQuery.of(c).size.height * 0.85,
           ),
@@ -12820,6 +12855,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
   Future<void> _shareWorkoutResult(BuildContext ctx) async {
     await showModalBottomSheet(
+      useSafeArea: true,
       context: ctx,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
@@ -13176,7 +13212,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           24,
           20,
           24,
-          24 + scala.max(MediaQuery.of(ctx).padding.bottom, MediaQuery.of(ctx).viewPadding.bottom),
+          24 + _bottomNavInset(ctx),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -14011,11 +14047,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       24,
                       12,
                       24,
-                      scala.max(
-                            MediaQuery.of(context).padding.bottom,
-                            MediaQuery.of(context).viewPadding.bottom,
-                          ) +
-                          16,
+                      _bottomNavInset(context) + 16,
                     ),
                     decoration: BoxDecoration(
                       color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
@@ -15837,7 +15869,12 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
         color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
-      padding: EdgeInsets.fromLTRB(16, 16, 16, MediaQuery.of(context).viewInsets.bottom + 24),
+      padding: EdgeInsets.fromLTRB(
+        16,
+        16,
+        16,
+        _bottomNavInset(context) + MediaQuery.of(context).viewInsets.bottom + 24,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -16155,7 +16192,12 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
         color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
-      padding: EdgeInsets.fromLTRB(16, 16, 16, MediaQuery.of(context).viewInsets.bottom + 24),
+      padding: EdgeInsets.fromLTRB(
+        16,
+        16,
+        16,
+        _bottomNavInset(context) + MediaQuery.of(context).viewInsets.bottom + 24,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -16466,7 +16508,12 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
         color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
-      padding: EdgeInsets.fromLTRB(16, 16, 16, MediaQuery.of(context).viewInsets.bottom + 24),
+      padding: EdgeInsets.fromLTRB(
+        16,
+        16,
+        16,
+        _bottomNavInset(context) + MediaQuery.of(context).viewInsets.bottom + 24,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
