@@ -34,14 +34,14 @@ import 'app_l.dart';
 bool _isDarkCtx(BuildContext context) =>
     Theme.of(context).brightness == Brightness.dark;
 
-/// Bottom inset for edge-to-edge Android nav bar (floor 64 for One UI / inset-0 devices).
+/// Bottom inset under CTAs.
+/// Web: always 0 (no iPhone home-indicator detach).
+/// Android: content already sits above the nav bar via
+/// WindowCompat.setDecorFitsSystemWindows(true) — only padding.bottom remains
+/// (usually 0). Never use viewPadding or a floor-64 (would double-lift CTAs).
 double _bottomNavInset(BuildContext context) {
-  final mq = MediaQuery.of(context);
-  return [
-    mq.padding.bottom,
-    mq.viewPadding.bottom,
-    64.0,
-  ].reduce(scala.max);
+  if (kIsWeb) return 0;
+  return MediaQuery.paddingOf(context).bottom;
 }
 
 final ValueNotifier<Color> appAccentNotifier = ValueNotifier<Color>(
@@ -257,7 +257,11 @@ void main() async {
     }
   } catch (_) {}
 
-  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  // App content above system bars (not edge-to-edge under nav bar).
+  await SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.manual,
+    overlays: SystemUiOverlay.values,
+  );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarIconBrightness: Brightness.light,
