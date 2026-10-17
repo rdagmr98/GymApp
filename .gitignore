@@ -43,16 +43,45 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+/android/build/
 
 releases/
 
-# SIEL (gestionale AVES) — dati operativi reali + python embedded: MAI nel repo pubblico
-Documents/SIEL_Portable/
-Documents/siel_app/
-Documents/Gestione_Manutenzione/
-# Cloni dei repo web SIEL (privati, dati reali AVES) — fuori dal repo pubblico home
-/siel/
-/siel-data/
+node_modules
 
-# Vault Obsidian (dati personali/PII reali) — migrato in repo privato rdagmr98/ObsidianVault
-/ObsidianVault/
+# ALLOWLIST. Questo repo (GymApp, PUBBLICO, Pages da main /) vive nella home:
+# tutto il resto della home (Documents, altri progetti, AppData, vault, dati
+# personali) resta fuori. Ogni altro progetto ha il suo repo dedicato.
+# Se la build web produce un nuovo file top-level, aggiungerlo qui.
+/*
+!/.gitignore
+!/.metadata
+!/README.md
+!/analysis_options.yaml
+!/pubspec.yaml
+!/pubspec.lock
+!/lib/
+!/test/
+!/assets/
+!/android/
+!/windows/
+!/web/
+!/docs/
+# build web copiata in root (sito rdagmr98.github.io/GymApp/)
+!/index.html
+!/404.html
+!/.nojekyll
+!/ads.txt
+!/favicon.png
+!/gymapp-favicon.png
+!/icons/
+!/canvaskit/
+!/manifest.json
+!/version.json
+!/.last_build_id
+!/flutter.js
+!/flutter_bootstrap.js
+!/flutter_service_worker.js
+!/main.dart.js
+!/main.dart.wasm
+!/main.dart.mjs
