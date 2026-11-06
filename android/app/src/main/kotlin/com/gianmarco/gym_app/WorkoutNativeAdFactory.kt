@@ -9,11 +9,11 @@ import android.widget.TextView
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
-import io.flutter.plugins.googlemobileads.GoogleMobileAdsPlugin
+import io.flutter.plugins.googlemobileads.NativeAdFactory
 
 class WorkoutNativeAdFactory(
     private val layoutInflater: LayoutInflater
-) : GoogleMobileAdsPlugin.NativeAdFactory {
+) : NativeAdFactory {
     override fun createNativeAd(
         nativeAd: NativeAd,
         customOptions: MutableMap<String, Any>?

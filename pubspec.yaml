@@ -2,7 +2,7 @@ name: gym_app
 description: "GymApp - Track your workouts, build your own schedule"
 publish_to: 'none'
 
-version: 1.0.2+44
+version: 1.0.2+45
 
 environment:
   sdk: ^3.10.4
@@ -21,7 +21,7 @@ dependencies:
   path_provider: ^2.1.5
   file_picker: ^10.3.10
   google_fonts: ^6.2.1
-  google_mobile_ads: ^5.2.0
+  google_mobile_ads: ^9.2.0
   share_plus: ^10.1.4
 
 dev_dependencies:
