@@ -58,12 +58,33 @@ class MainActivity : FlutterActivity() {
         }
     }
 
+    // Testo di una scheda .workout aperta con "Apri con"/condivisione, letto da Dart con getPendingScheda.
+    private var pendingScheda: String? = null
+
+    private fun handleSchedaIntent(intent: Intent?, warmStart: Boolean = false) {
+        if (intent?.action != Intent.ACTION_VIEW && intent?.action != Intent.ACTION_SEND) return
+        if (intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY != 0) return
+        @Suppress("DEPRECATION")
+        val uri = (if (intent.action == Intent.ACTION_SEND)
+            intent.getParcelableExtra<android.net.Uri>(Intent.EXTRA_STREAM) else intent.data) ?: return
+        val text = try {
+            contentResolver.openInputStream(uri)?.use { it.readBytes().toString(Charsets.UTF_8) }
+        } catch (e: Exception) { null } ?: return
+        pendingScheda = text
+        if (warmStart) {
+            flutterEngine?.dartExecutor?.binaryMessenger?.let { messenger ->
+                MethodChannel(messenger, "gym_file_reader").invokeMethod("openScheda", null)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Opt out of edge-to-edge: Flutter content above system nav bar.
         WindowCompat.setDecorFitsSystemWindows(window, true)
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, true)
         handleWorkoutStartIntent(intent)
+        handleSchedaIntent(intent)
     }
 
     override fun onPostResume() {
@@ -75,6 +96,7 @@ class MainActivity : FlutterActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         handleWorkoutStartIntent(intent, warmStart = true)
+        handleSchedaIntent(intent, warmStart = true)
     }
 
     private fun timerFinishedPendingIntent(title: String = "", body: String = ""): PendingIntent {
@@ -209,6 +231,10 @@ class MainActivity : FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "gym_file_reader")
             .setMethodCallHandler { call, result ->
                 when (call.method) {
+                    "getPendingScheda" -> {
+                        result.success(pendingScheda)
+                        pendingScheda = null
+                    }
                     "playBeep" -> {
                         try {
                             val durationMs = (call.arguments as? Int) ?: 400

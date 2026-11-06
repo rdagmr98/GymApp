@@ -67,19 +67,8 @@ String _limitToOneEmoji(String s) {
   return result.trim();
 }
 
-// Channel per leggere file content:// da WhatsApp/Telegram via ContentResolver
+// Canale nativo: beep/notifiche timer, widget, schede .workout aperte da fuori (getPendingScheda)
 const _gymFileChannel = MethodChannel('gym_file_reader');
-
-Future<String> _readFileUri(Uri uri) async {
-  if (uri.scheme == 'content') {
-    final bytes = await _gymFileChannel.invokeMethod<List<int>>(
-      'readBytes',
-      uri.toString(),
-    );
-    return utf8.decode(bytes!);
-  }
-  return await File(uri.toFilePath()).readAsString();
-}
 
 Future<void> cercaEsercizioSuYoutube(String nomeEsercizio) async {
   String query = Uri.encodeComponent("esecuzione $nomeEsercizio");
@@ -4689,6 +4678,20 @@ List<dynamic> _templateDays(Map<String, dynamic> template) {
   return decoded is List ? decoded : const [];
 }
 
+/// Giorni di una scheda GymCoach (.workout = "TIPO:SCHEDA_GYM" + JSON, codice GYM1:, o lista).
+/// Lancia un'eccezione se il testo non è una scheda (es. file progressi .gymlog).
+List<dynamic> parseSchedaCoach(String text) {
+  var t = text.replaceFirst('﻿', '').trim();
+  if (t.startsWith('TIPO:SCHEDA_GYM')) t = t.substring(15).trim();
+  if (t.startsWith('TIPO:')) throw const FormatException('non è una scheda');
+  final days = _templateDays({'payload': t});
+  if (days.isEmpty ||
+      days.any((d) => d is! Map || (d['exercises'] ?? d['esercizi']) is! List)) {
+    throw const FormatException('non è una scheda');
+  }
+  return days;
+}
+
 /// Infers a muscle image filename from the day name and exercise list.
 /// Used to provide a background image for curated template days that lack muscleImage.
 String? _inferMuscleImage(String dayName, List<dynamic> exercises) {
@@ -4802,6 +4805,7 @@ class _ClientMainPageState extends State<ClientMainPage>
       // Handle widget play button warm-start (app already running)
       _gymFileChannel.setMethodCallHandler((call) async {
         if (call.method == 'startWorkout') await _maybeStartWorkoutFromWidget();
+        if (call.method == 'openScheda') await _apriSchedaInArrivo();
         return null;
       });
     }
@@ -5982,6 +5986,21 @@ class _ClientMainPageState extends State<ClientMainPage>
     });
     if (!kIsWeb) _updateWidgetData();
     if (!kIsWeb) _maybeStartWorkoutFromWidget();
+    if (!kIsWeb) _apriSchedaInArrivo();
+  }
+
+  /// File .workout aperto con "Apri con" / condivisione: lo passa al costruttore scheda.
+  Future<void> _apriSchedaInArrivo() async {
+    String? text;
+    try {
+      text = await _gymFileChannel.invokeMethod<String>('getPendingScheda');
+    } catch (_) {}
+    if (text == null || !mounted) return;
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => ScheduleBuilderScreen(importText: text)),
+    );
+    _loadData();
   }
 
   Future<void> _updateWidgetData() async {
@@ -9012,7 +9031,9 @@ class _ClientMainPageState extends State<ClientMainPage>
 
 // --- COSTRUTTORE SCHEDA AUTONOMO ---
 class ScheduleBuilderScreen extends StatefulWidget {
-  const ScheduleBuilderScreen({super.key});
+  const ScheduleBuilderScreen({super.key, this.importText});
+  /// Testo di una scheda .workout aperta da fuori (Apri con / condividi): propone subito l'import.
+  final String? importText;
   @override
   State<ScheduleBuilderScreen> createState() => _ScheduleBuilderScreenState();
 }
@@ -9052,6 +9073,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
       _days = [];
     }
     if (mounted) setState(() => _loading = false);
+    if (mounted && widget.importText != null) _importaScheda(widget.importText!);
   }
 
   Future<void> _save() async {
@@ -9514,6 +9536,136 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     );
   }
 
+  /// Giorno di template/scheda coach → WorkoutDay con nomi esercizio normalizzati sul catalogo.
+  WorkoutDay _dayFromTemplate(dynamic dayData) {
+    final rawDay = Map<String, dynamic>.from(dayData as Map);
+    rawDay['dayName'] = localizeMixedLabel(
+      rawDay['dayName'] as String? ?? 'Giorno',
+    );
+    final exercises =
+        ((rawDay['exercises'] ?? rawDay['esercizi']) as List? ?? <dynamic>[])
+            .map((e) {
+              final rawEx = Map<String, dynamic>.from(e as Map);
+              final rawName = rawEx['name'] as String? ?? 'Exercise';
+              final resolved = resolveExerciseInfo(rawName);
+              rawEx['name'] = resolved?.nameEn ?? rawName.trim();
+              rawEx['gifFilename'] ??=
+                  resolved?.gifFilename ?? resolved?.gifSlug;
+              return rawEx;
+            })
+            .toList();
+    rawDay['exercises'] = exercises;
+    // Infer muscleImage for curated templates that don't have it
+    if (rawDay['muscleImage'] == null) {
+      rawDay['muscleImage'] = _inferMuscleImage(
+        rawDay['dayName'] as String? ?? '',
+        exercises,
+      );
+    }
+    return WorkoutDay.fromJson(rawDay);
+  }
+
+  Future<void> _importaSchedaDaFile() async {
+    try {
+      final res = await FilePicker.platform.pickFiles(withData: true);
+      final bytes = res?.files.single.bytes;
+      if (bytes == null) return;
+      _importaScheda(utf8.decode(bytes, allowMalformed: true));
+    } catch (_) {
+      _importaScheda('');
+    }
+  }
+
+  Future<void> _importaSchedaDaAppunti() async {
+    final data = await Clipboard.getData(Clipboard.kTextPlain);
+    _importaScheda(data?.text ?? '');
+  }
+
+  /// Scheda creata con GymCoach: chiede se sostituire la scheda attuale o aggiungerne i giorni.
+  /// Lo storico resta intatto (è indicizzato per nome esercizio, non per scheda).
+  void _importaScheda(String text) {
+    final en = AppL.lang == 'en';
+    final List<dynamic> days;
+    try {
+      days = parseSchedaCoach(text);
+    } catch (_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            en
+                ? 'Not a valid GymCoach schedule (.workout file or copied code).'
+                : 'Scheda non valida: serve il file .workout o il codice copiato da GymCoach.',
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    final accent = appAccentNotifier.value;
+    final dark = _isDarkCtx(context);
+    Future<void> applica(bool sostituisci) async {
+      Navigator.pop(context);
+      setState(() {
+        if (sostituisci) _days = [];
+        _days.addAll(days.map(_dayFromTemplate));
+      });
+      await _save();
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(en ? 'Schedule loaded!' : 'Scheda caricata!'),
+          backgroundColor: Colors.green.shade700,
+        ),
+      );
+    }
+
+    showDialog(
+      context: context,
+      builder: (c) => AlertDialog(
+        backgroundColor: dark ? const Color(0xFF1C1C1E) : Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(
+          en ? 'Load coach schedule?' : 'Caricare la scheda del coach?',
+          style: TextStyle(color: dark ? Colors.white : Colors.black87, fontSize: 16),
+        ),
+        content: Text(
+          (en
+                  ? '${days.length} sessions: '
+                  : '${days.length} sessioni: ') +
+              days.map((d) => localizeMixedLabel('${d['dayName'] ?? ''}')).join(', ') +
+              (_days.isEmpty
+                  ? ''
+                  : (en
+                        ? '\n\nReplace your current schedule or add these sessions to it? Your history is kept either way.'
+                        : '\n\nSostituire la scheda attuale o aggiungere queste sessioni? Lo storico resta in ogni caso.')),
+          style: TextStyle(color: dark ? Colors.white54 : Colors.black54, fontSize: 14),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(c),
+            child: Text(
+              AppL.cancel,
+              style: TextStyle(color: dark ? Colors.white38 : Colors.black38),
+            ),
+          ),
+          if (_days.isNotEmpty)
+            TextButton(
+              onPressed: () => applica(false),
+              child: Text(en ? 'Add' : 'Aggiungi', style: TextStyle(color: accent)),
+            ),
+          ElevatedButton(
+            onPressed: () => applica(true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: accent,
+              foregroundColor: Colors.black,
+            ),
+            child: Text(_days.isEmpty ? AppL.load : (en ? 'Replace' : 'Sostituisci')),
+          ),
+        ],
+      ),
+    );
+  }
+
   void _mostraTemplateDialog() {
     final accent = appAccentNotifier.value;
     showModalBottomSheet(
@@ -9558,7 +9710,39 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
               Flexible(
                 child: ListView(
                   shrinkWrap: true,
-                  children: kAllWorkoutTemplates.map(
+                  children: [
+                    for (final opt in [
+                      (Icons.file_open_rounded, AppL.lang == 'en' ? 'Open GymCoach schedule (.workout)' : 'Apri scheda GymCoach (.workout)', _importaSchedaDaFile),
+                      (Icons.content_paste_rounded, AppL.lang == 'en' ? 'Paste copied schedule code' : 'Incolla codice scheda copiato', _importaSchedaDaAppunti),
+                    ])
+                      ListTile(
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        leading: Container(
+                          width: 44,
+                          height: 44,
+                          decoration: BoxDecoration(
+                            color: accent.withAlpha(20),
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: accent.withAlpha(60)),
+                          ),
+                          child: Icon(opt.$1, color: accent),
+                        ),
+                        title: Text(
+                          opt.$2,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: TextStyle(
+                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.pop(c);
+                          opt.$3();
+                        },
+                      ),
+                    const Divider(),
+                    ...kAllWorkoutTemplates.map(
                     (t) => ListTile(
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 8,
@@ -9601,7 +9785,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         _confermaCaricaTemplate(t);
                       },
                     ),
-                  ).toList(),
+                  ),
+                  ],
                 ),
               ),
             ],
@@ -9640,32 +9825,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
             onPressed: () async {
               Navigator.pop(c);
               setState(() {
-                for (final dayData in _templateDays(template)) {
-                  final rawDay = Map<String, dynamic>.from(dayData as Map);
-                  rawDay['dayName'] = localizeMixedLabel(
-                    rawDay['dayName'] as String? ?? 'Giorno',
-                  );
-                  final exercises =
-                      (rawDay['exercises'] as List? ?? <dynamic>[]).map((e) {
-                        final rawEx = Map<String, dynamic>.from(e as Map);
-                        final rawName = rawEx['name'] as String? ?? 'Exercise';
-                        final resolved = resolveExerciseInfo(rawName);
-                        rawEx['name'] = resolved?.nameEn ?? rawName.trim();
-                        rawEx['gifFilename'] ??=
-                            resolved?.gifFilename ?? resolved?.gifSlug;
-                        return rawEx;
-                      }).toList();
-                  rawDay['exercises'] = exercises;
-                  // Infer muscleImage for curated templates that don't have it
-                  if (rawDay['muscleImage'] == null) {
-                    rawDay['muscleImage'] = _inferMuscleImage(
-                      rawDay['dayName'] as String? ?? '',
-                      exercises,
-                    );
-                  }
-                  final day = WorkoutDay.fromJson(rawDay);
-                  _days.add(day);
-                }
+                _days.addAll(_templateDays(template).map(_dayFromTemplate));
               });
               await _save();
               if (mounted) {
@@ -11272,7 +11432,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   int _timerRunId = 0;
   int _newTimerRunId() => DateTime.now().microsecondsSinceEpoch;
   // ID univoco sessione (per separare sessioni stessa giornata nei grafici)
-  late final String _sessionId;
+  // Non final: alla ripresa di un allenamento interrotto torna l'id salvato nello snapshot,
+  // altrimenti lo storico si spezza in due sessioni (trend falsato).
+  late String _sessionId;
   bool _autoStartTimer = true;
   bool _confirmSeriesEnabled = true;
   bool _showWeightSuggestion = true;
@@ -11505,6 +11667,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         (k, v) => MapEntry(k.toString(), v),
       ),
       'allCompletedExercises': _allCompletedExercises,
+      'sessionId': _sessionId,
     };
     await prefs.setString(_inProgressKey, jsonEncode(snapshot));
   }
@@ -11540,6 +11703,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
       if (!mounted) return;
       setState(() {
+        if (snap['sessionId'] is String) _sessionId = snap['sessionId'] as String;
         exI = savedExI.clamp(0, widget.day.exercises.length - 1);
         setN = savedSetN;
         eserciziCompletati = savedCompleted;
