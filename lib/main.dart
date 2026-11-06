@@ -1498,6 +1498,9 @@ String translateMuscle(String italian) {
       'Glutei (grande gluteo)': 'Glutes (gluteus maximus)',
       'Muscolatura principale coinvolta': 'Main muscles', 'Muscolatura di supporto': 'Supporting muscles',
       'Mobilità articolare generale': 'General joint mobility',
+      'Infraspinato': 'Infraspinatus', 'Sottoscapolare': 'Subscapularis', 'Cuffia dei rotatori': 'Rotator cuff',
+      'Estensori del collo': 'Neck extensors', 'Flessori del collo': 'Neck flexors',
+      'Tensore fascia lata': 'Tensor fasciae latae', 'Tibiale anteriore': 'Tibialis anterior', 'Quadrato dei lombi': 'Quadratus lumborum',
       'Sistema cardiovascolare': 'Cardiovascular system',
       'Polpacci, Sistema cardiovascolare': 'Calves, Cardiovascular system',
       'Core': 'Core', 'Spalle': 'Shoulders', 'Dorso': 'Back', 'Gambe': 'Legs', 'Braccia': 'Arms',
@@ -1535,6 +1538,9 @@ String translateMuscle(String italian) {
       'Muscolatura principale coinvolta': 'M\u00fasculos principales',
       'Muscolatura di supporto': 'M\u00fasculos de apoyo',
       'Mobilità articolare generale': 'Movilidad articular general',
+      'Infraspinato': 'Infraespinoso', 'Sottoscapolare': 'Subescapular', 'Cuffia dei rotatori': 'Manguito rotador',
+      'Estensori del collo': 'Extensores del cuello', 'Flessori del collo': 'Flexores del cuello',
+      'Tensore fascia lata': 'Tensor de la fascia lata', 'Tibiale anteriore': 'Tibial anterior', 'Quadrato dei lombi': 'Cuadrado lumbar',
       'Sistema cardiovascolare': 'Sistema cardiovascular',
       'Polpacci, Sistema cardiovascolare': 'Pantorrillas, Sistema cardiovascular',
       'Core': 'Core', 'Spalle': 'Hombros', 'Dorso': 'Espalda', 'Gambe': 'Piernas', 'Braccia': 'Brazos',
@@ -8778,6 +8784,16 @@ class _ClientMainPageState extends State<ClientMainPage>
                     ),
                     const SizedBox(height: 12),
                   ],
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    activeThumbColor: accent,
+                    title: Text(
+                      AppL.lang == 'en' ? 'Timed (cardio)' : 'A tempo (cardio)',
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                    ),
+                    value: isCardioMode,
+                    onChanged: (v) => setS(() => isCardioMode = v),
+                  ),
                   if (isCardioMode) ...[
                     TextField(
                       controller: cardioCtrl,
@@ -10811,6 +10827,16 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     ),
                   ),
                   const SizedBox(height: 12),
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    activeThumbColor: accent,
+                    title: Text(
+                      AppL.lang == 'en' ? 'Timed (cardio)' : 'A tempo (cardio)',
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                    ),
+                    value: isCardioMode,
+                    onChanged: (v) => setS(() => isCardioMode = v),
+                  ),
                   if (isCardioMode) ...[
                     TextField(
                       controller: cardioCtrl,
