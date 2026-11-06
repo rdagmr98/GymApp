@@ -255,6 +255,17 @@ class MainActivity : FlutterActivity() {
                             val type = args["type"] as? String ?: "beep"
                             val path = args["path"] as? String ?: ""
                             val h = Handler(Looper.getMainLooper())
+                            // Campanella di app_cliente: dong dong DONG, un ToneGenerator per
+                            // rintocco a 0/350/700 ms così le code si sovrappongono.
+                            val campanella = {
+                                listOf(500, 500, 700).forEachIndexed { i, ms ->
+                                    h.postDelayed({
+                                        val t = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
+                                        t.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, ms)
+                                        h.postDelayed({ t.release() }, (ms + 300).toLong())
+                                    }, (i * 350).toLong())
+                                }
+                            }
                             when (type) {
                                 "long" -> {
                                     val tone = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
@@ -279,25 +290,11 @@ class MainActivity : FlutterActivity() {
                                         mp.setOnCompletionListener { it.release() }
                                         mp.start()
                                     } else {
-                                        // Fallback to default beep
-                                        val tone = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
-                                        repeat(3) { i ->
-                                            h.postDelayed({
-                                                tone.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, 500)
-                                            }, (i * 850).toLong())
-                                        }
-                                        h.postDelayed({ tone.release() }, 2700)
+                                        campanella()
                                     }
                                 }
                                 else -> {
-                                    // "beep" default: 3x beep sequence
-                                    val tone = ToneGenerator(AudioManager.STREAM_MUSIC, 100)
-                                    repeat(3) { i ->
-                                        h.postDelayed({
-                                            tone.startTone(ToneGenerator.TONE_CDMA_SOFT_ERROR_LITE, if (i < 2) 500 else 700)
-                                        }, (i * 850).toLong())
-                                    }
-                                    h.postDelayed({ tone.release() }, 2700)
+                                    campanella()
                                 }
                             }
                             result.success(null)

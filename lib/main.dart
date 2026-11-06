@@ -34,6 +34,34 @@ import 'app_l.dart';
 bool _isDarkCtx(BuildContext context) =>
     Theme.of(context).brightness == Brightness.dark;
 
+/// Pill unica per valori (ultima volta, conferma) e suggerimenti in allenamento.
+/// Senza [color] è neutra; con [color] è tinta (suggerimenti).
+Widget _pill(BuildContext context, String text,
+    {IconData? icon, Color? color, double fontSize = 13, VoidCallback? onTap}) {
+  final dark = _isDarkCtx(context);
+  final fg = color ?? (dark ? Colors.white : Colors.black87);
+  final box = Container(
+    padding: EdgeInsets.symmetric(horizontal: fontSize * 0.95, vertical: fontSize * 0.45),
+    decoration: BoxDecoration(
+      color: color?.withAlpha(dark ? 30 : 24) ?? (dark ? Colors.white.withAlpha(16) : Colors.black.withAlpha(10)),
+      border: Border.all(color: color?.withAlpha(90) ?? (dark ? Colors.white12 : Colors.black12)),
+      borderRadius: BorderRadius.circular(100),
+    ),
+    child: Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (icon != null) ...[
+          Icon(icon, size: fontSize + 2, color: fg),
+          SizedBox(width: fontSize * 0.4),
+        ],
+        Text(text, style: TextStyle(color: fg, fontSize: fontSize, fontWeight: FontWeight.w700)),
+        if (onTap != null) Icon(Icons.chevron_right_rounded, size: fontSize + 2, color: fg.withAlpha(160)),
+      ],
+    ),
+  );
+  return onTap == null ? box : GestureDetector(onTap: onTap, child: box);
+}
+
 /// Bottom inset under CTAs.
 /// Web: always 0 (no iPhone home-indicator detach).
 /// Android: content already sits above the nav bar via
@@ -9059,23 +9087,11 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     with SingleTickerProviderStateMixin {
   List<WorkoutDay> _days = [];
   bool _loading = true;
-  bool _isReordering = false;
-  late final AnimationController _wiggleCtrl;
 
   @override
   void initState() {
     super.initState();
-    _wiggleCtrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 180),
-    );
     _loadExisting();
-  }
-
-  @override
-  void dispose() {
-    _wiggleCtrl.dispose();
-    super.dispose();
   }
 
   Future<void> _loadExisting() async {
@@ -9528,27 +9544,26 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     _save();
   }
 
-  void _setReordering(bool value) {
-    if (_isReordering == value) return;
-    setState(() => _isReordering = value);
-    if (value) {
-      _wiggleCtrl.repeat(reverse: true);
-    } else {
-      _wiggleCtrl.stop();
-      _wiggleCtrl.value = 0.5;
-    }
-  }
-
-  Widget _reorderCue({required int index, required Widget child}) {
+  // ponytail: niente wiggle (ruotava ogni riga a ogni frame e ricostruiva lo
+  // schermo a inizio/fine drag): si solleva solo l'elemento trascinato.
+  Widget _dragProxy(Widget child, int index, Animation<double> anim) {
+    final bg = _isDarkCtx(context) ? const Color(0xFF2A2A2E) : Colors.white;
     return AnimatedBuilder(
-      animation: _wiggleCtrl,
+      animation: anim,
       child: child,
-      builder: (_, wiggleChild) {
-        final direction = index.isEven ? -1.0 : 1.0;
-        final angle = _isReordering
-            ? direction * (0.008 + (_wiggleCtrl.value * 0.01))
-            : 0.0;
-        return Transform.rotate(angle: angle, child: wiggleChild);
+      builder: (_, c) {
+        final t = Curves.easeOut.transform(anim.value);
+        return Transform.scale(
+          scale: 1 + 0.03 * t,
+          child: Material(
+            color: bg,
+            elevation: 10 * t,
+            shadowColor: Colors.black54,
+            borderRadius: BorderRadius.circular(16),
+            clipBehavior: Clip.antiAlias,
+            child: c,
+          ),
+        );
       },
     );
   }
@@ -11147,8 +11162,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
               buildDefaultDragHandles: false,
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
               itemCount: _days.length,
-              onReorderStart: (_) => _setReordering(true),
-              onReorderEnd: (_) => _setReordering(false),
+              proxyDecorator: _dragProxy,
               onReorder: _riordinaGiorni,
               itemBuilder: (_, dayIdx) {
                 final day = _days[dayIdx];
@@ -11225,7 +11239,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           padding: const EdgeInsets.symmetric(horizontal: 2),
                           child: Icon(
                             Icons.drag_indicator_rounded,
-                            color: _isReordering ? accent : Colors.white38,
+                            color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
                             size: 20,
                           ),
                         ),
@@ -11238,8 +11252,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         physics: const NeverScrollableScrollPhysics(),
                         buildDefaultDragHandles: false,
                         itemCount: day.exercises.length,
-                        onReorderStart: (_) => _setReordering(true),
-                        onReorderEnd: (_) => _setReordering(false),
+                        proxyDecorator: _dragProxy,
                         onReorder: (oldIndex, newIndex) =>
                             _riordinaEsercizi(dayIdx, oldIndex, newIndex),
                         itemBuilder: (_, exIdx) {
@@ -11336,9 +11349,9 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                                   ),
                                   child: Icon(
                                     Icons.drag_indicator_rounded,
-                                    color: _isReordering
-                                        ? accent
-                                        : Colors.white38,
+                                    color: _isDarkCtx(context)
+                                        ? Colors.white38
+                                        : Colors.black38,
                                     size: 20,
                                   ),
                                 ),
@@ -11348,10 +11361,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           return ReorderableDelayedDragStartListener(
                             key: ObjectKey(ex),
                             index: exIdx,
-                            child: _reorderCue(
-                              index: exIdx,
-                              child: exerciseTile,
-                            ),
+                            child: exerciseTile,
                           );
                         },
                       ),
@@ -11381,7 +11391,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                 return ReorderableDelayedDragStartListener(
                   key: ObjectKey(day),
                   index: dayIdx,
-                  child: _reorderCue(index: dayIdx, child: dayCard),
+                  child: dayCard,
                 );
               },
             ),
@@ -12345,15 +12355,15 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           perfLabel = AppL.firstSession;
         } else if (score > 0) {
           perfIcon = Icons.trending_up;
-          perfColor = Colors.greenAccent;
+          perfColor = const Color(0xFF4CD97B);
           perfLabel = AppL.improving;
         } else if (score < 0) {
           perfIcon = Icons.trending_down;
-          perfColor = Colors.redAccent;
+          perfColor = const Color(0xFFFF6B6B);
           perfLabel = AppL.declining;
         } else {
           perfIcon = Icons.trending_flat;
-          perfColor = Colors.orangeAccent;
+          perfColor = const Color(0xFFE0A458);
           perfLabel = AppL.plateau;
         }
         return AlertDialog(
@@ -12363,7 +12373,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           ),
           title: Column(
             children: [
-              Icon(perfIcon, color: perfColor, size: 52),
+              Icon(perfIcon, color: perfColor, size: 40),
               const SizedBox(height: 8),
               Text(
                 AppL.workoutComplete,
@@ -12410,7 +12420,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: _currentStreak > 0
-                          ? Colors.orange.withAlpha(80)
+                          ? Theme.of(c).colorScheme.primary.withAlpha(80)
                           : (_isDarkCtx(context) ? Colors.white12 : Colors.black12),
                     ),
                   ),
@@ -12419,7 +12429,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('🔓', style: TextStyle(fontSize: 15)),
+                          Icon(Icons.lock_open_rounded, size: 15, color: Theme.of(c).colorScheme.primary),
                           const SizedBox(width: 6),
                           Flexible(
                             child: Text(
@@ -12458,26 +12468,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                       height: iconSize,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(7),
-                                        gradient: done
-                                            ? const LinearGradient(
-                                                colors: [
-                                                  Color(0xFFFF6B00),
-                                                  Color(0xFFFFAB00),
-                                                ],
-                                              )
-                                            : null,
                                         color: done
-                                            ? null
+                                            ? Theme.of(c).colorScheme.primary.withAlpha(50)
                                             : (_isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.grey.shade200),
-                                        boxShadow: done
-                                            ? [
-                                                BoxShadow(
-                                                  color: Colors.orange
-                                                      .withAlpha(80),
-                                                  blurRadius: 6,
-                                                ),
-                                              ]
-                                            : null,
                                       ),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(7),
@@ -12503,8 +12496,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         Text(
                           AppL.microcycleCompleteStreak,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.orange,
+                          style: TextStyle(
+                            color: Theme.of(c).colorScheme.primary,
                             fontWeight: FontWeight.bold,
                             fontSize: 12,
                           ),
@@ -12523,10 +12516,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         const SizedBox(height: 6),
                         Text(
                           AppL.streakFireMsg.replaceAll('{n}', '$_currentStreak'),
-                          style: const TextStyle(
-                            color: Colors.orange,
+                          style: TextStyle(
+                            color: Theme.of(c).colorScheme.primary,
                             fontSize: 14,
-                            fontWeight: FontWeight.w900,
+                            fontWeight: FontWeight.w800,
                           ),
                         ),
                       ],
@@ -12816,48 +12809,12 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     spacing: 8,
                     runSpacing: 6,
                     children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFFD700).withAlpha(30),
-                          border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg',
-                          style: const TextStyle(color: Color(0xFFFFD700), fontSize: 13, fontWeight: FontWeight.bold)),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                        decoration: BoxDecoration(
-                          color: accent.withAlpha(30),
-                          border: Border.all(color: accent.withAlpha(180), width: 1.5),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Text('$lastR reps',
-                          style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
-                      ),
+                      _pill(context, '${lastW % 1 == 0 ? lastW.toInt() : lastW} kg'),
+                      _pill(context, '$lastR reps'),
                       if (suggerisciReps && _showWeightSuggestion)
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.green.withAlpha(30),
-                            border: Border.all(color: Colors.green.withAlpha(180), width: 1.5),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(AppL.tryReps(targetR + 2),
-                            style: const TextStyle(color: Colors.green, fontSize: 13, fontWeight: FontWeight.bold)),
-                        ),
+                        _pill(context, AppL.tryReps(targetR + 2), icon: Icons.add_rounded, color: accent),
                       if (suggerisciAumento && _showWeightSuggestion)
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.amber.withAlpha(30),
-                            border: Border.all(color: Colors.amber.withAlpha(180), width: 1.5),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: const Text('↑ AUMENTA PESO',
-                            style: TextStyle(color: Colors.amber, fontSize: 13, fontWeight: FontWeight.bold)),
-                        ),
+                        _pill(context, AppL.increaseWeight, icon: Icons.trending_up_rounded, color: accent),
                     ],
                   ),
 
@@ -13443,12 +13400,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _chipConferma(
-                          "${w % 1 == 0 ? w.toInt() : w} kg",
-                          const Color(0xFFFFD700),
-                        ),
-                        const SizedBox(width: 20),
-                        _chipConferma("$r reps", Theme.of(ctx).colorScheme.primary),
+                        _pill(ctx, "${w % 1 == 0 ? w.toInt() : w} kg", fontSize: 20),
+                        const SizedBox(width: 14),
+                        _pill(ctx, "$r reps", fontSize: 20),
                       ],
                     ),
                     _buildConfirmPopupNativeAd(),
@@ -13592,18 +13546,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       widget.day.exercises.isNotEmpty &&
       !eserciziCompletati.contains(widget.day.exercises[exI].name);
 
-  Widget _chipConferma(String text, Color color) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-    decoration: BoxDecoration(
-      color: color.withAlpha(30),
-      border: Border.all(color: color.withAlpha(180), width: 1.5),
-      borderRadius: BorderRadius.circular(12),
-    ),
-    child: Text(
-      text,
-      style: TextStyle(color: color, fontSize: 22, fontWeight: FontWeight.bold),
-    ),
-  );
 
   void _saveSet() async {
     double w = double.tryParse(wC.text) ?? 0.0;
@@ -14394,77 +14336,24 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               spacing: 8,
               runSpacing: 6,
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFFFD700).withAlpha(30),
-                    border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg',
-                    style: const TextStyle(color: Color(0xFFFFD700), fontSize: 17, fontWeight: FontWeight.bold)),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: accent.withAlpha(30),
-                    border: Border.all(color: accent.withAlpha(180), width: 1.5),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text('$lastR reps',
-                    style: TextStyle(color: accent, fontSize: 17, fontWeight: FontWeight.bold)),
-                ),
-
+                _pill(context, '${lastW % 1 == 0 ? lastW.toInt() : lastW} kg', fontSize: 16),
+                _pill(context, '$lastR reps', fontSize: 16),
               ],
             ),
           ],
           if (suggerisciAumento || suggerisciReps)
-            GestureDetector(
-              onTap: () => _showSuggestionOverlay(
-                isWeight: suggerisciAumento,
-                targetReps: targetR,
-                force: true,
-              ),
-              child: Container(
-                width: double.infinity,
-                margin: const EdgeInsets.only(top: 6),
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 9),
-                decoration: BoxDecoration(
-                  color: suggerisciAumento
-                      ? const Color(0xFFFFD700).withAlpha(20)
-                      : const Color(0xFF7C4DFF).withAlpha(20),
-                  border: Border.all(
-                    color: suggerisciAumento
-                        ? const Color(0xFFFFD700)
-                        : const Color(0xFF7C4DFF),
-                    width: 1.2,
-                  ),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      suggerisciAumento ? Icons.trending_up : Icons.fitness_center,
-                      size: 16,
-                      color: suggerisciAumento
-                          ? const Color(0xFFFFD700)
-                          : const Color(0xFFB388FF),
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      suggerisciAumento
-                          ? AppL.increaseWeight
-                          : AppL.tryReps(targetR + 2),
-                      style: TextStyle(
-                        color: suggerisciAumento
-                            ? const Color(0xFFFFD700)
-                            : const Color(0xFFB388FF),
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: _pill(
+                context,
+                suggerisciAumento ? AppL.increaseWeight : AppL.tryReps(targetR + 2),
+                icon: suggerisciAumento ? Icons.trending_up_rounded : Icons.add_rounded,
+                color: accent,
+                fontSize: 14,
+                onTap: () => _showSuggestionOverlay(
+                  isWeight: suggerisciAumento,
+                  targetReps: targetR,
+                  force: true,
                 ),
               ),
             ),
@@ -15111,26 +15000,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                           spacing: 8,
                                           runSpacing: 4,
                                           children: [
-                                            Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                              decoration: BoxDecoration(
-                                                color: const Color(0xFFFFD700).withAlpha(30),
-                                                border: Border.all(color: const Color(0xFFFFD700).withAlpha(180), width: 1.5),
-                                                borderRadius: BorderRadius.circular(8),
-                                              ),
-                                              child: Text('${lastW % 1 == 0 ? lastW.toInt() : lastW} kg',
-                                                style: const TextStyle(color: Color(0xFFFFD700), fontSize: 13, fontWeight: FontWeight.bold)),
-                                            ),
-                                            Container(
-                                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                                              decoration: BoxDecoration(
-                                                color: accent.withAlpha(30),
-                                                border: Border.all(color: accent.withAlpha(180), width: 1.5),
-                                                borderRadius: BorderRadius.circular(8),
-                                              ),
-                                              child: Text('$lastR reps',
-                                                style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.bold)),
-                                            ),
+                                            _pill(context, '${lastW % 1 == 0 ? lastW.toInt() : lastW} kg'),
+                                            _pill(context, '$lastR reps'),
                                           ],
                                         ),
                                       ],
@@ -15212,192 +15083,9 @@ class _SuggestionOverlay extends StatefulWidget {
   State<_SuggestionOverlay> createState() => _SuggestionOverlayState();
 }
 
-class _SuggestionOverlayState extends State<_SuggestionOverlay> with TickerProviderStateMixin {
-  late AnimationController _scaleCtrl;
-  late AnimationController _auraCtrl;
-  late Animation<double> _scale;
-
-  @override
-  void initState() {
-    super.initState();
-    _scaleCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 420));
-    _scale = CurvedAnimation(parent: _scaleCtrl, curve: Curves.elasticOut);
-    _scaleCtrl.forward();
-    _auraCtrl = AnimationController(vsync: this, duration: Duration(milliseconds: widget.isWeight ? 2200 : 3400));
-    _auraCtrl.repeat();
-  }
-
-  @override
-  void dispose() {
-    _scaleCtrl.dispose();
-    _auraCtrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final isWeight = widget.isWeight;
-    final c1 = isWeight ? const Color(0xFFFF7043) : const Color(0xFF00B0FF);
-    final c2 = isWeight ? const Color(0xFFFFD600) : const Color(0xFF9C27B0);
-    final cardBorder = isWeight ? const Color(0xFFFF8A65) : const Color(0xFF40C4FF);
-    final title = isWeight ? AppL.increaseWeight : AppL.tryReps(widget.targetReps + 2);
-    return Material(
-      color: Colors.transparent,
-      child: BackdropFilter(
-        filter: ui.ImageFilter.blur(sigmaX: 14, sigmaY: 14),
-        child: Container(
-          color: (isWeight ? const Color(0xFFFF5722) : const Color(0xFF1565C0)).withAlpha(35),
-          child: Center(
-            child: ScaleTransition(
-              scale: _scale,
-              child: AnimatedBuilder(
-                animation: _auraCtrl,
-                builder: (context, child) {
-                  final t = _auraCtrl.value * 2 * scala.pi;
-                  final pulse1 = 0.88 + 0.12 * scala.sin(t);
-                  final pulse2 = 0.90 + 0.10 * scala.sin(t + 1.2);
-                  return Stack(
-                    alignment: Alignment.center,
-                    clipBehavior: Clip.none,
-                    children: [
-                      // Outer halo
-                      Container(
-                        width: (isWeight ? 320.0 : 260.0) * pulse1,
-                        height: (isWeight ? 320.0 : 260.0) * pulse1,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: RadialGradient(
-                            colors: [
-                              c1.withAlpha(isWeight ? 70 : 50),
-                              c2.withAlpha(isWeight ? 35 : 25),
-                              Colors.transparent,
-                            ],
-                            stops: const [0.0, 0.5, 1.0],
-                          ),
-                        ),
-                      ),
-                      // Inner halo (offset phase for flame flicker)
-                      Container(
-                        width: (isWeight ? 200.0 : 160.0) * pulse2,
-                        height: (isWeight ? 200.0 : 160.0) * pulse2,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: RadialGradient(
-                            colors: [
-                              c1.withAlpha(isWeight ? 110 : 80),
-                              Colors.transparent,
-                            ],
-                          ),
-                        ),
-                      ),
-                      // Card
-                      child!,
-                    ],
-                  );
-                },
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 36),
-                  padding: const EdgeInsets.fromLTRB(28, 32, 28, 28),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: isWeight
-                          ? [const Color(0xFF1A0800), const Color(0xFF2D1200)]
-                          : [const Color(0xFF00081A), const Color(0xFF0A0028)],
-                    ),
-                    borderRadius: BorderRadius.circular(24),
-                    border: Border.all(color: cardBorder.withAlpha(180), width: 1.5),
-                    boxShadow: [
-                      BoxShadow(color: c1.withAlpha(100), blurRadius: 40, spreadRadius: 8),
-                    ],
-                  ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          title,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: cardBorder,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.5,
-                            shadows: [Shadow(color: c1.withAlpha(200), blurRadius: 12)],
-                          ),
-                        ),
-                        const SizedBox(height: 28),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: widget.onDismiss,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: c1,
-                              foregroundColor: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 15),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                              textStyle: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, letterSpacing: 1.2),
-                              elevation: 6,
-                              shadowColor: c1,
-                            ),
-                            child: Text(AppL.tryWeightBtn),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-    );
-  }
-}
-
-// --- BADGE ANIMATO AUMENTA IL PESO ---
-class _AumentaPesoWidget extends StatefulWidget {
-  const _AumentaPesoWidget();
-
-  @override
-  State<_AumentaPesoWidget> createState() => _AumentaPesoWidgetState();
-}
-
-class _AumentaPesoWidgetState extends State<_AumentaPesoWidget>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _ctrl;
-  late Animation<double> _scale;
-  late Animation<double> _glow;
-  int _flashes = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 380),
-    );
-    _scale = Tween(
-      begin: 1.0,
-      end: 1.07,
-    ).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
-    _glow = Tween(
-      begin: 0.0,
-      end: 22.0,
-    ).animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
-
-    _ctrl.addStatusListener((status) {
-      if (!mounted) return;
-      if (status == AnimationStatus.completed) {
-        _ctrl.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        _flashes++;
-        if (_flashes < 3) _ctrl.forward();
-        // dopo 3 lampeggi rimane a valore 0 = aspetto normale
-      }
-    });
-    _ctrl.forward();
-  }
+class _SuggestionOverlayState extends State<_SuggestionOverlay> with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl =
+      AnimationController(vsync: this, duration: const Duration(milliseconds: 220))..forward();
 
   @override
   void dispose() {
@@ -15407,54 +15095,73 @@ class _AumentaPesoWidgetState extends State<_AumentaPesoWidget>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _ctrl,
-      builder: (_, __) => Transform.scale(
-        scale: _scale.value,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.amber.shade700,
-                Colors.deepOrange.shade600,
-                Colors.red.shade700,
-              ],
-            ),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: _glow.value > 0
-                ? [
-                    BoxShadow(
-                      color: Colors.amber.withAlpha(180),
-                      blurRadius: _glow.value,
-                      spreadRadius: _glow.value / 5,
-                    ),
-                    BoxShadow(
-                      color: Colors.red.withAlpha(100),
-                      blurRadius: _glow.value * 1.6,
-                      spreadRadius: _glow.value / 4,
-                    ),
-                  ]
-                : [],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('🔥', style: TextStyle(fontSize: 20)),
-              const SizedBox(width: 10),
-              Text(
-                AppL.increaseWeight,
-                style: TextStyle(
-                  color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 15,
-                  letterSpacing: 1.5,
+    final dark = _isDarkCtx(context);
+    final accent = Theme.of(context).colorScheme.primary;
+    final anim = CurvedAnimation(parent: _ctrl, curve: Curves.easeOutCubic);
+    final title = widget.isWeight ? AppL.increaseWeight : AppL.tryReps(widget.targetReps + 2);
+    return Material(
+      color: Colors.transparent,
+      child: FadeTransition(
+        opacity: anim,
+        child: GestureDetector(
+          onTap: widget.onDismiss,
+          child: Container(
+            color: Colors.black.withAlpha(120),
+            alignment: Alignment.center,
+            child: ScaleTransition(
+              scale: Tween(begin: 0.94, end: 1.0).animate(anim),
+              child: GestureDetector(
+                onTap: () {},
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.fromLTRB(24, 26, 24, 20),
+                  decoration: BoxDecoration(
+                    color: dark ? const Color(0xFF1C1C1E) : Colors.white,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: dark ? Colors.white10 : Colors.black12),
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(color: accent.withAlpha(30), shape: BoxShape.circle),
+                        child: Icon(
+                          widget.isWeight ? Icons.trending_up_rounded : Icons.add_rounded,
+                          color: accent,
+                          size: 26,
+                        ),
+                      ),
+                      const SizedBox(height: 14),
+                      Text(
+                        title,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: dark ? Colors.white : Colors.black87,
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FilledButton(
+                          onPressed: widget.onDismiss,
+                          style: FilledButton.styleFrom(
+                            backgroundColor: accent,
+                            foregroundColor: Colors.black,
+                            padding: const EdgeInsets.symmetric(vertical: 13),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                            textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+                          ),
+                          child: Text(AppL.tryWeightBtn),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(width: 10),
-              const Text('🔥', style: TextStyle(fontSize: 20)),
-            ],
+            ),
           ),
         ),
       ),
@@ -15462,6 +15169,7 @@ class _AumentaPesoWidgetState extends State<_AumentaPesoWidget>
   }
 }
 
+// --- AVVISO RECORD: toast in alto, non blocca i tocchi ---
 class _RecordOverlay extends StatefulWidget {
   final String lang;
   final VoidCallback onDone;
@@ -15470,184 +15178,17 @@ class _RecordOverlay extends StatefulWidget {
   State<_RecordOverlay> createState() => _RecordOverlayState();
 }
 
-class _RecordOverlayState extends State<_RecordOverlay>
-    with TickerProviderStateMixin {
-  late final AnimationController _cardCtrl;
-  late final AnimationController _sparkCtrl;
-  late final Animation<double> _cardScale;
-  late final Animation<double> _sparkAnim;
-
-    static const List<Color> _sparkColors = [
-    Color(0xFFFFD700), Color(0xFFFFA500), Color(0xFFFFE082),
-    Color(0xFFFF8C00), Color(0xFFFFD700), Color(0xFFFFC107),
-    Color(0xFFFFAB40), Color(0xFFFFD740),
-  ];
-  static const List<double> _sparkSizes = [18, 12, 16, 10, 14, 11, 13, 15];
-  static const List<Offset> _dirs = [
-    Offset(-1.0, -1.2),
-    Offset(0.0, -1.5),
-    Offset(1.0, -1.2),
-    Offset(-1.3, 0.0),
-    Offset(1.3, 0.0),
-    Offset(-0.8, 1.2),
-    Offset(0.0, 1.5),
-    Offset(0.8, 1.2),
-  ];
+class _RecordOverlayState extends State<_RecordOverlay> with SingleTickerProviderStateMixin {
+  late final AnimationController _ctrl =
+      AnimationController(vsync: this, duration: const Duration(milliseconds: 260))..forward();
 
   @override
   void initState() {
     super.initState();
-    _cardCtrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 500),
-    );
-    _sparkCtrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1200),
-    );
-    _cardScale = CurvedAnimation(parent: _cardCtrl, curve: Curves.elasticOut);
-    _sparkAnim = CurvedAnimation(parent: _sparkCtrl, curve: Curves.easeOut);
-    _cardCtrl.forward();
-    Future.delayed(const Duration(milliseconds: 100), () {
-      if (mounted) _sparkCtrl.forward();
+    // il chiamante rimuove l'entry a 1800 ms: uscita animata poco prima
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      if (mounted) _ctrl.reverse();
     });
-  }
-
-  @override
-  void dispose() {
-    _cardCtrl.dispose();
-    _sparkCtrl.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final cx = size.width / 2;
-    final cy = size.height * 0.4;
-    return Material(
-      color: Colors.transparent,
-      child: Stack(
-        children: [
-          // Fullscreen gold card
-          Positioned.fill(
-            child: ScaleTransition(
-              scale: _cardScale,
-              child: Container(
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
-                ),
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 32),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const Text('🏆', style: TextStyle(fontSize: 88)),
-                        const SizedBox(height: 20),
-                        Text(
-                          AppL.newPersonalRecord,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900,
-                            letterSpacing: 1,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          AppL.keepPushing,
-                          style: const TextStyle(
-                            color: Colors.black87,
-                            fontSize: 20,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          // Sparks on top
-          ...List.generate(_sparkColors.length, (i) {
-            final dir = _dirs[i % _dirs.length];
-            return AnimatedBuilder(
-              animation: _sparkAnim,
-              builder: (_, __) {
-                final t = _sparkAnim.value;
-                final dx = dir.dx * 180 * t;
-                final dy = dir.dy * 180 * t;
-                final opacity = (1.0 - t).clamp(0.0, 1.0);
-                final sz = _sparkSizes[i % _sparkSizes.length];
-                return Positioned(
-                  left: cx + dx - sz / 2,
-                  top: cy + dy - sz / 2,
-                  child: Opacity(
-                    opacity: opacity,
-                    child: Container(
-                      width: sz,
-                      height: sz,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _sparkColors[i % _sparkColors.length],
-                        boxShadow: [BoxShadow(color: _sparkColors[i % _sparkColors.length].withAlpha(180), blurRadius: 8)],
-                      ),
-                    ),
-                  ),
-                );
-              },
-            );
-          }),
-        ],
-      ),
-    );
-  }
-}
-
-// --- BADGE ANIMATO AUMENTA LE REPS ---
-class _AumentaRepsWidget extends StatefulWidget {
-  final int targetReps;
-  const _AumentaRepsWidget({required this.targetReps});
-
-  @override
-  State<_AumentaRepsWidget> createState() => _AumentaRepsWidgetState();
-}
-
-class _AumentaRepsWidgetState extends State<_AumentaRepsWidget>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _ctrl;
-  late Animation<double> _scale;
-  late Animation<double> _glow;
-  int _flashes = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _ctrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 380),
-    );
-    _scale = Tween(begin: 1.0, end: 1.07)
-        .animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
-    _glow = Tween(begin: 0.0, end: 18.0)
-        .animate(CurvedAnimation(parent: _ctrl, curve: Curves.easeInOut));
-    _ctrl.addStatusListener((status) {
-      if (!mounted) return;
-      if (status == AnimationStatus.completed) {
-        _ctrl.reverse();
-      } else if (status == AnimationStatus.dismissed) {
-        _flashes++;
-        if (_flashes < 3) _ctrl.forward();
-      }
-    });
-    _ctrl.forward();
   }
 
   @override
@@ -15658,49 +15199,60 @@ class _AumentaRepsWidgetState extends State<_AumentaRepsWidget>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _ctrl,
-      builder: (_, __) => Transform.scale(
-        scale: _scale.value,
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 14),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.green.shade600,
-                Colors.teal.shade500,
-                Colors.green.shade700,
-              ],
-            ),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: _glow.value > 0
-                ? [
-                    BoxShadow(
-                      color: Colors.green.withAlpha(160),
-                      blurRadius: _glow.value,
-                      spreadRadius: _glow.value / 5,
-                    ),
-                  ]
-                : [],
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('💪', style: TextStyle(fontSize: 20)),
-              const SizedBox(width: 10),
-              Text(
-                AppL.tryReps(widget.targetReps),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 15,
-                  letterSpacing: 1.5,
+    final dark = _isDarkCtx(context);
+    const gold = Color(0xFFFFC107);
+    final anim = CurvedAnimation(parent: _ctrl, curve: Curves.easeOutCubic);
+    return IgnorePointer(
+      child: Material(
+        color: Colors.transparent,
+        child: SafeArea(
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: FadeTransition(
+              opacity: anim,
+              child: SlideTransition(
+                position: Tween(begin: const Offset(0, -0.6), end: Offset.zero).animate(anim),
+                child: Container(
+                  margin: const EdgeInsets.fromLTRB(20, 12, 20, 0),
+                  padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+                  decoration: BoxDecoration(
+                    color: dark ? const Color(0xFF1C1C1E) : Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: gold.withAlpha(110)),
+                    boxShadow: [BoxShadow(color: Colors.black.withAlpha(60), blurRadius: 18, offset: const Offset(0, 6))],
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.emoji_events_rounded, color: gold, size: 28),
+                      const SizedBox(width: 12),
+                      Flexible(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppL.newPersonalRecord,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: dark ? Colors.white : Colors.black87,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            Text(
+                              AppL.keepPushing,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(color: dark ? Colors.white60 : Colors.black54, fontSize: 13),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(width: 10),
-              const Text('💪', style: TextStyle(fontSize: 20)),
-            ],
+            ),
           ),
         ),
       ),
@@ -15799,17 +15351,6 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
   bool _sharing = false;
   final GlobalKey _cardKey = GlobalKey();
 
-  double _computeMaxWeight() {
-    double max = 0;
-    for (final ex in widget.exercises) {
-      for (final s in (ex['series'] as List)) {
-        final w = (s['w'] ?? 0.0).toDouble();
-        if (w > max) max = w;
-      }
-    }
-    return max;
-  }
-
   Widget _buildCard(Color accent) {
     return Container(
       width: 360,
@@ -15850,7 +15391,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                   ),
                   Text(
                     '${widget.dayName} · ${widget.todayLabel}',
-                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
+                    style: const TextStyle(color: Colors.white54, fontSize: 12),
                   ),
                 ],
               ),
@@ -15858,7 +15399,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
           ),
           const SizedBox(height: 14),
           if (_showExercises) ...[
-            Divider(color: _isDarkCtx(context) ? Colors.white12 : Colors.black12),
+            const Divider(color: Colors.white12),
             const SizedBox(height: 8),
             ...widget.exercises.map((ex) {
               final name = ex['exercise'] as String;
@@ -15877,7 +15418,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                     Expanded(
                       child: Text(
                         name,
-                        style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 12),
+                        style: const TextStyle(color: Colors.white70, fontSize: 12),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
@@ -15892,24 +15433,24 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
             const SizedBox(height: 8),
           ],
           if (_showStreak || _showWeeklyBadges || _showSessionProgress) ...[
-            Divider(color: _isDarkCtx(context) ? Colors.white12 : Colors.black12),
+            const Divider(color: Colors.white12),
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 if (_showStreak)
                   _badgeChip(
-                    icon: '🔥',
+                    icon: Icons.local_fire_department_rounded,
                     label: 'Streak',
                     value: '${widget.streak} ${AppL.microAbbr}',
-                    accent: Colors.orange,
+                    accent: accent,
                   ),
                 if (_showSessionProgress && widget.progressPercent != null)
                   _badgeChip(
-                    icon: widget.progressPercent! >= 0 ? '📈' : '📉',
+                    icon: widget.progressPercent! >= 0 ? Icons.trending_up_rounded : Icons.trending_down_rounded,
                     label: AppL.vsPrev,
                     value: '${widget.progressPercent! >= 0 ? '+' : ''}${widget.progressPercent!.toStringAsFixed(1)}%',
-                    accent: widget.progressPercent! >= 0 ? Colors.greenAccent : Colors.redAccent,
+                    accent: widget.progressPercent! >= 0 ? const Color(0xFF4CD97B) : const Color(0xFFFF6B6B),
                   ),
               ],
             ),
@@ -15938,13 +15479,8 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                           padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            gradient: done ? const LinearGradient(
-                              colors: [Color(0xFFFF6B00), Color(0xFFFFAB00)],
-                              begin: Alignment.topLeft, end: Alignment.bottomRight,
-                            ) : null,
-                            color: done ? null : Colors.white10,
-                            border: Border.all(color: done ? Colors.orange : Colors.white12),
-                            boxShadow: done ? [BoxShadow(color: Colors.orange.withAlpha(60), blurRadius: 6)] : null,
+                            color: done ? accent.withAlpha(36) : Colors.white10,
+                            border: Border.all(color: done ? accent.withAlpha(140) : Colors.white12),
                           ),
                           child: Column(
                             children: [
@@ -15980,7 +15516,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                     const SizedBox(height: 4),
                     Text(
                       '$doneCount/$total ${AppL.thisMicrocycleLabel}',
-                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 9),
+                      style: const TextStyle(color: Colors.white54, fontSize: 9),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -15990,20 +15526,13 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
             ],
             const SizedBox(height: 4),
           ],
-          const SizedBox(height: 6),
-          Center(
-            child: Text(
-              '',
-              style: TextStyle(color: accent.withAlpha(120), fontSize: 10),
-            ),
-          ),
         ],
       ),
     );
   }
 
   Widget _badgeChip({
-    required String icon,
+    required IconData icon,
     required String label,
     required String value,
     required Color accent,
@@ -16011,15 +15540,15 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: accent.withAlpha(30),
+        color: Colors.white.withAlpha(10),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: accent.withAlpha(80)),
+        border: Border.all(color: Colors.white12),
       ),
       child: Column(
         children: [
-          Text(icon, style: const TextStyle(fontSize: 18)),
-          Text(value, style: TextStyle(color: accent, fontWeight: FontWeight.w800, fontSize: 14)),
-          Text(label, style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 10)),
+          Icon(icon, color: accent, size: 18),
+          Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14)),
+          Text(label, style: const TextStyle(color: Colors.white54, fontSize: 10)),
         ],
       ),
     );
@@ -16088,23 +15617,23 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                 accent,
               ),
               _toggleChip(
-                'Streak 🔥',
+                'Streak',
                 _showStreak,
                 () => setState(() => _showStreak = !_showStreak),
-                Colors.orange,
+                accent,
               ),
               _toggleChip(
                 AppL.microcycleBadges,
                 _showWeeklyBadges,
                 () => setState(() => _showWeeklyBadges = !_showWeeklyBadges),
-                Colors.amber,
+                accent,
               ),
               if (widget.progressPercent != null)
                 _toggleChip(
                   AppL.vsPrevious,
                   _showSessionProgress,
                   () => setState(() => _showSessionProgress = !_showSessionProgress),
-                  Colors.greenAccent,
+                  accent,
                 ),
             ],
           ),
@@ -16137,14 +15666,14 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: active ? c.withAlpha(40) : Colors.white12,
+          color: active ? c.withAlpha(40) : (_isDarkCtx(context) ? Colors.white10 : Colors.black.withAlpha(10)),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: active ? c : Colors.white24),
+          border: Border.all(color: active ? c : (_isDarkCtx(context) ? Colors.white24 : Colors.black26)),
         ),
         child: Text(
           label,
           style: TextStyle(
-            color: active ? c : Colors.white54,
+            color: active ? c : (_isDarkCtx(context) ? Colors.white54 : Colors.black54),
             fontSize: 12,
             fontWeight: FontWeight.w600,
           ),
@@ -16175,46 +15704,17 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
   bool _showBadges = true;
   final GlobalKey _cardKey = GlobalKey();
 
-  // Day-of-week badges: Mon-Sun, highlight those with a completed session
-  static const _dayEmojis = ['☀️', '🔥', '💪', '⚡', '🏃', '🎯', '🌟'];
-
   Widget _buildStoryCard() {
-    final doneCount = widget.streakDoneNames.intersection(widget.allSessionNames.toSet()).length;
-    final total = widget.allSessionNames.length;
-
     return Container(
       width: 340,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF0A0A0C), Color(0xFF1A0D00), Color(0xFF0A0A0C)],
-          stops: [0.0, 0.5, 1.0],
-        ),
-        border: Border.all(color: Colors.orange.withAlpha(60)),
+        color: const Color(0xFF0E0E10),
+        border: Border.all(color: widget.accent.withAlpha(80)),
       ),
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          // Glowing fire effect at top
-          Positioned(
-            top: -40,
-            left: 0,
-            right: 0,
-            child: Center(
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  gradient: RadialGradient(
-                    colors: [Colors.orange.withAlpha(60), Colors.transparent],
-                  ),
-                ),
-              ),
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(28),
             child: Column(
@@ -16229,9 +15729,9 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                       borderRadius: BorderRadius.circular(8),
                       child: Image.asset(
                         'assets/icon_client.png',
-                        width: 72,
-                        height: 72,
-                        errorBuilder: (_, __, ___) => const Text('💪', style: TextStyle(fontSize: 20)),
+                        width: 48,
+                        height: 48,
+                        errorBuilder: (_, __, ___) => const Icon(Icons.fitness_center, color: Colors.white, size: 28),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -16240,21 +15740,20 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                       style: TextStyle(
                         color: widget.accent,
                         fontWeight: FontWeight.w900,
-                        fontSize: 32,
-                        letterSpacing: 1.5,
+                        fontSize: 26,
+                        letterSpacing: 1.2,
                       ),
                     ),
                   ],
                 ),
                 const SizedBox(height: 32),
-                // Giant flame + streak
-                const Text('🔥', style: TextStyle(fontSize: 72)),
-                const SizedBox(height: 8),
+                Icon(Icons.local_fire_department_rounded, color: widget.accent, size: 44),
+                const SizedBox(height: 4),
                 Text(
                   '${widget.streak}',
                   style: const TextStyle(
-                    color: Colors.orange,
-                    fontSize: 96,
+                    color: Colors.white,
+                    fontSize: 88,
                     fontWeight: FontWeight.w900,
                     height: 0.9,
                   ),
@@ -16262,9 +15761,9 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                 const SizedBox(height: 8),
                 Text(
                   AppL.streakOnFire,
-                  style: const TextStyle(
-                    color: Colors.orange,
-                    fontSize: 20,
+                  style: TextStyle(
+                    color: widget.accent,
+                    fontSize: 18,
                     fontWeight: FontWeight.w700,
                     letterSpacing: 0.5,
                   ),
@@ -16274,7 +15773,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                 if (_showBadges && widget.allSessionNames.isNotEmpty) ...[
                   Text(
                     AppL.thisMicrocycle,
-                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
+                    style: const TextStyle(color: Colors.white38, fontSize: 12),
                   ),
                   const SizedBox(height: 12),
                   Wrap(
@@ -16289,20 +15788,10 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                         height: 84,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          gradient: done
-                              ? const LinearGradient(
-                                  colors: [Color(0xFFFF6B00), Color(0xFFFFAB00)],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                )
-                              : null,
-                          color: done ? null : Colors.white10,
+                          color: done ? widget.accent.withAlpha(36) : Colors.white10,
                           border: Border.all(
-                            color: done ? Colors.orange : Colors.white12,
+                            color: done ? widget.accent.withAlpha(140) : Colors.white12,
                           ),
-                          boxShadow: done
-                              ? [BoxShadow(color: Colors.orange.withAlpha(80), blurRadius: 8)]
-                              : null,
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -16311,7 +15800,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                               borderRadius: BorderRadius.circular(8),
                               child: done
                                   ? Image.asset('assets/icon_client.png', width: 36, height: 36,
-                                      errorBuilder: (_, __, ___) => Icon(Icons.fitness_center, color: _isDarkCtx(context) ? Colors.white : Colors.black87, size: 32))
+                                      errorBuilder: (_, __, ___) => const Icon(Icons.fitness_center, color: Colors.white, size: 32))
                                   : ColorFiltered(
                                       colorFilter: const ColorFilter.matrix([
                                         0.2126, 0.7152, 0.0722, 0, 0,
@@ -16320,7 +15809,7 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
                                         0,      0,      0,      0.3, 0,
                                       ]),
                                       child: Image.asset('assets/icon_client.png', width: 36, height: 36,
-                                          errorBuilder: (_, __, ___) => Icon(Icons.fitness_center, color: _isDarkCtx(context) ? Colors.white24 : Colors.black26, size: 32)),
+                                          errorBuilder: (_, __, ___) => const Icon(Icons.fitness_center, color: Colors.white24, size: 32)),
                                     ),
                             ),
                             const SizedBox(height: 2),
@@ -16416,10 +15905,10 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
               onPressed: _sharing ? null : _share,
               icon: _sharing
                   ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
-                  : const Text('🔥', style: TextStyle(fontSize: 16)),
+                  : const Icon(Icons.share_rounded),
               label: Text(AppL.shareToStories),
               style: FilledButton.styleFrom(
-                backgroundColor: Colors.orange,
+                backgroundColor: widget.accent,
                 foregroundColor: Colors.black,
                 padding: const EdgeInsets.symmetric(vertical: 14),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
@@ -16438,15 +15927,15 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: active ? Colors.orange.withAlpha(40) : (_isDarkCtx(context) ? Colors.white10 : Colors.grey.shade200),
+          color: active ? widget.accent.withAlpha(40) : (_isDarkCtx(context) ? Colors.white10 : Colors.grey.shade200),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: active ? Colors.orange : (_isDarkCtx(context) ? Colors.white24 : Colors.grey.shade400)),
+          border: Border.all(color: active ? widget.accent : (_isDarkCtx(context) ? Colors.white24 : Colors.grey.shade400)),
         ),
         child: Text(
           label,
           style: TextStyle(
             fontSize: 12,
-            color: active ? Colors.orange : (_isDarkCtx(context) ? Colors.white54 : Colors.black54),
+            color: active ? widget.accent : (_isDarkCtx(context) ? Colors.white54 : Colors.black54),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -16590,36 +16079,37 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
         final trendUp = trendPct >= 0;
         final isMicrocycle = widget.points.isNotEmpty && widget.points.first.dayName.startsWith('Microciclo');
 
-        final activeCards = <(Color, String, String, String)>[];
-        if (_includeSessionCount) activeCards.add((const Color(0xFF00BCD4), '📅', '${widget.points.length}', isMicrocycle ? AppL.microcycles : AppL.sessions));
-        if (_includeStreak) activeCards.add((const Color(0xFFFF6B00), '🔥', '${widget.streak}', 'Streak'));
-        if (_includeTrend) activeCards.add((trendUp ? Colors.greenAccent : Colors.redAccent, trendUp ? '📈' : '📉', '${trendUp ? '+' : ''}${trendPct.toStringAsFixed(0)}%', 'Trend'));
+        final activeCards = <(Color, IconData, String, String)>[];
+        if (_includeSessionCount) activeCards.add((widget.accent, Icons.event_available_rounded, '${widget.points.length}', isMicrocycle ? AppL.microcycles : AppL.sessions));
+        if (_includeStreak) activeCards.add((widget.accent, Icons.local_fire_department_rounded, '${widget.streak}', 'Streak'));
+        if (_includeTrend) activeCards.add((trendUp ? const Color(0xFF4CD97B) : const Color(0xFFFF6B6B), trendUp ? Icons.trending_up_rounded : Icons.trending_down_rounded, '${trendUp ? '+' : ''}${trendPct.toStringAsFixed(0)}%', 'Trend'));
 
         if (activeCards.isNotEmpty) {
           final double totalCardsW = activeCards.length * cardSize + (activeCards.length + 1) * gap;
           final double firstCardX = (w - totalCardsW) / 2 + gap;
 
-          void drawStatCard(Canvas canvas, double cx, Color cardColor, String emoji, String val, String lbl) {
+          void drawStatCard(Canvas canvas, double cx, Color cardColor, IconData icon, String val, String lbl) {
             final rect = RRect.fromRectAndRadius(
               Rect.fromLTWH(cx, bY, cardSize, cardSize),
               Radius.circular(24 * s),
             );
-            canvas.drawRRect(rect, Paint()..color = cardColor.withAlpha(25));
-            canvas.drawRRect(rect, Paint()..color = cardColor.withAlpha(130)..style = PaintingStyle.stroke..strokeWidth = 2 * s);
-            // Glow effect
-            canvas.drawRRect(rect, Paint()..color = Colors.white.withAlpha(15)..style = PaintingStyle.stroke..strokeWidth = 1 * s);
+            canvas.drawRRect(rect, Paint()..color = const Color(0xFF1C1C1E));
+            canvas.drawRRect(rect, Paint()..color = Colors.white.withAlpha(25)..style = PaintingStyle.stroke..strokeWidth = 1.5 * s);
             final emojiTp = TextPainter(
-              text: TextSpan(text: emoji, style: TextStyle(fontSize: 44 * s)),
+              text: TextSpan(
+                text: String.fromCharCode(icon.codePoint),
+                style: TextStyle(fontSize: 44 * s, color: cardColor, fontFamily: icon.fontFamily, package: icon.fontPackage),
+              ),
               textDirection: TextDirection.ltr,
             )..layout();
             emojiTp.paint(canvas, Offset(cx + (cardSize - emojiTp.width) / 2, bY + cardSize * 0.10));
             final valTp = TextPainter(
-              text: TextSpan(text: val, style: TextStyle(color: cardColor, fontSize: 48 * s, fontWeight: FontWeight.w900)),
+              text: TextSpan(text: val, style: TextStyle(color: Colors.white, fontSize: 48 * s, fontWeight: FontWeight.w800)),
               textDirection: TextDirection.ltr,
             )..layout(maxWidth: cardSize - 8 * s);
             valTp.paint(canvas, Offset(cx + (cardSize - valTp.width) / 2, bY + cardSize * 0.42));
             final lblTp = TextPainter(
-              text: TextSpan(text: lbl, style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 20 * s)),
+              text: TextSpan(text: lbl, style: TextStyle(color: Colors.white54, fontSize: 20 * s)),
               textDirection: TextDirection.ltr,
             )..layout(maxWidth: cardSize - 8 * s);
             lblTp.paint(canvas, Offset(cx + (cardSize - lblTp.width) / 2, bY + cardSize * 0.74));
@@ -16649,20 +16139,6 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
     }
   }
 
-  void _drawBadge(Canvas canvas, String text, Color color, double y, double x, double maxW) {
-    final bgRect = RRect.fromRectAndRadius(
-      Rect.fromLTWH(x, y, maxW - x * 2, 40),
-      const Radius.circular(10),
-    );
-    canvas.drawRRect(bgRect, Paint()..color = color.withAlpha(40));
-    canvas.drawRRect(bgRect, Paint()..color = color.withAlpha(80)..style = PaintingStyle.stroke..strokeWidth = 1);
-    final tp = TextPainter(
-      text: TextSpan(text: text, style: TextStyle(color: color, fontSize: 14, fontWeight: FontWeight.w700)),
-      textDirection: TextDirection.ltr,
-    )..layout(maxWidth: maxW - x * 2 - 20);
-    tp.paint(canvas, Offset(x + 10, y + 12));
-  }
-
   Widget _toggleChip({required String label, required bool active, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
@@ -16670,15 +16146,15 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: active ? widget.accent.withAlpha(40) : Colors.white10,
+          color: active ? widget.accent.withAlpha(40) : (_isDarkCtx(context) ? Colors.white10 : Colors.black.withAlpha(10)),
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: active ? widget.accent : Colors.white24),
+          border: Border.all(color: active ? widget.accent : (_isDarkCtx(context) ? Colors.white24 : Colors.black26)),
         ),
         child: Text(
           label,
           style: TextStyle(
             fontSize: 12,
-            color: active ? widget.accent : Colors.white54,
+            color: active ? widget.accent : (_isDarkCtx(context) ? Colors.white54 : Colors.black54),
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -16723,12 +16199,12 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
             alignment: WrapAlignment.center,
             children: [
               _toggleChip(
-                label: '🔥 Streak',
+                label: 'Streak',
                 active: _includeStreak,
                 onTap: () => setState(() => _includeStreak = !_includeStreak),
               ),
               _toggleChip(
-                label: '🏋 ${AppL.sessions}',
+                label: AppL.sessions,
                 active: _includeSessionCount,
                 onTap: () => setState(() => _includeSessionCount = !_includeSessionCount),
               ),
@@ -16890,6 +16366,18 @@ class _DrumPickersState extends State<_DrumPickers>
   bool _manualUseEvenStep = false;
   bool _manualUseSingleStep = false;
   bool _interacted = false;
+  // true mentre la ruota si sposta da codice (input tastiera / cambio step):
+  // onSelectedItemChanged non deve azzerare il valore digitato né i callback.
+  bool _programmaticJump = false;
+
+  void _jumpKgSilently(int idx) {
+    _programmaticJump = true;
+    try {
+      if (_kgCtrl.hasClients) _kgCtrl.jumpToItem(idx);
+    } finally {
+      _programmaticJump = false;
+    }
+  }
 
   // Animazione freccia suggerimento aumento peso
   late AnimationController _arrowCtrl;
@@ -16938,7 +16426,7 @@ class _DrumPickersState extends State<_DrumPickers>
         final kg = _customKgValue ?? _displayValueToKg(_weightValues[_selKg.clamp(0, _weightValues.length - 1)]);
         final newIdx = _nearestIndex(_weightValues, widget.displayInPounds ? kgToLb(kg) : kg);
         setState(() => _selKg = newIdx);
-        _kgCtrl.jumpToItem(newIdx);
+        _jumpKgSilently(newIdx);
       });
     }
   }
@@ -16979,15 +16467,16 @@ class _DrumPickersState extends State<_DrumPickers>
 
   void _editValue({required bool isKg}) {
     if (!widget.allowKeyboardInput) return;
-    final textCtrl = TextEditingController(
-      text: isKg
-          ? _formatDisplayedWeight(_selectedDisplayedWeight())
-          : _repsValues[_selReps].toString(),
-    );
+    final initialText = isKg
+        ? _formatDisplayedWeight(_selectedDisplayedWeight())
+        : _repsValues[_selReps].toString();
+    // Testo già selezionato: si digita il nuovo valore senza cancellare.
+    final textCtrl = TextEditingController(text: initialText)
+      ..selection = TextSelection(baseOffset: 0, extentOffset: initialText.length);
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        backgroundColor: const Color(0xFF1A1A1E),
+        backgroundColor: _isDarkCtx(context) ? const Color(0xFF1A1A1E) : Colors.white,
         title: Text(
           isKg ? AppL.insertKg : AppL.insertReps,
           style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
@@ -16995,7 +16484,8 @@ class _DrumPickersState extends State<_DrumPickers>
         content: TextField(
           controller: textCtrl,
           autofocus: true,
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          keyboardType: TextInputType.numberWithOptions(decimal: isKg),
+          textInputAction: TextInputAction.done,
           style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontSize: 28),
           textAlign: TextAlign.center,
           decoration: InputDecoration(
@@ -17024,10 +16514,10 @@ class _DrumPickersState extends State<_DrumPickers>
               Navigator.pop(ctx);
               _applyTextInput(textCtrl.text, isKg: isKg);
             },
-            child: const Text(
+            child: Text(
               'OK',
               style: TextStyle(
-                color: Colors.amber,
+                color: widget.accent,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -17078,11 +16568,11 @@ class _DrumPickersState extends State<_DrumPickers>
         _selKg = best;
         _customKgValue = normalizedKg;
       });
-      _kgCtrl.animateToItem(
-        best,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
+      // ponytail: salto secco dopo il rebuild (la lista step può essere cambiata);
+      // animateToItem passava per i valori intermedi e azzerava _customKgValue.
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _jumpKgSilently(best);
+      });
       _triggerInteraction();
       widget.onKgChanged(_customKgValue!);
       widget.onWeightModeChanged?.call(
@@ -17095,11 +16585,12 @@ class _DrumPickersState extends State<_DrumPickers>
       if (v == null) return;
       final idx = (v - 1).clamp(0, 49);
       setState(() => _selReps = idx);
-      _repsCtrl.animateToItem(
-        idx,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
+      _programmaticJump = true;
+      try {
+        _repsCtrl.jumpToItem(idx);
+      } finally {
+        _programmaticJump = false;
+      }
       _triggerInteraction();
       widget.onRepsChanged(_repsValues[idx]);
     }
@@ -17235,6 +16726,7 @@ class _DrumPickersState extends State<_DrumPickers>
     required List items,
     required Function(int) onChanged,
   }) {
+    if (_programmaticJump) return;
     setState(() {
       if (isKg) {
         _selKg = index;
@@ -17640,10 +17132,10 @@ class _PTGraphWidgetState extends State<PTGraphWidget> {
   Widget build(BuildContext context) {
     final List<Color> seriesColors = [
       Theme.of(context).colorScheme.primary,
-      Colors.purpleAccent,
-      Colors.greenAccent,
-      Colors.orangeAccent,
-      Colors.redAccent,
+      const Color(0xFF8E8CF2),
+      const Color(0xFF5CC8A8),
+      const Color(0xFFE0A458),
+      const Color(0xFFE07A7A),
     ];
     var logs = widget.history
         .where((h) => h['exercise'] == widget.exerciseName)
@@ -17770,18 +17262,23 @@ class PTChartPainter extends CustomPainter {
         maxSets = (log['series'] as List).length;
     }
 
+    final grid = Paint()..color = Colors.grey.withAlpha(40)..strokeWidth = 1;
+    for (final f in [0.25, 0.5, 0.75]) {
+      canvas.drawLine(Offset(0, size.height * f), Offset(size.width, size.height * f), grid);
+    }
+
     for (int sIdx = 0; sIdx < maxSets; sIdx++) {
       final color = colors[sIdx % colors.length];
       final paint = Paint()
         ..color = color
-        ..strokeWidth = 2.5
+        ..strokeWidth = 2
         ..style = PaintingStyle.stroke
         ..strokeCap = StrokeCap.round;
 
       final path = Path();
       final fillPath = Path();
       bool first = true;
-      double firstX = 0, lastX = 0;
+      double lastX = 0;
 
       for (int i = 0; i < logs.length; i++) {
         final sData = logs[i]['series'] as List;
@@ -17798,7 +17295,6 @@ class PTChartPainter extends CustomPainter {
             path.moveTo(x, y);
             fillPath.moveTo(x, size.height);
             fillPath.lineTo(x, y);
-            firstX = x;
             first = false;
           } else {
             path.lineTo(x, y);
@@ -17808,7 +17304,8 @@ class PTChartPainter extends CustomPainter {
           canvas.drawCircle(Offset(x, y), 3, Paint()..color = color);
         }
       }
-      if (!first) {
+      // ponytail: riempimento solo sulla prima serie, le altre sovrapposte impastano
+      if (!first && sIdx == 0) {
         fillPath.lineTo(lastX, size.height);
         fillPath.close();
         canvas.drawPath(
@@ -17817,7 +17314,7 @@ class PTChartPainter extends CustomPainter {
             ..shader = LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [color.withAlpha(40), color.withAlpha(0)],
+              colors: [color.withAlpha(36), color.withAlpha(0)],
             ).createShader(Rect.fromLTWH(0, 0, size.width, size.height)),
         );
       }
