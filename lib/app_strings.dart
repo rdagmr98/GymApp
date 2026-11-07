@@ -45,8 +45,8 @@ class AppL {
   static String get set           => _lang == 'en' ? 'Set'              : 'Serie';
   static String get lastTime      => _lang == 'en' ? 'Last time'        : 'Ultima volta';
   static String get suggestion    => _lang == 'en' ? 'Suggestion'       : 'Suggerimento';
-  static String get increaseWeight=> _lang == 'en' ? '💡 Consider increasing the weight!'
-                                                   : '💡 Potresti aumentare il peso!';
+  static String get increaseWeight=> _lang == 'en' ? 'Consider increasing the weight!'
+                                                   : 'Potresti aumentare il peso!';
 
   // ── Promo PT ──
   static String get proTrainer    => _lang == 'en' ? 'Are you a Personal Trainer?'
@@ -54,14 +54,14 @@ class AppL {
   static String get proDesc       => _lang == 'en'
       ? 'Manage all your clients with the complete GymApp ecosystem: create custom schedules, monitor progress and communicate directly with your athletes.'
       : 'Gestisci tutti i tuoi clienti con l\'ecosistema completo GymApp: crea schede personalizzate, monitora i progressi e comunica direttamente con i tuoi atleti.';
-  static String get contactMe     => _lang == 'en' ? '📧 Contact Gianmarco' : '📧 Contatta Gianmarco';
+  static String get contactMe     => _lang == 'en' ? 'Contact Gianmarco' : 'Contatta Gianmarco';
   static String get proEmail      => 'osare199@gmail.com';
 
   // ── Settings ──
-  static String get language      => _lang == 'en' ? '🌐 Language'      : '🌐 Lingua';
+  static String get language      => _lang == 'en' ? 'Language'      : 'Lingua';
   static String get deleteData    => _lang == 'en' ? 'Delete data'      : 'Cancella dati';
   static String get accentColor   => _lang == 'en' ? 'Accent color'     : 'Colore accento';
-  static String get gymAppPro     => '👨‍💼 GymApp Pro';
+  static String get gymAppPro     => 'GymApp Pro';
 
   // ── Messaggi ──
   static String get savedOk       => _lang == 'en' ? 'Saved!'           : 'Salvato!';

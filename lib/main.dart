@@ -826,7 +826,7 @@ class LanguagePickerScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 32),
-              const Text('🌍', style: TextStyle(fontSize: 72)),
+              Icon(Icons.language_rounded, size: 72),
               const SizedBox(height: 20),
               Text(
                 'Scegli la lingua / Choose your language',
@@ -891,27 +891,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   List<_OnboardingPage> get _pages => [
     _OnboardingPage(
-      icon: '🏋️',
+      icon: Icons.fitness_center_rounded,
       title: AppL.welcomeTitle,
       text: AppL.onboardingWelcomeText,
     ),
     _OnboardingPage(
-      icon: '📋',
+      icon: Icons.list_alt_rounded,
       title: AppL.onboardingScheduleTitle,
       text: AppL.onboardingScheduleText,
     ),
     _OnboardingPage(
-      icon: '⏱️',
+      icon: Icons.timer_outlined,
       title: AppL.onboardingTrainTitle,
       text: AppL.onboardingTrainText,
     ),
     _OnboardingPage(
-      icon: '📊',
+      icon: Icons.show_chart_rounded,
       title: AppL.onboardingProgressTitle,
       text: AppL.onboardingProgressText,
     ),
     _OnboardingPage(
-      icon: '👨‍💼',
+      icon: Icons.workspace_premium_outlined,
       title: AppL.proTrainer,
       text: AppL.onboardingProText,
       isPromo: true,
@@ -1024,7 +1024,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(page.icon, style: const TextStyle(fontSize: 72)),
+          Icon(page.icon, size: 72, color: accent),
           const SizedBox(height: 32),
           Text(
             page.title,
@@ -1053,7 +1053,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 final uri = Uri.parse('mailto:osare199@gmail.com');
                 if (await canLaunchUrl(uri)) await launchUrl(uri);
               },
-              icon: const Text('📧', style: TextStyle(fontSize: 18)),
+              icon: Icon(Icons.mail_outline_rounded, size: 18),
               label: Text(AppL.contactGianmarco),
               style: OutlinedButton.styleFrom(
                 foregroundColor: accent,
@@ -1081,7 +1081,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 }
 
 class _OnboardingPage {
-  final String icon;
+  final IconData icon;
   final String title;
   final String text;
   final bool isPromo;
@@ -4646,18 +4646,17 @@ class WorkoutDay {
   }
 }
 
-const Map<String, String> kBodyPartIcons = {
-  'nessuno': '',
-  'petto': '🦍',
-  'dorso': '🔙',
-  'gambe': '🦵',
-  'spalle': '🏋️',
-  'braccia': '💪',
-  'core': '🔥',
-  'full_body': '🏃',
-  'cardio': '❤️',
-  'glutei': '🍑',
-  'altro': '⚡',
+const Map<String, IconData> kBodyPartIcons = {
+  'petto': Icons.fitness_center_rounded,
+  'dorso': Icons.rowing_rounded,
+  'gambe': Icons.directions_walk_rounded,
+  'spalle': Icons.accessibility_new_rounded,
+  'braccia': Icons.sports_gymnastics_rounded,
+  'core': Icons.self_improvement_rounded,
+  'full_body': Icons.accessibility_new_rounded,
+  'cardio': Icons.favorite_border_rounded,
+  'glutei': Icons.directions_run_rounded,
+  'altro': Icons.bolt_rounded,
 };
 const Map<String, String> kBodyPartNames = {
   'nessuno': 'Nessuna',
@@ -5104,7 +5103,7 @@ class _ClientMainPageState extends State<ClientMainPage>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('👨‍💼', style: TextStyle(fontSize: 56)),
+            Icon(Icons.workspace_premium_outlined, size: 56),
             const SizedBox(height: 16),
             Text(
               AppL.proTrainer,
@@ -5157,7 +5156,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                   final uri = Uri.parse('mailto:osare199@gmail.com');
                   if (await canLaunchUrl(uri)) await launchUrl(uri);
                 },
-                icon: const Text('📧', style: TextStyle(fontSize: 16)),
+                icon: Icon(Icons.mail_outline_rounded, size: 16),
                 label: Text(AppL.contactGianmarco),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: accent,
@@ -6188,14 +6187,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                           width: 64,
                           height: 64,
                           child: Center(
-                            child: Text(
-                              day.bodyParts
-                                  .map((k) => kBodyPartIcons[k] ?? '')
-                                  .where((e) => e.isNotEmpty)
-                                  .join(' '),
-                              style: const TextStyle(fontSize: 28),
-                              textAlign: TextAlign.center,
-                            ),
+                            child: Icon(kBodyPartIcons[day.bodyParts.first] ?? Icons.fitness_center_rounded, size: 28, color: Theme.of(context).colorScheme.primary),
                           ),
                         ),
                       const SizedBox(width: 16),
@@ -6329,13 +6321,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                     )
                   : day.bodyParts.isNotEmpty
                   ? Center(
-                      child: Text(
-                        day.bodyParts
-                            .map((k) => kBodyPartIcons[k] ?? '')
-                            .where((e) => e.isNotEmpty)
-                            .join(' '),
-                        style: const TextStyle(fontSize: 60),
-                      ),
+                      child: Icon(kBodyPartIcons[day.bodyParts.first] ?? Icons.fitness_center_rounded, size: 60, color: Theme.of(context).colorScheme.primary),
                     )
                   : const SizedBox(height: 8),
             ),
@@ -7839,7 +7825,7 @@ class _ClientMainPageState extends State<ClientMainPage>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Column(
           children: [
-            const Text('🔥', style: TextStyle(fontSize: 36)),
+            Icon(Icons.local_fire_department_rounded, size: 36, color: Colors.orange),
             const SizedBox(height: 4),
             Text(
               '$_streak',
@@ -7936,7 +7922,7 @@ class _ClientMainPageState extends State<ClientMainPage>
         actions: [
           if (!kIsWeb)
             TextButton.icon(
-              icon: const Text('🔥', style: TextStyle(fontSize: 14)),
+              icon: Icon(Icons.local_fire_department_rounded, size: 14, color: Colors.orange),
               label: Text(
                 AppL.shareStreak,
                 style: const TextStyle(color: Colors.orange),
@@ -8122,10 +8108,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          const Text(
-                                            '🔥',
-                                            style: TextStyle(fontSize: 22),
-                                          ),
+                                          Icon(Icons.local_fire_department_rounded, size: 22, color: Colors.orange),
                                           const SizedBox(width: 2),
                                           Text(
                                             '$_streak',
@@ -8180,10 +8163,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const Text(
-                                      '🔥',
-                                      style: TextStyle(fontSize: 16),
-                                    ),
+                                    Icon(Icons.local_fire_department_rounded, size: 16, color: Colors.orange),
                                     const SizedBox(width: 4),
                                     Text(
                                       '$_streak ${_streak == 1 ? AppL.streakUnitSingle : AppL.streakUnitPlural}',
@@ -8280,8 +8260,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    '${d.bodyParts.map((k) => kBodyPartIcons[k] ?? '').where((e) => e.isNotEmpty).take(2).join(' ')} ${d.dayName.toUpperCase()}'
-                                        .trim(),
+                                    d.dayName.toUpperCase(),
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 2,
                                     style: TextStyle(
@@ -8816,7 +8795,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    '🔗  ${AppL.circuit}',
+                    AppL.circuit,
                     style: TextStyle(
                       color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                       fontWeight: FontWeight.bold,
@@ -9251,7 +9230,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                       final sel = selectedParts.contains(e.key);
                       return FilterChip(
                         label: Text(
-                          '${kBodyPartIcons[e.key] ?? ''} ${bodyPartName(e.key)}',
+                          bodyPartName(e.key),
                           style: TextStyle(
                             fontSize: 12,
                             color: sel ? Colors.black : Colors.white70,
@@ -9973,7 +9952,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                       Padding(
                         padding: const EdgeInsets.only(top: 6),
                         child: Text(
-                          '💪 ${translateMuscle(selectedExInfo!.primaryMuscle)}',
+                          translateMuscle(selectedExInfo!.primaryMuscle),
                           style: TextStyle(
                             color: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
                             fontSize: 12,
@@ -10110,7 +10089,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
 
                   // — Superserie / Circuito
                   Text(
-                    '🔗  ${AppL.circuit}',
+                    AppL.circuit,
                     style: TextStyle(
                       color: _isDarkCtx(context) ? Colors.white : Colors.black87,
                       fontWeight: FontWeight.bold,
@@ -10324,7 +10303,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                       ...cats.map(
                         (cat) => _archiveChip(
                           label:
-                              '${kBodyPartIcons[cat] ?? ''} ${bodyPartName(cat)}',
+                              bodyPartName(cat),
                           selected: selectedCategory == cat,
                           onTap: () => setA(() => selectedCategory = cat),
                           accent: appAccentNotifier.value,
@@ -10349,7 +10328,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   child: Row(
                     children: [
                       _archiveChip(
-                        label: '🤸 Corpo libero',
+                        label: 'Corpo libero',
                         selected: selectedEquipment == 'corpo_libero',
                         onTap: () => setA(
                           () => selectedEquipment =
@@ -10358,7 +10337,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         accent: appAccentNotifier.value,
                       ),
                       _archiveChip(
-                        label: '🏋️ Manubri',
+                        label: 'Manubri',
                         selected: selectedEquipment == 'manubri',
                         onTap: () => setA(
                           () => selectedEquipment =
@@ -10367,7 +10346,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         accent: appAccentNotifier.value,
                       ),
                       _archiveChip(
-                        label: '🏋️‍♂️ Bilanciere',
+                        label: 'Bilanciere',
                         selected: selectedEquipment == 'bilanciere',
                         onTap: () => setA(
                           () => selectedEquipment =
@@ -10975,7 +10954,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text('💬', style: const TextStyle(fontSize: 22)),
+                          Icon(Icons.chat_bubble_outline_rounded, size: 22),
                           const SizedBox(width: 10),
                           Flexible(
                             child: Text(
@@ -11032,14 +11011,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                             ),
                           )
                         : day.bodyParts.isNotEmpty
-                        ? Text(
-                            day.bodyParts
-                                .map((k) => kBodyPartIcons[k] ?? '')
-                                .where((e) => e.isNotEmpty)
-                                .take(2)
-                                .join(' '),
-                            style: const TextStyle(fontSize: 22),
-                          )
+                        ? Icon(kBodyPartIcons[day.bodyParts.first] ?? Icons.fitness_center_rounded, size: 22, color: Theme.of(context).colorScheme.primary)
                         : Icon(
                             Icons.fitness_center,
                             color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
@@ -15226,7 +15198,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                   width: 36,
                   height: 36,
                   fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => const Text('💪', style: TextStyle(fontSize: 28)),
+                  errorBuilder: (_, __, ___) => Icon(Icons.fitness_center_rounded, size: 28),
                 ),
               ),
               const SizedBox(width: 10),
