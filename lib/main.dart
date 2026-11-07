@@ -5193,407 +5193,172 @@ class _ClientMainPageState extends State<ClientMainPage>
       const Color(0xFFFF6E40), // corallo
       const Color(0xFFE040FB), // viola neon
     ];
-    final bool isDark = Theme.of(context).brightness == Brightness.dark;
+    const langs = {
+      'it': 'Italiano',
+      'en': 'English',
+      'es': 'Español',
+      'pt': 'Português',
+      'fr': 'Français',
+      'de': 'Deutsch',
+      'el': 'Ελληνικά',
+      'ar': 'العربية',
+      'pl': 'Polski',
+      'ro': 'Română',
+      'hu': 'Magyar',
+    };
+    final bool isDark = _isDarkCtx(context);
     final Color textColor = isDark ? Colors.white : Colors.black87;
-    final Color subColor  = isDark ? Colors.white38 : Colors.black45;
-    final Color divColor  = isDark ? Colors.white12 : Colors.black12;
+    final Color subColor = isDark ? Colors.white38 : Colors.black45;
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.surface,
       child: SafeArea(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              FutureBuilder<SharedPreferences>(
-                future: SharedPreferences.getInstance(),
-                builder: (ctx, snap) {
-                  final name = snap.data?.getString('athlete_name') ?? '';
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name.isNotEmpty ? name.toUpperCase() : AppL.athleteFallback,
-                        style: TextStyle(
-                          color: accent,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1,
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
+          children: [
+            FutureBuilder<SharedPreferences>(
+              future: SharedPreferences.getInstance(),
+              builder: (ctx, snap) {
+                final name = (snap.data?.getString('athlete_name') ?? '').trim();
+                return Row(children: [
+                  CircleAvatar(
+                    radius: 24,
+                    backgroundColor: accent.withAlpha(40),
+                    child: name.isNotEmpty
+                        ? Text(
+                            name.characters.first.toUpperCase(),
+                            style: TextStyle(color: accent, fontSize: 20, fontWeight: FontWeight.w800),
+                          )
+                        : Icon(Icons.person_rounded, color: accent),
+                  ),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name.isNotEmpty ? name : AppL.athleteFallback,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(color: textColor, fontSize: 18, fontWeight: FontWeight.w800),
                         ),
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        AppL.settings,
-                        style: TextStyle(
-                          color: subColor,
-                          fontSize: 12,
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
-              const SizedBox(height: 20),
-              Divider(color: divColor),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  AppL.sectionFeedback,
-                  style: TextStyle(
-                    color: subColor,
-                    fontSize: 11,
-                    letterSpacing: 1.5,
+                        Text(AppL.settings, style: TextStyle(color: subColor, fontSize: 12)),
+                      ],
+                    ),
                   ),
-                ),
-              ),
-              _mainSettingRow(
-                Icons.notifications_active_outlined,
-                AppL.timerSound,
-                _stTimerSound,
-                (v) {
-                  setState(() => _stTimerSound = v);
-                  _saveMainSettings();
-                },
-              ),
-              _alarmSoundSettingRow(),
-              _mainSettingRow(
-                Icons.vibration,
-                AppL.timerVibration,
-                _stVibration,
-                (v) {
-                  setState(() => _stVibration = v);
-                  _saveMainSettings();
-                },
-              ),
-              Divider(color: divColor),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  AppL.sectionTimer,
-                  style: TextStyle(
-                    color: subColor,
-                    fontSize: 11,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-              _mainSettingRow(
-                Icons.timer_outlined,
-                AppL.autoStartTimer,
-                _stAutoTimer,
-                (v) {
-                  setState(() => _stAutoTimer = v);
-                  _saveMainSettings();
-                },
-              ),
-              _mainSettingRow(
-                Icons.screen_lock_portrait_outlined,
-                AppL.screenAlwaysOn,
-                _stWakelock,
-                (v) {
-                  setState(() => _stWakelock = v);
-                  _saveMainSettings();
-                  _applyWakelock(v);
-                },
-              ),
-              Divider(color: divColor),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  AppL.sets.toUpperCase(),
-                  style: TextStyle(
-                    color: subColor,
-                    fontSize: 11,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-              _mainSettingRow(
-                Icons.check_circle_outline,
-                AppL.confirmSeriesWindow,
-                _stConfirmSeries,
-                (v) {
-                  setState(() => _stConfirmSeries = v);
-                  _saveMainSettings();
-                },
-              ),
-              _mainSettingRow(
-                Icons.trending_up,
-                AppL.weightSuggestion,
-                _stWeightHint,
-                (v) {
-                  setState(() => _stWeightHint = v);
-                  _saveMainSettings();
-                },
-              ),
+                ]);
+              },
+            ),
+            _settingsGroup(AppL.sectionFeedback, [
+              _mainSettingRow(Icons.notifications_active_outlined, AppL.timerSound, _stTimerSound, (v) {
+                setState(() => _stTimerSound = v);
+                _saveMainSettings();
+              }),
+              if (_stTimerSound) _alarmSoundSettingRow(),
+              _mainSettingRow(Icons.vibration, AppL.timerVibration, _stVibration, (v) {
+                setState(() => _stVibration = v);
+                _saveMainSettings();
+              }),
+            ]),
+            _settingsGroup(AppL.sectionTimer, [
+              _mainSettingRow(Icons.timer_outlined, AppL.autoStartTimer, _stAutoTimer, (v) {
+                setState(() => _stAutoTimer = v);
+                _saveMainSettings();
+              }),
+              _mainSettingRow(Icons.screen_lock_portrait_outlined, AppL.screenAlwaysOn, _stWakelock, (v) {
+                setState(() => _stWakelock = v);
+                _saveMainSettings();
+                _applyWakelock(v);
+              }),
+            ]),
+            _settingsGroup(AppL.sets, [
+              _mainSettingRow(Icons.check_circle_outline, AppL.confirmSeriesWindow, _stConfirmSeries, (v) {
+                setState(() => _stConfirmSeries = v);
+                _saveMainSettings();
+              }),
+              _mainSettingRow(Icons.trending_up, AppL.weightSuggestion, _stWeightHint, (v) {
+                setState(() => _stWeightHint = v);
+                _saveMainSettings();
+              }),
               _mainSegmentSettingRow(
                 Icons.straighten,
                 AppL.weightUnit,
                 selectedKey: _stUsePounds ? 'lb' : 'kg',
-                options: {
-                  'kg': 'KG',
-                  'lb': AppL.pounds,
-                },
+                options: {'kg': 'KG', 'lb': AppL.pounds},
                 onChanged: (value) {
                   setState(() => _stUsePounds = value == 'lb');
                   _saveMainSettings();
                 },
               ),
-              _mainSettingRow(
-                Icons.keyboard_hide_outlined,
-                AppL.noKeyboard,
-                _stDisableWeightKeyboard,
-                (v) {
-                  setState(() => _stDisableWeightKeyboard = v);
-                  _saveMainSettings();
-                },
-              ),
-              Divider(color: divColor),
-
+              _mainSettingRow(Icons.keyboard_hide_outlined, AppL.noKeyboard, _stDisableWeightKeyboard, (v) {
+                setState(() => _stDisableWeightKeyboard = v);
+                _saveMainSettings();
+              }),
+            ]),
+            _settingsGroup(AppL.sectionAppearance, [
+              _mainSettingRow(Icons.brightness_medium, AppL.darkTheme, _stDarkMode, (v) async {
+                setState(() => _stDarkMode = v);
+                appThemeModeNotifier.value = v ? ThemeMode.dark : ThemeMode.light;
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('dark_mode', v);
+              }),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  AppL.sectionAppearance,
-                  style: TextStyle(color: subColor, fontSize: 11, letterSpacing: 1.5),
-                ),
-              ),
-              _mainSettingRow(
-                Icons.brightness_medium,
-                AppL.darkTheme,
-                _stDarkMode,
-                (v) async {
-                  setState(() => _stDarkMode = v);
-                  appThemeModeNotifier.value = v ? ThemeMode.dark : ThemeMode.light;
-                  final prefs = await SharedPreferences.getInstance();
-                  await prefs.setBool('dark_mode', v);
-                },
-              ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  AppL.sectionTutorial,
-                  style: TextStyle(
-                    color: subColor,
-                    fontSize: 11,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () async {
-                  final prefs = await SharedPreferences.getInstance();
-                  await prefs.setBool('workout_tutorial_shown', false);
-                  if (mounted) {
-                    final demoDay = WorkoutDay(
-                      dayName: 'Demo',
-                      bodyParts: ['petto', 'braccia'],
-                      exercises: [
-                        ExerciseConfig(
-                          name: 'Panca Piana',
-                          targetSets: 2,
-                          repsList: [10, 10],
-                          recoveryTime: 15,
-                          notePT: 'Mantieni i piedi a terra e la schiena leggermente arcuata.',
-                        ),
-                        ExerciseConfig(
-                          name: 'Trazioni',
-                          targetSets: 2,
-                          repsList: [8, 8],
-                          recoveryTime: 15,
-                        ),
-                      ],
-                    );
-                    Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (c, anim, _) => WorkoutTutorial(
-                          accentColor: accent,
-                          onComplete: () {
-                            Navigator.pop(context);
-                            prefs.setBool('workout_tutorial_shown', true);
+                padding: const EdgeInsets.fromLTRB(14, 12, 14, 14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(children: [
+                      Icon(Icons.palette_outlined, color: accent, size: 20),
+                      const SizedBox(width: 14),
+                      Text(AppL.sectionAccentColor[0] + AppL.sectionAccentColor.substring(1).toLowerCase(),
+                          style: TextStyle(color: textColor, fontSize: 14)),
+                    ]),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: presets.map((c) {
+                        final selected = accent.toARGB32() == c.toARGB32();
+                        return GestureDetector(
+                          onTap: () async {
+                            final prefs = await SharedPreferences.getInstance();
+                            await prefs.setInt('accent_color', c.toARGB32());
+                            appAccentNotifier.value = c;
+                            setState(() {});
                           },
-                          onStartDemo: () async {
-                            await Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (bc, a, __) => WorkoutEngine(
-                                  demoMode: true,
-                                  day: demoDay,
-                                  history: const [],
-                                  carryoverWeights: const {},
-                                  allSessionNames: const [],
-                                  onDone: (_) {},
-                                ),
-                                transitionsBuilder: (bc, a, _, child) => SlideTransition(
-                                  position: Tween<Offset>(
-                                    begin: const Offset(0, 1),
-                                    end: Offset.zero,
-                                  ).animate(CurvedAnimation(parent: a, curve: Curves.easeOutCubic)),
-                                  child: child,
-                                ),
+                          child: AnimatedContainer(
+                            duration: const Duration(milliseconds: 180),
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: c,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: selected ? textColor : Colors.transparent,
+                                width: 2.5,
                               ),
-                            );
-                          },
-                        ),
-                        transitionsBuilder: (c, anim, _, child) => FadeTransition(
-                          opacity: anim,
-                          child: child,
-                        ),
-                      ),
-                    );
-                  }
-                },
-                child: Container(
-                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                  decoration: BoxDecoration(
-                    color: _isDarkCtx(context) ? const Color(0xFF2C2C2E) : Colors.white,
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      color: accent.withAlpha(100),
-                      width: 1,
-                    ),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.school_outlined,
-                        color: accent,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Text(
-                          AppL.watchTutorial,
-                          style: TextStyle(
-                            color: accent,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Divider(color: divColor),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  AppL.sectionAccentColor,
-                  style: TextStyle(
-                    color: subColor,
-                    fontSize: 11,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-              Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: presets.map((c) {
-                  final selected = accent.toARGB32() == c.toARGB32();
-                  return GestureDetector(
-                    onTap: () async {
-                      final prefs = await SharedPreferences.getInstance();
-                      await prefs.setInt('accent_color', c.toARGB32());
-                      appAccentNotifier.value = c;
-                      setState(() {});
-                    },
-                    child: Container(
-                      width: 36,
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: c,
-                        shape: BoxShape.circle,
-                        border: selected
-                            ? Border.all(color: _isDarkCtx(context) ? Colors.white : Colors.black87, width: 3)
-                            : null,
-                        boxShadow: selected
-                            ? [
-                                BoxShadow(
-                                  color: c.withAlpha(120),
-                                  blurRadius: 8,
-                                  spreadRadius: 2,
-                                ),
-                              ]
-                            : null,
-                      ),
-                      child: selected
-                          ? const Icon(
-                              Icons.check,
-                              color: Colors.black,
-                              size: 18,
-                            )
-                          : null,
-                    ),
-                  );
-                }).toList(),
-              ),
-              Divider(color: divColor),
-
-              Divider(color: divColor),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  AppL.language.toUpperCase(),
-                  style: TextStyle(
-                    color: subColor,
-                    fontSize: 11,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: 2),
-                          child: Icon(
-                            Icons.language,
-                            color: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
-                            size: 20,
-                          ),
-                        ),
-                        SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            AppL.language,
-                            softWrap: true,
-                            style: TextStyle(
-                              color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-                              fontSize: 14,
                             ),
+                            child: selected ? const Icon(Icons.check, color: Colors.black, size: 16) : null,
                           ),
-                        ),
-                      ],
+                        );
+                      }).toList(),
                     ),
-                  ),
-                  const SizedBox(width: 12),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(14, 2, 10, 2),
+                child: Row(children: [
+                  Icon(Icons.language, color: accent, size: 20),
+                  const SizedBox(width: 14),
+                  Expanded(child: Text(AppL.language, style: TextStyle(color: textColor, fontSize: 14))),
                   DropdownButton<String>(
                     value: _appLang,
-                    dropdownColor: const Color(0xFF2C2C2E),
-                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                    dropdownColor: Theme.of(context).colorScheme.surface,
+                    borderRadius: BorderRadius.circular(12),
+                    style: TextStyle(color: textColor, fontSize: 14),
                     underline: const SizedBox(),
-                    items: const [
-                      DropdownMenuItem(value: 'it', child: Text('🇮🇹 Italiano')),
-                      DropdownMenuItem(value: 'en', child: Text('🇬🇧 English')),
-                      DropdownMenuItem(value: 'es', child: Text('🇪🇸 Español')),
-                      DropdownMenuItem(value: 'pt', child: Text('🇧🇷 Português')),
-                      DropdownMenuItem(value: 'fr', child: Text('🇫🇷 Français')),
-                      DropdownMenuItem(value: 'de', child: Text('🇩🇪 Deutsch')),
-                      DropdownMenuItem(value: 'el', child: Text('🇬🇷 Ελληνικά')),
-                      DropdownMenuItem(value: 'ar', child: Text('🇸🇦 العربية')),
-                      DropdownMenuItem(value: 'pl', child: Text('🇵🇱 Polski')),
-                      DropdownMenuItem(value: 'ro', child: Text('🇷🇴 Română')),
-                      DropdownMenuItem(value: 'hu', child: Text('🇭🇺 Magyar')),
+                    items: [
+                      for (final e in langs.entries) DropdownMenuItem(value: e.key, child: Text(e.value)),
                     ],
                     onChanged: (v) async {
                       if (v == null) return;
@@ -5603,106 +5368,171 @@ class _ClientMainPageState extends State<ClientMainPage>
                       setState(() => _appLang = v);
                     },
                   ),
-                ],
+                ]),
               ),
-              Divider(color: divColor),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  AppL.sectionPro,
-                  style: TextStyle(
-                    color: subColor,
-                    fontSize: 11,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton.icon(
-                  icon: const Text('👨‍💼', style: TextStyle(fontSize: 16)),
-                  label: Text(
-                    AppL.gymAppPro,
-                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    _mostraPromoScreen();
-                  },
-                ),
-              ),
-              Divider(color: divColor),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  AppL.dataSection,
-                  style: TextStyle(
-                    color: subColor,
-                    fontSize: 11,
-                    letterSpacing: 1.5,
-                  ),
-                ),
-              ),
-
-              SizedBox(
-                width: double.infinity,
-                child: OutlinedButton.icon(
-                  icon: const Icon(
-                    Icons.storage_rounded,
-                    color: Colors.redAccent,
-                  ),
-                  label: Text(
-                    AppL.dataManagement,
-                    style: const TextStyle(color: Colors.redAccent),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.redAccent),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => CancellazioneScreen(
-                          history: history,
-                          routine: myRoutine,
-                          onSave: (newHistory) async {
-                            final prefs = await SharedPreferences.getInstance();
-                            await prefs.setString(
-                              'client_history',
-                              jsonEncode(newHistory),
-                            );
-                            if (mounted) {
-                              setState(() {
-                                history = newHistory;
-                              });
-                            }
-                          },
-                        ),
-                      ),
-                    ).then((didChange) {
-                      if (didChange == true) {
-                        _loadData();
-                      }
-                    });
-                  },
-                ),
-              ),
-              const SizedBox(height: 20),
-            ],
-          ),
+            ]),
+            _settingsGroup(AppL.sectionTutorial, [
+              _navSettingRow(Icons.school_outlined, AppL.watchTutorial, _openTutorialFromSettings),
+            ]),
+            _settingsGroup(AppL.sectionPro, [
+              _navSettingRow(Icons.workspace_premium_outlined, AppL.gymAppPro, () {
+                Navigator.pop(context);
+                _mostraPromoScreen();
+              }),
+            ]),
+            _settingsGroup(AppL.dataSection, [
+              _navSettingRow(Icons.storage_rounded, AppL.dataManagement, _openDataManagement, color: Colors.redAccent),
+            ]),
+          ],
         ),
       ),
     );
+  }
+
+  Widget _settingsGroup(String title, List<Widget> rows) {
+    final dark = _isDarkCtx(context);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(14, 22, 14, 8),
+          child: Text(
+            title.toUpperCase(),
+            style: TextStyle(
+              color: dark ? Colors.white38 : Colors.black45,
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 1.2,
+            ),
+          ),
+        ),
+        Material(
+          color: dark ? const Color(0xFF2C2C2E) : const Color(0xFFF2F2F7),
+          borderRadius: BorderRadius.circular(14),
+          clipBehavior: Clip.antiAlias,
+          child: Column(children: [
+            for (int i = 0; i < rows.length; i++) ...[
+              if (i > 0) Divider(height: 1, thickness: 0.5, indent: 48, color: dark ? Colors.white12 : Colors.black12),
+              rows[i],
+            ],
+          ]),
+        ),
+      ],
+    );
+  }
+
+  Widget _navSettingRow(IconData icon, String label, VoidCallback onTap, {String? sub, Color? color}) {
+    return Builder(builder: (ctx) {
+      final onSurface = Theme.of(ctx).colorScheme.onSurface;
+      final subClr = onSurface.withAlpha(140);
+      return InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 13),
+          child: Row(children: [
+            Icon(icon, color: color ?? appAccentNotifier.value, size: 20),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label, style: TextStyle(color: color ?? onSurface, fontSize: 14)),
+                  if (sub != null) Text(sub, style: TextStyle(color: subClr, fontSize: 12)),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right_rounded, color: subClr, size: 20),
+          ]),
+        ),
+      );
+    });
+  }
+
+  Future<void> _openTutorialFromSettings() async {
+    final accent = appAccentNotifier.value;
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('workout_tutorial_shown', false);
+    if (!mounted) return;
+    final demoDay = WorkoutDay(
+      dayName: 'Demo',
+      bodyParts: ['petto', 'braccia'],
+      exercises: [
+        ExerciseConfig(
+          name: 'Panca Piana',
+          targetSets: 2,
+          repsList: [10, 10],
+          recoveryTime: 15,
+          notePT: 'Mantieni i piedi a terra e la schiena leggermente arcuata.',
+        ),
+        ExerciseConfig(
+          name: 'Trazioni',
+          targetSets: 2,
+          repsList: [8, 8],
+          recoveryTime: 15,
+        ),
+      ],
+    );
+    Navigator.push(
+      context,
+      PageRouteBuilder(
+        pageBuilder: (c, anim, _) => WorkoutTutorial(
+          accentColor: accent,
+          onComplete: () {
+            Navigator.pop(context);
+            prefs.setBool('workout_tutorial_shown', true);
+          },
+          onStartDemo: () async {
+            await Navigator.push(
+              context,
+              PageRouteBuilder(
+                pageBuilder: (bc, a, __) => WorkoutEngine(
+                  demoMode: true,
+                  day: demoDay,
+                  history: const [],
+                  carryoverWeights: const {},
+                  allSessionNames: const [],
+                  onDone: (_) {},
+                ),
+                transitionsBuilder: (bc, a, _, child) => SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(0, 1),
+                    end: Offset.zero,
+                  ).animate(CurvedAnimation(parent: a, curve: Curves.easeOutCubic)),
+                  child: child,
+                ),
+              ),
+            );
+          },
+        ),
+        transitionsBuilder: (c, anim, _, child) => FadeTransition(opacity: anim, child: child),
+      ),
+    );
+  }
+
+  void _openDataManagement() {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => CancellazioneScreen(
+          history: history,
+          routine: myRoutine,
+          onSave: (newHistory) async {
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.setString('client_history', jsonEncode(newHistory));
+            if (mounted) {
+              setState(() {
+                history = newHistory;
+              });
+            }
+          },
+        ),
+      ),
+    ).then((didChange) {
+      if (didChange == true) {
+        _loadData();
+      }
+    });
   }
 
   Widget _alarmSoundSettingRow() {
@@ -5712,38 +5542,14 @@ class _ClientMainPageState extends State<ClientMainPage>
       'triple': AppL.alarmTripleBeep,
       'custom': AppL.alarmCustomFile,
     };
-    final currentLabel = labelMap[_stAlarmType] ?? AppL.alarmBeep;
-    return Builder(builder: (ctx) {
-      final textClr = Theme.of(ctx).colorScheme.onSurface;
-      final subClr = textClr.withAlpha(140);
-      return InkWell(
-        borderRadius: BorderRadius.circular(8),
-        onTap: () => _showAlarmSoundSheet(ctx),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 2),
-                child: Icon(Icons.music_note_outlined, color: appAccentNotifier.value, size: 20),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(AppL.alarmSound, style: TextStyle(color: textClr, fontSize: 14)),
-                    Text(currentLabel, style: TextStyle(color: subClr, fontSize: 12)),
-                  ],
-                ),
-              ),
-              Icon(Icons.chevron_right, color: subClr, size: 20),
-            ],
-          ),
-        ),
-      );
-    });
+    return Builder(
+      builder: (ctx) => _navSettingRow(
+        Icons.music_note_outlined,
+        AppL.alarmSound,
+        () => _showAlarmSoundSheet(ctx),
+        sub: labelMap[_stAlarmType] ?? AppL.alarmBeep,
+      ),
+    );
   }
 
   void _showAlarmSoundSheet(BuildContext ctx) {
@@ -5838,35 +5644,24 @@ class _ClientMainPageState extends State<ClientMainPage>
   ) {
     return Builder(builder: (ctx) {
       final textClr = Theme.of(ctx).colorScheme.onSurface;
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 2),
-                  child: Icon(icon, color: appAccentNotifier.value, size: 20),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    label,
-                    softWrap: true,
-                    style: TextStyle(color: textClr, fontSize: 14),
-                  ),
-                ),
-              ],
+      return InkWell(
+        onTap: () => onChanged(!value),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(14, 4, 6, 4),
+          child: Row(children: [
+            Icon(icon, color: appAccentNotifier.value, size: 20),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Text(label, softWrap: true, style: TextStyle(color: textClr, fontSize: 14)),
             ),
-          ),
-          const SizedBox(width: 12),
-          Switch(
-            value: value,
-            onChanged: onChanged,
-            activeTrackColor: appAccentNotifier.value,
-          ),
-        ],
+            const SizedBox(width: 8),
+            Switch(
+              value: value,
+              onChanged: onChanged,
+              activeTrackColor: appAccentNotifier.value,
+            ),
+          ]),
+        ),
       );
     });
   }
@@ -5878,52 +5673,51 @@ class _ClientMainPageState extends State<ClientMainPage>
     required Map<String, String> options,
     required ValueChanged<String> onChanged,
   }) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+    final dark = _isDarkCtx(context);
+    final accent = appAccentNotifier.value;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(14, 10, 12, 10),
+      child: Row(children: [
+        Icon(icon, color: accent, size: 20),
+        const SizedBox(width: 14),
         Expanded(
+          child: Text(label,
+              softWrap: true, style: TextStyle(color: dark ? Colors.white : Colors.black87, fontSize: 14)),
+        ),
+        const SizedBox(width: 8),
+        Container(
+          padding: const EdgeInsets.all(3),
+          decoration: BoxDecoration(
+            color: dark ? Colors.black26 : Colors.black.withAlpha(12),
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 2),
-                child: Icon(icon, color: appAccentNotifier.value, size: 20),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  label,
-                  softWrap: true,
-                  style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontSize: 14),
+            mainAxisSize: MainAxisSize.min,
+            children: options.entries.map((entry) {
+              final selected = selectedKey == entry.key;
+              return GestureDetector(
+                onTap: () => onChanged(entry.key),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 180),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: selected ? accent : Colors.transparent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    entry.value,
+                    style: TextStyle(
+                      color: selected ? Colors.black : (dark ? Colors.white70 : Colors.black54),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
-              ),
-            ],
+              );
+            }).toList(),
           ),
         ),
-        const SizedBox(width: 12),
-        Wrap(
-          spacing: 8,
-          children: options.entries.map((entry) {
-            final selected = selectedKey == entry.key;
-            return ChoiceChip(
-              label: Text(
-                entry.value,
-                style: TextStyle(
-                  color: selected ? Colors.black : (_isDarkCtx(context) ? Colors.white70 : Colors.black87),
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              selected: selected,
-              onSelected: (_) => onChanged(entry.key),
-              selectedColor: appAccentNotifier.value,
-              backgroundColor: _isDarkCtx(context) ? Colors.white10 : Colors.grey.shade200,
-              side: BorderSide(
-                color: selected ? appAccentNotifier.value : (_isDarkCtx(context) ? Colors.white12 : Colors.grey.shade400),
-              ),
-            );
-          }).toList(),
-        ),
-      ],
+      ]),
     );
   }
 
@@ -7270,14 +7064,11 @@ class _ClientMainPageState extends State<ClientMainPage>
             ),
             const SizedBox(height: 6),
             Text(
-              AppL.progressOverTime,
+              AppL.chartTapHint,
               style: TextStyle(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26, fontSize: 11),
             ),
             const SizedBox(height: 16),
-            SizedBox(
-              height: 320,
-              child: PTGraphWidget(exerciseName: name, history: history),
-            ),
+            PTGraphWidget(exerciseName: name, history: history, usePounds: _stUsePounds),
             _buildGraphNativeAd(),
           ],
         ),
@@ -7976,6 +7767,7 @@ class _ClientMainPageState extends State<ClientMainPage>
           routine: myRoutine,
           streak: _streak,
           accent: appAccentNotifier.value,
+          usePounds: _stUsePounds,
           buildAd: _buildOverallProgressNativeAd,
         ),
       ),
@@ -15999,15 +15791,16 @@ class _StreakShareSheetState extends State<_StreakShareSheet> {
 }
 
 // --- PROGRESS SHARE SHEET ---
+// Anteprima = immagine condivisa (RepaintBoundary), come le altre share.
 class _ProgressShareSheet extends StatefulWidget {
-  final GlobalKey chartKey;
   final int streak;
   final List<_SessionPoint> points;
+  final List<_ExTrend> top;
   final Color accent;
   const _ProgressShareSheet({
-    required this.chartKey,
     required this.streak,
     required this.points,
+    required this.top,
     required this.accent,
   });
   @override
@@ -16019,171 +15812,21 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
   bool _includeStreak = true;
   bool _includeSessionCount = true;
   bool _includeTrend = true;
+  bool _includeTop = true;
+  final GlobalKey _cardKey = GlobalKey();
 
   Future<void> _share() async {
     if (_sharing) return;
     setState(() => _sharing = true);
     try {
-      final boundary = widget.chartKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+      final boundary = _cardKey.currentContext?.findRenderObject() as RenderRepaintBoundary?;
       if (boundary == null) return;
-
-      // Capture the chart at high resolution
-      final chartImage = await boundary.toImage(pixelRatio: 6.0);
-      final chartBytes = await chartImage.toByteData(format: ui.ImageByteFormat.png);
-      if (chartBytes == null) return;
-
-      // Build composed image using PictureRecorder (2x scale for higher quality)
-      const double s = 2.0;
-      const double w = 1080 * s;
-      const double hPad = 20.0 * s; // horizontal padding
-      final double chartW = w - 2 * hPad; // chart fills content width
-      const double cardSize = 220.0 * s;
-      final double badgesH = (_includeStreak || _includeSessionCount || _includeTrend) ? (cardSize + 40.0 * s) : 0.0;
-      const double headerH = 260.0 * s; // reduced from 300
-
-      // Calculate chart height based on actual chart image dimensions
-      final chartAspect = chartImage.width / chartImage.height;
-      const double gap = 16.0 * s;
-      final double chartH = chartW / chartAspect; // Height proportional to width
-      final double totalH = headerH + chartH + badgesH + 40 * s;
-
-      final recorder = ui.PictureRecorder();
-      final canvas = Canvas(recorder);
-
-      // Rounded corners clip
-      canvas.clipRRect(RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, w, totalH), const Radius.circular(32 * s)));
-
-      // Background
-      final bgPaint = Paint()..color = const Color(0xFF0E0E10);
-      canvas.drawRect(Rect.fromLTWH(0, 0, w, totalH), bgPaint);
-
-      // Colored border for 3D effect
-      final borderPaint = Paint()
-        ..color = widget.accent.withAlpha(120)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 3 * s;
-      canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(0, 0, w, totalH), Radius.circular(32 * s)),
-        borderPaint,
-      );
-
-      // Header: icon + "GymApp"
-      final codec = await ui.instantiateImageCodec(
-        (await rootBundle.load('assets/icon_client.png')).buffer.asUint8List(),
-        targetWidth: (180 * s).round(),
-        targetHeight: (180 * s).round(),
-      );
-      final frame = await codec.getNextFrame();
-      const double iconSz = 180.0 * s;
-      final iconX = (w - iconSz) / 2;
-      canvas.drawImageRect(
-        frame.image,
-        Rect.fromLTWH(0, 0, frame.image.width.toDouble(), frame.image.height.toDouble()),
-        Rect.fromLTWH(iconX, 16 * s, iconSz, iconSz),
-        Paint(),
-      );
-
-      // Border around icon with rounded corners
-      final iconBorderPaint = Paint()
-        ..color = widget.accent.withAlpha(150)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.5 * s;
-      canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(iconX, 16 * s, iconSz, iconSz), Radius.circular(16 * s)),
-        iconBorderPaint,
-      );
-      final tp = TextPainter(
-        text: TextSpan(
-          text: 'GymApp',
-          style: TextStyle(
-            color: widget.accent,
-            fontSize: 48 * s,
-            fontWeight: FontWeight.w900,
-            letterSpacing: 2.0,
-          ),
-        ),
-        textDirection: TextDirection.ltr,
-      )..layout();
-      tp.paint(canvas, Offset((w - tp.width) / 2, (16 + 180 + 12) * s));
-
-      // Chart background (dark box behind the transparent chart)
-      canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(hPad, headerH, chartW, chartH), const Radius.circular(16 * s)),
-        Paint()..color = const Color(0xFF1C1C1E),
-      );
-
-      // Draw chart below header, filling content width
-      final chartUi = await ui.instantiateImageCodec(chartBytes.buffer.asUint8List());
-      final chartFrame = await chartUi.getNextFrame();
-      final double innerPad = 12.0 * s;
-      final dst = Rect.fromLTWH(hPad + innerPad, headerH + innerPad, chartW - 2 * innerPad, chartH - 2 * innerPad);
-      canvas.drawImageRect(
-        chartFrame.image,
-        Rect.fromLTWH(0, 0, chartImage.width.toDouble(), chartImage.height.toDouble()),
-        dst,
-        Paint(),
-      );
-
-      // Stat cards row
-      if (_includeStreak || _includeSessionCount || _includeTrend) {
-        final double bY = headerH + chartH + 16 * s;
-        final trendPct = widget.points.length >= 2 && widget.points.first.score > 0
-            ? ((widget.points.last.score - widget.points.first.score) / widget.points.first.score * 100)
-            : 0.0;
-        final trendUp = trendPct >= 0;
-        final isMicrocycle = widget.points.isNotEmpty && widget.points.first.dayName.startsWith('Microciclo');
-
-        final activeCards = <(Color, IconData, String, String)>[];
-        if (_includeSessionCount) activeCards.add((widget.accent, Icons.event_available_rounded, '${widget.points.length}', isMicrocycle ? AppL.microcycles : AppL.sessions));
-        if (_includeStreak) activeCards.add((widget.accent, Icons.local_fire_department_rounded, '${widget.streak}', 'Streak'));
-        if (_includeTrend) activeCards.add((trendUp ? const Color(0xFF4CD97B) : const Color(0xFFFF6B6B), trendUp ? Icons.trending_up_rounded : Icons.trending_down_rounded, '${trendUp ? '+' : ''}${trendPct.toStringAsFixed(0)}%', 'Trend'));
-
-        if (activeCards.isNotEmpty) {
-          final double totalCardsW = activeCards.length * cardSize + (activeCards.length + 1) * gap;
-          final double firstCardX = (w - totalCardsW) / 2 + gap;
-
-          void drawStatCard(Canvas canvas, double cx, Color cardColor, IconData icon, String val, String lbl) {
-            final rect = RRect.fromRectAndRadius(
-              Rect.fromLTWH(cx, bY, cardSize, cardSize),
-              Radius.circular(24 * s),
-            );
-            canvas.drawRRect(rect, Paint()..color = const Color(0xFF1C1C1E));
-            canvas.drawRRect(rect, Paint()..color = Colors.white.withAlpha(25)..style = PaintingStyle.stroke..strokeWidth = 1.5 * s);
-            final emojiTp = TextPainter(
-              text: TextSpan(
-                text: String.fromCharCode(icon.codePoint),
-                style: TextStyle(fontSize: 44 * s, color: cardColor, fontFamily: icon.fontFamily, package: icon.fontPackage),
-              ),
-              textDirection: TextDirection.ltr,
-            )..layout();
-            emojiTp.paint(canvas, Offset(cx + (cardSize - emojiTp.width) / 2, bY + cardSize * 0.10));
-            final valTp = TextPainter(
-              text: TextSpan(text: val, style: TextStyle(color: Colors.white, fontSize: 48 * s, fontWeight: FontWeight.w800)),
-              textDirection: TextDirection.ltr,
-            )..layout(maxWidth: cardSize - 8 * s);
-            valTp.paint(canvas, Offset(cx + (cardSize - valTp.width) / 2, bY + cardSize * 0.42));
-            final lblTp = TextPainter(
-              text: TextSpan(text: lbl, style: TextStyle(color: Colors.white54, fontSize: 20 * s)),
-              textDirection: TextDirection.ltr,
-            )..layout(maxWidth: cardSize - 8 * s);
-            lblTp.paint(canvas, Offset(cx + (cardSize - lblTp.width) / 2, bY + cardSize * 0.74));
-          }
-
-          for (int ci = 0; ci < activeCards.length; ci++) {
-            final cx = firstCardX + ci * (cardSize + gap);
-            drawStatCard(canvas, cx, activeCards[ci].$1, activeCards[ci].$2, activeCards[ci].$3, activeCards[ci].$4);
-          }
-        }
-      }
-
-      final picture = recorder.endRecording();
-      final finalImage = await picture.toImage(w.toInt(), totalH.toInt());
-      final finalBytes = await finalImage.toByteData(format: ui.ImageByteFormat.png);
-      if (finalBytes == null) return;
-
+      final image = await boundary.toImage(pixelRatio: 4.0);
+      final bytes = await image.toByteData(format: ui.ImageByteFormat.png);
+      if (bytes == null) return;
       final dir = await getTemporaryDirectory();
       final file = File('${dir.path}/gymapp_progress.png');
-      await file.writeAsBytes(finalBytes.buffer.asUint8List());
+      await file.writeAsBytes(bytes.buffer.asUint8List());
       await Share.shareXFiles(
         [XFile(file.path, mimeType: 'image/png')],
         text: AppL.myGymProgress,
@@ -16191,6 +15834,133 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
     } finally {
       if (mounted) setState(() => _sharing = false);
     }
+  }
+
+  Widget _tile(String value, String label, Color color) => Expanded(
+    child: Container(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),
+      decoration: BoxDecoration(
+        color: Colors.white.withAlpha(12),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(children: [
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(value, style: TextStyle(color: color, fontSize: 20, fontWeight: FontWeight.w800)),
+        ),
+        const SizedBox(height: 2),
+        Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: const TextStyle(color: Colors.white54, fontSize: 11)),
+      ]),
+    ),
+  );
+
+  Widget _buildCard() {
+    final accent = widget.accent;
+    final pts = widget.points;
+    final values = pts.map((p) => p.score).toList();
+    final trend = pts.length >= 2 && pts.first.score > 0
+        ? (pts.last.score - pts.first.score) / pts.first.score * 100
+        : 0.0;
+    final isMicro = pts.isNotEmpty && pts.first.dayName.startsWith('Microciclo');
+    var lo = values.isEmpty ? 0.0 : values.reduce((a, b) => a < b ? a : b);
+    var hi = values.isEmpty ? 1.0 : values.reduce((a, b) => a > b ? a : b);
+    final span = (hi - lo).abs() < 1 ? 1.0 : hi - lo;
+    lo = (lo - span * 0.15).clamp(0.0, double.infinity);
+    hi += span * 0.15;
+    final tiles = <Widget>[
+      if (_includeSessionCount) _tile('${pts.length}', isMicro ? AppL.microcycles : AppL.sessions, Colors.white),
+      if (_includeStreak) _tile('${widget.streak}', 'Streak', accent),
+      if (_includeTrend && pts.length >= 2)
+        _tile('${trend >= 0 ? '+' : ''}${trend.toStringAsFixed(0)}%', 'Trend', trend >= 0 ? _kUp : _kDown),
+    ];
+    final now = DateTime.now();
+    return Container(
+      width: 360,
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: const Color(0xFF0E0E10),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: accent.withAlpha(80)),
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image.asset(
+                'assets/icon_client.png',
+                width: 36,
+                height: 36,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => const SizedBox(width: 36, height: 36),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('GymApp',
+                      style: TextStyle(color: accent, fontWeight: FontWeight.w900, fontSize: 18, letterSpacing: 1.2)),
+                  Text(
+                    '${AppL.overallProgress} · ${now.day}/${now.month}/${now.year}',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(color: Colors.white54, fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+          ]),
+          if (values.isNotEmpty) ...[
+            const SizedBox(height: 16),
+            SizedBox(
+              height: 140,
+              child: CustomPaint(
+                painter: PTChartPainter(
+                  values: values,
+                  tops: const [],
+                  dates: pts.map<DateTime?>((p) => p.date).toList(),
+                  lo: lo,
+                  hi: hi,
+                  sel: values.length - 1,
+                  accent: accent,
+                  dark: true,
+                ),
+              ),
+            ),
+          ],
+          if (tiles.isNotEmpty) ...[
+            const SizedBox(height: 14),
+            Row(children: [
+              for (int i = 0; i < tiles.length; i++) ...[
+                if (i > 0) const SizedBox(width: 8),
+                tiles[i],
+              ],
+            ]),
+          ],
+          if (_includeTop && widget.top.isNotEmpty) ...[
+            const SizedBox(height: 14),
+            ...widget.top.take(3).map((t) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 3),
+              child: Row(children: [
+                Expanded(
+                  child: Text(t.name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.white70, fontSize: 13)),
+                ),
+                const SizedBox(width: 8),
+                Text('+${t.delta.toStringAsFixed(0)}%',
+                    style: const TextStyle(color: _kUp, fontWeight: FontWeight.w800, fontSize: 13)),
+              ]),
+            )),
+          ],
+        ],
+      ),
+    );
   }
 
   Widget _toggleChip({required String label, required bool active, required VoidCallback onTap}) {
@@ -16221,7 +15991,7 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
     return Container(
       decoration: BoxDecoration(
         color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(24)),
       ),
       padding: EdgeInsets.fromLTRB(
         16,
@@ -16229,64 +15999,77 @@ class _ProgressShareSheetState extends State<_ProgressShareSheet> {
         16,
         _bottomNavInset(context) + MediaQuery.of(context).viewInsets.bottom + 24,
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: 40, height: 4,
-            decoration: BoxDecoration(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26, borderRadius: BorderRadius.circular(2)),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            AppL.shareProgressIcon,
-            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontWeight: FontWeight.w700, fontSize: 16),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            AppL.chooseWhatToInclude,
-            style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
-          ),
-          const SizedBox(height: 10),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            alignment: WrapAlignment.center,
-            children: [
-              _toggleChip(
-                label: 'Streak',
-                active: _includeStreak,
-                onTap: () => setState(() => _includeStreak = !_includeStreak),
-              ),
-              _toggleChip(
-                label: AppL.sessions,
-                active: _includeSessionCount,
-                onTap: () => setState(() => _includeSessionCount = !_includeSessionCount),
-              ),
-              _toggleChip(
-                label: '📈 Trend',
-                active: _includeTrend,
-                onTap: () => setState(() => _includeTrend = !_includeTrend),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton.icon(
-              onPressed: _sharing ? null : _share,
-              icon: _sharing
-                  ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
-                  : const Icon(Icons.share_rounded),
-              label: Text(AppL.shareProgress),
-              style: FilledButton.styleFrom(
-                backgroundColor: widget.accent,
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: 40,
+              height: 4,
+              decoration: BoxDecoration(
+                color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
+                borderRadius: BorderRadius.circular(2),
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 16),
+            Text(
+              AppL.shareProgress,
+              style: TextStyle(
+                color: _isDarkCtx(context) ? Colors.white : Colors.black87,
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              ),
+            ),
+            const SizedBox(height: 14),
+            RepaintBoundary(key: _cardKey, child: _buildCard()),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              alignment: WrapAlignment.center,
+              children: [
+                _toggleChip(
+                  label: AppL.sessions,
+                  active: _includeSessionCount,
+                  onTap: () => setState(() => _includeSessionCount = !_includeSessionCount),
+                ),
+                _toggleChip(
+                  label: 'Streak',
+                  active: _includeStreak,
+                  onTap: () => setState(() => _includeStreak = !_includeStreak),
+                ),
+                _toggleChip(
+                  label: 'Trend',
+                  active: _includeTrend,
+                  onTap: () => setState(() => _includeTrend = !_includeTrend),
+                ),
+                if (widget.top.isNotEmpty)
+                  _toggleChip(
+                    label: AppL.exercises,
+                    active: _includeTop,
+                    onTap: () => setState(() => _includeTop = !_includeTop),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.icon(
+                onPressed: _sharing ? null : _share,
+                icon: _sharing
+                    ? const SizedBox(width: 16, height: 16, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
+                    : const Icon(Icons.share_rounded),
+                label: Text(AppL.shareImage),
+                style: FilledButton.styleFrom(
+                  backgroundColor: widget.accent,
+                  foregroundColor: Colors.black,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -16847,9 +16630,16 @@ class _DrumPickersState extends State<_DrumPickers>
         softWrap: false,
         overflow: TextOverflow.visible,
       );
+      // FittedBox: "102.5" a 80 px è più largo di mezzo telefono e il
+      // ClipRect tagliava i decimali; così il numero si rimpicciolisce.
       final centeredText = SizedBox(
         width: double.infinity,
-        child: Center(child: textWidget),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6),
+          child: Center(
+            child: FittedBox(fit: BoxFit.scaleDown, child: textWidget),
+          ),
+        ),
       );
       return isSel
           ? GestureDetector(
@@ -17162,11 +16952,13 @@ class _WorkoutProgressPainter extends CustomPainter {
 class PTGraphWidget extends StatefulWidget {
   final String exerciseName;
   final List<dynamic> history;
+  final bool usePounds;
 
   const PTGraphWidget({
     super.key,
     required this.exerciseName,
     required this.history,
+    this.usePounds = false,
   });
 
   @override
@@ -17175,6 +16967,7 @@ class PTGraphWidget extends StatefulWidget {
 
 class _PTGraphWidgetState extends State<PTGraphWidget> {
   final _scrollCtrl = ScrollController();
+  int? _sel;
 
   @override
   void dispose() {
@@ -17182,202 +16975,365 @@ class _PTGraphWidgetState extends State<PTGraphWidget> {
     super.dispose();
   }
 
+  // Epley: con 1 rep il 1RM è il peso stesso
+  static double _e1rm(double w, double r) => r <= 1 ? w : w * (1 + r / 30);
+
+  static String _fmt(double v) {
+    final s = v.toStringAsFixed(v >= 100 ? 0 : 1);
+    return s.endsWith('.0') ? s.substring(0, s.length - 2) : s;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<Color> seriesColors = [
-      Theme.of(context).colorScheme.primary,
-      const Color(0xFF8E8CF2),
-      const Color(0xFF5CC8A8),
-      const Color(0xFFE0A458),
-      const Color(0xFFE07A7A),
-    ];
-    var logs = widget.history
-        .where((h) => h['exercise'] == widget.exerciseName)
-        .map((e) => Map<String, dynamic>.from(e))
+    final dark = _isDarkCtx(context);
+    final accent = Theme.of(context).colorScheme.primary;
+    final fg = dark ? Colors.white : Colors.black87;
+    final muted = dark ? Colors.white38 : Colors.black38;
+    final logs = widget.history
+        .where((h) => h is Map && h['exercise'] == widget.exerciseName)
+        .map((e) => Map<String, dynamic>.from(e as Map))
+        .where((l) => (l['series'] as List?)?.isNotEmpty ?? false)
         .toList();
-
-    if (logs.isEmpty) return Center(child: Text(AppL.noData));
-
-    // 1. Troviamo il numero massimo di serie per questo esercizio
-    int maxSetsFound = 0;
-    for (var l in logs) {
-      var series = l['series'] as List;
-      if (series.length > maxSetsFound) maxSetsFound = series.length;
+    if (logs.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 40),
+        child: Center(child: Text(AppL.noData, style: TextStyle(color: muted))),
+      );
     }
 
-    // 2. Score = 1RM stimato (adattivo) per serie → normalizzazione min-max per indice serie
-    Map<int, double> minScore = {};
-    Map<int, double> maxScore = {};
-    for (var l in logs) {
-      var series = l['series'] as List;
-      for (int i = 0; i < series.length; i++) {
-        double w = (series[i]['w'] ?? 0.0).toDouble();
-        double r = (series[i]['r'] ?? 0.0).toDouble();
-        double sc = w * (1 + r / (30.0 + w / 10.0));
-        minScore[i] = sc < (minScore[i] ?? sc) ? sc : (minScore[i] ?? sc);
-        maxScore[i] = sc > (maxScore[i] ?? sc) ? sc : (maxScore[i] ?? sc);
+    double conv(double kg) => widget.usePounds ? kgToLb(kg) : kg;
+    final allBodyweight = logs.every((l) => (l['series'] as List)
+        .every((s) => ((s['w'] ?? 0) as num) <= 0));
+    final unit = allBodyweight ? 'reps' : (widget.usePounds ? 'lb' : 'kg');
+    final values = <double>[]; // 1RM stimato (o reps max a corpo libero)
+    final tops = <double>[]; // peso massimo sollevato
+    final dates = <DateTime?>[];
+    for (final l in logs) {
+      double best = 0, top = 0;
+      for (final s in l['series'] as List) {
+        final w = ((s['w'] ?? 0) as num).toDouble();
+        final r = ((s['r'] ?? 0) as num).toDouble();
+        final v = allBodyweight ? r : conv(_e1rm(w, r));
+        if (v > best) best = v;
+        if (conv(w) > top) top = conv(w);
       }
+      values.add(best);
+      tops.add(top);
+      dates.add(DateTime.tryParse(l['date']?.toString() ?? ''));
     }
-
-    // 3. Applica normalizzazione score
-    for (var l in logs) {
-      var series = l['series'] as List;
-      for (int i = 0; i < series.length; i++) {
-        double w = (series[i]['w'] ?? 0.0).toDouble();
-        double r = (series[i]['r'] ?? 0.0).toDouble();
-        double sc = w * (1 + r / (30.0 + w / 10.0));
-        double lo = minScore[i] ?? 0;
-        double hi = maxScore[i] ?? 1;
-        double range = hi - lo;
-        series[i]['s_norm'] = range > 0.5 ? (sc - lo) / range : 0.5;
-        series[i]['s_min'] = lo;
-        series[i]['s_max'] = hi;
-      }
-    }
+    final n = values.length;
+    final sel = (_sel ?? n - 1).clamp(0, n - 1);
+    final record = values.reduce((a, b) => a > b ? a : b);
+    final delta = values.first > 0 ? (values.last - values.first) / values.first * 100 : 0.0;
+    var lo = [...values, if (!allBodyweight) ...tops].reduce((a, b) => a < b ? a : b);
+    var hi = [...values, if (!allBodyweight) ...tops].reduce((a, b) => a > b ? a : b);
+    final span = (hi - lo).abs() < 1 ? 1.0 : hi - lo;
+    lo = (lo - span * 0.15).clamp(0.0, double.infinity);
+    hi = hi + span * 0.15;
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_scrollCtrl.hasClients) _scrollCtrl.jumpTo(_scrollCtrl.position.maxScrollExtent);
+      if (_sel == null && _scrollCtrl.hasClients) {
+        _scrollCtrl.jumpTo(_scrollCtrl.position.maxScrollExtent);
+      }
     });
 
+    Widget stat(String label, String value, {Color? color}) => Expanded(
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+        decoration: BoxDecoration(
+          color: dark ? Colors.white.withAlpha(10) : Colors.black.withAlpha(8),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(children: [
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(value,
+                style: TextStyle(color: color ?? fg, fontSize: 18, fontWeight: FontWeight.w800)),
+          ),
+          const SizedBox(height: 2),
+          Text(label, style: TextStyle(color: muted, fontSize: 11), maxLines: 1, overflow: TextOverflow.ellipsis),
+        ]),
+      ),
+    );
+
+    final selSeries = (logs[sel]['series'] as List)
+        .map((s) {
+          final w = ((s['w'] ?? 0) as num).toDouble();
+          final r = ((s['r'] ?? 0) as num).toInt();
+          return allBodyweight || w <= 0 ? '$r' : '${_fmt(conv(w))}×$r';
+        })
+        .join('  ·  ');
+    final d = dates[sel];
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(height: 10),
-        Text(
-          widget.exerciseName.toUpperCase(),
-          overflow: TextOverflow.ellipsis,
-          maxLines: 1,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.bold,
-            letterSpacing: 1.5,
+        Row(children: [
+          stat(AppL.chartLast, '${_fmt(values.last)} $unit'),
+          const SizedBox(width: 8),
+          stat(AppL.chartRecord, '${_fmt(record)} $unit', color: accent),
+          const SizedBox(width: 8),
+          stat(
+            AppL.chartSinceStart,
+            '${delta >= 0 ? '+' : ''}${delta.toStringAsFixed(0)}%',
+            color: n < 2 ? fg : (delta >= 0 ? const Color(0xFF4CD97B) : const Color(0xFFFF6B6B)),
           ),
-        ),
-        const SizedBox(height: 20),
-        Wrap(
-          spacing: 15,
-          runSpacing: 15,
-          children: List.generate(
-            maxSetsFound,
-            (i) => Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 12,
-                  height: 3,
-                  color: seriesColors[i % seriesColors.length],
-                ),
-                const SizedBox(width: 5),
-                Text(
-                  "S${i + 1}",
-                  style: TextStyle(fontSize: 11, color: _isDarkCtx(context) ? Colors.white70 : Colors.black87),
-                ),
-              ],
-            ),
-          ),
-        ),
-        const SizedBox(height: 8),
+        ]),
+        const SizedBox(height: 16),
         SizedBox(
-          height: 160,
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final chartWidth = (logs.length * 50.0).clamp(constraints.maxWidth, double.infinity);
-              return SingleChildScrollView(
-                controller: _scrollCtrl,
-                scrollDirection: Axis.horizontal,
-                child: SizedBox(
-                  width: chartWidth,
-                  height: 160,
-                  child: CustomPaint(
-                    size: Size.infinite,
-                    painter: PTChartPainter(logs: logs, colors: seriesColors),
-                  ),
+          height: 200,
+          child: Row(children: [
+            SizedBox(
+              width: 34,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [hi, (hi + lo) / 2, lo]
+                      .map((v) => Text(_fmt(v), style: TextStyle(color: muted, fontSize: 10)))
+                      .toList(),
                 ),
-              );
-            },
+              ),
+            ),
+            const SizedBox(width: 6),
+            Expanded(
+              child: _tapChart(
+                ctrl: _scrollCtrl,
+                height: 200,
+                n: n,
+                onSel: (i) => setState(() => _sel = i),
+                painter: PTChartPainter(
+                  values: values,
+                  tops: allBodyweight ? const [] : tops,
+                  dates: dates,
+                  lo: lo,
+                  hi: hi,
+                  sel: sel,
+                  accent: accent,
+                  dark: dark,
+                ),
+              ),
+            ),
+          ]),
+        ),
+        const SizedBox(height: 10),
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Container(width: 14, height: 3, color: accent),
+          const SizedBox(width: 6),
+          Text(allBodyweight ? AppL.chartMaxReps : AppL.chart1rm, style: TextStyle(color: muted, fontSize: 11)),
+          if (!allBodyweight) ...[
+            const SizedBox(width: 16),
+            Container(width: 14, height: 2, color: muted),
+            const SizedBox(width: 6),
+            Text(AppL.chartTopWeight, style: TextStyle(color: muted, fontSize: 11)),
+          ],
+        ]),
+        const SizedBox(height: 14),
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            border: Border.all(color: dark ? Colors.white12 : Colors.black12),
+            borderRadius: BorderRadius.circular(12),
           ),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Row(children: [
+              Text(
+                d == null ? '—' : '${d.day.toString().padLeft(2, '0')}/${d.month.toString().padLeft(2, '0')}/${d.year}',
+                style: TextStyle(color: fg, fontWeight: FontWeight.w700, fontSize: 13),
+              ),
+              const Spacer(),
+              Text('${_fmt(values[sel])} $unit',
+                  style: TextStyle(color: accent, fontWeight: FontWeight.w800, fontSize: 13)),
+            ]),
+            const SizedBox(height: 6),
+            Text(selSeries, style: TextStyle(color: muted, fontSize: 13)),
+          ]),
         ),
       ],
     );
   }
 }
 
-class PTChartPainter extends CustomPainter {
-  final List<Map<String, dynamic>> logs;
-  final List<Color> colors;
-  PTChartPainter({required this.logs, required this.colors});
+// Grafico scorrevole in orizzontale: il tocco seleziona il punto più vicino
+// (stessa geometria di PTChartPainter: margine 12 px ai lati).
+Widget _tapChart({
+  required ScrollController ctrl,
+  required double height,
+  required int n,
+  required ValueChanged<int> onSel,
+  required CustomPainter painter,
+}) {
+  return SizedBox(
+    height: height,
+    child: LayoutBuilder(builder: (context, c) {
+      final w = (n * 44.0).clamp(c.maxWidth, double.infinity);
+      return SingleChildScrollView(
+        controller: ctrl,
+        scrollDirection: Axis.horizontal,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTapDown: (e) {
+            if (n < 2) {
+              onSel(0);
+            } else {
+              onSel(((e.localPosition.dx - 12) / ((w - 24) / (n - 1))).round().clamp(0, n - 1));
+            }
+          },
+          child: CustomPaint(size: Size(w, height), painter: painter),
+        ),
+      );
+    }),
+  );
+}
+
+class _SparkPainter extends CustomPainter {
+  final List<double> v;
+  final Color color;
+  _SparkPainter(this.v, this.color);
 
   @override
   void paint(Canvas canvas, Size size) {
-    if (logs.isEmpty) return;
-
-    int maxSets = 0;
-    for (var log in logs) {
-      if ((log['series'] as List).length > maxSets)
-        maxSets = (log['series'] as List).length;
+    if (v.length < 2) {
+      canvas.drawCircle(size.center(Offset.zero), 2.5, Paint()..color = color);
+      return;
     }
-
-    final grid = Paint()..color = Colors.grey.withAlpha(40)..strokeWidth = 1;
-    for (final f in [0.25, 0.5, 0.75]) {
-      canvas.drawLine(Offset(0, size.height * f), Offset(size.width, size.height * f), grid);
+    final lo = v.reduce((a, b) => a < b ? a : b);
+    final hi = v.reduce((a, b) => a > b ? a : b);
+    final p = Path();
+    for (int i = 0; i < v.length; i++) {
+      final t = hi - lo < 1e-6 ? 0.5 : (v[i] - lo) / (hi - lo);
+      final o = Offset(size.width * i / (v.length - 1), size.height * (0.95 - 0.9 * t));
+      i == 0 ? p.moveTo(o.dx, o.dy) : p.lineTo(o.dx, o.dy);
     }
-
-    for (int sIdx = 0; sIdx < maxSets; sIdx++) {
-      final color = colors[sIdx % colors.length];
-      final paint = Paint()
+    canvas.drawPath(
+      p,
+      Paint()
         ..color = color
         ..strokeWidth = 2
         ..style = PaintingStyle.stroke
-        ..strokeCap = StrokeCap.round;
+        ..strokeJoin = StrokeJoin.round
+        ..strokeCap = StrokeCap.round,
+    );
+  }
 
-      final path = Path();
-      final fillPath = Path();
-      bool first = true;
-      double lastX = 0;
+  @override
+  bool shouldRepaint(_SparkPainter o) => o.v != v || o.color != color;
+}
 
-      for (int i = 0; i < logs.length; i++) {
-        final sData = logs[i]['series'] as List;
-        if (sIdx < sData.length) {
-          double x = logs.length == 1
-              ? size.width / 2
-              : size.width / (logs.length - 1) * i;
-          double sNorm = ((sData[sIdx]['s_norm'] ?? 0.5) as double).clamp(
-            0.0,
-            1.0,
-          );
-          double y = size.height * (1.0 - sNorm);
-          if (first) {
-            path.moveTo(x, y);
-            fillPath.moveTo(x, size.height);
-            fillPath.lineTo(x, y);
-            first = false;
-          } else {
-            path.lineTo(x, y);
-            fillPath.lineTo(x, y);
-          }
-          lastX = x;
-          canvas.drawCircle(Offset(x, y), 3, Paint()..color = color);
-        }
+class PTChartPainter extends CustomPainter {
+  final List<double> values, tops;
+  final List<DateTime?> dates;
+  final double lo, hi;
+  final int sel;
+  final Color accent;
+  final bool dark;
+  PTChartPainter({
+    required this.values,
+    required this.tops,
+    required this.dates,
+    required this.lo,
+    required this.hi,
+    required this.sel,
+    required this.accent,
+    required this.dark,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final n = values.length;
+    if (n == 0) return;
+    const padX = 12.0, labelH = 20.0;
+    final h = size.height - labelH;
+    final step = n == 1 ? 0.0 : (size.width - padX * 2) / (n - 1);
+    double x(int i) => n == 1 ? size.width / 2 : padX + step * i;
+    double y(double v) => h * (1 - ((v - lo) / (hi - lo)).clamp(0.0, 1.0));
+    final muted = dark ? Colors.white38 : Colors.black38;
+
+    final grid = Paint()..color = (dark ? Colors.white : Colors.black).withAlpha(18)..strokeWidth = 1;
+    for (final f in [0.0, 0.5, 1.0]) {
+      canvas.drawLine(Offset(0, h * f), Offset(size.width, h * f), grid);
+    }
+
+    // riga del punto selezionato
+    canvas.drawLine(Offset(x(sel), 0), Offset(x(sel), h),
+        Paint()..color = accent.withAlpha(60)..strokeWidth = 1);
+
+    if (tops.length == n) {
+      final p = Path()..moveTo(x(0), y(tops[0]));
+      for (int i = 1; i < n; i++) {
+        p.lineTo(x(i), y(tops[i]));
       }
-      // ponytail: riempimento solo sulla prima serie, le altre sovrapposte impastano
-      if (!first && sIdx == 0) {
-        fillPath.lineTo(lastX, size.height);
-        fillPath.close();
-        canvas.drawPath(
-          fillPath,
-          Paint()
-            ..shader = LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [color.withAlpha(36), color.withAlpha(0)],
-            ).createShader(Rect.fromLTWH(0, 0, size.width, size.height)),
-        );
+      canvas.drawPath(p, Paint()..color = muted..strokeWidth = 1.5..style = PaintingStyle.stroke);
+    }
+
+    final line = Path()..moveTo(x(0), y(values[0]));
+    for (int i = 1; i < n; i++) {
+      line.lineTo(x(i), y(values[i]));
+    }
+    final fill = Path.from(line)
+      ..lineTo(x(n - 1), h)
+      ..lineTo(x(0), h)
+      ..close();
+    canvas.drawPath(
+      fill,
+      Paint()
+        ..shader = LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [accent.withAlpha(50), accent.withAlpha(0)],
+        ).createShader(Rect.fromLTWH(0, 0, size.width, h)),
+    );
+    canvas.drawPath(
+      line,
+      Paint()
+        ..color = accent
+        ..strokeWidth = 2.5
+        ..style = PaintingStyle.stroke
+        ..strokeJoin = StrokeJoin.round
+        ..strokeCap = StrokeCap.round,
+    );
+
+    final record = values.reduce((a, b) => a > b ? a : b);
+    final bg = dark ? const Color(0xFF0E0E10) : Colors.white;
+    for (int i = 0; i < n; i++) {
+      final o = Offset(x(i), y(values[i]));
+      if (i == sel) {
+        canvas.drawCircle(o, 7, Paint()..color = accent.withAlpha(60));
       }
-      canvas.drawPath(path, paint);
+      canvas.drawCircle(o, i == sel ? 4.5 : 3.5, Paint()..color = accent);
+      if (values[i] == record) {
+        canvas.drawCircle(o, 1.8, Paint()..color = bg);
+      }
+    }
+
+    // date sotto i punti, diradate per non sovrapporsi
+    final every = step <= 0 ? 1 : (40 / step).ceil().clamp(1, n);
+    for (int i = 0; i < n; i++) {
+      if (i % every != 0 && i != n - 1) continue;
+      if (i != n - 1 && n - 1 - i < every) continue;
+      final d = dates[i];
+      if (d == null) continue;
+      final tp = TextPainter(
+        text: TextSpan(
+          text: '${d.day}/${d.month}',
+          style: TextStyle(
+            color: i == sel ? accent : muted,
+            fontSize: 10,
+            fontWeight: i == sel ? FontWeight.w700 : FontWeight.w400,
+          ),
+        ),
+        textDirection: TextDirection.ltr,
+      )..layout();
+      final lx = (x(i) - tp.width / 2).clamp(0.0, size.width - tp.width);
+      tp.paint(canvas, Offset(lx, h + 6));
     }
   }
 
   @override
-  bool shouldRepaint(old) => true;
+  bool shouldRepaint(PTChartPainter old) =>
+      old.sel != sel || old.values != values || old.accent != accent || old.dark != dark;
 }
 
 // --- SCHERMATA GESTIONE DATI ---
@@ -18094,6 +18050,7 @@ class _OverallProgressPage extends StatefulWidget {
   final List<WorkoutDay> routine;
   final int streak;
   final Color accent;
+  final bool usePounds;
   final Widget Function() buildAd;
 
   const _OverallProgressPage({
@@ -18101,6 +18058,7 @@ class _OverallProgressPage extends StatefulWidget {
     required this.routine,
     required this.streak,
     required this.accent,
+    this.usePounds = false,
     required this.buildAd,
   });
 
@@ -18108,9 +18066,20 @@ class _OverallProgressPage extends StatefulWidget {
   State<_OverallProgressPage> createState() => _OverallProgressPageState();
 }
 
+class _ExTrend {
+  final String name;
+  final List<double> values; // 1RM stimato per sessione (reps max a corpo libero)
+  final double delta; // % dalla prima all'ultima sessione
+  final bool bodyweight;
+  const _ExTrend(this.name, this.values, this.delta, this.bodyweight);
+}
+
+const _kUp = Color(0xFF4CD97B);
+const _kDown = Color(0xFFFF6B6B);
+
 class _OverallProgressPageState extends State<_OverallProgressPage> {
   String? _filterDay;
-  final GlobalKey _chartKey = GlobalKey();
+  int? _sel;
   final ScrollController _chartScrollCtrl = ScrollController();
 
   @override
@@ -18129,6 +18098,14 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
     if (_chartScrollCtrl.hasClients) {
       _chartScrollCtrl.jumpTo(_chartScrollCtrl.position.maxScrollExtent);
     }
+  }
+
+  void _setFilter(String? d) {
+    setState(() {
+      _filterDay = d;
+      _sel = null;
+    });
+    WidgetsBinding.instance.addPostFrameCallback((_) => _scrollChartToEnd());
   }
 
   List<_SessionPoint> _computePoints() {
@@ -18245,16 +18222,108 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
     );
   }
 
-  Future<void> _shareProgress(BuildContext context) async {
-    // Show composer sheet with options
+  List<_ExTrend> _exerciseTrends() {
+    final byEx = <String, List<(DateTime, double, double)>>{};
+    for (final h in widget.history) {
+      if (h is! Map) continue;
+      if (_filterDay != null && h['dayName'] != _filterDay) continue;
+      final name = (h['exercise'] as String?) ?? '';
+      final series = (h['series'] as List?) ?? const [];
+      if (name.isEmpty || series.isEmpty) continue;
+      double best = 0, reps = 0;
+      for (final s in series) {
+        final w = ((s['w'] ?? 0) as num).toDouble();
+        final r = ((s['r'] ?? 0) as num).toDouble();
+        final e = _PTGraphWidgetState._e1rm(w, r);
+        if (e > best) best = e;
+        if (r > reps) reps = r;
+      }
+      byEx
+          .putIfAbsent(name, () => [])
+          .add((DateTime.tryParse('${h['date']}') ?? DateTime(2000), best, reps));
+    }
+    final out = <_ExTrend>[];
+    byEx.forEach((name, l) {
+      l.sort((a, b) => a.$1.compareTo(b.$1));
+      final bw = l.every((e) => e.$2 <= 0);
+      final v = l.map((e) => bw ? e.$3 : e.$2).toList();
+      final delta = v.length >= 2 && v.first > 0 ? (v.last - v.first) / v.first * 100 : 0.0;
+      out.add(_ExTrend(name, v, delta, bw));
+    });
+    // prima chi migliora di più; chi ha una sola sessione in fondo
+    double key(_ExTrend t) => t.values.length < 2 ? -1e9 : t.delta;
+    out.sort((a, b) => key(b).compareTo(key(a)));
+    return out;
+  }
+
+  /// Volume (peso × ripetizioni) delle ultime 8 settimane, lunedì → domenica.
+  List<(DateTime, double)> _weeklyVolume() {
+    final now = DateTime.now();
+    final monday = DateTime(now.year, now.month, now.day - (now.weekday - 1));
+    final weeks = List.generate(8, (i) => DateTime(monday.year, monday.month, monday.day - 7 * (7 - i)));
+    final vol = List.filled(8, 0.0);
+    for (final h in widget.history) {
+      if (h is! Map) continue;
+      if (_filterDay != null && h['dayName'] != _filterDay) continue;
+      final d = DateTime.tryParse('${h['date']}');
+      if (d == null) continue;
+      final i = weeks.lastIndexWhere((w) => !DateTime(d.year, d.month, d.day).isBefore(w));
+      if (i < 0) continue;
+      for (final s in (h['series'] as List?) ?? const []) {
+        vol[i] += ((s['w'] ?? 0) as num).toDouble() * ((s['r'] ?? 0) as num).toDouble();
+      }
+    }
+    return [for (int i = 0; i < 8; i++) (weeks[i], widget.usePounds ? kgToLb(vol[i]) : vol[i])];
+  }
+
+  void _openExercise(String name) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (c) => SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                name,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: _isDarkCtx(c) ? Colors.white : Colors.black87,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                AppL.chartTapHint,
+                style: TextStyle(color: _isDarkCtx(c) ? Colors.white38 : Colors.black38, fontSize: 11),
+              ),
+              const SizedBox(height: 16),
+              PTGraphWidget(exerciseName: name, history: widget.history, usePounds: widget.usePounds),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _shareProgress(BuildContext context, List<_SessionPoint> points, List<_ExTrend> trends) async {
     await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (_) => _ProgressShareSheet(
-        chartKey: _chartKey,
         streak: widget.streak,
-        points: _computePoints(),
+        points: points,
+        top: trends.where((t) => t.values.length >= 2 && t.delta > 0).toList(),
         accent: widget.accent,
       ),
     );
@@ -18263,27 +18332,203 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
   @override
   Widget build(BuildContext context) {
     final accent = widget.accent;
+    final dark = _isDarkCtx(context);
+    final bg = dark ? const Color(0xFF0E0E10) : Colors.white;
+    final card = dark ? const Color(0xFF1C1C1E) : const Color(0xFFF4F4F6);
+    final fg = dark ? Colors.white : Colors.black87;
+    final muted = dark ? Colors.white38 : Colors.black38;
+    final unit = widget.usePounds ? 'lb' : 'kg';
     final allPoints = _computePoints();
+    final trends = _exerciseTrends();
+    final weeks = _weeklyVolume();
     final dayNames = widget.routine.map((d) => d.dayName).toList();
+    final n = allPoints.length;
+    final sel = n == 0 ? 0 : (_sel ?? n - 1).clamp(0, n - 1);
+
+    Widget section(String title, Widget child) => Container(
+      margin: const EdgeInsets.only(bottom: 14),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(color: card, borderRadius: BorderRadius.circular(16)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(title, style: TextStyle(color: fg, fontSize: 13, fontWeight: FontWeight.w700)),
+          const SizedBox(height: 14),
+          child,
+        ],
+      ),
+    );
+
+    Widget chart() {
+      final values = allPoints.map((p) => p.score).toList();
+      var lo = values.reduce((a, b) => a < b ? a : b);
+      var hi = values.reduce((a, b) => a > b ? a : b);
+      final span = (hi - lo).abs() < 1 ? 1.0 : hi - lo;
+      lo = (lo - span * 0.15).clamp(0.0, double.infinity);
+      hi += span * 0.15;
+      final p = allPoints[sel];
+      final prev = sel > 0 ? allPoints[sel - 1].score : 0.0;
+      final vsPrev = prev > 0 ? (p.score - prev) / prev * 100 : null;
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          _tapChart(
+            ctrl: _chartScrollCtrl,
+            height: 190,
+            n: n,
+            onSel: (i) => setState(() => _sel = i),
+            painter: PTChartPainter(
+              values: values,
+              tops: const [],
+              dates: allPoints.map<DateTime?>((p) => p.date).toList(),
+              lo: lo,
+              hi: hi,
+              sel: sel,
+              accent: accent,
+              dark: dark,
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(children: [
+            Expanded(
+              child: Text(
+                '${p.date.day}/${p.date.month}/${p.date.year} · ${p.dayName}',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: muted, fontSize: 12),
+              ),
+            ),
+            if (vsPrev != null)
+              Text(
+                '${vsPrev >= 0 ? '+' : ''}${vsPrev.toStringAsFixed(1)}% ${AppL.vsPrevious}',
+                style: TextStyle(color: vsPrev >= 0 ? _kUp : _kDown, fontSize: 12, fontWeight: FontWeight.w700),
+              ),
+          ]),
+        ],
+      );
+    }
+
+    Widget volume() {
+      final maxV = weeks.fold(0.0, (a, w) => w.$2 > a ? w.$2 : a);
+      String f(double v) => v >= 1000 ? '${(v / 1000).toStringAsFixed(1)}k' : v.toStringAsFixed(0);
+      return SizedBox(
+        height: 140,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            for (int i = 0; i < weeks.length; i++)
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 3),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          weeks[i].$2 > 0 ? f(weeks[i].$2) : '',
+                          style: TextStyle(
+                            color: i == weeks.length - 1 ? accent : muted,
+                            fontSize: 10,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        height: maxV > 0 ? 90 * weeks[i].$2 / maxV : 0,
+                        constraints: const BoxConstraints(minHeight: 3),
+                        decoration: BoxDecoration(
+                          color: i == weeks.length - 1 ? accent : accent.withAlpha(90),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          '${weeks[i].$1.day}/${weeks[i].$1.month}',
+                          style: TextStyle(color: muted, fontSize: 9),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
+      );
+    }
+
+    Widget exercises() => Column(
+      children: [
+        for (final t in trends)
+          InkWell(
+            borderRadius: BorderRadius.circular(10),
+            onTap: () => _openExercise(t.name),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 9),
+              child: Row(children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        t.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(color: fg, fontSize: 14, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        t.bodyweight
+                            ? '${_PTGraphWidgetState._fmt(t.values.last)} reps'
+                            : '1RM ${_PTGraphWidgetState._fmt(widget.usePounds ? kgToLb(t.values.last) : t.values.last)} $unit',
+                        style: TextStyle(color: muted, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 10),
+                SizedBox(
+                  width: 64,
+                  height: 26,
+                  child: CustomPaint(painter: _SparkPainter(t.values, accent)),
+                ),
+                SizedBox(
+                  width: 56,
+                  child: Text(
+                    t.values.length < 2 ? '—' : '${t.delta >= 0 ? '+' : ''}${t.delta.toStringAsFixed(0)}%',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      color: t.values.length < 2 ? muted : (t.delta >= 0 ? _kUp : _kDown),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                ),
+                Icon(Icons.chevron_right_rounded, color: muted, size: 18),
+              ]),
+            ),
+          ),
+      ],
+    );
 
     return Scaffold(
-      backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
+      backgroundColor: bg,
       appBar: AppBar(
-        backgroundColor: _isDarkCtx(context) ? const Color(0xFF0E0E10) : Colors.white,
+        backgroundColor: bg,
         title: Text(
           AppL.overallProgress,
-          style: TextStyle(
-            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
+          style: TextStyle(color: fg, fontWeight: FontWeight.bold, fontSize: 16),
         ),
-        iconTheme: IconThemeData(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+        iconTheme: IconThemeData(color: fg),
         actions: [
-          if (!kIsWeb)
+          if (!kIsWeb && n > 0)
             IconButton(
               icon: const Icon(Icons.share_rounded),
-              onPressed: () => _shareProgress(context),
+              onPressed: () => _shareProgress(context, allPoints, trends),
               tooltip: AppL.shareSimple,
             ),
         ],
@@ -18300,7 +18545,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                     label: AppL.all,
                     selected: _filterDay == null,
                     accent: accent,
-                    onTap: () { setState(() => _filterDay = null); WidgetsBinding.instance.addPostFrameCallback((_) => _scrollChartToEnd()); },
+                    onTap: () => _setFilter(null),
                   ),
                   const SizedBox(width: 8),
                   ...dayNames.map(
@@ -18310,7 +18555,7 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                         label: d,
                         selected: _filterDay == d,
                         accent: accent,
-                        onTap: () { setState(() => _filterDay = _filterDay == d ? null : d); WidgetsBinding.instance.addPostFrameCallback((_) => _scrollChartToEnd()); },
+                        onTap: () => _setFilter(_filterDay == d ? null : d),
                       ),
                     ),
                   ),
@@ -18318,104 +18563,38 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
               ),
             ),
           Expanded(
-            child: allPoints.isEmpty
+            child: n == 0
                 ? Center(
-                    child: Text(
-                      AppL.noData,
-                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 16),
-                    ),
+                    child: Text(AppL.noData, style: TextStyle(color: muted, fontSize: 16)),
                   )
-                : SingleChildScrollView(
+                : ListView(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _buildStatsRow(allPoints, accent),
-                        const SizedBox(height: 20),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
-                            borderRadius: BorderRadius.circular(16),
+                    children: [
+                      _buildStatsRow(allPoints, accent),
+                      const SizedBox(height: 14),
+                      section(
+                        _filterDay == null && widget.routine.length > 1
+                            ? AppL.progressPerMicrocycle
+                            : AppL.progressPerSession,
+                        chart(),
+                      ),
+                      section('${AppL.weeklyVolume} ($unit)', volume()),
+                      if (trends.isNotEmpty) section(AppL.exercises, exercises()),
+                      if (!kIsWeb)
+                        OutlinedButton.icon(
+                          icon: const Icon(Icons.share_rounded),
+                          label: Text(AppL.shareProgress),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: accent,
+                            side: BorderSide(color: accent),
+                            padding: const EdgeInsets.symmetric(vertical: 12),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                           ),
-                          padding: const EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    width: 4,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      color: accent,
-                                      borderRadius: BorderRadius.circular(2),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  Text(
-                                    _filterDay == null && widget.routine.length > 1
-                                        ? (AppL.progressPerMicrocycle)
-                                        : (AppL.progressPerSession),
-                                    style: TextStyle(
-                                      color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 16),
-                              LayoutBuilder(
-                                builder: (context, constraints) {
-                                  final chartWidth = (allPoints.length * 50.0).clamp(constraints.maxWidth, double.infinity);
-                                  return SingleChildScrollView(
-                                    controller: _chartScrollCtrl,
-                                    scrollDirection: Axis.horizontal,
-                                    child: RepaintBoundary(
-                                      key: _chartKey,
-                                      child: SizedBox(
-                                        width: chartWidth,
-                                        height: 220,
-                                        child: CustomPaint(
-                                          size: Size.infinite,
-                                          painter: _OverallProgressPainter(
-                                            points: allPoints,
-                                            accent: accent,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                              const SizedBox(height: 8),
-                            ],
-                          ),
+                          onPressed: () => _shareProgress(context, allPoints, trends),
                         ),
-                        const SizedBox(height: 12),
-                        if (!kIsWeb) ...[
-                          const SizedBox(height: 16),
-                          SizedBox(
-                            width: double.infinity,
-                            child: OutlinedButton.icon(
-                              icon: const Icon(Icons.share_rounded),
-                              label: Text(
-                                AppL.shareProgress,
-                              ),
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: accent,
-                                side: BorderSide(color: accent),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12)),
-                              ),
-                              onPressed: () => _shareProgress(context),
-                            ),
-                          ),
-                        ],
-                        const SizedBox(height: 12),
-                        widget.buildAd(),
-                      ],
-                    ),
+                      const SizedBox(height: 12),
+                      widget.buildAd(),
+                    ],
                   ),
           ),
         ],
@@ -18455,73 +18634,43 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
   }
 
   Widget _buildStatsRow(List<_SessionPoint> points, Color accent) {
-    final totalSessions = points.length;
-    final streak = widget.streak;
-    final trendPct = points.length >= 2 && points.first.score > 0
-        ? ((points.last.score - points.first.score) / points.first.score * 100)
+    final dark = _isDarkCtx(context);
+    final muted = dark ? Colors.white38 : Colors.black38;
+    final pct = points.length >= 2 && points.first.score > 0
+        ? (points.last.score - points.first.score) / points.first.score * 100
         : 0.0;
-    final trendUp = trendPct >= 0;
-
-    return Row(
-      children: [
-        _statCard(
-          _filterDay == null && widget.routine.length > 1
-              ? (AppL.microcycles)
-              : (AppL.sessions),
-          '$totalSessions',
-          Icons.calendar_today_rounded,
-          accent,
-        ),
-        const SizedBox(width: 8),
-        _statCard(
-          'Streak',
-          '🔥 $streak',
-          Icons.local_fire_department_rounded,
-          Colors.orange,
-        ),
-        const SizedBox(width: 8),
-        _statCard(
-          'Trend',
-          points.length >= 2
-              ? '${trendUp ? '+' : ''}${trendPct.toStringAsFixed(0)}%'
-              : '—',
-          trendUp ? Icons.trending_up : Icons.trending_down,
-          trendUp ? Colors.greenAccent : Colors.redAccent,
-        ),
-      ],
-    );
-  }
-
-  Widget _statCard(String label, String value, IconData icon, Color color) {
-    return Expanded(
+    Widget tile(String label, String value, Color color) => Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
         decoration: BoxDecoration(
-          color: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: color.withAlpha(100), width: 1.5),
+          color: dark ? const Color(0xFF1C1C1E) : const Color(0xFFF4F4F6),
+          borderRadius: BorderRadius.circular(14),
         ),
-        child: Column(
-          children: [
-            Icon(icon, color: color, size: 26),
-            const SizedBox(height: 4),
-            Text(
-              value,
-              style: TextStyle(
-                color: color,
-                fontSize: 18,
-                fontWeight: FontWeight.w900,
-              ),
-            ),
-            Text(
-              label,
-              style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 10),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
+        child: Column(children: [
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(value, style: TextStyle(color: color, fontSize: 22, fontWeight: FontWeight.w800)),
+          ),
+          const SizedBox(height: 2),
+          Text(label, maxLines: 1, overflow: TextOverflow.ellipsis, style: TextStyle(color: muted, fontSize: 11)),
+        ]),
       ),
     );
+    return Row(children: [
+      tile(
+        _filterDay == null && widget.routine.length > 1 ? AppL.microcycles : AppL.sessions,
+        '${points.length}',
+        dark ? Colors.white : Colors.black87,
+      ),
+      const SizedBox(width: 8),
+      tile('Streak', '${widget.streak}', accent),
+      const SizedBox(width: 8),
+      tile(
+        'Trend',
+        points.length >= 2 ? '${pct >= 0 ? '+' : ''}${pct.toStringAsFixed(0)}%' : '—',
+        points.length < 2 ? muted : (pct >= 0 ? _kUp : _kDown),
+      ),
+    ]);
   }
 }
 
@@ -18536,83 +18685,4 @@ class _SessionPoint {
     required this.score,
     required this.dayName,
   });
-}
-
-class _OverallProgressPainter extends CustomPainter {
-  final List<_SessionPoint> points;
-  final Color accent;
-
-  const _OverallProgressPainter({required this.points, required this.accent});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (points.isEmpty) return;
-    final n = points.length;
-    final volumes = points.map((p) => p.score).toList();
-    final minV = volumes.reduce((a, b) => a < b ? a : b);
-    final maxV = volumes.reduce((a, b) => a > b ? a : b);
-    final range = (maxV - minV).abs();
-
-    final axisPaint = Paint()..color = Colors.white12..strokeWidth = 1;
-    const leftPad = 10.0;
-    const botPad = 20.0;
-    final chartH = size.height - botPad;
-    canvas.drawLine(Offset(leftPad, 0), Offset(leftPad, chartH), axisPaint);
-    canvas.drawLine(Offset(leftPad, chartH), Offset(size.width, chartH), axisPaint);
-
-    final fillPath = Path();
-    final linePath = Path();
-    for (int i = 0; i < n; i++) {
-      final x = leftPad + (size.width - leftPad) / (n > 1 ? (n - 1) : 1) * i;
-      final norm = range > 0.5 ? (volumes[i] - minV) / range : 0.5;
-      final y = chartH * 0.9 - (chartH * 0.8 * norm.clamp(0.0, 1.0));
-      if (i == 0) {
-        fillPath.moveTo(x, chartH);
-        fillPath.lineTo(x, y);
-        linePath.moveTo(x, y);
-      } else {
-        fillPath.lineTo(x, y);
-        linePath.lineTo(x, y);
-      }
-    }
-    fillPath.lineTo(leftPad + (size.width - leftPad), chartH);
-    fillPath.close();
-    canvas.drawPath(
-      fillPath,
-      Paint()
-        ..shader = LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [accent.withAlpha(60), accent.withAlpha(0)],
-        ).createShader(Rect.fromLTWH(0, 0, size.width, chartH)),
-    );
-    canvas.drawPath(
-      linePath,
-      Paint()
-        ..color = accent
-        ..strokeWidth = 2.5
-        ..style = PaintingStyle.stroke
-        ..strokeCap = StrokeCap.round
-        ..strokeJoin = StrokeJoin.round,
-    );
-
-    final dotPaint = Paint()..color = accent..style = PaintingStyle.fill;
-    final dotBg = Paint()
-      ..color = const Color(0xFF1C1C1E)
-      ..style = PaintingStyle.fill;
-    for (int i = 0; i < n; i++) {
-      final x = leftPad + (size.width - leftPad) / (n > 1 ? (n - 1) : 1) * i;
-      final norm = range > 0.5 ? (volumes[i] - minV) / range : 0.5;
-      final y = chartH * 0.9 - (chartH * 0.8 * norm.clamp(0.0, 1.0));
-      canvas.drawCircle(Offset(x, y), 5, dotBg);
-      canvas.drawCircle(Offset(x, y), 4, dotPaint);
-
-      if (n <= 8 || i % ((n / 6).ceil()) == 0 || i == n - 1) {
-        // Date labels removed from share card
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(_OverallProgressPainter old) => true;
 }

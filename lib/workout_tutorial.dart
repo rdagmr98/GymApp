@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'app_l.dart';
 
-/// Interactive tutorial widget for GymApp.
+/// Tutorial a pagine (scorri o AVANTI), ultima pagina = prova guidata.
 class WorkoutTutorial extends StatefulWidget {
   final Color accentColor;
   final VoidCallback onComplete;
@@ -18,30 +18,17 @@ class WorkoutTutorial extends StatefulWidget {
   State<WorkoutTutorial> createState() => _WorkoutTutorialState();
 }
 
-class _WorkoutTutorialState extends State<WorkoutTutorial>
-    with SingleTickerProviderStateMixin {
-  bool _demoStarted = false;
+class _WorkoutTutorialState extends State<WorkoutTutorial> {
+  final PageController _pages = PageController();
+  int _page = 0;
   bool _demoCompleted = false;
   bool _loading = false;
 
-  late final AnimationController _pulseCtrl;
-  late final Animation<double> _pulseAnim;
-
-  @override
-  void initState() {
-    super.initState();
-    _pulseCtrl = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1200),
-    )..repeat(reverse: true);
-    _pulseAnim = Tween<double>(begin: 1.0, end: 1.08).animate(
-      CurvedAnimation(parent: _pulseCtrl, curve: Curves.easeInOut),
-    );
-  }
+  static const _count = 4;
 
   @override
   void dispose() {
-    _pulseCtrl.dispose();
+    _pages.dispose();
     super.dispose();
   }
 
@@ -51,10 +38,7 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
       widget.onComplete();
       return;
     }
-    setState(() {
-      _demoStarted = true;
-      _loading = true;
-    });
+    setState(() => _loading = true);
     await widget.onStartDemo!();
     if (mounted) {
       setState(() {
@@ -64,141 +48,95 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
     }
   }
 
+  void _go(int p) => _pages.animateToPage(p, duration: const Duration(milliseconds: 320), curve: Curves.easeOutCubic);
+
+  bool get _dark => Theme.of(context).brightness == Brightness.dark;
+  Color get _bg => _dark ? const Color(0xFF0E0E10) : const Color(0xFFF2F2F7);
+  Color get _fg => _dark ? Colors.white : Colors.black87;
+  Color get _muted => _dark ? Colors.white60 : Colors.black54;
+  Color get _card => _dark ? const Color(0xFF1C1C1E) : Colors.white;
+
   @override
   Widget build(BuildContext context) {
     if (_demoCompleted) return _buildCompletionScreen();
-    if (_demoStarted && _loading) return _buildLoadingScreen();
-    return _buildIntroScreen();
-  }
-
-  Widget _buildLoadingScreen() {
-    return Scaffold(
-      backgroundColor: const Color(0xFF0E0E10),
-      body: Center(child: CircularProgressIndicator(color: widget.accentColor)),
-    );
-  }
-
-  Widget _buildIntroScreen() {
     final accent = widget.accentColor;
+    final last = _page == _count - 1;
     return Scaffold(
-      backgroundColor: const Color(0xFF0E0E10),
+      backgroundColor: _bg,
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(AppL.tutorialTitle,
-                      style: TextStyle(color: accent, fontWeight: FontWeight.bold, fontSize: 16)),
-                  TextButton(
-                    onPressed: widget.onComplete,
-                    child: Text(AppL.skip,
-                        style: const TextStyle(color: Colors.white54, fontSize: 14)),
+              padding: const EdgeInsets.fromLTRB(8, 4, 8, 0),
+              child: Row(children: [
+                AnimatedOpacity(
+                  opacity: _page > 0 ? 1 : 0,
+                  duration: const Duration(milliseconds: 200),
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back_rounded, color: _muted),
+                    onPressed: _page > 0 ? () => _go(_page - 1) : null,
                   ),
+                ),
+                const Spacer(),
+                TextButton(
+                  onPressed: widget.onComplete,
+                  child: Text(AppL.skip, style: TextStyle(color: _muted, fontSize: 14)),
+                ),
+              ]),
+            ),
+            Expanded(
+              child: PageView(
+                controller: _pages,
+                onPageChanged: (p) => setState(() => _page = p),
+                children: [
+                  _hero(accent, Icons.fitness_center_rounded, AppL.welcomeTitle, AppL.tutorialSubtitle),
+                  _list(accent, AppL.tutorialHowItWorks, [
+                    (Icons.play_arrow_rounded, AppL.tutorialStep1Title, AppL.tutorialStep1Body),
+                    (Icons.edit_note_rounded, AppL.tutorialStep2Title, AppL.tutorialStep2Body),
+                    (Icons.timer_outlined, AppL.tutorialStep3Title, AppL.tutorialStep3Body),
+                    (Icons.skip_next_rounded, AppL.nextSet, AppL.tutorialStep4Body),
+                  ], numbered: true),
+                  _list(accent, AppL.tutorialFeatures, [
+                    (Icons.history_rounded, AppL.tutorialMemoryTitle, AppL.tutorialMemoryBody),
+                    (Icons.show_chart_rounded, AppL.tutorialChartsTitle, AppL.tutorialChartsBody),
+                    (Icons.local_fire_department_outlined, AppL.tutorialStreakTitle, AppL.tutorialStreakBody),
+                  ]),
+                  _hero(accent, Icons.sports_esports_outlined, AppL.tutorialDemoTitle, AppL.tutorialDemoBody),
                 ],
               ),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 8),
-                    ScaleTransition(
-                      scale: _pulseAnim,
-                      child: Container(
-                        width: 100, height: 100,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: accent.withAlpha(30),
-                          border: Border.all(color: accent.withAlpha(120), width: 2),
-                        ),
-                        child: const Center(child: Text('🏋️', style: TextStyle(fontSize: 52))),
-                      ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                for (int i = 0; i < _count; i++)
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 250),
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    width: i == _page ? 22 : 7,
+                    height: 7,
+                    decoration: BoxDecoration(
+                      color: i == _page ? accent : _muted.withAlpha(60),
+                      borderRadius: BorderRadius.circular(4),
                     ),
-                    const SizedBox(height: 24),
-                    Text(AppL.welcomeTitle,
-                        style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center),
-                    const SizedBox(height: 8),
-                    Text(AppL.tutorialSubtitle,
-                        style: const TextStyle(color: Colors.white54, fontSize: 14),
-                        textAlign: TextAlign.center),
-                    const SizedBox(height: 28),
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.white.withAlpha(8),
-                        borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.white.withAlpha(20)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(AppL.tutorialHowItWorks,
-                              style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
-                          const SizedBox(height: 14),
-                          _step(accent, '1', '💪', AppL.tutorialStep1Title, AppL.tutorialStep1Body),
-                          const SizedBox(height: 10),
-                          _step(accent, '2', '📝', AppL.tutorialStep2Title, AppL.tutorialStep2Body),
-                          const SizedBox(height: 10),
-                          _step(accent, '3', '⏱️', AppL.tutorialStep3Title, AppL.tutorialStep3Body),
-                          const SizedBox(height: 10),
-                          _step(accent, '4', '🔁', AppL.nextSet, AppL.tutorialStep4Body),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    _featureCard(accent, '🧠', AppL.tutorialMemoryTitle, AppL.tutorialMemoryBody),
-                    const SizedBox(height: 12),
-                    _featureCard(accent, '📊', AppL.tutorialChartsTitle, AppL.tutorialChartsBody),
-                    const SizedBox(height: 12),
-                    _featureCard(accent, '🎯', AppL.tutorialStreakTitle, AppL.tutorialStreakBody),
-                    const SizedBox(height: 24),
-                    Container(
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: accent.withAlpha(25),
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: accent.withAlpha(80)),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text('🎮', style: TextStyle(fontSize: 22)),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(AppL.tutorialDemoTitle,
-                                    style: TextStyle(color: accent, fontWeight: FontWeight.bold, fontSize: 14)),
-                                const SizedBox(height: 4),
-                                Text(AppL.tutorialDemoBody,
-                                    style: const TextStyle(color: Colors.white70, fontSize: 13)),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(height: 32),
-                    SizedBox(
-                      width: double.infinity, height: 56,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: accent, foregroundColor: Colors.black,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                        ),
-                        onPressed: _startDemo,
-                        child: Text(AppL.tutorialStartDemo,
-                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17)),
-                      ),
-                    ),
-                    const SizedBox(height: 32),
-                  ],
+                  ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
+              child: SizedBox(
+                width: double.infinity,
+                height: 54,
+                child: FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: accent,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                  ),
+                  onPressed: _loading ? null : (last ? _startDemo : () => _go(_page + 1)),
+                  child: _loading
+                      ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.black))
+                      : Text(last ? AppL.tutorialStartDemo : AppL.nextBtn,
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                 ),
               ),
             ),
@@ -208,61 +146,63 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
     );
   }
 
-  Widget _step(Color accent, String num, String icon, String title, String body) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 24, height: 24,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: accent.withAlpha(40),
-            border: Border.all(color: accent.withAlpha(120), width: 1),
-          ),
-          child: Center(
-              child: Text(num, style: TextStyle(color: accent, fontSize: 12, fontWeight: FontWeight.bold))),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(children: [
-                Text(icon, style: const TextStyle(fontSize: 16)),
-                const SizedBox(width: 6),
-                Flexible(child: Text(title,
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 13))),
-              ]),
-              const SizedBox(height: 2),
-              Text(body, style: const TextStyle(color: Colors.white54, fontSize: 12)),
-            ],
-          ),
-        ),
-      ],
+  Widget _badge(Color accent, IconData icon, double size) => Container(
+    width: size,
+    height: size,
+    decoration: BoxDecoration(shape: BoxShape.circle, color: accent.withAlpha(_dark ? 30 : 40)),
+    child: Icon(icon, color: accent, size: size * 0.48),
+  );
+
+  Widget _hero(Color accent, IconData icon, String title, String body) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _badge(accent, icon, 112),
+          const SizedBox(height: 32),
+          Text(title,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: _fg, fontSize: 26, fontWeight: FontWeight.w800, height: 1.2)),
+          const SizedBox(height: 12),
+          Text(body, textAlign: TextAlign.center, style: TextStyle(color: _muted, fontSize: 15, height: 1.4)),
+        ],
+      ),
     );
   }
 
-  Widget _featureCard(Color accent, String icon, String title, String body) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      decoration: BoxDecoration(
-          color: Colors.white.withAlpha(8), borderRadius: BorderRadius.circular(14)),
-      child: Row(
+  Widget _list(Color accent, String title, List<(IconData, String, String)> items, {bool numbered = false}) {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.fromLTRB(24, 24, 24, 12),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(icon, style: const TextStyle(fontSize: 26)),
-          const SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(title,
-                    style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 14)),
-                const SizedBox(height: 4),
-                Text(body, style: const TextStyle(color: Colors.white60, fontSize: 13)),
-              ],
+          Text(title, style: TextStyle(color: _fg, fontSize: 24, fontWeight: FontWeight.w800)),
+          const SizedBox(height: 20),
+          for (int i = 0; i < items.length; i++)
+            Container(
+              margin: const EdgeInsets.only(bottom: 12),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(color: _card, borderRadius: BorderRadius.circular(16)),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _badge(accent, items[i].$1, 44),
+                  const SizedBox(width: 14),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(numbered ? '${i + 1}. ${items[i].$2}' : items[i].$2,
+                            style: TextStyle(color: _fg, fontWeight: FontWeight.w700, fontSize: 15)),
+                        const SizedBox(height: 4),
+                        Text(items[i].$3, style: TextStyle(color: _muted, fontSize: 13, height: 1.35)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
         ],
       ),
     );
@@ -271,45 +211,42 @@ class _WorkoutTutorialState extends State<WorkoutTutorial>
   Widget _buildCompletionScreen() {
     final accent = widget.accentColor;
     return Scaffold(
-      backgroundColor: const Color(0xFF0E0E10),
+      backgroundColor: _bg,
       body: SafeArea(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(32),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 100, height: 100,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.greenAccent.withAlpha(30),
-                    border: Border.all(color: Colors.greenAccent.withAlpha(120), width: 2),
-                  ),
-                  child: const Center(child: Text('🎉', style: TextStyle(fontSize: 52))),
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _badge(accent, Icons.check_rounded, 112),
+                    const SizedBox(height: 32),
+                    Text(AppL.tutorialCompleteTitle,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: _fg, fontSize: 26, fontWeight: FontWeight.w800)),
+                    const SizedBox(height: 12),
+                    Text(AppL.tutorialCompleteBody,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: _muted, fontSize: 15, height: 1.4)),
+                  ],
                 ),
-                const SizedBox(height: 28),
-                Text(AppL.tutorialCompleteTitle,
-                    style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 12),
-                Text(AppL.tutorialCompleteBody,
-                    style: const TextStyle(color: Colors.white70, fontSize: 15),
-                    textAlign: TextAlign.center),
-                const SizedBox(height: 40),
-                SizedBox(
-                  width: double.infinity, height: 56,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: accent, foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                    ),
-                    onPressed: widget.onComplete,
-                    child: Text(AppL.startRealWorkout,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+              ),
+              SizedBox(
+                width: double.infinity,
+                height: 54,
+                child: FilledButton(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: accent,
+                    foregroundColor: Colors.black,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                   ),
+                  onPressed: widget.onComplete,
+                  child: Text(AppL.startRealWorkout, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
