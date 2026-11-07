@@ -28,6 +28,7 @@ import 'exercise_catalog.dart';
 import 'workout_tutorial.dart';
 import 'workout_templates.dart';
 import 'app_l.dart';
+import 'progression.dart';
 
 // Colore accento globale (tema)
 /// Returns true if dark mode is active
@@ -9521,6 +9522,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
 
   void _mostraTemplateDialog() {
     final accent = appAccentNotifier.value;
+    final it = AppL.lang == 'it';
+    final all = kAllWorkoutTemplates;
+    int? fLv, fDays;
+    bool? fSplit, fMono;
     showModalBottomSheet(
       context: context,
       backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
@@ -9528,7 +9533,30 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (c) {
+      builder: (c) => StatefulBuilder(builder: (c, setS) {
+        final list = all.where((t) =>
+            (fLv == null || t['level'] == fLv) &&
+            (fDays == null || _templateDays(t).length == fDays) &&
+            (fSplit == null || t['split'] == fSplit) &&
+            (fMono == null || t['mono'] == fMono)).toList();
+        // ripremere il chip scelto toglie il filtro
+        Widget chips<T>(List<(T, String)> opts, T? sel, void Function(T?) set) => SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(children: [
+                for (final o in opts)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6, bottom: 6),
+                    child: ChoiceChip(
+                      label: Text(o.$2),
+                      selected: sel == o.$1,
+                      showCheckmark: false,
+                      visualDensity: VisualDensity.compact,
+                      selectedColor: accent.withAlpha(50),
+                      onSelected: (_) => setS(() => set(sel == o.$1 ? null : o.$1)),
+                    ),
+                  ),
+              ]),
+            );
         return Container(
           padding: EdgeInsets.fromLTRB(24, 24, 24, 12 + _bottomNavInset(c)),
           constraints: BoxConstraints(
@@ -9595,7 +9623,20 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         },
                       ),
                     const Divider(),
-                    ...kAllWorkoutTemplates.map(
+                    chips([(0, it ? 'Principiante' : 'Beginner'), (1, it ? 'Intermedio' : 'Intermediate'), (2, it ? 'Avanzato' : 'Advanced')], fLv, (v) => fLv = v),
+                    chips([for (final d in [2, 3, 4, 5]) (d, it ? '$d giorni' : '$d days')], fDays, (v) => fDays = v),
+                    chips([(false, 'Full body'), (true, 'Split')], fSplit, (v) => fSplit = v),
+                    chips([(false, it ? 'Multifrequenza' : 'Multi-frequency'), (true, it ? 'Monofrequenza' : 'Once a week')], fMono, (v) => fMono = v),
+                    if (list.isEmpty)
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 24),
+                        child: Text(
+                          it ? 'Nessuna scheda con questi filtri' : 'No plan matches these filters',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
+                        ),
+                      ),
+                    ...list.map(
                     (t) => ListTile(
                       contentPadding: const EdgeInsets.symmetric(
                         horizontal: 8,
@@ -9610,9 +9651,14 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           border: Border.all(color: accent.withAlpha(60)),
                         ),
                         alignment: Alignment.center,
-                        child: Text(
-                          t['icon'] as String,
-                          style: const TextStyle(fontSize: 20),
+                        child: Icon(
+                          switch (t['level']) {
+                            0 => Icons.signal_cellular_alt_1_bar_rounded,
+                            1 => Icons.signal_cellular_alt_2_bar_rounded,
+                            2 => Icons.signal_cellular_alt_rounded,
+                            _ => Icons.fitness_center_rounded,
+                          },
+                          color: accent,
                         ),
                       ),
                       title: Text(
@@ -9625,7 +9671,13 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                         ),
                       ),
                       subtitle: Text(
-                        t['desc'] as String,
+                        [
+                          if ((t['levelName'] as String?)?.isNotEmpty ?? false)
+                            '${t['levelName']} · ${t['mono'] == true ? (it ? 'monofrequenza' : 'once a week') : (it ? 'multifrequenza' : 'multi-frequency')}',
+                          t['desc'] as String,
+                        ].join('\n'),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
                       ),
                       trailing: Icon(
@@ -9645,7 +9697,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
             ],
           ),
         );
-      },
+      }),
     );
   }
 
@@ -9660,11 +9712,39 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
           '"${localizeMixedLabel(template['name'] as String)}"?',
           style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontSize: 16),
         ),
-        content: Text(
-          AppL.lang == 'en'
-              ? 'This will add ${_templateDays(template).length} sessions to your schedule. Existing sessions will be kept.'
-              : 'Verranno aggiunte ${_templateDays(template).length} sessioni alla scheda. Le sessioni esistenti verranno mantenute.',
-          style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 14),
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final k in ['desc', 'info'])
+                if ((template[k] as String?)?.isNotEmpty ?? false)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(template[k] as String,
+                        style: TextStyle(color: _isDarkCtx(context) ? Colors.white70 : Colors.black87, fontSize: 13, height: 1.35)),
+                  ),
+              for (final d in _templateDays(template).cast<Map>()) ...[
+                Padding(
+                  padding: const EdgeInsets.only(top: 6, bottom: 2),
+                  child: Text(localizeMixedLabel('${d['dayName'] ?? ''}'),
+                      style: TextStyle(color: accent, fontWeight: FontWeight.w700, fontSize: 13)),
+                ),
+                for (final e in ((d['exercises'] as List?) ?? const []).cast<Map>())
+                  Text(
+                    '${e['targetSets']}×${{...(e['repsList'] as List? ?? const [])}.join('/')}  ${localizedExerciseName('${e['name']}')}',
+                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
+                  ),
+              ],
+              const SizedBox(height: 12),
+              Text(
+                AppL.lang == 'en'
+                    ? 'This will add ${_templateDays(template).length} sessions to your schedule. Existing sessions will be kept.'
+                    : 'Verranno aggiunte ${_templateDays(template).length} sessioni alla scheda. Le sessioni esistenti verranno mantenute.',
+                style: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(
@@ -11263,7 +11343,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   final Map<int, List<Map<String, dynamic>>> _supersetAccumulated = {};
   // Risultati sessione precedente: nome esercizio → lista serie {w, r}
   final Map<String, List<Map<String, dynamic>>> _previousResults = {};
-  bool _plateauDetected = false;
   final Set<String> _shownSuggestions = {}; // true if 2+ microcycles with no workout-wide improvement
   // Chiave persistenza allenamento in corso
   String get _inProgressKey => 'workout_in_progress_${widget.day.dayName}';
@@ -11336,7 +11415,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       }
       ex.results = [];
     }
-    _checkPlateauForWorkout();
     _loadSettings();
     if (!widget.demoMode) _loadWorkoutNativeAds();
     if (!widget.demoMode) _restoreInProgressWorkout();
@@ -12636,7 +12714,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       _pill(context, '${lastW % 1 == 0 ? lastW.toInt() : lastW} kg'),
                       _pill(context, '$lastR reps'),
                       if (suggerisciReps && _showWeightSuggestion)
-                        _pill(context, AppL.tryReps(targetR + 2), icon: Icons.add_rounded, color: accent),
+                        _pill(context, AppL.tryReps(targetR), icon: Icons.add_rounded, color: accent),
                       if (suggerisciAumento && _showWeightSuggestion)
                         _pill(context, AppL.increaseWeight, icon: Icons.trending_up_rounded, color: accent),
                     ],
@@ -12668,8 +12746,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   height: 54,
                   child: ElevatedButton.icon(
                     onPressed: () {
-                      if (suggerisciAumento) _showSuggestionOverlay(isWeight: true, targetReps: targetR);
-                      else if (suggerisciReps) _showSuggestionOverlay(isWeight: false, targetReps: targetR);
+                      if (suggerisciAumento && _showWeightSuggestion) _showSuggestionOverlay(isWeight: true, targetReps: targetR);
                       setState(() {
                         _awaitingFirstExerciseStart = false;
                       });
@@ -13288,7 +13365,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
 
   void _showSuggestionOverlay({required bool isWeight, required int targetReps, bool force = false}) {
-    final key = isWeight ? 'peso_${exI}_${currentExSeries.length}' : 'reps_${exI}_${currentExSeries.length}';
+    final key = isWeight ? 'peso_$exI' : 'reps_${exI}_${currentExSeries.length}';
     if (!force && _shownSuggestions.contains(key)) return;
     _shownSuggestions.add(key);
     OverlayEntry? entry;
@@ -13747,23 +13824,11 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     double lastW = (suggest['w'] as num?)?.toDouble() ?? 0.0;
     int lastR = (suggest['r'] as num?)?.toInt() ?? 0;
 
-    // CALCOLO SICURO REPS (Correzione Errore Bad State)
-    int targetR = ex.repsList.isNotEmpty
-        ? (setN <= ex.repsList.length
-              ? ex.repsList[setN - 1]
-              : ex.repsList.last)
-        : 10;
-    // Il suggerimento si attiva SOLO se le reps dell'ultima volta sono MAGGIORI del target
-    final _sugg = _computeSuggestions(ex, setN, lastR, targetR);
-    bool suggerisciAumento = _sugg['aumento']!;
-    bool suggerisciReps = _sugg['reps']!;
-    if (ex.repsList.isNotEmpty) {
-      if (setN <= ex.repsList.length) {
-        targetR = ex.repsList[setN - 1];
-      } else {
-        targetR = ex.repsList.last;
-      }
-    }
+    final plan = _plan(ex, setN);
+    bool suggerisciAumento = plan.aumento;
+    bool suggerisciReps = plan.provaReps != null;
+    // ai pannelli serve il numero da mostrare in "prova N reps"
+    final int targetR = plan.provaReps ?? plan.target;
 
     bool isLastSet = (setN >= ex.targetSets);
     int timeToUse = isLastSet
@@ -13964,8 +14029,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         Positioned.fill(
                           child: _DrumPickers(
                             key: ValueKey('drum_$exI'),
-                            initialKg: lastW <= 0 ? 20.0 : lastW,
-                            initialReps: targetR,
+                            initialKg: plan.kg,
+                            initialReps: plan.reps,
+                            repsOnWeightUp: plan.target,
                             suggerisciAumento:
                                 suggerisciAumento && _showWeightSuggestion,
                             useQuarterStep: _usesQuarterStepForExercise(ex, lastW),
@@ -14091,15 +14157,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   void _setDrumValues(int targetExI, int targetSetN) {
     if (targetExI >= widget.day.exercises.length) return;
     final ex = widget.day.exercises[targetExI];
-    final suggest = _getSuggest(ex.name, targetSetN);
-    final double kg = (suggest['w'] as num?)?.toDouble() ?? 0.0;
-    int tR = ex.repsList.isNotEmpty
-        ? (targetSetN <= ex.repsList.length
-              ? ex.repsList[targetSetN - 1]
-              : ex.repsList.last)
-        : 10;
-    wC.text = formatWeightValue(kg, maxDecimals: 2);
-    rC.text = tR.toString();
+    final p = _plan(ex, targetSetN);
+    wC.text = formatWeightValue(p.kg, maxDecimals: 2);
+    rC.text = p.reps.toString();
   }
 
   int? _nextPendingExerciseIndex({int fromExclusive = -1}) {
@@ -14170,7 +14230,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
               padding: const EdgeInsets.only(top: 8),
               child: _pill(
                 context,
-                suggerisciAumento ? AppL.increaseWeight : AppL.tryReps(targetR + 2),
+                suggerisciAumento ? AppL.increaseWeight : AppL.tryReps(targetR),
                 icon: suggerisciAumento ? Icons.trending_up_rounded : Icons.add_rounded,
                 color: accent,
                 fontSize: 14,
@@ -14475,112 +14535,33 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     );
   }
 
-  /// Calcola i suggerimenti per la serie corrente.
-  /// Checks history for 2 consecutive sessions without ANY improvement across
-  /// the entire workout (neither weight nor reps increased on any exercise).
-  void _checkPlateauForWorkout() {
-    // Group all history entries by date string (= one session)
-    final Map<String, Map<String, List<Map<String, dynamic>>>> byDate = {};
-    for (final h in widget.history) {
-      final entry = h as Map<String, dynamic>;
-      final date = (entry['date'] as String?) ?? '';
-      final exName = (entry['exercise'] as String?) ?? '';
-      if (date.isEmpty || exName.isEmpty) continue;
-      byDate.putIfAbsent(date, () => {});
-      final rawSeries = entry['series'];
-      if (rawSeries is List) {
-        byDate[date]![exName] =
-            rawSeries.map((s) => Map<String, dynamic>.from(s as Map)).toList();
-      }
-    }
-    // Sort sessions newest-first
-    final sortedDates = byDate.keys.toList()
-      ..sort((a, b) => b.compareTo(a));
-    if (sortedDates.length < 2) {
-      _plateauDetected = false;
-      return;
-    }
-    // Check last 2 sessions for ANY improvement
-    bool anyImprovement = false;
-    final sess1 = byDate[sortedDates[0]]!; // most recent
-    final sess2 = byDate[sortedDates[1]]!; // second most recent
-    for (final exName in sess1.keys) {
-      final s1 = sess1[exName] ?? [];
-      final s2 = sess2[exName] ?? [];
-      if (s2.isEmpty) continue;
-      double maxW1 = 0, maxW2 = 0;
-      int maxR1 = 0, maxR2 = 0;
-      for (final s in s1) {
-        final w = ((s['w'] ?? s['weight'] ?? 0) as num).toDouble();
-        final r = ((s['r'] ?? s['reps'] ?? 0) as num).toInt();
-        if (w > maxW1) maxW1 = w;
-        if (r > maxR1) maxR1 = r;
-      }
-      for (final s in s2) {
-        final w = ((s['w'] ?? s['weight'] ?? 0) as num).toDouble();
-        final r = ((s['r'] ?? s['reps'] ?? 0) as num).toInt();
-        if (w > maxW2) maxW2 = w;
-        if (r > maxR2) maxR2 = r;
-      }
-      if (maxW1 > maxW2 || maxR1 > maxR2) {
-        anyImprovement = true;
-        break;
-      }
-    }
-    _plateauDetected = !anyImprovement;
-  }
-
-
-  Map<String, bool> _computeSuggestions(ExerciseConfig ex, int setN, int lastR, int targetR) {
-    bool suggerisciAumento = _plateauDetected && lastR > targetR && lastR > 0;
-
-    int? repsTriggerSet;
-    for (int sn = ex.targetSets; sn >= 1; sn--) {
-      final tgt = ex.repsList.isNotEmpty
-          ? (sn <= ex.repsList.length ? ex.repsList[sn - 1] : ex.repsList.last)
-          : 10;
-      final prevSug = _getSuggest(ex.name, sn);
-      final pr = (prevSug['r'] as num?)?.toInt() ?? 0;
-      if (pr > tgt && pr > 0) {
-        repsTriggerSet = sn;
-        break;
-      }
-    }
-
-    bool suggerisciReps = false;
-    if (!suggerisciAumento && repsTriggerSet != null && setN < repsTriggerSet) {
-      final currentHasHigherReps = currentExSeries.any((s) {
-        final sn2 = (s['s'] as num?)?.toInt() ?? 0;
-        final r2 = (s['r'] as num?)?.toInt() ?? 0;
-        if (sn2 <= 0) return false;
-        final tgt2 = ex.repsList.isNotEmpty
-            ? (sn2 <= ex.repsList.length ? ex.repsList[sn2 - 1] : ex.repsList.last)
-            : 10;
-        return r2 > tgt2;
-      });
-      if (currentHasHigherReps) {
-        suggerisciAumento = true;
-      } else {
-        suggerisciReps = true;
-      }
-    }
-
-    return {'aumento': suggerisciAumento, 'reps': suggerisciReps};
+  /// Doppia progressione, serie per serie, contro la stessa serie della volta scorsa:
+  /// reps oltre il target -> le ripropone; target+2 -> suggerisce più peso;
+  /// peso già aumentato oggi sulla serie prima -> lo porta qui e le reps tornano al target.
+  /// Va chiamata con ex = esercizio corrente (usa currentExSeries).
+  ProgressionPlan _plan(ExerciseConfig ex, int s) {
+    double w(Map m) => (m['w'] as num?)?.toDouble() ?? 0.0;
+    final p = _getSuggest(ex.name, s);
+    final today = currentExSeries.where((e) => (e['s'] as num?)?.toInt() == s - 1);
+    return progressionPlan(
+      target: ex.repsList.isEmpty ? 10 : ex.repsList[scala.min(s, ex.repsList.length) - 1],
+      lastKg: w(p),
+      lastReps: (p['r'] as num?)?.toInt() ?? 0,
+      todayPrevKg: today.isEmpty ? null : w(today.last),
+      lastPrevKg: today.isEmpty ? 0 : w(_getSuggest(ex.name, s - 1)),
+    );
   }
 
   Widget _buildRestUI() {
     var ex = widget.day.exercises[exI];
     var suggest = _getSuggest(ex.name, setN);
-    // Auto-show suggestion overlay when rest timer starts
+    // Durante il recupero avvisa solo per l'aumento di peso; le reps restano nella pill.
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final suggDelay = _isNewRecord ? const Duration(milliseconds: 2000) : Duration.zero;
       Future.delayed(suggDelay, () {
-        if (!mounted) return;
-        final _s2 = _computeSuggestions(ex, setN,
-            (suggest['r'] as num?)?.toInt() ?? 0,
-            ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
-        if (_s2['aumento']!) _showSuggestionOverlay(isWeight: true, targetReps: ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
-        else if (_s2['reps']!) _showSuggestionOverlay(isWeight: false, targetReps: ex.repsList.isNotEmpty ? (setN <= ex.repsList.length ? ex.repsList[setN-1] : ex.repsList.last) : 10);
+        if (!mounted || !_showWeightSuggestion) return;
+        final p = _plan(ex, setN);
+        if (p.aumento) _showSuggestionOverlay(isWeight: true, targetReps: p.target);
       });
     });
     double lastW = (suggest['w'] as num?)?.toDouble() ?? 0.0;
@@ -14923,7 +14904,7 @@ class _SuggestionOverlayState extends State<_SuggestionOverlay> with SingleTicke
     final dark = _isDarkCtx(context);
     final accent = Theme.of(context).colorScheme.primary;
     final anim = CurvedAnimation(parent: _ctrl, curve: Curves.easeOutCubic);
-    final title = widget.isWeight ? AppL.increaseWeight : AppL.tryReps(widget.targetReps + 2);
+    final title = widget.isWeight ? AppL.increaseWeight : AppL.tryReps(widget.targetReps);
     return Material(
       color: Colors.transparent,
       child: FadeTransition(
@@ -16059,6 +16040,8 @@ class _DrumPickers extends StatefulWidget {
   final double initialKg;
   final int initialReps;
   final bool suggerisciAumento;
+  /// reps da proporre se l'utente alza il peso (doppia progressione: si riparte dal target)
+  final int? repsOnWeightUp;
   final bool useQuarterStep;
   final bool useEvenStep;
   final bool useSingleStep;
@@ -16080,6 +16063,7 @@ class _DrumPickers extends StatefulWidget {
     required this.initialKg,
     required this.initialReps,
     required this.suggerisciAumento,
+    this.repsOnWeightUp,
     this.useQuarterStep = false,
     this.useEvenStep = false,
     this.useSingleStep = false,
@@ -16182,6 +16166,7 @@ class _DrumPickersState extends State<_DrumPickers>
   bool _manualUseEvenStep = false;
   bool _manualUseSingleStep = false;
   bool _interacted = false;
+  bool _repsTouched = false;
   // true mentre la ruota si sposta da codice (input tastiera / cambio step):
   // onSelectedItemChanged non deve azzerare il valore digitato né i callback.
   bool _programmaticJump = false;
@@ -16253,6 +16238,23 @@ class _DrumPickersState extends State<_DrumPickers>
     _kgCtrl.dispose();
     _repsCtrl.dispose();
     super.dispose();
+  }
+
+  // Peso alzato sopra la proposta -> reps al target; riportato giù -> reps proposte.
+  // Solo finché l'utente non ha toccato le reps a mano.
+  void _syncRepsToKg(double kg) {
+    final up = widget.repsOnWeightUp;
+    if (up == null || _repsTouched) return;
+    final idx = ((kg > widget.initialKg + 0.01 ? up : widget.initialReps) - 1).clamp(0, 49);
+    if (idx == _selReps) return;
+    setState(() => _selReps = idx);
+    _programmaticJump = true;
+    try {
+      if (_repsCtrl.hasClients) _repsCtrl.jumpToItem(idx);
+    } finally {
+      _programmaticJump = false;
+    }
+    widget.onRepsChanged(_repsValues[idx]);
   }
 
   void _triggerInteraction() {
@@ -16391,6 +16393,7 @@ class _DrumPickersState extends State<_DrumPickers>
       });
       _triggerInteraction();
       widget.onKgChanged(_customKgValue!);
+      _syncRepsToKg(_customKgValue!);
       widget.onWeightModeChanged?.call(
         useQuarterStep,
         useEvenStep,
@@ -16400,6 +16403,7 @@ class _DrumPickersState extends State<_DrumPickers>
       final v = int.tryParse(raw);
       if (v == null) return;
       final idx = (v - 1).clamp(0, 49);
+      _repsTouched = true;
       setState(() => _selReps = idx);
       _programmaticJump = true;
       try {
@@ -16552,8 +16556,11 @@ class _DrumPickersState extends State<_DrumPickers>
       }
     });
     if (isKg) {
-      widget.onKgChanged(_displayValueToKg(items[index] as double));
+      final kg = _displayValueToKg(items[index] as double);
+      widget.onKgChanged(kg);
+      _syncRepsToKg(kg);
     } else {
+      _repsTouched = true;
       onChanged(index);
     }
     _triggerInteraction();
