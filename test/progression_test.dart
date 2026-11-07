@@ -26,4 +26,15 @@ void main() {
     final p = progressionPlan(target: 12, lastKg: 0, lastReps: 15);
     expect((p.kg, p.reps, p.aumento, p.provaReps), (0.0, 15, false, 16));
   });
+  test('ultimo allenamento: conta la sessione, non l esercizio in comune', () {
+    final h = [
+      {'exercise': 'Panca', 'dayName': 'B', 'date': '2026-11-06T10:00:00'},
+      {'exercise': 'Panca', 'dayName': 'A', 'date': '2026-11-01T10:00:00'},
+      {'exercise': 'Squat', 'date': '2026-10-20T10:00:00'}, // vecchia, senza dayName
+    ];
+    expect(lastTrainedDate(h, 'A', ['Panca']), DateTime(2026, 11, 1, 10));
+    expect(lastTrainedDate(h, 'b', ['Panca']), DateTime(2026, 11, 6, 10));
+    expect(lastTrainedDate(h, 'C', ['Squat']), DateTime(2026, 10, 20, 10));
+    expect(lastTrainedDate(h, 'D', ['Stacco']), null);
+  });
 }
