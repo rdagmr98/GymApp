@@ -1094,128 +1094,6 @@ class _OnboardingPage {
   });
 }
 
-/// Mappa parole chiave italiane → termini inglesi per la ricerca esercizi
-const Map<String, List<String>> kItalianKeywords = {
-  'panca': ['bench'],
-  'petto': ['chest', 'pec', 'bench', 'fly', 'push'],
-  'pettorali': ['chest', 'pec', 'bench', 'fly', 'push', 'crossover'],
-  'dorsale': ['lat', 'pulldown', 'pull', 'row'],
-  'rematore': ['row'],
-  'tirate': ['pulldown', 'pull'],
-  'tirata': ['pulldown', 'pull', 'row'],
-  'trazioni': ['pull-up', 'pull up', 'pullup', 'chin-up', 'chinup', 'pull'],
-  'trazione': ['pull-up', 'pull up', 'pullup', 'chin-up', 'chinup'],
-  'bicipite': ['curl', 'bicep'],
-  'tricipite': ['tricep', 'extension', 'pushdown', 'dip'],
-  'spalla': ['shoulder', 'press', 'raise', 'delt', 'arnold'],
-  'deltoidi': ['delt', 'shoulder', 'raise', 'lateral', 'front'],
-  'deltoide': ['delt', 'shoulder', 'raise', 'lateral'],
-  'squat': ['squat'],
-  'affondi': ['lunge'],
-  'affondo': ['lunge'],
-  'stacco': ['deadlift'],
-  'curl': ['curl'],
-  'croci': ['fly', 'flye', 'crossover'],
-  'pressa': ['press', 'leg press'],
-  'gambe': ['leg', 'squat', 'lunge'],
-  'glutei': ['glute', 'hip', 'bridge'],
-  'gluteo': ['glute', 'hip', 'bridge'],
-  'addome': ['ab', 'crunch', 'plank', 'core'],
-  'addominali': ['ab', 'crunch', 'plank', 'core', 'sit-up', 'situp'],
-  'plank': ['plank'],
-  'polpaccio': ['calf', 'raise'],
-  'polpacci': ['calf', 'raise'],
-  'pull': ['pull', 'pulldown', 'pullup'],
-  'push': ['push', 'press'],
-  'dip': ['dip'],
-  'manubri': ['dumbbell'],
-  'bilanciere': ['barbell'],
-  'cavo': ['cable'],
-  'corda': ['rope'],
-  'kettlebell': ['kettlebell'],
-  'alzate': ['raise', 'lateral', 'front'],
-  'alzata': ['raise', 'lateral', 'front'],
-  'lat': ['lat', 'pulldown'],
-  'lombari': ['back extension', 'hyperextension', 'deadlift'],
-  'lombare': ['back extension', 'hyperextension'],
-  'adduttori': ['adductor'],
-  'abduttori': ['abductor'],
-  'quadricipiti': ['quad', 'leg extension', 'squat', 'leg press'],
-  'quadricipite': ['quad', 'leg extension', 'squat'],
-  'femorali': ['hamstring', 'leg curl', 'romanian'],
-  'femorale': ['hamstring', 'leg curl', 'romanian'],
-  'inclinata': ['incline'],
-  'declinata': ['decline'],
-  'cardio': ['jump', 'burpee', 'running', 'rope', 'jumping', 'sprint'],
-};
-
-/// Cerca esercizi nel catalogo con supporto parole chiave italiane.
-/// Restituisce al massimo [limit] risultati.
-List<ExerciseInfo> searchExercisesWithItalian(String query, {int limit = 6}) {
-  if (query.length < 2) return [];
-  final q = query.toLowerCase().trim();
-  final results = <ExerciseInfo>[];
-  final seen = <String>{};
-
-  void tryAdd(ExerciseInfo ex) {
-    if (seen.add(ex.name) && results.length < limit) results.add(ex);
-  }
-
-  if (AppL.lang == 'en') {
-    // EN mode: search kGifCatalog (English names) first, then kExerciseCatalog by nameEn
-    for (final ex in kGifCatalog) {
-      if (ex.name.toLowerCase().contains(q) ||
-          ex.nameEn.toLowerCase().contains(q)) {
-        tryAdd(ex);
-      }
-    }
-    for (final ex in kExerciseCatalog) {
-      if (ex.nameEn.toLowerCase().contains(q) ||
-          ex.aliases.any((a) => a.toLowerCase().contains(q))) {
-        tryAdd(ex);
-      }
-    }
-    return results;
-  }
-
-  // IT mode: cerca prima nel catalogo italiano, poi GIF, poi keywords
-  // 1. Match diretto nel catalogo italiano (kExerciseCatalog) — nomi IT come "Trazioni"
-  for (final ex in kExerciseCatalog) {
-    if (ex.name.toLowerCase().contains(q) ||
-        ex.nameEn.toLowerCase().contains(q) ||
-        ex.aliases.any((a) => a.toLowerCase().contains(q))) {
-      tryAdd(ex);
-    }
-  }
-
-  // 2. Match diretto nel catalogo GIF (nomi EN) — es. "Pull-Up", "Bench Press"
-  for (final ex in kGifCatalog) {
-    if (ex.name.toLowerCase().contains(q) ||
-        ex.nameEn.toLowerCase().contains(q)) {
-      tryAdd(ex);
-    }
-  }
-
-  // 3. Match tramite parole chiave italiane → inglese
-  if (results.length < limit) {
-    for (final entry in kItalianKeywords.entries) {
-      if (entry.key.contains(q) || q.contains(entry.key)) {
-        for (final eng in entry.value) {
-          for (final ex in kGifCatalog) {
-            if (ex.name.toLowerCase().contains(eng) ||
-                ex.nameEn.toLowerCase().contains(eng)) {
-              tryAdd(ex);
-              if (results.length >= limit) return results;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  return results;
-}
-
 // --- STREAK SYSTEM ---
 
 /// Restituisce la stringa ISO-week "YYYY-Www" per la data fornita.
@@ -8542,7 +8420,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                       ),
                     ),
                     onChanged: (v) => setS(() {
-                      suggestions = searchExercisesWithItalian(v, limit: 6);
+                      suggestions = searchExercises(v, limit: 6);
                       isCardioMode = resolveExerciseInfo(v)?.category == 'cardio';
                     }),
                   ),
@@ -9910,7 +9788,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     ),
                     onChanged: (v) => setS(
                       () =>
-                          suggestions = searchExercisesWithItalian(v, limit: 6),
+                          suggestions = searchExercises(v, limit: 6),
                     ),
                   ),
 
@@ -10360,11 +10238,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     String? selectedEquipment;
     String searchQuery = '';
 
-    final Map<String, ExerciseInfo> archiveByName = {};
-    for (final e in [...kExerciseCatalog, ...kGifCatalog]) {
-      archiveByName.putIfAbsent(e.name.toLowerCase(), () => e);
-    }
-    final List<ExerciseInfo> archiveAll = archiveByName.values.toList();
+    final List<ExerciseInfo> archiveAll = kAllExercises;
 
     showModalBottomSheet(
       context: context,
@@ -10397,16 +10271,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                 .toList();
           }
 
-          if (searchQuery.isNotEmpty) {
-            final q = searchQuery.toLowerCase();
-            filtered = filtered
-                .where(
-                  (e) =>
-                      e.name.toLowerCase().contains(q) ||
-                      e.nameEn.toLowerCase().contains(q) ||
-                      e.aliases.any((a) => a.toLowerCase().contains(q)),
-                )
-                .toList();
+          if (searchQuery.trim().length >= 2) {
+            filtered = searchExercises(searchQuery, pool: filtered);
           }
 
           return Container(
