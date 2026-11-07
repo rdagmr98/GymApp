@@ -1315,7 +1315,7 @@ const RESOURCES = {"ads.txt": "5826c18f51a746e3f3a71e9c21cc0b9b",
 "canvaskit/skwasm_heavy.wasm": "b0be7910760d205ea4e011458df6ee01",
 "favicon.png": "bab703d825dafa066624127b80b9b949",
 "flutter.js": "24bc71911b75b5f8135c949e27a2984e",
-"flutter_bootstrap.js": "b6c9c060aec4bbbf72f05e272543255c",
+"flutter_bootstrap.js": "8480c7466f0aa5288a3cbb3b24b764b7",
 "gymapp-favicon.png": "bab703d825dafa066624127b80b9b949",
 "icons/gymapp-home-180.png": "ffc859c4461c480f31bd4af23ccc2555",
 "icons/gymapp-icon-192.png": "c102f13ce1671fe76013435cb654409a",
@@ -1328,9 +1328,9 @@ const RESOURCES = {"ads.txt": "5826c18f51a746e3f3a71e9c21cc0b9b",
 "icons/Icon-maskable-512.png": "fc7ca009d17fa7a63c30194c5da5903c",
 "index.html": "e58c7a73609398b4e3d211a01cbf92a7",
 "/": "e58c7a73609398b4e3d211a01cbf92a7",
-"main.dart.js": "bb188cd566694821ed724943e553f292",
+"main.dart.js": "f76c863705dc9efaa6b6fcfafc3d02d9",
 "manifest.json": "c58b590ae81d6fe7fea194a1eba19ee7",
-"version.json": "4322d107e9ea031f8d6230267e1e5fef"};
+"version.json": "e295ed781c767116d994bf24d5a90cc1"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
