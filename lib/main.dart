@@ -9806,6 +9806,18 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     ExerciseInfo? selectedExInfo;
     List<ExerciseInfo> suggestions = [];
 
+    ExerciseConfig buildEx(String name, String? gif) => ExerciseConfig(
+      name: name,
+      targetSets: (int.tryParse(setsCtrl.text) ?? 3).clamp(1, 20),
+      repsList: repsCtrls.map((c) => int.tryParse(c.text) ?? 10).toList(),
+      recoveryTime: int.tryParse(recoveryCtrl.text) ?? 90,
+      interExercisePause: int.tryParse(pausaCtrl.text) ?? 120,
+      notePT: noteCtrl.text.trim(),
+      noteCliente: '',
+      supersetGroup: supersetGroup,
+      gifFilename: gif,
+    );
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -9831,6 +9843,18 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                 repsCtrls.removeLast();
               }
             });
+          }
+
+          void setAllReps(String v) => setS(() {
+            for (final r in repsCtrls) {
+              r.text = v;
+            }
+          });
+
+          void applyPreset(int s, int r) {
+            setsCtrl.text = '$s';
+            updateSets('$s');
+            setAllReps('$r');
           }
 
           return Padding(
@@ -9990,23 +10014,86 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                   const SizedBox(height: 8),
 
                   // — Sfoglia archivio per gruppo muscolare
-                  OutlinedButton.icon(
-                    onPressed: () => _apriArchivioEsercizi(ctx, setS, (ex) {
-                      nameCtrl.text = ex.name;
-                      setS(() {
-                        selectedExInfo = ex;
-                        suggestions = [];
-                      });
-                    }),
-                    icon: const Icon(Icons.library_books_rounded, size: 18),
-                    label: Text(AppL.browseArchive),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: accent,
-                      side: BorderSide(color: accent.withAlpha(80)),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () => _apriArchivioEsercizi(ctx, setS, (ex) {
+                            nameCtrl.text = ex.name;
+                            setS(() {
+                              selectedExInfo = ex;
+                              suggestions = [];
+                            });
+                          }),
+                          icon: const Icon(Icons.library_books_rounded, size: 18),
+                          label: Text(AppL.browseArchive),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: accent,
+                            side: BorderSide(color: accent.withAlpha(80)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(width: 8),
+                      // Selezione multipla: aggiunge tutti con serie/reps/recupero del modulo
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () => _apriArchivioEsercizi(
+                            ctx,
+                            setS,
+                            (_) {},
+                            onSelectMany: (list) {
+                              Navigator.pop(c);
+                              setState(() => _days[dayIdx].exercises.addAll(
+                                list.map((e) => buildEx(e.name, e.gifFilename)),
+                              ));
+                              _save();
+                            },
+                          ),
+                          icon: const Icon(Icons.playlist_add_rounded, size: 18),
+                          label: const Text('Più esercizi'),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: accent,
+                            side: BorderSide(color: accent.withAlpha(80)),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  // — Preset serie x reps e recupero
+                  Wrap(
+                    runSpacing: 6,
+                    children: [
+                      for (final p in const [[3, 10], [4, 8], [3, 12], [5, 5]])
+                        _archiveChip(
+                          label: '${p[0]}×${p[1]}',
+                          selected: currentSets == p[0] &&
+                              repsCtrls.every((r) => r.text == '${p[1]}'),
+                          onTap: () => applyPreset(p[0], p[1]),
+                          accent: accent,
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
+                  Wrap(
+                    runSpacing: 6,
+                    children: [
+                      for (final v in const [60, 90, 120, 180])
+                        _archiveChip(
+                          label: '$v s',
+                          selected: recoveryCtrl.text == '$v',
+                          onTap: () => setS(() => recoveryCtrl.text = '$v'),
+                          accent: accent,
+                        ),
+                    ],
                   ),
 
                   const SizedBox(height: 12),
@@ -10104,10 +10191,38 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
 
                   const SizedBox(height: 12),
 
-                  // — Reps per serie
-                  Text(
-                    AppL.repsPerSet,
-                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
+                  // — Reps per serie (il campo a destra le imposta tutte insieme)
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          AppL.repsPerSet,
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 90,
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87, fontSize: 13),
+                          decoration: InputDecoration(
+                            hintText: 'tutte',
+                            hintStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white38 : Colors.black38, fontSize: 12),
+                            isDense: true,
+                            filled: true,
+                            fillColor: Colors.black26,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
+                            ),
+                          ),
+                          onChanged: (v) {
+                            if (int.tryParse(v) != null) setAllReps(v);
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 6),
                   Wrap(
@@ -10223,26 +10338,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                       onPressed: () {
                         final name = nameCtrl.text.trim();
                         if (name.isEmpty) return;
-                        final sets = (int.tryParse(setsCtrl.text) ?? 3).clamp(
-                          1,
-                          20,
-                        );
-                        final repsList = repsCtrls
-                            .map((c) => int.tryParse(c.text) ?? 10)
-                            .toList();
-                        final recovery = int.tryParse(recoveryCtrl.text) ?? 90;
-                        final pausa = int.tryParse(pausaCtrl.text) ?? 120;
-                        final ex = ExerciseConfig(
-                          name: name,
-                          targetSets: sets,
-                          repsList: repsList,
-                          recoveryTime: recovery,
-                          interExercisePause: pausa,
-                          notePT: noteCtrl.text.trim(),
-                          noteCliente: '',
-                          supersetGroup: supersetGroup,
-                          gifFilename: selectedExInfo?.gifFilename,
-                        );
+                        final ex = buildEx(name, selectedExInfo?.gifFilename);
                         Navigator.pop(c);
                         setState(() => _days[dayIdx].exercises.add(ex));
                         _save();
@@ -10268,8 +10364,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
   void _apriArchivioEsercizi(
     BuildContext context,
     StateSetter setS,
-    Function(ExerciseInfo) onSelect,
-  ) {
+    Function(ExerciseInfo) onSelect, {
+    void Function(List<ExerciseInfo>)? onSelectMany,
+  }) {
+    final picked = <ExerciseInfo>[];
     String? selectedCategory;
     String? selectedEquipment;
     String searchQuery = '';
@@ -10450,8 +10548,13 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     itemCount: filtered.length,
                     itemBuilder: (_, i) {
                       final ex = filtered[i];
+                      final isPicked = picked.contains(ex);
                       return GestureDetector(
                         onTap: () {
+                          if (onSelectMany != null) {
+                            setA(() => isPicked ? picked.remove(ex) : picked.add(ex));
+                            return;
+                          }
                           Navigator.pop(c);
                           setS(() => onSelect(ex));
                         },
@@ -10459,6 +10562,9 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           decoration: BoxDecoration(
                             color: _isDarkCtx(context) ? Colors.white10 : Colors.grey.shade100,
                             borderRadius: BorderRadius.circular(12),
+                            border: isPicked
+                                ? Border.all(color: appAccentNotifier.value, width: 2.5)
+                                : null,
                           ),
                           child: Column(
                             children: [
@@ -10513,6 +10619,26 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     },
                   ),
                 ),
+                if (onSelectMany != null && picked.isNotEmpty)
+                  SafeArea(
+                    top: false,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(c);
+                            onSelectMany(List.of(picked));
+                          },
+                          child: Text(
+                            'Aggiungi ${picked.length}',
+                            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
           );
