@@ -6022,6 +6022,57 @@ class _ClientMainPageState extends State<ClientMainPage>
     if (!kIsWeb) _updateWidgetData();
     if (!kIsWeb) _maybeStartWorkoutFromWidget();
     if (!kIsWeb) _apriSchedaInArrivo();
+    _offerResumeWorkout();
+  }
+
+  bool _resumeAsked = false;
+
+  /// App chiusa a metà allenamento: al primo caricamento chiede se riprenderlo.
+  Future<void> _offerResumeWorkout() async {
+    if (_resumeAsked) return;
+    _resumeAsked = true;
+    final prefs = await SharedPreferences.getInstance();
+    final now = DateTime.now().millisecondsSinceEpoch;
+    WorkoutDay? day;
+    for (final k in prefs.getKeys().where((k) => k.startsWith('workout_in_progress_')).toList()) {
+      int ts = 0;
+      try {
+        ts = ((jsonDecode(prefs.getString(k) ?? '{}') as Map)['ts'] as num?)?.toInt() ?? 0;
+      } catch (_) {}
+      final match = myRoutine.where((d) => 'workout_in_progress_${d.dayName}' == k);
+      // ponytail: oltre 12 ore lo snapshot è un allenamento abbandonato, si scarta
+      if (day != null || match.isEmpty || now - ts > 12 * 3600 * 1000) {
+        await prefs.remove(k);
+      } else {
+        day = match.first;
+      }
+    }
+    if (day == null || !mounted) return;
+    final ok = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (c) => AlertDialog(
+        backgroundColor: _isDarkCtx(c) ? const Color(0xFF1C1C1E) : Colors.white,
+        title: Text(AppL.resumeWorkoutTitle),
+        content: Text('${day!.dayName}\n\n${AppL.resumeWorkoutMsg}'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(c, false),
+            child: Text(AppL.resumeWorkoutNo),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.pop(c, true),
+            child: Text(AppL.resumeWorkoutYes),
+          ),
+        ],
+      ),
+    );
+    if (!mounted) return;
+    if (ok == true) {
+      _startWorkout(day, resume: true);
+    } else {
+      await prefs.remove('workout_in_progress_${day.dayName}');
+    }
   }
 
   /// File .workout aperto con "Apri con" / condivisione: lo passa al costruttore scheda.
@@ -7803,7 +7854,7 @@ class _ClientMainPageState extends State<ClientMainPage>
     );
   }
 
-  void _startWorkout(WorkoutDay d) async {
+  void _startWorkout(WorkoutDay d, {bool resume = false}) async {
     if (!await _handleWebDonationStartGate()) return;
     
     // Check if tutorial should be shown
@@ -7875,7 +7926,8 @@ class _ClientMainPageState extends State<ClientMainPage>
     
     // Cancella SEMPRE lo snapshot precedente: ogni tap su "Allena ora" è una nuova sessione.
     // Il ripristino automatico avviene solo se l'app viene chiusa MID-workout.
-    await prefs.remove('workout_in_progress_${d.dayName}');
+    // resume: lo snapshot resta e lo ripristina WorkoutEngine all'avvio
+    if (!resume) await prefs.remove('workout_in_progress_${d.dayName}');
     // Resetta i risultati in memoria dell'allenamento precedente
     for (final ex in d.exercises) {
       ex.results = [];
@@ -11705,6 +11757,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       ),
       'allCompletedExercises': _allCompletedExercises,
       'sessionId': _sessionId,
+      'ts': DateTime.now().millisecondsSinceEpoch,
     };
     await prefs.setString(_inProgressKey, jsonEncode(snapshot));
   }
@@ -11811,6 +11864,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       // Sovrascrivi il file sul disco: ora i grafici vedranno le modifiche!
       await prefs.setString('client_routine', jsonEncode(fullRoutine));
     }
+    await prefs.remove(_inProgressKey); // uscita voluta: non chiedere di riprendere
 
     _timerRunId = _newTimerRunId();
     _bgTimer?.cancel();
