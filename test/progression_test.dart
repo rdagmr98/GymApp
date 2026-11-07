@@ -37,4 +37,13 @@ void main() {
     expect(lastTrainedDate(h, 'C', ['Squat']), DateTime(2026, 10, 20, 10));
     expect(lastTrainedDate(h, 'D', ['Stacco']), null);
   });
+  test('il peso conta più delle reps: 230×8 batte 220×10', () {
+    expect(setScore(230, 8) > setScore(220, 10), true);
+    expect(setScore(222.5, 8) > setScore(220, 10), true); // salto minimo della doppia progressione
+    expect(setScore(220, 10) > setScore(220, 8), true);
+    expect(setScore(0, 12) > setScore(0, 10), true);
+    final b = bestSet([{'w': 220, 'r': 10}, {'w': 230, 'r': 8}, {'w': 230, 'r': 6}]);
+    expect((b!.w, b.r), (230.0, 8));
+    expect(bestSet([]), null);
+  });
 }
