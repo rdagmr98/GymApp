@@ -75,4 +75,22 @@ void main() {
     expect(i['b1'], 100);
     expect(i['a2'], closeTo(120, 1e-9));
   });
+
+  test('renamedDays: giorno rinominato con gli stessi esercizi, giorno nuovo diverso no', () {
+    final before = {'Push': {'Panca', 'Croci', 'Dip'}, 'Pull': {'Trazioni', 'Rematore'}};
+    final after = {
+      'Petto e tricipiti': {'Panca', 'Croci', 'French press'},
+      'pull': {'Trazioni', 'Rematore'},
+      'Gambe': {'Squat', 'Pressa'},
+    };
+    expect(renamedDays(before, after), {'Push': 'Petto e tricipiti'});
+    final hist = [
+      {'dayName': 'push', 'exercise': 'Panca'},
+      {'dayName': 'Pull', 'exercise': 'Trazioni'},
+      {'exercise': 'Squat'},
+    ];
+    expect(renameDaysInHistory(hist, {'Push': 'Petto e tricipiti'}), 1);
+    expect(hist[0]['dayName'], 'Petto e tricipiti');
+    expect(hist[1]['dayName'], 'Pull');
+  });
 }

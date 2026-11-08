@@ -8530,10 +8530,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
 
   Future<void> _save() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(
-      'client_routine',
-      jsonEncode(_days.map((d) => d.toJson()).toList()),
-    );
+    await saveRoutineKeepingHistory(prefs, jsonEncode(_days.map((d) => d.toJson()).toList()));
   }
 
   void _aggiungiGiorno() {
@@ -10745,6 +10742,29 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
 
 
 // --- MOTORE ALLENAMENTO ---
+/// Salva la scheda [routineJson] al posto di quella attuale. Se un giorno ha solo cambiato nome
+/// ([renamedDays]), storico e microciclo lo seguono: trend, grafici e suggerimento contano il `dayName`.
+Future<void> saveRoutineKeepingHistory(SharedPreferences prefs, String routineJson) async {
+  try {
+    final oldDays = (jsonDecode(prefs.getString('client_routine') ?? '[]') as List).cast<Map>();
+    final newDays = (jsonDecode(routineJson) as List).cast<Map>();
+    Map<String, Set<String>> names(List<Map> ds) => {
+      for (final d in ds)
+        '${d['dayName']}': {for (final e in (d['exercises'] as List? ?? const []).cast<Map>()) '${e['name']}'},
+    };
+    final ren = renamedDays(names(oldDays), names(newDays));
+    if (ren.isNotEmpty) {
+      final hist = jsonDecode(prefs.getString('client_history') ?? '[]') as List;
+      if (renameDaysInHistory(hist, ren) > 0) await prefs.setString('client_history', jsonEncode(hist));
+      final micro = (jsonDecode(prefs.getString('microcycle_done') ?? '[]') as List).map((d) => ren[d] ?? d).toList();
+      await prefs.setString('microcycle_done', jsonEncode(micro));
+    }
+  } catch (_) {
+    // Storico illeggibile: la scheda si salva comunque.
+  }
+  await prefs.setString('client_routine', routineJson);
+}
+
 class WorkoutEngine extends StatefulWidget {
   final WorkoutDay day;
   final List<dynamic> history;
@@ -10820,6 +10840,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   bool _displayInPounds = false;
   bool _disableWeightKeyboard = false;
   bool _awaitingFirstExerciseStart = true;
+  /// Ordine della scheda. La sessione può cambiarlo (Occupato, parti da un altro), il disco no.
+  late final List<ExerciseConfig> _origExercises;
   NativeAd? _inlineWorkoutNativeAd;
   NativeAd? _startWorkoutNativeAd;
   NativeAd? _confirmPopupNativeAd;
@@ -10838,6 +10860,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     super.initState();
     WidgetsBinding.instance.addObserver(this); // per didChangeAppLifecycleState
     _sessionId = DateTime.now().millisecondsSinceEpoch.toString();
+    _origExercises = List.of(widget.day.exercises);
     exI = 0;
     currentExSeries = [];
     setN = 1;
@@ -11046,6 +11069,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     final prefs = await SharedPreferences.getInstance();
     final snapshot = {
       'exI': exI,
+      'order': [for (final e in widget.day.exercises) _origExercises.indexOf(e)],
       'setN': setN,
       'eserciziCompletati': eserciziCompletati,
       'currentExSeries': currentExSeries,
@@ -11091,6 +11115,14 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       if (!mounted) return;
       setState(() {
         if (snap['sessionId'] is String) _sessionId = snap['sessionId'] as String;
+        final order = [for (final i in (snap['order'] as List? ?? const [])) (i as num).toInt()];
+        if (order.length == _origExercises.length &&
+            order.toSet().length == order.length &&
+            order.every((i) => i >= 0 && i < order.length)) {
+          widget.day.exercises
+            ..clear()
+            ..addAll(order.map((i) => _origExercises[i]));
+        }
         exI = savedExI.clamp(0, widget.day.exercises.length - 1);
         setN = savedSetN;
         eserciziCompletati = savedCompleted;
@@ -11153,7 +11185,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       // Trova il giorno attuale e aggiornalo con i nuovi risultati (serie e note)
       for (int i = 0; i < fullRoutine.length; i++) {
         if (fullRoutine[i]['dayName'] == widget.day.dayName) {
-          fullRoutine[i] = widget.day.toJson();
+          fullRoutine[i] = _dayJson();
           break;
         }
       }
@@ -11298,6 +11330,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
   @override
   void dispose() {
+    // Il giorno è lo stesso oggetto della Home: torna nell'ordine della scheda.
+    widget.day.exercises
+      ..clear()
+      ..addAll(_origExercises);
     WidgetsBinding.instance.removeObserver(this);
     if (_bgTimer != null) _bgTimer!.cancel();
     _cardioCountdownTimer?.cancel();
@@ -12002,6 +12038,126 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     );
   }
 
+  /// Giorno da salvare su disco: i risultati di oggi nell'ordine della scheda,
+  /// non in quello scelto per la sessione.
+  Map<String, dynamic> _dayJson() =>
+      widget.day.toJson()..['exercises'] = [for (final e in _origExercises) e.toJson()];
+
+  /// Esercizi della sessione a blocchi: singolo o superserie intera (stesso gruppo, contigui).
+  List<List<ExerciseConfig>> get _blocks {
+    final out = <List<ExerciseConfig>>[];
+    for (final e in widget.day.exercises) {
+      final g = e.supersetGroup;
+      if (g > 0 && out.isNotEmpty && out.last.last.supersetGroup == g) {
+        out.last.add(e);
+      } else {
+        out.add([e]);
+      }
+    }
+    return out;
+  }
+
+  /// Sposta il blocco [from] in posizione [to], solo per questa sessione (prima di iniziare).
+  void _moveBlock(int from, int to) {
+    final b = _blocks;
+    b.insert(to, b.removeAt(from));
+    setState(() {
+      widget.day.exercises
+        ..clear()
+        ..addAll(b.expand((x) => x));
+      exI = 0;
+      setN = 1;
+    });
+    _setDrumValues(0, 1);
+  }
+
+  /// Schermata iniziale: «Occupato» e l'elenco degli altri esercizi, nell'ordine in cui arriveranno.
+  /// Toccandone uno si parte da lui (con la sua superserie), gli altri restano in ordine.
+  List<Widget> _upNext(Color accent) {
+    final dark = _isDarkCtx(context);
+    final muted = dark ? Colors.white54 : Colors.black54;
+    final blocks = _blocks;
+    Widget thumb(ExerciseConfig e) {
+      final g = exerciseGifPath(e.name, e.gifFilename);
+      final icon = Icon(Icons.fitness_center, size: 20, color: muted);
+      return g == null ? icon : Image.asset(g, fit: BoxFit.cover, errorBuilder: (_, __, ___) => icon);
+    }
+
+    return [
+      if (blocks.length > 1) ...[
+        const SizedBox(height: 8),
+        SizedBox(
+          width: double.infinity,
+          height: 46,
+          child: OutlinedButton.icon(
+            onPressed: () => _moveBlock(0, 1),
+            icon: const Icon(Icons.schedule_rounded),
+            label: Text(AppL.busyDoSecond),
+          ),
+        ),
+      ],
+      if (widget.day.exercises.length > 1) ...[
+        const SizedBox(height: 18),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            AppL.thenInOrder,
+            style: TextStyle(color: muted, fontSize: 12, fontWeight: FontWeight.w700),
+          ),
+        ),
+        const SizedBox(height: 6),
+        for (var bi = 0; bi < blocks.length; bi++)
+          for (final e in blocks[bi])
+            if (!identical(e, widget.day.exercises.first))
+              InkWell(
+                borderRadius: BorderRadius.circular(12),
+                onTap: bi == 0 ? null : () => _moveBlock(bi, 0),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: Row(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          width: 48,
+                          height: 48,
+                          color: dark ? Colors.white10 : const Color(0xFFF0F0F2),
+                          child: thumb(e),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      if (blocks[bi].length > 1)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 6),
+                          child: Icon(Icons.link_rounded, size: 16, color: accent),
+                        ),
+                      Expanded(
+                        child: Text(
+                          localizedExerciseName(e.name),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: dark ? Colors.white : Colors.black87,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        e.cardioSeconds > 0
+                            ? '${(e.cardioSeconds / 60).round()} min'
+                            : '${e.targetSets}×${e.repsList.toSet().join('-')}',
+                        style: TextStyle(color: muted, fontSize: 12),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+      ],
+    ];
+  }
+
   Widget _buildWorkoutReadyScreen(
     ExerciseConfig ex,
     double lastW,
@@ -12058,54 +12214,30 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   ),
                 ),
                 const SizedBox(height: 14),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: exI > 0
-                          ? () => _cambiaEsercizioMethod(exI - 1)
-                          : null,
-                      icon: Icon(
-                        Icons.chevron_left,
-                        color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
+                gifPath != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(18),
+                        child: Image.asset(
+                          gifPath,
+                          height: 160,
+                          fit: BoxFit.contain,
+                          errorBuilder: (_, __, ___) => Icon(
+                            Icons.fitness_center,
+                            size: 72,
+                            color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
+                          ),
+                        ),
+                      )
+                    : SizedBox(
+                        height: 160,
+                        child: Center(
+                          child: Icon(
+                            Icons.fitness_center,
+                            size: 72,
+                            color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
+                          ),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: gifPath != null
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(18),
-                              child: Image.asset(
-                                gifPath,
-                                height: 160,
-                                fit: BoxFit.contain,
-                                errorBuilder: (_, __, ___) => Icon(
-                                  Icons.fitness_center,
-                                  size: 72,
-                                  color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
-                                ),
-                              ),
-                            )
-                          : SizedBox(
-                              height: 160,
-                              child: Center(
-                                child: Icon(
-                                  Icons.fitness_center,
-                                  size: 72,
-                                  color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
-                                ),
-                              ),
-                            ),
-                    ),
-                    IconButton(
-                      onPressed: exI < widget.day.exercises.length - 1
-                          ? () => _cambiaEsercizioMethod(exI + 1)
-                          : null,
-                      icon: Icon(
-                        Icons.chevron_right,
-                        color: _isDarkCtx(context) ? Colors.white70 : Colors.black87,
-                      ),
-                    ),
-                  ],
-                ),
                 if (lastR > 0) ...[
                   const SizedBox(height: 14),
                   _lastVsGoal(ex, accent),
@@ -12141,13 +12273,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       });
                     },
                     icon: const Icon(Icons.play_arrow_rounded),
-                    label: Text(
-                      exI == 0
-                          ? AppL.startFirstEx
-                          : AppL.startFromThisEx,
-                    ),
+                    label: Text(AppL.startFirstEx),
                   ),
                 ),
+                ..._upNext(accent),
               ],
             ),
           ),
@@ -12580,7 +12709,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       for (int i = 0; i < fullRoutine.length; i++) {
         if (fullRoutine[i]['dayName'] == widget.day.dayName) {
           // Sovrascriviamo il giorno vecchio con quello aggiornato (che ha i nuovi results)
-          fullRoutine[i] = widget.day.toJson();
+          fullRoutine[i] = _dayJson();
           break;
         }
       }
@@ -12953,7 +13082,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             List<dynamic> full = jsonDecode(routineStr);
             for (int i = 0; i < full.length; i++) {
               if (full[i]['dayName'] == widget.day.dayName)
-                full[i] = widget.day.toJson();
+                full[i] = _dayJson();
             }
             await prefs.setString('client_routine', jsonEncode(full));
           }
@@ -13051,7 +13180,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           List<dynamic> full = jsonDecode(routineStr);
           for (int i = 0; i < full.length; i++) {
             if (full[i]['dayName'] == widget.day.dayName) {
-              full[i] = widget.day.toJson();
+              full[i] = _dayJson();
             }
           }
           await prefs.setString('client_routine', jsonEncode(full));
