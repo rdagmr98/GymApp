@@ -211,6 +211,8 @@ class AppL {
     'sessionCountPlural': {'it': 'sessioni', 'en': 'sessions', 'es': 'sesiones', 'pt': 'sessões', 'fr': 'sessions', 'de': 'Einheiten', 'el': 'συνεδρίες', 'ar': 'جلسات', 'pl': 'sesje', 'ro': 'sesiuni', 'hu': 'foglalkozások'},
     'loadExample': {'it': 'Carica esempio', 'en': 'Load example', 'es': 'Cargar ejemplo', 'pt': 'Carregar exemplo', 'fr': 'Charger exemple', 'de': 'Beispiel laden', 'el': 'Φόρτωση παραδείγματος', 'ar': 'تحميل مثال', 'pl': 'Załaduj przykład', 'ro': 'Încarcă exemplu', 'hu': 'Példa betöltése'},
     'renameSession': {'it': 'Rinomina sessione', 'en': 'Rename session', 'es': 'Renombrar sesión', 'pt': 'Renomear sessão', 'fr': 'Renommer session', 'de': 'Einheit umbenennen', 'el': 'Μετονομασία συνεδρίας', 'ar': 'إعادة تسمية الجلسة', 'pl': 'Zmień nazwę sesji', 'ro': 'Redenumește sesiunea', 'hu': 'Foglalkozás átnevezése'},
+    'moveUp': {'it': 'Sposta su', 'en': 'Move up', 'es': 'Mover arriba', 'pt': 'Mover para cima', 'fr': 'Monter', 'de': 'Nach oben', 'el': 'Μετακίνηση πάνω', 'ar': 'نقل لأعلى', 'pl': 'Przesuń w górę', 'ro': 'Mută în sus', 'hu': 'Feljebb'},
+    'moveDown': {'it': 'Sposta giù', 'en': 'Move down', 'es': 'Mover abajo', 'pt': 'Mover para baixo', 'fr': 'Descendre', 'de': 'Nach unten', 'el': 'Μετακίνηση κάτω', 'ar': 'نقل لأسفل', 'pl': 'Przesuń w dół', 'ro': 'Mută în jos', 'hu': 'Lejjebb'},
     'sessionName': {'it': 'Nome sessione', 'en': 'Session name', 'es': 'Nombre de sesión', 'pt': 'Nome da sessão', 'fr': 'Nom de la session', 'de': 'Name der Einheit', 'el': 'Όνομα συνεδρίας', 'ar': 'اسم الجلسة', 'pl': 'Nazwa sesji', 'ro': 'Numele sesiunii', 'hu': 'Foglalkozás neve'},
     'editExercise': {'it': 'Modifica esercizio', 'en': 'Edit exercise', 'es': 'Editar ejercicio', 'pt': 'Editar exercício', 'fr': 'Modifier exercice', 'de': 'Übung bearbeiten', 'el': 'Επεξεργασία άσκησης', 'ar': 'تعديل التمرين', 'pl': 'Edytuj ćwiczenie', 'ro': 'Editează exercițiu', 'hu': 'Gyakorlat szerkesztése'},
     'streakWeeks': {'it': 'Microcicli di fila', 'en': 'Week streak', 'es': 'Racha de semanas', 'pt': 'Sequência de semanas', 'fr': 'Série de semaines', 'de': 'Wochensträhne', 'el': 'Σερί εβδομάδων', 'ar': 'تتابع الأسابيع', 'pl': 'Seria tygodni', 'ro': 'Serie de săptămâni', 'hu': 'Hetek sorozata'},
@@ -519,6 +521,8 @@ class AppL {
   static String get sessionCountPlural => _t('sessionCountPlural');
   static String get loadExample => _t('loadExample');
   static String get renameSession => _t('renameSession');
+  static String get moveUp => _t('moveUp');
+  static String get moveDown => _t('moveDown');
   static String get sessionName => _t('sessionName');
   static String get editExercise => _t('editExercise');
   static String get streakWeeks => _t('streakWeeks');

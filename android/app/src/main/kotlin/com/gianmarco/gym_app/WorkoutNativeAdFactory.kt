@@ -18,10 +18,9 @@ class WorkoutNativeAdFactory(
         nativeAd: NativeAd,
         customOptions: MutableMap<String, Any>?
     ): NativeAdView {
-        val adView = layoutInflater.inflate(
-            R.layout.native_workout_ad,
-            null
-        ) as NativeAdView
+        // "narrow": slot stretto accanto al pannello serie, layout verticale.
+        val layout = if (customOptions?.get("narrow") == true) R.layout.native_workout_ad_narrow else R.layout.native_workout_ad
+        val adView = layoutInflater.inflate(layout, null) as NativeAdView
 
         val headlineView = adView.findViewById<TextView>(R.id.ad_headline)
         val bodyView = adView.findViewById<TextView>(R.id.ad_body)
