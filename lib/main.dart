@@ -9318,33 +9318,45 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     );
   }
 
-  void _aggiungiEsercizio(int dayIdx) {
+  /// Form unico per aggiungere ([editIdx] null) o modificare un esercizio.
+  void _aggiungiEsercizio(int dayIdx, {int? editIdx}) {
     final accent = appAccentNotifier.value;
-    final nameCtrl = TextEditingController();
-    final setsCtrl = TextEditingController(text: '3');
-    final recoveryCtrl = TextEditingController(text: '90');
-    final pausaCtrl = TextEditingController(text: '120');
-    final noteCtrl = TextEditingController();
-    int supersetGroup = 0;
-
-    int currentSets = 3;
-    List<TextEditingController> repsCtrls = List.generate(
-      3,
-      (_) => TextEditingController(text: '10'),
+    final orig = editIdx == null ? null : _days[dayIdx].exercises[editIdx];
+    final nameCtrl = TextEditingController(text: orig?.name ?? '');
+    final setsCtrl = TextEditingController(text: '${orig?.targetSets ?? 3}');
+    final recoveryCtrl = TextEditingController(text: '${orig?.recoveryTime ?? 90}');
+    final pausaCtrl = TextEditingController(text: '${orig?.interExercisePause ?? 120}');
+    final noteCtrl = TextEditingController(text: orig?.notePT ?? '');
+    final cardioCtrl = TextEditingController(
+      text: '${orig != null && orig.cardioSeconds > 0 ? orig.cardioSeconds : 300}',
     );
-    ExerciseInfo? selectedExInfo;
+    bool isCardioMode = orig != null &&
+        (orig.isCardio || resolveExerciseInfo(orig.name)?.category == 'cardio');
+    int supersetGroup = orig?.supersetGroup ?? 0;
+
+    int currentSets = orig?.targetSets ?? 3;
+    List<TextEditingController> repsCtrls = [
+      for (int i = 0; i < currentSets; i++)
+        TextEditingController(
+          text: '${orig == null || orig.repsList.isEmpty ? 10 : orig.repsList[scala.min(i, orig.repsList.length - 1)]}',
+        ),
+    ];
+    ExerciseInfo? selectedExInfo =
+        orig?.gifFilename != null ? findByGifSlug(orig!.gifFilename!) : null;
     List<ExerciseInfo> suggestions = [];
 
     ExerciseConfig buildEx(String name, String? gif) => ExerciseConfig(
       name: name,
-      targetSets: (int.tryParse(setsCtrl.text) ?? 3).clamp(1, 20),
-      repsList: repsCtrls.map((c) => int.tryParse(c.text) ?? 10).toList(),
+      targetSets: isCardioMode ? 1 : (int.tryParse(setsCtrl.text) ?? 3).clamp(1, 20),
+      repsList: isCardioMode ? [1] : repsCtrls.map((c) => int.tryParse(c.text) ?? 10).toList(),
       recoveryTime: int.tryParse(recoveryCtrl.text) ?? 90,
       interExercisePause: int.tryParse(pausaCtrl.text) ?? 120,
       notePT: noteCtrl.text.trim(),
-      noteCliente: '',
+      noteCliente: orig?.noteCliente ?? '',
       supersetGroup: supersetGroup,
       gifFilename: gif,
+      useQuarterStep: orig?.useQuarterStep ?? false,
+      cardioSeconds: isCardioMode ? (int.tryParse(cardioCtrl.text) ?? 300).clamp(1, 86400) : 0,
     );
 
     showModalBottomSheet(
@@ -9395,9 +9407,10 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
               minChildSize: 0.5,
               maxChildSize: 0.95,
               expand: false,
-              builder: (_, scrollCtrl) => ListView(
+              builder: (_, scrollCtrl) => Column(children: [
+                Expanded(child: ListView(
                 controller: scrollCtrl,
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
                 children: [
                   Center(
                     child: Container(
@@ -9411,7 +9424,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     ),
                   ),
                   Text(
-                    AppL.exercises,
+                    editIdx != null ? AppL.editExercise : AppL.exercises,
                     style: TextStyle(
                       color: accent,
                       fontWeight: FontWeight.bold,
@@ -9565,6 +9578,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           ),
                         ),
                       ),
+                      if (editIdx == null) ...[
                       const SizedBox(width: 8),
                       // Selezione multipla: aggiunge tutti con serie/reps/recupero del modulo
                       Expanded(
@@ -9592,11 +9606,50 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                           ),
                         ),
                       ),
+                      ],
                     ],
                   ),
 
                   const SizedBox(height: 12),
 
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    activeThumbColor: accent,
+                    title: Text(
+                      AppL.lang == 'en' ? 'Timed (cardio)' : 'A tempo (cardio)',
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                    ),
+                    value: isCardioMode,
+                    onChanged: (v) => setS(() => isCardioMode = v),
+                  ),
+                  if (isCardioMode) ...[
+                    TextField(
+                      controller: cardioCtrl,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                      decoration: InputDecoration(
+                        labelText: AppL.cardioDurationSec,
+                        labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                        filled: true,
+                        fillColor: _isDarkCtx(context) ? Colors.black26 : Colors.black.withAlpha(10),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    TextField(
+                      controller: pausaCtrl,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
+                      decoration: InputDecoration(
+                        labelText: AppL.pauseSec,
+                        labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
+                        filled: true,
+                        fillColor: _isDarkCtx(context) ? Colors.black26 : Colors.black.withAlpha(10),
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12), borderSide: BorderSide.none),
+                      ),
+                    ),
+                  ],
+                  if (!isCardioMode) ...[
                   // — Preset serie x reps e recupero
                   Wrap(
                     runSpacing: 6,
@@ -9627,6 +9680,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
 
                   const SizedBox(height: 12),
 
+                  ],
                   // — Preview GIF selezionata
                   if (selectedExInfo != null &&
                       selectedExInfo!.gifFilename != null) ...[
@@ -9658,6 +9712,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     const SizedBox(height: 12),
                   ],
 
+                  if (!isCardioMode) ...[
                   // — Serie
                   Row(
                     children: [
@@ -9792,6 +9847,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
 
                   const SizedBox(height: 16),
 
+                  ],
                   // — Note
                   TextField(
                     controller: noteCtrl,
@@ -9859,17 +9915,26 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                     ),
                   ),
 
-                  const SizedBox(height: 20),
-
-                  SizedBox(
+                ],
+              )),
+              // Salva fisso in basso, sempre visibile
+              Padding(
+                padding: EdgeInsets.fromLTRB(20, 8, 20, 12 + MediaQuery.of(ctx).padding.bottom),
+                child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
                         final name = nameCtrl.text.trim();
                         if (name.isEmpty) return;
-                        final ex = buildEx(name, selectedExInfo?.gifFilename);
+                        final ex = buildEx(name, selectedExInfo?.gifFilename ?? orig?.gifFilename);
                         Navigator.pop(c);
-                        setState(() => _days[dayIdx].exercises.add(ex));
+                        setState(() {
+                          if (editIdx != null) {
+                            _days[dayIdx].exercises[editIdx] = ex;
+                          } else {
+                            _days[dayIdx].exercises.add(ex);
+                          }
+                        });
                         _save();
                       },
                       child: Text(
@@ -9881,8 +9946,8 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
                       ),
                     ),
                   ),
-                ],
               ),
+              ]),
             ),
           );
         },
@@ -10269,332 +10334,7 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
     );
   }
 
-  void _modificaEsercizio(int dayIdx, int exIdx) {
-    final orig = _days[dayIdx].exercises[exIdx];
-    final accent = appAccentNotifier.value;
-    final nameCtrl = TextEditingController(text: orig.name);
-    final setsCtrl = TextEditingController(text: '${orig.targetSets}');
-    final recoveryCtrl = TextEditingController(text: '${orig.recoveryTime}');
-    final pausaCtrl = TextEditingController(text: '${orig.interExercisePause}');
-    final noteCtrl = TextEditingController(text: orig.notePT);
-    final cardioCtrl = TextEditingController(
-      text: '${orig.cardioSeconds > 0 ? orig.cardioSeconds : 300}',
-    );
-    int supersetGroup = orig.supersetGroup;
-    int currentSets = orig.targetSets;
-    List<TextEditingController> repsCtrls = List.generate(
-      orig.repsList.length,
-      (i) => TextEditingController(text: '${orig.repsList[i]}'),
-    );
-    if (repsCtrls.isEmpty) repsCtrls = [TextEditingController(text: '10')];
-    ExerciseInfo? selectedExInfo;
-    bool isCardioMode = orig.isCardio || (resolveExerciseInfo(orig.name)?.category == 'cardio');
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: _isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (c) => StatefulBuilder(
-        builder: (ctx, setS) {
-          void updateSets(String val) {
-            final n = (int.tryParse(val) ?? 1).clamp(1, 20);
-            setS(() {
-              currentSets = n;
-              while (repsCtrls.length < n) {
-                repsCtrls.add(
-                  TextEditingController(
-                    text: repsCtrls.isNotEmpty ? repsCtrls.last.text : '10',
-                  ),
-                );
-              }
-              while (repsCtrls.length > n) {
-                repsCtrls.last.dispose();
-                repsCtrls.removeLast();
-              }
-            });
-          }
-
-          return Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(ctx).viewInsets.bottom,
-            ),
-            child: DraggableScrollableSheet(
-              initialChildSize: 0.9,
-              minChildSize: 0.5,
-              maxChildSize: 0.95,
-              expand: false,
-              builder: (_, scrollCtrl) => ListView(
-                controller: scrollCtrl,
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 32),
-                children: [
-                  Center(
-                    child: Container(
-                      width: 40,
-                      height: 4,
-                      margin: const EdgeInsets.only(bottom: 16),
-                      decoration: BoxDecoration(
-                        color: _isDarkCtx(context) ? Colors.white24 : Colors.black26,
-                        borderRadius: BorderRadius.circular(2),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    AppL.editExercise,
-                    style: TextStyle(
-                      color: accent,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: nameCtrl,
-                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                    decoration: InputDecoration(
-                      labelText: AppL.exerciseName,
-                      labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                      filled: true,
-                      fillColor: _isDarkCtx(context) ? Colors.black26 : Colors.black.withAlpha(10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                    onChanged: (v) => setS(() {
-                      isCardioMode = resolveExerciseInfo(v)?.category == 'cardio';
-                    }),
-                  ),
-                  const SizedBox(height: 8),
-                  OutlinedButton.icon(
-                    onPressed: () => _apriArchivioEsercizi(ctx, setS, (ex) {
-                      nameCtrl.text = ex.name;
-                      setS(() {
-                        selectedExInfo = ex;
-                        isCardioMode = ex.category == 'cardio';
-                      });
-                    }),
-                    icon: const Icon(Icons.library_books_rounded, size: 18),
-                    label: Text(AppL.browseArchive),
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: accent,
-                      side: BorderSide(color: accent.withAlpha(80)),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  SwitchListTile(
-                    contentPadding: EdgeInsets.zero,
-                    activeThumbColor: accent,
-                    title: Text(
-                      AppL.lang == 'en' ? 'Timed (cardio)' : 'A tempo (cardio)',
-                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                    ),
-                    value: isCardioMode,
-                    onChanged: (v) => setS(() => isCardioMode = v),
-                  ),
-                  if (isCardioMode) ...[
-                    TextField(
-                      controller: cardioCtrl,
-                      keyboardType: TextInputType.number,
-                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                      decoration: InputDecoration(
-                        labelText: AppL.cardioDurationSec,
-                        labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                        filled: true,
-                        fillColor: _isDarkCtx(context) ? Colors.black26 : Colors.black.withAlpha(10),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 12),
-                    TextField(
-                      controller: pausaCtrl,
-                      keyboardType: TextInputType.number,
-                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                      decoration: InputDecoration(
-                        labelText: AppL.pauseSec,
-                        labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                        filled: true,
-                        fillColor: _isDarkCtx(context) ? Colors.black26 : Colors.black.withAlpha(10),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                          borderSide: BorderSide.none,
-                        ),
-                      ),
-                    ),
-                  ] else ...[
-                    Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            controller: setsCtrl,
-                            keyboardType: TextInputType.number,
-                            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                            decoration: InputDecoration(
-                              labelText: AppL.sets,
-                              labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                              filled: true,
-                              fillColor: _isDarkCtx(context) ? Colors.black26 : Colors.black.withAlpha(10),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                            onChanged: updateSets,
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: TextField(
-                            controller: recoveryCtrl,
-                            keyboardType: TextInputType.number,
-                            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                            decoration: InputDecoration(
-                              labelText: AppL.recovery,
-                              labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                              filled: true,
-                              fillColor: _isDarkCtx(context) ? Colors.black26 : Colors.black.withAlpha(10),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: TextField(
-                            controller: pausaCtrl,
-                            keyboardType: TextInputType.number,
-                            style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                            decoration: InputDecoration(
-                              labelText: AppL.pauseSec,
-                              labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                              filled: true,
-                              fillColor: _isDarkCtx(context) ? Colors.black26 : Colors.black.withAlpha(10),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      AppL.repsPerSet,
-                      style: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54, fontSize: 12),
-                    ),
-                    const SizedBox(height: 6),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: List.generate(
-                        currentSets,
-                        (i) => SizedBox(
-                          width: 58,
-                          child: TextField(
-                            controller: repsCtrls[i],
-                            keyboardType: TextInputType.number,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-                              fontSize: 13,
-                            ),
-                            decoration: InputDecoration(
-                              labelText: 'S${i + 1}',
-                              labelStyle: TextStyle(
-                                color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
-                                fontSize: 11,
-                              ),
-                              filled: true,
-                              fillColor: _isDarkCtx(context) ? Colors.black26 : Colors.black.withAlpha(10),
-                              contentPadding: const EdgeInsets.symmetric(
-                                vertical: 8,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: 16),
-                  TextField(
-                    controller: noteCtrl,
-                    maxLines: 3,
-                    style: TextStyle(color: _isDarkCtx(context) ? Colors.white : Colors.black87),
-                    decoration: InputDecoration(
-                      labelText: AppL.notes,
-                      labelStyle: TextStyle(color: _isDarkCtx(context) ? Colors.white54 : Colors.black54),
-                      filled: true,
-                      fillColor: _isDarkCtx(context) ? Colors.black26 : Colors.black.withAlpha(10),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        final name = nameCtrl.text.trim();
-                        if (name.isEmpty) return;
-                        final cardioSec = isCardioMode
-                            ? (int.tryParse(cardioCtrl.text) ?? 300).clamp(1, 86400)
-                            : 0;
-                        final sets = isCardioMode ? 1 : (int.tryParse(setsCtrl.text) ?? 3).clamp(1, 20);
-                        final repsList = isCardioMode ? [1] : repsCtrls.map((c) => int.tryParse(c.text) ?? 10).toList();
-                        final recovery = int.tryParse(recoveryCtrl.text) ?? 90;
-                        final pausa = int.tryParse(pausaCtrl.text) ?? 120;
-                        final newEx = ExerciseConfig(
-                          name: name,
-                          targetSets: sets,
-                          repsList: repsList,
-                          recoveryTime: recovery,
-                          interExercisePause: pausa,
-                          notePT: noteCtrl.text.trim(),
-                          noteCliente: orig.noteCliente,
-                          supersetGroup: supersetGroup,
-                          gifFilename:
-                              selectedExInfo?.gifFilename ?? orig.gifFilename,
-                          useQuarterStep: orig.useQuarterStep,
-                          cardioSeconds: cardioSec,
-                        );
-                        Navigator.pop(c);
-                        setState(() => _days[dayIdx].exercises[exIdx] = newEx);
-                        _save();
-                      },
-                      child: Text(
-                        AppL.save,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
+  void _modificaEsercizio(int dayIdx, int exIdx) => _aggiungiEsercizio(dayIdx, editIdx: exIdx);
 
   @override
   Widget build(BuildContext context) {
