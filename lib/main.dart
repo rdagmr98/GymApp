@@ -8534,8 +8534,6 @@ class _ScheduleBuilderScreenState extends State<ScheduleBuilderScreen>
       'client_routine',
       jsonEncode(_days.map((d) => d.toJson()).toList()),
     );
-    // Reset microcycle in progress when the routine changes (keep streak count)
-    await prefs.setString('microcycle_done', '[]');
   }
 
   void _aggiungiGiorno() {
@@ -11468,25 +11466,18 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   String _formatWeightLabel(double kg) =>
       '${formatWeightValue(kg, usePounds: _displayInPounds)} ${_displayInPounds ? 'lb' : 'kg'}';
 
-  // Calcola il punteggio performance: > 0 miglioramento, < 0 peggioramento, 0 stallo
+  // Stesso metro del grafico Andamento: somma delle serie migliori degli esercizi rifatti, oggi contro la volta scorsa
   int _calcPerformanceScore() {
-    int improved = 0, regressed = 0;
+    double curr = 0, prev = 0;
     for (final ex in _allCompletedExercises) {
-      final name = ex['exercise'] as String;
-      final currSeries = (ex['series'] as List).cast<Map<String, dynamic>>();
-      final prevSeries = _previousResults[name];
-      if (prevSeries == null || prevSeries.isEmpty || currSeries.isEmpty)
-        continue;
-      // media di setScore: il peso conta più delle reps (230×8 batte 220×10)
-      double avg(List series) =>
-          series.map((s) => setScore(s['w'] as num, s['r'] as num)).reduce((a, b) => a + b) / series.length;
-      final d = avg(currSeries) - avg(prevSeries);
-      if (d > 0.01)
-        improved++;
-      else if (d < -0.01)
-        regressed++;
+      final p = bestSet(_previousResults[ex['exercise']]);
+      final c = bestSet(ex['series'] as List?);
+      if (p == null || c == null) continue;
+      curr += c.score;
+      prev += p.score;
     }
-    return improved - regressed;
+    final d = curr - prev;
+    return d > 0.01 ? 1 : (d < -0.01 ? -1 : 0);
   }
 
   // Ritorna lista dettagli miglioramenti per esercizio
@@ -12115,38 +12106,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                     ),
                   ],
                 ),
-                if (lastW > 0) ...[
+                if (lastR > 0) ...[
                   const SizedBox(height: 14),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.history_rounded, size: 11,
-                        color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
-                      const SizedBox(width: 4),
-                      Text(AppL.lastTime.toUpperCase(),
-                        style: TextStyle(
-                          color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
-                          fontSize: 11,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  Wrap(
-                    alignment: WrapAlignment.center,
-                    spacing: 8,
-                    runSpacing: 6,
-                    children: [
-                      _pill(context, '${lastW % 1 == 0 ? lastW.toInt() : lastW} kg'),
-                      _pill(context, '$lastR reps'),
-                      if (suggerisciReps && _showWeightSuggestion)
-                        _pill(context, AppL.tryReps(targetR), icon: Icons.add_rounded, color: accent),
-                      if (suggerisciAumento && _showWeightSuggestion)
-                        _pill(context, AppL.increaseWeight, icon: Icons.trending_up_rounded, color: accent),
-                    ],
-                  ),
-
+                  _lastVsGoal(ex, accent),
                 ],
                 if (ex.notePT.isNotEmpty) ...[
                   const SizedBox(height: 14),
@@ -13588,6 +13550,80 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     return null;
   }
 
+  /// Volta scorsa -> obiettivo di oggi della serie corrente (lo stesso che la ruota ha già impostato),
+  /// sotto tutte le serie della volta scorsa. Toccando spiega il suggerimento.
+  Widget _lastVsGoal(ExerciseConfig ex, Color accent) {
+    final dark = _isDarkCtx(context);
+    final muted = dark ? Colors.white38 : Colors.black38;
+    final last = _getSuggest(ex.name, setN);
+    final lw = (last['w'] as num?)?.toDouble() ?? 0.0;
+    final lr = (last['r'] as num?)?.toInt() ?? 0;
+    final p = _plan(ex, setN);
+    String fmt(num w, num r) => w > 0 ? '${_formatWeightLabel(w.toDouble())} × $r' : '$r reps';
+    final plus = lw > 0 && p.kg - lw > 0.001
+        ? '+${_formatWeightLabel(p.kg - lw)}'
+        : (p.reps > lr ? '+${p.reps - lr} reps' : '');
+    final prev = _previousResults[ex.name] ?? const <Map<String, dynamic>>[];
+    Widget col(String label, String value, Color c, String sub) => Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(color: muted, fontSize: 10, letterSpacing: 1.5)),
+            const SizedBox(height: 2),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(value, style: TextStyle(color: c, fontSize: 20, fontWeight: FontWeight.w800)),
+            ),
+            if (sub.isNotEmpty)
+              Text(sub, style: TextStyle(color: c, fontSize: 12, fontWeight: FontWeight.w700)),
+          ],
+        );
+    final tip = p.aumento || p.provaReps != null;
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: tip
+          ? () => _showSuggestionOverlay(isWeight: p.aumento, targetReps: p.provaReps ?? p.target, force: true)
+          : null,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Expanded(child: col(AppL.lastTime.toUpperCase(), fmt(lw, lr), dark ? Colors.white70 : Colors.black87, '')),
+              Icon(Icons.arrow_forward_rounded, size: 18, color: accent),
+              Expanded(child: col(AppL.today.toUpperCase(), fmt(p.kg, p.reps), accent, plus)),
+            ],
+          ),
+          if (prev.length > 1) ...[
+            const SizedBox(height: 6),
+            Wrap(
+              alignment: WrapAlignment.center,
+              spacing: 10,
+              runSpacing: 2,
+              children: [
+                for (var i = 0; i < prev.length; i++)
+                  Builder(builder: (_) {
+                    final n = (prev[i]['s'] as num?)?.toInt() ?? i + 1;
+                    final cur = n == setN;
+                    return Text(
+                      'S$n ${fmt((prev[i]['w'] as num?) ?? 0, (prev[i]['r'] as num?) ?? 0)}',
+                      style: TextStyle(
+                        fontSize: 11,
+                        color: cur ? accent : muted,
+                        fontWeight: cur ? FontWeight.w700 : FontWeight.w500,
+                      ),
+                    );
+                  }),
+              ],
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
   Widget _buildInfoPanel(
     ExerciseConfig ex,
     double lastW,
@@ -13610,51 +13646,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.max,
         children: [
-          if (lastW > 0) ...[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.history_rounded, size: 11,
-                  color: _isDarkCtx(context) ? Colors.white38 : Colors.black38),
-                const SizedBox(width: 4),
-                Text(AppL.lastTime,
-                  style: TextStyle(
-                    color: _isDarkCtx(context) ? Colors.white38 : Colors.black38,
-                    fontSize: 11,
-                    letterSpacing: 2,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 8,
-              runSpacing: 6,
-              children: [
-                _pill(context, '${lastW % 1 == 0 ? lastW.toInt() : lastW} kg', fontSize: 16),
-                _pill(context, '$lastR reps', fontSize: 16),
-              ],
-            ),
-          ],
-          if (suggerisciAumento || suggerisciReps)
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: _pill(
-                context,
-                suggerisciAumento ? AppL.increaseWeight : AppL.tryReps(targetR),
-                icon: suggerisciAumento ? Icons.trending_up_rounded : Icons.add_rounded,
-                color: accent,
-                fontSize: 14,
-                onTap: () => _showSuggestionOverlay(
-                  isWeight: suggerisciAumento,
-                  targetReps: targetR,
-                  force: true,
-                ),
-              ),
-            ),
+          if (lastR > 0) _lastVsGoal(ex, accent),
           if (ex.notePT.isNotEmpty) ...[
-            if (lastW > 0) Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 10),
+            if (lastR > 0) Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 10),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -13713,10 +13707,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     );
   }
 
-  /// Doppia progressione, serie per serie, contro la stessa serie della volta scorsa:
-  /// reps oltre il target -> le ripropone; target+2 -> suggerisce più peso;
-  /// peso già aumentato oggi sulla serie prima -> lo porta qui e le reps tornano al target.
+  /// Doppia progressione, serie per serie, contro la stessa serie della volta scorsa (regole in progressionPlan):
+  /// sempre un passo avanti, +1 rep oppure, a target+2, più peso con le reps di nuovo al target.
   /// Va chiamata con ex = esercizio corrente (usa currentExSeries).
+  final Map<String, double> _steps = {}; // salto di peso abituale per esercizio (weightStep)
   ProgressionPlan _plan(ExerciseConfig ex, int s) {
     double w(Map m) => (m['w'] as num?)?.toDouble() ?? 0.0;
     final p = _getSuggest(ex.name, s);
@@ -13727,6 +13721,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       lastReps: (p['r'] as num?)?.toInt() ?? 0,
       todayPrevKg: today.isEmpty ? null : w(today.last),
       lastPrevKg: today.isEmpty ? 0 : w(_getSuggest(ex.name, s - 1)),
+      step: _steps.putIfAbsent(ex.name, () => weightStep(widget.history, ex.name)),
     );
   }
 
@@ -15992,7 +15987,7 @@ class _WorkoutProgressChartState extends State<_WorkoutProgressChart> {
       );
     }
 
-    final values = [for (final k in keys) scores[k]!.values.fold(0.0, (a, b) => a + b)];
+    final values = chainIndex([for (final k in keys) scores[k]!]); // solo esercizi in comune con la sessione prima
     final dates = [for (final k in keys) date[k]];
     final n = values.length;
     final sel = (_sel ?? n - 1).clamp(0, n - 1);
@@ -17282,12 +17277,13 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
       if ((exMap[exName] ?? 0) < best) exMap[exName] = best;
     }
 
+    final idx = sessionIndex(bySessionEx, sessionDate, sessionDayName);
     final List<_SessionPoint> points = [];
     for (final sid in bySessionEx.keys) {
       final date = sessionDate[sid] ?? '';
       if (date.isEmpty) continue;
-      // Score = somma delle serie migliori di ogni esercizio della sessione
-      final score = bySessionEx[sid]!.values.fold(0.0, (a, b) => a + b);
+      // andamento concatenato per giorno sugli esercizi in comune (sessionIndex)
+      final score = idx[sid]!;
       points.add(_SessionPoint(
         sessionId: sid,
         date: DateTime.tryParse(date) ?? DateTime(2000),
