@@ -54,6 +54,8 @@ void main() {
     ];
     expect(weightStep(h, 'Fly'), 5);
     expect(weightStep(h, 'Panca'), 2.5);
+    // pochi pesi diversi (70 e 80): non propone +10 kg
+    expect(weightStep([{'exercise': 'Leg', 'series': [{'w': 70, 'r': 12}, {'w': 80, 'r': 8}]}], 'Leg'), 5);
   });
   test('andamento: solo esercizi in comune con la sessione prima', () {
     final i = chainIndex([
