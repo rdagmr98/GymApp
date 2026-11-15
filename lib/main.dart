@@ -11578,8 +11578,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   String _formatWeightLabel(double kg) =>
       '${formatWeightValue(kg, usePounds: _displayInPounds)} ${_displayInPounds ? 'lb' : 'kg'}';
 
-  // Stesso metro del grafico Andamento: somma delle serie migliori degli esercizi rifatti, oggi contro la volta scorsa
-  int _calcPerformanceScore() {
+  // Stesso metro del grafico Andamento: somma delle serie migliori degli esercizi rifatti, oggi contro la volta scorsa.
+  // Variazione in %, null se nessun esercizio ha una volta scorsa. La usano riepilogo e card da condividere.
+  double? _sessionProgressPct() {
     double curr = 0, prev = 0;
     for (final ex in _allCompletedExercises) {
       final p = bestSet(_previousResults[ex['exercise']]);
@@ -11588,8 +11589,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       curr += c.score;
       prev += p.score;
     }
-    final d = curr - prev;
-    return d > 0.01 ? 1 : (d < -0.01 ? -1 : 0);
+    return prev > 0 ? (curr / prev - 1) * 100 : null;
   }
 
   // Ritorna lista dettagli miglioramenti per esercizio
@@ -11625,7 +11625,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name.toUpperCase(),
+                      localizedExerciseName(name).toUpperCase(),
                       style: TextStyle(
                         color: _isDarkCtx(context) ? Colors.white54 : Colors.black54,
                         fontSize: 11,
@@ -11638,8 +11638,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       final s = currSeries[si];
                       final double w = (s['w'] as num).toDouble();
                       final int r = (s['r'] as num).toInt();
-                      // Confronto con la stessa serie del giro precedente
-                      Color serieColor = Colors.white70;
+                      final dark = _isDarkCtx(context);
+                      // Confronto con la stessa serie del giro precedente (colori leggibili anche col tema chiaro)
+                      Color serieColor = dark ? Colors.white70 : Colors.black87;
                       String compareStr = '';
                       if (prevSeries != null && si < prevSeries.length) {
                         final ps = prevSeries[si];
@@ -11649,15 +11650,17 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         final dR = r - pr;
                         final dS = setScore(w, r) - setScore(pw, pr); // il peso conta più delle reps
                         final parts = [
-                          if (dW.abs() > 0.05) '${dW > 0 ? '+' : ''}${dW.toStringAsFixed(1)}kg',
+                          if (dW.abs() > 0.05) '${dW > 0 ? '+' : '-'}${_formatWeightLabel(dW.abs())}',
                           if (dR != 0) '${dR > 0 ? '+' : ''}$dR reps',
                         ];
                         serieColor = dS > 0.01
-                            ? Colors.greenAccent
-                            : (dS < -0.01 ? Colors.redAccent : Colors.white60);
+                            ? (dark ? Colors.greenAccent : const Color(0xFF1E8E4E))
+                            : (dS < -0.01
+                                ? (dark ? Colors.redAccent : const Color(0xFFC62828))
+                                : (dark ? Colors.white60 : Colors.black54));
                         compareStr = parts.isEmpty ? ' (=)' : ' (${parts.join(', ')})';
                       } else if (prevSeries == null) {
-                        serieColor = Colors.white54;
+                        serieColor = dark ? Colors.white54 : Colors.black54;
                       }
                       return Padding(
                         padding: const EdgeInsets.symmetric(vertical: 2),
@@ -11673,12 +11676,14 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                 ),
                               ),
                             ),
-                            Text(
-                              '${w % 1 == 0 ? w.toInt() : w} kg × $r reps$compareStr',
-                              style: TextStyle(
-                                color: serieColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
+                            Expanded(
+                              child: Text(
+                                '${_formatWeightLabel(w)} × $r reps$compareStr',
+                                style: TextStyle(
+                                  color: serieColor,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
                             ),
                           ],
@@ -11761,11 +11766,18 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     for (final ex in _allCompletedExercises) {
       totalSeries += (ex['series'] as List).length;
     }
-    final score = _calcPerformanceScore();
-    // hasPrev = almeno un esercizio ha dati dalla sessione precedente
-    final hasPrev = _allCompletedExercises.any(
-      (ex) => _previousResults.containsKey(ex['exercise']),
-    );
+    final pct = _sessionProgressPct(); // null = prima volta
+    double volume = 0;
+    for (final ex in _allCompletedExercises) {
+      for (final s in ex['series'] as List) {
+        volume += ((s['w'] as num?) ?? 0) * ((s['r'] as num?) ?? 0);
+      }
+    }
+    // ponytail: durata dall'avvio (_sessionId = ms di inizio, sopravvive alla ripresa); oltre 4 h
+    // è un allenamento ripreso il giorno dopo e il numero non dice nulla, quindi non si mostra.
+    final minutes = DateTime.now()
+        .difference(DateTime.fromMillisecondsSinceEpoch(int.tryParse(_sessionId) ?? 0))
+        .inMinutes;
     if (kIsWeb) {
       if (kWebDonationLockEnabled) {
         _recordWebDonationPromptIfNeeded();
@@ -11781,18 +11793,20 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         IconData perfIcon;
         Color perfColor;
         String perfLabel;
-        if (!hasPrev) {
+        // la % è la stessa del grafico Andamento e della card da condividere
+        final pctLabel = pct == null ? '' : ' ${pct >= 0 ? '+' : ''}${pct.toStringAsFixed(1)}%';
+        if (pct == null) {
           perfIcon = Icons.fitness_center;
           perfColor = Theme.of(c).colorScheme.primary;
           perfLabel = AppL.firstSession;
-        } else if (score > 0) {
+        } else if (pct >= 0.05) {
           perfIcon = Icons.trending_up;
           perfColor = const Color(0xFF4CD97B);
-          perfLabel = AppL.improving;
-        } else if (score < 0) {
+          perfLabel = '${AppL.improving}$pctLabel';
+        } else if (pct <= -0.05) {
           perfIcon = Icons.trending_down;
           perfColor = const Color(0xFFFF6B6B);
-          perfLabel = AppL.declining;
+          perfLabel = '${AppL.declining}$pctLabel';
         } else {
           perfIcon = Icons.trending_flat;
           perfColor = const Color(0xFFE0A458);
@@ -11841,6 +11855,12 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   '${_allCompletedExercises.length}',
                 ),
                 _recapRow(Icons.repeat, AppL.totalSeries, '$totalSeries'),
+                if (volume > 0)
+                  _recapRow(Icons.scale_rounded, AppL.totalVolume,
+                      '${formatWeightValue(volume, usePounds: _displayInPounds, maxDecimals: 0)} ${_displayInPounds ? 'lb' : 'kg'}'),
+                if (minutes > 0 && minutes <= 240)
+                  _recapRow(Icons.timer_outlined, AppL.workoutDuration,
+                      minutes >= 60 ? '${minutes ~/ 60} h ${minutes % 60} min' : '$minutes min'),
                 const SizedBox(height: 8),
                 Divider(color: _isDarkCtx(context) ? Colors.white24 : Colors.black26),
                 const SizedBox(height: 8),
@@ -12507,26 +12527,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (c) {
-        // Compute session progress: average delta% across each exercise vs previous.
-        // Per-exercise comparison avoids the independent-max bug where cur and prev
-        // best come from different exercises and small improvements net to 0%.
-        double? progressPct;
-        if (_previousResults.isNotEmpty && _allCompletedExercises.isNotEmpty) {
-          double totalDelta = 0;
-          int matchCount = 0;
-          for (final ex in _allCompletedExercises) {
-            final currSeries = (ex['series'] as List);
-            final prevSeries = _previousResults[ex['exercise']] ?? [];
-            if (currSeries.isEmpty || prevSeries.isEmpty) continue;
-            final ec = bestSet(currSeries)!.score;
-            final ep = bestSet(prevSeries)!.score;
-            if (ep > 0) {
-              totalDelta += (ec - ep) / ep;
-              matchCount++;
-            }
-          }
-          if (matchCount > 0) progressPct = totalDelta / matchCount * 100;
-        }
+        // stessa % del riepilogo e del grafico Andamento
+        final progressPct = _sessionProgressPct();
         return _WorkoutShareSheet(
           dayName: widget.day.dayName,
           todayLabel: _todayLabel(),
@@ -13408,8 +13410,11 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     bool suggerisciReps = plan.provaReps != null;
     // ai pannelli serve il numero da mostrare in "prova N reps"
     final int targetR = plan.provaReps ?? plan.target;
-    // Impostata: la ruota parte dalla proposta. Suggerita: dal peso della volta scorsa e rimbalza finché non lo alzi.
-    final double startKg = _progressionPreset || lastR <= 0 ? plan.kg : lastW;
+    // Impostata: le ruote partono dalla proposta (peso alzato o rep in più). Suggerita: da kg e reps della
+    // volta scorsa, e la ruota da alzare rimbalza finché l'utente non sale.
+    final bool suggerita = !_progressionPreset && lastR > 0;
+    final double startKg = suggerita ? lastW : plan.kg;
+    final int startReps = suggerita ? lastR : plan.reps;
 
     bool isLastSet = (setN >= ex.targetSets);
     int timeToUse = isLastSet
@@ -13611,10 +13616,11 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           child: _DrumPickers(
                             key: ValueKey('drum_$exI'),
                             initialKg: startKg,
-                            initialReps: plan.reps,
+                            initialReps: startReps,
                             repsOnWeightUp: plan.target,
                             suggerisciAumento:
                                 plan.kg > startKg && _showWeightSuggestion,
+                            suggerisciReps: suggerita && plan.provaReps != null,
                             useQuarterStep: _usesQuarterStepForExercise(ex, lastW),
                             useEvenStep: _usesEvenStepForExercise(ex, lastW),
                             useSingleStep: _usesSingleStepForExercise(ex, lastW),
@@ -13636,7 +13642,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                     useSingleStep: useSingleStep,
                                   );
                                 },
-                            onInteraction: () => _avviaTimerConTempo(timeToUse),
+                            // solo le reps: il peso si imposta prima della serie, le reps a serie finita
+                            onRepsInteraction: () => _avviaTimerConTempo(timeToUse),
                           ),
                         ),
                         if (!giaFatto && timerActive)
@@ -13898,7 +13905,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       lastKg: w(p),
       lastReps: (p['r'] as num?)?.toInt() ?? 0,
       todayPrevKg: today.isEmpty ? null : w(today.last),
-      lastPrevKg: today.isEmpty ? 0 : w(_getSuggest(ex.name, s - 1)),
       step: _steps.putIfAbsent(ex.name, () => weightStep(widget.history, ex.name)),
     );
   }
@@ -15391,13 +15397,16 @@ class _DrumPickers extends StatefulWidget {
     bool useSingleStep,
   )?
   onWeightModeChanged;
-  final VoidCallback onInteraction; // chiamato ad ogni scroll
+  /// rimbalza la ruota reps finché non supera [initialReps] (modalità Suggerita)
+  final bool suggerisciReps;
+  final VoidCallback onRepsInteraction; // a ogni cambio delle reps (fine serie); il peso no
 
   const _DrumPickers({
     super.key,
     required this.initialKg,
     required this.initialReps,
     required this.suggerisciAumento,
+    this.suggerisciReps = false,
     this.repsOnWeightUp,
     this.useQuarterStep = false,
     this.useEvenStep = false,
@@ -15408,7 +15417,7 @@ class _DrumPickers extends StatefulWidget {
     required this.onKgChanged,
     required this.onRepsChanged,
     this.onWeightModeChanged,
-    required this.onInteraction,
+    required this.onRepsInteraction,
   });
 
   @override
@@ -15592,9 +15601,9 @@ class _DrumPickersState extends State<_DrumPickers>
     widget.onRepsChanged(_repsValues[idx]);
   }
 
-  void _triggerInteraction() {
+  void _triggerInteraction({required bool isKg}) {
     _interacted = true;
-    widget.onInteraction();
+    if (!isKg) widget.onRepsInteraction();
   }
 
   double _displayValueToKg(double value) =>
@@ -15726,7 +15735,7 @@ class _DrumPickersState extends State<_DrumPickers>
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (mounted) _jumpKgSilently(best);
       });
-      _triggerInteraction();
+      _triggerInteraction(isKg: true);
       widget.onKgChanged(_customKgValue!);
       _syncRepsToKg(_customKgValue!);
       widget.onWeightModeChanged?.call(
@@ -15746,7 +15755,7 @@ class _DrumPickersState extends State<_DrumPickers>
       } finally {
         _programmaticJump = false;
       }
-      _triggerInteraction();
+      _triggerInteraction(isKg: false);
       widget.onRepsChanged(_repsValues[idx]);
     }
   }
@@ -15763,13 +15772,15 @@ class _DrumPickersState extends State<_DrumPickers>
     required bool isKg,
   }) {
     final accent = widget.accent;
-    // Rimbalzo quando il peso NON è ancora stato aumentato (invita a salire)
-    final currentSelectedValue = isKg ? _selectedDisplayedWeight() : 0.0;
-    final referenceDisplayed = widget.displayInPounds
+    // Rimbalzo finché il valore NON supera quello di partenza (invita a salire): peso o reps
+    final currentSelectedValue = isKg
+        ? _selectedDisplayedWeight()
+        : _repsValues[_selReps].toDouble();
+    final referenceDisplayed = isKg && widget.displayInPounds
         ? kgToLb(referenceKg)
         : referenceKg;
     final bool showNudge =
-        isKg && highlightAbove && currentSelectedValue <= referenceDisplayed;
+        highlightAbove && currentSelectedValue <= referenceDisplayed;
 
     // Dimensioni e opacità basate sulla distanza dal centro
     double _itemSize(int dist) {
@@ -15898,7 +15909,7 @@ class _DrumPickersState extends State<_DrumPickers>
       _repsTouched = true;
       onChanged(index);
     }
-    _triggerInteraction();
+    _triggerInteraction(isKg: isKg);
   }
 
   Widget _buildWheelScroller({
@@ -16055,8 +16066,8 @@ class _DrumPickersState extends State<_DrumPickers>
                 label: 'REPS',
                 onChanged: (i) => widget.onRepsChanged(_repsValues[i]),
                 formatter: (v) => v.toString(),
-                highlightAbove: false,
-                referenceKg: 0,
+                highlightAbove: widget.suggerisciReps,
+                referenceKg: widget.initialReps.toDouble(),
                 isKg: false,
               ),
             ),

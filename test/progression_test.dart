@@ -14,9 +14,9 @@ void main() {
     final p = progressionPlan(target: 10, lastKg: 60, lastReps: 8);
     expect((p.kg, p.reps, p.aumento, p.provaReps), (60.0, 9, false, 9));
   });
-  test('peso alzato sulla serie prima -> stesso aumento, reps al target', () {
-    final p = progressionPlan(target: 10, lastKg: 60, lastReps: 12, todayPrevKg: 62.5, lastPrevKg: 60);
-    expect((p.kg, p.reps, p.aumento), (62.5, 10, false));
+  test('aumento fatto oggi sulla serie prima non si porta qui (piramide 70/75 non diventa 80)', () {
+    final p = progressionPlan(target: 10, lastKg: 75, lastReps: 10, todayPrevKg: 75, step: 5);
+    expect((p.kg, p.reps, p.aumento, p.provaReps), (75.0, 11, false, 11));
   });
   test('senza storico: peso della serie prima, poi 20 kg', () {
     expect(progressionPlan(target: 8, lastKg: 0, lastReps: 0, todayPrevKg: 40).kg, 40);
