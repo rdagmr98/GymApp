@@ -18,6 +18,43 @@ void main() {
     final p = progressionPlan(target: 10, lastKg: 75, lastReps: 10, todayPrevKg: 75, step: 5);
     expect((p.kg, p.reps, p.aumento, p.provaReps), (75.0, 11, false, 11));
   });
+  test('serie concatenate: la serie prima di oggi contro quella della volta scorsa', () {
+    // volta scorsa 80×8 poi 70×10; oggi la prima viene 80×10: si poteva fare 85, la seconda sale a 75×10
+    final su = progressionPlan(target: 10, lastKg: 70, lastReps: 10,
+        todayPrevKg: 80, todayPrevReps: 10, lastPrevKg: 80, lastPrevReps: 8, step: 5);
+    expect((su.kg, su.reps, su.aumento), (75.0, 10, true));
+    // prima uguale alla volta scorsa: solo una rep in più
+    final pari = progressionPlan(target: 10, lastKg: 70, lastReps: 10,
+        todayPrevKg: 80, todayPrevReps: 8, lastPrevKg: 80, lastPrevReps: 8, step: 5);
+    expect((pari.kg, pari.reps, pari.aumento), (70.0, 11, false));
+    // la volta scorsa aveva già aumentato (70×12 -> 75 oggi sulla prima): la seconda 75×10 non sale
+    final gia = progressionPlan(target: 10, lastKg: 75, lastReps: 10,
+        todayPrevKg: 75, todayPrevReps: 10, lastPrevKg: 70, lastPrevReps: 12, step: 5);
+    expect((gia.kg, gia.reps, gia.aumento), (75.0, 11, false));
+  });
+  test('lontani dal target: peso più basso per arrivarci', () {
+    final p = progressionPlan(target: 10, lastKg: 80, lastReps: 6, step: 2.5);
+    expect((p.kg, p.reps, p.aumento), (70.0, 10, false));
+  });
+  test('serie senza storico: dalla serie prima di oggi con la fatica', () {
+    expect(progressionPlan(target: 10, lastKg: 0, lastReps: 0, todayPrevKg: 80, todayPrevReps: 8).kg, 70);
+    expect(progressionPlan(target: 10, lastKg: 0, lastReps: 0, todayPrevKg: 80, todayPrevReps: 10).kg, 75);
+  });
+  test('record personali: solo se batte tutte le sessioni prima', () {
+    final h = [
+      {'exercise': 'Panca', 'session_id': 'a', 'series': [{'w': 80, 'r': 8}]},
+      {'exercise': 'Panca', 'session_id': 'b', 'series': [{'w': 85, 'r': 6}]},
+      {'exercise': 'Squat', 'session_id': 'a', 'series': [{'w': 100, 'r': 5}]},
+      {'exercise': 'Panca', 'session_id': 'oggi', 'series': [{'w': 85, 'r': 7}]},
+    ];
+    final done = [
+      {'exercise': 'Panca', 'series': [{'w': 85, 'r': 7}]},
+      {'exercise': 'Squat', 'series': [{'w': 100, 'r': 5}]},
+      {'exercise': 'Nuovo', 'series': [{'w': 10, 'r': 10}]},
+    ];
+    final rec = sessionRecords(h, done, 'oggi');
+    expect(rec.map((e) => (e.exercise, e.w, e.r)), [('Panca', 85.0, 7)]);
+  });
   test('senza storico: peso della serie prima, poi 20 kg', () {
     expect(progressionPlan(target: 8, lastKg: 0, lastReps: 0, todayPrevKg: 40).kg, 40);
     expect(progressionPlan(target: 8, lastKg: 0, lastReps: 0).kg, 20);
