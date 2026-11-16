@@ -14843,7 +14843,7 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                     ),
                     Text(
                       '${widget.dayName} · ${widget.todayLabel}',
-                      maxLines: 1,
+                      maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(color: Colors.white54, fontSize: 12),
                     ),
