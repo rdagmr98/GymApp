@@ -99,4 +99,53 @@ void main() {
     final logs = parseProgressiGym(f.readAsStringSync());
     expect(logs.length, greaterThan(100));
   });
+
+  test('updateHistoryEntrySeries aggiorna la voce con stesso session_id ed exercise', () {
+    final history = <dynamic>[
+      {
+        'exercise': 'Panca Piana',
+        'series': [
+          {'s': 1, 'w': 60.0, 'r': 10},
+          {'s': 2, 'w': 60.0, 'r': 8},
+        ],
+        'date': '2026-11-10T18:00:00',
+        'dayName': 'Push',
+        'session_id': 'sid_1',
+      },
+      {
+        'exercise': 'Panca Piana',
+        'series': [
+          {'s': 1, 'w': 62.5, 'r': 10},
+          {'s': 2, 'w': 62.5, 'r': 9},
+        ],
+        'date': '2026-11-20T18:00:00',
+        'dayName': 'Push',
+        'session_id': 'sid_2',
+      },
+      {
+        'exercise': 'Croci Cavi',
+        'series': [
+          {'s': 1, 'w': 15.0, 'r': 12},
+        ],
+        'date': '2026-11-20T18:15:00',
+        'dayName': 'Push',
+        'session_id': 'sid_2',
+      },
+    ];
+
+    final updated = [
+      {'s': 1, 'w': 65.0, 'r': 10},
+      {'s': 2, 'w': 65.0, 'r': 8},
+    ];
+    final ok = updateHistoryEntrySeries(history, 'sid_2', 'Panca Piana', updated);
+    expect(ok, isTrue);
+    expect((history[1]['series'] as List)[0]['w'], 65.0);
+    expect((history[1]['series'] as List)[1]['r'], 8);
+    // Non tocca la sessione precedente né gli altri esercizi della stessa sessione
+    expect((history[0]['series'] as List)[0]['w'], 60.0);
+    expect((history[2]['series'] as List)[0]['w'], 15.0);
+
+    // Non trova una voce inesistente
+    expect(updateHistoryEntrySeries(history, 'sid_999', 'Panca Piana', updated), isFalse);
+  });
 }

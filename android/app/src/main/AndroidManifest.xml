@@ -49,6 +49,23 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:scheme="content" android:mimeType="application/octet-stream" android:pathPattern=".*\\.workout" />
             </intent-filter>
+            <!-- Progressi .gymlog esportati da Gym Logbook -->
+            <intent-filter android:label="GymApp">
+                <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/x-gymlog" />
+            </intent-filter>
+            <intent-filter android:label="GymApp">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="file" android:mimeType="*/*" android:pathSuffix=".gymlog" />
+            </intent-filter>
+            <intent-filter android:label="GymApp">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" android:mimeType="application/octet-stream" android:pathPattern=".*\\.gymlog" />
+            </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
