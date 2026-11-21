@@ -34,6 +34,99 @@ import 'progression.dart';
 bool _isDarkCtx(BuildContext context) =>
     Theme.of(context).brightness == Brightness.dark;
 
+/// Contenuto alto almeno quanto la viewport e nativo dopo: la pubblicità si vede solo scorrendo.
+Widget _belowFold({
+  required Widget ad,
+  required List<Widget> children,
+  EdgeInsets padding = EdgeInsets.zero,
+}) => LayoutBuilder(
+  builder: (_, box) => SingleChildScrollView(
+    padding: padding,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ConstrainedBox(
+          constraints: BoxConstraints(minHeight: scala.max(0.0, box.maxHeight - padding.vertical)),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: children),
+        ),
+        ad,
+      ],
+    ),
+  ),
+);
+
+/// Come ListView.builder, con il nativo dopo uno spazio che riempie la viewport: si vede solo scorrendo.
+Widget _listBelowFold({
+  required Widget ad,
+  required EdgeInsets padding,
+  required int itemCount,
+  required NullableIndexedWidgetBuilder itemBuilder,
+}) => CustomScrollView(
+  slivers: [
+    SliverPadding(
+      padding: padding,
+      sliver: SliverList(delegate: SliverChildBuilderDelegate(itemBuilder, childCount: itemCount)),
+    ),
+    const SliverFillRemaining(hasScrollBody: false, child: SizedBox.shrink()),
+    SliverToBoxAdapter(child: ad),
+  ],
+);
+
+/// Nativo che si carica da solo, per le schermate senza un nativo già caricato. Solo sotto la piega.
+class _SelfNativeAd extends StatefulWidget {
+  const _SelfNativeAd(this.adUnitId);
+  final String adUnitId;
+
+  @override
+  State<_SelfNativeAd> createState() => _SelfNativeAdState();
+}
+
+class _SelfNativeAdState extends State<_SelfNativeAd> {
+  NativeAd? _ad;
+  bool _loaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    if (kIsWeb) return;
+    _ad = NativeAd(
+      adUnitId: widget.adUnitId,
+      factoryId: kWorkoutNativeAdFactoryId,
+      request: const AdRequest(),
+      listener: NativeAdListener(
+        onAdLoaded: (_) {
+          if (mounted) setState(() => _loaded = true);
+        },
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+          _ad = null;
+          debugPrint('native ad failed to load: $error');
+        },
+      ),
+    );
+    _ad!.load().catchError((_) {});
+  }
+
+  @override
+  void dispose() {
+    _ad?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!_loaded || _ad == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+      child: SizedBox(
+        width: double.infinity,
+        height: 260,
+        child: ClipRRect(borderRadius: BorderRadius.circular(16), child: AdWidget(ad: _ad!)),
+      ),
+    );
+  }
+}
+
 /// Pill unica per valori (ultima volta, conferma) e suggerimenti in allenamento.
 /// Senza [color] è neutra; con [color] è tinta (suggerimenti).
 Widget _pill(BuildContext context, String text,
@@ -125,8 +218,6 @@ class YouTubeSearchView extends StatefulWidget {
 
 class _YouTubeSearchViewState extends State<YouTubeSearchView> {
   late final WebViewController controller;
-  NativeAd? _tutorialNativeAd;
-  bool _tutorialNativeAdLoaded = false;
 
   @override
   void initState() {
@@ -138,40 +229,6 @@ class _YouTubeSearchViewState extends State<YouTubeSearchView> {
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(Uri.parse(url));
-    if (!kIsWeb) {
-      _tutorialNativeAd = NativeAd(
-        adUnitId: kTutorialNativeAdUnitId,
-        factoryId: kWorkoutNativeAdFactoryId,
-        request: const AdRequest(),
-        listener: NativeAdListener(
-          onAdLoaded: (loadedAd) {
-            if (!mounted) {
-              loadedAd.dispose();
-              return;
-            }
-            setState(() {
-              _tutorialNativeAd = loadedAd as NativeAd;
-              _tutorialNativeAdLoaded = true;
-            });
-          },
-          onAdFailedToLoad: (failedAd, error) {
-            failedAd.dispose();
-            if (!mounted) return;
-            setState(() {
-              _tutorialNativeAd = null;
-              _tutorialNativeAdLoaded = false;
-            });
-            debugPrint('tutorial native ad failed to load: $error');
-          },
-        ),
-      )..load();
-    }
-  }
-
-  @override
-  void dispose() {
-    _tutorialNativeAd?.dispose();
-    super.dispose();
   }
 
   @override
@@ -184,21 +241,6 @@ class _YouTubeSearchViewState extends State<YouTubeSearchView> {
       body: Column(
         children: [
           Expanded(child: WebViewWidget(controller: controller)),
-          if (!kIsWeb && _tutorialNativeAdLoaded && _tutorialNativeAd != null)
-            SafeArea(
-              top: false,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 8, 16, 12),
-                child: SizedBox(
-                  width: double.infinity,
-                  height: 260,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(16),
-                    child: AdWidget(ad: _tutorialNativeAd!),
-                  ),
-                ),
-              ),
-            ),
         ],
       ),
     );
@@ -5356,8 +5398,10 @@ class _ClientMainPageState extends State<ClientMainPage>
     return Drawer(
       backgroundColor: Theme.of(context).colorScheme.surface,
       child: SafeArea(
-        child: ListView(
+        // ponytail: unit id del vecchio nativo del video YouTube, tolto il 2026-11-21
+        child: _belowFold(
           padding: const EdgeInsets.fromLTRB(16, 20, 16, 24),
+          ad: const _SelfNativeAd(kTutorialNativeAdUnitId),
           children: [
             FutureBuilder<SharedPreferences>(
               future: SharedPreferences.getInstance(),
@@ -5941,65 +5985,81 @@ class _ClientMainPageState extends State<ClientMainPage>
     final accent = appAccentNotifier.value;
     final fg = dark ? Colors.white : Colors.black87;
     final subClr = fg.withAlpha(140);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(14, 10, 12, 10),
-      child: Row(children: [
-        Icon(icon, color: accent, size: 20),
-        const SizedBox(width: 14),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+    // Con il sottotitolo il selettore va su una riga sua a tutta larghezza, altrimenti il testo va a capo.
+    final stacked = sub != null;
+    final segments = Container(
+      padding: const EdgeInsets.all(3),
+      decoration: BoxDecoration(
+        color: dark ? Colors.black26 : Colors.black.withAlpha(12),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisSize: stacked ? MainAxisSize.max : MainAxisSize.min,
+        children: options.entries.map((entry) {
+          final selected = selectedKey == entry.key;
+          final seg = GestureDetector(
+            onTap: () => onChanged(entry.key),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              alignment: stacked ? Alignment.center : null,
+              decoration: BoxDecoration(
+                color: selected ? accent : Colors.transparent,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                entry.value,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: selected ? Colors.black : (dark ? Colors.white70 : Colors.black54),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          );
+          return stacked ? Expanded(child: seg) : seg;
+        }).toList(),
+      ),
+    );
+    final head = Row(children: [
+      Icon(icon, color: accent, size: 20),
+      const SizedBox(width: 14),
+      Expanded(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              label,
+              maxLines: stacked ? 1 : 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(color: fg, fontSize: 14),
+            ),
+            if (sub != null)
               Text(
-                label,
+                sub,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(color: fg, fontSize: 14),
+                style: TextStyle(color: subClr, fontSize: 12),
               ),
-              if (sub != null)
-                Text(
-                  sub,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(color: subClr, fontSize: 12),
-                ),
-            ],
-          ),
+          ],
         ),
-        const SizedBox(width: 8),
-        Container(
-          padding: const EdgeInsets.all(3),
-          decoration: BoxDecoration(
-            color: dark ? Colors.black26 : Colors.black.withAlpha(12),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: options.entries.map((entry) {
-              final selected = selectedKey == entry.key;
-              return GestureDetector(
-                onTap: () => onChanged(entry.key),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 180),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                  decoration: BoxDecoration(
-                    color: selected ? accent : Colors.transparent,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    entry.value,
-                    style: TextStyle(
-                      color: selected ? Colors.black : (dark ? Colors.white70 : Colors.black54),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-        ),
-      ]),
+      ),
+      if (!stacked) ...[const SizedBox(width: 8), segments],
+    ]);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(14, 10, 12, 10),
+      child: stacked
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                head,
+                const SizedBox(height: 8),
+                Padding(padding: const EdgeInsets.only(left: 34), child: segments),
+              ],
+            )
+          : head,
     );
   }
 
@@ -6842,8 +6902,9 @@ class _ClientMainPageState extends State<ClientMainPage>
             ),
             Divider(color: _isDarkCtx(context) ? Colors.white12 : Colors.black87.withAlpha(10), height: 1),
             Expanded(
-              child: ListView(
+              child: _belowFold(
                 padding: EdgeInsets.fromLTRB(24, 16, 24, _bottomNavInset(c) + 24),
+                ad: _buildWorkoutProgressNativeAd(),
                 children: [
                   Row(
                     children: [
@@ -6907,7 +6968,6 @@ class _ClientMainPageState extends State<ClientMainPage>
                       ],
                     ),
                   ],
-                  _buildWorkoutProgressNativeAd(),
                 ],
               ),
             ),
@@ -7036,10 +7096,7 @@ class _ClientMainPageState extends State<ClientMainPage>
                 child: LayoutBuilder(builder: (_, lc) {
                 // ponytail: le righe crescono finché la lista riempie il foglio
                 final t = ((lc.maxHeight - 16) / day.exercises.length - 17).clamp(52.0, 96.0);
-                return ListView.separated(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  itemCount: day.exercises.length + 1,
-                  separatorBuilder: (_, i) {
+                Widget sep(int i) {
                     final g = day.exercises[i].supersetGroup;
                     // superset: niente divisore, la barra viola unisce le righe
                     if (g > 0 && i + 1 < day.exercises.length && day.exercises[i + 1].supersetGroup == g) {
@@ -7051,11 +7108,8 @@ class _ClientMainPageState extends State<ClientMainPage>
                       indent: 24,
                       endIndent: 24,
                     );
-                  },
-                  itemBuilder: (ctx, idx) {
-                    if (idx == day.exercises.length) {
-                      return _buildExerciseListNativeAd();
-                    }
+                }
+                Widget row(BuildContext ctx, int idx) {
                     final ex = day.exercises[idx];
                     final dark = _isDarkCtx(context);
                     final gif = exerciseGifPath(ex.name, ex.gifFilename);
@@ -7154,7 +7208,16 @@ class _ClientMainPageState extends State<ClientMainPage>
                         ),
                       ),
                     );
-                  },
+                }
+                return _belowFold(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  ad: _buildExerciseListNativeAd(),
+                  children: [
+                    for (int idx = 0; idx < day.exercises.length; idx++) ...[
+                      row(context, idx),
+                      if (idx < day.exercises.length - 1) sep(idx),
+                    ],
+                  ],
                 );
                 }),
               ),
@@ -7176,8 +7239,9 @@ class _ClientMainPageState extends State<ClientMainPage>
       ),
       builder: (c) => SizedBox(
         height: MediaQuery.of(context).size.height * 0.72,
-        child: ListView(
+        child: _belowFold(
           padding: const EdgeInsets.fromLTRB(24, 16, 24, 24),
+          ad: _buildGraphNativeAd(),
           children: [
             Center(
               child: Container(
@@ -7214,7 +7278,6 @@ class _ClientMainPageState extends State<ClientMainPage>
             ),
             const SizedBox(height: 16),
             PTGraphWidget(exerciseName: name, history: history, usePounds: _stUsePounds),
-            _buildGraphNativeAd(),
           ],
         ),
       ),
@@ -8138,6 +8201,7 @@ class _ClientMainPageState extends State<ClientMainPage>
             );
           },
         ),
+        const SliverFillRemaining(hasScrollBody: false, child: SizedBox.shrink()),
         SliverToBoxAdapter(child: _buildTrainPageNativeAd()),
       ],
     );
@@ -11176,13 +11240,11 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   late final List<ExerciseConfig> _origExercises;
   NativeAd? _inlineWorkoutNativeAd;
   NativeAd? _startWorkoutNativeAd;
-  NativeAd? _confirmPopupNativeAd;
   NativeAd? _timerRestNativeAd;
   NativeAd? _recapWorkoutNativeAd;
   NativeAd? _chooseExerciseNativeAd;
   bool _isInlineWorkoutNativeAdLoaded = false;
   bool _isStartWorkoutNativeAdLoaded = false;
-  bool _isConfirmPopupNativeAdLoaded = false;
   bool _isTimerRestNativeAdLoaded = false;
   bool _isRecapWorkoutNativeAdLoaded = false;
   bool _isChooseExerciseNativeAdLoaded = false;
@@ -11281,7 +11343,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       final current = switch (placement) {
         'inline' => _inlineWorkoutNativeAd,
         'start' => _startWorkoutNativeAd,
-        'confirm' => _confirmPopupNativeAd,
         'timer' => _timerRestNativeAd,
         'recap' => _recapWorkoutNativeAd,
         'choose' => _chooseExerciseNativeAd,
@@ -11308,10 +11369,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                 case 'start':
                   _startWorkoutNativeAd = loadedAd as NativeAd;
                   _isStartWorkoutNativeAdLoaded = true;
-                  break;
-                case 'confirm':
-                  _confirmPopupNativeAd = loadedAd as NativeAd;
-                  _isConfirmPopupNativeAdLoaded = true;
                   break;
                 case 'timer':
                   _timerRestNativeAd = loadedAd as NativeAd;
@@ -11341,10 +11398,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   _startWorkoutNativeAd = null;
                   _isStartWorkoutNativeAdLoaded = false;
                   break;
-                case 'confirm':
-                  _confirmPopupNativeAd = null;
-                  _isConfirmPopupNativeAdLoaded = false;
-                  break;
                 case 'timer':
                   _timerRestNativeAd = null;
                   _isTimerRestNativeAdLoaded = false;
@@ -11370,9 +11423,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         case 'start':
           _startWorkoutNativeAd = ad;
           break;
-        case 'confirm':
-          _confirmPopupNativeAd = ad;
-          break;
         case 'timer':
           _timerRestNativeAd = ad;
           break;
@@ -11388,7 +11438,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
     loadAd(adUnitId: kWorkoutInlineNativeAdUnitId, placement: 'inline');
     loadAd(adUnitId: kWorkoutStartNativeAdUnitId, placement: 'start');
-    loadAd(adUnitId: kConfirmPopupNativeAdUnitId, placement: 'confirm');
     loadAd(adUnitId: kTimerRestNativeAdUnitId, placement: 'timer');
     loadAd(adUnitId: kWorkoutRecapNativeAdUnitId, placement: 'recap');
     loadAd(adUnitId: kChooseExerciseNativeAdUnitId, placement: 'choose');
@@ -11673,7 +11722,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     _clearTimerNotifications();
     _inlineWorkoutNativeAd?.dispose();
     _startWorkoutNativeAd?.dispose();
-    _confirmPopupNativeAd?.dispose();
     _timerRestNativeAd?.dispose();
     _recapWorkoutNativeAd?.dispose();
     _chooseExerciseNativeAd?.dispose();
@@ -12679,7 +12727,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             builder: (ctx, constraints) {
               return SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
-                child: Center(
+                child: Column(children: [
+                  ConstrainedBox(
+                    constraints: BoxConstraints(minHeight: scala.max(0.0, constraints.maxHeight - 16)),
+                    child: Center(
                     child: Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
@@ -12782,11 +12833,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
             ),
           ),
                   ),
+                  ),
+                  _buildChooseExerciseNativeAd(),
+                ]),
               );
             },
           ),
         ),
-        _buildChooseExerciseNativeAd(),
       ],
     );
   }
@@ -12843,25 +12896,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
           child: AdWidget(ad: _chooseExerciseNativeAd!),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildConfirmPopupNativeAd() {
-    if (kIsWeb ||
-        !_isConfirmPopupNativeAdLoaded ||
-        _confirmPopupNativeAd == null) {
-      return const SizedBox.shrink();
-    }
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
-      child: SizedBox(
-        width: double.infinity,
-        height: 260,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _confirmPopupNativeAd!),
         ),
       ),
     );
@@ -13315,7 +13349,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         _pill(ctx, "$r reps", fontSize: 20),
                       ],
                     ),
-                    _buildConfirmPopupNativeAd(),
                   ],
                 ),
               ),
@@ -14293,7 +14326,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     final accent = Theme.of(context).colorScheme.primary;
     final dark = _isDarkCtx(context);
 
-    final saved = await showDialog<bool>(
+    final canPick = _eserciziConSerieFatte().fold<int>(0, (n, i) => n + _doneSeriesFor(i).length) > 1;
+
+    final result = await showDialog<String>(
       context: context,
       builder: (ctx) => AlertDialog(
         backgroundColor: dark ? const Color(0xFF1C1C1E) : Colors.white,
@@ -14324,6 +14359,17 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                 fontWeight: FontWeight.w800,
               ),
             ),
+            if (canPick)
+              TextButton.icon(
+                onPressed: () => Navigator.pop(ctx, 'pick'),
+                icon: Icon(Icons.list_rounded, size: 18, color: accent),
+                label: Text(
+                  AppL.lang == 'en' ? 'Pick another set' : "Scegli un'altra serie",
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(color: accent, fontSize: 13, fontWeight: FontWeight.w700),
+                ),
+              ),
           ],
         ),
         content: SizedBox(
@@ -14352,14 +14398,14 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         ),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(ctx, false),
+            onPressed: () => Navigator.pop(ctx),
             child: Text(
               AppL.cancel.toUpperCase(),
               style: TextStyle(color: dark ? Colors.white38 : Colors.black38),
             ),
           ),
           ElevatedButton(
-            onPressed: () => Navigator.pop(ctx, true),
+            onPressed: () => Navigator.pop(ctx, 'save'),
             style: ElevatedButton.styleFrom(
               backgroundColor: accent,
               foregroundColor: Colors.black,
@@ -14373,55 +14419,107 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         ],
       ),
     );
-    if (saved == true && mounted) {
+    if (!mounted) return;
+    if (result == 'save') {
       _updateCompletedSet(targetExI, serieIdx, editKg, editReps);
+    } else if (result == 'pick') {
+      final scelta = await _scegliSerieFatta(targetExI, serieIdx);
+      if (scelta != null && mounted) _mostraDialogModificaSerie(scelta.$1, scelta.$2);
     }
   }
 
-  /// Chip compatti toccabili "S1  60 kg x 10" per correggere peso e reps delle serie già fatte.
-  Widget _buildDoneSeriesChips(int targetExI, {bool showExName = false}) {
-    final series = _doneSeriesFor(targetExI);
-    if (series.isEmpty) return const SizedBox.shrink();
-    final ex = widget.day.exercises[targetExI];
+  /// Esercizi con almeno una serie fatta, nell'ordine in cui sono stati eseguiti.
+  List<int> _eserciziConSerieFatte() {
+    final out = <int>[];
+    void add(int i) {
+      if (i >= 0 && !out.contains(i) && _doneSeriesFor(i).isNotEmpty) out.add(i);
+    }
+    for (final e in _allCompletedExercises) {
+      add(widget.day.exercises.indexWhere((x) => x.name == e['exercise']));
+    }
+    for (final i in _supersetAccumulated.keys) {
+      add(i);
+    }
+    if (currentExSeries.isNotEmpty) add(exI);
+    return out;
+  }
+
+  /// Ultima serie fatta nell'allenamento: (indice esercizio, indice serie).
+  (int, int)? _ultimaSerieFatta() {
+    final last = _lastExecutedExI;
+    if (last != null && last < widget.day.exercises.length && _doneSeriesFor(last).isNotEmpty) {
+      return (last, _doneSeriesFor(last).length - 1);
+    }
+    final all = _eserciziConSerieFatte();
+    if (all.isEmpty) return null;
+    return (all.last, _doneSeriesFor(all.last).length - 1);
+  }
+
+  void _apriModificaUltimaSerie() {
+    final u = _ultimaSerieFatta();
+    if (u != null) _mostraDialogModificaSerie(u.$1, u.$2);
+  }
+
+  /// Elenco di tutte le serie fatte finora, raggruppate per esercizio; restituisce quella scelta.
+  Future<(int, int)?> _scegliSerieFatta(int curExI, int curIdx) {
     final dark = _isDarkCtx(context);
+    final accent = Theme.of(context).colorScheme.primary;
     final muted = dark ? Colors.white54 : Colors.black54;
     final unit = _displayInPounds ? 'lb' : 'kg';
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (showExName) ...[
-          Text(
-            localizedExerciseName(ex.name).toUpperCase(),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: muted,
-              fontSize: 10,
-              fontWeight: FontWeight.w700,
-              letterSpacing: 1.5,
-            ),
+    return showDialog<(int, int)>(
+      context: context,
+      builder: (ctx) => SimpleDialog(
+        backgroundColor: dark ? const Color(0xFF1C1C1E) : Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        title: Text(
+          AppL.lang == 'en' ? 'Sets done' : 'Serie fatte',
+          style: TextStyle(
+            color: dark ? Colors.white : Colors.black87,
+            fontSize: 17,
+            fontWeight: FontWeight.w800,
           ),
-          const SizedBox(height: 4),
-        ],
-        Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 6,
-          runSpacing: 6,
-          children: List.generate(series.length, (i) {
-            final s = series[i];
-            final w = (s['w'] as num?)?.toDouble() ?? 0.0;
-            final r = (s['r'] as num?)?.toInt() ?? 0;
-            final wStr = formatWeightValue(w, usePounds: _displayInPounds);
-            return _pill(
-              context,
-              'S${i + 1}  $wStr $unit x $r',
-              icon: Icons.edit_rounded,
-              fontSize: 12,
-              onTap: () => _mostraDialogModificaSerie(targetExI, i),
-            );
-          }),
         ),
-      ],
+        children: [
+          for (final i in _eserciziConSerieFatte()) ...[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 10, 24, 2),
+              child: Text(
+                localizedExerciseName(widget.day.exercises[i].name).toUpperCase(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                  color: muted,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ),
+            for (final (j, s) in _doneSeriesFor(i).indexed)
+              SimpleDialogOption(
+                onPressed: () => Navigator.pop(ctx, (i, j)),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'S${j + 1}  ${formatWeightValue((s['w'] as num?)?.toDouble() ?? 0.0, usePounds: _displayInPounds)} $unit x ${(s['r'] as num?)?.toInt() ?? 0}',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: dark ? Colors.white : Colors.black87,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    if (i == curExI && j == curIdx)
+                      Icon(Icons.check_rounded, size: 18, color: accent),
+                  ],
+                ),
+              ),
+          ],
+        ],
+      ),
     );
   }
 
@@ -14480,7 +14578,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     int targetR,
     bool suggerisciReps,
   ) {
-    final doneSeries = _doneSeriesFor(exI);
     return Container(
       margin: const EdgeInsets.fromLTRB(16, 8, 16, 4),
       padding: const EdgeInsets.fromLTRB(14, 10, 14, 10),
@@ -14494,12 +14591,8 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         mainAxisSize: MainAxisSize.max,
         children: [
           if (lastR > 0) _lastVsGoal(ex),
-          if (doneSeries.isNotEmpty) ...[
-            if (lastR > 0) const SizedBox(height: 8),
-            _buildDoneSeriesChips(exI),
-          ],
           if (ex.notePT.isNotEmpty) ...[
-            if (lastR > 0 || doneSeries.isNotEmpty)
+            if (lastR > 0)
               Divider(color: _isDarkCtx(context) ? Colors.white10 : Colors.black12, height: 10),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -14618,12 +14711,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     final progress = timerActive
         ? (_bgCounter / _maxTime).clamp(0.0, 1.0)
         : 0.0;
-    final int doneExI = (_lastExecutedExI != null &&
-            _lastExecutedExI! >= 0 &&
-            _lastExecutedExI! < widget.day.exercises.length)
-        ? _lastExecutedExI!
-        : exI;
-    final bool hasDoneSeries = _doneSeriesFor(doneExI).isNotEmpty;
+    final bool hasDoneSeries = _ultimaSerieFatta() != null;
 
     return Scaffold(
       backgroundColor: _isDarkCtx(context) ? Colors.black : Colors.white,
@@ -14749,14 +14837,6 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                     ),
                                   ],
                                 ),
-                              if (hasDoneSeries)
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 4),
-                                  child: _buildDoneSeriesChips(
-                                    doneExI,
-                                    showExName: doneExI != exI,
-                                  ),
-                                ),
                               // Card prossimo esercizio
                               GestureDetector(
                                 onTap: _prossimoNome.isNotEmpty
@@ -14856,35 +14936,60 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                                 ),
                               ),
 
-                              // SKIP
-                              _TapHere(
-                                on: widget.demoMode,
-                                radius: 50,
-                                hint: AppL.demoGuideRest,
-                                child: GestureDetector(
-                                  onTap: _skipRest,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 60,
-                                      vertical: 16,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: _isDarkCtx(context) ? Colors.white.withAlpha(40) : Colors.black26,
-                                      ),
-                                      borderRadius: BorderRadius.circular(50),
-                                    ),
-                                    child: Text(
-                                      AppL.skip.toUpperCase(),
-                                      style: TextStyle(
-                                        letterSpacing: 3,
-                                        fontWeight: FontWeight.w600,
-                                        color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-                                        fontSize: 16,
+                              // SKIP + matita per correggere le serie già fatte
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  _TapHere(
+                                    on: widget.demoMode,
+                                    radius: 50,
+                                    hint: AppL.demoGuideRest,
+                                    child: GestureDetector(
+                                      onTap: _skipRest,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 60,
+                                          vertical: 16,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: _isDarkCtx(context) ? Colors.white.withAlpha(40) : Colors.black26,
+                                          ),
+                                          borderRadius: BorderRadius.circular(50),
+                                        ),
+                                        child: Text(
+                                          AppL.skip.toUpperCase(),
+                                          style: TextStyle(
+                                            letterSpacing: 3,
+                                            fontWeight: FontWeight.w600,
+                                            color: _isDarkCtx(context) ? Colors.white : Colors.black87,
+                                            fontSize: 16,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
+                                  if (hasDoneSeries) ...[
+                                    const SizedBox(width: 12),
+                                    GestureDetector(
+                                      onTap: _apriModificaUltimaSerie,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(15),
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: _isDarkCtx(context) ? Colors.white.withAlpha(40) : Colors.black26,
+                                          ),
+                                        ),
+                                        child: Icon(
+                                          Icons.edit_rounded,
+                                          size: 22,
+                                          color: _isDarkCtx(context) ? Colors.white : Colors.black87,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ],
                               ),
                             ],
                           ),
@@ -18186,7 +18291,9 @@ class _CancellazioneScreenState extends State<CancellazioneScreen> {
                       ),
                     ),
                   )
-                : ListView.builder(
+                : _listBelowFold(
+                    // ponytail: unit id del vecchio nativo del popup di conferma, tolto il 2026-11-21
+                    ad: const _SelfNativeAd(kConfirmPopupNativeAdUnitId),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,
                       vertical: 8,
@@ -18664,7 +18771,8 @@ class _DettaglioEsercizioScreenState extends State<_DettaglioEsercizioScreen> {
                 ),
               ),
             )
-          : ListView.builder(
+          : _listBelowFold(
+              ad: const _SelfNativeAd(kConfirmPopupNativeAdUnitId),
               padding: const EdgeInsets.all(12),
               itemCount: _sessions.length,
               itemBuilder: (_, sIdx) {
@@ -19234,8 +19342,9 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                 ? Center(
                     child: Text(AppL.noData, style: TextStyle(color: muted, fontSize: 16)),
                   )
-                : ListView(
+                : _belowFold(
                     padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+                    ad: widget.buildAd(),
                     children: [
                       _buildStatsRow(allPoints, accent),
                       const SizedBox(height: 14),
@@ -19258,8 +19367,6 @@ class _OverallProgressPageState extends State<_OverallProgressPage> {
                           ),
                           onPressed: () => _shareProgress(context, allPoints, trends),
                         ),
-                      const SizedBox(height: 12),
-                      widget.buildAd(),
                     ],
                   ),
           ),

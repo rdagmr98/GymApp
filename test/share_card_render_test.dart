@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:gym_app/app_l.dart';
 import 'package:gym_app/main.dart';
@@ -459,5 +460,43 @@ void main() {
     await tester.pumpAndSettle();
     expect(tester.takeException(), isNull);
     await _captureStoryPng(tester, 'build/share_previews/gestione_dati.png');
+  });
+
+  testWidgets('Menu laterale a 360 dp: righe leggibili, PNG', (WidgetTester tester) async {
+    SharedPreferences.setMockInitialValues({'onboarding_done': true, 'lang_chosen': true});
+    // plugin (AdMob, notifiche, wakelock) senza piattaforma: rispondono "ok, null"
+    final messenger = TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+    messenger.allMessagesHandler = (channel, handler, message) async {
+      if (handler != null) return handler(message);
+      if (channel.startsWith('flutter/')) return null;
+      if (channel.startsWith('dev.flutter.pigeon.')) return const StandardMessageCodec().encodeMessage(<Object?>[null]);
+      return const StandardMethodCodec().encodeSuccessEnvelope(null);
+    };
+    addTearDown(() => messenger.allMessagesHandler = null);
+    await tester.binding.setSurfaceSize(const Size(360, 780));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidget(const ClientGymApp());
+    for (int i = 0; i < 10; i++) {
+      await tester.pump(const Duration(milliseconds: 200));
+    }
+    tester.state<ScaffoldState>(find.byWidgetPredicate((w) => w is Scaffold && w.endDrawer != null).first).openEndDrawer();
+    for (int i = 0; i < 10; i++) {
+      await tester.pump(const Duration(milliseconds: 100));
+    }
+    expect(find.text(AppL.progressionMode), findsOneWidget);
+    expect(tester.takeException(), isNull);
+    RenderObject? ro = tester.renderObject(find.byType(Drawer));
+    while (ro != null && ro is! RenderRepaintBoundary) {
+      ro = ro.parent;
+    }
+    final boundary = ro! as RenderRepaintBoundary;
+    final bytes = await tester.runAsync(() async {
+      final image = await boundary.toImage(pixelRatio: 2.0);
+      final data = await image.toByteData(format: ui.ImageByteFormat.png);
+      return data!.buffer.asUint8List();
+    });
+    final outFile = File('build/share_previews/menu_laterale.png');
+    outFile.parent.createSync(recursive: true);
+    outFile.writeAsBytesSync(bytes!);
   });
 }
