@@ -4793,6 +4793,58 @@ List<dynamic> parseSchedaCoach(String text) {
   return days;
 }
 
+/// Voci di storico da un file .gymlog ("TIPO:PROGRESSI_GYM\n" + JSON List o Map con 'logs').
+List<Map<String, dynamic>> parseProgressiGym(String text) {
+  final t = text.replaceFirst('\uFEFF', '').trim();
+  final nl = t.indexOf('\n');
+  if (!t.startsWith('TIPO:PROGRESSI_GYM') || nl < 0) {
+    throw const FormatException('non sono progressi');
+  }
+  final decoded = jsonDecode(t.substring(nl + 1));
+  final rawList = decoded is List
+      ? decoded
+      : (decoded is Map && decoded['logs'] is List ? decoded['logs'] as List : null);
+  if (rawList == null) throw const FormatException('non sono progressi');
+  final out = <Map<String, dynamic>>[];
+  for (final item in rawList) {
+    if (item is! Map) continue;
+    final ex = item['exercise'];
+    if (ex is! String || ex.trim().isEmpty || item['series'] is! List) continue;
+    final m = Map<String, dynamic>.from(item);
+    m['exercise'] = resolveExerciseInfo(ex)?.nameEn ?? ex.trim();
+    out.add(m);
+  }
+  if (out.isEmpty) throw const FormatException('nessun progresso valido');
+  return out;
+}
+
+/// Unisce incoming a history senza duplicati (chiave session_id|exercise|date) e riordina per date crescente stabile.
+int mergeProgressi(List<dynamic> history, List<Map<String, dynamic>> incoming) {
+  String key(Map m) => '${m['session_id'] ?? ''}|${m['exercise'] ?? ''}|${m['date'] ?? ''}';
+  final seen = <String>{
+    for (final e in history)
+      if (e is Map) key(e),
+  };
+  var added = 0;
+  for (final v in incoming) {
+    if (seen.add(key(v))) {
+      history.add(v);
+      added++;
+    }
+  }
+  final indexed = [for (int i = 0; i < history.length; i++) (i, history[i])];
+  indexed.sort((a, b) {
+    final da = a.$2 is Map ? (a.$2['date'] as String? ?? '') : '';
+    final db = b.$2 is Map ? (b.$2['date'] as String? ?? '') : '';
+    final c = da.compareTo(db);
+    return c != 0 ? c : a.$1.compareTo(b.$1);
+  });
+  for (int i = 0; i < indexed.length; i++) {
+    history[i] = indexed[i].$2;
+  }
+  return added;
+}
+
 /// Infers a muscle image filename from the day name and exercise list.
 /// Used to provide a background image for curated template days that lack muscleImage.
 String? _inferMuscleImage(String dayName, List<dynamic> exercises) {
@@ -5459,6 +5511,16 @@ class _ClientMainPageState extends State<ClientMainPage>
               }),
             ]),
             _settingsGroup(AppL.dataSection, [
+              _navSettingRow(
+                Icons.file_open_rounded,
+                AppL.lang == 'en' ? 'Import progress (.gymlog)' : 'Importa progressi (.gymlog)',
+                _importaProgressiDaFile,
+              ),
+              _navSettingRow(
+                Icons.content_paste_rounded,
+                AppL.lang == 'en' ? 'Paste copied progress' : 'Incolla progressi copiati',
+                _importaProgressiDaAppunti,
+              ),
               _navSettingRow(Icons.storage_rounded, AppL.dataManagement, _openDataManagement, color: Colors.redAccent),
             ]),
           ],
@@ -5552,6 +5614,100 @@ class _ClientMainPageState extends State<ClientMainPage>
         _loadData();
       }
     });
+  }
+
+  Future<void> _importaProgressiDaFile() async {
+    Navigator.pop(context);
+    try {
+      final res = await FilePicker.platform.pickFiles(withData: true);
+      final bytes = res?.files.single.bytes;
+      if (bytes == null || !mounted) return;
+      _importaProgressi(utf8.decode(bytes, allowMalformed: true));
+    } catch (_) {
+      if (mounted) _importaProgressi('');
+    }
+  }
+
+  Future<void> _importaProgressiDaAppunti() async {
+    Navigator.pop(context);
+    final data = await Clipboard.getData(Clipboard.kTextPlain);
+    if (!mounted) return;
+    _importaProgressi(data?.text ?? '');
+  }
+
+  void _importaProgressi(String text) {
+    final en = AppL.lang == 'en';
+    final List<Map<String, dynamic>> voci;
+    try {
+      voci = parseProgressiGym(text);
+    } catch (_) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            en
+                ? 'Invalid file: use the .gymlog exported from Gym Logbook (Send progress).'
+                : 'File non valido: serve il file .gymlog esportato da Gym Logbook (Invia progressi).',
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+    final accent = appAccentNotifier.value;
+    final dark = _isDarkCtx(context);
+    final nSess = voci.map((v) => '${v['session_id'] ?? ''}').toSet().length;
+    showDialog(
+      context: context,
+      builder: (c) => AlertDialog(
+        backgroundColor: dark ? const Color(0xFF1C1C1E) : Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        title: Text(
+          en ? 'Import progress?' : 'Importare i progressi?',
+          style: TextStyle(color: dark ? Colors.white : Colors.black87, fontSize: 16),
+        ),
+        content: Text(
+          en
+              ? '$nSess workouts · ${voci.length} exercises.\n\nYour current history is kept: only missing sessions are added.'
+              : '$nSess allenamenti · ${voci.length} esercizi.\n\nLo storico attuale resta: si aggiungono solo le sessioni che mancano.',
+          style: TextStyle(color: dark ? Colors.white54 : Colors.black54, fontSize: 14),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(c),
+            child: Text(
+              AppL.cancel,
+              style: TextStyle(color: dark ? Colors.white38 : Colors.black38),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              Navigator.pop(c);
+              final n = mergeProgressi(history, voci);
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.setString('client_history', jsonEncode(history));
+              if (!mounted) return;
+              setState(() {});
+              _loadData();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(
+                    n == 0
+                        ? (en ? 'Nothing new: already present' : 'Niente di nuovo: già presenti')
+                        : (en ? 'Imported $n exercises' : 'Importati $n esercizi'),
+                  ),
+                  backgroundColor: Colors.green.shade700,
+                ),
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: accent,
+              foregroundColor: Colors.black,
+            ),
+            child: Text(en ? 'Import' : 'Importa'),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _alarmSoundSettingRow() {
