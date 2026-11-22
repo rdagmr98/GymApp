@@ -4449,10 +4449,13 @@ void showExerciseDetail(BuildContext context, {required String name, String? gif
       maxChildSize: 0.95,
       minChildSize: 0.4,
       expand: false,
-      builder: (_, scrollCtrl) => ListView(
+      // nativo sotto la piega: si vede solo scorrendo oltre il pulsante YouTube
+      builder: (_, scrollCtrl) => CustomScrollView(
         controller: scrollCtrl,
-        padding: EdgeInsets.fromLTRB(20, 0, 20, _bottomNavInset(c) + 24),
-        children: [
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 24),
+            sliver: SliverList(delegate: SliverChildListDelegate([
           Center(
             child: Container(
               margin: const EdgeInsets.symmetric(vertical: 12),
@@ -4566,6 +4569,13 @@ void showExerciseDetail(BuildContext context, {required String name, String? gif
               padding: const EdgeInsets.symmetric(vertical: 14),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
             ),
+          ),
+            ])),
+          ),
+          const SliverFillRemaining(hasScrollBody: false, child: SizedBox.shrink()),
+          SliverPadding(
+            padding: EdgeInsets.only(bottom: _bottomNavInset(c)),
+            sliver: const SliverToBoxAdapter(child: _SelfNativeAd(kExerciseListNativeAdUnitId)),
           ),
         ],
       ),
@@ -11240,11 +11250,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   late final List<ExerciseConfig> _origExercises;
   NativeAd? _inlineWorkoutNativeAd;
   NativeAd? _startWorkoutNativeAd;
+  NativeAd? _confirmPopupNativeAd;
   NativeAd? _timerRestNativeAd;
   NativeAd? _recapWorkoutNativeAd;
   NativeAd? _chooseExerciseNativeAd;
   bool _isInlineWorkoutNativeAdLoaded = false;
   bool _isStartWorkoutNativeAdLoaded = false;
+  bool _isConfirmPopupNativeAdLoaded = false;
   bool _isTimerRestNativeAdLoaded = false;
   bool _isRecapWorkoutNativeAdLoaded = false;
   bool _isChooseExerciseNativeAdLoaded = false;
@@ -11343,6 +11355,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       final current = switch (placement) {
         'inline' => _inlineWorkoutNativeAd,
         'start' => _startWorkoutNativeAd,
+        'confirm' => _confirmPopupNativeAd,
         'timer' => _timerRestNativeAd,
         'recap' => _recapWorkoutNativeAd,
         'choose' => _chooseExerciseNativeAd,
@@ -11369,6 +11382,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                 case 'start':
                   _startWorkoutNativeAd = loadedAd as NativeAd;
                   _isStartWorkoutNativeAdLoaded = true;
+                  break;
+                case 'confirm':
+                  _confirmPopupNativeAd = loadedAd as NativeAd;
+                  _isConfirmPopupNativeAdLoaded = true;
                   break;
                 case 'timer':
                   _timerRestNativeAd = loadedAd as NativeAd;
@@ -11398,6 +11415,10 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                   _startWorkoutNativeAd = null;
                   _isStartWorkoutNativeAdLoaded = false;
                   break;
+                case 'confirm':
+                  _confirmPopupNativeAd = null;
+                  _isConfirmPopupNativeAdLoaded = false;
+                  break;
                 case 'timer':
                   _timerRestNativeAd = null;
                   _isTimerRestNativeAdLoaded = false;
@@ -11423,6 +11444,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         case 'start':
           _startWorkoutNativeAd = ad;
           break;
+        case 'confirm':
+          _confirmPopupNativeAd = ad;
+          break;
         case 'timer':
           _timerRestNativeAd = ad;
           break;
@@ -11438,6 +11462,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
     loadAd(adUnitId: kWorkoutInlineNativeAdUnitId, placement: 'inline');
     loadAd(adUnitId: kWorkoutStartNativeAdUnitId, placement: 'start');
+    loadAd(adUnitId: kConfirmPopupNativeAdUnitId, placement: 'confirm');
     loadAd(adUnitId: kTimerRestNativeAdUnitId, placement: 'timer');
     loadAd(adUnitId: kWorkoutRecapNativeAdUnitId, placement: 'recap');
     loadAd(adUnitId: kChooseExerciseNativeAdUnitId, placement: 'choose');
@@ -11722,6 +11747,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     _clearTimerNotifications();
     _inlineWorkoutNativeAd?.dispose();
     _startWorkoutNativeAd?.dispose();
+    _confirmPopupNativeAd?.dispose();
     _timerRestNativeAd?.dispose();
     _recapWorkoutNativeAd?.dispose();
     _chooseExerciseNativeAd?.dispose();
@@ -12081,26 +12107,27 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
   /// Serie migliorate oggi rispetto alla stessa serie della volta scorsa (stesso metro di Dettagli):
   /// per esercizio, (numero serie, kg × reps di oggi, differenza).
-  List<(String, List<(int, String, String)>)> _improvements() {
-    final out = <(String, List<(int, String, String)>)>[];
+  List<(String, List<(int, String, String, double)>)> _improvements() {
+    final out = <(String, List<(int, String, String, double)>)>[];
     for (final ex in _allCompletedExercises) {
       final name = ex['exercise'] as String;
       final prev = _previousResults[name];
       if (prev == null) continue;
       final curr = ex['series'] as List;
-      final sets = <(int, String, String)>[];
+      final sets = <(int, String, String, double)>[];
       for (var i = 0; i < curr.length && i < prev.length; i++) {
         final w = ((curr[i] as Map)['w'] as num).toDouble();
         final r = ((curr[i] as Map)['r'] as num).toInt();
         final pw = (prev[i]['w'] as num).toDouble();
         final pr = (prev[i]['r'] as num).toInt();
-        if (setScore(w, r) - setScore(pw, pr) <= 0.01) continue;
+        final gain = setScore(w, r) - setScore(pw, pr);
+        if (gain <= 0.01) continue;
         final dW = w - pw, dR = r - pr;
         final delta = [
           if (dW.abs() > 0.05) '${dW > 0 ? '+' : '-'}${_formatWeightLabel(dW.abs())}',
           if (dR != 0) '${dR > 0 ? '+' : ''}$dR reps',
         ].join('  ');
-        sets.add((i + 1, w > 0 ? '${_formatWeightLabel(w)} × $r' : '$r reps', delta));
+        sets.add((i + 1, w > 0 ? '${_formatWeightLabel(w)} × $r' : '$r reps', delta, gain));
       }
       if (sets.isNotEmpty) out.add((name, sets));
     }
@@ -12127,11 +12154,11 @@ class _WorkoutEngineState extends State<WorkoutEngine>
         } else if (pct >= 0.05) {
           perfIcon = Icons.trending_up;
           perfColor = const Color(0xFF4CD97B);
-          perfLabel = '${AppL.improving}$pctLabel';
+          perfLabel = AppL.improving;
         } else if (pct <= -0.05) {
           perfIcon = Icons.trending_down;
           perfColor = const Color(0xFFFF6B6B);
-          perfLabel = '${AppL.declining}$pctLabel';
+          perfLabel = AppL.declining;
         } else {
           perfIcon = Icons.trending_flat;
           perfColor = const Color(0xFFE0A458);
@@ -12160,282 +12187,208 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         constraints: BoxConstraints(minHeight: box.maxHeight - 40),
                         child: Column(
                       children: [
-                        TweenAnimationBuilder<double>(
-                          tween: Tween(begin: 0, end: 1),
-                          duration: const Duration(milliseconds: 650),
-                          curve: Curves.easeOutBack,
-                          builder: (_, v, child) => Transform.scale(scale: v, child: child),
-                          child: Container(
-                            width: 104,
-                            height: 104,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [primary, Color.lerp(primary, Colors.black, 0.35)!],
+                        // ponytail: testata compatta in riga, poi durata e andamento affiancati
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TweenAnimationBuilder<double>(
+                              tween: Tween(begin: 0, end: 1),
+                              duration: const Duration(milliseconds: 650),
+                              curve: Curves.easeOutBack,
+                              builder: (_, v, child) => Transform.scale(scale: v, child: child),
+                              child: Container(
+                                width: 56,
+                                height: 56,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [primary, Color.lerp(primary, Colors.black, 0.35)!],
+                                  ),
+                                  boxShadow: [BoxShadow(color: primary.withAlpha(90), blurRadius: 20, spreadRadius: 2)],
+                                ),
+                                child: Icon(records.isEmpty ? Icons.check_rounded : Icons.emoji_events_rounded,
+                                    size: 32, color: Colors.black),
                               ),
-                              boxShadow: [BoxShadow(color: primary.withAlpha(90), blurRadius: 32, spreadRadius: 4)],
                             ),
-                            child: Icon(records.isEmpty ? Icons.check_rounded : Icons.emoji_events_rounded,
-                                size: 58, color: Colors.black),
-                          ),
+                            const SizedBox(width: 14),
+                            Flexible(
+                              child: Text(
+                                AppL.workoutComplete,
+                                style: TextStyle(color: dark ? Colors.white : Colors.black87, fontWeight: FontWeight.w800, fontSize: 22),
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 18),
-                        Text(
-                          AppL.workoutComplete,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: dark ? Colors.white : Colors.black87, fontWeight: FontWeight.w800, fontSize: 24),
-                        ),
-                        const SizedBox(height: 10),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-                          decoration: BoxDecoration(color: perfColor.withAlpha(38), borderRadius: BorderRadius.circular(20)),
+                        IntrinsicHeight(
                           child: Row(
-                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Icon(perfIcon, color: perfColor, size: 18),
-                              const SizedBox(width: 6),
-                              Flexible(
-                                child: Text(perfLabel,
-                                    style: TextStyle(color: perfColor, fontSize: 14, fontWeight: FontWeight.w700)),
+                              if (minutes > 0 && minutes <= 240) ...[
+                                Expanded(
+                                  child: _recapTile(Icons.timer_outlined, AppL.workoutDuration,
+                                      minutes >= 60 ? '${minutes ~/ 60} h ${minutes % 60} min' : '$minutes min'),
+                                ),
+                                const SizedBox(width: 10),
+                              ],
+                              Expanded(
+                                child: _recapTile(perfIcon, pct == null ? '' : perfLabel, pct == null ? perfLabel : pctLabel.trim(),
+                                    color: perfColor),
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 20),
-                        if (minutes > 0 && minutes <= 240)
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
-                            child: _recapTile(Icons.timer_outlined, AppL.workoutDuration,
-                                minutes >= 60 ? '${minutes ~/ 60} h ${minutes % 60} min' : '$minutes min'),
-                          ),
-                        if (improved.isNotEmpty) ...[
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(14),
-                            decoration: BoxDecoration(
-                              color: green.withAlpha(dark ? 24 : 30),
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: green.withAlpha(110)),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(Icons.trending_up_rounded, color: green, size: 20),
-                                    const SizedBox(width: 8),
-                                    Expanded(
-                                      child: Text(AppL.improvedToday,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w800,
-                                              fontSize: 15,
-                                              color: dark ? Colors.white : Colors.black87)),
-                                    ),
-                                  ],
-                                ),
-                                for (final (name, sets) in improved) ...[
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 10, bottom: 2),
-                                    child: Text(localizedExerciseName(name),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w700, color: dark ? Colors.white70 : Colors.black87)),
-                                  ),
-                                  for (final (n, now, delta) in sets)
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 3),
-                                      child: Row(
-                                        children: [
-                                          SizedBox(
-                                            width: 28,
-                                            child: Text('S$n',
-                                                style: TextStyle(
-                                                    fontSize: 12, color: dark ? Colors.white38 : Colors.black38)),
-                                          ),
-                                          Expanded(
-                                            child: Text(now,
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(color: dark ? Colors.white : Colors.black87)),
-                                          ),
-                                          const SizedBox(width: 8),
-                                          Text(delta, style: TextStyle(color: green, fontWeight: FontWeight.w800)),
-                                        ],
-                                      ),
-                                    ),
-                                ],
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                        ],
-                        if (records.isNotEmpty) ...[
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.all(14),
-                            decoration: BoxDecoration(
-                              color: Colors.amber.withAlpha(dark ? 30 : 45),
-                              borderRadius: BorderRadius.circular(16),
-                              border: Border.all(color: Colors.amber.withAlpha(140)),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(Icons.emoji_events_rounded, color: Colors.amber, size: 20),
-                                    const SizedBox(width: 8),
-                                    Text(AppL.personalBest,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w800,
-                                            fontSize: 15,
-                                            color: dark ? Colors.white : Colors.black87)),
-                                  ],
-                                ),
-                                for (final r in records)
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 8),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(localizedExerciseName(r.exercise),
-                                              maxLines: 1,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(color: dark ? Colors.white70 : Colors.black87)),
-                                        ),
-                                        const SizedBox(width: 8),
-                                        Text(
-                                          r.w > 0
-                                              ? '${_formatWeightLabel(r.w)} × ${r.r}'
-                                              : '${r.r} ${AppL.reps.toLowerCase()}',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold, color: dark ? Colors.white : Colors.black87),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 10),
-                        ],
-                // Streak progress section
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: _isDarkCtx(context) ? const Color(0xFF252527) : Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: _currentStreak > 0
-                          ? Theme.of(c).colorScheme.primary.withAlpha(80)
-                          : (_isDarkCtx(context) ? Colors.white12 : Colors.black12),
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.lock_open_rounded, size: 15, color: Theme.of(c).colorScheme.primary),
-                          const SizedBox(width: 6),
-                          Flexible(
-                            child: Text(
-                              AppL.sessionUnlockedMsg.replaceAll('{done}', '$_streakDoneCount').replaceAll('{total}', '$_streakTotalCount'),
-                              style: TextStyle(
-                                color: _isDarkCtx(context) ? Colors.white : Colors.black87,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12,
+                        const SizedBox(height: 10),
+                        // migliorati e record in un solo riquadro: una riga per esercizio, coppa sui record,
+                        // la serie migliorata di più; il dettaglio serie per serie è in «Dettagli»
+                        if (improved.isNotEmpty || records.isNotEmpty) ...[
+                          Builder(builder: (_) {
+                            final recBy = {for (final r in records) r.exercise: r};
+                            final impBy = {for (final (name, sets) in improved) name: sets};
+                            final names = [...recBy.keys, ...impBy.keys.where((n) => !recBy.containsKey(n))];
+                            final fg = dark ? Colors.white : Colors.black87;
+                            return Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+                              decoration: BoxDecoration(
+                                color: green.withAlpha(dark ? 24 : 30),
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(color: green.withAlpha(110)),
                               ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(AppL.improvedToday,
+                                      style: TextStyle(fontWeight: FontWeight.w800, fontSize: 14, color: fg)),
+                                  for (final name in names)
+                                    Builder(builder: (_) {
+                                      final rec = recBy[name];
+                                      final sets = impBy[name];
+                                      final best = sets == null || sets.isEmpty
+                                          ? null
+                                          : sets.reduce((a, b) => b.$4 > a.$4 ? b : a);
+                                      final value = rec != null
+                                          ? (rec.w > 0
+                                              ? '${_formatWeightLabel(rec.w)} × ${rec.r}'
+                                              : '${rec.r} ${AppL.reps.toLowerCase()}')
+                                          : best!.$2;
+                                      return Padding(
+                                        padding: const EdgeInsets.only(top: 8),
+                                        child: Row(
+                                          children: [
+                                            Icon(rec != null ? Icons.emoji_events_rounded : Icons.trending_up_rounded,
+                                                size: 16, color: rec != null ? Colors.amber : green),
+                                            const SizedBox(width: 8),
+                                            Expanded(
+                                              child: Text(localizedExerciseName(name),
+                                                  maxLines: 1,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: TextStyle(fontSize: 13, color: dark ? Colors.white70 : Colors.black87)),
+                                            ),
+                                            const SizedBox(width: 8),
+                                            Text(value,
+                                                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: fg)),
+                                            if (best != null && best.$3.isNotEmpty) ...[
+                                              const SizedBox(width: 6),
+                                              Text(best.$3,
+                                                  style: TextStyle(fontSize: 12, color: green, fontWeight: FontWeight.w800)),
+                                            ],
+                                          ],
+                                        ),
+                                      );
+                                    }),
+                                ],
+                              ),
+                            );
+                          }),
+                          const SizedBox(height: 10),
+                        ],
+                        // microciclo: sessioni fatte, streak e icone in un riquadro basso
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+                          decoration: BoxDecoration(
+                            color: dark ? const Color(0xFF252527) : Colors.grey.shade100,
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: _currentStreak > 0 ? primary.withAlpha(80) : (dark ? Colors.white12 : Colors.black12),
                             ),
                           ),
-                        ],
-                      ),
-                      if (widget.allSessionNames.isNotEmpty) ...[
-                        const SizedBox(height: 8),
-                        LayoutBuilder(
-                          builder: (ctx, constraints) {
-                            final n = widget.allSessionNames.length;
-                            final iconSize = n > 0
-                                ? (constraints.maxWidth / n - 8).clamp(
-                                    18.0,
-                                    48.0,
-                                  )
-                                : 48.0;
-                            return Row(
-                              children: List.generate(n, (i) {
-                                final name = widget.allSessionNames[i];
-                                final done = _streakDoneNames.contains(name);
-                                return Expanded(
-                                  child: Center(
-                                    child: AnimatedContainer(
-                                      duration: const Duration(
-                                        milliseconds: 300,
-                                      ),
-                                      width: iconSize,
-                                      height: iconSize,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(7),
-                                        color: done
-                                            ? Theme.of(c).colorScheme.primary.withAlpha(50)
-                                            : (_isDarkCtx(context) ? const Color(0xFF1C1C1E) : Colors.grey.shade200),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(7),
-                                        child: Opacity(
-                                          opacity: done ? 1.0 : 0.2,
-                                          child: Image.asset(
-                                            'assets/icon_client.png',
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(Icons.lock_open_rounded, size: 15, color: primary),
+                                  const SizedBox(width: 6),
+                                  Expanded(
+                                    child: Text(
+                                      '$_streakDoneCount/$_streakTotalCount ${AppL.thisMicrocycleLabel}',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(color: dark ? Colors.white : Colors.black87, fontWeight: FontWeight.bold, fontSize: 12),
                                     ),
                                   ),
-                                );
-                              }),
-                            );
-                          },
-                        ),
-                      ],
-                      const SizedBox(height: 8),
-                      if (_streakDoneCount >= _streakTotalCount &&
-                          _streakTotalCount > 0)
-                        Text(
-                          AppL.microcycleCompleteStreak,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Theme.of(c).colorScheme.primary,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12,
+                                  if (_currentStreak > 0) ...[
+                                    Icon(Icons.local_fire_department_rounded, size: 16, color: primary),
+                                    const SizedBox(width: 2),
+                                    Text('$_currentStreak ${AppL.microAbbr}',
+                                        style: TextStyle(color: primary, fontWeight: FontWeight.w800, fontSize: 13)),
+                                  ],
+                                ],
+                              ),
+                              if (widget.allSessionNames.isNotEmpty) ...[
+                                const SizedBox(height: 8),
+                                LayoutBuilder(
+                                  builder: (ctx, constraints) {
+                                    final n = widget.allSessionNames.length;
+                                    final iconSize = (constraints.maxWidth / n - 8).clamp(14.0, 28.0);
+                                    return Row(
+                                      children: List.generate(n, (i) {
+                                        final done = _streakDoneNames.contains(widget.allSessionNames[i]);
+                                        return Expanded(
+                                          child: Center(
+                                            child: Container(
+                                              width: iconSize,
+                                              height: iconSize,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(6),
+                                                color: done
+                                                    ? primary.withAlpha(50)
+                                                    : (dark ? const Color(0xFF1C1C1E) : Colors.grey.shade200),
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(6),
+                                                child: Opacity(
+                                                  opacity: done ? 1.0 : 0.2,
+                                                  child: Image.asset('assets/icon_client.png', fit: BoxFit.cover),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                    );
+                                  },
+                                ),
+                              ],
+                              const SizedBox(height: 6),
+                              Text(
+                                _streakDoneCount >= _streakTotalCount && _streakTotalCount > 0
+                                    ? AppL.microcycleCompleteStreak
+                                    : AppL.completeMoreSessions.replaceAll('{n}', '${_streakTotalCount - _streakDoneCount}'),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: _streakDoneCount >= _streakTotalCount && _streakTotalCount > 0
+                                      ? primary
+                                      : (dark ? Colors.white60 : Colors.black54),
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
                           ),
-                        )
-                      else ...[
-                        Text(
-                          AppL.completeMoreSessions.replaceAll('{n}', '${_streakTotalCount - _streakDoneCount}'),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: _isDarkCtx(context) ? Colors.white60 : Colors.black54,
-                            fontSize: 11,
-                          ),
                         ),
-                      ],
-                      if (_currentStreak > 0) ...[
-                        const SizedBox(height: 6),
-                        Text(
-                          AppL.streakFireMsg.replaceAll('{n}', '$_currentStreak'),
-                          style: TextStyle(
-                            color: Theme.of(c).colorScheme.primary,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                ),
                 if (_previousResults.isNotEmpty)
                   TextButton(
                     onPressed: () => _showDettagliMiglioramenti(c),
@@ -12901,6 +12854,25 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     );
   }
 
+  Widget _buildConfirmPopupNativeAd() {
+    if (kIsWeb ||
+        !_isConfirmPopupNativeAdLoaded ||
+        _confirmPopupNativeAd == null) {
+      return const SizedBox.shrink();
+    }
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
+      child: SizedBox(
+        width: double.infinity,
+        height: 260,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: AdWidget(ad: _confirmPopupNativeAd!),
+        ),
+      ),
+    );
+  }
+
   Widget _buildTimerRestNativeAd() {
     if (kIsWeb || !_isTimerRestNativeAdLoaded || _timerRestNativeAd == null) {
       return const SizedBox.shrink();
@@ -12937,7 +12909,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     );
   }
 
-  Widget _recapTile(IconData icon, String label, String value) {
+  Widget _recapTile(IconData icon, String label, String value, {Color? color}) {
     final dark = _isDarkCtx(context);
     return Container(
       padding: const EdgeInsets.all(14),
@@ -12949,14 +12921,15 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 20, color: Theme.of(context).colorScheme.primary),
+          Icon(icon, size: 20, color: color ?? Theme.of(context).colorScheme.primary),
           const SizedBox(height: 8),
           FittedBox(
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerLeft,
             child: Text(value,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: dark ? Colors.white : Colors.black87)),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: color ?? (dark ? Colors.white : Colors.black87))),
           ),
+          if (label.isNotEmpty)
           Text(label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -13349,6 +13322,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         _pill(ctx, "$r reps", fontSize: 20),
                       ],
                     ),
+                    _buildConfirmPopupNativeAd(),
                   ],
                 ),
               ),
@@ -15520,7 +15494,8 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
             const Divider(color: Colors.white12),
             const SizedBox(height: 8),
             // record e migliorati in cima, con il delta rispetto alla volta scorsa
-            for (final r in rows)
+            // ponytail: massimo 8 righe (record e migliorati sono già in cima), il resto in un «+N»
+            for (final r in rows.take(8))
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 3),
                 child: Row(
@@ -15548,100 +15523,90 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
                   ],
                 ),
               ),
+            if (rows.length > 8)
+              Padding(
+                padding: const EdgeInsets.only(top: 3),
+                child: Text('+${rows.length - 8}', style: const TextStyle(color: Colors.white38, fontSize: 11, fontWeight: FontWeight.w700)),
+              ),
             const SizedBox(height: 8),
           ],
           if (_showStreak || _showWeeklyBadges || _showSessionProgress) ...[
             const Divider(color: Colors.white12),
             const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                if (_showStreak)
-                  _badgeChip(
-                    icon: Icons.local_fire_department_rounded,
-                    label: 'Streak',
-                    value: '${widget.streak} ${AppL.microAbbr}',
-                    accent: accent,
+            // ponytail: statistiche in pillole su una riga e microciclo a segmenti, per tenere la card bassa
+            Builder(builder: (ctx) {
+              final names = widget.allSessionNames.isNotEmpty
+                  ? widget.allSessionNames
+                  : widget.streakDoneNames.toList();
+              final pct = widget.progressPercent;
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 6,
+                    children: [
+                      if (_showStreak)
+                        _badgeChip(
+                          icon: Icons.local_fire_department_rounded,
+                          label: '',
+                          value: '${widget.streak} ${AppL.microAbbr}',
+                          accent: accent,
+                        ),
+                      if (_showSessionProgress && pct != null)
+                        _badgeChip(
+                          icon: pct >= 0 ? Icons.trending_up_rounded : Icons.trending_down_rounded,
+                          label: AppL.vsPrev,
+                          value: '${pct >= 0 ? '+' : ''}${pct.toStringAsFixed(1)}%',
+                          accent: pct >= 0 ? const Color(0xFF4CD97B) : const Color(0xFFFF6B6B),
+                        ),
+                      if (_showWeeklyBadges && names.isNotEmpty)
+                        _badgeChip(
+                          icon: Icons.lock_open_rounded,
+                          label: '',
+                          value: '${widget.streakDoneNames.length}/${names.length}',
+                          accent: accent,
+                        ),
+                    ],
                   ),
-                if (_showSessionProgress && widget.progressPercent != null)
-                  _badgeChip(
-                    icon: widget.progressPercent! >= 0 ? Icons.trending_up_rounded : Icons.trending_down_rounded,
-                    label: AppL.vsPrev,
-                    value: '${widget.progressPercent! >= 0 ? '+' : ''}${widget.progressPercent!.toStringAsFixed(1)}%',
-                    accent: widget.progressPercent! >= 0 ? const Color(0xFF4CD97B) : const Color(0xFFFF6B6B),
-                  ),
-              ],
-            ),
-            if (_showWeeklyBadges) ...[
-              const SizedBox(height: 8),
-              Builder(builder: (ctx) {
-                final names = widget.allSessionNames.isNotEmpty
-                    ? widget.allSessionNames
-                    : widget.streakDoneNames.toList();
-                final doneCount = widget.streakDoneNames.length;
-                final total = names.length;
-                return SizedBox(
-                  width: double.infinity,
-                  child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 6,
-                      alignment: WrapAlignment.center,
-                      runAlignment: WrapAlignment.center,
-                      children: names.map((name) {
-                        final done = widget.streakDoneNames.contains(name);
-                        return Container(
-                          width: 60,
-                          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 4),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: done ? accent.withAlpha(36) : Colors.white10,
-                            border: Border.all(color: done ? accent.withAlpha(140) : Colors.white12),
-                          ),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(6),
-                                child: ColorFiltered(
-                                  colorFilter: done
-                                      ? const ColorFilter.mode(Colors.transparent, BlendMode.multiply)
-                                      : const ColorFilter.matrix([
-                                          0.2126, 0.7152, 0.0722, 0, 0,
-                                          0.2126, 0.7152, 0.0722, 0, 0,
-                                          0.2126, 0.7152, 0.0722, 0, 0,
-                                          0,      0,      0,      1, 0,
-                                        ]),
-                                  child: Transform.scale(
-                                    scale: 1.18,
-                                    child: Image.asset('assets/icon_client.png', width: 28, height: 28,
-                                        errorBuilder: (_, __, ___) => Icon(Icons.fitness_center, color: done ? Colors.white : Colors.white24, size: 24)),
+                  if (_showWeeklyBadges && names.isNotEmpty) ...[
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        for (int k = 0; k < names.length; k++) ...[
+                          if (k > 0) const SizedBox(width: 4),
+                          Expanded(
+                            child: Builder(builder: (_) {
+                              final done = widget.streakDoneNames.contains(names[k]);
+                              return Container(
+                                height: 20,
+                                alignment: Alignment.center,
+                                padding: const EdgeInsets.symmetric(horizontal: 3),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6),
+                                  color: done ? accent.withAlpha(60) : Colors.white10,
+                                  border: Border.all(color: done ? accent.withAlpha(160) : Colors.white12),
+                                ),
+                                child: Text(
+                                  names[k],
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 8,
+                                    color: done ? Colors.white : Colors.white38,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 3),
-                              Text(
-                                name,
-                                style: TextStyle(fontSize: 7, color: done ? Colors.white : Colors.white38, fontWeight: FontWeight.w700),
-                                textAlign: TextAlign.center, overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
+                              );
+                            }),
                           ),
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '$doneCount/$total ${AppL.thisMicrocycleLabel}',
-                      style: const TextStyle(color: Colors.white54, fontSize: 9),
-                      textAlign: TextAlign.center,
+                        ],
+                      ],
                     ),
                   ],
-                  ),
-                );
-              }),
-            ],
+                ],
+              );
+            }),
             const SizedBox(height: 4),
           ],
         ],
@@ -15656,17 +15621,22 @@ class _WorkoutShareSheetState extends State<_WorkoutShareSheet> {
     required Color accent,
   }) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: Colors.white.withAlpha(10),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: Colors.white12),
       ),
-      child: Column(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, color: accent, size: 18),
-          Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 14)),
-          Text(label, style: const TextStyle(color: Colors.white54, fontSize: 10)),
+          Icon(icon, color: accent, size: 15),
+          const SizedBox(width: 5),
+          Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: 13)),
+          if (label.isNotEmpty) ...[
+            const SizedBox(width: 4),
+            Text(label, style: const TextStyle(color: Colors.white54, fontSize: 10)),
+          ],
         ],
       ),
     );
@@ -16440,6 +16410,33 @@ Widget testProgressShareSheet({
       accent: accent,
     );
 
+@visibleForTesting
+Widget testDrumPickers({
+  required double initialKg,
+  required int initialReps,
+  bool useQuarterStep = false,
+  bool useEvenStep = false,
+  bool useSingleStep = false,
+  bool displayInPounds = false,
+  required Color accent,
+  required ValueChanged<double> onKgChanged,
+  required ValueChanged<int> onRepsChanged,
+  void Function(bool, bool, bool)? onWeightModeChanged,
+}) => _DrumPickers(
+  initialKg: initialKg,
+  initialReps: initialReps,
+  suggerisciAumento: false,
+  useQuarterStep: useQuarterStep,
+  useEvenStep: useEvenStep,
+  useSingleStep: useSingleStep,
+  displayInPounds: displayInPounds,
+  accent: accent,
+  onKgChanged: onKgChanged,
+  onRepsChanged: onRepsChanged,
+  onWeightModeChanged: onWeightModeChanged,
+  onRepsInteraction: () {},
+);
+
 // --- DRUM PICKERS ---
 class _DrumPickers extends StatefulWidget {
   final double initialKg;
@@ -16543,18 +16540,18 @@ class _DrumPickersState extends State<_DrumPickers>
   List<double> get _weightValues => widget.displayInPounds
       ? (!widget.allowKeyboardInput
             ? _lbMergedValues
-            : (_manualUseSingleStep || widget.useSingleStep)
+            : _manualUseSingleStep
             ? _lbSingleValues
-            : (_manualUseQuarterStep || widget.useQuarterStep)
+            : _manualUseQuarterStep
             ? _lbQuarterValues
             : _lbValues)
       : (!widget.allowKeyboardInput
             ? _kgMergedValues
-            : (_manualUseQuarterStep || widget.useQuarterStep)
+            : _manualUseQuarterStep
             ? _kgQuarterValues
-            : (_manualUseEvenStep || widget.useEvenStep)
+            : _manualUseEvenStep
             ? _kgEvenValues
-            : (_manualUseSingleStep || widget.useSingleStep)
+            : _manualUseSingleStep
             ? _kgSingleValues
             : _kgValues);
 
@@ -17834,7 +17831,10 @@ class PTChartPainter extends CustomPainter {
 
     final record = values.reduce((a, b) => a > b ? a : b);
     final bg = dark ? const Color(0xFF0E0E10) : Colors.white;
+    // ponytail: con punti fitti (molti allenamenti) i pallini si impastano: restano solo selezionato e record
+    final dense = step > 0 && step < 14;
     for (int i = 0; i < n; i++) {
+      if (dense && i != sel && values[i] != record) continue;
       final o = Offset(x(i), y(values[i]));
       if (i == sel) {
         canvas.drawCircle(o, 7, Paint()..color = accent.withAlpha(60));
