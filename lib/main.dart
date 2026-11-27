@@ -72,6 +72,29 @@ Widget _listBelowFold({
   ],
 );
 
+/// Mostra un nativo già caricato e chiama [onGone] quando esce di scena (popup chiuso, recupero finito, esercizio lasciato).
+class _AdSlot extends StatefulWidget {
+  const _AdSlot(this.ad, this.onGone);
+  final NativeAd ad;
+  final void Function(NativeAd ad) onGone;
+
+  @override
+  State<_AdSlot> createState() => _AdSlotState();
+}
+
+class _AdSlotState extends State<_AdSlot> {
+  @override
+  void dispose() {
+    final ad = widget.ad;
+    final onGone = widget.onGone;
+    WidgetsBinding.instance.addPostFrameCallback((_) => onGone(ad));
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => AdWidget(ad: widget.ad);
+}
+
 /// Nativo che si carica da solo, per le schermate senza un nativo già caricato. Solo sotto la piega.
 class _SelfNativeAd extends StatefulWidget {
   const _SelfNativeAd(this.adUnitId);
@@ -11092,18 +11115,16 @@ class _WorkoutEngineState extends State<WorkoutEngine>
   bool _awaitingFirstExerciseStart = true;
   /// Ordine della scheda. La sessione può cambiarlo (Occupato, parti da un altro), il disco no.
   late final List<ExerciseConfig> _origExercises;
-  NativeAd? _inlineWorkoutNativeAd;
-  NativeAd? _startWorkoutNativeAd;
-  NativeAd? _confirmPopupNativeAd;
-  NativeAd? _timerRestNativeAd;
-  NativeAd? _recapWorkoutNativeAd;
-  NativeAd? _chooseExerciseNativeAd;
-  bool _isInlineWorkoutNativeAdLoaded = false;
-  bool _isStartWorkoutNativeAdLoaded = false;
-  bool _isConfirmPopupNativeAdLoaded = false;
-  bool _isTimerRestNativeAdLoaded = false;
-  bool _isRecapWorkoutNativeAdLoaded = false;
-  bool _isChooseExerciseNativeAdLoaded = false;
+  // ponytail: un nativo caricato per posizione; visto e uscito di scena se ne carica uno nuovo
+  static const Map<String, String> _workoutAdUnits = {
+    'inline': kWorkoutInlineNativeAdUnitId,
+    'confirm': kConfirmPopupNativeAdUnitId,
+    'timer': kTimerRestNativeAdUnitId,
+    'recap': kWorkoutRecapNativeAdUnitId,
+    'choose': kChooseExerciseNativeAdUnitId,
+  };
+  final Map<String, NativeAd> _workoutAds = {}; // solo i nativi già caricati
+  final Set<Ad> _impressedAds = {};
 
   @override
   void initState() {
@@ -11195,121 +11216,62 @@ class _WorkoutEngineState extends State<WorkoutEngine>
 
   void _loadWorkoutNativeAds() {
     if (kIsWeb) return;
-    void loadAd({required String adUnitId, required String placement}) {
-      final current = switch (placement) {
-        'inline' => _inlineWorkoutNativeAd,
-        'start' => _startWorkoutNativeAd,
-        'confirm' => _confirmPopupNativeAd,
-        'timer' => _timerRestNativeAd,
-        'recap' => _recapWorkoutNativeAd,
-        'choose' => _chooseExerciseNativeAd,
-        _ => null,
-      };
-      current?.dispose();
-      final ad = NativeAd(
-        adUnitId: adUnitId,
-        factoryId: kWorkoutNativeAdFactoryId,
-        customOptions: placement == 'inline' ? const {'narrow': true} : null,
-        request: const AdRequest(),
-        listener: NativeAdListener(
-          onAdLoaded: (loadedAd) {
-            if (!mounted) {
-              loadedAd.dispose();
-              return;
-            }
-            setState(() {
-              switch (placement) {
-                case 'inline':
-                  _inlineWorkoutNativeAd = loadedAd as NativeAd;
-                  _isInlineWorkoutNativeAdLoaded = true;
-                  break;
-                case 'start':
-                  _startWorkoutNativeAd = loadedAd as NativeAd;
-                  _isStartWorkoutNativeAdLoaded = true;
-                  break;
-                case 'confirm':
-                  _confirmPopupNativeAd = loadedAd as NativeAd;
-                  _isConfirmPopupNativeAdLoaded = true;
-                  break;
-                case 'timer':
-                  _timerRestNativeAd = loadedAd as NativeAd;
-                  _isTimerRestNativeAdLoaded = true;
-                  break;
-                case 'recap':
-                  _recapWorkoutNativeAd = loadedAd as NativeAd;
-                  _isRecapWorkoutNativeAdLoaded = true;
-                  break;
-                case 'choose':
-                  _chooseExerciseNativeAd = loadedAd as NativeAd;
-                  _isChooseExerciseNativeAdLoaded = true;
-                  break;
-              }
-            });
-          },
-          onAdFailedToLoad: (failedAd, error) {
-            failedAd.dispose();
-            if (!mounted) return;
-            setState(() {
-              switch (placement) {
-                case 'inline':
-                  _inlineWorkoutNativeAd = null;
-                  _isInlineWorkoutNativeAdLoaded = false;
-                  break;
-                case 'start':
-                  _startWorkoutNativeAd = null;
-                  _isStartWorkoutNativeAdLoaded = false;
-                  break;
-                case 'confirm':
-                  _confirmPopupNativeAd = null;
-                  _isConfirmPopupNativeAdLoaded = false;
-                  break;
-                case 'timer':
-                  _timerRestNativeAd = null;
-                  _isTimerRestNativeAdLoaded = false;
-                  break;
-                case 'recap':
-                  _recapWorkoutNativeAd = null;
-                  _isRecapWorkoutNativeAdLoaded = false;
-                  break;
-                case 'choose':
-                  _chooseExerciseNativeAd = null;
-                  _isChooseExerciseNativeAdLoaded = false;
-                  break;
-              }
-            });
-            debugPrint('$placement workout native ad failed to load: $error');
-          },
-        ),
-      );
-      switch (placement) {
-        case 'inline':
-          _inlineWorkoutNativeAd = ad;
-          break;
-        case 'start':
-          _startWorkoutNativeAd = ad;
-          break;
-        case 'confirm':
-          _confirmPopupNativeAd = ad;
-          break;
-        case 'timer':
-          _timerRestNativeAd = ad;
-          break;
-        case 'recap':
-          _recapWorkoutNativeAd = ad;
-          break;
-        case 'choose':
-          _chooseExerciseNativeAd = ad;
-          break;
-      }
-      ad.load();
-    }
+    _workoutAdUnits.keys.forEach(_loadWorkoutNativeAd);
+  }
 
-    loadAd(adUnitId: kWorkoutInlineNativeAdUnitId, placement: 'inline');
-    loadAd(adUnitId: kWorkoutStartNativeAdUnitId, placement: 'start');
-    loadAd(adUnitId: kConfirmPopupNativeAdUnitId, placement: 'confirm');
-    loadAd(adUnitId: kTimerRestNativeAdUnitId, placement: 'timer');
-    loadAd(adUnitId: kWorkoutRecapNativeAdUnitId, placement: 'recap');
-    loadAd(adUnitId: kChooseExerciseNativeAdUnitId, placement: 'choose');
+  void _loadWorkoutNativeAd(String placement) {
+    NativeAd(
+      adUnitId: _workoutAdUnits[placement]!,
+      factoryId: kWorkoutNativeAdFactoryId,
+      customOptions: placement == 'inline' ? const {'narrow': true} : null,
+      request: const AdRequest(),
+      listener: NativeAdListener(
+        onAdLoaded: (ad) {
+          if (!mounted) {
+            ad.dispose();
+            return;
+          }
+          setState(() => _workoutAds[placement] = ad as NativeAd);
+        },
+        onAdImpression: (ad) => _impressedAds.add(ad),
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+          debugPrint('$placement workout native ad failed to load: $error');
+        },
+      ),
+    ).load();
+  }
+
+  /// Il nativo di [placement] è uscito di scena: se è stato visto lo sostituisce con uno nuovo.
+  void _onWorkoutAdGone(String placement, NativeAd ad) {
+    if (!mounted || _workoutAds[placement] != ad || !_impressedAds.remove(ad)) return;
+    setState(() => _workoutAds.remove(placement));
+    // dispose dopo il frame che lo toglie dall'albero
+    WidgetsBinding.instance.addPostFrameCallback((_) => ad.dispose());
+    _loadWorkoutNativeAd(placement);
+  }
+
+  /// Cambio esercizio senza recupero (frecce, superserie): il nativo accanto alle note resta montato, va rinnovato qui.
+  void _renewInlineAd() {
+    final ad = _workoutAds['inline'];
+    if (ad != null) _onWorkoutAdGone('inline', ad);
+  }
+
+  /// Nativo di allenamento alto 260, oppure niente finché non è caricato.
+  Widget _workoutAd(String placement, EdgeInsets padding, {double? width, double radius = 16}) {
+    final ad = _workoutAds[placement];
+    if (kIsWeb || ad == null) return const SizedBox.shrink();
+    return Padding(
+      padding: padding,
+      child: SizedBox(
+        width: width ?? double.infinity,
+        height: 260,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(radius),
+          child: _AdSlot(ad, (a) => _onWorkoutAdGone(placement, a)),
+        ),
+      ),
+    );
   }
 
   /// Salva lo stato corrente dell'allenamento in SharedPreferences
@@ -11589,12 +11551,9 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     if (_bgTimer != null) _bgTimer!.cancel();
     _cardioCountdownTimer?.cancel();
     _clearTimerNotifications();
-    _inlineWorkoutNativeAd?.dispose();
-    _startWorkoutNativeAd?.dispose();
-    _confirmPopupNativeAd?.dispose();
-    _timerRestNativeAd?.dispose();
-    _recapWorkoutNativeAd?.dispose();
-    _chooseExerciseNativeAd?.dispose();
+    for (final ad in _workoutAds.values) {
+      ad.dispose();
+    }
     wC.dispose();
     rC.dispose();
     for (final ctrl in _noteControllers.values) {
@@ -12330,7 +12289,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                       ],
                     ),
                         ),
-                        _buildRecapNativeAd(),
+                        _workoutAd('recap', const EdgeInsets.only(top: 10)),
                       ],
                     ),
                   ),
@@ -12631,125 +12590,13 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           ),
                   ),
                   ),
-                  _buildChooseExerciseNativeAd(),
+                  _workoutAd('choose', const EdgeInsets.fromLTRB(16, 4, 16, 12)),
                 ]),
               );
             },
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildWorkoutNativeAd() {
-    if (kIsWeb ||
-        !_isInlineWorkoutNativeAdLoaded ||
-        _inlineWorkoutNativeAd == null) {
-      return const SizedBox.shrink();
-    }
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 10, 16, 2),
-      child: SizedBox(
-        width: double.infinity,
-        height: 260,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _inlineWorkoutNativeAd!),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildWorkoutStartNativeAd() {
-    if (kIsWeb ||
-        !_isStartWorkoutNativeAdLoaded ||
-        _startWorkoutNativeAd == null) {
-      return const SizedBox.shrink();
-    }
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 10, 16, 2),
-      child: SizedBox(
-        width: double.infinity,
-        height: 260,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _startWorkoutNativeAd!),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildChooseExerciseNativeAd() {
-    if (kIsWeb ||
-        !_isChooseExerciseNativeAdLoaded ||
-        _chooseExerciseNativeAd == null) {
-      return const SizedBox.shrink();
-    }
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 4, 16, 12),
-      child: SizedBox(
-        width: double.infinity,
-        height: 260,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _chooseExerciseNativeAd!),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildConfirmPopupNativeAd() {
-    if (kIsWeb ||
-        !_isConfirmPopupNativeAdLoaded ||
-        _confirmPopupNativeAd == null) {
-      return const SizedBox.shrink();
-    }
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 6, 0, 6),
-      child: SizedBox(
-        width: double.infinity,
-        height: 260,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _confirmPopupNativeAd!),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTimerRestNativeAd() {
-    if (kIsWeb || !_isTimerRestNativeAdLoaded || _timerRestNativeAd == null) {
-      return const SizedBox.shrink();
-    }
-    return Padding(
-      padding: const EdgeInsets.only(top: 4),
-      child: SizedBox(
-        width: double.infinity,
-        height: 260,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _timerRestNativeAd!),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildRecapNativeAd() {
-    if (kIsWeb ||
-        !_isRecapWorkoutNativeAdLoaded ||
-        _recapWorkoutNativeAd == null) {
-      return const SizedBox.shrink();
-    }
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
-      child: SizedBox(
-        width: double.infinity,
-        height: 260,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _recapWorkoutNativeAd!),
-        ),
-      ),
     );
   }
 
@@ -12884,6 +12731,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
       }
     });
     _setDrumValues(nuovoIndice, setN);
+    _renewInlineAd();
   }
 
   void _triggerTimer(int sec, {bool force = false}) {
@@ -13166,7 +13014,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                         _pill(ctx, "$r reps", fontSize: 20),
                       ],
                     ),
-                    _buildConfirmPopupNativeAd(),
+                    _workoutAd('confirm', const EdgeInsets.fromLTRB(0, 6, 0, 6)),
                   ],
                 ),
               ),
@@ -13381,6 +13229,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
           _isNewRecord = false;
         });
         _setDrumValues(nextExInRound, setN);
+        _renewInlineAd();
       } else if (setN < maxRounds) {
         // Fine del round corrente, riposa e ricomincia al prossimo round
         final nextRound = setN + 1;
@@ -13869,18 +13718,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           suggerisciReps,
                         ),
                       ),
-                      if (!kIsWeb && _isInlineWorkoutNativeAdLoaded && _inlineWorkoutNativeAd != null)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 8, 16, 4),
-                          child: SizedBox(
-                            width: 140,
-                            height: 260,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: AdWidget(ad: _inlineWorkoutNativeAd!),
-                            ),
-                          ),
-                        ),
+                      _workoutAd('inline', const EdgeInsets.fromLTRB(0, 8, 16, 4), width: 140, radius: 12),
                     ],
                   ),
                 ),
@@ -14813,7 +14651,7 @@ class _WorkoutEngineState extends State<WorkoutEngine>
                           ),
                         ),
                       ),
-                      _buildTimerRestNativeAd(),
+                      _workoutAd('timer', const EdgeInsets.only(top: 4)),
                     ],
                   ),
                 ),
