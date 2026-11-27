@@ -132,4 +132,16 @@ void main() {
     expect(hist[0]['dayName'], 'Petto e tricipiti');
     expect(hist[1]['dayName'], 'Pull');
   });
+
+  test('prima serie: la seconda della volta scorsa a pari peso con 2 reps in più alza il peso', () {
+    final last = [{'w': 80.0, 'r': 10}, {'w': 80.0, 'r': 12}];
+    expect(refReps(last, 1, 80, 10), 12);
+    final p = progressionPlan(target: 10, lastKg: 80, lastReps: refReps(last, 1, 80, 10));
+    expect((p.kg, p.aumento), (82.5, true));
+  });
+  test('refReps: piramide e serie prima non contano', () {
+    final last = [{'w': 70.0, 'r': 12}, {'weight': 80, 'reps': 8}, {'w': 75.0, 'r': 10}];
+    expect(refReps(last, 2, 80, 8), 8);
+    expect(refReps(last, 3, 75, 10), 10);
+  });
 }

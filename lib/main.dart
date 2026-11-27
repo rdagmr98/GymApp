@@ -5018,16 +5018,15 @@ class _ClientMainPageState extends State<ClientMainPage>
   String _appLang = 'it';
   BannerAd? _bannerAd;
   bool _bannerAdLoaded = false;
-  NativeAd? _exerciseListNativeAd;
-  NativeAd? _graphNativeAd;
-  NativeAd? _workoutProgressNativeAd;
-  NativeAd? _overallProgressNativeAd;
-  bool _exerciseListNativeAdLoaded = false;
-  bool _graphNativeAdLoaded = false;
-  bool _workoutProgressNativeAdLoaded = false;
-  bool _overallProgressNativeAdLoaded = false;
-  NativeAd? _trainPageNativeAd;
-  bool _trainPageNativeAdLoaded = false;
+  static const Map<String, String> _libraryAdUnits = {
+    'exercise-list': kExerciseListNativeAdUnitId,
+    'graph': kChartsNativeAdUnitId,
+    'workout-progress': kWorkoutProgressNativeAdUnitId,
+    'overall-progress': kOverallProgressNativeAdUnitId,
+    'train-page': kWorkoutStartNativeAdUnitId,
+  };
+  final Map<String, NativeAd> _libraryAds = {}; // solo i nativi già caricati
+  final Set<Ad> _libraryImpressed = {};
   bool _webDonationLocked = false;
   bool _webDonationAcknowledged = false;
   bool _webDonationBannerHidden = false;
@@ -5076,11 +5075,9 @@ class _ClientMainPageState extends State<ClientMainPage>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _bannerAd?.dispose();
-    _exerciseListNativeAd?.dispose();
-    _graphNativeAd?.dispose();
-    _workoutProgressNativeAd?.dispose();
-    _overallProgressNativeAd?.dispose();
-    _trainPageNativeAd?.dispose();
+    for (final ad in _libraryAds.values) {
+      ad.dispose();
+    }
     super.dispose();
   }
 
@@ -5122,113 +5119,43 @@ class _ClientMainPageState extends State<ClientMainPage>
 
   void _loadLibraryNativeAds() {
     if (kIsWeb) return;
-    void loadAd({required String placement, required String adUnitId}) {
-      final current = switch (placement) {
-        'exercise-list' => _exerciseListNativeAd,
-        'graph' => _graphNativeAd,
-        'workout-progress' => _workoutProgressNativeAd,
-        'overall-progress' => _overallProgressNativeAd,
-        'train-page' => _trainPageNativeAd,
-        _ => null,
-      };
-      current?.dispose();
-      final ad = NativeAd(
-        adUnitId: adUnitId,
-        factoryId: kWorkoutNativeAdFactoryId,
-        request: const AdRequest(),
-        listener: NativeAdListener(
-          onAdLoaded: (loadedAd) {
-            if (!mounted) {
-              loadedAd.dispose();
-              return;
-            }
-            setState(() {
-              switch (placement) {
-                case 'exercise-list':
-                  _exerciseListNativeAd = loadedAd as NativeAd;
-                  _exerciseListNativeAdLoaded = true;
-                  break;
-                case 'graph':
-                  _graphNativeAd = loadedAd as NativeAd;
-                  _graphNativeAdLoaded = true;
-                  break;
-                case 'workout-progress':
-                  _workoutProgressNativeAd = loadedAd as NativeAd;
-                  _workoutProgressNativeAdLoaded = true;
-                  break;
-                case 'overall-progress':
-                  _overallProgressNativeAd = loadedAd as NativeAd;
-                  _overallProgressNativeAdLoaded = true;
-                  break;
-                case 'train-page':
-                  _trainPageNativeAd = loadedAd as NativeAd;
-                  _trainPageNativeAdLoaded = true;
-                  break;
-              }
-            });
-          },
-          onAdFailedToLoad: (failedAd, error) {
-            failedAd.dispose();
-            if (!mounted) return;
-            setState(() {
-              switch (placement) {
-                case 'exercise-list':
-                  _exerciseListNativeAd = null;
-                  _exerciseListNativeAdLoaded = false;
-                  break;
-                case 'graph':
-                  _graphNativeAd = null;
-                  _graphNativeAdLoaded = false;
-                  break;
-                case 'workout-progress':
-                  _workoutProgressNativeAd = null;
-                  _workoutProgressNativeAdLoaded = false;
-                  break;
-                case 'overall-progress':
-                  _overallProgressNativeAd = null;
-                  _overallProgressNativeAdLoaded = false;
-                  break;
-                case 'train-page':
-                  _trainPageNativeAd = null;
-                  _trainPageNativeAdLoaded = false;
-                  break;
-              }
-            });
-            debugPrint('$placement native ad failed to load: $error');
-          },
-        ),
-      );
-      switch (placement) {
-        case 'exercise-list':
-          _exerciseListNativeAd = ad;
-          break;
-        case 'graph':
-          _graphNativeAd = ad;
-          break;
-        case 'workout-progress':
-          _workoutProgressNativeAd = ad;
-          break;
-        case 'overall-progress':
-          _overallProgressNativeAd = ad;
-          break;
-        case 'train-page':
-          _trainPageNativeAd = ad;
-          break;
-      }
-      ad.load();
-    }
+    _libraryAdUnits.keys.forEach(_loadLibraryNativeAd);
+  }
 
-    loadAd(placement: 'exercise-list', adUnitId: kExerciseListNativeAdUnitId);
-    loadAd(placement: 'graph', adUnitId: kChartsNativeAdUnitId);
-    loadAd(placement: 'workout-progress', adUnitId: kWorkoutProgressNativeAdUnitId);
-    loadAd(placement: 'overall-progress', adUnitId: kOverallProgressNativeAdUnitId);
-    loadAd(placement: 'train-page', adUnitId: kWorkoutStartNativeAdUnitId);
+  void _loadLibraryNativeAd(String placement) {
+    NativeAd(
+      adUnitId: _libraryAdUnits[placement]!,
+      factoryId: kWorkoutNativeAdFactoryId,
+      request: const AdRequest(),
+      listener: NativeAdListener(
+        onAdLoaded: (ad) {
+          if (!mounted) {
+            ad.dispose();
+            return;
+          }
+          setState(() => _libraryAds[placement] = ad as NativeAd);
+        },
+        onAdImpression: (ad) => _libraryImpressed.add(ad),
+        onAdFailedToLoad: (ad, error) {
+          ad.dispose();
+          debugPrint('$placement native ad failed to load: $error');
+        },
+      ),
+    ).load();
+  }
+
+  /// Il nativo di [placement] è uscito di scena: se è stato visto lo sostituisce con uno nuovo.
+  void _onLibraryAdGone(String placement, NativeAd ad) {
+    if (!mounted || _libraryAds[placement] != ad || !_libraryImpressed.remove(ad)) return;
+    setState(() => _libraryAds.remove(placement));
+    // dispose dopo il frame che lo toglie dall'albero
+    WidgetsBinding.instance.addPostFrameCallback((_) => ad.dispose());
+    _loadLibraryNativeAd(placement);
   }
 
   Widget _buildExerciseListNativeAd() {
-    if (kIsWeb ||
-        !_exerciseListNativeAdLoaded ||
-        _exerciseListNativeAd == null) {
+    final ad = _libraryAds['exercise-list'];
+    if (kIsWeb || ad == null) {
       return const SizedBox.shrink();
     }
     return Padding(
@@ -5238,14 +5165,15 @@ class _ClientMainPageState extends State<ClientMainPage>
         height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _exerciseListNativeAd!),
+          child: _AdSlot(ad, (a) => _onLibraryAdGone('exercise-list', a)),
         ),
       ),
     );
   }
 
   Widget _buildGraphNativeAd() {
-    if (kIsWeb || !_graphNativeAdLoaded || _graphNativeAd == null) {
+    final ad = _libraryAds['graph'];
+    if (kIsWeb || ad == null) {
       return const SizedBox.shrink();
     }
     return Padding(
@@ -5255,24 +5183,24 @@ class _ClientMainPageState extends State<ClientMainPage>
         height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _graphNativeAd!),
+          child: _AdSlot(ad, (a) => _onLibraryAdGone('graph', a)),
         ),
       ),
     );
   }
 
   Widget _buildWorkoutProgressNativeAd() {
-    if (kIsWeb || !_workoutProgressNativeAdLoaded || _workoutProgressNativeAd == null)
-      return const SizedBox.shrink();
+    final ad = _libraryAds['workout-progress'];
+    if (kIsWeb || ad == null) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 12),
-      child: SizedBox(height: 260, child: AdWidget(ad: _workoutProgressNativeAd!)),
+      child: SizedBox(height: 260, child: _AdSlot(ad, (a) => _onLibraryAdGone('workout-progress', a))),
     );
   }
 
   Widget _buildOverallProgressNativeAd() {
-    if (kIsWeb || !_overallProgressNativeAdLoaded || _overallProgressNativeAd == null)
-      return const SizedBox.shrink();
+    final ad = _libraryAds['overall-progress'];
+    if (kIsWeb || ad == null) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.only(top: 16),
       child: SizedBox(
@@ -5280,15 +5208,15 @@ class _ClientMainPageState extends State<ClientMainPage>
         height: 250,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _overallProgressNativeAd!),
+          child: _AdSlot(ad, (a) => _onLibraryAdGone('overall-progress', a)),
         ),
       ),
     );
   }
 
   Widget _buildTrainPageNativeAd() {
-    if (kIsWeb || !_trainPageNativeAdLoaded || _trainPageNativeAd == null)
-      return const SizedBox.shrink();
+    final ad = _libraryAds['train-page'];
+    if (kIsWeb || ad == null) return const SizedBox.shrink();
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
       child: SizedBox(
@@ -5296,7 +5224,7 @@ class _ClientMainPageState extends State<ClientMainPage>
         height: 260,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(16),
-          child: AdWidget(ad: _trainPageNativeAd!),
+          child: _AdSlot(ad, (a) => _onLibraryAdGone('train-page', a)),
         ),
       ),
     );
@@ -14319,14 +14247,16 @@ class _WorkoutEngineState extends State<WorkoutEngine>
     final today = currentExSeries.where((e) => (e['s'] as num?)?.toInt() == s - 1);
     // la serie prima, oggi e la volta scorsa: dice com'è la forma di oggi (progressionPlan)
     final lp = s > 1 ? _getSuggest(ex.name, s - 1) : const {};
+    // le serie dopo della volta scorsa allo stesso peso contano anche per questa (refReps)
+    final prev = _previousResults[ex.name] ?? const <Map>[];
     return progressionPlan(
       target: ex.repsList.isEmpty ? 10 : ex.repsList[scala.min(s, ex.repsList.length) - 1],
       lastKg: w(p),
-      lastReps: r(p),
+      lastReps: refReps(prev, s, w(p), r(p)),
       todayPrevKg: today.isEmpty ? null : w(today.last),
       todayPrevReps: today.isEmpty ? 0 : r(today.last),
       lastPrevKg: w(lp),
-      lastPrevReps: r(lp),
+      lastPrevReps: s > 1 ? refReps(prev, s - 1, w(lp), r(lp)) : 0,
       step: _steps.putIfAbsent(ex.name, () => weightStep(widget.history, ex.name)),
     );
   }
